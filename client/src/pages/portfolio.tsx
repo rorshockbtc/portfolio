@@ -136,7 +136,7 @@ const enterpriseCards = [
     id: "bank",
     title: "Architecting a Full-Reserve Digital Asset Bank",
     label: "Zero-to-One Launch",
-    image: "/artwork/enterprise-bank.png",
+    image: "/artwork/enterprise-vault.png",
   },
   {
     id: "health",
