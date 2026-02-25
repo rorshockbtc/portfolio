@@ -205,8 +205,7 @@ function HeroSection() {
           data-testid="text-headline"
         >
           Principal Product Designer
-          <br />
-          <span className="text-muted-foreground">&amp;</span> Systems Architect
+          <span className="text-muted-foreground"> &amp;</span> Systems Architect
         </motion.h1>
 
         <motion.p
