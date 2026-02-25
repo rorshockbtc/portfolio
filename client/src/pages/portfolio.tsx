@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { SiLinkedin, SiGithub } from "react-icons/si";
 import { motion } from "framer-motion";
+import heroImage from "@assets/hero-hands_1772050914101.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -135,21 +136,25 @@ const enterpriseCards = [
     id: "bank",
     title: "Architecting a Full-Reserve Digital Asset Bank",
     label: "Zero-to-One Launch",
+    image: "/artwork/enterprise-bank.png",
   },
   {
     id: "health",
     title: "Scaling Flagship Patient Ecosystems for a Fortune 50 Healthcare Provider",
     label: "35M+ Users",
+    image: "/artwork/enterprise-health.png",
   },
   {
     id: "fraud",
     title: "Engineering Fraud Detection & Operations for a Major Food Delivery Network",
     label: "10x Exit",
+    image: "/artwork/enterprise-fraud.png",
   },
   {
     id: "invest",
     title: "Directing a Tier-1 Global Investment Firm through Cloud-Native App and Agile Design Processes",
     label: "Enterprise",
+    image: "/artwork/enterprise-invest.png",
   },
 ];
 
@@ -168,14 +173,26 @@ function BrandIcon({ className }: { className?: string }) {
 function HeroSection() {
   return (
     <section
-      className="min-h-[90vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto"
+      className="relative min-h-[90vh] flex flex-col justify-center"
       data-testid="section-hero"
     >
+      <div className="absolute inset-0 z-0">
+        <img
+          src={heroImage}
+          alt=""
+          className="w-full h-full object-cover object-center"
+          data-testid="img-hero-bg"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/70 md:to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+      </div>
+
+      <div className="relative z-10 px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto w-full">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        className="space-y-8"
+        className="space-y-8 max-w-2xl"
       >
         <motion.div variants={fadeUp} custom={0}>
           <BrandIcon className="text-5xl md:text-7xl" />
@@ -198,8 +215,8 @@ function HeroSection() {
           className="text-lg md:text-xl font-medium text-foreground/80 max-w-2xl leading-relaxed"
           data-testid="text-subheadline"
         >
-          I build enterprise-scale data systems, zero-to-one fintech platforms,
-          and collaborative agentic AI models.
+          I build enterprise-scale design systems, zero-to-one fintech platforms,
+          and collaborative agentic AI models. My background spans 20+ years in art, business, and technology while my career has been focused on healthcare and FinTech applications.
         </motion.p>
 
         <motion.p
@@ -245,6 +262,7 @@ function HeroSection() {
           </Button>
         </motion.div>
       </motion.div>
+    </div>
     </section>
   );
 }
@@ -549,7 +567,7 @@ function EnterpriseVaultSection() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {enterpriseCards.map((card, idx) => (
           <motion.div
             key={card.id}
@@ -559,7 +577,7 @@ function EnterpriseVaultSection() {
             transition={{ delay: idx * 0.08, duration: 0.4 }}
           >
             <Card
-              className="group cursor-pointer hover-elevate active-elevate-2 p-6"
+              className="group cursor-pointer hover-elevate active-elevate-2 p-0"
               onClick={handleEnterpriseClick}
               role="button"
               tabIndex={0}
@@ -572,24 +590,31 @@ function EnterpriseVaultSection() {
               }}
               data-testid={`card-enterprise-${card.id}`}
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="space-y-2 flex-1">
-                  <span
-                    className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
-                    data-testid={`text-enterprise-label-${card.id}`}
-                  >
-                    {card.label}
-                  </span>
-                  <h3
-                    className="text-sm md:text-base font-semibold leading-snug"
-                    data-testid={`text-enterprise-title-${card.id}`}
-                  >
-                    {card.title}
-                  </h3>
+              <div className="relative w-full h-32 md:h-40 rounded-t-xl bg-muted">
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="w-full h-full object-cover rounded-t-xl"
+                  data-testid={`img-enterprise-${card.id}`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent rounded-t-xl" />
+                <div className="absolute top-3 right-3 w-7 h-7 rounded-md bg-background/70 backdrop-blur-sm flex items-center justify-center">
+                  <Lock className="w-3 h-3 text-muted-foreground" />
                 </div>
-                <div className="shrink-0 w-8 h-8 rounded-md bg-muted flex items-center justify-center">
-                  <Lock className="w-3.5 h-3.5 text-muted-foreground" />
-                </div>
+              </div>
+              <div className="p-5 space-y-2">
+                <span
+                  className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+                  data-testid={`text-enterprise-label-${card.id}`}
+                >
+                  {card.label}
+                </span>
+                <h3
+                  className="text-sm md:text-base font-semibold leading-snug"
+                  data-testid={`text-enterprise-title-${card.id}`}
+                >
+                  {card.title}
+                </h3>
               </div>
             </Card>
           </motion.div>
