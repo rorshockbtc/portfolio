@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { SiLinkedin, SiGithub } from "react-icons/si";
 import { motion } from "framer-motion";
-import heroImage from "@assets/hero-hands_1772050914101.jpg";
+import heroImage from "/artwork/hero.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
