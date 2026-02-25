@@ -183,8 +183,7 @@ function HeroSection() {
           className="w-full h-full object-cover object-center"
           data-testid="img-hero-bg"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/70 md:to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
 
       <div className="relative z-10 px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto w-full">
@@ -192,7 +191,7 @@ function HeroSection() {
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        className="space-y-8 max-w-2xl"
+        className="space-y-8 max-w-2xl bg-background/75 backdrop-blur-md rounded-xl p-6 md:p-10"
       >
         <motion.div variants={fadeUp} custom={0}>
           <BrandIcon className="text-5xl md:text-7xl" />
@@ -256,7 +255,7 @@ function HeroSection() {
               rel="noopener noreferrer"
             >
               <Presentation className="w-4 h-4 mr-2" />
-              View Slide Deck
+              View Process Deck
             </a>
           </Button>
         </motion.div>
@@ -295,7 +294,8 @@ function CaseStudyModal({
                 <span
                   key={tag}
                   role="listitem"
-                  className="font-mono text-xs px-2 py-0.5 bg-background/80 backdrop-blur-sm rounded-md text-foreground/80"
+                  className="font-mono text-xs px-2 py-0.5 backdrop-blur-sm rounded-md border"
+                  style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
                   data-testid={`tag-modal-${study.id}-${tag}`}
                 >
                   {tag}
@@ -431,7 +431,7 @@ function ShowcaseSection() {
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {caseStudies.map((study, idx) => {
           const Icon = study.icon;
           const isLarge = idx === 0;
@@ -442,74 +442,131 @@ function ShowcaseSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className={isLarge ? "md:col-span-2 md:row-span-2" : ""}
+              className={isLarge ? "md:col-span-2" : ""}
             >
-              <Card
-                className="group cursor-pointer hover-elevate active-elevate-2 h-full"
-                onClick={() => setActiveStudy(study)}
-                role="button"
-                tabIndex={0}
-                aria-label={`View case study: ${study.title}`}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActiveStudy(study);
-                  }
-                }}
-                data-testid={`card-project-${study.id}`}
-              >
+              {isLarge ? (
                 <div
-                  className={`relative w-full ${
-                    isLarge ? "h-48 md:h-64" : "h-36 md:h-44"
-                  } rounded-t-xl bg-muted`}
+                  className="group cursor-pointer"
+                  onClick={() => setActiveStudy(study)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View case study: ${study.title}`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveStudy(study);
+                    }
+                  }}
+                  data-testid={`card-project-${study.id}`}
                 >
-                  <img
-                    src={study.image}
-                    alt={study.title}
-                    className="w-full h-full object-cover rounded-t-xl"
-                    data-testid={`img-project-${study.id}`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent rounded-t-xl opacity-60" />
-                  <div className="absolute top-3 right-3 w-8 h-8 rounded-md bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight className="w-4 h-4" />
+                  <div className="relative w-full h-56 md:h-72 rounded-xl bg-muted">
+                    <img
+                      src={study.image}
+                      alt={study.title}
+                      className="w-full h-full object-cover rounded-xl"
+                      data-testid={`img-project-${study.id}`}
+                    />
+                    <div className="absolute top-4 right-4 w-8 h-8 rounded-md bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
                   </div>
-                </div>
 
-                <div className={`p-5 ${isLarge ? "md:p-7" : ""} space-y-3`}>
-                  <div className="flex items-center gap-2">
-                    <Icon className="w-4 h-4" style={{ color: "#FE299E" }} />
-                    <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                      {study.subtitle}
-                    </span>
-                  </div>
-                  <h3
-                    className={`font-bold tracking-tight leading-snug ${
-                      isLarge ? "text-xl md:text-2xl" : "text-base md:text-lg"
-                    }`}
-                    data-testid={`text-project-title-${study.id}`}
-                  >
-                    {study.title}
-                  </h3>
-                  <p
-                    className="text-sm text-muted-foreground line-clamp-2 leading-relaxed"
-                    data-testid={`text-project-summary-${study.id}`}
-                  >
-                    {study.executiveSummary}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 pt-1" role="list" aria-label="Tags">
-                    {study.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        role="listitem"
-                        className="font-mono text-[10px] px-1.5 py-0.5 bg-muted rounded text-muted-foreground"
-                        data-testid={`tag-${study.id}-${tag}`}
-                      >
-                        {tag}
+                  <div className="pt-5 space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Icon className="w-4 h-4" style={{ color: "#FE299E" }} />
+                      <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                        {study.subtitle}
                       </span>
-                    ))}
+                    </div>
+                    <h3
+                      className="text-2xl md:text-3xl font-bold tracking-tight leading-snug"
+                      data-testid={`text-project-title-${study.id}`}
+                    >
+                      {study.title}
+                    </h3>
+                    <p
+                      className="text-base text-muted-foreground leading-relaxed max-w-3xl"
+                      data-testid={`text-project-summary-${study.id}`}
+                    >
+                      {study.executiveSummary}
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-1" role="list" aria-label="Tags">
+                      {study.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          role="listitem"
+                          className="font-mono text-[11px] px-2 py-0.5 rounded-md border"
+                          style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
+                          data-testid={`tag-${study.id}-${tag}`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </Card>
+              ) : (
+                <Card
+                  className="group cursor-pointer hover-elevate active-elevate-2 h-full bg-transparent border-border/60"
+                  onClick={() => setActiveStudy(study)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View case study: ${study.title}`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveStudy(study);
+                    }
+                  }}
+                  data-testid={`card-project-${study.id}`}
+                >
+                  <div className="relative w-full h-40 md:h-48 rounded-t-xl bg-muted">
+                    <img
+                      src={study.image}
+                      alt={study.title}
+                      className="w-full h-full object-cover rounded-t-xl"
+                      data-testid={`img-project-${study.id}`}
+                    />
+                    <div className="absolute top-3 right-3 w-8 h-8 rounded-md bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <div className="p-5 space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Icon className="w-4 h-4" style={{ color: "#FE299E" }} />
+                      <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                        {study.subtitle}
+                      </span>
+                    </div>
+                    <h3
+                      className="text-lg md:text-xl font-bold tracking-tight leading-snug"
+                      data-testid={`text-project-title-${study.id}`}
+                    >
+                      {study.title}
+                    </h3>
+                    <p
+                      className="text-sm md:text-base text-muted-foreground line-clamp-3 leading-relaxed"
+                      data-testid={`text-project-summary-${study.id}`}
+                    >
+                      {study.executiveSummary}
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-1" role="list" aria-label="Tags">
+                      {study.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          role="listitem"
+                          className="font-mono text-[11px] px-2 py-0.5 rounded-md border"
+                          style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
+                          data-testid={`tag-${study.id}-${tag}`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Card>
+              )}
             </motion.div>
           );
         })}
@@ -589,14 +646,13 @@ function EnterpriseVaultSection() {
               }}
               data-testid={`card-enterprise-${card.id}`}
             >
-              <div className="relative w-full h-32 md:h-40 rounded-t-xl bg-muted">
+              <div className="relative w-full h-40 md:h-48 rounded-t-xl bg-muted">
                 <img
                   src={card.image}
                   alt={card.title}
                   className="w-full h-full object-cover rounded-t-xl"
                   data-testid={`img-enterprise-${card.id}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent rounded-t-xl" />
                 <div className="absolute top-3 right-3 w-7 h-7 rounded-md bg-background/70 backdrop-blur-sm flex items-center justify-center">
                   <Lock className="w-3 h-3 text-muted-foreground" />
                 </div>
