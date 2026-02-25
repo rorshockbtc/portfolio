@@ -1,0 +1,59 @@
+Portfolio site prompt
+
+You are an expert frontend engineer and UI/UX developer. Your task is to build a responsive single-page portfolio website for a Principal Product Designer & Systems Architect.
+STRICT DIRECTIVE - AVOID FEATURE CREEP: Do NOT hallucinate additional features, complex routing, or heavy server-state management. Your goal is to build a highly performant, visually striking, single-page presentation layer using a Bento-box grid that triggers scrollable modals (using Shadcn/ui or Radix UI Dialogs) to house dense technical text.
+DESIGN SYSTEM & VIBE:
+* The Vibe: "The most interesting person in the world." Highly competent, slightly subversive, but warm and approachable. Clean, brutalist Notion-style documents that suddenly smile at you. Some playfulness, refer to colonhyphenbracket.pink and hash.pink designs for inspiration, but this page should be more professional and client/employer facing. 
+* Colors: Minimalist white/off-white background, dark high-contrast text. Use a vibrant pink (#FE299E) EXCLUSIVELY for primary CTAs, hover states, and the :-] smiley face brand icon. Do not use pink as a background color. If accent colors are required, pull accents from colonhyphenbracket.pink.
+* Typography: Clean sans-serif for UI elements (Inter or Roboto), and a monospace font (JetBrains Mono) for technical tags/labels to lean into the developer aesthetic. Preference for humanist feel, think Apple but with Google’s playfulness.
+* Layout: A Bento-box grid system for the projects. Include appropriate artwork throughout the site to achieve vibrancy and engagement without being overwhelming. Store this artwork in a clearly marked folder in the repo so that I can later go in and replace it.
+DATA STRUCTURE & CONTENT: Build the components to house the exact content below.
+SECTION 1: THE HERO (Above the Fold)
+* Icon: :-] (in #FE299E pink)
+* Headline: Principal Product Designer & Systems Architect
+* Subheadline: I build enterprise-scale data systems, zero-to-one fintech platforms, and collaborative agentic AI models.
+* Intro Text: I don't just push pixels. I align complex business strategy with high-fidelity technical execution. I believe technology should feel human, which is why my systems prioritize persistent memory, privacy, and actual utility over AI hype. I'm a "high-bandwidth" thinker who bridges the gap between executive vision and engineering reality.
+* Primary CTA: "View Resume" (link to /cyree_resume_2026.pdf)
+* Secondary CTA: "Contact Me" (mailto:rorshock@protonmail.com) Tertiary CTA: “View Slide Deck“ (link to https://www.sketch.com/s/d826d733-5642-411a-8da3-72486d6164f0)
+SECTION 2: THE PUBLIC SHOWCASE (Live Products)
+Create a clickable grid of cards for these projects. When clicked, open a sleek, scrollable modal containing the full case study text below. Ensure the typography inside the modal is optimized for long-form reading, and include simple/tasteful art as necessary.
+Case Study 1: The CHB Ecosystem (Hash, Semi, Pipes)
+* Title: The Persistent Memory AI Ecosystem
+* Executive Summary: A suite of interconnected web apps that share a universal cryptographic identity and persistent memory. It is an AI ecosystem that actually remembers who you are across platforms.
+* The Human Problem: AI amnesia. Having to repeat your context, your projects, and your preferences to an AI every single session is a form of digital torture. High-bandwidth thinkers need an AI sparring partner that remembers their context, not a goldfish.
+* UX Outcomes: Zero-friction context. A conversational UI that adapts its tone, rhetorical style, and challenge-level based on the user's psychological profile (Big Five, MBTI, Enneagram) derived automatically from their journaling habits.
+* Technical Problem 1: The "AI Tax"—users burning expensive API tokens just trying to establish context through massive prompt engineering.
+* Technical Problem 2: Securely managing user identity across a decentralized suite of tools without relying on Big Tech OAuth providers.
+* Technical Outcomes: * Architected the "Reference Library Pattern" (Curated Template + Keyword Matching + User Words = Personalized Output). This system delivers PhD-tier, 25-page psychological insights at exactly $0.00 in AI API costs by running local keyword detection against curated JSON libraries.
+    * Built cross-product APIs secured by a custom Auth Hub using both traditional email/bcrypt and NOSTR (NIP-07) cryptographic authentication, generating a chbUniversalId for seamless cross-app memory sharing.
+* The Invitation: Experience an AI that doesn't forget. [Visit colonhyphenbracket.pink]
+Case Study 2: Slash V6
+* Title: High-Velocity Binary Arbitrage Engine
+* Executive Summary: A production-grade, market-neutral high-frequency trading bot designed for 15-minute cryptocurrency prediction windows.
+* The Human Problem: Prediction markets are chaotic, 24/7, and structurally inefficient. Humans need to sleep; mathematical arbitrage opportunities do not.
+* UX Outcomes: A centralized, React-based dashboard that translates sub-100ms websocket chaos into human-readable scorecards, forensic event logs, and strategic levers. It turns anxiety-inducing market volatility into a manageable game of dials and switches.
+* Technical Problem 1: Geographic latency and exchange access restrictions requiring sub-second execution.
+* Technical Problem 2: Catastrophic capital loss scenarios during violent market breakouts, and "trading deadlocks" where competing safety systems freeze the bot's logic.
+* Technical Outcomes: * Scaled to 37,000+ lines of TypeScript utilizing a distributed "Brain + Hands" architecture. The Cloud UI handles monitoring and simulation, while a low-latency Amsterdam VPS executes trades, communicating via a custom WebSocket bridge.
+    * Built "The Crucible," a custom Monte Carlo simulator to backtest 50+ tunable parameters against 126 recorded historical markets.
+    * Engineered 6 independent, concurrent risk management systems including Pace Brakes (to prevent runaway accumulation), Margin Oracles (for capital efficiency), and Liquidity Throttles.
+* The Invitation: I build systems that don't sleep so that I can. (Private Repository - Architecture available upon request)
+Case Study 3: Workshop.pink
+* Title: The Sovereign Blueprint (Anti-Chaos Engine)
+* Executive Summary: A strategic governance system that generates "Project Constitutions" to tame chaotic, overly-opinionated AI builder agents.
+* The Human Problem: The "Template Tyranny" of modern AI. You ask a coding agent to build a simple landing page, and it confidently builds a full-stack monorepo you didn't ask for. Founders are reduced from visionaries to exasperated micromanagers.
+* UX Outcomes: Restoring sanity and creative flow to founders. Workshop provides a "Living Primer"—a massive, human-readable and machine-parseable Markdown document that acts as the un-ignorable law for the AI, keeping it aligned with the human's actual vision.
+* Technical Problem 1: AI agents suffer from context window amnesia and fall into "circular logic hell" during complex software builds.
+* Technical Problem 2: Discrepancies between development and production environments caused by rogue AI dependency choices.
+* Technical Outcomes: * Developed a strict Constitutional Governance middleware pattern that enforces hard dependency limits (e.g., max 50 production dependencies), API timeout fallbacks (max 10s), and environment parity.
+    * Engineered the "Agentic Handshake," an API connection allowing the builder agent to continuously re-sync with the project's master constitution, bypassing context window limitations.
+* The Invitation: Stop arguing with your tools. Give them a constitution. 
+SECTION 3: THE ENTERPRISE VAULT (Gated Access)
+Create a visually distinct section. It should look like a secure, Brutalist grid. These cards DO NOT open modals. Instead, clicking them triggers a toast notification or a mailto: link stating: "Due to the sensitive nature of enterprise financial and healthcare architecture, full case studies are available upon request via secure access key."
+* Card 1: Architecting a Full-Reserve Digital Asset Bank (Zero-to-One Launch)
+* Card 2: Scaling Flagship Patient Ecosystems for a Fortune 50 Healthcare Provider (35M+ Users)
+* Card 3: Engineering Fraud Detection & Operations for a Major Food Delivery Network (10x Exit)
+* Card 4: Directing a Tier-1 Global Investment Firm through Cloud-Native App and Agile Design Processes
+SECTION 4: FOOTER
+* Text: 2026 CHB (Colon Hyphen Bracket, LLC).
+* Links: LinkedIn (https://www.linkedin.com/in/kyle-cyree/), GitHub (https://github.com/rorshockbtc)
