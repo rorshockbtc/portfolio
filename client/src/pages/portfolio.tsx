@@ -471,7 +471,7 @@ function ShowcaseSection() {
                     </div>
                   </div>
 
-                  <div className="pt-5 space-y-3">
+                  <div className="pt-5 pb-4 space-y-3">
                     <div className="flex items-center gap-2">
                       <Icon className="w-4 h-4" style={{ color: "#FE299E" }} />
                       <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
