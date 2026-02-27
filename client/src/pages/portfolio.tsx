@@ -237,7 +237,7 @@ function HeroSection() {
           className="flex flex-wrap gap-3 pt-4"
         >
           <Button asChild data-testid="cta-resume">
-            <a href="/cyree_resume_2026.pdf" target="_blank" rel="noopener noreferrer">
+            <a href="/images/cyree_resume_2026.pdf" target="_blank" rel="noopener noreferrer">
               <FileText className="w-4 h-4 mr-2" />
               View Resume
             </a>
