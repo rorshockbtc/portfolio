@@ -19,6 +19,8 @@ import {
   TrendingUp,
   Shield,
   ChevronRight,
+  Download,
+  ExternalLink,
 } from "lucide-react";
 import { SiLinkedin, SiGithub } from "react-icons/si";
 import { motion } from "framer-motion";
@@ -408,6 +410,135 @@ function CaseStudyModal({
   );
 }
 
+const whitepaperTags = [
+  "Customer Experience",
+  "Scalable Agents",
+  "Knowledge Base Chatbots",
+  "Bitcoin",
+  "Developer Tools",
+];
+
+function WhitepaperSection() {
+  return (
+    <section
+      className="px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto"
+      data-testid="section-whitepaper"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5 }}
+        className="mb-12"
+      >
+        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
+          Research
+        </p>
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight" data-testid="text-whitepaper-heading">
+          Open Source Whitepaper
+        </h2>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5 }}
+      >
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 border border-border/60 rounded-xl overflow-hidden"
+          data-testid="card-whitepaper-emerald"
+        >
+          <div className="relative w-full h-56 md:h-full min-h-[280px] bg-muted">
+            <img
+              src="/artwork/emerald.png"
+              alt="Project Emerald — Sovereign CX Architecture"
+              className="w-full h-full object-cover"
+              data-testid="img-whitepaper-emerald"
+            />
+          </div>
+
+          <div className="p-6 md:p-8 flex flex-col justify-center space-y-5">
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4" style={{ color: "#FE299E" }} />
+              <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                Project Emerald
+              </span>
+            </div>
+
+            <h3
+              className="text-xl md:text-2xl font-bold tracking-tight leading-snug"
+              data-testid="text-whitepaper-title"
+            >
+              The Human Layer is the Single Point of Failure
+            </h3>
+
+            <p
+              className="text-sm md:text-base text-muted-foreground leading-relaxed"
+              data-testid="text-whitepaper-subtitle"
+            >
+              Private &amp; Anonymous Support for High-Stakes Brands
+            </p>
+
+            <p
+              className="text-sm text-foreground/80 leading-relaxed"
+              data-testid="text-whitepaper-summary"
+            >
+              A sovereign &ldquo;Protocol Interpreter&rdquo; designed to protect human capital by
+              automating the friction of technical support without sacrificing user privacy.
+              Deterministic, high-fidelity support at 1/1000th the operational cost of any SaaS
+              support system.
+            </p>
+
+            <div className="flex flex-wrap gap-2 pt-1" role="list" aria-label="Whitepaper tags">
+              {whitepaperTags.map((tag) => (
+                <span
+                  key={tag}
+                  role="listitem"
+                  className="font-mono text-[11px] px-2 py-0.5 rounded-md border"
+                  style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
+                  data-testid={`tag-whitepaper-${tag.toLowerCase().replace(/\s+/g, "-")}`}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Button asChild size="sm" data-testid="cta-download-whitepaper">
+                <a href="/emerald-whitepaper.pdf" download>
+                  <Download className="w-4 h-4 mr-2" />
+                  Download PDF
+                </a>
+              </Button>
+              <Button variant="secondary" asChild size="sm" data-testid="cta-view-repo">
+                <a
+                  href="https://github.com/rorshockbtc/emerald-support-bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SiGithub className="w-4 h-4 mr-2" />
+                  View Repository
+                </a>
+              </Button>
+              <Button variant="secondary" asChild size="sm" data-testid="cta-try-demo">
+                <a
+                  href="https://89caa569-87ea-4743-951d-eab6107b8df9-00-3oaxcznbew6b9.spock.replit.dev/#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Try Demo
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
 function ShowcaseSection() {
   const [activeStudy, setActiveStudy] = useState<CaseStudy | null>(null);
 
@@ -742,6 +873,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <HeroSection />
+      <WhitepaperSection />
       <ShowcaseSection />
       <EnterpriseVaultSection />
       <Footer />
