@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -21,6 +21,10 @@ import {
   ChevronRight,
   Download,
   ExternalLink,
+  Play,
+  Pause,
+  Volume2,
+  Loader2,
 } from "lucide-react";
 import { SiLinkedin, SiGithub } from "react-icons/si";
 import { motion } from "framer-motion";
@@ -418,7 +422,465 @@ const whitepaperTags = [
   "Developer Tools",
 ];
 
+function AudioPlayer() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [audioError, setAudioError] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/tts/emerald/status")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.ready) setReady(true);
+      })
+      .catch(() => {});
+  }, []);
+
+  const loadAndPlay = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    setLoading(true);
+    setAudioError(false);
+    try {
+      const res = await fetch("/api/tts/emerald");
+      if (res.status === 202) {
+        setLoading(false);
+        setAudioError(true);
+        return;
+      }
+      if (!res.ok) throw new Error("Failed to generate audio");
+      const blob = await res.blob();
+      audio.src = URL.createObjectURL(blob);
+      await new Promise<void>((resolve, reject) => {
+        audio.oncanplaythrough = () => resolve();
+        audio.onerror = () => reject(new Error("Audio load failed"));
+        audio.load();
+      });
+      setReady(true);
+      setLoading(false);
+      audio.play();
+      setPlaying(true);
+    } catch {
+      setLoading(false);
+      setAudioError(true);
+    }
+  };
+
+  const handlePlayPause = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (!ready && !loading) {
+      await loadAndPlay();
+      return;
+    }
+
+    if (playing) {
+      audio.pause();
+      setPlaying(false);
+    } else {
+      if (!audio.src || audio.src === "") {
+        await loadAndPlay();
+        return;
+      }
+      audio.play();
+      setPlaying(true);
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    const audio = audioRef.current;
+    if (audio && audio.duration) {
+      setProgress((audio.currentTime / audio.duration) * 100);
+      setDuration(audio.duration);
+    }
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const audio = audioRef.current;
+    if (!audio || !audio.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = pct * audio.duration;
+  };
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${s.toString().padStart(2, "0")}`;
+  };
+
+  return (
+    <div className="border border-border/60 rounded-lg p-4 space-y-3" data-testid="audio-player-emerald">
+      <audio
+        ref={audioRef}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={() => {
+          if (audioRef.current) setDuration(audioRef.current.duration);
+        }}
+        onEnded={() => setPlaying(false)}
+        preload="none"
+      />
+
+      <div className="flex items-center gap-3">
+        <Volume2 className="w-4 h-4 text-muted-foreground shrink-0" />
+        <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+          Listen &mdash; AI Narration (Nova Voice)
+        </span>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handlePlayPause}
+          disabled={loading}
+          className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors disabled:opacity-50"
+          style={{ backgroundColor: "#FE299E", color: "white" }}
+          data-testid="btn-play-narration"
+          aria-label={playing ? "Pause narration" : "Play narration"}
+        >
+          {loading ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : playing ? (
+            <Pause className="w-4 h-4" />
+          ) : (
+            <Play className="w-4 h-4 ml-0.5" />
+          )}
+        </button>
+
+        <div className="flex-1 space-y-1">
+          <div
+            className="h-1.5 bg-muted rounded-full cursor-pointer relative overflow-hidden"
+            onClick={handleSeek}
+            data-testid="progress-bar-narration"
+          >
+            <div
+              className="absolute inset-y-0 left-0 rounded-full transition-all"
+              style={{ width: `${progress}%`, backgroundColor: "#FE299E" }}
+            />
+          </div>
+          <div className="flex justify-between">
+            <span className="font-mono text-[10px] text-muted-foreground">
+              {ready && audioRef.current ? formatTime(audioRef.current.currentTime) : "0:00"}
+            </span>
+            <span className="font-mono text-[10px] text-muted-foreground">
+              {duration > 0 ? formatTime(duration) : loading ? "Generating..." : "—:——"}
+            </span>
+          </div>
+        </div>
+
+        <a
+          href="/api/tts/emerald"
+          download="emerald-whitepaper-narration.mp3"
+          className="w-8 h-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors shrink-0"
+          title="Download narration MP3"
+          data-testid="btn-download-narration"
+          onClick={(e) => {
+            if (!ready) {
+              e.preventDefault();
+            }
+          }}
+        >
+          <Download className="w-4 h-4" />
+        </a>
+      </div>
+
+      {audioError && (
+        <p className="text-xs text-red-500" data-testid="text-audio-error">
+          Audio generation failed. Try again later.
+        </p>
+      )}
+
+      <p className="text-[11px] text-muted-foreground leading-relaxed">
+        Free to distribute. Generated with OpenAI Nova voice.
+      </p>
+    </div>
+  );
+}
+
+function WhitepaperModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  return (
+    <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
+      <DialogContent
+        className="max-w-3xl max-h-[85vh] overflow-y-auto p-0"
+        data-testid="modal-whitepaper"
+      >
+        <div className="relative w-full h-48 md:h-64 bg-muted rounded-t-lg">
+          <img
+            src="/artwork/emerald.png"
+            alt="Project Emerald"
+            className="w-full h-full object-cover rounded-t-lg"
+            data-testid="img-modal-whitepaper"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent rounded-t-lg" />
+          <div className="absolute bottom-4 left-6 right-6">
+            <div className="flex flex-wrap gap-2 mb-2" role="list" aria-label="Technology tags">
+              {whitepaperTags.map((tag) => (
+                <span
+                  key={tag}
+                  role="listitem"
+                  className="font-mono text-xs px-2 py-0.5 backdrop-blur-sm rounded-md border"
+                  style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="px-6 md:px-8 pb-8 pt-2 space-y-8">
+          <DialogHeader className="space-y-2">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Project Emerald
+            </p>
+            <DialogTitle className="text-2xl md:text-3xl font-bold tracking-tight">
+              The Human Layer is the Single Point of Failure
+            </DialogTitle>
+            <DialogDescription className="text-base text-muted-foreground leading-relaxed">
+              Private &amp; Anonymous Support for High-Stakes Brands/Products
+            </DialogDescription>
+          </DialogHeader>
+
+          <AudioPlayer />
+
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="sm" data-testid="cta-modal-download-whitepaper">
+              <a href="/emerald-whitepaper.pdf" download>
+                <Download className="w-4 h-4 mr-2" />
+                Download Whitepaper
+              </a>
+            </Button>
+            <Button variant="secondary" asChild size="sm" data-testid="cta-modal-view-repo">
+              <a
+                href="https://github.com/rorshockbtc/emerald-support-bot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SiGithub className="w-4 h-4 mr-2" />
+                View Repository
+              </a>
+            </Button>
+            <Button variant="secondary" asChild size="sm" data-testid="cta-modal-try-demo">
+              <a
+                href="https://89caa569-87ea-4743-951d-eab6107b8df9-00-3oaxcznbew6b9.spock.replit.dev/#"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Try Demo
+              </a>
+            </Button>
+          </div>
+
+          <div className="space-y-6 text-[15px] leading-[1.7]">
+            <div>
+              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
+                The Thesis
+              </h3>
+              <p className="text-foreground/85">
+                Bitcoin has no CEO, no marketing department, and no HR. This is its greatest security feature
+                and market differentiator but it creates a massive communication debt. When protocol updates
+                happen&mdash;like the recent Bitcoin Core 28.0 release&mdash;the friction doesn&apos;t occur in
+                the code; it occurs between humans.
+              </p>
+              <p className="text-foreground/85 mt-3">
+                Emerald was engineered as a high-fidelity, sovereign &ldquo;Protocol Interpreter&rdquo; designed
+                to protect human capital by automating the friction of technical support without sacrificing
+                user privacy.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
+                Brief Context
+              </h3>
+              <p className="text-foreground/85">
+                This was not built on commission. It represents synergies of AI-specific R&amp;D performed over
+                18 months plus 20+ years of experience designing outcomes for users that reinforce brands rather
+                than disrupting customer confidence. The concept is open-sourced under the name &ldquo;Emerald.&rdquo;
+              </p>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-3">
+                Escaping the &ldquo;Zendesk Trap&rdquo;
+              </h3>
+              <p className="text-foreground/85 mb-4">
+                Most companies rely on legacy CX tools that are fundamentally incompatible with a
+                &ldquo;Don&apos;t Trust, Verify&rdquo; ethos. They cost time, money, are difficult to implement,
+                and chip away at brand trust.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm border border-border/60 rounded-lg" data-testid="table-cx-comparison">
+                  <thead>
+                    <tr className="border-b border-border/60">
+                      <th className="text-left p-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Metric</th>
+                      <th className="text-left p-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Legacy CX</th>
+                      <th className="text-left p-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Emerald</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-foreground/85">
+                    <tr className="border-b border-border/40">
+                      <td className="p-3 font-medium">Base Seat Cost</td>
+                      <td className="p-3">$115&ndash;$169/agent/mo</td>
+                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>$0 (Self-hosted)</td>
+                    </tr>
+                    <tr className="border-b border-border/40">
+                      <td className="p-3 font-medium">AI Add-on Tax</td>
+                      <td className="p-3">$50/agent/mo</td>
+                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>$0 (Local-first)</td>
+                    </tr>
+                    <tr className="border-b border-border/40">
+                      <td className="p-3 font-medium">Resolution Fee</td>
+                      <td className="p-3">$1.50&ndash;$2.00/resolution</td>
+                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>&lt;$0.02</td>
+                    </tr>
+                    <tr className="border-b border-border/40">
+                      <td className="p-3 font-medium">Privacy Model</td>
+                      <td className="p-3">PII-heavy</td>
+                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>Zero-Knowledge</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-medium">Identity</td>
+                      <td className="p-3">Centralized DB</td>
+                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>Sovereign Persistence</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-foreground/85 mt-4">
+                For an enterprise team of 50 agents, Zendesk costs exceed $13k/month before solving a
+                single ticket. Emerald provides deterministic, high-fidelity support at 1/1000th the
+                operational cost.
+              </p>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-3">
+                Self-Sovereign Architecture
+              </h3>
+              <div className="space-y-4">
+                <div className="flex gap-3">
+                  <ChevronRight className="w-4 h-4 mt-1 shrink-0" style={{ color: "#FE299E" }} />
+                  <div>
+                    <p className="font-medium text-foreground/90 mb-1">Persistent Anonymity (Cryptographic Handshakes)</p>
+                    <p className="text-foreground/75">
+                      Identity decoupled from data using a PubKey-Signature handshake. Users interact
+                      anonymously; by signing a session hash with a NOSTR or PGP key, they persist context
+                      across devices without email login.
+                    </p>
+                    <code className="font-mono text-xs text-muted-foreground mt-2 block">
+                      Session_ID = SHA-256(User_PubKey + Session_Salt)
+                    </code>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <ChevronRight className="w-4 h-4 mt-1 shrink-0" style={{ color: "#FE299E" }} />
+                  <div>
+                    <p className="font-medium text-foreground/90 mb-1">Deterministic Orchestration via dspy.ts</p>
+                    <p className="text-foreground/75">
+                      Instead of probabilistic RAG, Emerald uses Programmatic Prompt Optimization. User intent
+                      maps to cryptographically verified documentation, delivering versioned technical specs
+                      rather than hallucinations.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <ChevronRight className="w-4 h-4 mt-1 shrink-0" style={{ color: "#FE299E" }} />
+                  <div>
+                    <p className="font-medium text-foreground/90 mb-1">Local-First &amp; Browser-Cached Memory</p>
+                    <p className="text-foreground/75">
+                      The browser is treated as a secure vault. PII is scrubbed locally before inference.
+                      A one-click &ldquo;Flush&rdquo; erases the user from system history entirely.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
+                Designing for Safety
+              </h3>
+              <p className="text-foreground/85">
+                In Bitcoin, &ldquo;ease of use&rdquo; can be a vulnerability. Emerald uses strategic friction&mdash;when
+                high-risk intent is detected (account freeze, time-locked transactions), the UI breaks the
+                chat paradigm and moves into a multi-step safety flow requiring manual acknowledgment of
+                irreversible actions.
+              </p>
+              <blockquote className="border-l-2 pl-4 mt-3 text-foreground/70 italic" style={{ borderColor: "#FE299E" }}>
+                Design-as-a-System means knowing when to stop the user from moving fast. Emerald is a
+                guardrail, not just a guide.
+              </blockquote>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
+                The Open Source Pivot
+              </h3>
+              <p className="text-foreground/85">
+                Built for Blockstream as a targeted CX solution. When leadership didn&apos;t move on the
+                hire, the IP was open-sourced. 250+ hours of preparation across four interview rounds,
+                months of GitHub analysis, and full product line decomposition went into this work.
+              </p>
+              <p className="text-lg font-medium italic text-foreground/70 mt-4">
+                It is far more important that Bitcoin remain &ldquo;hope&rdquo; for its users than me working
+                for any specific company.
+              </p>
+              <div className="flex flex-col gap-2 mt-3">
+                <a
+                  href="https://github.com/rorshockbtc/emerald-support-bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-mono text-sm transition-colors"
+                  style={{ color: "#FE299E" }}
+                  data-testid="link-modal-repo"
+                >
+                  View Repository <ArrowUpRight className="w-3 h-3" />
+                </a>
+                <a
+                  href="https://89caa569-87ea-4743-951d-eab6107b8df9-00-3oaxcznbew6b9.spock.replit.dev/#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-mono text-sm transition-colors"
+                  style={{ color: "#FE299E" }}
+                  data-testid="link-modal-demo"
+                >
+                  Try Live Demo <ArrowUpRight className="w-3 h-3" />
+                </a>
+                <a
+                  href="https://hire.colonhyphenbracket.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-mono text-sm transition-colors"
+                  style={{ color: "#FE299E" }}
+                  data-testid="link-modal-hire"
+                >
+                  hire.colonhyphenbracket.com <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 function WhitepaperSection() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <section
       className="px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto"
@@ -446,8 +908,18 @@ function WhitepaperSection() {
         transition={{ duration: 0.5 }}
       >
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 border border-border/60 rounded-xl overflow-hidden"
+          className="group cursor-pointer grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 border border-border/60 rounded-xl overflow-hidden"
           data-testid="card-whitepaper-emerald"
+          onClick={() => setModalOpen(true)}
+          role="button"
+          tabIndex={0}
+          aria-label="Read whitepaper: The Human Layer is the Single Point of Failure"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setModalOpen(true);
+            }
+          }}
         >
           <div className="relative w-full h-56 md:h-full min-h-[280px] bg-muted">
             <img
@@ -456,6 +928,9 @@ function WhitepaperSection() {
               className="w-full h-full object-cover"
               data-testid="img-whitepaper-emerald"
             />
+            <div className="absolute top-4 right-4 w-8 h-8 rounded-md bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
           </div>
 
           <div className="p-6 md:p-8 flex flex-col justify-center space-y-5">
@@ -504,7 +979,7 @@ function WhitepaperSection() {
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap gap-3 pt-2" onClick={(e) => e.stopPropagation()}>
               <Button asChild size="sm" data-testid="cta-download-whitepaper">
                 <a href="/emerald-whitepaper.pdf" download>
                   <Download className="w-4 h-4 mr-2" />
@@ -535,6 +1010,8 @@ function WhitepaperSection() {
           </div>
         </div>
       </motion.div>
+
+      <WhitepaperModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }
