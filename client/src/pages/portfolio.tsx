@@ -477,7 +477,7 @@ function WhitepaperSection() {
               className="text-sm md:text-base text-muted-foreground leading-relaxed"
               data-testid="text-whitepaper-subtitle"
             >
-              Private &amp; Anonymous Support for High-Stakes Brands
+              Project Emerald &mdash; Private &amp; Anonymous Support for High-Stakes Brands
             </p>
 
             <p
@@ -508,7 +508,7 @@ function WhitepaperSection() {
               <Button asChild size="sm" data-testid="cta-download-whitepaper">
                 <a href="/emerald-whitepaper.pdf" download>
                   <Download className="w-4 h-4 mr-2" />
-                  Download PDF
+                  Download Whitepaper
                 </a>
               </Button>
               <Button variant="secondary" asChild size="sm" data-testid="cta-view-repo">
