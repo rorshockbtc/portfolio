@@ -424,6 +424,7 @@ const whitepaperTags = [
 
 function AudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const blobUrlRef = useRef<string | null>(null);
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
@@ -438,7 +439,24 @@ function AudioPlayer() {
         if (data.ready) setReady(true);
       })
       .catch(() => {});
+
+    return () => {
+      if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
+    };
   }, []);
+
+  const setAudioSourceFromResponse = async (res: Response) => {
+    const audio = audioRef.current;
+    if (!audio) return false;
+
+    const blob = await res.blob();
+    const cachedUrl = URL.createObjectURL(blob);
+    if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
+    blobUrlRef.current = cachedUrl;
+    audio.src = cachedUrl;
+    await audio.load();
+    return true;
+  };
 
   const loadAndPlay = async () => {
     const audio = audioRef.current;
@@ -454,16 +472,10 @@ function AudioPlayer() {
         return;
       }
       if (!res.ok) throw new Error("Failed to generate audio");
-      const blob = await res.blob();
-      audio.src = URL.createObjectURL(blob);
-      await new Promise<void>((resolve, reject) => {
-        audio.oncanplaythrough = () => resolve();
-        audio.onerror = () => reject(new Error("Audio load failed"));
-        audio.load();
-      });
+      await setAudioSourceFromResponse(res);
       setReady(true);
       setLoading(false);
-      audio.play();
+      await audio.play();
       setPlaying(true);
     } catch {
       setLoading(false);
@@ -488,7 +500,7 @@ function AudioPlayer() {
         await loadAndPlay();
         return;
       }
-      audio.play();
+      await audio.play();
       setPlaying(true);
     }
   };
@@ -574,7 +586,7 @@ function AudioPlayer() {
         </div>
 
         <a
-          href="/api/tts/emerald"
+          href={ready ? audioRef.current?.src || "/api/tts/emerald" : "/api/tts/emerald"}
           download="emerald-whitepaper-narration.mp3"
           className="w-8 h-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors shrink-0"
           title="Download narration MP3"

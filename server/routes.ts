@@ -55,7 +55,17 @@ async function generateNarration(): Promise<Buffer> {
 
     for (let i = 0; i < whitepaperChunks.length; i++) {
       console.log(`[TTS] Generating chunk ${i + 1}/${whitepaperChunks.length}...`);
-      const audio = await textToSpeech(whitepaperChunks[i], "nova", "mp3");
+      const audio = await textToSpeech(
+        whitepaperChunks[i],
+        "nova",
+        "mp3",
+        {
+          speed: 1.12,
+          style: "warm",
+          expressiveness: 0.82,
+          friendliness: 0.9,
+        } as any
+      );
       audioBuffers.push(audio);
       console.log(`[TTS] Chunk ${i + 1} complete (${audio.length} bytes)`);
     }
