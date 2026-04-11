@@ -225,10 +225,10 @@ export default function Studio() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.7, ease }}
             className="mt-8 md:mt-10 text-foreground leading-[1.5]"
-            style={{ fontSize: "clamp(1.25rem, 3.33vw, 4rem)", fontWeight: 200 }}
+            style={{ fontSize: "clamp(1rem, 1.15vw, 1.375rem)", fontWeight: 200 }}
             data-testid="text-studio-hero-subtitle"
           >
-            Colon Hyphen Bracket (just say CHB) applies tasteful, measured order to complex products &amp; growing businesses that have the words but need a voice.
+            Colon Hyphen Bracket (just say CHB) offers full-service design and development to products &amp; companies that have something to say.
           </motion.p>
 
           <motion.div
@@ -399,23 +399,25 @@ export default function Studio() {
         aria-labelledby="heading-regulated"
         data-testid="section-regulated"
       >
-        {/* Heading: flush left — no studio-content margin */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={stagger}
-        >
-          <motion.h2
-            variants={textReveal}
-            id="heading-regulated"
-            className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
-            style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)", paddingLeft: 0, paddingRight: 0 }}
-            data-testid="text-regulated-heading"
+        {/* Heading: standard studio-content left margin, matching all other sections */}
+        <div className="studio-content">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
           >
-            UNBLOCKING health &amp;<br />financial tech
-          </motion.h2>
-        </motion.div>
+            <motion.h2
+              variants={textReveal}
+              id="heading-regulated"
+              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
+              style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
+              data-testid="text-regulated-heading"
+            >
+              UNBLOCKING health &amp;<br />financial tech
+            </motion.h2>
+          </motion.div>
+        </div>
 
         {/* Two-column: body text left (74%), building images right (26%) */}
         <div className="lg:grid lg:grid-cols-[74%_26%] items-start">
@@ -502,29 +504,12 @@ export default function Studio() {
         aria-labelledby="heading-lab"
         data-testid="section-lab"
       >
-        {/* Full-bleed machine image with heading absolutely overlaid */}
-        <div className="relative overflow-hidden">
-          <motion.img
-            src={featurePropTech}
-            alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
-            className="w-full object-cover"
-            style={{ display: "block", maxHeight: "85vh" }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4 }}
-            loading="lazy"
-            data-testid="img-lab-feature"
-          />
-          {/* Heading overlaid at ~40% from top */}
+        {/* Heading: normal document flow above the machine image */}
+        <div className="studio-content pt-20 md:pt-28 pb-10 md:pb-14">
           <motion.h2
             id="heading-lab"
-            className="absolute font-display leading-[1.2] tracking-[-0.02em] z-10"
-            style={{
-              top: "40%",
-              paddingLeft: "clamp(24px, 2.08vw, 40px)",
-              fontSize: "clamp(2rem, 5.5vw, 5.5rem)",
-            }}
+            className="font-display leading-[1.2] tracking-[-0.02em]"
+            style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -533,6 +518,22 @@ export default function Studio() {
           >
             proprietary TEChNOLOGY
           </motion.h2>
+        </div>
+
+        {/* Full-bleed machine image below the heading */}
+        <div className="overflow-hidden">
+          <motion.img
+            src={featurePropTech}
+            alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
+            className="w-full object-cover"
+            style={{ display: "block", maxHeight: "80vh" }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.4 }}
+            loading="lazy"
+            data-testid="img-lab-feature"
+          />
         </div>
 
         {/* Cards below the image */}
@@ -565,16 +566,16 @@ export default function Studio() {
               <LabCard
                 title="LOCaL-first models:"
                 items={[
-                  "The knowledge economy runs on human data we can't repair",
+                  "CHB has worked with popular LLMs, browser-based AI, & built our own models and modules",
+                  "We have developed user-signed and agentic handshakes using SHA-256 and other encryption algorithms",
                   "Nothing is fully trusted until it can run without cloud dependency",
-                  "We have developed and deployed local-first AI for healthcare and finance",
                 ]}
                 testId="lab-local"
               />
               <LabCard
-                title="human cuRaTORS:"
+                title="focused on cuRaTORS:"
                 items={[
-                  "We are bullish on human curation in an era of algorithmic saturation",
+                  "The \u201ccurator economy\u201d is focused on human traits AI can\u2019t match",
                   "Our 5-year thesis sees many traditional jobs becoming curation-based",
                   "We are excited about this and would love to talk about it!",
                 ]}
@@ -638,8 +639,8 @@ export default function Studio() {
               our DESIGN manifesto
             </motion.h2>
 
-            {/* Single wide column, large editorial body text */}
-            <div className="space-y-10 text-foreground/60 leading-[1.6]" style={{ fontSize: "clamp(1rem, 1.67vw, 2rem)" }}>
+            {/* Single wide column, editorial body text — slightly larger than bullet text */}
+            <div className="space-y-10 text-foreground/60 leading-[1.75] text-[17px] md:text-[18px] lg:text-[19px]">
               <motion.p variants={itemFade} data-testid="text-manifesto-p1">
                 If poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
               </motion.p>
@@ -726,7 +727,7 @@ export default function Studio() {
               className="flex-1 space-y-7 text-foreground/70 leading-[1.8] text-[16px] md:text-[17px]"
               style={{
                 paddingLeft: "clamp(2rem, 4vw, 4rem)",
-                paddingRight: "calc(26vw + clamp(1rem, 2vw, 2rem))",
+                paddingRight: "clamp(2rem, 5vw, 7rem)",
               }}
             >
               <motion.p variants={imgRevealRight} data-testid="text-working-p1">
@@ -769,18 +770,18 @@ export default function Studio() {
               <EngagementCard
                 title="FaSTER & BETTER:"
                 items={[
-                  "Most agencies sell you on the dream team, then subcontract to a junior. CHB is faster because our team has been doing this for 20+ years",
+                  "Most agencies sell you on the dream team, then subcontract to a junior",
+                  "CHB is faster because our team has been doing this for 20+ years",
                   "Better is defined as: faster to market, faster to value, designed for ensuring client sovereignty post-engagement",
-                  "We prioritize delivering a working system over a perfected backlog of tickets",
                 ]}
                 testId="model-faster"
               />
               <EngagementCard
                 title="PERSONaL touch:"
                 items={[
-                  "CHB has no extended organizational structure. We're a phone call away. Directly interact with the person designing and developing for you",
-                  "We hold an MFA, MBA, and have design, marketing, and engineering expertise—we'll have something in common!",
-                  "We value long-term relationships, not just deliverables — your success is our reputation",
+                  "CHB has no extended organizational structure. We\u2019re a phone call away.",
+                  "Directly interact with the person designing and developing for you",
+                  "We hold an MFA, MBA, and have design, marketing, and engineering expertise\u2014we\u2019ll have something in common!",
                 ]}
                 testId="model-personal"
               />
@@ -876,12 +877,12 @@ function LabCard({
     <motion.div variants={itemFade} className="space-y-5" data-testid={`card-${testId}`}>
       <h3
         className="font-display tracking-tight leading-[1.2]"
-        style={{ fontSize: "clamp(1.5rem, 2.08vw, 2.5rem)" }}
+        style={{ fontSize: "clamp(1rem, 1.25vw, 1.5rem)" }}
         data-testid={`text-${testId}-title`}
       >
         {title}
       </h3>
-      <ul className="space-y-3 text-foreground/60 leading-[1.7]" style={{ fontSize: "clamp(1rem, 1.67vw, 2rem)" }} role="list">
+      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2">
             <PinkBullet />
@@ -911,7 +912,7 @@ function EngagementCard({
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, ease }}
-      className="p-7 md:p-9 border border-border/20 hover:border-[#FE299E]/25 transition-colors duration-500"
+      className="py-8 md:py-10"
       data-testid={`card-${testId}`}
     >
       <h3
