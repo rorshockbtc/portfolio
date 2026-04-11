@@ -42,3 +42,8 @@ waitForPort = 5000
 
 [agent]
 integrations = ["javascript_openai_ai_integrations:2.0.0"]
+
+[userenv]
+
+[userenv.shared]
+VITE_WEB3FORMS_ACCESS_KEY = "0a997a5d-fccb-46f4-bc7b-7df7ec33d90d"

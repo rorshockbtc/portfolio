@@ -26,7 +26,7 @@ export default function Navigation() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         scrolled
           ? "bg-background/80 backdrop-blur-xl border-b border-border/30"
-          : "bg-transparent border-b border-transparent"
+          : "bg-background/50 backdrop-blur-md border-b border-transparent"
       }`}
       role="navigation"
       aria-label="Main navigation"

@@ -29,6 +29,7 @@ import {
 import { SiGithub } from "react-icons/si";
 import { motion } from "framer-motion";
 import heroImage from "/artwork/hero.jpg";
+import ContactFormModal from "@/components/contact-form-modal";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -176,7 +177,7 @@ function BrandIcon({ className }: { className?: string }) {
   );
 }
 
-function HeroSection() {
+function HeroSection({ onContactClick }: { onContactClick: () => void }) {
   return (
     <section
       className="relative min-h-[90vh] flex flex-col justify-center pt-14 md:pt-16"
@@ -248,11 +249,9 @@ function HeroSection() {
               View Resume
             </a>
           </Button>
-          <Button variant="secondary" asChild data-testid="cta-contact">
-            <a href="mailto:rorshock@protonmail.com">
-              <Mail className="w-4 h-4 mr-2" />
-              Contact Me
-            </a>
+          <Button variant="secondary" onClick={onContactClick} data-testid="cta-contact">
+            <Mail className="w-4 h-4 mr-2" />
+            Contact Me
           </Button>
           <Button variant="secondary" asChild data-testid="cta-deck">
             <a
@@ -1203,7 +1202,7 @@ function ShowcaseSection() {
   );
 }
 
-function EnterpriseVaultSection() {
+function EnterpriseVaultSection({ onContactClick }: { onContactClick: () => void }) {
   const { toast } = useToast();
 
   const handleEnterpriseClick = () => {
@@ -1305,26 +1304,29 @@ function EnterpriseVaultSection() {
         data-testid="text-vault-contact"
       >
         Full case studies available upon request &mdash;{" "}
-        <a
-          href="mailto:rorshock@protonmail.com"
-          className="underline underline-offset-2 transition-colors"
+        <button
+          onClick={onContactClick}
+          className="underline underline-offset-2 transition-colors cursor-pointer bg-transparent border-none p-0 font-mono text-xs"
           style={{ color: "#FE299E" }}
           data-testid="link-vault-contact"
         >
-          rorshock@protonmail.com
-        </a>
+          get in touch
+        </button>
       </motion.p>
     </section>
   );
 }
 
 export default function Portfolio() {
+  const [contactOpen, setContactOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <HeroSection />
+      <HeroSection onContactClick={() => setContactOpen(true)} />
       <WhitepaperSection />
       <ShowcaseSection />
-      <EnterpriseVaultSection />
+      <EnterpriseVaultSection onContactClick={() => setContactOpen(true)} />
+      <ContactFormModal open={contactOpen} onOpenChange={setContactOpen} />
     </div>
   );
 }
