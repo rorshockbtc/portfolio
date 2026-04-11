@@ -218,7 +218,7 @@ export default function Studio() {
       {/* ═══════ HERO ═══════ */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-end pb-16 md:pb-24 lg:pb-28"
+        className="relative min-h-screen flex items-end pb-16 md:pb-24 lg:pb-28 pt-24 md:pt-28 lg:pt-32"
         data-testid="section-studio-hero"
         aria-labelledby="studio-hero-heading"
       >
@@ -226,15 +226,14 @@ export default function Studio() {
           <motion.img
             src={heroBg}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-20"
             style={{ scale: heroBgScale }}
             data-testid="img-studio-hero-bg"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
         </div>
         <motion.div
           style={{ y: heroTextY, opacity: heroOpacity }}
-          className="relative z-10 w-full pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]"
+          className="relative z-10 studio-content"
         >
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
@@ -242,7 +241,7 @@ export default function Studio() {
             transition={{ duration: 1.2, delay: 0.2, ease }}
             id="studio-hero-heading"
             className="font-display leading-[0.92] tracking-[-0.02em]"
-            style={{ fontSize: "clamp(3rem, 8.5vw, 10rem)" }}
+            style={{ fontSize: "clamp(2.5rem, 8.33vw, 10rem)" }}
             data-testid="text-studio-hero-heading"
           >
             architecture Partner for the Stuck &amp; UnderServed.
@@ -251,7 +250,8 @@ export default function Studio() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7, ease }}
-            className="mt-8 md:mt-10 text-[17px] md:text-[19px] text-foreground/60 max-w-2xl leading-[1.8]"
+            className="mt-8 md:mt-10 font-light text-foreground leading-[1.6]"
+            style={{ fontSize: "clamp(1.25rem, 3.33vw, 4rem)", fontWeight: 200 }}
             data-testid="text-studio-hero-subtitle"
           >
             Colon Hyphen Bracket (just say CHB) applies tasteful, measured order to complex products &amp; growing businesses that have the words but need a voice.
@@ -281,7 +281,7 @@ export default function Studio() {
           <img src={sectionBg01} alt="" className="w-full h-full object-cover opacity-15" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/50" />
         </div>
-        <div className="relative z-10 pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]">
+        <div className="relative z-10 studio-content">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
@@ -311,7 +311,7 @@ export default function Studio() {
         aria-labelledby="heading-overlooked"
         data-testid="section-overlooked"
       >
-        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]">
+        <div className="studio-content">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.05 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
@@ -381,7 +381,7 @@ export default function Studio() {
         aria-labelledby="heading-regulated"
         data-testid="section-regulated"
       >
-        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]">
+        <div className="studio-content">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
@@ -396,7 +396,7 @@ export default function Studio() {
         </div>
 
         <div className="relative">
-          <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-0">
+          <div className="studio-full">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
               <div className="grid lg:grid-cols-[55%_45%] gap-0 items-start">
                 <motion.div variants={itemFade} className="space-y-7 lg:pr-16 pb-12 lg:pb-0">
@@ -441,7 +441,7 @@ export default function Studio() {
         aria-labelledby="heading-lab"
         data-testid="section-lab"
       >
-        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-0">
+        <div className="studio-full">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.05 }} variants={stagger}>
             <div className="relative mb-0">
               <ScrollRevealImage
@@ -464,7 +464,7 @@ export default function Studio() {
           </motion.div>
         </div>
 
-        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%] mt-16 md:mt-24">
+        <div className="studio-content mt-16 md:mt-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <div className="grid sm:grid-cols-2 gap-x-12 gap-y-14 md:gap-x-20 md:gap-y-20">
               <LabCard
@@ -537,7 +537,7 @@ export default function Studio() {
         data-testid="section-engagement"
       >
         {/* MANIFESTO */}
-        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]">
+        <div className="studio-content">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
@@ -568,18 +568,18 @@ export default function Studio() {
 
         {/* WORKING WITH CHB */}
         <div className="mt-36 md:mt-48">
-          <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-0">
+          <div className="studio-full">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
               <motion.h2
                 variants={sectionReveal}
-                className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20 lg:pr-[25%]"
-                style={{ fontSize: "clamp(2.2rem, 6vw, 6.5rem)" }}
+                className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20"
+                style={{ fontSize: "clamp(2.2rem, 6vw, 6.5rem)", paddingLeft: "clamp(24px, 2.08vw, 40px)", maxWidth: "74%" }}
                 data-testid="text-working-heading"
               >
                 working with COLON hyphen BRaCKET
               </motion.h2>
 
-              <div className="grid lg:grid-cols-[55%_45%] gap-0 items-start">
+              <div className="grid lg:grid-cols-[55%_45%] gap-0 items-start" style={{ paddingLeft: "clamp(24px, 2.08vw, 40px)" }}>
                 <motion.div variants={itemFade} className="space-y-7 text-foreground/60 leading-[1.8] text-[16px] md:text-[17px] lg:pr-16 pb-12 lg:pb-0">
                   <p data-testid="text-working-p1">
                     CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
@@ -601,7 +601,7 @@ export default function Studio() {
         </div>
 
         {/* ENGAGEMENT MODELS */}
-        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%] mt-36 md:mt-48">
+        <div className="studio-content mt-36 md:mt-48">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
