@@ -526,7 +526,7 @@ export default function Studio() {
             src={featurePropTech}
             alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
             className="w-full object-cover"
-            style={{ display: "block", maxHeight: "80vh" }}
+            style={{ display: "block", maxHeight: "85vh" }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -912,7 +912,7 @@ function EngagementCard({
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, ease }}
-      className="py-8 md:py-10"
+      className="px-6 py-8 md:px-8 md:py-10"
       data-testid={`card-${testId}`}
     >
       <h3
