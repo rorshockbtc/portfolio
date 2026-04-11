@@ -30,7 +30,7 @@ export default function FooterSection() {
       aria-label="Site footer"
       data-testid="section-footer"
     >
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20 pb-28 md:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           <div className="md:col-span-5 space-y-4">
             <span
