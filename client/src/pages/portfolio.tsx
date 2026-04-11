@@ -26,7 +26,7 @@ import {
   Volume2,
   Loader2,
 } from "lucide-react";
-import { SiLinkedin, SiGithub } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
 import { motion } from "framer-motion";
 import heroImage from "/artwork/hero.jpg";
 
@@ -179,7 +179,7 @@ function BrandIcon({ className }: { className?: string }) {
 function HeroSection() {
   return (
     <section
-      className="relative min-h-[90vh] flex flex-col justify-center"
+      className="relative min-h-[90vh] flex flex-col justify-center pt-14 md:pt-16"
       data-testid="section-hero"
     >
       <div className="absolute inset-0 z-0">
@@ -1318,46 +1318,6 @@ function EnterpriseVaultSection() {
   );
 }
 
-function Footer() {
-  return (
-    <footer
-      className="px-6 md:px-12 lg:px-24 py-12 border-t border-border max-w-6xl mx-auto"
-      data-testid="section-footer"
-    >
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-3">
-          <BrandIcon className="text-xl" />
-          <p className="text-sm text-muted-foreground" data-testid="text-copyright">
-            2026 CHB (Colon Hyphen Bracket, LLC).
-          </p>
-        </div>
-        <div className="flex items-center gap-4">
-          <a
-            href="https://www.linkedin.com/in/kyle-cyree/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors"
-            data-testid="link-linkedin"
-            aria-label="LinkedIn"
-          >
-            <SiLinkedin className="w-5 h-5" />
-          </a>
-          <a
-            href="https://github.com/rorshockbtc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors"
-            data-testid="link-github"
-            aria-label="GitHub"
-          >
-            <SiGithub className="w-5 h-5" />
-          </a>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -1365,7 +1325,6 @@ export default function Portfolio() {
       <WhitepaperSection />
       <ShowcaseSection />
       <EnterpriseVaultSection />
-      <Footer />
     </div>
   );
 }

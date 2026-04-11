@@ -1,51 +1,71 @@
-# Portfolio Site - Kyle Cyree
+# Portfolio Site - Kyle Cyree / CHB
 
 ## Overview
-A responsive single-page portfolio website for a Principal Product Designer & Systems Architect. Built with a Bento-box grid layout, scrollable case study modals, and a brutalist-clean design aesthetic.
+A two-page portfolio website for a Principal Product Designer & Systems Architect. Features a brutalist-clean aesthetic with museum-grade polish. Two pages: **Hire** (employer-facing portfolio) and **Studio** (client-facing agency showcase).
 
 ## Architecture
 - **Frontend**: React + TypeScript + Vite + Tailwind CSS + shadcn/ui
 - **Backend**: Express with OpenAI TTS endpoint (via Replit AI Integrations)
+- **Routing**: wouter with shared Layout component, framer-motion page transitions
 - **Styling**: Tailwind with custom design tokens, framer-motion for animations
 - **Components**: shadcn/ui Dialog for modals, Toast for enterprise vault notifications
 - **AI Integration**: OpenAI gpt-audio model with Nova voice for whitepaper narration (TTS)
 
 ## Design System
-- **Colors**: Minimalist white/off-white, dark high-contrast text, vibrant pink (#FE299E) for CTAs and brand icon
-- **Typography**: Inter (UI), JetBrains Mono (technical tags/labels)
-- **Layout**: Bento-box grid for project cards, single-page scroll
+- **Colors**: Minimalist white/off-white, dark high-contrast text, vibrant pink (#FE299E) for CTAs and brand icon, blue (#01a9f4) for technology tags
+- **Typography**: Inter (body), JetBrains Mono (technical tags/labels), Major Mono Display (Studio page display headers)
+- **Buttons**: Pill-shaped (rounded-full), branded hover/active states, no generic elevation overlays
+- **Layout**: Shared nav/footer via Layout component, bento-box grid for project cards
 
 ## Structure
 ```
 client/src/
-  pages/portfolio.tsx    - Main single-page portfolio (Hero, Whitepaper, Showcase, Vault, Footer)
-  App.tsx                - Router setup
+  App.tsx                      - Router setup with Layout wrapper
+  pages/
+    portfolio.tsx              - Hire page (Hero, Whitepaper, Showcase, Vault)
+    studio.tsx                 - Studio page (placeholder, will be built in Task #4)
+  components/
+    layout.tsx                 - Shared layout (nav + footer + mobile nav + page transitions)
+    navigation.tsx             - Top nav bar (CHB logo, page links, frosted glass on scroll)
+    footer-section.tsx         - Redesigned footer (product links, social, brand mark)
+    mobile-nav.tsx             - Mobile bottom nav (page links, studio section tabs)
+    ui/button.tsx              - Restyled pill-shaped buttons
+  hooks/
+    use-studio-sections.tsx    - Context for Studio page section tracking (mobile nav tabs)
 client/public/
-  artwork/               - Generated artwork for case study cards (replace with your own)
-    chb-ecosystem.png
-    slash-v6.png
-    workshop.png
-    enterprise-vault.png
-    emerald.png          - Whitepaper card artwork
-  emerald-whitepaper.pdf - Emerald whitepaper PDF (downloadable)
-  cyree_resume_2026.pdf  - Place resume PDF here
+  artwork/                     - Generated artwork for case study cards
+  emerald-whitepaper.pdf       - Emerald whitepaper PDF (downloadable)
+attached_assets/               - Source images for Studio page (not served directly)
+  chb-logo-black_*.png         - CHB text wordmark (dark)
+  chb-logo-white_*.png         - CHB text wordmark (light)
+  hero_*.png                   - Studio page hero background
+  01-06-*.png                  - Studio page section images
 ```
 
-## Key Features
-- Hero section with brand icon (:-]) and CTAs
-- Research section featuring Project Emerald whitepaper with clickable card, scrollable reading modal, AI-narrated audio player (OpenAI Nova voice), PDF download, GitHub repo, and demo links
-- Bento-box project grid with 3 case studies opening scrollable modals
-- Enterprise Vault section with gated/locked cards triggering toast notifications
-- Footer with LinkedIn/GitHub links
-- Smooth scroll animations via framer-motion
+## Pages
+### Hire (/)
+1. **Hero**: Brand icon (:-]), headline, intro text, Resume/Contact/Deck CTAs
+2. **Research (Whitepaper)**: Clickable card → scrollable Dialog modal with full whitepaper, AI audio player, PDF download, repo, demo CTAs
+3. **Public Showcase**: 3 clickable bento cards with modal case studies
+4. **Enterprise Vault**: 4 locked cards with toast notification
+
+### Studio (/studio)
+- Placeholder "Coming Soon" — will be built in Task #4 with full content, sticky side nav, accessibility compliance
+
+## Navigation
+- **Desktop**: Fixed top bar, CHB wordmark logo left, Hire/Studio links right, transparent → frosted glass on scroll
+- **Mobile**: Bottom nav bar with page links. When on Studio page, shows horizontal-scrollable numbered section tabs (01-05)
+
+## Footer
+- Grid layout: brand mark + tagline, product ecosystem links (hash.pink, colonhyphenbracket.pink, pipes.pink, semi.pink), social links (LinkedIn, GitHub, email)
 
 ## API Endpoints
-- `GET /api/tts/emerald` — Generates (or serves cached) MP3 narration of the whitepaper using OpenAI gpt-audio model with Nova voice. Chunks the text into sections, generates TTS for each, concatenates MP3 buffers, caches at `client/public/emerald-narration.mp3`
-- `GET /api/tts/emerald/status` — Returns JSON `{ ready: boolean, generating: boolean }` for the audio generation status
+- `GET /api/tts/emerald` — Generates/serves cached MP3 narration (Nova voice)
+- `GET /api/tts/emerald/status` — Audio generation status
 
-## Sections
-1. **Hero**: Brand icon, headline, intro text, Resume/Contact/Deck CTAs
-2. **Research (Whitepaper)**: Clickable card opens a scrollable Dialog modal with full whitepaper content (thesis, Zendesk comparison table, architecture details, safety design, open source pivot). Audio player at top with play/pause, progress bar, and download. Card also has direct PDF download, repo, and demo CTAs
-3. **Public Showcase**: 3 clickable bento cards (CHB Ecosystem, Slash V6, Workshop.pink) with modal case studies
-4. **Enterprise Vault**: 4 locked cards with toast notification on click
-5. **Footer**: Copyright + social links
+## Accessibility
+- Skip-to-content link
+- Keyboard navigation with visible focus indicators
+- ARIA roles/labels on navigation landmarks
+- Screen reader support
+- WCAG 2.1 AA compliance target (especially for Studio page)
