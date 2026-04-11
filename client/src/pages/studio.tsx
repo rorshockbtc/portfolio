@@ -198,7 +198,7 @@ export default function Studio() {
           <motion.img
             src={heroBg}
             alt=""
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-[0.28]"
             style={{ scale: heroBgScale }}
             data-testid="img-studio-hero-bg"
           />
@@ -305,7 +305,7 @@ export default function Studio() {
             <div className="space-y-8" style={{ maxWidth: "68ch" }}>
               <motion.p
                 variants={itemFade}
-                className="text-foreground/60 leading-[1.85] text-[16px] md:text-[18px]"
+                className="text-foreground/70 leading-[1.85] text-[16px] md:text-[18px]"
                 style={{ textShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
                 data-testid="text-thesis-p1"
               >
@@ -313,7 +313,7 @@ export default function Studio() {
               </motion.p>
               <motion.p
                 variants={itemFade}
-                className="text-foreground/60 leading-[1.85] text-[16px] md:text-[18px]"
+                className="text-foreground/70 leading-[1.85] text-[16px] md:text-[18px]"
                 style={{ textShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
                 data-testid="text-thesis-p2"
               >
@@ -349,7 +349,7 @@ export default function Studio() {
               architecture FOR ThE OvERLOOKED
             </motion.h2>
 
-            <div className="grid sm:grid-cols-2 gap-10 md:gap-12">
+            <div className="grid sm:grid-cols-2 gap-x-10 gap-y-14 md:gap-x-12 md:gap-y-16 [&>*:nth-child(n+3)]:border-t [&>*:nth-child(n+3)]:border-border/20 [&>*:nth-child(n+3)]:pt-14 md:[&>*:nth-child(n+3)]:pt-16">
               <OverlookedCard
                 title="STARTUPS"
                 subtitle="idea to series b"
@@ -433,14 +433,14 @@ export default function Studio() {
             </motion.h2>
             <motion.p
               variants={itemFade}
-              className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px] mb-7"
+              className="text-foreground/70 leading-[1.8] text-[16px] md:text-[17px] mb-7"
               data-testid="text-regulated-p1"
             >
               In high-stakes environments like banking and healthcare, regulation is often used as an excuse for stagnation. We are used to regulated systems but we do ensure that security and compliance don't come at the cost of human-centered design. Having worked within the strictures of Fidelity, Walmart, UnitedHealth, Custodia Bank, and the DoD we understand how to architect systems that balance "bank-grade" with intuitively simple.
             </motion.p>
             <motion.p
               variants={itemFade}
-              className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px] mb-10"
+              className="text-foreground/70 leading-[1.8] text-[16px] md:text-[17px] mb-10"
               data-testid="text-regulated-p2"
             >
               Large financial and medical institutions are often paralyzed by their own internal inefficiencies, processes, and dependencies. By operating as a single-core studio, we bypass the layers of bureaucratic consensus that slow down responsive innovation. CHB is competent within these systems, but since we've been forced to "drink our own champagne," we have developed a way of working that's differentiated.
@@ -457,7 +457,7 @@ export default function Studio() {
                 <motion.p
                   key={i}
                   variants={itemFade}
-                  className="flex items-start gap-2 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]"
+                  className="flex items-start gap-2 text-[15px] md:text-[16px] text-foreground/70 leading-[1.7]"
                 >
                   <PinkBullet />
                   <span>{item}</span>
@@ -628,9 +628,9 @@ export default function Studio() {
             </motion.h2>
 
             {/* Single wide column, editorial body text — constrained for ~10 words/line */}
-            <div className="space-y-10 text-foreground/60 leading-[1.75] text-[17px] md:text-[18px] lg:text-[19px]" style={{ maxWidth: "63ch" }}>
+            <div className="space-y-10 text-foreground/70 leading-[1.75] text-[17px] md:text-[18px] lg:text-[19px]" style={{ maxWidth: "63ch" }}>
               <motion.p variants={itemFade} data-testid="text-manifesto-p1">
-                If poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
+                <span className="float-left font-display leading-[0.8] mr-3 mt-1" style={{ fontSize: "clamp(3.5rem, 5vw, 5rem)", color: "hsl(var(--foreground))" }}>I</span>f poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
               </motion.p>
               <motion.p variants={itemFade} data-testid="text-manifesto-p2">
                 Agencies are costly and slow because they are fragmented. They spend your budget on meetings to discuss ideas rather than time spent building. We bypass this cost because the person defining the brand positioning is the same person architecting the site/app design and the backend. There is no hand-off, zero loss in translation, and no committee-driven consensus that turns vibrant, living ideas into beige could-have-beens.
@@ -836,7 +836,7 @@ function OverlookedCard({
         )}
       </h3>
 
-      <div className="space-y-4 text-foreground/60 leading-[1.75]">
+      <div className="space-y-4 text-foreground/70 leading-[1.75]">
         {items.map((item, i) => {
           const isQuote = i === 0 && hasQuoteLead;
           if (isQuote) {
@@ -845,7 +845,7 @@ function OverlookedCard({
             const attribution = dashIdx > -1 ? item.slice(dashIdx).trim() : null;
             return (
               <div key={i} className="mb-5">
-                <p className="italic leading-[1.7] text-[12px] md:text-[13px] text-foreground/55">{quoteText}</p>
+                <p className="italic leading-[1.7] text-[12px] md:text-[13px] text-foreground/60">{quoteText}</p>
                 {attribution && (
                   <p className="mt-1 text-right text-[11px] font-mono text-foreground/40">{attribution}</p>
                 )}
@@ -879,7 +879,7 @@ function LabCard({
       >
         {title}
       </h3>
-      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
+      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/70 leading-[1.7]" role="list">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2">
             <PinkBullet />
@@ -911,7 +911,7 @@ function EngagementCard({
       transition={{ duration: 0.9, ease }}
       className="pt-6 pb-10"
       data-testid={`card-${testId}`}
-      style={{ borderTop: "3px solid #FE299E" }}
+      style={{ borderTop: "2px solid #FE299E" }}
     >
       <h3
         className="font-display leading-[1.2] mb-6 tracking-[-0.01em]"
@@ -920,7 +920,7 @@ function EngagementCard({
       >
         {title}
       </h3>
-      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
+      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/70 leading-[1.7]" role="list">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2">
             <PinkBullet />
