@@ -10,7 +10,7 @@ import cardStartups from "@assets/02a-card-image-startups_1775928187194.png";
 import cardFaith from "@assets/02b-card-image-faith_1775928187199.png";
 import cardSchools from "@assets/02c-card-image-schools_1775928187199.png";
 import cardSmallBiz from "@assets/02d-card-image-smallBusinesses_1775928187198.png";
-import sideHealthFintech from "@assets/03-side-image-health-fintech_1775946211474.png";
+import sideHealthFintech from "@assets/03-side-image-health-fintech_1775947646953.png";
 import featurePropTech from "@assets/04-feature-image-proprietaryTechnology_1775928187201.png";
 import dividerTopo from "@assets/05-divider-image-topography_1775928187201.png";
 import calloutWorkflow from "@assets/06-callout-image-workingWithCHB_1775928187202.png";
@@ -224,8 +224,8 @@ export default function Studio() {
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.7, ease }}
-            className="mt-8 md:mt-10 text-foreground leading-[1.6] text-[17px] md:text-[20px] lg:text-[22px]"
-            style={{ fontWeight: 200 }}
+            className="mt-8 md:mt-10 text-foreground leading-[1.5] text-[20px] md:text-[26px] lg:text-[30px]"
+            style={{ fontWeight: 300 }}
             data-testid="text-studio-hero-subtitle"
           >
             CHB applies tasteful, measured order to complex products &amp; growing businesses that have the words but need a voice.
@@ -412,7 +412,7 @@ export default function Studio() {
         data-testid="section-regulated"
       >
         {/* Single grid: heading + body left (74%), images right (26%) — images align to heading top */}
-        <div className="lg:grid lg:grid-cols-[74%_26%] items-start">
+        <div className="lg:grid lg:grid-cols-[74%_26%] items-stretch">
           {/* Left column: heading + body */}
           <motion.div
             initial="hidden"
@@ -466,34 +466,22 @@ export default function Studio() {
             </div>
           </motion.div>
 
-          {/* Right column: two building images stacked, bleeding to right edge, aligned to heading top */}
+          {/* Right column: single tall building image, bleeding to right edge */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            variants={stagger}
-            className="hidden lg:flex flex-col"
+            variants={imgRevealRight}
+            className="hidden lg:block overflow-hidden self-stretch"
           >
-            <motion.div variants={imgRevealRight} className="overflow-hidden">
-              <img
-                src={sideHealthFintech}
-                alt="Architectural cross-section of a building representing systematic health and financial tech design"
-                className="w-full object-cover"
-                style={{ objectPosition: "center top", height: "340px", opacity: 0.7 }}
-                loading="lazy"
-                data-testid="img-regulated-building-1"
-              />
-            </motion.div>
-            <motion.div variants={imgRevealRight} className="overflow-hidden mt-6">
-              <img
-                src={sideHealthFintech}
-                alt="Architectural cross-section detail"
-                className="w-full object-cover"
-                style={{ objectPosition: "center bottom", height: "280px", opacity: 0.7 }}
-                loading="lazy"
-                data-testid="img-regulated-building-2"
-              />
-            </motion.div>
+            <img
+              src={sideHealthFintech}
+              alt="Architectural cross-section of a building representing systematic health and financial tech design"
+              className="w-full h-full object-cover object-center"
+              style={{ opacity: 0.7, display: "block" }}
+              loading="lazy"
+              data-testid="img-regulated-building-1"
+            />
           </motion.div>
         </div>
       </section>
@@ -673,7 +661,7 @@ export default function Studio() {
 
           {/* Content: capped at 74% so text never runs behind sticky nav */}
           <div className="relative z-10" style={{ width: "74%" }}>
-            <div className="flex flex-col lg:flex-row items-start py-20 md:py-28 lg:py-36 gap-0">
+            <div className="flex flex-col lg:flex-row items-stretch py-20 md:py-28 lg:py-36 gap-0">
               {/* Left: white scrim + stacked heading + button + fig */}
               <motion.div
                 initial="hidden"
