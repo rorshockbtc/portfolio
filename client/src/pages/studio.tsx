@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import { useStudioSections } from "@/hooks/use-studio-sections";
@@ -24,25 +24,51 @@ const SECTIONS = [
   { id: "engagement", number: "05", shortLabel: "engagement" },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
+const sectionReveal = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
-const staggerChildren = {
+const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
-function StickyNav({ activeSection }: { activeSection: string }) {
+const itemFade = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+function StickyNav({ activeSection, visible }: { activeSection: string; visible: boolean }) {
   return (
-    <nav
-      className="hidden lg:flex fixed right-8 xl:right-12 top-1/2 -translate-y-1/2 z-40 flex-col gap-3"
+    <motion.nav
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : 20 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="hidden lg:flex fixed right-6 xl:right-10 top-1/2 -translate-y-1/2 z-40 flex-col"
       role="navigation"
       aria-label="Section navigation"
       data-testid="nav-sticky"
+      style={{ pointerEvents: visible ? "auto" : "none" }}
     >
-      <div className="bg-background/80 backdrop-blur-md rounded-lg px-4 py-5 border border-border/20">
+      <div className="bg-background/80 backdrop-blur-lg rounded-xl px-5 py-6 border border-border/30 shadow-sm">
         {SECTIONS.map((s) => (
           <a
             key={s.id}
@@ -51,10 +77,10 @@ function StickyNav({ activeSection }: { activeSection: string }) {
               e.preventDefault();
               document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
-            className={`block py-1.5 font-display text-[10px] lowercase tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm ${
+            className={`block py-2 font-display text-[11px] lowercase tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm whitespace-nowrap ${
               activeSection === s.id
-                ? "opacity-100"
-                : "text-muted-foreground opacity-60 hover:opacity-100"
+                ? "opacity-100 translate-x-0"
+                : "text-muted-foreground/60 hover:text-foreground hover:opacity-100 -translate-x-0"
             }`}
             style={activeSection === s.id ? { color: "#FE299E" } : undefined}
             aria-current={activeSection === s.id ? "true" : undefined}
@@ -64,20 +90,40 @@ function StickyNav({ activeSection }: { activeSection: string }) {
           </a>
         ))}
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 
 export default function Studio() {
   const [contactOpen, setContactOpen] = useState(false);
   const [activeSection, setActiveSectionLocal] = useState("");
+  const [stickyVisible, setStickyVisible] = useState(false);
   const { setSections, setActiveSection } = useStudioSections();
   const sectionRefs = useRef<Map<string, IntersectionObserverEntry>>(new Map());
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroTextY = useTransform(heroScrollProgress, [0, 1], [0, 80]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.6], [1, 0]);
 
   useEffect(() => {
     setSections(SECTIONS);
     return () => setSections([]);
   }, [setSections]);
+
+  useEffect(() => {
+    const heroEl = heroRef.current;
+    if (!heroEl) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setStickyVisible(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    obs.observe(heroEl);
+    return () => obs.disconnect();
+  }, []);
 
   const updateActive = useCallback(() => {
     let current = "";
@@ -112,57 +158,59 @@ export default function Studio() {
         });
         updateActive();
       },
-      { threshold: [0, 0.1, 0.25, 0.5], rootMargin: "-80px 0px -30% 0px" }
+      { threshold: [0, 0.1, 0.25, 0.5], rootMargin: "-80px 0px -20% 0px" }
     );
-
     SECTIONS.forEach((s) => {
       const el = document.getElementById(s.id);
       if (el) observer.observe(el);
     });
-
     return () => observer.disconnect();
   }, [updateActive]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <StickyNav activeSection={activeSection} />
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <StickyNav activeSection={activeSection} visible={stickyVisible} />
 
+      {/* ═══════ HERO ═══════ */}
       <section
-        className="relative min-h-screen flex items-center justify-center pt-14 md:pt-16"
+        ref={heroRef}
+        className="relative min-h-screen flex items-end pb-20 md:pb-28 pt-14 md:pt-16"
         data-testid="section-studio-hero"
         aria-labelledby="studio-hero-heading"
       >
         <div className="absolute inset-0 z-0">
-          <img
-            src={heroBg}
-            alt=""
-            className="w-full h-full object-cover"
-            data-testid="img-studio-hero-bg"
-          />
-          <div className="absolute inset-0 bg-background/60" />
+          <img src={heroBg} alt="" className="w-full h-full object-cover" data-testid="img-studio-hero-bg" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" />
         </div>
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerChildren}
-          className="relative z-10 text-center px-6 md:px-12 max-w-4xl mx-auto"
+          style={{ y: heroTextY, opacity: heroOpacity }}
+          className="relative z-10 w-full px-6 md:px-12 lg:px-20 max-w-[1200px] mx-auto"
         >
           <motion.h1
-            variants={fadeUp}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             id="studio-hero-heading"
-            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight max-w-5xl"
             data-testid="text-studio-hero-heading"
           >
             architecture Partner for the Stuck &amp; UnderServed.
           </motion.h1>
           <motion.p
-            variants={fadeUp}
-            className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 md:mt-8 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed"
             data-testid="text-studio-hero-subtitle"
           >
             Colon Hyphen Bracket (just say CHB) applies tasteful, measured order to complex products &amp; growing businesses that have the words but need a voice.
           </motion.p>
-          <motion.div variants={fadeUp} className="mt-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8"
+          >
             <Button onClick={() => setContactOpen(true)} data-testid="cta-studio-contact">
               <Mail className="w-4 h-4 mr-2" />
               Contact Us
@@ -171,64 +219,58 @@ export default function Studio() {
         </motion.div>
       </section>
 
+      {/* ═══════ 01 — THE THESIS ═══════ */}
       <section
         id="thesis"
-        className="relative py-24 md:py-32 overflow-hidden"
+        className="relative py-28 md:py-40 overflow-hidden"
         aria-labelledby="heading-thesis"
         data-testid="section-thesis"
       >
         <div className="absolute inset-0 z-0">
-          <img
-            src={sectionBg01}
-            alt=""
-            className="w-full h-full object-cover opacity-15"
-            loading="lazy"
-          />
+          <img src={sectionBg01} alt="" className="w-full h-full object-cover opacity-20" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/50" />
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-24 lg:pr-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerChildren}>
-            <motion.p variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6" data-testid="text-thesis-label">
-              02 // The Agency Bypass
-            </motion.p>
+        <div className="relative z-10 px-6 md:px-12 lg:px-20 max-w-[1200px] mx-auto lg:pr-56">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <motion.h2
-              variants={fadeUp}
+              variants={sectionReveal}
               id="heading-thesis"
-              className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight mb-8"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tight mb-10 md:mb-14"
               data-testid="text-thesis-heading"
             >
               there's a joke all DEvELOPERS know: good, fast, &amp; cheap. pick 2.
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed mb-6" data-testid="text-thesis-p1">
-              With CHB, you get all three by hiring a Director/Staff level Product Architect. You get better results faster for less expense. We move at the speed of thought, outpacing traditional agencies because they have a lot of organizational complexity and often subcontract work to less experienced employees who spend time exploring instead of building.
-            </motion.p>
-            <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed" data-testid="text-thesis-p2">
-              Big Tech, Big Business, and Big Agencies are out of reach and out of touch with the rest of America. CHB takes scary digital initiatives and humanizes them. While the brand name is a bit of a mouthful, it's easy enough for everyone to understand that we turn business complexities into a smile.
-            </motion.p>
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              <motion.p variants={itemFade} className="text-muted-foreground leading-relaxed text-[15px]" data-testid="text-thesis-p1">
+                With CHB, you get all three by hiring a Director/Staff level Product Architect. You get better results faster for less expense. We move at the speed of thought, outpacing traditional agencies because they have a lot of organizational complexity and often subcontract work to less experienced employees who spend time exploring instead of building.
+              </motion.p>
+              <motion.p variants={itemFade} className="text-muted-foreground leading-relaxed text-[15px]" data-testid="text-thesis-p2">
+                Big Tech, Big Business, and Big Agencies are out of reach and out of touch with the rest of America. CHB takes scary digital initiatives and humanizes them. While the brand name is a bit of a mouthful, it's easy enough for everyone to understand that we turn business complexities into a smile.
+              </motion.p>
+            </div>
           </motion.div>
         </div>
       </section>
 
+      {/* ═══════ 02 — THE OVERLOOKED ═══════ */}
       <section
         id="overlooked"
-        className="py-24 md:py-32 bg-muted/30"
+        className="py-28 md:py-40"
         aria-labelledby="heading-overlooked"
         data-testid="section-overlooked"
       >
-        <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 lg:pr-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerChildren}>
-            <motion.p variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
-              03 // Architecture for the Overlooked
-            </motion.p>
+        <div className="px-6 md:px-12 lg:px-20 max-w-[1200px] mx-auto lg:pr-56">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
             <motion.h2
-              variants={fadeUp}
+              variants={sectionReveal}
               id="heading-overlooked"
-              className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight mb-12"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tight mb-14 md:mb-20"
               data-testid="text-overlooked-heading"
             >
               architecture FOR ThE OvERLOOKED
             </motion.h2>
 
-            <div className="grid gap-12 md:gap-16">
+            <div className="grid sm:grid-cols-2 gap-8 md:gap-10">
               <OverlookedCard
                 title="STARTUPS"
                 subtitle="idea to series b"
@@ -242,7 +284,7 @@ export default function Studio() {
                 testId="overlooked-startups"
               />
               <OverlookedCard
-                title="private SChOOLS & FaMILIES"
+                title="private SChOOLS &amp; FaMILIES"
                 image={cardSchools}
                 imageAlt="Educational setting representing schools and family learning"
                 items={[
@@ -279,47 +321,52 @@ export default function Studio() {
         </div>
       </section>
 
+      {/* ═══════ 03 — REGULATED SYSTEMS ═══════ */}
       <section
         id="regulated"
-        className="py-24 md:py-32"
+        className="py-28 md:py-40 bg-muted/20"
         aria-labelledby="heading-regulated"
         data-testid="section-regulated"
       >
-        <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 lg:pr-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerChildren}>
-            <motion.p variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
-              04 // Regulated Systems
-            </motion.p>
+        <div className="px-6 md:px-12 lg:px-20 max-w-[1200px] mx-auto lg:pr-56">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
             <motion.h2
-              variants={fadeUp}
+              variants={sectionReveal}
               id="heading-regulated"
-              className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight mb-10"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tight mb-14 md:mb-20"
               data-testid="text-regulated-heading"
             >
               UNBLOCKING health &amp; financial tech
             </motion.h2>
 
-            <div className="grid md:grid-cols-[1fr_280px] gap-10 items-start">
-              <motion.div variants={fadeUp} className="space-y-6">
-                <p className="text-muted-foreground leading-relaxed" data-testid="text-regulated-p1">
+            <div className="grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-16 items-start">
+              <motion.div variants={itemFade} className="space-y-6">
+                <p className="text-muted-foreground leading-relaxed text-[15px]" data-testid="text-regulated-p1">
                   In high-stakes environments like banking and healthcare, regulation is often used as an excuse for stagnation. We are used to regulated systems but we do ensure that security and compliance don't come at the cost of human-centered design. Having worked within the strictures of Fidelity, Walmart, UnitedHealth, Custodia Bank, and the DoD we understand how to architect systems that balance "bank-grade" with intuitively simple.
                 </p>
-                <p className="text-muted-foreground leading-relaxed" data-testid="text-regulated-p2">
+                <p className="text-muted-foreground leading-relaxed text-[15px]" data-testid="text-regulated-p2">
                   Large financial and medical institutions are often paralyzed by their own internal inefficiencies, processes, and dependencies. By operating as a single-core studio, we bypass the layers of bureaucratic consensus that slow down responsive innovation. CHB is competent within these systems, but since we've been forced to "drink our own champagne," we have developed a way of working that's differentiated.
                 </p>
-                <ul className="space-y-2 text-sm text-muted-foreground" role="list" data-testid="list-regulated-points">
-                  <li className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />For small or large companies who need to get unstuck</li>
-                  <li className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />Architecture can span from sales/comms all the way to systems dev</li>
-                  <li className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />Process is close to fully auditable by default, code versioned with Git</li>
-                  <li className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />Design can include everything from IA to UI, Dev is full-stack</li>
-                  <li className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />While we can build good apps &amp; products, you should still rely on internal legal, compliance, &amp; security practices!</li>
+                <ul className="space-y-3 text-sm text-muted-foreground pt-2" role="list" data-testid="list-regulated-points">
+                  {[
+                    "For small or large companies who need to get unstuck",
+                    "Architecture can span from sales/comms all the way to systems dev",
+                    "Process is close to fully auditable by default, code versioned with Git",
+                    "Design can include everything from IA to UI, Dev is full-stack",
+                    "While we can build good apps & products, you should still rely on internal legal, compliance, & security practices!",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="mt-2 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </motion.div>
-              <motion.div variants={fadeUp} className="hidden md:block">
+              <motion.div variants={scaleIn} className="hidden lg:block sticky top-28">
                 <img
                   src={sideHealthFintech}
                   alt="Architectural cross-section of a building representing systematic health and financial tech design"
-                  className="w-full rounded-lg"
+                  className="w-full rounded-xl shadow-lg"
                   loading="lazy"
                   data-testid="img-regulated-side"
                 />
@@ -329,37 +376,35 @@ export default function Studio() {
         </div>
       </section>
 
+      {/* ═══════ 04 — THE LAB ═══════ */}
       <section
         id="lab"
-        className="py-24 md:py-32 bg-muted/30"
+        className="py-28 md:py-40"
         aria-labelledby="heading-lab"
         data-testid="section-lab"
       >
-        <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 lg:pr-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerChildren}>
-            <motion.p variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
-              05 // The Lab
-            </motion.p>
+        <div className="px-6 md:px-12 lg:px-20 max-w-[1200px] mx-auto lg:pr-56">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <motion.h2
-              variants={fadeUp}
+              variants={sectionReveal}
               id="heading-lab"
-              className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight mb-10"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tight mb-14 md:mb-20"
               data-testid="text-lab-heading"
             >
               proprietary TEChNOLOGY
             </motion.h2>
 
-            <motion.div variants={fadeUp} className="mb-12">
+            <motion.div variants={scaleIn} className="mb-16 md:mb-20">
               <img
                 src={featurePropTech}
                 alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
-                className="w-full max-w-2xl rounded-lg"
+                className="w-full rounded-xl"
                 loading="lazy"
                 data-testid="img-lab-feature"
               />
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 gap-8">
+            <div className="grid sm:grid-cols-2 gap-x-10 gap-y-12 md:gap-x-16 md:gap-y-16">
               <LabCard
                 title="KNOWLEDGE bases:"
                 items={[
@@ -398,80 +443,78 @@ export default function Studio() {
             </div>
 
             <motion.p
-              variants={fadeUp}
-              className="mt-10 text-sm font-medium text-center text-muted-foreground italic"
+              variants={itemFade}
+              className="mt-16 text-base md:text-lg font-medium text-foreground"
               data-testid="text-lab-patents"
             >
-              Our proprietary technology includes much more than is listed here. We have 50+ patents and trademarks pending.
+              Our proprietary technology includes much more than is listed here. We have <span style={{ color: "#FE299E" }}>50+ patents and trademarks pending.</span>
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      <div className="relative h-48 md:h-64 overflow-hidden" data-testid="divider-topography" aria-hidden="true">
-        <img
-          src={dividerTopo}
-          alt=""
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
+      {/* ═══════ TOPOGRAPHY DIVIDER ═══════ */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2 }}
+        className="relative h-64 md:h-80 lg:h-96 overflow-hidden"
+        data-testid="divider-topography"
+        aria-hidden="true"
+      >
+        <img src={dividerTopo} alt="" className="w-full h-full object-cover" loading="lazy" />
+      </motion.div>
 
+      {/* ═══════ 05 — ENGAGEMENT (Manifesto + Working + Models) ═══════ */}
       <section
         id="engagement"
-        className="py-24 md:py-32"
+        className="py-28 md:py-40"
         aria-labelledby="heading-manifesto"
         data-testid="section-engagement"
       >
-        <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-24 lg:pr-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerChildren}>
-            <motion.p variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
-              06 // The Manifesto
-            </motion.p>
+        {/* MANIFESTO */}
+        <div className="px-6 md:px-12 lg:px-20 max-w-[1200px] mx-auto lg:pr-56">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
             <motion.h2
-              variants={fadeUp}
+              variants={sectionReveal}
               id="heading-manifesto"
-              className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight mb-10"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tight mb-14 md:mb-16"
               data-testid="text-manifesto-heading"
             >
               our DESIGN manifesto
             </motion.h2>
-            <motion.div variants={fadeUp} className="space-y-6 text-muted-foreground leading-relaxed">
-              <p data-testid="text-manifesto-p1">
-                If poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
-              </p>
-              <p data-testid="text-manifesto-p2">
-                Agencies are costly and slow because they are fragmented. They spend your budget on meetings to discuss ideas rather than time spent building. We bypass this cost because the person defining the brand positioning is the same person architecting the site/app design and the backend. There is no hand-off, zero loss in translation, and no committee-driven consensus that turns vibrant, living ideas into beige could-have-beens.
-              </p>
-              <p data-testid="text-manifesto-p3">
-                A product is only successful if the company feels a sense of camaraderie with it. We don't just build apps; we design digital expressions that the team is actually excited to own and we document everything for successful, resilient handoffs. Whether we are designing a simplified MedTech interface for an 80-year-old grandmother or a high-velocity workflow for technical users, our goal is the same: meeting the end user exactly where they are.
-              </p>
-            </motion.div>
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 text-muted-foreground leading-relaxed text-[15px]">
+              <motion.div variants={itemFade} className="space-y-6">
+                <p data-testid="text-manifesto-p1">
+                  If poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
+                </p>
+                <p data-testid="text-manifesto-p2">
+                  Agencies are costly and slow because they are fragmented. They spend your budget on meetings to discuss ideas rather than time spent building. We bypass this cost because the person defining the brand positioning is the same person architecting the site/app design and the backend. There is no hand-off, zero loss in translation, and no committee-driven consensus that turns vibrant, living ideas into beige could-have-beens.
+                </p>
+              </motion.div>
+              <motion.div variants={itemFade}>
+                <p data-testid="text-manifesto-p3">
+                  A product is only successful if the company feels a sense of camaraderie with it. We don't just build apps; we design digital expressions that the team is actually excited to own and we document everything for successful, resilient handoffs. Whether we are designing a simplified MedTech interface for an 80-year-old grandmother or a high-velocity workflow for technical users, our goal is the same: meeting the end user exactly where they are.
+                </p>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
-      </section>
 
-      <section
-        className="py-24 md:py-32 bg-muted/30"
-        aria-labelledby="heading-working"
-        data-testid="section-working"
-      >
-        <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 lg:pr-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerChildren}>
-            <motion.p variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
-              07 // Working with CHB
-            </motion.p>
+        {/* WORKING WITH CHB */}
+        <div className="px-6 md:px-12 lg:px-20 max-w-[1200px] mx-auto lg:pr-56 mt-32 md:mt-44">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
             <motion.h2
-              variants={fadeUp}
-              id="heading-working"
-              className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight mb-10"
+              variants={sectionReveal}
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] tracking-tight mb-14 md:mb-16"
               data-testid="text-working-heading"
             >
               working with COLON hyphen BRaCKET
             </motion.h2>
 
-            <div className="grid md:grid-cols-[1fr_300px] gap-10 items-start">
-              <motion.div variants={fadeUp} className="space-y-6 text-muted-foreground leading-relaxed">
+            <div className="grid lg:grid-cols-[1fr_340px] gap-10 lg:gap-16 items-start">
+              <motion.div variants={itemFade} className="space-y-6 text-muted-foreground leading-relaxed text-[15px]">
                 <p data-testid="text-working-p1">
                   CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
                 </p>
@@ -479,11 +522,11 @@ export default function Studio() {
                   The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
                 </p>
               </motion.div>
-              <motion.div variants={fadeUp} className="hidden md:block">
+              <motion.div variants={scaleIn} className="hidden lg:block">
                 <img
                   src={calloutWorkflow}
                   alt="Steampunk workflow diagram illustrating CHB's streamlined engagement process"
-                  className="w-full rounded-lg"
+                  className="w-full rounded-xl shadow-lg"
                   loading="lazy"
                   data-testid="img-working-callout"
                 />
@@ -491,28 +534,19 @@ export default function Studio() {
             </div>
           </motion.div>
         </div>
-      </section>
 
-      <section
-        className="py-24 md:py-32"
-        aria-labelledby="heading-models"
-        data-testid="section-models"
-      >
-        <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 lg:pr-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerChildren}>
-            <motion.p variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
-              08 // Engagement Models
-            </motion.p>
+        {/* ENGAGEMENT MODELS */}
+        <div className="px-6 md:px-12 lg:px-20 max-w-[1200px] mx-auto lg:pr-56 mt-32 md:mt-44">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
             <motion.h2
-              variants={fadeUp}
-              id="heading-models"
-              className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight mb-12"
+              variants={sectionReveal}
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tight mb-14 md:mb-20"
               data-testid="text-models-heading"
             >
-              how we work
+              engagement models
             </motion.h2>
 
-            <div className="grid sm:grid-cols-2 gap-8">
+            <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
               <EngagementCard
                 title="SIMPLE engagements:"
                 items={[
@@ -549,7 +583,7 @@ export default function Studio() {
               />
             </div>
 
-            <motion.div variants={fadeUp} className="mt-16 text-center">
+            <motion.div variants={itemFade} className="mt-20 text-center">
               <Button onClick={() => setContactOpen(true)} data-testid="cta-studio-contact-bottom">
                 <Mail className="w-4 h-4 mr-2" />
                 Contact Us
@@ -580,34 +614,32 @@ function OverlookedCard({
   testId: string;
 }) {
   return (
-    <motion.div variants={fadeUp} className="grid md:grid-cols-[200px_1fr] gap-6 items-start" data-testid={`card-${testId}`}>
-      <div className="w-full md:w-[200px] h-40 md:h-48 rounded-lg overflow-hidden shrink-0">
+    <motion.div variants={scaleIn} className="group" data-testid={`card-${testId}`}>
+      <div className="aspect-[4/3] rounded-xl overflow-hidden mb-5 bg-muted">
         <img
           src={image}
           alt={imageAlt}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
           data-testid={`img-${testId}`}
         />
       </div>
-      <div>
-        <h3 className="font-display text-lg md:text-xl tracking-tight mb-1" data-testid={`text-${testId}-title`}>
-          {title}
-        </h3>
-        {subtitle && (
-          <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-3">
-            {subtitle}
-          </p>
-        )}
-        <ul className="space-y-3 text-sm text-muted-foreground leading-relaxed" role="list">
-          {items.map((item, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <h3 className="font-display text-lg md:text-xl tracking-tight mb-1" data-testid={`text-${testId}-title`}>
+        {title}
+      </h3>
+      {subtitle && (
+        <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-3">
+          {subtitle}
+        </p>
+      )}
+      <ul className="space-y-3 text-sm text-muted-foreground leading-relaxed mt-3" role="list">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 }
@@ -622,15 +654,15 @@ function LabCard({
   testId: string;
 }) {
   return (
-    <motion.div variants={fadeUp} className="space-y-3" data-testid={`card-${testId}`}>
-      <h3 className="font-display text-base md:text-lg tracking-tight" data-testid={`text-${testId}-title`}>
+    <motion.div variants={itemFade} className="space-y-4" data-testid={`card-${testId}`}>
+      <h3 className="font-display text-base md:text-lg tracking-tight pb-2 border-b border-border/40" data-testid={`text-${testId}-title`}>
         {title}
       </h3>
-      <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed" role="list">
+      <ul className="space-y-3 text-sm text-muted-foreground leading-relaxed" role="list">
         {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2">
+          <li key={i} className="flex items-start gap-3">
             <span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />
-            {item}
+            <span>{item}</span>
           </li>
         ))}
       </ul>
@@ -648,15 +680,19 @@ function EngagementCard({
   testId: string;
 }) {
   return (
-    <motion.div variants={fadeUp} className="space-y-3 p-5 rounded-lg border border-border/40 bg-background" data-testid={`card-${testId}`}>
-      <h3 className="font-semibold text-sm uppercase tracking-wide" data-testid={`text-${testId}-title`}>
+    <motion.div
+      variants={scaleIn}
+      className="p-6 md:p-8 rounded-xl border border-border/30 bg-muted/20 hover:bg-muted/40 transition-colors duration-500"
+      data-testid={`card-${testId}`}
+    >
+      <h3 className="font-semibold text-sm uppercase tracking-wide mb-4" data-testid={`text-${testId}-title`}>
         {title}
       </h3>
-      <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed" role="list">
+      <ul className="space-y-3 text-sm text-muted-foreground leading-relaxed" role="list">
         {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2">
+          <li key={i} className="flex items-start gap-3">
             <span className="mt-1.5 w-1 h-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />
-            {item}
+            <span>{item}</span>
           </li>
         ))}
       </ul>
