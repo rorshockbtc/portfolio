@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
 import { useStudioSections } from "@/hooks/use-studio-sections";
 import ContactFormModal from "@/components/contact-form-modal";
 
@@ -26,58 +25,39 @@ const SECTIONS = [
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const sectionReveal = {
-  hidden: { opacity: 0, y: 80 },
-  visible: { opacity: 1, y: 0, transition: { duration: 1, ease } },
-};
-
 const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
 };
 
-const itemFade = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
-};
-
-const slideRight = {
+const textReveal = {
   hidden: { opacity: 0, x: -60 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.9, ease } },
 };
 
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.92 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 1, ease } },
+const itemFade = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
 };
 
-const imgReveal = {
-  hidden: { opacity: 0, y: 40, scale: 0.97 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 1.1, ease } },
+const imgRevealRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1.1, ease } },
 };
 
 function PinkBullet() {
   return (
-    <span className="mt-[6px] shrink-0 select-none" style={{ color: "#FE299E", fontSize: "9px", lineHeight: 1 }} aria-hidden="true">
-      ▸
+    <span
+      className="mt-[6px] shrink-0 select-none"
+      style={{ color: "#FE299E", fontSize: "9px", lineHeight: 1 }}
+      aria-hidden="true"
+    >
+      ▲
     </span>
   );
 }
 
 function StickyNav({ activeSection, visible }: { activeSection: string; visible: boolean }) {
-  const [isDark, setIsDark] = useState(false);
-  useEffect(() => {
-    const check = () => setIsDark(document.documentElement.classList.contains("dark"));
-    check();
-    const obs = new MutationObserver(check);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-    return () => obs.disconnect();
-  }, []);
-
-  const shadow = isDark
-    ? "0 0 8px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.6)"
-    : "0 0 8px rgba(255,255,255,0.9), 0 0 16px rgba(255,255,255,0.6)";
-
   return (
     <motion.nav
       initial={{ opacity: 0, x: 30 }}
@@ -85,55 +65,44 @@ function StickyNav({ activeSection, visible }: { activeSection: string; visible:
       transition={{ duration: 0.6, ease }}
       className="hidden lg:flex fixed right-0 top-0 bottom-0 z-40 flex-col justify-center items-start"
       style={{
-        width: "25%",
-        maxWidth: "360px",
-        paddingLeft: "40px",
+        width: "26%",
+        paddingLeft: "clamp(24px, 2.08vw, 40px)",
         pointerEvents: visible ? "auto" : "none",
       }}
       role="navigation"
       aria-label="Section navigation"
       data-testid="nav-sticky"
     >
-      {SECTIONS.map((s) => (
-        <a
-          key={s.id}
-          href={`#${s.id}`}
-          onClick={(e) => {
-            e.preventDefault();
-            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            document.getElementById(s.id)?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
-          }}
-          className={`block py-[6px] font-display text-[13px] lowercase tracking-[0.08em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm whitespace-nowrap ${
-            activeSection === s.id
-              ? "font-bold"
-              : "text-foreground/80 hover:text-foreground"
-          }`}
-          style={{
-            ...(activeSection === s.id ? { color: "#FE299E" } : {}),
-            textShadow: shadow,
-          }}
-          aria-current={activeSection === s.id ? "true" : undefined}
-          data-testid={`nav-sticky-${s.id}`}
-        >
-          {s.number} // {s.shortLabel}
-        </a>
-      ))}
+      <div
+        className="flex flex-col"
+        style={{ background: "rgba(255,255,255,0.9)", padding: "18px 28px 18px 20px" }}
+      >
+        {SECTIONS.map((s) => (
+          <a
+            key={s.id}
+            href={`#${s.id}`}
+            onClick={(e) => {
+              e.preventDefault();
+              const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              document.getElementById(s.id)?.scrollIntoView({
+                behavior: prefersReducedMotion ? "auto" : "smooth",
+                block: "start",
+              });
+            }}
+            className="block py-[6px] font-display text-[12px] lowercase tracking-[0.08em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm whitespace-nowrap"
+            style={
+              activeSection === s.id
+                ? { color: "#FE299E", fontWeight: 700 }
+                : { color: "rgba(0,0,0,0.55)" }
+            }
+            aria-current={activeSection === s.id ? "true" : undefined}
+            data-testid={`nav-sticky-${s.id}`}
+          >
+            {s.number} // {s.shortLabel}
+          </a>
+        ))}
+      </div>
     </motion.nav>
-  );
-}
-
-function ScrollRevealImage({ src, alt, className, testId }: { src: string; alt: string; className?: string; testId: string }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50, scale: 0.96 }}
-      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ duration: 1.1, ease }}
-    >
-      <img src={src} alt={alt} className={className} loading="lazy" data-testid={testId} />
-    </motion.div>
   );
 }
 
@@ -151,7 +120,7 @@ export default function Studio() {
   });
   const heroTextY = useTransform(heroScrollProgress, [0, 1], [0, 120]);
   const heroOpacity = useTransform(heroScrollProgress, [0, 0.6], [1, 0]);
-  const heroBgScale = useTransform(heroScrollProgress, [0, 1], [1, 1.12]);
+  const heroBgScale = useTransform(heroScrollProgress, [0, 1], [1, 1.08]);
 
   useEffect(() => {
     setSections(SECTIONS);
@@ -215,10 +184,10 @@ export default function Studio() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <StickyNav activeSection={activeSection} visible={stickyVisible} />
 
-      {/* ═══════ HERO ═══════ */}
+      {/* ═══════════════════════════════ HERO ═══════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-end pb-16 md:pb-24 lg:pb-28 pt-24 md:pt-28 lg:pt-32"
+        className="relative min-h-screen flex items-start pt-24 md:pt-28 pb-20"
         data-testid="section-studio-hero"
         aria-labelledby="studio-hero-heading"
       >
@@ -231,72 +200,109 @@ export default function Studio() {
             data-testid="img-studio-hero-bg"
           />
         </div>
+
         <motion.div
           style={{ y: heroTextY, opacity: heroOpacity }}
           className="relative z-10 studio-content"
         >
           <motion.h1
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -60 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease }}
             id="studio-hero-heading"
-            className="font-display leading-[0.92] tracking-[-0.02em]"
+            className="font-display leading-[1.2] tracking-[-0.02em]"
             style={{ fontSize: "clamp(2.5rem, 8.33vw, 10rem)" }}
             data-testid="text-studio-hero-heading"
           >
             architecture Partner for the Stuck &amp; UnderServed.
           </motion.h1>
+
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.7, ease }}
-            className="mt-8 md:mt-10 font-light text-foreground leading-[1.6]"
+            className="mt-8 md:mt-10 text-foreground leading-[1.5]"
             style={{ fontSize: "clamp(1.25rem, 3.33vw, 4rem)", fontWeight: 200 }}
             data-testid="text-studio-hero-subtitle"
           >
             Colon Hyphen Bracket (just say CHB) applies tasteful, measured order to complex products &amp; growing businesses that have the words but need a voice.
           </motion.p>
+
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1, ease }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 1.1, ease }}
             className="mt-10"
           >
-            <Button onClick={() => setContactOpen(true)} data-testid="cta-studio-contact">
-              <Mail className="w-4 h-4 mr-2" />
+            <Button
+              onClick={() => setContactOpen(true)}
+              data-testid="cta-studio-contact"
+            >
               Contact Us
             </Button>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* ═══════ 01 — THE THESIS ═══════ */}
+      {/* ═══════════════════════════════ 01 — THE THESIS ═══════════════════════════════ */}
       <section
         id="thesis"
         className="relative py-28 md:py-40 lg:py-48 overflow-hidden"
         aria-labelledby="heading-thesis"
         data-testid="section-thesis"
       >
+        {/* Full-bleed US map — no left margin, offset so west coast is partially cut */}
         <div className="absolute inset-0 z-0">
-          <img src={sectionBg01} alt="" className="w-full h-full object-cover opacity-15" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/50" />
+          <img
+            src={sectionBg01}
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: "right center" }}
+            loading="lazy"
+          />
+          {/* Gradient: white top → reveal map in middle → white bottom */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, #FFFFFF 17%, rgba(255,255,255,0.75) 80%, #FFFFFF 100%)",
+            }}
+          />
         </div>
+
         <div className="relative z-10 studio-content">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
+          >
             <motion.h2
-              variants={sectionReveal}
+              variants={textReveal}
               id="heading-thesis"
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20"
-              style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
+              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
+              style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
               data-testid="text-thesis-heading"
             >
-              there's a joke all DEvELOPERS know: good, fast, &amp; cheap. pick 2.
+              there's a joke all DEvELOPERS know:<br />
+              good, fast, &amp; cheap. pick 2.
             </motion.h2>
+
             <div className="grid md:grid-cols-2 gap-8 md:gap-14">
-              <motion.p variants={itemFade} className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]" data-testid="text-thesis-p1">
+              <motion.p
+                variants={itemFade}
+                className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]"
+                style={{ textShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
+                data-testid="text-thesis-p1"
+              >
                 With CHB, you get all three by hiring a Director/Staff level Product Architect. You get better results faster for less expense. We move at the speed of thought, outpacing traditional agencies because they have a lot of organizational complexity and often subcontract work to less experienced employees who spend time exploring instead of building.
               </motion.p>
-              <motion.p variants={itemFade} className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]" data-testid="text-thesis-p2">
+              <motion.p
+                variants={itemFade}
+                className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]"
+                style={{ textShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
+                data-testid="text-thesis-p2"
+              >
                 Big Tech, Big Business, and Big Agencies are out of reach and out of touch with the rest of America. CHB takes scary digital initiatives and humanizes them. While the brand name is a bit of a mouthful, it's easy enough for everyone to understand that we turn business complexities into a smile.
               </motion.p>
             </div>
@@ -304,7 +310,7 @@ export default function Studio() {
         </div>
       </section>
 
-      {/* ═══════ 02 — THE OVERLOOKED ═══════ */}
+      {/* ═══════════════════════════════ 02 — THE OVERLOOKED ═══════════════════════════════ */}
       <section
         id="overlooked"
         className="py-28 md:py-40 lg:py-48"
@@ -312,12 +318,17 @@ export default function Studio() {
         data-testid="section-overlooked"
       >
         <div className="studio-content">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.05 }} variants={stagger}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            variants={stagger}
+          >
             <motion.h2
-              variants={sectionReveal}
+              variants={textReveal}
               id="heading-overlooked"
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-16 md:mb-24"
-              style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
+              className="font-display leading-[1.2] tracking-[-0.02em] mb-16 md:mb-24"
+              style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
               data-testid="text-overlooked-heading"
             >
               architecture FOR ThE OvERLOOKED
@@ -329,6 +340,7 @@ export default function Studio() {
                 subtitle="idea to series b"
                 image={cardStartups}
                 imageAlt="Abstract visualization of startup growth trajectory"
+                imagePosition="center"
                 items={[
                   `"Everyone talks about 10x engineers but the real risk for most companies is not whether you can build it, it's if you're building the right thing. A designer that can distill why a user is adopting and then prototype the most clear version of that insight will save you millions." –Nikita Bier`,
                   "Full-time designers are rarely a right fit for most smaller startups. Most traditional designers are \"Figma Experts\" but lack an understanding of scalable systems design. While AI has come a long way, the product architecture and customer journey pieces are the hardest for most founders to get right.",
@@ -340,6 +352,7 @@ export default function Studio() {
                 title="private SChOOLS &amp; FaMILIES"
                 image={cardSchools}
                 imageAlt="Educational setting representing schools and family learning"
+                imagePosition="center 40%"
                 items={[
                   "Private schools often lack the same resources as public schools and must rely on the same educational platforms that may not align with student needs or parent expectations.",
                   "Likewise, families who homeschool or who have goals to capture loved one's memories often have to rely on hostile applications build by Big Tech.",
@@ -351,6 +364,7 @@ export default function Studio() {
                 title="FaITh-BaSED organizations"
                 image={cardFaith}
                 imageAlt="Architectural detail representing faith-based community spaces"
+                imagePosition="60% center"
                 items={[
                   "It is challenging for youth groups, pastors, priests, churches, or other religious institutions to find a technology partner that can deliver on-time, within budget, and who is aligned to their values-based doctrines.",
                   "CHB helps faith-based organizations build websites, reach out to congregations, and even develop custom apps for operations teams, spiritual leadership, or for members of the organization.",
@@ -362,6 +376,7 @@ export default function Studio() {
                 title="SMaLL BUSINESSES"
                 image={cardSmallBiz}
                 imageAlt="Small business storefront visualization"
+                imagePosition="center center"
                 items={[
                   "So many small businesses use platforms like SquareSpace, Wix, Shopify, WordPress, or other template-based website builder tools that are challenging to modify and force small businesses to acquiesce.",
                   "Sometimes, the best thing is a de-coupled store front or marketing site and retaining your checkout flow or inventory management system as a separate concern.",
@@ -374,98 +389,157 @@ export default function Studio() {
         </div>
       </section>
 
-      {/* ═══════ 03 — REGULATED SYSTEMS ═══════ */}
+      {/* ═══════════════════════════════ 03 — REGULATED SYSTEMS ═══════════════════════════════ */}
       <section
         id="regulated"
-        className="relative py-28 md:py-40 lg:py-48"
+        className="relative py-28 md:py-40 lg:py-48 overflow-hidden"
         aria-labelledby="heading-regulated"
         data-testid="section-regulated"
       >
-        <div className="studio-content">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
-            <motion.h2
-              variants={sectionReveal}
-              id="heading-regulated"
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20"
-              style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
-              data-testid="text-regulated-heading"
+        {/* Heading: flush left — no studio-content margin */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={stagger}
+        >
+          <motion.h2
+            variants={textReveal}
+            id="heading-regulated"
+            className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
+            style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)", paddingLeft: 0, paddingRight: 0 }}
+            data-testid="text-regulated-heading"
+          >
+            UNBLOCKING health &amp;<br />financial tech
+          </motion.h2>
+        </motion.div>
+
+        {/* Two-column: body text left (74%), building images right (26%) */}
+        <div className="lg:grid lg:grid-cols-[74%_26%] items-start">
+          {/* Left column: body text with standard left padding */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
+            style={{ paddingLeft: "clamp(24px, 2.08vw, 40px)" }}
+            className="pr-6 lg:pr-20"
+          >
+            <motion.p
+              variants={itemFade}
+              className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px] mb-7"
+              data-testid="text-regulated-p1"
             >
-              UNBLOCKING health &amp; financial tech
-            </motion.h2>
+              In high-stakes environments like banking and healthcare, regulation is often used as an excuse for stagnation. We are used to regulated systems but we do ensure that security and compliance don't come at the cost of human-centered design. Having worked within the strictures of Fidelity, Walmart, UnitedHealth, Custodia Bank, and the DoD we understand how to architect systems that balance "bank-grade" with intuitively simple.
+            </motion.p>
+            <motion.p
+              variants={itemFade}
+              className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px] mb-10"
+              data-testid="text-regulated-p2"
+            >
+              Large financial and medical institutions are often paralyzed by their own internal inefficiencies, processes, and dependencies. By operating as a single-core studio, we bypass the layers of bureaucratic consensus that slow down responsive innovation. CHB is competent within these systems, but since we've been forced to "drink our own champagne," we have developed a way of working that's differentiated.
+            </motion.p>
+
+            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 pt-4" data-testid="list-regulated-points">
+              {[
+                "For small or large companies who need to get unstuck",
+                "Architecture can span from sales/comms all the way to systems dev",
+                "Process is close to fully auditable by default, code versioned with Git",
+                "Design can include everything from IA to UI, Dev is full-stack",
+                "While we can build good apps & products, you should still rely on internal legal, compliance, & security practices!",
+              ].map((item, i) => (
+                <motion.p
+                  key={i}
+                  variants={itemFade}
+                  className="flex items-start gap-2 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]"
+                >
+                  <PinkBullet />
+                  <span>{item}</span>
+                </motion.p>
+              ))}
+            </div>
           </motion.div>
-        </div>
 
-        <div className="relative">
-          <div className="studio-full">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
-              <div className="grid lg:grid-cols-[55%_45%] gap-0 items-start">
-                <motion.div variants={itemFade} className="space-y-7 lg:pr-16 pb-12 lg:pb-0">
-                  <p className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]" data-testid="text-regulated-p1">
-                    In high-stakes environments like banking and healthcare, regulation is often used as an excuse for stagnation. We are used to regulated systems but we do ensure that security and compliance don't come at the cost of human-centered design. Having worked within the strictures of Fidelity, Walmart, UnitedHealth, Custodia Bank, and the DoD we understand how to architect systems that balance "bank-grade" with intuitively simple.
-                  </p>
-                  <p className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]" data-testid="text-regulated-p2">
-                    Large financial and medical institutions are often paralyzed by their own internal inefficiencies, processes, and dependencies. By operating as a single-core studio, we bypass the layers of bureaucratic consensus that slow down responsive innovation. CHB is competent within these systems, but since we've been forced to "drink our own champagne," we have developed a way of working that's differentiated.
-                  </p>
-                  <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 pt-4" data-testid="list-regulated-points">
-                    {[
-                      "For small or large companies who need to get unstuck",
-                      "Architecture can span from sales/comms all the way to systems dev",
-                      "Process is close to fully auditable by default, code versioned with Git",
-                      "Design can include everything from IA to UI, Dev is full-stack",
-                      "While we can build good apps & products, you should still rely on internal legal, compliance, & security practices!",
-                    ].map((item, i) => (
-                      <motion.p key={i} variants={itemFade} className="flex items-start gap-2 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]">
-                        <PinkBullet />
-                        <span>{item}</span>
-                      </motion.p>
-                    ))}
-                  </div>
-                </motion.div>
-
-                <ScrollRevealImage
-                  src={sideHealthFintech}
-                  alt="Architectural cross-section of a building representing systematic health and financial tech design"
-                  className="w-full h-auto"
-                  testId="img-regulated-side"
-                />
-              </div>
+          {/* Right column: two building images stacked at 70% opacity, bleeding to right edge */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
+            className="hidden lg:flex flex-col"
+          >
+            <motion.div variants={imgRevealRight} className="overflow-hidden">
+              <img
+                src={sideHealthFintech}
+                alt="Architectural cross-section of a building representing systematic health and financial tech design"
+                className="w-full object-cover"
+                style={{ objectPosition: "center top", height: "340px", opacity: 0.7 }}
+                loading="lazy"
+                data-testid="img-regulated-building-1"
+              />
             </motion.div>
-          </div>
+            <motion.div variants={imgRevealRight} className="overflow-hidden mt-6">
+              <img
+                src={sideHealthFintech}
+                alt="Architectural cross-section detail"
+                className="w-full object-cover"
+                style={{ objectPosition: "center bottom", height: "280px", opacity: 0.7 }}
+                loading="lazy"
+                data-testid="img-regulated-building-2"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ═══════ 04 — THE LAB ═══════ */}
+      {/* ═══════════════════════════════ 04 — THE LAB ═══════════════════════════════ */}
       <section
         id="lab"
-        className="relative py-28 md:py-40 lg:py-48"
+        className="relative"
         aria-labelledby="heading-lab"
         data-testid="section-lab"
       >
-        <div className="studio-full">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.05 }} variants={stagger}>
-            <div className="relative mb-0">
-              <ScrollRevealImage
-                src={featurePropTech}
-                alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
-                className="w-full rounded-l-xl"
-                testId="img-lab-feature"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-background via-background/30 to-transparent rounded-l-xl pointer-events-none" />
-              <motion.h2
-                variants={sectionReveal}
-                id="heading-lab"
-                className="absolute top-6 md:top-10 lg:top-14 left-0 font-display leading-[0.92] tracking-[-0.02em] z-10"
-                style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
-                data-testid="text-lab-heading"
-              >
-                proprietary TEChNOLOGY
-              </motion.h2>
-            </div>
-          </motion.div>
+        {/* Full-bleed machine image with heading absolutely overlaid */}
+        <div className="relative overflow-hidden">
+          <motion.img
+            src={featurePropTech}
+            alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
+            className="w-full object-cover"
+            style={{ display: "block", maxHeight: "85vh" }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.4 }}
+            loading="lazy"
+            data-testid="img-lab-feature"
+          />
+          {/* Heading overlaid at ~40% from top */}
+          <motion.h2
+            id="heading-lab"
+            className="absolute font-display leading-[1.2] tracking-[-0.02em] z-10"
+            style={{
+              top: "40%",
+              paddingLeft: "clamp(24px, 2.08vw, 40px)",
+              fontSize: "clamp(2rem, 5.5vw, 5.5rem)",
+            }}
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.9, ease }}
+            data-testid="text-lab-heading"
+          >
+            proprietary TEChNOLOGY
+          </motion.h2>
         </div>
 
-        <div className="studio-content mt-16 md:mt-24">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
+        {/* Cards below the image */}
+        <div className="studio-content py-20 md:py-28">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            variants={stagger}
+          >
             <div className="grid sm:grid-cols-2 gap-x-12 gap-y-14 md:gap-x-20 md:gap-y-20">
               <LabCard
                 title="KNOWLEDGE bases:"
@@ -488,15 +562,16 @@ export default function Studio() {
               <LabCard
                 title="LOCaL-first models:"
                 items={[
-                  "CHB has worked with popular LLMs, browser-based AI & built our own models and modules",
-                  "We have developed user-signed and agentic handshakes using SHA-256 and other encryption algorithms",
+                  "The knowledge economy runs on human data we can't repair",
+                  "Nothing is fully trusted until it can run without cloud dependency",
+                  "We have developed and deployed local-first AI for healthcare and finance",
                 ]}
                 testId="lab-local"
               />
               <LabCard
-                title="focused on CURaTORS:"
+                title="human cuRaTORS:"
                 items={[
-                  `The "curator economy" is focused on human traits AI can't match`,
+                  "We are bullish on human curation in an era of algorithmic saturation",
                   "Our 5-year thesis sees many traditional jobs becoming curation-based",
                   "We are excited about this and would love to talk about it!",
                 ]}
@@ -516,102 +591,159 @@ export default function Studio() {
         </div>
       </section>
 
-      {/* ═══════ TOPOGRAPHY DIVIDER ═══════ */}
+      {/* ═══════════════════════════════ TOPOGRAPHY DIVIDER ═══════════════════════════════ */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.4 }}
-        className="relative h-72 md:h-96 lg:h-[500px] overflow-hidden"
+        className="relative overflow-hidden"
+        style={{ height: "320px" }}
         data-testid="divider-topography"
         aria-hidden="true"
       >
-        <img src={dividerTopo} alt="" className="w-full h-full object-cover" loading="lazy" />
+        <img
+          src={dividerTopo}
+          alt=""
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
       </motion.div>
 
-      {/* ═══════ 05 — ENGAGEMENT (Manifesto + Working + Models) ═══════ */}
+      {/* ═══════════════════════════════ 05 — ENGAGEMENT (Manifesto + Working + Models) ═══════════════════════════════ */}
       <section
         id="engagement"
         className="py-28 md:py-40 lg:py-48"
         aria-labelledby="heading-manifesto"
         data-testid="section-engagement"
       >
-        {/* MANIFESTO */}
+        {/* MANIFESTO — single column, large editorial type */}
         <div className="studio-content">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
+          >
             <motion.h2
-              variants={sectionReveal}
+              variants={textReveal}
               id="heading-manifesto"
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20"
-              style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
+              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
+              style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
               data-testid="text-manifesto-heading"
             >
               our DESIGN manifesto
             </motion.h2>
-            <div className="grid md:grid-cols-2 gap-8 md:gap-14 text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]">
-              <motion.div variants={itemFade} className="space-y-7">
-                <p data-testid="text-manifesto-p1">
-                  If poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
-                </p>
-                <p data-testid="text-manifesto-p2">
-                  Agencies are costly and slow because they are fragmented. They spend your budget on meetings to discuss ideas rather than time spent building. We bypass this cost because the person defining the brand positioning is the same person architecting the site/app design and the backend. There is no hand-off, zero loss in translation, and no committee-driven consensus that turns vibrant, living ideas into beige could-have-beens.
-                </p>
-              </motion.div>
-              <motion.div variants={itemFade}>
-                <p data-testid="text-manifesto-p3">
-                  A product is only successful if the company feels a sense of camaraderie with it. We don't just build apps; we design digital expressions that the team is actually excited to own and we document everything for successful, resilient handoffs. Whether we are designing a simplified MedTech interface for an 80-year-old grandmother or a high-velocity workflow for technical users, our goal is the same: meeting the end user exactly where they are.
-                </p>
-              </motion.div>
+
+            {/* Single wide column, large editorial body text */}
+            <div className="space-y-10 text-foreground/60 leading-[1.6]" style={{ fontSize: "clamp(1rem, 1.67vw, 2rem)" }}>
+              <motion.p variants={itemFade} data-testid="text-manifesto-p1">
+                If poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
+              </motion.p>
+              <motion.p variants={itemFade} data-testid="text-manifesto-p2">
+                Agencies are costly and slow because they are fragmented. They spend your budget on meetings to discuss ideas rather than time spent building. We bypass this cost because the person defining the brand positioning is the same person architecting the site/app design and the backend. There is no hand-off, zero loss in translation, and no committee-driven consensus that turns vibrant, living ideas into beige could-have-beens.
+              </motion.p>
+              <motion.p variants={itemFade} data-testid="text-manifesto-p3">
+                A product is only successful if the company feels a sense of camaraderie with it. We don't just build apps; we design digital expressions that the team is actually excited to own and we document everything for successful, resilient handoffs. Whether we are designing a simplified MedTech interface for an 80-year-old grandmother or a high-velocity workflow for technical users, our goal is the same: meeting the end user exactly where they are.
+              </motion.p>
             </div>
           </motion.div>
         </div>
 
-        {/* WORKING WITH CHB */}
-        <div className="mt-36 md:mt-48">
-          <div className="studio-full">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
-              <motion.h2
-                variants={sectionReveal}
-                className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20"
-                style={{ fontSize: "clamp(2.2rem, 6vw, 6.5rem)", paddingLeft: "clamp(24px, 2.08vw, 40px)", maxWidth: "74%" }}
+        {/* WORKING WITH CHB — full-bleed background, stacked vertical heading */}
+        <div className="relative mt-36 md:mt-48 overflow-hidden" data-testid="section-working-with-chb">
+          {/* Full-bleed background at 40% opacity */}
+          <motion.img
+            src={calloutWorkflow}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ opacity: 0.4 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.4 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.4 }}
+            loading="lazy"
+            data-testid="img-working-callout"
+          />
+
+          {/* Content overlay */}
+          <div
+            className="relative z-10 flex flex-col lg:flex-row items-start py-20 md:py-28 lg:py-36 gap-0"
+            style={{ paddingLeft: 0 }}
+          >
+            {/* Left: white scrim + stacked heading + button + fig */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={stagger}
+              style={{
+                background: "rgba(255,255,255,0.6)",
+                padding: "clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem) clamp(24px, 2.08vw, 40px)",
+                flexShrink: 0,
+              }}
+            >
+              {/* Stacked heading: one word per line */}
+              <div
+                className="font-display tracking-[-0.02em]"
+                style={{ fontSize: "clamp(3rem, 7vw, 8rem)", lineHeight: 1.0 }}
                 data-testid="text-working-heading"
               >
-                working with COLON hyphen BRaCKET
-              </motion.h2>
-
-              <div className="grid lg:grid-cols-[55%_45%] gap-0 items-start" style={{ paddingLeft: "clamp(24px, 2.08vw, 40px)" }}>
-                <motion.div variants={itemFade} className="space-y-7 text-foreground/60 leading-[1.8] text-[16px] md:text-[17px] lg:pr-16 pb-12 lg:pb-0">
-                  <p data-testid="text-working-p1">
-                    CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
-                  </p>
-                  <p data-testid="text-working-p2">
-                    The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
-                  </p>
-                </motion.div>
-
-                <ScrollRevealImage
-                  src={calloutWorkflow}
-                  alt="Steampunk workflow diagram illustrating CHB's streamlined engagement process"
-                  className="w-full h-auto"
-                  testId="img-working-callout"
-                />
+                {["WORKING", "WITH", "COLON", "HYPHEN", "BRACKET"].map((word, i) => (
+                  <motion.div key={word} variants={textReveal} custom={i}>
+                    {word}
+                  </motion.div>
+                ))}
               </div>
+
+              <motion.div variants={itemFade} className="mt-8">
+                <Button
+                  onClick={() => setContactOpen(true)}
+                  data-testid="cta-working-contact"
+                >
+                  Contact Us
+                </Button>
+              </motion.div>
+
+              <motion.p
+                variants={itemFade}
+                className="mt-3 text-[13px] text-foreground/50 italic"
+                data-testid="text-fig-caption"
+              >
+                Fig. 1
+              </motion.p>
+            </motion.div>
+
+            {/* Right: body text */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={stagger}
+              className="flex-1 space-y-7 text-foreground/70 leading-[1.8] text-[16px] md:text-[17px]"
+              style={{
+                paddingLeft: "clamp(2rem, 4vw, 4rem)",
+                paddingRight: "calc(26vw + clamp(1rem, 2vw, 2rem))",
+              }}
+            >
+              <motion.p variants={itemFade} data-testid="text-working-p1">
+                CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
+              </motion.p>
+              <motion.p variants={itemFade} data-testid="text-working-p2">
+                The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
+              </motion.p>
             </motion.div>
           </div>
         </div>
 
-        {/* ENGAGEMENT MODELS */}
+        {/* ENGAGEMENT MODELS — no heading, no contact button */}
         <div className="studio-content mt-36 md:mt-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
-            <motion.h2
-              variants={sectionReveal}
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-16 md:mb-24"
-              style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
-              data-testid="text-models-heading"
-            >
-              engagement models
-            </motion.h2>
-
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            variants={stagger}
+          >
             <div className="grid sm:grid-cols-2 gap-8 md:gap-10">
               <EngagementCard
                 title="SIMPLE engagements:"
@@ -636,6 +768,7 @@ export default function Studio() {
                 items={[
                   "Most agencies sell you on the dream team, then subcontract to a junior. CHB is faster because our team has been doing this for 20+ years",
                   "Better is defined as: faster to market, faster to value, designed for ensuring client sovereignty post-engagement",
+                  "We prioritize delivering a working system over a perfected backlog of tickets",
                 ]}
                 testId="model-faster"
               />
@@ -644,17 +777,11 @@ export default function Studio() {
                 items={[
                   "CHB has no extended organizational structure. We're a phone call away. Directly interact with the person designing and developing for you",
                   "We hold an MFA, MBA, and have design, marketing, and engineering expertise—we'll have something in common!",
+                  "We value long-term relationships, not just deliverables — your success is our reputation",
                 ]}
                 testId="model-personal"
               />
             </div>
-
-            <motion.div variants={itemFade} className="mt-24 text-center">
-              <Button onClick={() => setContactOpen(true)} data-testid="cta-studio-contact-bottom">
-                <Mail className="w-4 h-4 mr-2" />
-                Contact Us
-              </Button>
-            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -669,6 +796,7 @@ function OverlookedCard({
   subtitle,
   image,
   imageAlt,
+  imagePosition,
   items,
   testId,
 }: {
@@ -676,6 +804,7 @@ function OverlookedCard({
   subtitle?: string;
   image: string;
   imageAlt: string;
+  imagePosition: string;
   items: string[];
   testId: string;
 }) {
@@ -691,18 +820,19 @@ function OverlookedCard({
       className="group"
       data-testid={`card-${testId}`}
     >
-      <div className="aspect-[4/3] rounded-xl overflow-hidden mb-6 bg-muted">
+      <div className="aspect-[4/3] overflow-hidden mb-6 bg-muted">
         <img
           src={image}
           alt={imageAlt}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          style={{ objectPosition: imagePosition }}
           loading="lazy"
           data-testid={`img-${testId}`}
         />
       </div>
       <h3
-        className="font-display tracking-tight mb-1"
-        style={{ fontSize: "clamp(1.2rem, 2vw, 1.6rem)" }}
+        className="font-display tracking-tight mb-1 leading-[1.2]"
+        style={{ fontSize: "clamp(1.2rem, 2vw, 1.75rem)" }}
         data-testid={`text-${testId}-title`}
       >
         {title}
@@ -713,12 +843,26 @@ function OverlookedCard({
         </p>
       )}
       <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7] mt-4" role="list">
-        {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2">
-            <PinkBullet />
-            <span>{item}</span>
-          </li>
-        ))}
+        {items.map((item, i) => {
+          const isQuote = item.startsWith('"') || item.startsWith('\u201c');
+          return (
+            <li key={i} className="flex items-start gap-2">
+              {isQuote ? (
+                <span
+                  className="text-foreground/50 leading-[1.7]"
+                  style={{ fontStyle: "italic", fontSize: "inherit" }}
+                >
+                  {item}
+                </span>
+              ) : (
+                <>
+                  <PinkBullet />
+                  <span>{item}</span>
+                </>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </motion.div>
   );
@@ -736,13 +880,13 @@ function LabCard({
   return (
     <motion.div variants={itemFade} className="space-y-5" data-testid={`card-${testId}`}>
       <h3
-        className="font-display tracking-tight"
-        style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)" }}
+        className="font-display tracking-tight leading-[1.2]"
+        style={{ fontSize: "clamp(1.5rem, 2.08vw, 2.5rem)" }}
         data-testid={`text-${testId}-title`}
       >
         {title}
       </h3>
-      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
+      <ul className="space-y-3 text-foreground/60 leading-[1.7]" style={{ fontSize: "clamp(1rem, 1.67vw, 2rem)" }} role="list">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2">
             <PinkBullet />
@@ -769,14 +913,15 @@ function EngagementCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40, scale: 0.97 }}
-      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, ease }}
-      className="p-7 md:p-9 rounded-xl border border-border/20 hover:border-[#FE299E]/30 transition-colors duration-500"
+      className="p-7 md:p-9 border border-border/20 hover:border-[#FE299E]/25 transition-colors duration-500"
       data-testid={`card-${testId}`}
     >
       <h3
-        className="font-display text-[15px] md:text-[17px] uppercase tracking-wide mb-5"
+        className="font-display leading-[1.2] mb-6"
+        style={{ fontSize: "clamp(1.2rem, 2vw, 1.75rem)" }}
         data-testid={`text-${testId}-title`}
       >
         {title}
