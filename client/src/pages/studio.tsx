@@ -680,7 +680,13 @@ export default function Studio() {
                   data-testid="text-working-heading"
                 >
                   {["working", "with", "COLON", "hyphen", "BRaCKET"].map((word, i) => (
-                    <motion.div key={i} variants={textReveal} custom={i}>
+                    <motion.div
+                      key={word}
+                      initial={{ opacity: 0, x: -60 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.1 }}
+                      transition={{ duration: 0.9, ease, delay: i * 0.15 }}
+                    >
                       {word}
                     </motion.div>
                   ))}
