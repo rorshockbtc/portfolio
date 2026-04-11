@@ -120,7 +120,7 @@ export default function Studio() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const heroTextY = useTransform(heroScrollProgress, [0, 1], [0, 120]);
+  const heroTextY = useTransform(heroScrollProgress, [0, 1], [0, -120]);
   const heroOpacity = useTransform(heroScrollProgress, [0, 0.6], [1, 0]);
   const heroBgScale = useTransform(heroScrollProgress, [0, 1], [1, 1.08]);
 
@@ -717,7 +717,7 @@ export default function Studio() {
               </motion.p>
             </motion.div>
 
-            {/* Right: body text */}
+            {/* Right: body text — slides in from RIGHT per spec */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -729,10 +729,10 @@ export default function Studio() {
                 paddingRight: "calc(26vw + clamp(1rem, 2vw, 2rem))",
               }}
             >
-              <motion.p variants={itemFade} data-testid="text-working-p1">
+              <motion.p variants={imgRevealRight} data-testid="text-working-p1">
                 CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
               </motion.p>
-              <motion.p variants={itemFade} data-testid="text-working-p2">
+              <motion.p variants={imgRevealRight} data-testid="text-working-p2">
                 The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
               </motion.p>
             </motion.div>
@@ -818,8 +818,8 @@ function OverlookedCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: -50 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, ease }}
       className="group"
       data-testid={`card-${testId}`}
@@ -851,19 +851,10 @@ function OverlookedCard({
           const isQuote = item.startsWith('"') || item.startsWith('\u201c');
           return (
             <li key={i} className="flex items-start gap-2">
-              {isQuote ? (
-                <span
-                  className="text-foreground/50 leading-[1.7]"
-                  style={{ fontStyle: "italic", fontSize: "inherit" }}
-                >
-                  {item}
-                </span>
-              ) : (
-                <>
-                  <PinkBullet />
-                  <span>{item}</span>
-                </>
-              )}
+              <PinkBullet />
+              <span style={isQuote ? { fontStyle: "italic", opacity: 0.85 } : {}}>
+                {item}
+              </span>
             </li>
           );
         })}
@@ -917,8 +908,8 @@ function EngagementCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: -40 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, ease }}
       className="p-7 md:p-9 border border-border/20 hover:border-[#FE299E]/25 transition-colors duration-500"
       data-testid={`card-${testId}`}
