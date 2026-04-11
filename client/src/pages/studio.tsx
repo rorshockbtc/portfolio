@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import { useStudioSections } from "@/hooks/use-studio-sections";
@@ -24,13 +24,11 @@ const SECTIONS = [
   { id: "engagement", number: "05", shortLabel: "engagement" },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 const sectionReveal = {
-  hidden: { opacity: 0, y: 60 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
-  },
+  hidden: { opacity: 0, y: 80 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1, ease } },
 };
 
 const stagger = {
@@ -39,70 +37,103 @@ const stagger = {
 };
 
 const itemFade = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  },
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.9, ease } },
 };
 
 const scaleIn = {
-  hidden: { opacity: 0, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
-  },
+  hidden: { opacity: 0, scale: 0.92 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 1, ease } },
+};
+
+const imgReveal = {
+  hidden: { opacity: 0, y: 40, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 1.1, ease } },
 };
 
 function PinkBullet() {
   return (
-    <span
-      className="mt-[7px] shrink-0"
-      style={{ color: "#FE299E", fontSize: "8px", lineHeight: 1 }}
-      aria-hidden="true"
-    >
+    <span className="mt-[6px] shrink-0 select-none" style={{ color: "#FE299E", fontSize: "9px", lineHeight: 1 }} aria-hidden="true">
       ▸
     </span>
   );
 }
 
 function StickyNav({ activeSection, visible }: { activeSection: string; visible: boolean }) {
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDark(document.documentElement.classList.contains("dark"));
+    check();
+    const obs = new MutationObserver(check);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => obs.disconnect();
+  }, []);
+
+  const shadow = isDark
+    ? "0 0 8px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.6)"
+    : "0 0 8px rgba(255,255,255,0.9), 0 0 16px rgba(255,255,255,0.6)";
+
   return (
     <motion.nav
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : 20 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="hidden lg:flex fixed right-8 xl:right-12 top-1/2 -translate-y-1/2 z-40 flex-col"
+      initial={{ opacity: 0, x: 30 }}
+      animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : 30 }}
+      transition={{ duration: 0.6, ease }}
+      className="hidden lg:flex fixed right-0 top-0 bottom-0 z-40 flex-col justify-center items-start"
+      style={{
+        width: "25%",
+        maxWidth: "360px",
+        paddingLeft: "40px",
+        pointerEvents: visible ? "auto" : "none",
+      }}
       role="navigation"
       aria-label="Section navigation"
       data-testid="nav-sticky"
-      style={{ pointerEvents: visible ? "auto" : "none" }}
     >
-      <div className="py-4">
-        {SECTIONS.map((s) => (
-          <a
-            key={s.id}
-            href={`#${s.id}`}
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-            }}
-            className={`block py-2 font-display text-[12px] lowercase tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm whitespace-nowrap ${
-              activeSection === s.id
-                ? ""
-                : "text-foreground/40 hover:text-foreground/80"
-            }`}
-            style={activeSection === s.id ? { color: "#FE299E" } : undefined}
-            aria-current={activeSection === s.id ? "true" : undefined}
-            data-testid={`nav-sticky-${s.id}`}
-          >
-            {s.number} // {s.shortLabel}
-          </a>
-        ))}
-      </div>
+      {SECTIONS.map((s) => (
+        <a
+          key={s.id}
+          href={`#${s.id}`}
+          onClick={(e) => {
+            e.preventDefault();
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            document.getElementById(s.id)?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+          }}
+          className={`block py-[6px] font-display text-[13px] lowercase tracking-[0.08em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm whitespace-nowrap ${
+            activeSection === s.id
+              ? "font-bold"
+              : "text-foreground/80 hover:text-foreground"
+          }`}
+          style={{
+            ...(activeSection === s.id ? { color: "#FE299E" } : {}),
+            textShadow: shadow,
+          }}
+          aria-current={activeSection === s.id ? "true" : undefined}
+          data-testid={`nav-sticky-${s.id}`}
+        >
+          {s.number} // {s.shortLabel}
+        </a>
+      ))}
     </motion.nav>
+  );
+}
+
+function ScrollRevealImage({ src, alt, className, testId }: { src: string; alt: string; className?: string; testId: string }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50, scale: 0.96 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 1.1, ease }}
+    >
+      <img src={src} alt={alt} className={className} loading="lazy" data-testid={testId} />
+    </motion.div>
   );
 }
 
@@ -118,8 +149,9 @@ export default function Studio() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const heroTextY = useTransform(heroScrollProgress, [0, 1], [0, 100]);
-  const heroOpacity = useTransform(heroScrollProgress, [0, 0.5], [1, 0]);
+  const heroTextY = useTransform(heroScrollProgress, [0, 1], [0, 120]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.6], [1, 0]);
+  const heroBgScale = useTransform(heroScrollProgress, [0, 1], [1, 1.12]);
 
   useEffect(() => {
     setSections(SECTIONS);
@@ -186,22 +218,28 @@ export default function Studio() {
       {/* ═══════ HERO ═══════ */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-end pb-16 md:pb-24 lg:pb-28 pt-14 md:pt-16"
+        className="relative min-h-screen flex items-end pb-16 md:pb-24 lg:pb-28"
         data-testid="section-studio-hero"
         aria-labelledby="studio-hero-heading"
       >
-        <div className="absolute inset-0 z-0">
-          <img src={heroBg} alt="" className="w-full h-full object-cover" data-testid="img-studio-hero-bg" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.img
+            src={heroBg}
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ scale: heroBgScale }}
+            data-testid="img-studio-hero-bg"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
         </div>
         <motion.div
           style={{ y: heroTextY, opacity: heroOpacity }}
-          className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-20"
+          className="relative z-10 w-full pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]"
         >
           <motion.h1
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.2, delay: 0.2, ease }}
             id="studio-hero-heading"
             className="font-display leading-[0.92] tracking-[-0.02em]"
             style={{ fontSize: "clamp(3rem, 8.5vw, 10rem)" }}
@@ -210,10 +248,10 @@ export default function Studio() {
             architecture Partner for the Stuck &amp; UnderServed.
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 md:mt-10 text-[17px] md:text-[19px] text-foreground/60 max-w-2xl leading-relaxed"
+            transition={{ duration: 1, delay: 0.7, ease }}
+            className="mt-8 md:mt-10 text-[17px] md:text-[19px] text-foreground/60 max-w-2xl leading-[1.8]"
             data-testid="text-studio-hero-subtitle"
           >
             Colon Hyphen Bracket (just say CHB) applies tasteful, measured order to complex products &amp; growing businesses that have the words but need a voice.
@@ -221,7 +259,7 @@ export default function Studio() {
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.9, delay: 1, ease }}
             className="mt-10"
           >
             <Button onClick={() => setContactOpen(true)} data-testid="cta-studio-contact">
@@ -235,20 +273,20 @@ export default function Studio() {
       {/* ═══════ 01 — THE THESIS ═══════ */}
       <section
         id="thesis"
-        className="relative py-28 md:py-36 lg:py-44 overflow-hidden"
+        className="relative py-28 md:py-40 lg:py-48 overflow-hidden"
         aria-labelledby="heading-thesis"
         data-testid="section-thesis"
       >
         <div className="absolute inset-0 z-0">
-          <img src={sectionBg01} alt="" className="w-full h-full object-cover opacity-20" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/40" />
+          <img src={sectionBg01} alt="" className="w-full h-full object-cover opacity-15" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/50" />
         </div>
-        <div className="relative z-10 px-6 md:px-12 lg:px-16 xl:px-20 lg:pr-52 xl:pr-64">
+        <div className="relative z-10 pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
               id="heading-thesis"
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-12 md:mb-16"
+              className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20"
               style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
               data-testid="text-thesis-heading"
             >
@@ -269,12 +307,12 @@ export default function Studio() {
       {/* ═══════ 02 — THE OVERLOOKED ═══════ */}
       <section
         id="overlooked"
-        className="py-28 md:py-36 lg:py-44"
+        className="py-28 md:py-40 lg:py-48"
         aria-labelledby="heading-overlooked"
         data-testid="section-overlooked"
       >
-        <div className="px-6 md:px-12 lg:px-16 xl:px-20 lg:pr-52 xl:pr-64">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
+        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.05 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
               id="heading-overlooked"
@@ -339,88 +377,95 @@ export default function Studio() {
       {/* ═══════ 03 — REGULATED SYSTEMS ═══════ */}
       <section
         id="regulated"
-        className="py-28 md:py-36 lg:py-44 bg-neutral-50 dark:bg-neutral-900/30"
+        className="relative py-28 md:py-40 lg:py-48"
         aria-labelledby="heading-regulated"
         data-testid="section-regulated"
       >
-        <div className="px-6 md:px-12 lg:px-16 xl:px-20 lg:pr-52 xl:pr-64">
+        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
               id="heading-regulated"
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-16 md:mb-20"
+              className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20"
               style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
               data-testid="text-regulated-heading"
             >
               UNBLOCKING health &amp; financial tech
             </motion.h2>
+          </motion.div>
+        </div>
 
-            <div className="grid lg:grid-cols-[1fr_400px] gap-12 lg:gap-20 items-start">
-              <motion.div variants={itemFade} className="space-y-7">
-                <p className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]" data-testid="text-regulated-p1">
-                  In high-stakes environments like banking and healthcare, regulation is often used as an excuse for stagnation. We are used to regulated systems but we do ensure that security and compliance don't come at the cost of human-centered design. Having worked within the strictures of Fidelity, Walmart, UnitedHealth, Custodia Bank, and the DoD we understand how to architect systems that balance "bank-grade" with intuitively simple.
-                </p>
-                <p className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]" data-testid="text-regulated-p2">
-                  Large financial and medical institutions are often paralyzed by their own internal inefficiencies, processes, and dependencies. By operating as a single-core studio, we bypass the layers of bureaucratic consensus that slow down responsive innovation. CHB is competent within these systems, but since we've been forced to "drink our own champagne," we have developed a way of working that's differentiated.
-                </p>
-                <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 pt-4" data-testid="list-regulated-points">
-                  {[
-                    "For small or large companies who need to get unstuck",
-                    "Architecture can span from sales/comms all the way to systems dev",
-                    "Process is close to fully auditable by default, code versioned with Git",
-                    "Design can include everything from IA to UI, Dev is full-stack",
-                    "While we can build good apps & products, you should still rely on internal legal, compliance, & security practices!",
-                  ].map((item, i) => (
-                    <p key={i} className="flex items-start gap-2 text-[15px] text-foreground/60 leading-[1.7]">
-                      <PinkBullet />
-                      <span>{item}</span>
-                    </p>
-                  ))}
-                </div>
-              </motion.div>
-              <motion.div variants={scaleIn} className="hidden lg:block">
-                <img
+        <div className="relative">
+          <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-0">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
+              <div className="grid lg:grid-cols-[55%_45%] gap-0 items-start">
+                <motion.div variants={itemFade} className="space-y-7 lg:pr-16 pb-12 lg:pb-0">
+                  <p className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]" data-testid="text-regulated-p1">
+                    In high-stakes environments like banking and healthcare, regulation is often used as an excuse for stagnation. We are used to regulated systems but we do ensure that security and compliance don't come at the cost of human-centered design. Having worked within the strictures of Fidelity, Walmart, UnitedHealth, Custodia Bank, and the DoD we understand how to architect systems that balance "bank-grade" with intuitively simple.
+                  </p>
+                  <p className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]" data-testid="text-regulated-p2">
+                    Large financial and medical institutions are often paralyzed by their own internal inefficiencies, processes, and dependencies. By operating as a single-core studio, we bypass the layers of bureaucratic consensus that slow down responsive innovation. CHB is competent within these systems, but since we've been forced to "drink our own champagne," we have developed a way of working that's differentiated.
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 pt-4" data-testid="list-regulated-points">
+                    {[
+                      "For small or large companies who need to get unstuck",
+                      "Architecture can span from sales/comms all the way to systems dev",
+                      "Process is close to fully auditable by default, code versioned with Git",
+                      "Design can include everything from IA to UI, Dev is full-stack",
+                      "While we can build good apps & products, you should still rely on internal legal, compliance, & security practices!",
+                    ].map((item, i) => (
+                      <motion.p key={i} variants={itemFade} className="flex items-start gap-2 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]">
+                        <PinkBullet />
+                        <span>{item}</span>
+                      </motion.p>
+                    ))}
+                  </div>
+                </motion.div>
+
+                <ScrollRevealImage
                   src={sideHealthFintech}
                   alt="Architectural cross-section of a building representing systematic health and financial tech design"
-                  className="w-full rounded-xl"
-                  loading="lazy"
-                  data-testid="img-regulated-side"
+                  className="w-full h-auto"
+                  testId="img-regulated-side"
                 />
-              </motion.div>
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ═══════ 04 — THE LAB ═══════ */}
       <section
         id="lab"
-        className="py-28 md:py-36 lg:py-44"
+        className="relative py-28 md:py-40 lg:py-48"
         aria-labelledby="heading-lab"
         data-testid="section-lab"
       >
-        <div className="px-6 md:px-12 lg:px-16 xl:px-20 lg:pr-52 xl:pr-64">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.08 }} variants={stagger}>
-            <motion.h2
-              variants={sectionReveal}
-              id="heading-lab"
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-16 md:mb-20"
-              style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
-              data-testid="text-lab-heading"
-            >
-              proprietary TEChNOLOGY
-            </motion.h2>
-
-            <motion.div variants={scaleIn} className="mb-16 md:mb-24">
-              <img
+        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-0">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.05 }} variants={stagger}>
+            <div className="relative mb-0">
+              <ScrollRevealImage
                 src={featurePropTech}
                 alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
-                className="w-full rounded-xl"
-                loading="lazy"
-                data-testid="img-lab-feature"
+                className="w-full rounded-l-xl"
+                testId="img-lab-feature"
               />
-            </motion.div>
+              <div className="absolute inset-0 bg-gradient-to-b from-background via-background/30 to-transparent rounded-l-xl pointer-events-none" />
+              <motion.h2
+                variants={sectionReveal}
+                id="heading-lab"
+                className="absolute top-6 md:top-10 lg:top-14 left-0 font-display leading-[0.92] tracking-[-0.02em] z-10"
+                style={{ fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)" }}
+                data-testid="text-lab-heading"
+              >
+                proprietary TEChNOLOGY
+              </motion.h2>
+            </div>
+          </motion.div>
+        </div>
 
+        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%] mt-16 md:mt-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <div className="grid sm:grid-cols-2 gap-x-12 gap-y-14 md:gap-x-20 md:gap-y-20">
               <LabCard
                 title="KNOWLEDGE bases:"
@@ -464,7 +509,8 @@ export default function Studio() {
               className="mt-20 text-[18px] md:text-[20px] font-medium text-foreground leading-relaxed"
               data-testid="text-lab-patents"
             >
-              Our proprietary technology includes much more than is listed here. We have <strong style={{ color: "#FE299E" }}>50+ patents and trademarks pending.</strong>
+              Our proprietary technology includes much more than is listed here. We have{" "}
+              <strong style={{ color: "#FE299E" }}>50+ patents and trademarks pending.</strong>
             </motion.p>
           </motion.div>
         </div>
@@ -475,7 +521,7 @@ export default function Studio() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 1.2 }}
+        transition={{ duration: 1.4 }}
         className="relative h-72 md:h-96 lg:h-[500px] overflow-hidden"
         data-testid="divider-topography"
         aria-hidden="true"
@@ -486,12 +532,12 @@ export default function Studio() {
       {/* ═══════ 05 — ENGAGEMENT (Manifesto + Working + Models) ═══════ */}
       <section
         id="engagement"
-        className="py-28 md:py-36 lg:py-44"
+        className="py-28 md:py-40 lg:py-48"
         aria-labelledby="heading-manifesto"
         data-testid="section-engagement"
       >
         {/* MANIFESTO */}
-        <div className="px-6 md:px-12 lg:px-16 xl:px-20 lg:pr-52 xl:pr-64">
+        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%]">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
@@ -521,41 +567,41 @@ export default function Studio() {
         </div>
 
         {/* WORKING WITH CHB */}
-        <div className="px-6 md:px-12 lg:px-16 xl:px-20 lg:pr-52 xl:pr-64 mt-36 md:mt-48">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
-            <motion.h2
-              variants={sectionReveal}
-              className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20"
-              style={{ fontSize: "clamp(2.2rem, 6vw, 6.5rem)" }}
-              data-testid="text-working-heading"
-            >
-              working with COLON hyphen BRaCKET
-            </motion.h2>
+        <div className="mt-36 md:mt-48">
+          <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-0">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
+              <motion.h2
+                variants={sectionReveal}
+                className="font-display leading-[0.92] tracking-[-0.02em] mb-14 md:mb-20 lg:pr-[25%]"
+                style={{ fontSize: "clamp(2.2rem, 6vw, 6.5rem)" }}
+                data-testid="text-working-heading"
+              >
+                working with COLON hyphen BRaCKET
+              </motion.h2>
 
-            <div className="grid lg:grid-cols-[1fr_380px] gap-12 lg:gap-20 items-start">
-              <motion.div variants={itemFade} className="space-y-7 text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]">
-                <p data-testid="text-working-p1">
-                  CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
-                </p>
-                <p data-testid="text-working-p2">
-                  The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
-                </p>
-              </motion.div>
-              <motion.div variants={scaleIn} className="hidden lg:block">
-                <img
+              <div className="grid lg:grid-cols-[55%_45%] gap-0 items-start">
+                <motion.div variants={itemFade} className="space-y-7 text-foreground/60 leading-[1.8] text-[16px] md:text-[17px] lg:pr-16 pb-12 lg:pb-0">
+                  <p data-testid="text-working-p1">
+                    CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
+                  </p>
+                  <p data-testid="text-working-p2">
+                    The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
+                  </p>
+                </motion.div>
+
+                <ScrollRevealImage
                   src={calloutWorkflow}
                   alt="Steampunk workflow diagram illustrating CHB's streamlined engagement process"
-                  className="w-full rounded-xl"
-                  loading="lazy"
-                  data-testid="img-working-callout"
+                  className="w-full h-auto"
+                  testId="img-working-callout"
                 />
-              </motion.div>
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* ENGAGEMENT MODELS */}
-        <div className="px-6 md:px-12 lg:px-16 xl:px-20 lg:pr-52 xl:pr-64 mt-36 md:mt-48">
+        <div className="pl-6 md:pl-12 lg:pl-16 xl:pl-20 pr-6 md:pr-12 lg:pr-[25%] mt-36 md:mt-48">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={stagger}>
             <motion.h2
               variants={sectionReveal}
@@ -633,18 +679,32 @@ function OverlookedCard({
   items: string[];
   testId: string;
 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
   return (
-    <motion.div variants={scaleIn} className="group" data-testid={`card-${testId}`}>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, ease }}
+      className="group"
+      data-testid={`card-${testId}`}
+    >
       <div className="aspect-[4/3] rounded-xl overflow-hidden mb-6 bg-muted">
         <img
           src={image}
           alt={imageAlt}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
           loading="lazy"
           data-testid={`img-${testId}`}
         />
       </div>
-      <h3 className="font-display text-[20px] md:text-[24px] tracking-tight mb-1" data-testid={`text-${testId}-title`}>
+      <h3
+        className="font-display tracking-tight mb-1"
+        style={{ fontSize: "clamp(1.2rem, 2vw, 1.6rem)" }}
+        data-testid={`text-${testId}-title`}
+      >
         {title}
       </h3>
       {subtitle && (
@@ -652,7 +712,7 @@ function OverlookedCard({
           {subtitle}
         </p>
       )}
-      <ul className="space-y-3 text-[15px] text-foreground/60 leading-[1.7] mt-4" role="list">
+      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7] mt-4" role="list">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2">
             <PinkBullet />
@@ -675,10 +735,14 @@ function LabCard({
 }) {
   return (
     <motion.div variants={itemFade} className="space-y-5" data-testid={`card-${testId}`}>
-      <h3 className="font-display text-[18px] md:text-[22px] tracking-tight" data-testid={`text-${testId}-title`}>
+      <h3
+        className="font-display tracking-tight"
+        style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)" }}
+        data-testid={`text-${testId}-title`}
+      >
         {title}
       </h3>
-      <ul className="space-y-3 text-[15px] text-foreground/60 leading-[1.7]" role="list">
+      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2">
             <PinkBullet />
@@ -699,16 +763,25 @@ function EngagementCard({
   items: string[];
   testId: string;
 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
   return (
     <motion.div
-      variants={scaleIn}
-      className="p-7 md:p-9 rounded-xl border border-border/20 hover:border-border/40 transition-colors duration-500"
+      ref={ref}
+      initial={{ opacity: 0, y: 40, scale: 0.97 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 0.9, ease }}
+      className="p-7 md:p-9 rounded-xl border border-border/20 hover:border-[#FE299E]/30 transition-colors duration-500"
       data-testid={`card-${testId}`}
     >
-      <h3 className="font-semibold text-[14px] uppercase tracking-wide mb-5" data-testid={`text-${testId}-title`}>
+      <h3
+        className="font-display text-[15px] md:text-[17px] uppercase tracking-wide mb-5"
+        data-testid={`text-${testId}-title`}
+      >
         {title}
       </h3>
-      <ul className="space-y-3 text-[15px] text-foreground/60 leading-[1.7]" role="list">
+      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2">
             <PinkBullet />
