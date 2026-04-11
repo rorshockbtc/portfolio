@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, MotionConfig } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useStudioSections } from "@/hooks/use-studio-sections";
 import ContactFormModal from "@/components/contact-form-modal";
@@ -36,8 +36,8 @@ const textReveal = {
 };
 
 const itemFade = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
+  hidden: { opacity: 0, x: -40 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease } },
 };
 
 const imgRevealRight = {
@@ -89,11 +89,13 @@ function StickyNav({ activeSection, visible }: { activeSection: string; visible:
                 block: "start",
               });
             }}
-            className="block py-[6px] font-display text-[12px] lowercase tracking-[0.08em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm whitespace-nowrap"
+            className={`block py-[6px] font-display text-[12px] lowercase tracking-[0.08em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm whitespace-nowrap ${
+              activeSection === s.id ? "" : "text-foreground/80"
+            }`}
             style={
               activeSection === s.id
                 ? { color: "#FE299E", fontWeight: 700 }
-                : { color: "rgba(0,0,0,0.55)" }
+                : {}
             }
             aria-current={activeSection === s.id ? "true" : undefined}
             data-testid={`nav-sticky-${s.id}`}
@@ -181,6 +183,7 @@ export default function Studio() {
   }, [updateActive]);
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <StickyNav activeSection={activeSection} visible={stickyVisible} />
 
@@ -788,6 +791,7 @@ export default function Studio() {
 
       <ContactFormModal open={contactOpen} onOpenChange={setContactOpen} />
     </div>
+    </MotionConfig>
   );
 }
 
@@ -814,8 +818,8 @@ function OverlookedCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      initial={{ opacity: 0, x: -50 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.9, ease }}
       className="group"
       data-testid={`card-${testId}`}
@@ -913,8 +917,8 @@ function EngagementCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      initial={{ opacity: 0, x: -40 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.9, ease }}
       className="p-7 md:p-9 border border-border/20 hover:border-[#FE299E]/25 transition-colors duration-500"
       data-testid={`card-${testId}`}
