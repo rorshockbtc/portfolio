@@ -679,7 +679,7 @@ export default function Studio() {
                   style={{ fontSize: "clamp(2.2rem, 6vw, 7.5rem)", lineHeight: 1.0 }}
                   data-testid="text-working-heading"
                 >
-                  {["WORKING", "WITH", "COLON", "HYPHEN", "BRACKET"].map((word, i) => (
+                  {["working", "with", "COLON", "hyphen", "BRaCKET"].map((word, i) => (
                     <motion.div key={word} variants={textReveal} custom={i}>
                       {word}
                     </motion.div>
