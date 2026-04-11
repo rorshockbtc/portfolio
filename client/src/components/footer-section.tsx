@@ -25,7 +25,7 @@ const socialLinks = [
 export default function FooterSection() {
   return (
     <footer
-      className="border-t border-border/40 bg-background"
+      className="border-t border-border/40 bg-background relative z-50"
       role="contentinfo"
       aria-label="Site footer"
       data-testid="section-footer"

@@ -48,7 +48,7 @@ const imgRevealRight = {
 function PinkBullet() {
   return (
     <span
-      className="mt-[4px] shrink-0 select-none"
+      className="mt-[6px] shrink-0 select-none"
       style={{ color: "#FE299E", fontSize: "9px", lineHeight: 1 }}
       aria-hidden="true"
     >
@@ -110,7 +110,7 @@ function StickyNav({ activeSection, visible }: { activeSection: string; visible:
 
 export default function Studio() {
   const [contactOpen, setContactOpen] = useState(false);
-  const [activeSection, setActiveSectionLocal] = useState("");
+  const [activeSection, setActiveSectionLocal] = useState("thesis");
   const [stickyVisible, setStickyVisible] = useState(false);
   const { setSections, setActiveSection } = useStudioSections();
   const sectionRefs = useRef<Map<string, IntersectionObserverEntry>>(new Map());
@@ -190,7 +190,7 @@ export default function Studio() {
       {/* ═══════════════════════════════ HERO ═══════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative min-h-[95vh] flex items-start pt-24 md:pt-28 pb-20"
+        className="relative min-h-[75vh] md:min-h-[85vh] lg:min-h-[95vh] flex items-start pt-20 md:pt-28 pb-16 md:pb-20"
         data-testid="section-studio-hero"
         aria-labelledby="studio-hero-heading"
       >
@@ -285,7 +285,7 @@ export default function Studio() {
             <motion.h2
               variants={textReveal}
               id="heading-thesis"
-              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20 whitespace-nowrap"
+              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20 lg:whitespace-nowrap"
               style={{ fontSize: "clamp(1.5rem, 3.3vw, 4rem)" }}
               data-testid="text-thesis-heading"
             >
@@ -497,7 +497,7 @@ export default function Studio() {
         <div className="studio-content pt-20 md:pt-28 pb-6 md:pb-8">
           <motion.h2
             id="heading-lab"
-            className="font-display leading-[1.05] tracking-[-0.02em] whitespace-nowrap"
+            className="font-display leading-[1.05] tracking-[-0.02em] lg:whitespace-nowrap"
             style={{ fontSize: "clamp(2rem, 5.5vw, 6.5rem)", color: "hsl(var(--foreground))" }}
             initial={{ opacity: 0, x: -80 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -510,7 +510,7 @@ export default function Studio() {
         </div>
 
         {/* Machine image: 74% wide, flush left — leaves right margin for sticky nav */}
-        <div className="overflow-hidden" style={{ width: "74%" }}>
+        <div className="overflow-hidden w-full lg:w-[74%]">
           <motion.img
             src={featurePropTech}
             alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
@@ -590,8 +590,7 @@ export default function Studio() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.4 }}
-        className="relative overflow-hidden"
-        style={{ height: "320px" }}
+        className="relative overflow-hidden h-[180px] md:h-[260px] lg:h-[320px]"
         data-testid="divider-topography"
         aria-hidden="true"
       >
@@ -644,7 +643,7 @@ export default function Studio() {
         </div>
 
         {/* WORKING WITH CHB — full-bleed background image, unified scrim over 74% content */}
-        <div className="relative mt-36 md:mt-48 overflow-hidden" data-testid="section-working-with-chb">
+        <div className="relative mt-20 md:mt-36 lg:mt-48 overflow-hidden" data-testid="section-working-with-chb">
           {/* Full-bleed background at 40% opacity */}
           <motion.img
             src={calloutWorkflow}
@@ -660,7 +659,7 @@ export default function Studio() {
           />
 
           {/* Content: capped at 74% so text never runs behind sticky nav */}
-          <div className="relative z-10" style={{ width: "74%" }}>
+          <div className="relative z-10 w-full lg:w-[74%]">
             <div className="flex flex-col lg:flex-row items-stretch py-20 md:py-28 lg:py-36 gap-0">
               {/* Left: white scrim + stacked heading + button + fig */}
               <motion.div
@@ -677,7 +676,7 @@ export default function Studio() {
                 {/* Stacked heading: one word per line */}
                 <div
                   className="font-display tracking-[-0.02em]"
-                  style={{ fontSize: "clamp(3rem, 6vw, 7.5rem)", lineHeight: 1.0 }}
+                  style={{ fontSize: "clamp(2.2rem, 6vw, 7.5rem)", lineHeight: 1.0 }}
                   data-testid="text-working-heading"
                 >
                   {["WORKING", "WITH", "COLON", "HYPHEN", "BRACKET"].map((word, i) => (
@@ -729,7 +728,7 @@ export default function Studio() {
         </div>
 
         {/* ENGAGEMENT MODELS — no heading, no contact button */}
-        <div className="studio-content mt-36 md:mt-48">
+        <div className="studio-content mt-20 md:mt-36 lg:mt-48">
           <motion.div
             initial="hidden"
             whileInView="visible"
