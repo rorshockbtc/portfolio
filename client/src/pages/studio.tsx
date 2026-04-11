@@ -10,7 +10,7 @@ import cardStartups from "@assets/02a-card-image-startups_1775928187194.png";
 import cardFaith from "@assets/02b-card-image-faith_1775928187199.png";
 import cardSchools from "@assets/02c-card-image-schools_1775928187199.png";
 import cardSmallBiz from "@assets/02d-card-image-smallBusinesses_1775928187198.png";
-import sideHealthFintech from "@assets/03-side-image-health-fintech_1775928187199.png";
+import sideHealthFintech from "@assets/03-side-image-health-fintech_1775942203088.png";
 import featurePropTech from "@assets/04-feature-image-proprietaryTechnology_1775928187201.png";
 import dividerTopo from "@assets/05-divider-image-topography_1775928187201.png";
 import calloutWorkflow from "@assets/06-callout-image-workingWithCHB_1775928187202.png";
@@ -48,7 +48,7 @@ const imgRevealRight = {
 function PinkBullet() {
   return (
     <span
-      className="mt-[6px] shrink-0 select-none"
+      className="mt-[4px] shrink-0 select-none"
       style={{ color: "#FE299E", fontSize: "9px", lineHeight: 1 }}
       aria-hidden="true"
     >
@@ -190,7 +190,7 @@ export default function Studio() {
       {/* ═══════════════════════════════ HERO ═══════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-start pt-24 md:pt-28 pb-20"
+        className="relative min-h-[95vh] flex items-start pt-24 md:pt-28 pb-20"
         data-testid="section-studio-hero"
         aria-labelledby="studio-hero-heading"
       >
@@ -214,7 +214,7 @@ export default function Studio() {
             transition={{ duration: 1.2, delay: 0.2, ease }}
             id="studio-hero-heading"
             className="font-display leading-[1.2] tracking-[-0.02em]"
-            style={{ fontSize: "clamp(2.5rem, 8.33vw, 10rem)" }}
+            style={{ fontSize: "clamp(2rem, min(7vw, 8.5vh), 8rem)" }}
             data-testid="text-studio-hero-heading"
           >
             architecture Partner for the Stuck &amp; UnderServed.
@@ -224,8 +224,8 @@ export default function Studio() {
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.7, ease }}
-            className="mt-8 md:mt-10 text-foreground leading-[1.5]"
-            style={{ fontSize: "clamp(1rem, 1.15vw, 1.375rem)", fontWeight: 200 }}
+            className="mt-8 md:mt-10 text-foreground leading-[1.5] text-[17px] md:text-[20px]"
+            style={{ fontWeight: 200 }}
             data-testid="text-studio-hero-subtitle"
           >
             Colon Hyphen Bracket (just say CHB) offers full-service design and development to products &amp; companies that have something to say.
@@ -284,17 +284,17 @@ export default function Studio() {
               variants={textReveal}
               id="heading-thesis"
               className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
-              style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
+              style={{ fontSize: "clamp(1.5rem, 3.3vw, 4rem)" }}
               data-testid="text-thesis-heading"
             >
               there's a joke all DEvELOPERS know:<br />
               good, fast, &amp; cheap. pick 2.
             </motion.h2>
 
-            <div className="grid md:grid-cols-2 gap-8 md:gap-14">
+            <div className="space-y-8" style={{ maxWidth: "68ch" }}>
               <motion.p
                 variants={itemFade}
-                className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]"
+                className="text-foreground/60 leading-[1.85] text-[16px] md:text-[18px]"
                 style={{ textShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
                 data-testid="text-thesis-p1"
               >
@@ -302,7 +302,7 @@ export default function Studio() {
               </motion.p>
               <motion.p
                 variants={itemFade}
-                className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px]"
+                className="text-foreground/60 leading-[1.85] text-[16px] md:text-[18px]"
                 style={{ textShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
                 data-testid="text-thesis-p2"
               >
@@ -331,7 +331,7 @@ export default function Studio() {
               variants={textReveal}
               id="heading-overlooked"
               className="font-display leading-[1.2] tracking-[-0.02em] mb-16 md:mb-24"
-              style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
+              style={{ fontSize: "clamp(1.75rem, 4vw, 4.5rem)" }}
               data-testid="text-overlooked-heading"
             >
               architecture FOR ThE OvERLOOKED
@@ -340,7 +340,6 @@ export default function Studio() {
             <div className="grid sm:grid-cols-2 gap-10 md:gap-12">
               <OverlookedCard
                 title="STARTUPS"
-                subtitle="idea to series b"
                 image={cardStartups}
                 imageAlt="Abstract visualization of startup growth trajectory"
                 imagePosition="center"
@@ -399,29 +398,9 @@ export default function Studio() {
         aria-labelledby="heading-regulated"
         data-testid="section-regulated"
       >
-        {/* Heading: standard studio-content left margin, matching all other sections */}
-        <div className="studio-content">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={stagger}
-          >
-            <motion.h2
-              variants={textReveal}
-              id="heading-regulated"
-              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
-              style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
-              data-testid="text-regulated-heading"
-            >
-              UNBLOCKING health &amp;<br />financial tech
-            </motion.h2>
-          </motion.div>
-        </div>
-
-        {/* Two-column: body text left (74%), building images right (26%) */}
+        {/* Single grid: heading + body left (74%), images right (26%) — images align to heading top */}
         <div className="lg:grid lg:grid-cols-[74%_26%] items-start">
-          {/* Left column: body text with standard left padding */}
+          {/* Left column: heading + body */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -430,6 +409,15 @@ export default function Studio() {
             style={{ paddingLeft: "clamp(24px, 2.08vw, 40px)" }}
             className="pr-6 lg:pr-20"
           >
+            <motion.h2
+              variants={textReveal}
+              id="heading-regulated"
+              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 4.5rem)" }}
+              data-testid="text-regulated-heading"
+            >
+              UNBLOCKING health &amp;<br />financial tech
+            </motion.h2>
             <motion.p
               variants={itemFade}
               className="text-foreground/60 leading-[1.8] text-[16px] md:text-[17px] mb-7"
@@ -448,10 +436,10 @@ export default function Studio() {
             <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 pt-4" data-testid="list-regulated-points">
               {[
                 "For small or large companies who need to get unstuck",
-                "Architecture can span from sales/comms all the way to systems dev",
-                "Process is close to fully auditable by default, code versioned with Git",
                 "Design can include everything from IA to UI, Dev is full-stack",
+                "Architecture can span from sales/comms all the way to systems dev",
                 "While we can build good apps & products, you should still rely on internal legal, compliance, & security practices!",
+                "Process is close to fully auditable by default, code versioned with Git",
               ].map((item, i) => (
                 <motion.p
                   key={i}
@@ -465,7 +453,7 @@ export default function Studio() {
             </div>
           </motion.div>
 
-          {/* Right column: two building images stacked at 70% opacity, bleeding to right edge */}
+          {/* Right column: two building images stacked, bleeding to right edge, aligned to heading top */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -504,36 +492,44 @@ export default function Studio() {
         aria-labelledby="heading-lab"
         data-testid="section-lab"
       >
-        {/* Heading: normal document flow above the machine image */}
-        <div className="studio-content pt-20 md:pt-28 pb-10 md:pb-14">
-          <motion.h2
-            id="heading-lab"
-            className="font-display leading-[1.2] tracking-[-0.02em]"
-            style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.9, ease }}
-            data-testid="text-lab-heading"
-          >
-            proprietary TEChNOLOGY
-          </motion.h2>
-        </div>
+        {/* Image + overlaid heading: image is 74% wide (flush left), heading overlays at 50% height */}
+        <div className="relative pt-20 md:pt-28">
+          {/* Machine image: 74% wide, flush left — leaves right margin for sticky nav */}
+          <div className="overflow-hidden" style={{ width: "74%" }}>
+            <motion.img
+              src={featurePropTech}
+              alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
+              className="w-full object-cover"
+              style={{ display: "block", maxHeight: "82vh" }}
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.4, ease }}
+              loading="lazy"
+              data-testid="img-lab-feature"
+            />
+          </div>
 
-        {/* Full-bleed machine image below the heading */}
-        <div className="overflow-hidden">
-          <motion.img
-            src={featurePropTech}
-            alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
-            className="w-full object-cover"
-            style={{ display: "block", maxHeight: "85vh" }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4 }}
-            loading="lazy"
-            data-testid="img-lab-feature"
-          />
+          {/* Heading: absolutely positioned at 50% of image height, slides in from left */}
+          <div className="absolute inset-0 pointer-events-none flex items-center" style={{ width: "74%" }}>
+            <motion.h2
+              id="heading-lab"
+              className="font-display leading-[1.05] tracking-[-0.02em] studio-content"
+              style={{
+                fontSize: "clamp(2.5rem, 6vw, 7rem)",
+                color: "#fff",
+                textShadow: "0 2px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.3)",
+                mixBlendMode: "normal",
+              }}
+              initial={{ opacity: 0, x: -80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1.0, ease }}
+              data-testid="text-lab-heading"
+            >
+              proprietary TEChNOLOGY
+            </motion.h2>
+          </div>
         </div>
 
         {/* Cards below the image */}
@@ -639,8 +635,8 @@ export default function Studio() {
               our DESIGN manifesto
             </motion.h2>
 
-            {/* Single wide column, editorial body text — slightly larger than bullet text */}
-            <div className="space-y-10 text-foreground/60 leading-[1.75] text-[17px] md:text-[18px] lg:text-[19px]">
+            {/* Single wide column, editorial body text — constrained for ~10 words/line */}
+            <div className="space-y-10 text-foreground/60 leading-[1.75] text-[17px] md:text-[18px] lg:text-[19px]" style={{ maxWidth: "63ch" }}>
               <motion.p variants={itemFade} data-testid="text-manifesto-p1">
                 If poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
               </motion.p>
@@ -654,7 +650,7 @@ export default function Studio() {
           </motion.div>
         </div>
 
-        {/* WORKING WITH CHB — full-bleed background, stacked vertical heading */}
+        {/* WORKING WITH CHB — full-bleed background image, unified scrim over 74% content */}
         <div className="relative mt-36 md:mt-48 overflow-hidden" data-testid="section-working-with-chb">
           {/* Full-bleed background at 40% opacity */}
           <motion.img
@@ -670,73 +666,68 @@ export default function Studio() {
             data-testid="img-working-callout"
           />
 
-          {/* Content overlay */}
+          {/* Unified white scrim covers 74% content width (stops before sticky nav) */}
           <div
-            className="relative z-10 flex flex-col lg:flex-row items-start py-20 md:py-28 lg:py-36 gap-0"
-            style={{ paddingLeft: 0 }}
+            className="relative z-10 lg:w-[74%]"
+            style={{ background: "rgba(255,255,255,0.93)" }}
           >
-            {/* Left: white scrim + stacked heading + button + fig */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-              variants={stagger}
-              style={{
-                background: "rgba(255,255,255,0.6)",
-                padding: "clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem) clamp(24px, 2.08vw, 40px)",
-                flexShrink: 0,
-              }}
+            <div
+              className="flex flex-col lg:flex-row items-start py-20 md:py-28 lg:py-36 gap-0"
             >
-              {/* Stacked heading: one word per line */}
-              <div
-                className="font-display tracking-[-0.02em]"
-                style={{ fontSize: "clamp(3rem, 7vw, 8rem)", lineHeight: 1.0 }}
-                data-testid="text-working-heading"
+              {/* Left: stacked heading + fig caption */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+                variants={stagger}
+                style={{
+                  padding: "0 clamp(2rem, 4vw, 4rem) 0 clamp(24px, 2.08vw, 40px)",
+                  flexShrink: 0,
+                }}
               >
-                {["WORKING", "WITH", "COLON", "HYPHEN", "BRACKET"].map((word, i) => (
-                  <motion.div key={word} variants={textReveal} custom={i}>
-                    {word}
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.div variants={itemFade} className="mt-8">
-                <Button
-                  onClick={() => setContactOpen(true)}
-                  data-testid="cta-working-contact"
+                {/* Stacked heading: one word per line */}
+                <div
+                  className="font-display tracking-[-0.02em]"
+                  style={{ fontSize: "clamp(3rem, 6vw, 7.5rem)", lineHeight: 1.0 }}
+                  data-testid="text-working-heading"
                 >
-                  Contact Us
-                </Button>
+                  {["WORKING", "WITH", "COLON", "HYPHEN", "BRACKET"].map((word, i) => (
+                    <motion.div key={word} variants={textReveal} custom={i}>
+                      {word}
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.p
+                  variants={itemFade}
+                  className="mt-4 text-[13px] text-foreground/50 italic"
+                  data-testid="text-fig-caption"
+                >
+                  Fig. 1
+                </motion.p>
               </motion.div>
 
-              <motion.p
-                variants={itemFade}
-                className="mt-3 text-[13px] text-foreground/50 italic"
-                data-testid="text-fig-caption"
+              {/* Right: body text */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+                variants={stagger}
+                className="flex-1 space-y-7 text-foreground/70 leading-[1.8] text-[16px] md:text-[17px]"
+                style={{
+                  paddingLeft: "clamp(2rem, 4vw, 4rem)",
+                  paddingRight: "clamp(2rem, 4vw, 5rem)",
+                  paddingTop: "clamp(1.5rem, 3vw, 0px)",
+                }}
               >
-                Fig. 1
-              </motion.p>
-            </motion.div>
-
-            {/* Right: body text — slides in from RIGHT per spec */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-              variants={stagger}
-              className="flex-1 space-y-7 text-foreground/70 leading-[1.8] text-[16px] md:text-[17px]"
-              style={{
-                paddingLeft: "clamp(2rem, 4vw, 4rem)",
-                paddingRight: "clamp(2rem, 5vw, 7rem)",
-              }}
-            >
-              <motion.p variants={imgRevealRight} data-testid="text-working-p1">
-                CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
-              </motion.p>
-              <motion.p variants={imgRevealRight} data-testid="text-working-p2">
-                The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
-              </motion.p>
-            </motion.div>
+                <motion.p variants={imgRevealRight} data-testid="text-working-p1">
+                  CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
+                </motion.p>
+                <motion.p variants={imgRevealRight} data-testid="text-working-p2">
+                  The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
+                </motion.p>
+              </motion.div>
+            </div>
           </div>
         </div>
 
@@ -790,6 +781,31 @@ export default function Studio() {
         </div>
       </section>
 
+      {/* ═══════════════════════════════ FOOTER ═══════════════════════════════ */}
+      <footer
+        className="py-16 md:py-20 studio-content"
+        style={{ borderTop: "1px solid rgba(0,0,0,0.08)" }}
+        data-testid="section-footer"
+      >
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
+          <div>
+            <div className="font-display text-[18px] md:text-[22px] tracking-[-0.01em] leading-[1.2] mb-2">
+              COLON HYPHEN BRACKET
+            </div>
+            <p className="text-[13px] font-mono text-foreground/40 uppercase tracking-wider">
+              © {new Date().getFullYear()} CHB LLC — All rights reserved
+            </p>
+          </div>
+          <Button
+            onClick={() => setContactOpen(true)}
+            data-testid="cta-footer-contact"
+            size="lg"
+          >
+            Contact Us
+          </Button>
+        </div>
+      </footer>
+
       <ContactFormModal open={contactOpen} onOpenChange={setContactOpen} />
     </div>
     </MotionConfig>
@@ -798,7 +814,6 @@ export default function Studio() {
 
 function OverlookedCard({
   title,
-  subtitle,
   image,
   imageAlt,
   imagePosition,
@@ -806,7 +821,6 @@ function OverlookedCard({
   testId,
 }: {
   title: string;
-  subtitle?: string;
   image: string;
   imageAlt: string;
   imagePosition: string;
@@ -836,26 +850,32 @@ function OverlookedCard({
         />
       </div>
       <h3
-        className="font-display tracking-tight mb-1 leading-[1.2]"
-        style={{ fontSize: "clamp(1.2rem, 2vw, 1.75rem)" }}
+        className="font-display tracking-tight mb-4 leading-[1.2]"
+        style={{ fontSize: "clamp(1.4rem, 2.2vw, 2rem)" }}
         data-testid={`text-${testId}-title`}
       >
         {title}
       </h3>
-      {subtitle && (
-        <p className="text-[13px] font-mono text-foreground/40 uppercase tracking-wider mb-4">
-          {subtitle}
-        </p>
-      )}
-      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7] mt-4" role="list">
+      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
         {items.map((item, i) => {
           const isQuote = item.startsWith('"') || item.startsWith('\u201c');
+          if (isQuote) {
+            const dashIdx = item.lastIndexOf('–');
+            const quoteText = dashIdx > -1 ? item.slice(0, dashIdx).trim() : item;
+            const attribution = dashIdx > -1 ? item.slice(dashIdx).trim() : null;
+            return (
+              <li key={i} className="border-l-2 pl-4" style={{ borderColor: "#FE299E" }}>
+                <p className="italic text-foreground/70 leading-[1.75] text-[15px] md:text-[16px]">{quoteText}</p>
+                {attribution && (
+                  <p className="mt-1 text-[13px] font-mono text-foreground/40 not-italic">{attribution}</p>
+                )}
+              </li>
+            );
+          }
           return (
             <li key={i} className="flex items-start gap-2">
               <PinkBullet />
-              <span style={isQuote ? { fontStyle: "italic", opacity: 0.85 } : {}}>
-                {item}
-              </span>
+              <span>{item}</span>
             </li>
           );
         })}
@@ -912,12 +932,13 @@ function EngagementCard({
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, ease }}
-      className="px-6 py-8 md:px-8 md:py-10"
+      className="pt-6 pb-10"
       data-testid={`card-${testId}`}
+      style={{ borderTop: "3px solid #FE299E" }}
     >
       <h3
-        className="font-display leading-[1.2] mb-6"
-        style={{ fontSize: "clamp(1.2rem, 2vw, 1.75rem)" }}
+        className="font-display leading-[1.2] mb-6 tracking-[-0.01em]"
+        style={{ fontSize: "clamp(1.35rem, 2.2vw, 2rem)" }}
         data-testid={`text-${testId}-title`}
       >
         {title}
