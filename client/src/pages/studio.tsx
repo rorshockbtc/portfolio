@@ -680,7 +680,7 @@ export default function Studio() {
                   data-testid="text-working-heading"
                 >
                   {["working", "with", "COLON", "hyphen", "BRaCKET"].map((word, i) => (
-                    <motion.div key={word} variants={textReveal} custom={i}>
+                    <motion.div key={i} variants={textReveal} custom={i}>
                       {word}
                     </motion.div>
                   ))}
