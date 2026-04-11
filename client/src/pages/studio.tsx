@@ -10,7 +10,7 @@ import cardStartups from "@assets/02a-card-image-startups_1775928187194.png";
 import cardFaith from "@assets/02b-card-image-faith_1775928187199.png";
 import cardSchools from "@assets/02c-card-image-schools_1775928187199.png";
 import cardSmallBiz from "@assets/02d-card-image-smallBusinesses_1775928187198.png";
-import sideHealthFintech from "@assets/03-side-image-health-fintech_1775942203088.png";
+import sideHealthFintech from "@assets/03-side-image-health-fintech_1775946211474.png";
 import featurePropTech from "@assets/04-feature-image-proprietaryTechnology_1775928187201.png";
 import dividerTopo from "@assets/05-divider-image-topography_1775928187201.png";
 import calloutWorkflow from "@assets/06-callout-image-workingWithCHB_1775928187202.png";
@@ -214,7 +214,7 @@ export default function Studio() {
             transition={{ duration: 1.2, delay: 0.2, ease }}
             id="studio-hero-heading"
             className="font-display leading-[1.2] tracking-[-0.02em]"
-            style={{ fontSize: "clamp(2rem, min(7vw, 8.5vh), 8rem)" }}
+            style={{ fontSize: "clamp(2.5rem, min(8.33vw, 10vh), 10rem)" }}
             data-testid="text-studio-hero-heading"
           >
             architecture Partner for the Stuck &amp; UnderServed.
@@ -224,7 +224,7 @@ export default function Studio() {
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.7, ease }}
-            className="mt-8 md:mt-10 text-foreground leading-[1.5] text-[17px] md:text-[20px]"
+            className="mt-8 md:mt-10 text-foreground leading-[1.6] text-[17px] md:text-[20px] lg:text-[22px]"
             style={{ fontWeight: 200 }}
             data-testid="text-studio-hero-subtitle"
           >
@@ -273,24 +273,35 @@ export default function Studio() {
           />
         </div>
 
-        <div className="relative z-10 studio-content">
+        <div className="relative z-10">
+          {/* Heading outside studio-content so right-margin doesn't cause wrapping */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={stagger}
+            style={{ paddingLeft: "clamp(24px, 2.08vw, 40px)", paddingRight: "clamp(24px, 2.08vw, 40px)" }}
           >
             <motion.h2
               variants={textReveal}
               id="heading-thesis"
-              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
+              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20 whitespace-nowrap"
               style={{ fontSize: "clamp(1.5rem, 3.3vw, 4rem)" }}
               data-testid="text-thesis-heading"
             >
               there's a joke all DEvELOPERS know:<br />
               good, fast, &amp; cheap. pick 2.
             </motion.h2>
+          </motion.div>
 
+          {/* Body text inside studio-content (26% right padding for nav) */}
+          <div className="studio-content">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
+          >
             <div className="space-y-8" style={{ maxWidth: "68ch" }}>
               <motion.p
                 variants={itemFade}
@@ -310,6 +321,7 @@ export default function Studio() {
               </motion.p>
             </div>
           </motion.div>
+          </div>
         </div>
       </section>
 
@@ -340,6 +352,7 @@ export default function Studio() {
             <div className="grid sm:grid-cols-2 gap-10 md:gap-12">
               <OverlookedCard
                 title="STARTUPS"
+                subtitle="idea to series b"
                 image={cardStartups}
                 imageAlt="Abstract visualization of startup growth trajectory"
                 imagePosition="center"
@@ -510,8 +523,8 @@ export default function Studio() {
             />
           </div>
 
-          {/* Heading: absolutely positioned at 50% of image height, slides in from left */}
-          <div className="absolute inset-0 pointer-events-none flex items-center" style={{ width: "74%" }}>
+          {/* Heading: absolutely positioned at TOP of image, slides in from left */}
+          <div className="absolute inset-0 pointer-events-none flex items-start pt-10 md:pt-16" style={{ width: "74%" }}>
             <motion.h2
               id="heading-lab"
               className="font-display leading-[1.05] tracking-[-0.02em] studio-content"
@@ -666,68 +679,73 @@ export default function Studio() {
             data-testid="img-working-callout"
           />
 
-          {/* Unified white scrim covers 74% content width (stops before sticky nav) */}
+          {/* Content: two columns — left has scrim, right floats over image */}
           <div
-            className="relative z-10 lg:w-[74%]"
-            style={{ background: "rgba(255,255,255,0.93)" }}
+            className="relative z-10 flex flex-col lg:flex-row items-start py-20 md:py-28 lg:py-36 gap-0"
           >
-            <div
-              className="flex flex-col lg:flex-row items-start py-20 md:py-28 lg:py-36 gap-0"
+            {/* Left: white scrim + stacked heading + button + fig */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={stagger}
+              style={{
+                background: "rgba(255,255,255,0.88)",
+                padding: "clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem) clamp(24px, 2.08vw, 40px)",
+                flexShrink: 0,
+              }}
             >
-              {/* Left: stacked heading + fig caption */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={stagger}
-                style={{
-                  padding: "0 clamp(2rem, 4vw, 4rem) 0 clamp(24px, 2.08vw, 40px)",
-                  flexShrink: 0,
-                }}
+              {/* Stacked heading: one word per line */}
+              <div
+                className="font-display tracking-[-0.02em]"
+                style={{ fontSize: "clamp(3rem, 6vw, 7.5rem)", lineHeight: 1.0 }}
+                data-testid="text-working-heading"
               >
-                {/* Stacked heading: one word per line */}
-                <div
-                  className="font-display tracking-[-0.02em]"
-                  style={{ fontSize: "clamp(3rem, 6vw, 7.5rem)", lineHeight: 1.0 }}
-                  data-testid="text-working-heading"
-                >
-                  {["WORKING", "WITH", "COLON", "HYPHEN", "BRACKET"].map((word, i) => (
-                    <motion.div key={word} variants={textReveal} custom={i}>
-                      {word}
-                    </motion.div>
-                  ))}
-                </div>
+                {["WORKING", "WITH", "COLON", "HYPHEN", "BRACKET"].map((word, i) => (
+                  <motion.div key={word} variants={textReveal} custom={i}>
+                    {word}
+                  </motion.div>
+                ))}
+              </div>
 
-                <motion.p
-                  variants={itemFade}
-                  className="mt-4 text-[13px] text-foreground/50 italic"
-                  data-testid="text-fig-caption"
+              <motion.div variants={itemFade} className="mt-8">
+                <Button
+                  onClick={() => setContactOpen(true)}
+                  data-testid="cta-working-contact"
                 >
-                  Fig. 1
-                </motion.p>
+                  Contact Us
+                </Button>
               </motion.div>
 
-              {/* Right: body text */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={stagger}
-                className="flex-1 space-y-7 text-foreground/70 leading-[1.8] text-[16px] md:text-[17px]"
-                style={{
-                  paddingLeft: "clamp(2rem, 4vw, 4rem)",
-                  paddingRight: "clamp(2rem, 4vw, 5rem)",
-                  paddingTop: "clamp(1.5rem, 3vw, 0px)",
-                }}
+              <motion.p
+                variants={itemFade}
+                className="mt-3 text-[13px] text-foreground/50 italic"
+                data-testid="text-fig-caption"
               >
-                <motion.p variants={imgRevealRight} data-testid="text-working-p1">
-                  CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
-                </motion.p>
-                <motion.p variants={imgRevealRight} data-testid="text-working-p2">
-                  The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
-                </motion.p>
-              </motion.div>
-            </div>
+                Fig. 1
+              </motion.p>
+            </motion.div>
+
+            {/* Right: body text — no scrim, floats over background image */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={stagger}
+              className="flex-1 space-y-7 text-foreground/80 leading-[1.8] text-[16px] md:text-[17px]"
+              style={{
+                paddingLeft: "clamp(2rem, 4vw, 4rem)",
+                paddingRight: "clamp(2rem, 5vw, 7rem)",
+                paddingTop: "clamp(1.5rem, 3vw, 2rem)",
+              }}
+            >
+              <motion.p variants={imgRevealRight} data-testid="text-working-p1">
+                CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
+              </motion.p>
+              <motion.p variants={imgRevealRight} data-testid="text-working-p2">
+                The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
+              </motion.p>
+            </motion.div>
           </div>
         </div>
 
@@ -781,31 +799,6 @@ export default function Studio() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════ FOOTER ═══════════════════════════════ */}
-      <footer
-        className="py-16 md:py-20 studio-content"
-        style={{ borderTop: "1px solid rgba(0,0,0,0.08)" }}
-        data-testid="section-footer"
-      >
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-          <div>
-            <div className="font-display text-[18px] md:text-[22px] tracking-[-0.01em] leading-[1.2] mb-2">
-              COLON HYPHEN BRACKET
-            </div>
-            <p className="text-[13px] font-mono text-foreground/40 uppercase tracking-wider">
-              © {new Date().getFullYear()} CHB LLC — All rights reserved
-            </p>
-          </div>
-          <Button
-            onClick={() => setContactOpen(true)}
-            data-testid="cta-footer-contact"
-            size="lg"
-          >
-            Contact Us
-          </Button>
-        </div>
-      </footer>
-
       <ContactFormModal open={contactOpen} onOpenChange={setContactOpen} />
     </div>
     </MotionConfig>
@@ -814,6 +807,7 @@ export default function Studio() {
 
 function OverlookedCard({
   title,
+  subtitle,
   image,
   imageAlt,
   imagePosition,
@@ -821,6 +815,7 @@ function OverlookedCard({
   testId,
 }: {
   title: string;
+  subtitle?: string;
   image: string;
   imageAlt: string;
   imagePosition: string;
@@ -829,6 +824,7 @@ function OverlookedCard({
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const hasQuoteLead = items.length > 0 && (items[0].startsWith('"') || items[0].startsWith('\u201c'));
 
   return (
     <motion.div
@@ -855,31 +851,46 @@ function OverlookedCard({
         data-testid={`text-${testId}-title`}
       >
         {title}
+        {subtitle && (
+          <span className="font-display" style={{ opacity: 0.45, fontSize: "0.65em", marginLeft: "0.35em" }}>
+            ({subtitle})
+          </span>
+        )}
       </h3>
-      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
-        {items.map((item, i) => {
-          const isQuote = item.startsWith('"') || item.startsWith('\u201c');
-          if (isQuote) {
-            const dashIdx = item.lastIndexOf('–');
-            const quoteText = dashIdx > -1 ? item.slice(0, dashIdx).trim() : item;
-            const attribution = dashIdx > -1 ? item.slice(dashIdx).trim() : null;
-            return (
-              <li key={i} className="border-l-2 pl-4" style={{ borderColor: "#FE299E" }}>
-                <p className="italic text-foreground/70 leading-[1.75] text-[15px] md:text-[16px]">{quoteText}</p>
-                {attribution && (
-                  <p className="mt-1 text-[13px] font-mono text-foreground/40 not-italic">{attribution}</p>
-                )}
-              </li>
-            );
-          }
-          return (
+
+      {hasQuoteLead ? (
+        /* Quote-lead layout: blockquote + plain paragraphs, no bullets */
+        <div className="space-y-5 text-[15px] md:text-[16px] text-foreground/60 leading-[1.75]">
+          {items.map((item, i) => {
+            if (i === 0) {
+              const dashIdx = item.lastIndexOf('–');
+              const quoteText = dashIdx > -1 ? item.slice(0, dashIdx).trim() : item;
+              const attribution = dashIdx > -1 ? item.slice(dashIdx).trim() : null;
+              return (
+                <div key={i}>
+                  <p className="italic leading-[1.75]">{quoteText}</p>
+                  {attribution && (
+                    <p className="mt-1 text-right text-[13px] font-mono text-foreground/40">
+                      {attribution}
+                    </p>
+                  )}
+                </div>
+              );
+            }
+            return <p key={i}>{item}</p>;
+          })}
+        </div>
+      ) : (
+        /* Standard bullet layout */
+        <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/60 leading-[1.7]" role="list">
+          {items.map((item, i) => (
             <li key={i} className="flex items-start gap-2">
               <PinkBullet />
               <span>{item}</span>
             </li>
-          );
-        })}
-      </ul>
+          ))}
+        </ul>
+      )}
     </motion.div>
   );
 }

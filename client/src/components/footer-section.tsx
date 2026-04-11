@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { SiLinkedin, SiGithub } from "react-icons/si";
+import { Button } from "@/components/ui/button";
 
 const productLinks = [
   { name: "hash.pink", href: "https://hash.pink" },
@@ -110,9 +111,18 @@ export default function FooterSection() {
           >
             &copy; 2026 CHB (Colon Hyphen Bracket, LLC). All rights reserved.
           </p>
-          <p className="font-mono text-[10px] text-muted-foreground/40 tracking-wider">
-            Designed &amp; built with intention
-          </p>
+          <div className="flex items-center gap-6">
+            <p className="font-mono text-[10px] text-muted-foreground/40 tracking-wider">
+              Designed &amp; built with intention
+            </p>
+            <Button
+              asChild
+              size="sm"
+              data-testid="cta-footer-contact"
+            >
+              <a href="mailto:rorshock@protonmail.com">Contact Us</a>
+            </Button>
+          </div>
         </div>
       </div>
     </footer>
