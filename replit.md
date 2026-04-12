@@ -75,6 +75,13 @@ attached_assets/               - Source images imported via @assets/ alias
 - `GET /api/tts/emerald` — Generates/serves cached MP3 narration (Nova voice)
 - `GET /api/tts/emerald/status` — Audio generation status
 
+## SEO
+- **Per-page meta**: Server-side injection in `server/seo.ts` — different `<title>`, `<meta description>`, OG tags, and Twitter Cards for `/` vs `/studio`
+- **Structured data**: JSON-LD Person + WebSite schemas injected at request time
+- **Canonical URLs**: `<link rel="canonical">` set per-route
+- **OG image**: `/og-image.png` (hero image, served from `client/public/`)
+- **Template placeholders**: `__META_TITLE__`, `__META_DESCRIPTION__`, `__OG_TITLE__`, `__OG_DESCRIPTION__`, `__CANONICAL_URL__`, `__SITE_URL__`, `__JSON_LD__` in `client/index.html`, replaced by `injectSeoMeta()` in both `server/vite.ts` (dev) and `server/static.ts` (prod)
+
 ## Environment Variables
 - `VITE_WEB3FORMS_ACCESS_KEY` — Web3Forms API access key for contact form
 - `SESSION_SECRET` — Express session secret

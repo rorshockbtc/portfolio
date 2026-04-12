@@ -5,6 +5,7 @@ import viteConfig from "../vite.config";
 import fs from "fs";
 import path from "path";
 import { nanoid } from "nanoid";
+import { injectSeoMeta } from "./seo";
 
 const viteLogger = createLogger();
 
@@ -51,7 +52,7 @@ export async function setupVite(server: Server, app: Express) {
       const protocol = req.headers["x-forwarded-proto"] || req.protocol || "https";
       const host = req.headers["x-forwarded-host"] || req.get("host") || "localhost:5000";
       const siteUrl = `${protocol}://${host}`;
-      template = template.replaceAll("__SITE_URL__", siteUrl);
+      template = injectSeoMeta(template, url, siteUrl);
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {

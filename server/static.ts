@@ -1,6 +1,7 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
+import { injectSeoMeta } from "./seo";
 
 export function serveStatic(app: Express) {
   const distPath = path.resolve(__dirname, "public");
@@ -19,7 +20,7 @@ export function serveStatic(app: Express) {
     const protocol = (req.headers["x-forwarded-proto"] as string) || req.protocol || "https";
     const host = (req.headers["x-forwarded-host"] as string) || req.get("host") || "";
     const siteUrl = `${protocol}://${host}`;
-    html = html.split("__SITE_URL__").join(siteUrl);
+    html = injectSeoMeta(html, req.path, siteUrl);
     res.set("Content-Type", "text/html").send(html);
   });
 }
