@@ -1,7 +1,7 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
-import { injectSeoMeta } from "./seo";
+import { injectSeoMeta, buildSiteUrl } from "./seo";
 
 export function serveStatic(app: Express) {
   const distPath = path.resolve(__dirname, "public");
@@ -17,9 +17,7 @@ export function serveStatic(app: Express) {
   app.use("/{*path}", (req, res) => {
     const indexPath = path.resolve(distPath, "index.html");
     let html = fs.readFileSync(indexPath, "utf-8");
-    const protocol = (req.headers["x-forwarded-proto"] as string) || req.protocol || "https";
-    const host = (req.headers["x-forwarded-host"] as string) || req.get("host") || "";
-    const siteUrl = `${protocol}://${host}`;
+    const siteUrl = buildSiteUrl(req);
     html = injectSeoMeta(html, req.path, siteUrl);
     res.set("Content-Type", "text/html").send(html);
   });

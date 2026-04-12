@@ -78,7 +78,20 @@ function buildJsonLd(siteUrl: string): string {
   ].join("\n    ");
 }
 
+function sanitizeUrl(url: string): string {
+  return url.replace(/[<>"'&]/g, "");
+}
+
+export function buildSiteUrl(req: { headers: Record<string, any>; protocol?: string; get?: (name: string) => string | undefined }): string {
+  const proto = String(req.headers["x-forwarded-proto"] || req.protocol || "https").split(",")[0].trim();
+  const host = String(req.headers["x-forwarded-host"] || (req.get ? req.get("host") : "") || "").split(",")[0].trim();
+  const safeProto = /^https?$/.test(proto) ? proto : "https";
+  const safeHost = sanitizeUrl(host);
+  return `${safeProto}://${safeHost}`;
+}
+
 export function injectSeoMeta(html: string, requestPath: string, siteUrl: string): string {
+  siteUrl = sanitizeUrl(siteUrl);
   const meta = getMetaForPath(requestPath);
   const canonicalPath = requestPath === "/" ? "" : requestPath.replace(/\/$/, "");
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
