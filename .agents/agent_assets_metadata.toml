@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "B1adwvxQXiu8kAylROl3b"
+uri = "file://CHB-Portfolio-Design-System-Reference.md"
+type = "text"
+title = "CHB Portfolio — Design System & Integration Reference"
