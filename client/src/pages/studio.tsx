@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, useInView, MotionConfig } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useStudioSections } from "@/hooks/use-studio-sections";
 import ContactFormModal from "@/components/contact-form-modal";
@@ -570,6 +571,16 @@ export default function Studio() {
                 ]}
                 testId="lab-curators"
               />
+              <LabCard
+                title="GReaTer > (than):"
+                items={[
+                  "An open-source, persona-aware conversational AI built on the Emerald architecture",
+                  "Designed for brands that need sovereign, privacy-first support without Big Tech dependency",
+                  "Runs on your choice of model \u2014 local or cloud \u2014 with deterministic orchestration via dspy.ts",
+                ]}
+                testId="lab-greater"
+                link={{ label: "greater.pink", href: "https://greater.pink" }}
+              />
             </div>
 
             <motion.p
@@ -871,10 +882,12 @@ function LabCard({
   title,
   items,
   testId,
+  link,
 }: {
   title: string;
   items: string[];
   testId: string;
+  link?: { label: string; href: string };
 }) {
   return (
     <motion.div variants={itemFade} className="space-y-5" data-testid={`card-${testId}`}>
@@ -893,6 +906,18 @@ function LabCard({
           </li>
         ))}
       </ul>
+      {link && (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.15em] transition-colors"
+          style={{ color: "#FE299E" }}
+          data-testid={`link-${testId}`}
+        >
+          {link.label} <ArrowUpRight className="w-3 h-3" />
+        </a>
+      )}
     </motion.div>
   );
 }

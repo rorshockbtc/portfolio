@@ -674,7 +674,7 @@ function WhitepaperModal({
             </Button>
             <Button variant="secondary" asChild size="sm" data-testid="cta-modal-view-repo">
               <a
-                href="https://github.com/rorshockbtc/emerald-support-bot"
+                href="https://github.com/rorshockbtc/greater-than"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -684,7 +684,7 @@ function WhitepaperModal({
             </Button>
             <Button variant="secondary" asChild size="sm" data-testid="cta-modal-try-demo">
               <a
-                href="https://89caa569-87ea-4743-951d-eab6107b8df9-00-3oaxcznbew6b9.spock.replit.dev/#"
+                href="https://greater.pink"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -851,7 +851,7 @@ function WhitepaperModal({
               </p>
               <div className="flex flex-col gap-2 mt-3">
                 <a
-                  href="https://github.com/rorshockbtc/emerald-support-bot"
+                  href="https://github.com/rorshockbtc/greater-than"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 font-mono text-sm transition-colors"
@@ -861,7 +861,7 @@ function WhitepaperModal({
                   View Repository <ArrowUpRight className="w-3 h-3" />
                 </a>
                 <a
-                  href="https://89caa569-87ea-4743-951d-eab6107b8df9-00-3oaxcznbew6b9.spock.replit.dev/#"
+                  href="https://greater.pink"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 font-mono text-sm transition-colors"
@@ -999,7 +999,7 @@ function WhitepaperSection() {
               </Button>
               <Button variant="secondary" asChild size="sm" data-testid="cta-view-repo">
                 <a
-                  href="https://github.com/rorshockbtc/emerald-support-bot"
+                  href="https://github.com/rorshockbtc/greater-than"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -1009,7 +1009,7 @@ function WhitepaperSection() {
               </Button>
               <Button variant="secondary" asChild size="sm" data-testid="cta-try-demo">
                 <a
-                  href="https://89caa569-87ea-4743-951d-eab6107b8df9-00-3oaxcznbew6b9.spock.replit.dev/#"
+                  href="https://greater.pink"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
