@@ -19,8 +19,8 @@ import calloutWorkflow from "@assets/06-callout-image-workingWithCHB_17759281872
 const SECTIONS = [
   { id: "thesis", number: "01", shortLabel: "the thesis" },
   { id: "overlooked", number: "02", shortLabel: "the overlooked" },
-  { id: "regulated", number: "03", shortLabel: "regulated_ systems" },
-  { id: "lab", number: "04", shortLabel: "the_lab" },
+  { id: "regulated", number: "03", shortLabel: "regulated systems" },
+  { id: "lab", number: "04", shortLabel: "the lab" },
   { id: "engagement", number: "05", shortLabel: "engagement" },
 ];
 
