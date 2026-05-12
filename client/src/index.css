@@ -300,6 +300,17 @@
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
+  @keyframes chb-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(254, 41, 158, 0.0); }
+    50%      { box-shadow: 0 0 0 8px rgba(254, 41, 158, 0.18); }
+  }
+  .chb-pulse {
+    animation: chb-pulse 2.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chb-pulse { animation: none; }
+  }
+
   .studio-content {
     width: 100%;
     padding-left: clamp(24px, 2.08vw, 40px);

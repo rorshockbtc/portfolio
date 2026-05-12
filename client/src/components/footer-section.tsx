@@ -9,6 +9,49 @@ const productLinks = [
   { name: "semi.pink", href: "https://semi.pink" },
 ];
 
+const furtherReading = [
+  {
+    pub: "Columbia Law Review",
+    title: "Ghost Jobs",
+    href: "https://www.columbialawreview.org/content/ghost-jobs/",
+  },
+  {
+    pub: "WSJ",
+    title: "Ghost Jobs",
+    href: "https://www.wsj.com/lifestyle/careers/ghost-jobs-2c0dcd4e",
+  },
+  {
+    pub: "Wired",
+    title: "AI Hiring & Biometric Data",
+    href: "https://www.wired.com/story/ai-hiring-biometric-data/",
+  },
+  {
+    pub: "HBR",
+    title: "Beware the Free-Work Job Interview Scam",
+    href: "https://hbr.org/2023/04/beware-the-free-work-job-interview-scam",
+  },
+  {
+    pub: "Google Cloud",
+    title: "Distillation, Experimentation, Integration: AI's Adversarial Use",
+    href: "https://cloud.google.com/blog/topics/threat-intelligence/distillation-experimentation-integration-ai-adversarial-use",
+  },
+  {
+    pub: "Tech Monitor",
+    title: "Fake LinkedIn Profiles, MI5 & FBI",
+    href: "https://www.techmonitor.ai/technology/cybersecurity/fake-linkedin-profiles-mi5-fbi",
+  },
+  {
+    pub: "Nature",
+    title: "Step-by-Step Reasoning in Human Experts",
+    href: "https://www.nature.com/articles/s41586-023-06647-8",
+  },
+  {
+    pub: "arXiv",
+    title: "Gemini 1.5: Long-Context Reasoning",
+    href: "https://arxiv.org/abs/2403.05530",
+  },
+];
+
 const socialLinks = [
   {
     name: "LinkedIn",
@@ -32,7 +75,7 @@ export default function FooterSection() {
     >
       <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20 pb-28 md:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-4 space-y-4">
             <span
               className="font-mono font-bold text-4xl select-none block"
               style={{ color: "#FE299E" }}
@@ -49,7 +92,7 @@ export default function FooterSection() {
             </p>
           </div>
 
-          <div className="md:col-span-4 space-y-4">
+          <div className="md:col-span-2 space-y-4">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               Ecosystem
             </h3>
@@ -71,7 +114,34 @@ export default function FooterSection() {
             </ul>
           </div>
 
-          <div className="md:col-span-3 space-y-4">
+          <div className="md:col-span-4 space-y-4">
+            <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              Further Reading
+            </h3>
+            <ul className="space-y-2.5" role="list" data-testid="list-further-reading">
+              {furtherReading.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-baseline gap-1.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300 leading-snug"
+                    data-testid={`link-further-${item.pub.toLowerCase().replace(/\s+/g, "-")}`}
+                  >
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80 shrink-0">
+                      {item.pub}
+                    </span>
+                    <span className="text-foreground/70 group-hover:text-foreground">
+                      {item.title}
+                    </span>
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover:opacity-60 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300 shrink-0" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-2 space-y-4">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               Connect
             </h3>

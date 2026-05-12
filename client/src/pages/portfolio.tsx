@@ -11,9 +11,6 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import {
   ArrowUpRight,
-  FileText,
-  Mail,
-  Presentation,
   Lock,
   Brain,
   TrendingUp,
@@ -27,9 +24,11 @@ import {
   Loader2,
 } from "lucide-react";
 import { SiGithub } from "react-icons/si";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "/artwork/hero.jpg";
 import ContactFormModal from "@/components/contact-form-modal";
+
+const easeOut = [0.16, 1, 0.3, 1] as const;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -178,94 +177,539 @@ function BrandIcon({ className }: { className?: string }) {
 }
 
 function HeroSection({ onContactClick }: { onContactClick: () => void }) {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroTextY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const heroBgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
   return (
     <section
-      className="relative min-h-[90vh] flex flex-col justify-center pt-14 md:pt-16"
+      ref={heroRef}
+      className="relative min-h-[88vh] md:min-h-[92vh] flex flex-col justify-center pt-20 md:pt-24"
       data-testid="section-hero"
+      aria-labelledby="hero-headline"
     >
-      <div className="absolute inset-0 z-0">
-        <img
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <motion.img
           src={heroImage}
           alt=""
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center opacity-[0.55]"
+          style={{ scale: heroBgScale }}
           data-testid="img-hero-bg"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/10 to-background" />
       </div>
 
       <div className="relative z-10 px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto w-full">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="space-y-8 max-w-2xl bg-background/75 backdrop-blur-md rounded-xl p-6 md:p-10"
-      >
-        <motion.div variants={fadeUp} custom={0}>
-          <BrandIcon className="text-5xl md:text-7xl" />
-        </motion.div>
-
-        <motion.h1
-          variants={fadeUp}
-          custom={1}
-          className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight max-w-4xl"
-          data-testid="text-headline"
-        >
-          Principal Product Designer
-          <span className="text-muted-foreground"> &amp;</span> Systems Architect
-        </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          custom={2}
-          className="text-lg md:text-xl font-medium text-foreground/80 max-w-2xl leading-relaxed"
-          data-testid="text-subheadline"
-        >
-          I build enterprise-scale design systems, zero-to-one fintech platforms,
-          and collaborative agentic AI models. My background spans 20+ years in art, business, and technology while my career has been focused on healthcare and FinTech applications.
-        </motion.p>
-
-        <motion.p
-          variants={fadeUp}
-          custom={3}
-          className="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed"
-          data-testid="text-intro"
-        >
-          I don&apos;t just push pixels. I align complex business strategy with
-          high-fidelity technical execution. I believe technology should feel
-          human, which is why my systems prioritize persistent memory, privacy,
-          and actual utility over AI hype. I&apos;m a &ldquo;high-bandwidth&rdquo;
-          thinker who bridges the gap between executive vision and engineering
-          reality.
-        </motion.p>
-
         <motion.div
-          variants={fadeUp}
-          custom={4}
-          className="flex flex-wrap gap-3 pt-4"
+          style={{ y: heroTextY, opacity: heroOpacity }}
+          className="space-y-8 max-w-4xl"
         >
-          <Button asChild data-testid="cta-resume">
-            <a href="/images/cyree_resume_2026.pdf" target="_blank" rel="noopener noreferrer">
-              <FileText className="w-4 h-4 mr-2" />
-              View Resume
-            </a>
-          </Button>
-          <Button variant="secondary" onClick={onContactClick} data-testid="cta-contact">
-            <Mail className="w-4 h-4 mr-2" />
-            Contact Me
-          </Button>
-          <Button variant="secondary" asChild data-testid="cta-deck">
-            <a
-              href="https://www.sketch.com/s/d826d733-5642-411a-8da3-72486d6164f0"
-              target="_blank"
-              rel="noopener noreferrer"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: easeOut }}
+          >
+            <BrandIcon className="text-5xl md:text-6xl" />
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.1, delay: 0.15, ease: easeOut }}
+            id="hero-headline"
+            className="font-display leading-[1.15] tracking-[-0.02em] text-foreground"
+            style={{ fontSize: "clamp(2.25rem, 6.2vw, 5.75rem)" }}
+            data-testid="text-headline"
+          >
+            twenty years building things people quietly trust.
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.95, delay: 0.55, ease: easeOut }}
+            className="text-foreground/80 leading-[1.55] text-[18px] md:text-[22px] lg:text-[24px] max-w-3xl"
+            style={{ fontWeight: 400 }}
+            data-testid="text-subheadline"
+          >
+            Principal product designer and systems architect. Two decades across regulated banking,
+            healthcare, fraud detection, and device-level security at the nation-state level.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.95, ease: easeOut }}
+            className="flex flex-wrap gap-3 pt-4"
+          >
+            <Button asChild data-testid="cta-resume">
+              <a href="/images/cyree_resume_2026.pdf" target="_blank" rel="noopener noreferrer">
+                View Resume
+              </a>
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={onContactClick}
+              className="chb-pulse"
+              data-testid="cta-contact"
             >
-              <Presentation className="w-4 h-4 mr-2" />
-              View Process Deck
-            </a>
-          </Button>
+              Contact Me
+            </Button>
+            <Button
+              variant="secondary"
+              asChild
+              className="chb-pulse"
+              data-testid="cta-deck"
+            >
+              <a
+                href="https://www.sketch.com/s/d826d733-5642-411a-8da3-72486d6164f0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Process Deck
+              </a>
+            </Button>
+          </motion.div>
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Disclaimer hook section + long-read modal ──────────────────────────────
+function DisclaimerLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline underline-offset-2 decoration-foreground/25 hover:decoration-[2px] transition-colors"
+      style={{ color: "inherit" }}
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#FE299E")}
+      onMouseLeave={(e) => (e.currentTarget.style.color = "")}
+    >
+      {children}
+    </a>
+  );
+}
+
+function DisclaimerModal({ open, onClose, onContact }: { open: boolean; onClose: () => void; onContact: () => void }) {
+  return (
+    <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
+      <DialogContent
+        className="max-w-3xl max-h-[88vh] overflow-y-auto p-0"
+        data-testid="modal-disclaimer"
+      >
+        <div className="px-6 md:px-10 pt-10 pb-12 space-y-10">
+          <DialogHeader className="space-y-3">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              A note on what's missing
+            </p>
+            <DialogTitle className="text-3xl md:text-4xl font-bold tracking-tight leading-[1.15]">
+              Design is Risk.
+            </DialogTitle>
+            <DialogDescription className="text-base text-muted-foreground leading-relaxed">
+              The data-exfiltration honeypot nobody is talking about.
+            </DialogDescription>
+          </DialogHeader>
+
+          <article className="space-y-10 text-[16px] leading-[1.75] text-foreground/85" style={{ maxWidth: "68ch" }}>
+            {/* 01 — Design is Risk */}
+            <section className="space-y-5">
+              <p>
+                If you're either old school or haven't sought new employment since Q4 2025, you have
+                no idea what's actually happening in the job market.
+              </p>
+
+              <p>
+                Throughout my career &mdash; spanning fraud detection work with the FBI, device-level
+                security at the nation-state level, regulated banking and healthcare &mdash; I have
+                approached information integrity as a primary constraint. If a user can't trust you to
+                deliver on your promises and safeguard their information, does anything else really
+                matter?
+              </p>
+
+              <blockquote
+                className="border-l-2 pl-5 py-1 my-6 text-foreground/75 italic text-[17px] leading-[1.6]"
+                style={{ borderColor: "#FE299E" }}
+              >
+                If a designer is required to disclose Material Non-Public Information in their
+                portfolio, either publicly or "password protected," is it really protected?
+              </blockquote>
+
+              <p>
+                LinkedIn, within tech at least, has thousands of{" "}
+                <DisclaimerLink href="https://www.wsj.com/lifestyle/careers/ghost-jobs-2c0dcd4e">
+                  fake job postings
+                </DisclaimerLink>
+                . Recent empirical research highlighted in the <em>Columbia Law Review</em> found that
+                up to <strong style={{ color: "#FE299E" }}>21%</strong> of job postings on major
+                platforms are{" "}
+                <DisclaimerLink href="https://www.columbialawreview.org/content/ghost-jobs/">
+                  ghost jobs
+                </DisclaimerLink>
+                . When you "Easy Apply" or even fill out a direct, short application on a recruiting
+                firm's website, you're often texted by an AI agent or asked to complete an "optional"
+                video/audio exercise. You're allowed to decline, but then your application's
+                rightness-of-fit is scored as "not available," and if a recruiter has 1,500+ resumes
+                and 90 of them score 85/100 or higher, do you really think the "optional" exercise is
+                going to get your work history reviewed?
+              </p>
+
+              <p>
+                Other applications use firms like Crossover, which dangle a lucrative $100&ndash;$250
+                an hour job over desperate jobseekers for task after task. When you apply for these
+                roles, you're invited to immediately "complete your application." I went through{" "}
+                <DisclaimerLink href="https://www.wired.com/story/ai-hiring-biometric-data/">
+                  the initial phases of this process
+                </DisclaimerLink>
+                . It asks you to write your thought process out, then you'll have "assessments" which
+                each take 1&ndash;4 hours to complete, and when you complete one, "don't worry, we're
+                almost done, just complete the next assessment to finalize your application."{" "}
+                <DisclaimerLink href="https://hbr.org/2023/04/beware-the-free-work-job-interview-scam">
+                  Over and over
+                </DisclaimerLink>
+                . Your voice, facial expressions, reasoning, typing speed, text-entry box edits
+                &mdash;{" "}
+                <DisclaimerLink href="https://www.wired.com/story/ai-hiring-biometric-data/">
+                  all of it is recorded
+                </DisclaimerLink>
+                . The cost isn't just IP, which is quantifiable by Accounting; it is the waste of
+                productivity and hope that occurs when a human is being mined for a position that
+                never existed.
+              </p>
+
+              <p>
+                The cardinal sin, for designers, is that this discipline is the only one I'm aware of
+                where the disclosure of Material Non-Public Information and processes is a firm
+                pre-requisite to{" "}
+                <DisclaimerLink href="https://www.law.cornell.edu/wex/trade_secret">
+                  even apply for a job
+                </DisclaimerLink>
+                : "Portfolio Required, if there is a password, provide it directly." Designers must
+                show "process, product, outcome, impact." And by show, I really mean it: early
+                concepts, processes, cross-functional team alignment exercises, medium to high
+                fidelity output, why revisions happen, market impact, and more. It's all text-based
+                and picture-based with og-desc declarations, imminently{" "}
+                <DisclaimerLink href="https://techcrunch.com/2024/09/18/linkedin-scraped-user-data-for-training-before-updating-its-terms-of-service/">
+                  crawlable, harvestable, valuable
+                </DisclaimerLink>
+                . Google DeepMind found{" "}
+                <DisclaimerLink href="https://cloud.google.com/blog/topics/threat-intelligence/distillation-experimentation-integration-ai-adversarial-use">
+                  similar results
+                </DisclaimerLink>{" "}
+                in late 2025, arguing (in their terms) that "extraction attacks" are continually
+                increasing.
+              </p>
+
+              <p>
+                Design portfolios are a security risk for SMBs, Enterprises, and any business or
+                national security interest that is mitigated by the sole discretion of what one
+                individual deems public or private &mdash; and then hides behind an outdated
+                password-required WordPress/SquareSpace plugin they don't understand with security
+                vulnerabilities. If the designer wants a job in the future, they are mandated to
+                "show the work," which means the designer is heavily incentivized to exfiltrate work
+                product, use a personal phone to document process (video, audio, photographs), keep
+                detailed notes in Drive or similar solutions which are protected by
+                ChildName+Birthday passwords, and your attack surface on years of protected corporate
+                IP is underestimated, if not unknown.
+              </p>
+
+              <p>
+                Your design leads likely have no idea this is happening, so they go on-trend and
+                require a portfolio and "if password=true, print; else: hide," thus perpetuating the
+                largest honeypot of private IP with the strongest individual incentive possible
+                (disclose or your family starves) to people who are too lazy to put in more than 5
+                clicks to apply for a job, and they apply for 10&ndash;50 jobs each day. Your
+                prospective employees:
+              </p>
+
+              <p className="italic text-foreground/70">
+                "
+                <DisclaimerLink href="https://www.gov.uk/government/news/new-app-to-counter-malicious-approaches-online">
+                  What's the harm
+                </DisclaimerLink>
+                ? I need a job and this Codex/Claude coded app someone put up in 30 minutes can be
+                trusted with institutional property right? Well, I'll create a password people have to
+                enter, that'll <strong>definitely</strong> make everything safe."
+              </p>
+
+              <p>
+                There are tens of thousands of American designers, engineers, salespeople, and others
+                who use these fly-by-night auto-apply bots daily. Design is the best honeypot, but
+                salespeople giving strategies, financial analysts talking risk mitigation, biomedical
+                researchers talking about the times leadership doubted their progress but they pushed
+                through and the product is about to hit the market to show that they are
+                avant-garde&hellip;
+              </p>
+
+              <p>In the words of Maximus Decimus Meridius: "Are you not entertained?"</p>
+            </section>
+
+            {/* 02 — Current State of LLMs */}
+            <section className="space-y-5 border-t border-border pt-10">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                02 / Current State of LLMs
+              </p>
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug">
+                Why CoT case studies became the highest-value seed corpus.
+              </h3>
+
+              <p>
+                In the current landscape, the requirement for designers to publicly disclose
+                Chain-of-Thought (CoT) case studies has created a massive, unaddressed vulnerability
+                for the Enterprise. Nobody is talking about it because design is viewed as an
+                interpolative layer &mdash; neither a center of cost nor profit, merely a fuel
+                injector to the business engine that occasionally requires servicing at the Jiffy
+                Lube for $39.99.
+              </p>
+
+              <p>
+                The mechanical evolution of Large Language Models (LLMs) has fundamentally shifted
+                the standard design portfolio from a professional requirement into a high-fidelity
+                exfiltration vector, primarily through the optimization of CoT reasoning. CoT is no
+                longer merely a prompting technique but the primary mechanism for knowledge
+                distillation, allowing student models to absorb the granular,{" "}
+                <DisclaimerLink href="https://www.nature.com/articles/s41586-023-06647-8">
+                  step-by-step logical progression of human experts
+                </DisclaimerLink>
+                . For a model to achieve "turing-test" capabilities, it requires the deconstruction
+                of complex problems into intermediate segments, which is exactly what a high-level
+                design case study provides by detailing{" "}
+                <DisclaimerLink href="https://arxiv.org/abs/2201.11903">
+                  discovery, trade-offs, and strategic roadmaps
+                </DisclaimerLink>
+                . This process represents the "pre-production logic" of an organization &mdash;
+                information that is traditionally treated as a trade secret but is now mandated for
+                public or "password-protected" disclosure in the design industry as a non-negotiable
+                hiring requirement.
+              </p>
+
+              <p>
+                When these capabilities are combined with "ghost job" harvesting operations, the
+                result is an industrial-scale intelligence operation. Intelligence agencies have
+                officially identified this as a state-level vulnerability. MI5 has tracked over{" "}
+                <strong style={{ color: "#FE299E" }}>10,000 "disguised approaches"</strong> by
+                foreign spies using fake LinkedIn profiles to target individuals in{" "}
+                <DisclaimerLink href="https://www.techmonitor.ai/technology/cybersecurity/fake-linkedin-profiles-mi5-fbi">
+                  high-tech and government sectors
+                </DisclaimerLink>
+                . Furthermore, the US Department of Defense and Air University recently published a
+                warning regarding foreign adversaries exploiting LinkedIn to conduct virtual
+                espionage, intentionally circumventing robust cybersecurity defenses through
+                lucrative job solicitations.
+              </p>
+
+              <p>
+                Research in model extraction attacks demonstrates that adversaries do not need to
+                breach a firewall when they can simply harvest this reasoning to replicate a
+                company's competitive advantage at a{" "}
+                <DisclaimerLink href="https://www.google.com/search?q=https://ieeexplore.ieee.org/document/7745404">
+                  fraction of the original R&amp;D cost
+                </DisclaimerLink>
+                .
+              </p>
+
+              <p>
+                The threat is amplified by the exponential expansion of context windows, which in
+                2026 have reached capacities of{" "}
+                <strong style={{ color: "#FE299E" }}>1 million to 10 million tokens</strong>,
+                allowing for the simultaneous ingestion of{" "}
+                <DisclaimerLink href="https://arxiv.org/abs/2403.05530">
+                  entire corporate archives or exhaustive portfolio histories
+                </DisclaimerLink>
+                , dependent upon contextualization and harness engineering, which requires a "card
+                catalog" of sorts that indexes information similar to a search engine or even
+                Wikipedia, at scale, and facilitates low-cost token normalization with high
+                performance (
+                <DisclaimerLink href="https://greater.pink">
+                  look at my proof-of-concept
+                </DisclaimerLink>
+                ). This massive aperture enables zero-shot reasoning where a model can maintain
+                coherent/instant logic across 1,000+ pages of documentation to identify patterns and
+                vulnerabilities that were previously obscured by the sheer volume of data.
+              </p>
+
+              <p>
+                As these models become more sophisticated, they become increasingly sensitive to the
+                quality of the reasoning chains they ingest, making the intellectual property of
+                senior designers, financial analysts, and researchers the highest-value "seed corpus"
+                available. The current mandate for designers to "show the work" creates a perverse
+                incentive for the exfiltration of material non-public information onto personal
+                devices and vulnerable third-party platforms, creating a shadow honeypot that most
+                enterprise security leads have yet to recognize due to its downstream nature.
+              </p>
+
+              <p>
+                To treat the open web as anything other than a hostile environment or a "dark forest"
+                (talk to me about Cixin Liu's books!) for sensitive IP is a strategic failure; a
+                designer should be an asset to a company's security posture, not an unmapped leak in
+                their institutional pipeline.
+              </p>
+            </section>
+
+            {/* 03 — Why is this the headliner? */}
+            <section className="space-y-5 border-t border-border pt-10">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                03 / Why is this the headliner in your design portfolio?
+              </p>
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug">
+                Trust over decades. Designers as grammarians.
+              </h3>
+
+              <p>
+                Simple: because I care more about the success of users and the safety of my clients
+                than the vain beauty of the screens I've created across my career. UX/CX isn't about
+                the most beautiful screens and most intuitive apps; it is about trust that is earned
+                across years and decades. It is about users, or more appropriately: humans. It is
+                about the trust we've worked so hard to earn, and the trust we must work harder to
+                maintain.
+              </p>
+
+              <p>
+                If you have an ego and want to win design awards, you should never design for
+                life-or-death applications in banking or healthcare, or defense, or any other
+                industry that impacts people's lives. Adoption is never worth more than trust,
+                period.
+              </p>
+
+              <p>
+                If you spend more time on your portfolio than you do with users or with business
+                stakeholders, you aren't a designer. You're a salesperson, and you're not just
+                selling yourself: you're selling out the user. In many cases, you're just a student.
+                Design isn't about flash &mdash; it is about ensuring the human-in-the-mix achieves
+                the jobs-to-be-done, and anything else is spice, not meat.
+              </p>
+
+              <p>
+                I view design as two things: it is (1) language with allowable opinions, and (2) it
+                is order applied to organizational chaos. Suppositions:
+              </p>
+              <ol className="list-decimal pl-6 space-y-2 text-foreground/85">
+                <li>
+                  There is (likely) no organization with enough polymaths where a bank cashier can
+                  have a valid opinion on banking core integrations and risk management balanced with
+                  corporate compliance; and
+                </li>
+                <li>
+                  There are (likely) no organizations wherein that same cashier can suggest changes
+                  that take effect within 2&ndash;6 weeks.
+                </li>
+              </ol>
+              <p>From my experience in startups to Fortune 10, this remains true.</p>
+
+              <p>
+                Designers are grammarians. We mind the rules, we speak the language, we elevate the
+                word. But if we do so without minding the interests of our patrons, we are inevitably
+                extending a hand to Spartan activity, that she may overtake Roman infrastructure. The
+                dark forest is not about being seen; it is focused on being protected.
+              </p>
+
+              <p>
+                As designers, we are Romans. We must build the roads. We must talk to the users and
+                ensure the roads are walkable, without providing our competition the means to waltz
+                through the front door. The longevity of commerce depends on it.
+              </p>
+
+              <blockquote
+                className="border-l-2 pl-5 py-1 my-2 text-foreground/75 italic text-[20px] md:text-[22px] leading-[1.5]"
+                style={{ borderColor: "#FE299E" }}
+              >
+                It is your republic, if you can keep it.
+              </blockquote>
+            </section>
+          </article>
+
+          <div className="border-t border-border pt-8 flex flex-wrap gap-3">
+            <Button
+              onClick={() => {
+                onClose();
+                setTimeout(onContact, 250);
+              }}
+              data-testid="cta-disclaimer-contact"
+            >
+              Let's Talk
+            </Button>
+            <Button variant="secondary" asChild data-testid="cta-disclaimer-deck">
+              <a
+                href="https://www.sketch.com/s/d826d733-5642-411a-8da3-72486d6164f0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Process Deck
+              </a>
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function DisclaimerHookSection({ onContactClick }: { onContactClick: () => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <section
+      className="px-6 md:px-12 lg:px-24 py-20 md:py-28 max-w-5xl mx-auto"
+      data-testid="section-disclaimer-hook"
+      aria-labelledby="disclaimer-hook-heading"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.7, ease: easeOut }}
+        className="space-y-7"
+      >
+        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          A note on what's missing
+        </p>
+
+        <h2
+          id="disclaimer-hook-heading"
+          className="text-2xl md:text-4xl lg:text-[44px] font-bold tracking-tight leading-[1.18] max-w-4xl"
+          data-testid="text-disclaimer-headline"
+        >
+          Most hiring managers don't realize that asking every applicant to publish a portfolio is
+          a security risk.
+        </h2>
+
+        <div className="space-y-4 text-base md:text-[17px] text-foreground/80 leading-[1.7] max-w-3xl">
+          <p data-testid="text-disclaimer-body-1">
+            Publicly-required design portfolios &mdash; process, decisions, trade-offs, screens
+            &mdash; have quietly become the highest-fidelity exfiltration vector in the hiring
+            pipeline. The same risk now shows up in DeepMind's adversarial-use research, MI5's
+            espionage briefings, and the <em>Columbia Law Review</em>.
+          </p>
+          <p data-testid="text-disclaimer-body-2">
+            This site is intentionally light. The interesting client work isn't safe to publish; what
+            is linked here is independently built and safe to share.
+          </p>
+          <p data-testid="text-disclaimer-body-3">
+            Read the full piece, or just say hello.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-3 pt-2">
+          <Button onClick={() => setOpen(true)} data-testid="cta-disclaimer-read">
+            Read the Full Piece
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={onContactClick}
+            data-testid="cta-disclaimer-talk"
+          >
+            Let's Talk
+          </Button>
+        </div>
       </motion.div>
-    </div>
+
+      <DisclaimerModal open={open} onClose={() => setOpen(false)} onContact={onContactClick} />
     </section>
   );
 }
@@ -1043,11 +1487,15 @@ function ShowcaseSection() {
         className="mb-12"
       >
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
-          Public Showcase
+          Public Work
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tight" data-testid="text-showcase-heading">
-          Live Products
+        <h2 className="text-2xl md:text-4xl font-bold tracking-tight leading-[1.2] max-w-3xl" data-testid="text-showcase-heading">
+          Independent products. No client IP at risk.
         </h2>
+        <p className="text-base text-foreground/70 mt-4 max-w-2xl leading-relaxed" data-testid="text-showcase-lead">
+          These are the parts of my practice I can put under a microscope. Click any card for the
+          case study and the repo.
+        </p>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -1207,9 +1655,9 @@ function EnterpriseVaultSection({ onContactClick }: { onContactClick: () => void
 
   const handleEnterpriseClick = () => {
     toast({
-      title: "Secure Access Required",
+      title: "This card is locked on purpose.",
       description:
-        "Due to the sensitive nature of enterprise financial and healthcare architecture, full case studies are available upon request via secure access key.",
+        "The case study is real. Public access isn't. If you have a real reason to ask, contact me — happy to walk through any of these under appropriate NDA. Automated traffic is logged.",
     });
   };
 
@@ -1232,13 +1680,16 @@ function EnterpriseVaultSection({ onContactClick }: { onContactClick: () => void
           </p>
         </div>
         <h2
-          className="text-2xl md:text-3xl font-bold tracking-tight"
+          className="text-2xl md:text-4xl font-bold tracking-tight leading-[1.2] max-w-3xl"
           data-testid="text-vault-heading"
         >
-          Gated Case Studies
+          These case studies exist. Public access doesn't.
         </h2>
-        <p className="text-sm text-muted-foreground mt-2 max-w-lg">
-          Enterprise-grade work spanning fintech, healthcare, and global investment operations.
+        <p className="text-base text-foreground/70 mt-4 max-w-2xl leading-relaxed">
+          Real engagements across fintech, healthcare, fraud detection, and global investment
+          operations. The gating is deliberate &mdash; automated traffic, datacenter IPs, and
+          recruiters from low-signal postings get logged. If you have a real reason to ask, the
+          contact button works.
         </p>
       </motion.div>
 
@@ -1323,6 +1774,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <HeroSection onContactClick={() => setContactOpen(true)} />
+      <DisclaimerHookSection onContactClick={() => setContactOpen(true)} />
       <WhitepaperSection />
       <ShowcaseSection />
       <EnterpriseVaultSection onContactClick={() => setContactOpen(true)} />
