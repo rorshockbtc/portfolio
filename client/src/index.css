@@ -307,6 +307,19 @@
   .chb-pulse {
     animation: chb-pulse 2.6s ease-in-out infinite;
   }
+
+  .citation-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: hsl(var(--foreground) / 0.25);
+    transition: color 0.2s ease, text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
+  }
+  .citation-link:hover {
+    color: #FE299E;
+    text-decoration-color: #FE299E;
+    text-decoration-thickness: 2px;
+  }
   @media (prefers-reduced-motion: reduce) {
     .chb-pulse { animation: none; }
   }

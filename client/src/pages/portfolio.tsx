@@ -284,15 +284,7 @@ function HeroSection({ onContactClick }: { onContactClick: () => void }) {
 // ─── Disclaimer hook section + long-read modal ──────────────────────────────
 function DisclaimerLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="underline underline-offset-2 decoration-foreground/25 hover:decoration-[2px] transition-colors"
-      style={{ color: "inherit" }}
-      onMouseEnter={(e) => (e.currentTarget.style.color = "#FE299E")}
-      onMouseLeave={(e) => (e.currentTarget.style.color = "")}
-    >
+    <a href={href} target="_blank" rel="noopener noreferrer" className="citation-link">
       {children}
     </a>
   );
@@ -321,6 +313,13 @@ function DisclaimerModal({ open, onClose, onContact }: { open: boolean; onClose:
           <article className="space-y-10 text-[16px] leading-[1.75] text-foreground/85" style={{ maxWidth: "68ch" }}>
             {/* 01 — Design is Risk */}
             <section className="space-y-5">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                01 / Design is Risk
+              </p>
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug">
+                The data-exfiltration honeypot nobody is talking about.
+              </h3>
+
               <p>
                 If you're either old school or haven't sought new employment since Q4 2025, you have
                 no idea what's actually happening in the job market.
