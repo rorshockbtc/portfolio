@@ -11,13 +11,21 @@ export function serveStatic(app: Express) {
     );
   }
 
-  // Vite content-hashes all JS/CSS filenames — serve them with immutable 1-year cache.
-  // index: false ensures every request falls through to the SEO-injecting catch-all below.
+  // Serve static files with cache headers appropriate to content type.
+  // Vite content-hashes JS/CSS bundles under /assets/ — give those immutable 1-year caching.
+  // Everything else (images, manifest, favicon, OG assets) gets a short 1-hour cache so
+  // changes can propagate without requiring a full CDN purge.
   app.use(
     express.static(distPath, {
       index: false,
-      maxAge: "1y",
-      immutable: true,
+      setHeaders(res, filePath) {
+        // Matches Vite-emitted hashed bundles: /assets/index-AbCdEf12.js, /assets/main-Xy9Z.css, etc.
+        if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+          res.set("Cache-Control", "public, max-age=31536000, immutable");
+        } else {
+          res.set("Cache-Control", "public, max-age=3600");
+        }
+      },
     }),
   );
 
