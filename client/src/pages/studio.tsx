@@ -192,7 +192,7 @@ export default function Studio() {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <motion.img
             src="/images/studio/hero.webp"
-            alt=""
+            alt="Blueprint technical drawing of architectural systems — CHB Studio hero"
             width={1920}
             height={1080}
             fetchpriority="high"
@@ -256,7 +256,7 @@ export default function Studio() {
         <div className="absolute inset-0 z-0">
           <img
             src="/images/studio/section-bg-01.webp"
-            alt=""
+            alt="US map outline representing CHB's nationwide client reach"
             width={1400}
             height={764}
             className="w-full h-full object-cover"
@@ -618,7 +618,7 @@ export default function Studio() {
       >
         <img
           src="/images/studio/divider-topo.webp"
-          alt=""
+          alt="Watercolor topographic map section break"
           width={1400}
           height={593}
           className="w-full h-full object-cover"
@@ -671,7 +671,7 @@ export default function Studio() {
           {/* Full-bleed background at 40% opacity */}
           <motion.img
             src="/images/studio/callout-workflow.webp"
-            alt=""
+            alt="Steampunk workflow illustration representing CHB's collaborative engagement process"
             width={1400}
             height={781}
             className="absolute inset-0 w-full h-full object-cover"

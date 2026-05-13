@@ -359,6 +359,8 @@ function CaseStudyModal({
           <img
             src={study.image}
             alt={study.title}
+            width={1024}
+            height={559}
             className="w-full h-full object-cover rounded-t-lg"
             data-testid={`img-modal-${study.id}`}
           />
@@ -1005,7 +1007,10 @@ function WhitepaperSection() {
           <div className="relative w-full h-56 md:h-full min-h-[280px] bg-muted">
             <img
               src="/artwork/emerald.png"
-              alt="Project Emerald — Sovereign CX Architecture"
+              alt="Project Emerald — Sovereign CX Architecture for Bitcoin and privacy-first brands"
+              width={1920}
+              height={1080}
+              loading="lazy"
               className="w-full h-full object-cover"
               data-testid="img-whitepaper-emerald"
             />
@@ -1156,6 +1161,9 @@ function ShowcaseSection() {
                     <img
                       src={study.image}
                       alt={study.title}
+                      width={1024}
+                      height={559}
+                      loading="lazy"
                       className="w-full h-full object-cover rounded-xl"
                       data-testid={`img-project-${study.id}`}
                     />
@@ -1217,6 +1225,9 @@ function ShowcaseSection() {
                     <img
                       src={study.image}
                       alt={study.title}
+                      width={1024}
+                      height={559}
+                      loading="lazy"
                       className="w-full h-full object-cover rounded-t-xl"
                       data-testid={`img-project-${study.id}`}
                     />
@@ -1346,6 +1357,9 @@ function EnterpriseVaultSection({ onContactClick }: { onContactClick: () => void
                 <img
                   src={card.image}
                   alt={card.title}
+                  width={1024}
+                  height={559}
+                  loading="lazy"
                   className="w-full h-full object-cover rounded-t-xl"
                   data-testid={`img-enterprise-${card.id}`}
                 />
