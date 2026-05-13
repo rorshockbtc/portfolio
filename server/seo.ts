@@ -6,6 +6,14 @@ interface PageMeta {
 }
 
 const PAGE_META: Record<string, PageMeta> = {
+  "/essays/design-is-risk": {
+    title: "Design is Risk — The data-exfiltration honeypot nobody is talking about | CHB",
+    description:
+      "A non-traditional design architecture case study on portfolio IP risk, Chain-of-Thought data mining, and why an intentionally lightweight portfolio is a security decision. By Kyle Cyree / Colon Hyphen Bracket.",
+    ogTitle: "Design is Risk — The data-exfiltration honeypot nobody is talking about",
+    ogDescription:
+      "Portfolio CoT case studies are the highest-value seed corpus for LLM extraction attacks. A deep dive by Kyle Cyree on why this site is intentionally light.",
+  },
   "/studio": {
     title: "CHB Studio — Architecture Partner for the Stuck & Underserved | Colon Hyphen Bracket",
     description:
