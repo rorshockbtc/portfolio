@@ -193,6 +193,25 @@ The essay at `/essays/design-is-risk` explains the full threat model. The short 
 
 ---
 
+## Why This Beats WordPress
+
+The honest answer when a client asks whether to move off WordPress.
+
+| Concern | WordPress | This Stack |
+|---|---|---|
+| **Page speed** | Plugin bloat, unoptimised images, shared hosting | Sub-second LCP, WebP images, Brotli/gzip compression, immutable asset caching |
+| **Security** | 50,000+ CVEs catalogued, plugin attack surface, known password-protection bypasses | No CMS, no plugin ecosystem, security headers by default, zero attack surface for authenticated exploits |
+| **Maintenance** | Weekly plugin updates, PHP version drift, database backups, hosting renewals | Zero plugin maintenance, stateless Node.js — deploy anywhere |
+| **SEO** | Yoast plugin required, OG tags manual, sitemap plugin, schema plugin | Server-side meta injection with per-route structured data, sitemap + robots.txt built-in, zero plugins |
+| **Cost** | Hosting + Yoast Pro + Elementor Pro + WooCommerce + backup plugin + CDN = $150–400/yr minimum | Replit or any Node host — $0–20/mo, no plugin licenses |
+| **PageSpeed score** | Typical WordPress score: 40–65 mobile | Target: 90+ mobile, 95+ desktop on PageSpeed Insights |
+| **IP safety** | WordPress sites are trivially scraped; password-protected pages provide false security | External-link architecture breaks scraper pipelines; no MNPI published inline |
+| **Auditability** | Black-box plugins; no traceable code history | Blank git history, every line accountable, no vendor lock-in |
+
+The pitch in one sentence: faster, safer, cheaper to maintain, auditable from a blank commit history — and the person who designed it can also build the backend, write the copy, and present the strategy.
+
+---
+
 ## License
 
-MIT — © 2026 Kyle Cyree / Colon Hyphen Bracket, LLC
+MIT — see [LICENSE](./LICENSE) for the full text. © 2026 Kyle Cyree / Colon Hyphen Bracket, LLC.

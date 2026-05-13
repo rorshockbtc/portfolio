@@ -195,6 +195,7 @@ export default function Studio() {
             alt=""
             width={1920}
             height={1080}
+            fetchpriority="high"
             className="w-full h-full object-cover opacity-[0.28]"
             style={{ scale: heroBgScale }}
             data-testid="img-studio-hero-bg"
@@ -354,6 +355,8 @@ export default function Studio() {
                 subtitle="idea to series b"
                 image="/images/studio/card-startups.webp"
                 imageAlt="Abstract visualization of startup growth trajectory"
+                imageWidth={1000}
+                imageHeight={583}
                 imagePosition="center"
                 items={[
                   `"Everyone talks about 10x engineers but the real risk for most companies is not whether you can build it, it's if you're building the right thing. A designer that can distill why a user is adopting and then prototype the most clear version of that insight will save you millions." –Nikita Bier`,
@@ -366,6 +369,8 @@ export default function Studio() {
                 title="private SChOOLS &amp; FaMILIES"
                 image="/images/studio/card-schools.webp"
                 imageAlt="Educational setting representing schools and family learning"
+                imageWidth={1000}
+                imageHeight={424}
                 imagePosition="center 40%"
                 items={[
                   "Private schools often lack the same resources as public schools and must rely on the same educational platforms that may not align with student needs or parent expectations.",
@@ -378,6 +383,8 @@ export default function Studio() {
                 title="FaITh-BaSED organizations"
                 image="/images/studio/card-faith.webp"
                 imageAlt="Architectural detail representing faith-based community spaces"
+                imageWidth={1000}
+                imageHeight={424}
                 imagePosition="60% center"
                 items={[
                   "It is challenging for youth groups, pastors, priests, churches, or other religious institutions to find a technology partner that can deliver on-time, within budget, and who is aligned to their values-based doctrines.",
@@ -390,6 +397,8 @@ export default function Studio() {
                 title="SMaLL BUSINESSES"
                 image="/images/studio/card-small-biz.webp"
                 imageAlt="Small business storefront visualization"
+                imageWidth={800}
+                imageHeight={339}
                 imagePosition="center center"
                 items={[
                   "So many small businesses use platforms like SquareSpace, Wix, Shopify, WordPress, or other template-based website builder tools that are challenging to modify and force small businesses to acquiesce.",
@@ -811,6 +820,8 @@ function OverlookedCard({
   subtitle,
   image,
   imageAlt,
+  imageWidth,
+  imageHeight,
   imagePosition,
   items,
   testId,
@@ -819,6 +830,8 @@ function OverlookedCard({
   subtitle?: string;
   image: string;
   imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
   imagePosition: string;
   items: string[];
   testId: string;
@@ -840,6 +853,8 @@ function OverlookedCard({
         <img
           src={image}
           alt={imageAlt}
+          width={imageWidth}
+          height={imageHeight}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
           style={{ objectPosition: imagePosition }}
           loading="lazy"

@@ -189,7 +189,10 @@ function HeroSection({ onContactClick }: { onContactClick: () => void }) {
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
-          alt=""
+          alt="Illustrated collage of design artifacts, systems diagrams, and product thinking tools"
+          width={1024}
+          height={559}
+          fetchpriority="high"
           className="w-full h-full object-cover object-center"
           data-testid="img-hero-bg"
         />
