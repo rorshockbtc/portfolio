@@ -5,6 +5,7 @@ interface PageMeta {
   ogDescription: string;
   ogType?: string;
   ogImageAlt?: string;
+  preloadHero?: string;
 }
 
 const PAGE_META: Record<string, PageMeta> = {
@@ -27,6 +28,7 @@ const PAGE_META: Record<string, PageMeta> = {
       "Fractional design leadership and product architecture for startups, small businesses, and regulated industries. Good, fast, and cheap — pick all three.",
     ogType: "website",
     ogImageAlt: "CHB Studio — Colon Hyphen Bracket design and architecture portfolio",
+    preloadHero: "/images/studio/hero.webp",
   },
   "/": {
     title: "Kyle Cyree — Principal Product Designer & Systems Architect",
@@ -125,7 +127,27 @@ function buildJsonLd(siteUrl: string, path: string): string {
         "UX design",
       ],
     };
-    schemas.push(articleSchema);
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Design is Risk",
+          item: `${siteUrl}/essays/design-is-risk`,
+        },
+      ],
+    };
+
+    schemas.push(articleSchema, breadcrumbSchema);
   }
 
   return schemas
@@ -159,6 +181,13 @@ export function injectSeoMeta(html: string, requestPath: string, siteUrl: string
   html = html.split("__OG_TYPE__").join(meta.ogType ?? "website");
   html = html.split("__OG_IMAGE_ALT__").join(meta.ogImageAlt ?? meta.ogTitle);
   html = html.split("__CANONICAL_URL__").join(canonicalUrl);
+
+  // Inject hero preload for routes that need it (prevents LCP penalty)
+  const preloadTag = meta.preloadHero
+    ? `<link rel="preload" as="image" href="${meta.preloadHero}" type="image/webp">`
+    : "";
+  html = html.split("__HERO_PRELOAD__").join(preloadTag);
+
   html = html.replace("__JSON_LD__", buildJsonLd(siteUrl, requestPath));
 
   return html;

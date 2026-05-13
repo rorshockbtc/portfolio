@@ -1,30 +1,18 @@
-# colonhyphenbracket.com — Kyle Cyree Portfolio
+# Colon Hyphen Bracket — Kyle Cyree Portfolio
 
-A museum-quality, dual-page portfolio for **Kyle Cyree**, Principal Product Designer & Systems Architect at **CHB (Colon Hyphen Bracket, LLC)**.
+A two-page portfolio and studio site for Kyle Cyree, Principal Product Designer & Systems Architect at Colon Hyphen Bracket, LLC. Intentionally minimal on inline process documentation — the architecture itself is the argument.
 
-Aesthetic: Massimo Vignelli precision meets brutalist-clean editorial. The internal brief calls it "artfully autistic."
+**Live:** [colonhyphenbracket.pink](https://colonhyphenbracket.pink) · [hash.pink](https://hash.pink) · [semi.pink](https://semi.pink)
 
 ---
 
-## Pages
+## What This Is
 
-### `/` — Hire
-Employer-facing portfolio. Features AI-narrated research (Project Emerald whitepaper via OpenAI TTS, `nova` voice), interactive case studies, and an enterprise vault section.
+Two pages with distinct audiences:
 
-**Case studies include:**
-- Persistent Memory AI Ecosystem
-- High-Velocity Binary Arbitrage Engine
-
-### `/studio` — Studio
-Client-facing agency page. A magazine-editorial presentation of CHB's thesis, specialization areas, proprietary tech, design manifesto, and engagement models. Anchored sections with a sticky side-nav:
-
-| # | Section |
-|---|---|
-| 01 | The Thesis — good, fast, cheap: all three |
-| 02 | The Overlooked — startups, schools, faith orgs, small business |
-| 03 | Regulated Systems — health & financial tech |
-| 04 | The Lab — proprietary technology |
-| 05 | Engagement — manifesto, working process, pricing |
+- **`/` — Hire**: Employer-facing portfolio. Hero, AI-narrated whitepaper, public case studies, enterprise vault.
+- **`/studio` — Studio**: Client-facing agency showcase. Mission, sectors served, proprietary technology, engagement models.
+- **`/essays/design-is-risk`**: Standalone long-form essay on portfolio IP risk and CoT data mining — the security argument for why this site is built the way it is.
 
 ---
 
@@ -36,52 +24,42 @@ Client-facing agency page. A magazine-editorial presentation of CHB's thesis, sp
 | Styling | Tailwind CSS, shadcn/ui (Radix UI) |
 | Animation | Framer Motion |
 | Routing | wouter |
-| Data fetching | TanStack Query v5 |
-| Backend | Express.js v5, Node.js |
-| ORM | Drizzle ORM + PostgreSQL |
-| AI | OpenAI SDK — TTS narration |
+| Backend | Express.js, Node.js |
+| AI | OpenAI SDK — TTS narration (Nova voice) |
 | Contact | Web3Forms API |
 | Hosting | Replit |
 
 ---
 
-## Design System
-
-- **Typography:** Major Mono Display (headings) · Inter (body) · JetBrains Mono (labels/code)
-- **Pink `#FE299E`** — CTAs, bullet points, active nav state only
-- **Blue `#01a9f4`** — Technology tag outlines only
-- **Brand mark:** `:-]`
-- **Target viewport:** 1920×1080 · reviewed at 1440×734 (MacBook Air)
-
----
-
-## Project Structure
+## Directory Structure
 
 ```
 client/src/
-├── pages/
-│   ├── portfolio.tsx          # Hire page
-│   └── studio.tsx             # Studio page
-├── components/
-│   ├── layout.tsx             # Shared layout wrapper (nav + footer)
-│   ├── navigation.tsx         # Top navigation bar
-│   ├── footer-section.tsx     # Site footer
-│   ├── mobile-nav.tsx         # Fixed bottom mobile navigation
-│   ├── contact-form-modal.tsx # Contact form modal (Web3Forms)
-│   └── ui/                    # shadcn/ui component primitives
-├── hooks/
-│   ├── use-studio-sections.tsx # Studio scroll section tracking
-│   └── use-mobile.tsx
-└── App.tsx                    # Router (wouter)
+  App.tsx                         Router (Layout wrapper + standalone essay route)
+  pages/
+    portfolio.tsx                 Hire page
+    studio.tsx                    Studio page
+    essay-design-is-risk.tsx      Standalone essay (no nav/footer)
+  components/
+    layout.tsx                    Shared nav + footer + mobile nav
+    contact-form-modal.tsx        Web3Forms contact modal
+  hooks/
+    use-studio-sections.tsx       Intersection Observer context for Studio mobile nav
 
 server/
-├── index.ts                   # Express server entry
-├── routes.ts                  # API routes (TTS generation + caching)
-├── storage.ts                 # DB interface (Drizzle)
-└── vite.ts                    # Vite dev middleware
+  index.ts                        Express app — compression, security headers
+  routes.ts                       API routes + /robots.txt + /sitemap.xml
+  seo.ts                          Per-route meta injection + JSON-LD structured data
+  static.ts                       Production static file serving with cache headers
+  vite.ts                         Dev server Vite middleware (with SEO injection)
 
-shared/
-└── schema.ts                  # Drizzle schema + Zod types (shared client/server)
+client/public/
+  images/studio/                  WebP-optimized Studio images
+  og-image.jpg                    OG card image, 1200×630, JPEG
+  site.webmanifest                Web App Manifest
+
+scripts/
+  convert-images.js               Batch PNG→WebP conversion via sharp
 ```
 
 ---
@@ -93,7 +71,7 @@ npm install
 npm run dev
 ```
 
-Starts Express (backend) and Vite (frontend) concurrently on port 5000.
+Starts Express (API + SSR meta injection) and Vite (client HMR) concurrently on port 5000.
 
 ### Environment Variables
 
@@ -101,10 +79,120 @@ Starts Express (backend) and Vite (frontend) concurrently on port 5000.
 |---|---|
 | `SESSION_SECRET` | Express session secret |
 | `VITE_WEB3FORMS_ACCESS_KEY` | Web3Forms contact form API key |
-| `OPENAI_API_KEY` | OpenAI TTS for whitepaper narration |
+
+---
+
+## SEO System
+
+All meta tags are injected **server-side** at request time. This makes the site fully crawlable despite being a React SPA — Googlebot sees complete `<title>`, `<meta description>`, Open Graph tags, and JSON-LD structured data in the raw HTML.
+
+### How it works
+
+`client/index.html` uses placeholder tokens:
+
+```html
+<title>__META_TITLE__</title>
+<meta name="description" content="__META_DESCRIPTION__" />
+<meta property="og:image" content="__SITE_URL__/og-image.jpg" />
+__HERO_PRELOAD__
+__JSON_LD__
+```
+
+`server/seo.ts` exports `injectSeoMeta(html, requestPath, siteUrl)` which replaces every token with per-route values before the HTTP response is sent. Both `server/vite.ts` (dev) and `server/static.ts` (production) call this function.
+
+### Adding a new route
+
+1. Add to `PAGE_META` in `server/seo.ts`:
+
+```typescript
+"/your-route": {
+  title: "Page Title | CHB",
+  description: "120–160 character description.",
+  ogTitle: "Open Graph title",
+  ogDescription: "OG description.",
+  ogType: "website",           // or "article" for long-form
+  ogImageAlt: "Alt text for OG image",
+  preloadHero: "/images/your-hero.webp",  // optional — LCP preload hint
+},
+```
+
+2. Add the route to `getMetaForPath()` in the same file.
+3. Add the URL to `sitemap.xml` in `server/routes.ts`.
+
+### Structured Data (JSON-LD)
+
+Every page receives `Person` + `WebSite` schemas. The essay page additionally receives `Article` + `BreadcrumbList`. Add page-specific schemas inside `buildJsonLd()` in `server/seo.ts`.
+
+---
+
+## Image Optimization
+
+Raw PNG exports (6–14 MB each) are converted to WebP before deployment using `scripts/convert-images.js`.
+
+```bash
+node scripts/convert-images.js
+```
+
+| Output | Dimensions | Size |
+|---|---|---|
+| hero.webp | 1920×1080 | ~358 KB |
+| section-bg-01.webp | 1400×764 | ~119 KB |
+| card-startups.webp | 1000×583 | ~165 KB |
+| card-faith.webp | 1000×424 | ~62 KB |
+| card-schools.webp | 1000×424 | ~76 KB |
+| card-small-biz.webp | 800×339 | ~40 KB |
+| side-health-fintech.webp | 900×1613 | ~158 KB |
+| feature-prop-tech.webp | 1200×655 | ~130 KB |
+| divider-topo.webp | 1400×593 | ~105 KB |
+| callout-workflow.webp | 1400×781 | ~192 KB |
+| **og-image.jpg** | 1200×630 | ~159 KB |
+
+The hero `<img>` carries `fetchPriority="high"`. The server injects a `<link rel="preload" as="image">` in the document `<head>` for routes that define `preloadHero` — both signals target the same LCP image to eliminate any render-blocking delay.
+
+---
+
+## Performance & Security
+
+### Compression
+
+`server/index.ts` registers `compression` middleware (gzip) before all route handlers. All text responses — HTML, JSON, JS, CSS — are compressed automatically.
+
+### Cache-Control
+
+| Resource | Strategy |
+|---|---|
+| JS/CSS bundles | `max-age=31536000, immutable` (Vite content-hashes filenames) |
+| HTML responses | `no-cache, no-store, must-revalidate` (per-route meta must be fresh) |
+| Audio, sitemap, robots | `public, max-age=86400` |
+
+### Security Headers
+
+Applied globally in `server/index.ts`:
+
+```
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+```
+
+---
+
+## Design System
+
+- **Typography:** Major Mono Display (display headers) · Inter (body) · JetBrains Mono (labels/tags)
+- **Pink `#FE299E`** — CTAs, bullet points, active nav state, brand icon
+- **Blue `#01a9f4`** — Technology tag outlines only
+- **Brand mark:** `:-]`
+
+---
+
+## Security-Forward Design Philosophy
+
+The essay at `/essays/design-is-risk` explains the full threat model. The short version: design portfolio content is among the highest-value Chain-of-Thought datasets for LLM training. Ghost-job scrapers harvest it automatically. The design of this site — external links, deliberate content scarcity, no inline process walkthroughs — is a direct response to that threat surface.
 
 ---
 
 ## License
 
-All rights reserved. © Colon Hyphen Bracket, LLC.
+MIT — © 2026 Kyle Cyree / Colon Hyphen Bracket, LLC

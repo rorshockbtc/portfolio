@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { textToSpeech } from "./replit_integrations/audio/client";
+import { buildSiteUrl } from "./seo";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -97,6 +98,48 @@ export async function registerRoutes(
   app.get("/api/tts/emerald/status", (_req, res) => {
     const cached = fs.existsSync(CACHE_PATH);
     res.json({ ready: cached, generating });
+  });
+
+  // ── robots.txt ──────────────────────────────────────────────────────────────
+  app.get("/robots.txt", (req, res) => {
+    const siteUrl = buildSiteUrl(req);
+    res
+      .set("Content-Type", "text/plain")
+      .set("Cache-Control", "public, max-age=86400")
+      .send(
+        `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`,
+      );
+  });
+
+  // ── sitemap.xml ─────────────────────────────────────────────────────────────
+  app.get("/sitemap.xml", (req, res) => {
+    const siteUrl = buildSiteUrl(req);
+    const today = new Date().toISOString().split("T")[0];
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${siteUrl}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${siteUrl}/studio</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${siteUrl}/essays/design-is-risk</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>`;
+    res
+      .set("Content-Type", "application/xml")
+      .set("Cache-Control", "public, max-age=3600")
+      .send(xml);
   });
 
   return httpServer;

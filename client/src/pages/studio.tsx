@@ -5,16 +5,6 @@ import { Button } from "@/components/ui/button";
 import { useStudioSections } from "@/hooks/use-studio-sections";
 import ContactFormModal from "@/components/contact-form-modal";
 
-import heroBg from "@assets/hero_1775928187189.png";
-import sectionBg01 from "@assets/01-section-background_1775928187192.png";
-import cardStartups from "@assets/02a-card-image-startups_1775928187194.png";
-import cardFaith from "@assets/02b-card-image-faith_1775928187199.png";
-import cardSchools from "@assets/02c-card-image-schools_1775928187199.png";
-import cardSmallBiz from "@assets/02d-card-image-smallBusinesses_1775928187198.png";
-import sideHealthFintech from "@assets/03-side-image-health-fintech_1775947646953.png";
-import featurePropTech from "@assets/04-feature-image-proprietaryTechnology_1775928187201.png";
-import dividerTopo from "@assets/05-divider-image-topography_1775928187201.png";
-import calloutWorkflow from "@assets/06-callout-image-workingWithCHB_1775928187202.png";
 
 const SECTIONS = [
   { id: "thesis", number: "01", shortLabel: "the thesis" },
@@ -126,6 +116,10 @@ export default function Studio() {
   const heroBgScale = useTransform(heroScrollProgress, [0, 1], [1, 1.08]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
+  useEffect(() => {
     setSections(SECTIONS);
     return () => setSections([]);
   }, [setSections]);
@@ -197,8 +191,10 @@ export default function Studio() {
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
           <motion.img
-            src={heroBg}
+            src="/images/studio/hero.webp"
             alt=""
+            width={1920}
+            height={1080}
             className="w-full h-full object-cover opacity-[0.28]"
             style={{ scale: heroBgScale }}
             data-testid="img-studio-hero-bg"
@@ -258,8 +254,10 @@ export default function Studio() {
         {/* Full-bleed US map — no left margin, offset so west coast is partially cut */}
         <div className="absolute inset-0 z-0">
           <img
-            src={sectionBg01}
+            src="/images/studio/section-bg-01.webp"
             alt=""
+            width={1400}
+            height={764}
             className="w-full h-full object-cover"
             style={{ objectPosition: "right center" }}
             loading="lazy"
@@ -354,7 +352,7 @@ export default function Studio() {
               <OverlookedCard
                 title="STARTUPS"
                 subtitle="idea to series b"
-                image={cardStartups}
+                image="/images/studio/card-startups.webp"
                 imageAlt="Abstract visualization of startup growth trajectory"
                 imagePosition="center"
                 items={[
@@ -366,7 +364,7 @@ export default function Studio() {
               />
               <OverlookedCard
                 title="private SChOOLS &amp; FaMILIES"
-                image={cardSchools}
+                image="/images/studio/card-schools.webp"
                 imageAlt="Educational setting representing schools and family learning"
                 imagePosition="center 40%"
                 items={[
@@ -378,7 +376,7 @@ export default function Studio() {
               />
               <OverlookedCard
                 title="FaITh-BaSED organizations"
-                image={cardFaith}
+                image="/images/studio/card-faith.webp"
                 imageAlt="Architectural detail representing faith-based community spaces"
                 imagePosition="60% center"
                 items={[
@@ -390,7 +388,7 @@ export default function Studio() {
               />
               <OverlookedCard
                 title="SMaLL BUSINESSES"
-                image={cardSmallBiz}
+                image="/images/studio/card-small-biz.webp"
                 imageAlt="Small business storefront visualization"
                 imagePosition="center center"
                 items={[
@@ -476,8 +474,10 @@ export default function Studio() {
             className="hidden lg:block overflow-hidden self-stretch"
           >
             <img
-              src={sideHealthFintech}
+              src="/images/studio/side-health-fintech.webp"
               alt="Architectural cross-section of a building representing systematic health and financial tech design"
+              width={900}
+              height={1613}
               className="w-full h-full object-cover object-center"
               style={{ opacity: 0.7, display: "block" }}
               loading="lazy"
@@ -513,8 +513,10 @@ export default function Studio() {
         {/* Machine image: 74% wide, flush left — leaves right margin for sticky nav */}
         <div className="overflow-hidden w-full lg:w-[74%]">
           <motion.img
-            src={featurePropTech}
+            src="/images/studio/feature-prop-tech.webp"
             alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
+            width={1200}
+            height={655}
             className="w-full object-cover"
             style={{ display: "block", maxHeight: "82vh" }}
             initial={{ opacity: 0, x: 40 }}
@@ -606,8 +608,10 @@ export default function Studio() {
         aria-hidden="true"
       >
         <img
-          src={dividerTopo}
+          src="/images/studio/divider-topo.webp"
           alt=""
+          width={1400}
+          height={593}
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -657,8 +661,10 @@ export default function Studio() {
         <div className="relative mt-20 md:mt-36 lg:mt-48 overflow-hidden" data-testid="section-working-with-chb">
           {/* Full-bleed background at 40% opacity */}
           <motion.img
-            src={calloutWorkflow}
+            src="/images/studio/callout-workflow.webp"
             alt=""
+            width={1400}
+            height={781}
             className="absolute inset-0 w-full h-full object-cover"
             style={{ opacity: 0.4 }}
             initial={{ opacity: 0 }}

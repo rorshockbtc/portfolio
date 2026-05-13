@@ -1,0 +1,17 @@
+{
+  "name": "Colon Hyphen Bracket — Kyle Cyree",
+  "short_name": "CHB",
+  "description": "Portfolio and studio site for Kyle Cyree — Principal Product Designer & Systems Architect.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FE299E",
+  "icons": [
+    {
+      "src": "/images/favicon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
