@@ -56,7 +56,7 @@ export default function EssayDesignIsRisk() {
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-[1.1]" data-testid="text-essay-title">
             The data-exfiltration honeypot nobody is talking about.
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl" data-testid="text-essay-subtitle">
+          <p className="text-lg text-muted-foreground leading-relaxed" data-testid="text-essay-subtitle">
             A non-traditional design architecture case study on portfolio IP risk, CoT mining, and
             why this site is intentionally light.
           </p>
@@ -85,8 +85,16 @@ export default function EssayDesignIsRisk() {
               the design profession.
             </p>
             <p className="text-sm text-muted-foreground border-l-2 border-border pl-4 italic">
-              This synthesis may be freely distributed or quoted per the MIT license available on
-              the project's GitHub repository.
+              This synthesis may be freely distributed or quoted per the MIT license available on{" "}
+              <a
+                href="https://github.com/rorshockbtc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="citation-link"
+              >
+                the project's GitHub repository
+              </a>
+              .
             </p>
           </section>
 
@@ -407,19 +415,17 @@ export default function EssayDesignIsRisk() {
               sugar, not meat.
             </p>
 
-            <PinkQuote large>
-              If you want to work with a designer and product systems architect who thinks
-              outside the screen and beyond the pixel, let's connect.
-            </PinkQuote>
           </section>
 
-          {/* Footer CTAs */}
-          <div className="border-t border-border pt-12 space-y-6">
-            <p className="text-base text-muted-foreground">
-              If any of this resonates &mdash; or if you have a role, project, or problem that
-              needs a designer who thinks about the pipeline as much as the pixels &mdash; I'd
-              genuinely like to talk.
-            </p>
+          {/* Footer CTAs — single CTA block */}
+          <div className="border-t border-border pt-14 space-y-8">
+            <blockquote
+              className="border-l-2 pl-5 py-1 text-[20px] md:text-[22px] text-foreground/75 italic leading-[1.6]"
+              style={{ borderColor: "#FE299E" }}
+            >
+              If you want to work with a designer and product systems architect who thinks
+              outside the screen and beyond the pixel, let's connect.
+            </blockquote>
             <div className="flex flex-wrap gap-3">
               <Button onClick={() => setContactOpen(true)} data-testid="cta-essay-contact">
                 Let's Talk

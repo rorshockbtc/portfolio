@@ -277,7 +277,7 @@ function HeroSection({ onContactClick }: { onContactClick: () => void }) {
 function DisclaimerHookSection({ onContactClick }: { onContactClick: () => void }) {
   return (
     <section
-      className="px-6 md:px-12 lg:px-24 py-20 md:py-28 max-w-5xl mx-auto"
+      className="px-6 md:px-12 lg:px-24 py-20 md:py-28 max-w-6xl mx-auto"
       data-testid="section-disclaimer-hook"
       aria-labelledby="disclaimer-hook-heading"
     >
