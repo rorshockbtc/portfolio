@@ -34,11 +34,14 @@ const images = [
     console.log(`✓ ${img.out.padEnd(28)} ${(meta.width + "x" + meta.height).padEnd(12)} ${Math.round(stat.size / 1024)} KB`);
   }
 
-  // OG image — standard 1200×630 crop
+  // OG image — standard 1200×630 crop sourced from the Studio hero raw PNG
+  // (attached_assets/hero_1775928187189.png is the durable source; client/public/og-image.png
+  //  was a copy that has been removed to reduce deployment artifact size)
+  const ogSrc = path.resolve(__dirname, "../attached_assets/hero_1775928187189.png");
   const ogOut = path.resolve(__dirname, "../client/public/og-image.jpg");
-  await sharp("client/public/og-image.png")
+  await sharp(ogSrc)
     .resize({ width: 1200, height: 630, fit: "cover" })
-    .jpeg({ quality: 82, mozjpeg: true })
+    .jpeg({ quality: 85, mozjpeg: true })
     .toFile(ogOut);
   const ogStat = fs.statSync(ogOut);
   console.log(`✓ og-image.jpg                  1200x630     ${Math.round(ogStat.size / 1024)} KB`);
