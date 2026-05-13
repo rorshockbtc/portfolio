@@ -195,7 +195,7 @@ export default function Studio() {
             alt="Blueprint technical drawing of architectural systems — CHB Studio hero"
             width={1920}
             height={1080}
-            fetchpriority="high"
+            fetchPriority="high"
             className="w-full h-full object-cover opacity-[0.28]"
             style={{ scale: heroBgScale }}
             data-testid="img-studio-hero-bg"

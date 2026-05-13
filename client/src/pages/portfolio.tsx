@@ -192,7 +192,7 @@ function HeroSection({ onContactClick }: { onContactClick: () => void }) {
           alt="Illustrated collage of design artifacts, systems diagrams, and product thinking tools"
           width={1024}
           height={559}
-          fetchpriority="high"
+          fetchPriority="high"
           className="w-full h-full object-cover object-center"
           data-testid="img-hero-bg"
         />
@@ -701,7 +701,10 @@ function WhitepaperModal({
         <div className="relative w-full h-48 md:h-64 bg-muted rounded-t-lg">
           <img
             src="/artwork/emerald.png"
-            alt="Project Emerald"
+            alt="Project Emerald — Sovereign CX Architecture for Bitcoin and privacy-first brands"
+            width={1920}
+            height={1080}
+            loading="lazy"
             className="w-full h-full object-cover rounded-t-lg"
             data-testid="img-modal-whitepaper"
           />
