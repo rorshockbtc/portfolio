@@ -3,32 +3,40 @@ interface PageMeta {
   description: string;
   ogTitle: string;
   ogDescription: string;
+  ogType?: string;
+  ogImageAlt?: string;
 }
 
 const PAGE_META: Record<string, PageMeta> = {
   "/essays/design-is-risk": {
-    title: "Design is Risk — The data-exfiltration honeypot nobody is talking about | CHB",
+    title: "Design is Risk: The Data-Exfiltration Honeypot | Kyle Cyree",
     description:
-      "A non-traditional design architecture case study on portfolio IP risk, Chain-of-Thought data mining, and why an intentionally lightweight portfolio is a security decision. By Kyle Cyree / Colon Hyphen Bracket.",
-    ogTitle: "Design is Risk — The data-exfiltration honeypot nobody is talking about",
+      "A design architecture case study on portfolio IP risk, Chain-of-Thought data mining, and why an intentionally lightweight portfolio is a security decision. By Kyle Cyree.",
+    ogTitle: "Design is Risk: The data-exfiltration honeypot nobody is talking about",
     ogDescription:
-      "Portfolio CoT case studies are the highest-value seed corpus for LLM extraction attacks. A deep dive by Kyle Cyree on why this site is intentionally light.",
+      "Portfolio CoT case studies are the highest-value seed corpus for LLM extraction attacks. A deep dive by Kyle Cyree / CHB on why this site is intentionally light.",
+    ogType: "article",
+    ogImageAlt: "Design is Risk — A case study by Kyle Cyree on portfolio IP exfiltration risk",
   },
   "/studio": {
-    title: "CHB Studio — Architecture Partner for the Stuck & Underserved | Colon Hyphen Bracket",
+    title: "CHB Studio — Design & Architecture Partner | Colon Hyphen Bracket",
     description:
-      "CHB applies tasteful, measured order to complex products and growing businesses. Fractional design leadership, product architecture, and full-stack development for startups, small businesses, faith-based organizations, and regulated industries including healthcare and fintech.",
+      "CHB applies tasteful, measured order to complex products and growing businesses. Fractional design leadership, product architecture, and full-stack development for startups, small businesses, faith-based organizations, and regulated industries.",
     ogTitle: "CHB Studio — Architecture Partner for the Stuck & Underserved",
     ogDescription:
       "Fractional design leadership and product architecture for startups, small businesses, and regulated industries. Good, fast, and cheap — pick all three.",
+    ogType: "website",
+    ogImageAlt: "CHB Studio — Colon Hyphen Bracket design and architecture portfolio",
   },
   "/": {
-    title: "Kyle Cyree — Principal Product Designer & Systems Architect | CHB",
+    title: "Kyle Cyree — Principal Product Designer & Systems Architect",
     description:
-      "Kyle Cyree is a Principal Product Designer and Systems Architect with 20+ years spanning enterprise healthcare (UnitedHealth, 35M+ users), fintech (Fidelity, Custodia Bank), AI/ML ecosystems, and high-frequency trading systems. Director/Staff-level product architecture, design systems, and full-stack development.",
-    ogTitle: "Kyle Cyree — Principal Product Designer & Systems Architect",
+      "Kyle Cyree is a Principal Product Designer and Systems Architect with 20+ years spanning enterprise healthcare (UnitedHealth, 35M+ users), fintech (Fidelity, Custodia Bank), AI/ML ecosystems, and high-frequency trading systems.",
+    ogTitle: "Kyle Cyree — Principal Product Designer & Systems Architect | CHB",
     ogDescription:
-      "I build enterprise-scale design systems, zero-to-one fintech platforms, and collaborative agentic AI models. 20+ years in art, business, and technology.",
+      "I build enterprise-scale design systems, zero-to-one fintech platforms, and collaborative agentic AI models. 20+ years spanning healthcare, fintech, and defense.",
+    ogType: "website",
+    ogImageAlt: "Kyle Cyree — Principal Product Designer & Systems Architect at Colon Hyphen Bracket",
   },
 };
 
@@ -42,14 +50,17 @@ function getMetaForPath(path: string): PageMeta {
   return PAGE_META["/"];
 }
 
-function buildJsonLd(siteUrl: string): string {
+function buildJsonLd(siteUrl: string, path: string): string {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Kyle Cyree",
     jobTitle: "Principal Product Designer & Systems Architect",
     url: siteUrl,
-    sameAs: ["https://github.com/rorshockbtc"],
+    sameAs: [
+      "https://github.com/rorshockbtc",
+      "https://www.linkedin.com/in/kyle-cyree/",
+    ],
     knowsAbout: [
       "Product Design",
       "Systems Architecture",
@@ -57,8 +68,8 @@ function buildJsonLd(siteUrl: string): string {
       "AI/ML",
       "FinTech",
       "Healthcare UX",
-      "Cryptographic Authentication",
-      "High-Frequency Trading",
+      "Information Security",
+      "Chain-of-Thought Reasoning",
       "TypeScript",
       "React",
       "Full-Stack Development",
@@ -68,8 +79,6 @@ function buildJsonLd(siteUrl: string): string {
       name: "Colon Hyphen Bracket, LLC",
       alternateName: "CHB",
       url: siteUrl,
-      description:
-        "A product design and systems architecture studio serving startups, small businesses, faith-based organizations, and regulated industries.",
     },
   };
 
@@ -83,10 +92,45 @@ function buildJsonLd(siteUrl: string): string {
       "Portfolio and studio site for Kyle Cyree — Principal Product Designer & Systems Architect at Colon Hyphen Bracket, LLC.",
   };
 
-  return [
-    `<script type="application/ld+json">${JSON.stringify(personSchema)}</script>`,
-    `<script type="application/ld+json">${JSON.stringify(websiteSchema)}</script>`,
-  ].join("\n    ");
+  const schemas: object[] = [personSchema, websiteSchema];
+
+  if (path.startsWith("/essays/design-is-risk")) {
+    const articleSchema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: "Design is Risk: The data-exfiltration honeypot nobody is talking about",
+      description:
+        "A non-traditional design architecture case study on portfolio IP risk, Chain-of-Thought data mining, and why an intentionally lightweight portfolio is a security decision.",
+      author: {
+        "@type": "Person",
+        name: "Kyle Cyree",
+        url: siteUrl,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Colon Hyphen Bracket, LLC",
+        url: siteUrl,
+      },
+      url: `${siteUrl}/essays/design-is-risk`,
+      datePublished: "2026-05-13",
+      mainEntityOfPage: `${siteUrl}/essays/design-is-risk`,
+      keywords: [
+        "design portfolio security",
+        "IP exfiltration",
+        "Chain-of-Thought data mining",
+        "LLM scraping",
+        "design risk",
+        "portfolio architecture",
+        "information security",
+        "UX design",
+      ],
+    };
+    schemas.push(articleSchema);
+  }
+
+  return schemas
+    .map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`)
+    .join("\n    ");
 }
 
 function sanitizeUrl(url: string): string {
@@ -112,8 +156,10 @@ export function injectSeoMeta(html: string, requestPath: string, siteUrl: string
   html = html.split("__META_DESCRIPTION__").join(meta.description);
   html = html.split("__OG_TITLE__").join(meta.ogTitle);
   html = html.split("__OG_DESCRIPTION__").join(meta.ogDescription);
+  html = html.split("__OG_TYPE__").join(meta.ogType ?? "website");
+  html = html.split("__OG_IMAGE_ALT__").join(meta.ogImageAlt ?? meta.ogTitle);
   html = html.split("__CANONICAL_URL__").join(canonicalUrl);
-  html = html.replace("__JSON_LD__", buildJsonLd(siteUrl));
+  html = html.replace("__JSON_LD__", buildJsonLd(siteUrl, requestPath));
 
   return html;
 }

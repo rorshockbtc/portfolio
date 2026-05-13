@@ -31,7 +31,6 @@ export default function EssayDesignIsRisk() {
   const [contactOpen, setContactOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Minimal header — back link only, not in main nav */}
       <header className="fixed top-0 inset-x-0 z-50 border-b border-border/50 bg-background/90 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
           <a href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-back-hire">
@@ -43,7 +42,6 @@ export default function EssayDesignIsRisk() {
       </header>
 
       <main className="pt-24 pb-24 max-w-4xl mx-auto px-6 md:px-10" data-testid="page-essay">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,7 +61,6 @@ export default function EssayDesignIsRisk() {
           <p className="font-mono text-xs text-muted-foreground">Kyle Cyree &mdash; Colon Hyphen Bracket, LLC</p>
         </motion.div>
 
-        {/* Article body */}
         <article className="space-y-14 text-[17px] leading-[1.78] text-foreground/85 max-w-[68ch]" data-testid="article-body">
 
           {/* Executive Summary */}
@@ -74,26 +71,15 @@ export default function EssayDesignIsRisk() {
             </h2>
             <p>
               My portfolio is designed to prevent intellectual property exfiltration by including
-              case studies as links to external, non-indexed domains rather than publishing
-              process documentation directly. Chain-of-Thought (CoT) data-mining operations are
-              increasing globally &mdash; specifically within the tech sector following recent
-              mass layoffs &mdash; with bad actors targeting portfolios and case studies for
-              IP-theft via automated data harvesting. This portfolio is intentionally lightweight
-              to prevent that risk. The synthesis below includes documentation and proprietary
-              research exploring this threat, why it is structurally underestimated by enterprise
-              design leadership, and why information integrity is the most undervalued skill in
-              the design profession.
-            </p>
-            <p className="text-sm text-muted-foreground border-l-2 border-border pl-4 italic">
-              This synthesis may be freely distributed or quoted per the MIT license available on{" "}
-              <a
-                href="https://github.com/rorshockbtc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="citation-link"
-              >
+              case studies as links. Chain-of-Thought (CoT) data mining operations are increasing
+              globally, specifically within the tech sector after recent layoffs, with bad actors
+              targeting portfolios and case studies for IP-theft via automated data harvesting.
+              This portfolio is intentionally lightweight to prevent this risk. The synthesis below
+              includes documentation and proprietary research that explores this rarely discussed
+              problem and it may be freely distributed or quoted per the MIT license available on{" "}
+              <CitationLink href="https://github.com/rorshockbtc/portfolio">
                 the project's GitHub repository
-              </a>
+              </CitationLink>
               .
             </p>
           </section>
@@ -106,7 +92,7 @@ export default function EssayDesignIsRisk() {
             </h2>
 
             <p>
-              If you're either old school or haven't sought new employment since Q4 2025, you
+              If you're either Old School or haven't sought new employment since Q4 2025, you
               have no idea what's actually happening in the job market.
             </p>
 
@@ -133,53 +119,52 @@ export default function EssayDesignIsRisk() {
               <CitationLink href="https://www.columbialawreview.org/content/ghost-jobs/">
                 ghost jobs
               </CitationLink>
-              . When you "Easy Apply" or fill out a direct application on a recruiting firm's
-              website, you're often texted by an AI agent or asked to complete an "optional"
+              . When you "Easy Apply" or even fill out a direct, short application on a recruiting
+              firm's website, you're often texted by an AI agent or asked to complete an "optional"
               video/audio exercise. You're allowed to decline, but then your application's
-              rightness-of-fit is scored as "not available" &mdash; and if a recruiter has
-              1,500+ resumes with 90 of them scoring 85/100 or higher, do you think the
-              "optional" exercise will get your history reviewed?
+              rightness-of-fit is scored as "not available" &mdash; and if a recruiter has 1,500+
+              r&eacute;sum&eacute;s and 90 of them score an 85/100 or higher, do you really think
+              that the "optional" exercise is going to get your work history reviewed?
             </p>
 
             <p>
-              Other applications use firms like Crossover, which dangle a lucrative
-              $100&ndash;$250/hr role over desperate jobseekers. When you apply, you're invited
-              to "complete your application." I went through{" "}
-              <CitationLink href="https://www.wired.com/story/ai-hiring-biometric-data/">
-                the initial phases of this process
+              Other applications use firms like{" "}
+              <CitationLink href="https://www.reddit.com/r/recruitinghell/comments/194ee0b/proof_that_crossover_is_a_scam/">
+                Crossover
               </CitationLink>
-              . It asks you to write your thought process, then you have "assessments" each
-              taking 1&ndash;4 hours, and when you complete one: "don't worry, we're almost
-              done, just complete the next assessment."{" "}
+              , which dangle a lucrative $100&ndash;$250/hr role over desperate jobseekers. When
+              you apply, you're invited to "complete your application." I went through the initial
+              phases of this process. It asks you to write your thought process, then you have
+              "assessments" each taking 1&ndash;4 hours, and when you complete one: "don't worry,
+              we're almost done, just complete the next assessment."{" "}
               <CitationLink href="https://hbr.org/2023/04/beware-the-free-work-job-interview-scam">
                 Over and over
               </CitationLink>
               . Your voice, facial expressions, reasoning, typing speed, edit history &mdash;{" "}
-              <CitationLink href="https://www.wired.com/story/ai-hiring-biometric-data/">
-                all of it recorded
+              <CitationLink href="https://x.com/CynthiaOzumba/status/2037078194986090926">
+                albeit dystopian and privacy-abusing
               </CitationLink>
-              . The cost isn't just IP (which Accounting can quantify) &mdash; it is the waste
-              of productivity and hope that occurs when a human is being mined for a position
-              that never existed.
+              , all of it is being recorded and scored. The cost isn't just IP (which Accounting
+              can quantify) &mdash; it is the waste of productivity and hope that occurs when a
+              human is being mined for a position that never existed.
             </p>
 
             <p>
-              The cardinal sin, for designers, is that this discipline is the only one I'm
-              aware of where the disclosure of Material Non-Public Information and processes is
-              a firm prerequisite to{" "}
-              <CitationLink href="https://www.law.cornell.edu/wex/trade_secret">
-                even apply for a job
+              The cardinal sin, for designers, is that this discipline is the only one I'm aware
+              of where the disclosure of Material Non-Public Information and processes is a firm{" "}
+              <CitationLink href="https://www.uxdesigninstitute.com/blog/your-guide-to-landing-ux-jobs/">
+                pre-requisite for 90% of design jobs
               </CitationLink>
-              : "Portfolio Required; if there is a password, provide it directly." Designers
-              must show "process, product, outcome, impact." Early concepts, cross-functional
-              alignment exercises, medium-to-high-fidelity output, revision rationale, market
-              impact. It's all text and images with og-desc declarations, imminently{" "}
+              : "Portfolio Required; if there is a password, provide it directly." Designers must
+              show "process, product, outcome, impact." Early concepts, cross-functional alignment
+              exercises, medium-to-high-fidelity output, revision rationale, market impact. It's
+              all text and images with og-desc declarations, imminently{" "}
               <CitationLink href="https://techcrunch.com/2024/09/18/linkedin-scraped-user-data-for-training-before-updating-its-terms-of-service/">
-                crawlable, harvestable, valuable
+                crawlable, harvestable, and extremely valuable
               </CitationLink>
-              . Google DeepMind{" "}
+              . Google DeepMind reported{" "}
               <CitationLink href="https://cloud.google.com/blog/topics/threat-intelligence/distillation-experimentation-integration-ai-adversarial-use">
-                confirmed as much
+                similar results
               </CitationLink>{" "}
               in late 2025, arguing that "extraction attacks" are continually increasing.
             </p>
@@ -197,9 +182,9 @@ export default function EssayDesignIsRisk() {
             <p>
               Your design leads likely have no idea this is happening, so they go on-trend and
               require a portfolio: "if password=true, print; else: hide" &mdash; perpetuating
-              the largest honeypot of private IP with the strongest individual incentive
-              possible (disclose or your family starves) to people applying for
-              10&ndash;50 jobs each day. Your prospective employees:
+              the largest honeypot of private IP with the strongest individual incentive possible
+              (disclose or your family starves) to people applying for 10&ndash;50 jobs each day.
+              Your prospective employees:
             </p>
 
             <p className="italic text-foreground/70">
@@ -224,38 +209,37 @@ export default function EssayDesignIsRisk() {
 
           {/* 02 — Current State of LLMs */}
           <section className="space-y-5 border-t border-border pt-12">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">02 / Current State of LLMs</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">02 / Current State of LLMs (Large Language Models)</p>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug text-foreground">
               Why CoT case studies became the highest-value seed corpus.
             </h2>
 
             <p>
               In the current landscape, the requirement for designers to publicly disclose
-              Chain-of-Thought (CoT) case studies has created a massive, unaddressed
-              vulnerability for the enterprise. Nobody is talking about it because design is
-              viewed as an interpolative layer &mdash; neither a center of cost nor profit,
-              merely a fuel injector to the business engine that occasionally requires servicing
-              at the Jiffy Lube for $39.99.
+              Chain-of-Thought (CoT) case studies has created a massive, unaddressed vulnerability
+              for the Enterprise. Nobody is talking about it because design is viewed as an
+              interpolative layer &mdash; neither a center of cost nor profit, merely a fuel
+              injector to the business engine that occasionally requires servicing at the Jiffy
+              Lube for $39.99.
             </p>
 
             <p>
-              The mechanical evolution of Large Language Models (LLMs) has fundamentally
-              shifted the standard design portfolio from a professional requirement into a
-              high-fidelity exfiltration vector, primarily through the optimization of CoT
-              reasoning. CoT is no longer merely a prompting technique but the primary
-              mechanism for knowledge distillation, allowing student models to absorb the
-              granular,{" "}
+              The mechanical evolution of Large Language Models (LLMs) has fundamentally shifted
+              the standard design portfolio from a professional requirement into a high-fidelity
+              exfiltration vector, primarily through the optimization of CoT reasoning. CoT is no
+              longer merely a prompting technique but the primary mechanism for knowledge
+              distillation, allowing student models to absorb the granular,{" "}
               <CitationLink href="https://www.nature.com/articles/s41586-023-06647-8">
                 step-by-step logical progression of human experts
               </CitationLink>
-              . For a model to achieve Turing-test capabilities, it requires the deconstruction
-              of complex problems into intermediate segments &mdash; which is exactly what a
+              . For a model to achieve Turing-test capabilities, it requires the deconstruction of
+              complex problems into intermediate segments &mdash; which is exactly what a
               high-level design case study provides, detailing{" "}
               <CitationLink href="https://arxiv.org/abs/2201.11903">
                 discovery, trade-offs, and strategic roadmaps
               </CitationLink>
-              . This "pre-production logic" of an organization is traditionally treated as a
-              trade secret but is now mandated for public disclosure in design hiring.
+              . This "pre-production logic" of an organization is traditionally treated as a trade
+              secret but is now mandated for public disclosure in design hiring.
             </p>
 
             <p>
@@ -266,51 +250,62 @@ export default function EssayDesignIsRisk() {
               <CitationLink href="https://www.techmonitor.ai/technology/cybersecurity/fake-linkedin-profiles-mi5-fbi">
                 high-tech and government sectors
               </CitationLink>
-              . The US Department of Defense and Air University have published warnings about
-              foreign adversaries exploiting LinkedIn to conduct virtual espionage &mdash;
-              intentionally circumventing cybersecurity defenses through lucrative job offers.
+              .{" "}
+              <CitationLink href="https://www.techmonitor.ai/technology/cybersecurity/fake-linkedin-profiles-mi5-fbi">
+                Organizations have officially identified this as a state-level vulnerability
+              </CitationLink>
+              . The US Department of Defense and Air University have published warnings about{" "}
+              <CitationLink href="https://www.airuniversity.af.edu/JIPA/Display/Article/3768503/covert-connections-the-linkedin-recruitment-ruse-targeting-defense-insiders/">
+                foreign adversaries exploiting LinkedIn to conduct virtual espionage
+              </CitationLink>{" "}
+              &mdash; intentionally circumventing cybersecurity defenses through lucrative job
+              offers.
             </p>
 
             <p>
               Research in model extraction attacks demonstrates that adversaries don't need to
-              breach a firewall when they can simply harvest reasoning chains to replicate a
-              company's competitive advantage at a{" "}
-              <CitationLink href="https://www.google.com/search?q=https://ieeexplore.ieee.org/document/7745404">
-                fraction of the original R&amp;D cost
+              breach a firewall when{" "}
+              <CitationLink href="https://thehackernews.com/2022/08/the-rise-of-data-exfiltration-and-why.html">
+                they can simply harvest this reasoning to replicate a company's competitive
+                advantage at a fraction of the original R&amp;D cost
               </CitationLink>
               .
             </p>
 
             <p>
-              The threat is amplified by the exponential expansion of context windows, which in
-              2026 have reached capacities of{" "}
-              <Stat>1 million to 10 million tokens</Stat>, allowing simultaneous ingestion of{" "}
+              The threat is amplified by the exponential expansion of LLM context windows, which
+              in 2026 have reached capacities of{" "}
+              <Stat>1 million to 10 million tokens</Stat>, allowing for the simultaneous ingestion
+              of{" "}
               <CitationLink href="https://arxiv.org/abs/2403.05530">
                 entire corporate archives or exhaustive portfolio histories
               </CitationLink>
-              , dependent upon contextualization and harness engineering which requires a "card
-              catalog" that indexes information like a search engine at scale and facilitates
-              low-cost token normalization with high performance (
-              <CitationLink href="https://greater.pink">see my proof-of-concept</CitationLink>
+              , dependent upon contextualization and harness engineering, which requires a "card
+              catalog" of sorts that indexes information similar to a search engine or even
+              Wikipedia, at scale, and facilitates low-cost token normalization with high
+              performance (
+              <CitationLink href="https://greater.pink">
+                look at my branch and leaf proof-of-concept
+              </CitationLink>
               ). This aperture enables zero-shot reasoning across 1,000+ pages of documentation
               to identify patterns and vulnerabilities previously obscured by volume.
             </p>
 
             <p>
               As models become more sophisticated, they become increasingly sensitive to the
-              quality of the reasoning chains they ingest &mdash; making the intellectual
-              property of senior designers, analysts, and researchers the highest-value "seed
-              corpus" available. The current mandate for designers to "show the work" creates a
-              perverse incentive for exfiltrating material non-public information onto personal
-              devices and vulnerable third-party platforms: a shadow honeypot that most
-              enterprise security leads have yet to recognize.
+              quality of the reasoning chains they ingest &mdash; making the intellectual property
+              of senior designers, analysts, and researchers the highest-value "seed corpus"
+              available. The current mandate for designers to "show the work" creates a perverse
+              incentive for exfiltrating material non-public information onto personal devices and
+              vulnerable third-party platforms: a shadow honeypot that most enterprise security
+              leads have yet to recognize.
             </p>
 
             <p>
-              To treat the open web as anything other than a hostile environment &mdash; a
-              "dark forest" (talk to me about Cixin Liu's books) &mdash; for sensitive IP is a
-              strategic failure. A designer should be an asset to a company's security posture,
-              not an unmapped leak in the institutional pipeline.
+              To treat the open web as anything other than a hostile environment &mdash; a "dark
+              forest" (talk to me about Cixin Liu's books) &mdash; for sensitive IP is a strategic
+              failure. A designer should be an asset to a company's security posture, not an
+              unmapped leak in the institutional pipeline.
             </p>
           </section>
 
@@ -322,21 +317,34 @@ export default function EssayDesignIsRisk() {
             </h2>
 
             <p>
-              Web crawlers and data extraction bots are heavily constrained by compute and time
-              budgets. They are optimized for localized data density: harvest the target DOM
-              tree aggressively, then drop external links to preserve resources. By forcing a
-              jump to an external domain &mdash; specifically one outside the primary indexed
-              URL in the allowed crawl list &mdash; you actively break the automated crawling
-              pipeline.
+              This post, and many of my projects, aren't what is typical for most UI designers or
+              traditional UX flows. Most companies view design based on visual output and
+              documentation, not on service design or customer experience. I believe the
+              non-visual elements, such as trust and security, are undervalued by most designers
+              and this lack of business acumen introduces risk to companies throughout the R&amp;D
+              product lifecycle.
             </p>
 
             <p>
-              This is why my portfolio site has external links to case study material rather
-              than inline process documentation. It is annoying for hiring managers. That's
-              deliberate: the friction is calibrated to exceed a bot's budget while remaining
-              trivial for a human. If you've read this far, you are not a bot. The case study
-              material exists; it is simply hosted where automated harvesting can't profitably
-              follow.
+              <CitationLink href="https://www.researchgate.net/publication/340330402_A_Novel_Web_Scraping_Approach_Using_the_Additional_Information_Obtained_From_Web_Pages">
+                Because scrapers are optimized for localized data density, they are programmed to
+                aggressively harvest the target DOM tree and immediately drop external links to
+                preserve resources
+              </CitationLink>
+              . Common frameworks like{" "}
+              <CitationLink href="https://docs.scrapy.org/en/latest/topics/spider-middleware.html">
+                Scrapy
+              </CitationLink>{" "}
+              and{" "}
+              <CitationLink href="https://arxiv.org/abs/2601.06301">
+                BeautifulSoup
+              </CitationLink>{" "}
+              are explicitly designed to construct and traverse DOM trees efficiently, making
+              unprotected portfolio pages trivially harvestable. By forcing a jump to an external
+              domain &mdash; specifically one outside your primary indexed URL in the allowed list
+              &mdash; you actively break the automated crawling pipeline. This is why my portfolio
+              site has external links, which is annoying for hiring managers, but critical to
+              preserve the integrity of previous work product.
             </p>
 
             <p>
@@ -346,7 +354,11 @@ export default function EssayDesignIsRisk() {
             <div className="border border-border rounded-lg p-6 space-y-4 bg-muted/30">
               <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Q&amp;A</p>
               <p className="font-semibold text-foreground">
-                Q: Why is your process deck in Sketch rather than Figma? Are you some type of design dinosaur?
+                Q: Why is your{" "}
+                <CitationLink href="https://www.sketch.com/s/d826d733-5642-411a-8da3-72486d6164f0">
+                  process deck in Sketch
+                </CitationLink>{" "}
+                rather than Figma? Are you some type of design dinosaur?
               </p>
               <p>
                 <strong>A:</strong> The underlying architecture of a design or documentation
@@ -355,29 +367,31 @@ export default function EssayDesignIsRisk() {
                 technologies, rendering their user interfaces dynamically within a Document Object
                 Model (DOM) tree. Recent research into automated data extraction explicitly notes
                 that the primary mechanism for modern web scraping &mdash; whether through
-                traditional scripts or advanced LLM-powered agents &mdash; relies on parsing and
-                accessing this DOM structure.
-              </p>
-              <p>
-                Since Figma is built to be an open, highly collaborative web system, its DOM is
+                traditional scripts or advanced LLM-powered agents &mdash;{" "}
+                <CitationLink href="https://www.researchgate.net/publication/340330402_A_Novel_Web_Scraping_Approach_Using_the_Additional_Information_Obtained_From_Web_Pages">
+                  relies on parsing and accessing this DOM structure
+                </CitationLink>
+                . Since Figma is built to be an open, highly collaborative web system, its DOM is
                 highly structured and natively accessible, making it frictionless for LLM
                 harvesters to scrape comments, structural logic, and text components. Most
                 organizations' intractable insistence on design systems and "following recognized
-                best practices for consistent results" means most design teams are following the
-                same component structure via "add Auto Layout" and preparing their data for
-                developer ingestion. Convenient for handoff. Equally convenient for harvest.
+                best practices for consistent results" means that most design teams are following
+                the same component structure via automatically "adding Auto Layout" or preparing
+                their data for developer ingestion and use.
               </p>
               <p>
                 In contrast, systems with non-standard web architectures or those originating as
                 localized applications (like Sketch) do not broadcast a universally accessible,
-                standardized HTML DOM tree in the same manner as a browser-first platform. By
-                migrating protected intellectual property away from a web-native, DOM-heavy
-                ecosystem, you introduce <em>security through friction</em>. The system resists
-                standard parsing algorithms, making mass-scale automated extraction technically
-                unviable for standard scraping agents. For potentially sensitive material like
-                CoT rationale and work product screenshots, a portfolio hosted as nested Sketch
-                pages in a publicly-accessible document is too computationally expensive for
-                cost-optimized webscrapers to consider worthwhile.
+                standardized HTML DOM tree in the same manner as a browser-first platform.
+                Traditional scraping mechanisms and LLM agents fundamentally rely on constructing
+                and navigating a DOM tree to identify and extract relevant data. By migrating
+                protected intellectual property away from a web-native, DOM-heavy ecosystem, you
+                introduce "security through friction." The system resists standard parsing
+                algorithms, making mass-scale automated extraction technically unviable for
+                standard scraping agents. For potentially sensitive information such as CoT
+                rationale and work product screenshots, hosting a portfolio as a series of nested
+                Sketch pages in a publicly-accessible document is too computationally expensive
+                for cost-optimized webscrapers to consider worthwhile.
               </p>
               <p className="text-foreground/70 italic">
                 Short answer: Figma is beautiful and I use it daily. I just don't publish client
@@ -394,12 +408,12 @@ export default function EssayDesignIsRisk() {
             </h2>
 
             <p>
-              Simple: because I care more about the success of users and the safety of my
-              clients than the vanity of the experiences I've designed across my career.
-              UX/CX isn't about the most beautiful screens and most intuitive apps &mdash; it is
-              about trust that is earned across years and decades. It is about users, or more
-              appropriately: humans. It is about the trust we've worked so hard to earn, and
-              the trust we must work harder to maintain.
+              Simple: because I care more about the success of users and the safety of my clients
+              than the vanity of the experiences I've designed across my career. UX/CX isn't about
+              the most beautiful screens and most intuitive apps, it is about trust that is earned
+              across years and decades. It is about users, or more appropriately: humans. It is
+              about the trust we've worked so hard to earn, and the trust we must work harder to
+              maintain.
             </p>
 
             <p>
@@ -410,14 +424,12 @@ export default function EssayDesignIsRisk() {
             </p>
 
             <p>
-              Design isn't about flash &mdash; it is about ensuring the Human-in-the-Loop
-              achieves the jobs-to-be-done via clear workflows. Anything else is syntactic
-              sugar, not meat.
+              Design isn't about flash, it is about ensuring the Human-in-the-Loop achieves the
+              jobs-to-be-done via clear workflows. Anything else is syntactic sugar, not meat.
             </p>
-
           </section>
 
-          {/* Footer CTAs — single CTA block */}
+          {/* Footer CTA */}
           <div className="border-t border-border pt-14 space-y-8">
             <blockquote
               className="border-l-2 pl-5 py-1 text-[20px] md:text-[22px] text-foreground/75 italic leading-[1.6]"
