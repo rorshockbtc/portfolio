@@ -294,13 +294,13 @@ function DisclaimerHookSection({ onContactClick }: { onContactClick: () => void 
 
         <h2
           id="disclaimer-hook-heading"
-          className="text-2xl md:text-3xl font-bold tracking-tight leading-tight max-w-3xl"
+          className="text-2xl md:text-3xl font-bold tracking-tight leading-tight"
           data-testid="text-disclaimer-headline"
         >
           Your design portfolio is a data-exfiltration honeypot. Nobody is talking about it.
         </h2>
 
-        <div className="space-y-4 text-base md:text-[17px] text-foreground/80 leading-[1.7] max-w-3xl">
+        <div className="space-y-4 text-base md:text-[17px] text-foreground/80 leading-[1.7]">
           <p data-testid="text-disclaimer-body-1">
             Designers are the only profession required to publish their Chain-of-Thought to even
             apply for a job. Process, trade-offs, screens, rationale &mdash; the exact reasoning

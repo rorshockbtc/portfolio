@@ -33,6 +33,9 @@ const PAGE_META: Record<string, PageMeta> = {
 };
 
 function getMetaForPath(path: string): PageMeta {
+  if (path.startsWith("/essays/design-is-risk")) {
+    return PAGE_META["/essays/design-is-risk"];
+  }
   if (path === "/studio" || path.startsWith("/studio")) {
     return PAGE_META["/studio"];
   }
