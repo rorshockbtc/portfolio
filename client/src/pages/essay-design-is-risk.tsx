@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import ContactFormModal from "@/components/contact-form-modal";
 
 function CitationLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -26,6 +28,7 @@ function PinkQuote({ children, large }: { children: React.ReactNode; large?: boo
 }
 
 export default function EssayDesignIsRisk() {
+  const [contactOpen, setContactOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Minimal header — back link only, not in main nav */}
@@ -80,6 +83,10 @@ export default function EssayDesignIsRisk() {
               research exploring this threat, why it is structurally underestimated by enterprise
               design leadership, and why information integrity is the most undervalued skill in
               the design profession.
+            </p>
+            <p className="text-sm text-muted-foreground border-l-2 border-border pl-4 italic">
+              This synthesis may be freely distributed or quoted per the MIT license available on
+              the project's GitHub repository.
             </p>
           </section>
 
@@ -334,28 +341,39 @@ export default function EssayDesignIsRisk() {
                 Q: Why is your process deck in Sketch rather than Figma? Are you some type of design dinosaur?
               </p>
               <p>
-                The underlying architecture of a design platform fundamentally dictates its
-                attack surface vulnerability to automated IP exfiltration. Browser-native
-                applications like Figma are built entirely on web technologies, rendering
-                their interfaces dynamically within a Document Object Model (DOM) tree. Recent
-                research into automated data extraction explicitly notes that the primary
-                mechanism for modern web scraping &mdash; whether via traditional scripts or
-                advanced AI-driven agents &mdash; is the parsing and traversal of this
-                accessible DOM structure.
+                <strong>A:</strong> The underlying architecture of a design or documentation
+                platform fundamentally dictates its attack surface vulnerability to automated IP
+                exfiltration. Browser-native applications like Figma are built entirely on web
+                technologies, rendering their user interfaces dynamically within a Document Object
+                Model (DOM) tree. Recent research into automated data extraction explicitly notes
+                that the primary mechanism for modern web scraping &mdash; whether through
+                traditional scripts or advanced LLM-powered agents &mdash; relies on parsing and
+                accessing this DOM structure.
               </p>
               <p>
-                In contrast, systems with non-standard web architectures or those originating
-                as localized applications (like Sketch) do not broadcast a universally
-                accessible, standardized HTML DOM tree in the same manner as a browser-first
-                platform. Traditional scraping mechanisms and LLM agents fundamentally rely on
-                constructing and navigating a DOM tree to identify and extract relevant data.
-                By migrating protected intellectual property away from a web-native, DOM-heavy
-                ecosystem, you introduce a structural barrier that has nothing to do with
-                design preference and everything to do with information security posture.
+                Since Figma is built to be an open, highly collaborative web system, its DOM is
+                highly structured and natively accessible, making it frictionless for LLM
+                harvesters to scrape comments, structural logic, and text components. Most
+                organizations' intractable insistence on design systems and "following recognized
+                best practices for consistent results" means most design teams are following the
+                same component structure via "add Auto Layout" and preparing their data for
+                developer ingestion. Convenient for handoff. Equally convenient for harvest.
               </p>
               <p>
-                The short answer: Figma is beautiful and I use it daily. I just don't publish
-                client IP inside it.
+                In contrast, systems with non-standard web architectures or those originating as
+                localized applications (like Sketch) do not broadcast a universally accessible,
+                standardized HTML DOM tree in the same manner as a browser-first platform. By
+                migrating protected intellectual property away from a web-native, DOM-heavy
+                ecosystem, you introduce <em>security through friction</em>. The system resists
+                standard parsing algorithms, making mass-scale automated extraction technically
+                unviable for standard scraping agents. For potentially sensitive material like
+                CoT rationale and work product screenshots, a portfolio hosted as nested Sketch
+                pages in a publicly-accessible document is too computationally expensive for
+                cost-optimized webscrapers to consider worthwhile.
+              </p>
+              <p className="text-foreground/70 italic">
+                Short answer: Figma is beautiful and I use it daily. I just don't publish client
+                IP inside it.
               </p>
             </div>
           </section>
@@ -364,68 +382,34 @@ export default function EssayDesignIsRisk() {
           <section className="space-y-5 border-t border-border pt-12">
             <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">04 / Why is this the headline section in your design portfolio?</p>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug text-foreground">
-              Trust over decades. Designers as grammarians.
+              Trust over decades. Users over vanity.
             </h2>
 
             <p>
               Simple: because I care more about the success of users and the safety of my
               clients than the vanity of the experiences I've designed across my career.
-              UX/CX isn't about the most beautiful screens and most intuitive apps; it is about
-              trust that is earned across years and decades. It is about users &mdash; or more
+              UX/CX isn't about the most beautiful screens and most intuitive apps &mdash; it is
+              about trust that is earned across years and decades. It is about users, or more
               appropriately: humans. It is about the trust we've worked so hard to earn, and
               the trust we must work harder to maintain.
             </p>
 
             <p>
               If you have an ego and want to win design awards, you should never design for
-              life-or-death applications in banking or healthcare or defense, or any industry
-              that impacts people's lives. Adoption is never worth more than trust, period.
+              life-or-death applications in banking or healthcare, or defense, or any other
+              industry that impacts people's lives. Adoption is never worth more than trust and
+              user safety in those industries, period.
             </p>
 
             <p>
-              If you spend more time on your portfolio than you do with users or business
-              stakeholders, you aren't a designer. You're a salesperson, and you're not just
-              selling yourself: you're selling out the user. In many cases, you're just a
-              student. Design isn't about flash &mdash; it is about ensuring the
-              human-in-the-mix achieves the jobs-to-be-done, and anything else is spice, not
-              meat.
-            </p>
-
-            <p>
-              I view design as two things: (1) language with allowable opinions, and (2) order
-              applied to organizational chaos. Suppositions:
-            </p>
-
-            <ol className="list-decimal pl-6 space-y-2 text-foreground/85">
-              <li>
-                There is (likely) no organization with enough polymaths where a bank cashier
-                can have a valid opinion on banking core integrations and risk management
-                balanced with corporate compliance; and
-              </li>
-              <li>
-                There are (likely) no organizations wherein that same cashier can suggest
-                changes that take effect within 2&ndash;6 weeks.
-              </li>
-            </ol>
-
-            <p>From my experience in startups to Fortune 10, this remains true.</p>
-
-            <p>
-              Designers are grammarians. We mind the rules, we speak the language, we elevate
-              the word. But if we do so without minding the interests of our patrons, we
-              inevitably extend a hand to Spartan activity, that she may overtake Roman
-              infrastructure. The dark forest is not about being seen; it is about being
-              protected.
-            </p>
-
-            <p>
-              As designers, we are Romans. We must build the roads. We must talk to the users
-              and ensure the roads are walkable, without providing our competition the means to
-              waltz through the front door. The longevity of commerce depends on it.
+              Design isn't about flash &mdash; it is about ensuring the Human-in-the-Loop
+              achieves the jobs-to-be-done via clear workflows. Anything else is syntactic
+              sugar, not meat.
             </p>
 
             <PinkQuote large>
-              It is your republic, if you can keep it.
+              If you want to work with a designer and product systems architect who thinks
+              outside the screen and beyond the pixel, let's connect.
             </PinkQuote>
           </section>
 
@@ -437,8 +421,8 @@ export default function EssayDesignIsRisk() {
               genuinely like to talk.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button asChild data-testid="cta-essay-contact">
-                <a href="mailto:kyle@colonhyphenbracket.pink">Let's Talk</a>
+              <Button onClick={() => setContactOpen(true)} data-testid="cta-essay-contact">
+                Let's Talk
               </Button>
               <Button variant="secondary" asChild data-testid="cta-essay-deck">
                 <a
@@ -457,6 +441,8 @@ export default function EssayDesignIsRisk() {
           </div>
         </article>
       </main>
+
+      <ContactFormModal open={contactOpen} onOpenChange={setContactOpen} />
     </div>
   );
 }

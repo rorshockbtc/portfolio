@@ -289,7 +289,7 @@ function DisclaimerHookSection({ onContactClick }: { onContactClick: () => void 
         className="space-y-7"
       >
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          A note on what's missing
+          Why this portfolio is intentionally light
         </p>
 
         <h2
@@ -297,22 +297,26 @@ function DisclaimerHookSection({ onContactClick }: { onContactClick: () => void 
           className="text-2xl md:text-3xl font-bold tracking-tight leading-tight max-w-3xl"
           data-testid="text-disclaimer-headline"
         >
-          Most hiring managers don't realize that asking every applicant to publish a portfolio is a security risk.
+          Your design portfolio is a data-exfiltration honeypot. Nobody is talking about it.
         </h2>
 
-        <div className="space-y-4 text-base md:text-[17px] text-foreground/80 leading-[1.7] max-w-2xl">
+        <div className="space-y-4 text-base md:text-[17px] text-foreground/80 leading-[1.7] max-w-3xl">
           <p data-testid="text-disclaimer-body-1">
-            Publicly-required design portfolios &mdash; process, decisions, trade-offs, screens
-            &mdash; have quietly become the highest-fidelity exfiltration vector in the hiring
-            pipeline. The same risk now shows up in DeepMind's adversarial-use research, MI5's
-            espionage briefings, and the <em>Columbia Law Review</em>.
+            Designers are the only profession required to publish their Chain-of-Thought to even
+            apply for a job. Process, trade-offs, screens, rationale &mdash; the exact reasoning
+            corpus that LLMs and adversarial actors are paying top dollar to harvest. DeepMind,
+            MI5, and the <em>Columbia Law Review</em> have all flagged it. Your design leadership
+            almost certainly has not.
           </p>
           <p data-testid="text-disclaimer-body-2">
-            This site is intentionally light. The interesting client work isn't safe to publish; what
-            is linked here is independently built and safe to share.
+            This site is deliberately lightweight. The interesting client work isn't safe to
+            publish; what's linked here is independently built and safe to share. The full case
+            study explains the threat model, the architecture, and why every link on this page
+            jumps you to a different domain.
           </p>
           <p data-testid="text-disclaimer-body-3">
-            Read the full piece, or just say hello.
+            If you've ever required a portfolio from a candidate, you should read this before the
+            next requisition goes out.
           </p>
         </div>
 
