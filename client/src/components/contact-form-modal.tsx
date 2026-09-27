@@ -34,9 +34,10 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 interface ContactFormModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  defaultSubject?: string;
 }
 
-export default function ContactFormModal({ open, onOpenChange }: ContactFormModalProps) {
+export default function ContactFormModal({ open, onOpenChange, defaultSubject = "General Inquiry" }: ContactFormModalProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const form = useForm<ContactFormValues>({
@@ -44,7 +45,7 @@ export default function ContactFormModal({ open, onOpenChange }: ContactFormModa
     defaultValues: {
       name: "",
       email: "",
-      subject: "",
+      subject: defaultSubject,
       message: "",
     },
   });

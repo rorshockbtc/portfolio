@@ -81,12 +81,21 @@ export default {
           busy: "rgb(239 68 68)",
           offline: "rgb(156 163 175)",
         },
+        "brand-pink": "hsl(var(--brand-pink) / <alpha-value>)",
+        "brand-dusty-rose": "hsl(var(--brand-dusty-rose) / <alpha-value>)",
+        "brand-terracotta": "hsl(var(--brand-terracotta) / <alpha-value>)",
+        "brand-yellow": "hsl(var(--brand-yellow) / <alpha-value>)",
+        "brand-green": "hsl(var(--brand-green) / <alpha-value>)",
+        "brand-blue": "hsl(var(--brand-blue) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
+        editorial: ["var(--font-editorial)"],
         mono: ["var(--font-mono)"],
         display: ["var(--font-display)"],
+        outfit: ["Outfit", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

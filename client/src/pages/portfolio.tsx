@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -8,1420 +9,804 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
 import {
   ArrowUpRight,
-  Lock,
-  Brain,
   TrendingUp,
   Shield,
-  ChevronRight,
   Download,
   ExternalLink,
-  Play,
-  Pause,
-  Volume2,
-  Loader2,
   FileText,
-  Mail,
-  Presentation,
+  Zap,
+  Check,
+  Layers,
+  Cpu,
+  Building2,
+  HardHat,
+  Eye,
+  Activity,
+  ArrowRight,
 } from "lucide-react";
-import { SiGithub } from "react-icons/si";
-import { motion } from "framer-motion";
 import { Link } from "wouter";
 import heroImage from "/artwork/hero.jpg";
 import ContactFormModal from "@/components/contact-form-modal";
+import {
+  BrandMark,
+  NamespaceBadge,
+  MetricStrip,
+  TelemetryCockpit,
+  LivingProofCard,
+  InstitutionalCard,
+  SprintCallout,
+  ProtectedVault,
+  ClientLogoBar,
+  AlbersInteractionCard,
+  VideoShowcase,
+  type LivingProofData,
+  type InstitutionalRecord,
+  type MetricItem,
+} from "@/components/chb";
 
-const easeOut = [0.16, 1, 0.3, 1] as const;
+// ─── Audience / Perspective Tracks ──────────────────────────────────────────
+type PerspectiveTrack = "design" | "development" | "architecture";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-  }),
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
-
-interface CaseStudy {
-  id: string;
-  title: string;
-  subtitle: string;
-  executiveSummary: string;
-  humanProblem: string;
-  uxOutcomes: string;
-  technicalProblem1: string;
-  technicalProblem2: string;
-  technicalOutcomes: string[];
-  invitation: string;
-  invitationLink?: string;
-  invitationLinkText?: string;
-  image: string;
-  icon: typeof Brain;
-  tags: string[];
+interface SpecimenMetric {
+  label: string;
+  value: string;
+  subtext: string;
 }
 
-const caseStudies: CaseStudy[] = [
-  {
-    id: "chb",
-    title: "The Persistent Memory AI Ecosystem",
-    subtitle: "The CHB Ecosystem (Hash, Semi, Pipes)",
-    executiveSummary:
-      "A suite of interconnected web apps that share a universal cryptographic identity and persistent memory. It is an AI ecosystem that actually remembers who you are across platforms.",
-    humanProblem:
-      "AI amnesia. Having to repeat your context, your projects, and your preferences to an AI every single session is a form of digital torture. High-bandwidth thinkers need an AI sparring partner that remembers their context, not a goldfish.",
-    uxOutcomes:
-      "Zero-friction context. A conversational UI that adapts its tone, rhetorical style, and challenge-level based on the user\u2019s psychological profile (Big Five, MBTI, Enneagram) derived automatically from their journaling habits.",
-    technicalProblem1:
-      "The \u201cAI Tax\u201d\u2014users burning expensive API tokens just trying to establish context through massive prompt engineering.",
-    technicalProblem2:
-      "Securely managing user identity across a decentralized suite of tools without relying on Big Tech OAuth providers.",
-    technicalOutcomes: [
-      "Architected the \u201cReference Library Pattern\u201d (Curated Template + Keyword Matching + User Words = Personalized Output). This system delivers PhD-tier, 25-page psychological insights at exactly $0.00 in AI API costs by running local keyword detection against curated JSON libraries.",
-      "Built cross-product APIs secured by a custom Auth Hub using both traditional email/bcrypt and NOSTR (NIP-07) cryptographic authentication, generating a chbUniversalId for seamless cross-app memory sharing.",
+interface TrackConfig {
+  id: PerspectiveTrack;
+  label: string;
+  pillTag: string;
+  headlineMain: string;
+  headlineAmp: string;
+  headlineSub: string;
+  subhead: string;
+  categoryBadge: string;
+  valueProps: { text: string }[];
+  specimenMetrics: SpecimenMetric[];
+  resumeFile: string;
+  resumeLabel: string;
+}
+
+const TRACKS: Record<PerspectiveTrack, TrackConfig> = {
+  design: {
+    id: "design",
+    label: "Design",
+    pillTag: "Default View",
+    headlineMain: "Principal Product Designer",
+    headlineAmp: "&",
+    headlineSub: "Design Systems Leader",
+    subhead:
+      "From 4-day bank sprints to 70M-patient mobile ecosystems. I design resilient, high-craft digital products that thrive under extreme technical and regulatory constraints.",
+    categoryBadge: "Principal Product Designer",
+    valueProps: [
+      { text: "70M+ Patients (UnitedHealth Group Native Mobile)" },
+      { text: "3.2M Global Associates (Walmart LMS & Search)" },
+      { text: "4-Day Complete Bank Rebrand (Custodia Bank)" },
+      { text: "100% Solo Ownership on High-Stakes Platforms" },
     ],
-    invitation: "Experience an AI that doesn\u2019t forget.",
-    invitationLink: "https://colonhyphenbracket.pink",
-    invitationLinkText: "Visit colonhyphenbracket.pink",
-    image: "/artwork/chb-ecosystem.png",
-    icon: Brain,
-    tags: ["AI/ML", "Cryptographic Auth", "NOSTR", "Persistent Memory"],
+    specimenMetrics: [
+      { label: "Mobile Scale", value: "70M+", subtext: "UnitedHealth Native Apps" },
+      { label: "Workforce UI", value: "3.2M", subtext: "Walmart Global LMS" },
+      { label: "Rebrand Sprint", value: "4 Days", subtext: "Custodia Bank v1" },
+      { label: "Lead Role", value: "Sole Lead", subtext: "Zero Design Handoffs" },
+    ],
+    resumeFile: "/resumes/kyle-cyree-resume.pdf",
+    resumeLabel: "Download Product Design Resume",
+  },
+  development: {
+    id: "development",
+    label: "Development",
+    pillTag: "Engineering Focus",
+    headlineMain: "Principal Systems Builder",
+    headlineAmp: "&",
+    headlineSub: "Protocol Engineer",
+    subhead:
+      "Architecting distributed protocols, multi-engine financial settlement, and generative harness engineering into zero-overhead production systems.",
+    categoryBadge: "Systems Architect & Protocol Engineer",
+    valueProps: [
+      { text: "3 Incompatible Settlement Engines Unified (Custodia)" },
+      { text: "37,000-Line TypeScript Engine with Sub-100ms Telemetry" },
+      { text: "$0.00 Marginal AI Inference Pattern (Pipes Protocol)" },
+      { text: "Pre-Karpathy Harness Engineering & Constitutional UAT" },
+    ],
+    specimenMetrics: [
+      { label: "Settlement Rails", value: "3 Engines", subtext: "Fedwire, MM & Bitcoin" },
+      { label: "WebSocket Bridge", value: "<100ms", subtext: "Sub-100ms Execution" },
+      { label: "AI Inference", value: "$0.00", subtext: "Zero Token Overhead" },
+      { label: "Codebase Scale", value: "37,000", subtext: "Lines of TypeScript" },
+    ],
+    resumeFile: "/resumes/kyle-cyree-resume.pdf",
+    resumeLabel: "Download Systems Architect Resume",
+  },
+  architecture: {
+    id: "architecture",
+    label: "Product Architect",
+    pillTag: "The 'Unit of One'",
+    headlineMain: "Principal Product Architect",
+    headlineAmp: "&",
+    headlineSub: "Systems Builder",
+    subhead:
+      "I bridge the gap that breaks early-stage and growth tech companies: I architect the system, design the interface, and ship the production code.",
+    categoryBadge: "Unit of One: Design + Systems + Shipping",
+    valueProps: [
+      { text: "Zero-to-One Production Velocity & Solo Execution" },
+      { text: "C-Suite Stakeholder Facilitation & Enterprise Strategy (Fusion)" },
+      { text: "S&P 500 Industrial Field Modernization (Martin Marietta)" },
+      { text: "10x Acquisition Exit & -83% Fraud Reduction (Foodler)" },
+    ],
+    specimenMetrics: [
+      { label: "Production Speed", value: "100%", subtext: "Zero-to-One Solo" },
+      { label: "Global Charities", value: "1M+", subtext: "Fidelity Giving App" },
+      { label: "Fraud Slashed", value: "-83%", subtext: "$6M to <$1M (Foodler)" },
+      { label: "M&A Multiple", value: "10x Exit", subtext: "Successful Acquisition" },
+    ],
+    resumeFile: "/resumes/kyle-cyree-resume.pdf",
+    resumeLabel: "Download Product Architect Resume",
+  },
+};
+
+// ─── Vault Images (Custodia & Walmart) ──────────────────────────────────────────
+const custodiaVaultImages = [
+  {
+    src: "/images/custodia/404 horse.png",
+    title: "Hand-Drawn Brand Mark: 'The Horse'",
+    caption:
+      "Original hand-drawn identity crafted for Custodia Bank. Conceived as a contrarian, dignified antidote to generic SaaS fintech blue, embodying Wyoming full-reserve banking heritage.",
+    tag: "Brand Identity",
+  },
+  {
+    src: "/images/custodia/mm-01.png",
+    title: "Institutional Money Market: Account Overview",
+    caption:
+      "Corporate treasury interface designed for simultaneous monitoring of operational liquidity, daily institutional yield accrual, and multi-engine settlement positions.",
+    tag: "Banking Dashboard",
+  },
+  {
+    src: "/images/custodia/mm-02.png",
+    title: "Money Market Settlement & Order Routing",
+    caption:
+      "Order entry and allocation UX managing T+1/T+2 commercial paper settlement windows alongside instant reserve balance checks.",
+    tag: "Settlement UX",
+  },
+  {
+    src: "/images/custodia/mm-03.png",
+    title: "Fund Performance & Compliance Auditing",
+    caption:
+      "High-density institutional ledger views built for CFOs, compliance officers, and bank examiners with exportable audit logs and yield analytics.",
+    tag: "Audit Ledger",
+  },
+  {
+    src: "/images/custodia/utxo-1.png",
+    title: "Bitcoin Custody: UTXO Manager Dashboard",
+    caption:
+      "Enterprise unspent transaction output (UTXO) management interface enabling treasury operators to inspect on-chain UTXO denominations and consolidate fragmented balances.",
+    tag: "Bitcoin Custody",
+  },
+  {
+    src: "/images/custodia/utxo-2.png",
+    title: "UTXO Script Constructor & Fee Allocation",
+    caption:
+      "Interactive multi-sig constructor giving institutional clients fine-grained control over mempool priority fees, change addresses, and timelocks.",
+    tag: "Transaction Builder",
+  },
+  {
+    src: "/images/custodia/utxo-3.png",
+    title: "Multi-Engine Balance Allocation",
+    caption:
+      "Unified liquidity allocation panel reconciling on-chain Bitcoin confirmations with off-chain fiat ledger balances.",
+    tag: "Liquidity UX",
+  },
+];
+
+const walmartVaultImages = [
+  {
+    src: "/images/walmart/walmart-admin-manual.png",
+    title: "Enterprise Learning: Content Distribution Platform (CDP)",
+    caption:
+      "Administrative manual entry and metadata taxonomy engine built for Walmart's global training platform serving 3.2M associates.",
+    tag: "Global LMS",
+  },
+  {
+    src: "/images/walmart/walmart-search-results.png",
+    title: "Graph-Powered Enterprise Search Paradigm",
+    caption:
+      "High-density search results interface integrating GraphQL & graph databases to discover curriculum, operational guidelines, and role certifications in real time.",
+    tag: "Search UX",
+  },
+  {
+    src: "/images/walmart/walmart-cdp-content.png",
+    title: "Content Lifecycle & Version Management",
+    caption:
+      "State-driven courseware authoring and deletion safety controls designed to prevent accidental catalog regressions across millions of active learners.",
+    tag: "Admin Tooling",
+  },
+];
+
+// ─── Metric Strip Data ────────────────────────────────────────────────────────
+const headlineMetrics: MetricItem[] = [
+  {
+    value: "70M+",
+    label: "UnitedHealth Group",
+    highlight: true,
+  },
+  {
+    value: "3.2M",
+    label: "Walmart Global Tech",
+  },
+  {
+    value: "4 Days",
+    label: "Custodia Bank",
+    highlight: true,
+  },
+  {
+    value: "1M+",
+    label: "Fidelity Giving",
+  },
+];
+
+// ─── Living Proofs (Public Flagships) ──────────────────────────────────────────
+const publicWorkStudies: LivingProofData[] = [
+  {
+    id: "pipes",
+    namespace: "pipe\\multi-tenant-protocol",
+    category: "Flagship Living Product",
+    title: "Pipes Protocol & Knowledge Marketplace",
+    subtitle: "Pipes.pink",
+    summary:
+      "A sovereign knowledge protocol and marketplace that transforms human expertise into reusable, monetizable infrastructure with $0 marginal AI inference costs.",
+    humanProblem:
+      "Model collapse and AI amnesia. As foundation LLMs drown in synthetic data and hallucinations, verified human-curated context is the rarest asset. But standard SaaS burns expensive tokens on repetitive context dumps.",
+    systemsSolution:
+      "Architected the 'Reference Library Pattern' (Template + Keyword Match + Curated Knowledge = Deterministic Output at $0.00 marginal LLM cost). Built a runtime CSS variable injection engine that adapts the entire UI, palette, typography, and copy across 6 distinct personas in real time.",
+    metrics: [
+      { label: "Marginal AI Cost", value: "$0.00", highlight: true },
+      { label: "Persona Engine", value: "6 Live Themes" },
+      { label: "Creator Equity", value: "70% Split" },
+    ],
+    technicalOutcomes: [
+      "Engineered the Reference Library pattern delivering 25-page, PhD-level outputs with zero external token expenditure by matching local keyword ontologies.",
+      "Multi-tenant CSS variable injection engine powering instantaneous aesthetic & typographic adaptation across 6 live audiences.",
+      "Self-sovereign namespace registry with deeded equity mechanics (70/30 creator revenue split) anchored on cryptographic identity.",
+    ],
+    image: "/images/pipes/pipes-hero.png",
+    icon: Layers,
+    tags: ["Distributed Systems", "Runtime CSS Injection", "$0 AI Cost", "TypeScript", "NOSTR"],
+    liveUrl: "https://pipes.pink",
+    liveUrlText: "Launch Live Protocol (pipes.pink)",
+  },
+  {
+    id: "greater",
+    namespace: "pipe\\sovereign-cx",
+    category: "Open Source Bitcoin",
+    title: "Project Greater: Sovereign CX Interpreter",
+    subtitle: "Greaterthan.pink",
+    summary:
+      "An open-source, deterministic protocol interpreter engineered for high-stakes Bitcoin and privacy-first ecosystems at 1/1000th legacy SaaS costs.",
+    humanProblem:
+      "Legacy support software (Zendesk, Intercom) is bloated, PII-heavy, and fundamentally violates 'Don't Trust, Verify' security models, charging $150+/seat and leaking sensitive customer identities into centralized databases.",
+    systemsSolution:
+      "Engineered a sovereign customer support architecture decoupled from PII. Uses cryptographic handshakes (NOSTR/PGP keys) for persistent anonymous sessions and deterministic prompt optimization (dspy.ts) to deliver versioned technical specifications without hallucinations.",
+    metrics: [
+      { label: "Resolution Cost", value: "<$0.02", highlight: true },
+      { label: "Privacy Model", value: "Zero-Knowledge" },
+      { label: "Token Efficiency", value: "Deterministic" },
+    ],
+    technicalOutcomes: [
+      "Reduced resolution cost from $2.00 (legacy SaaS) to <$0.02 using local-first browser vaults and deterministic model orchestration.",
+      "Decoupled identity from data using Session_ID = SHA-256(User_PubKey + Salt) handshakes.",
+      "Engineered strategic friction UX: halts automated chats when high-risk operations (account freezes, timelocks) are detected, requiring manual cryptographic acknowledgment.",
+    ],
+    image: "/artwork/emerald.png",
+    icon: Shield,
+    tags: ["Open Source", "dspy.ts", "Zero-PII", "Bitcoin CX", "Web Crypto"],
+    liveUrl: "https://greater.pink",
+    liveUrlText: "Try Live Demo (greater.pink)",
+    repoUrl: "https://github.com/rorshockbtc/greater-than",
+  },
+  {
+    id: "harness",
+    namespace: "pipe\\harness-engineering",
+    category: "Agent Governance",
+    title: "General Practices (Agentic Harness Engineering)",
+    subtitle: "Formerly The Workshop",
+    summary:
+      "A constitutional governance framework built 18 months ahead of the industry to constrain rogue AI builder agents and enforce strict runtime parity.",
+    humanProblem:
+      "The 'Template Tyranny' of agentic coding. Unconstrained AI builder agents hallucinate monorepos, install 300 unvetted npm packages, fall into context amnesia, and break production parity.",
+    systemsSolution:
+      "Pioneered agent harness engineering ahead of mainstream industry adoption. Built a machine-parseable 'Living Primer' constitution with strict dependency caps (max 50), 10s API timeouts, and an automated agentic handshake that forces builders into rigorous compliance before merge.",
+    metrics: [
+      { label: "Market Timing", value: "+18 Mo Ahead", highlight: true },
+      { label: "Dependency Cap", value: "Max 50 Deps" },
+      { label: "Parity Enforcement", value: "Automated UAT" },
+    ],
+    technicalOutcomes: [
+      "Engineered the 'Agentic Handshake' API middleware, forcing LLM builders to validate against master project constitutions across every compute step.",
+      "Pre-Karpathy harness engineering: established automated UAT hooks, runtime boundary enforcement, and anti-pattern interceptors.",
+      "Zero-overhead architecture eliminating dev-to-production discrepancies across multi-agent workflows.",
+    ],
+    image: "/artwork/workshop.png",
+    icon: Cpu,
+    tags: ["Harness Engineering", "Constitutional Governance", "Multi-Agent Systems", "Runtime Constraints"],
   },
   {
     id: "slash",
-    title: "High-Velocity Binary Arbitrage Engine",
-    subtitle: "Slash V6",
-    executiveSummary:
-      "A production-grade, market-neutral high-frequency trading bot designed for 15-minute cryptocurrency prediction windows.",
+    namespace: "pipe\\algorithmic-systems",
+    category: "High-Frequency Trading",
+    title: "High-Velocity Market Prediction Engine",
+    subtitle: "Slash V6 (Algorithmic Architecture)",
+    summary:
+      "A 37,000-line TypeScript high-frequency systems architecture built for sub-100ms websocket execution and multi-layered risk mitigation.",
     humanProblem:
-      "Prediction markets are chaotic, 24/7, and structurally inefficient. Humans need to sleep; mathematical arbitrage opportunities do not.",
-    uxOutcomes:
-      "A centralized, React-based dashboard that translates sub-100ms websocket chaos into human-readable scorecards, forensic event logs, and strategic levers. It turns anxiety-inducing market volatility into a manageable game of dials and switches.",
-    technicalProblem1:
-      "Geographic latency and exchange access restrictions requiring sub-second execution.",
-    technicalProblem2:
-      "Catastrophic capital loss scenarios during violent market breakouts, and \u201ctrading deadlocks\u201d where competing safety systems freeze the bot\u2019s logic.",
-    technicalOutcomes: [
-      "Scaled to 37,000+ lines of TypeScript utilizing a distributed \u201cBrain + Hands\u201d architecture. The Cloud UI handles monitoring and simulation, while a low-latency Amsterdam VPS executes trades, communicating via a custom WebSocket bridge.",
-      "\u201cThe Crucible,\u201d a custom Monte Carlo simulator to backtest 50+ tunable parameters against 126 recorded historical markets.",
-      "Engineered 6 independent, concurrent risk management systems including Pace Brakes (to prevent runaway accumulation), Margin Oracles (for capital efficiency), and Liquidity Throttles.",
+      "Prediction markets are 24/7, chaotic, and subject to violent liquidity dislocations. Manual trading is impossible; naive bots freeze up or blow out during flash breakouts.",
+    systemsSolution:
+      "Architected a distributed 'Brain + Hands' system: a cloud React monitoring cockpit communicating with a low-latency Amsterdam execution node via a custom WebSocket bridge. Built 'The Crucible' Monte Carlo simulator to stress-test 50+ parameters against 126 historical markets.",
+    metrics: [
+      { label: "Telemetry Latency", value: "<100ms", highlight: true },
+      { label: "Codebase Scale", value: "37k Lines TS" },
+      { label: "Risk Subsystems", value: "6 Concurrent" },
     ],
-    invitation: "I build systems that don\u2019t sleep so that I can.",
+    technicalOutcomes: [
+      "Engineered 6 concurrent, independent risk systems: Pace Brakes (prevent runaway accumulation), Margin Oracles (capital efficiency), and Liquidity Throttles.",
+      "Sub-100ms real-time telemetry processing across streaming orderbooks.",
+      "Eliminated trading deadlocks with priority-queued state recovery and fail-safe automated circuit breakers.",
+    ],
     image: "/artwork/slash-v6.png",
     icon: TrendingUp,
-    tags: ["TypeScript", "WebSocket", "Monte Carlo", "HFT"],
+    tags: ["TypeScript", "WebSocket Bridge", "Monte Carlo Simulator", "Distributed Systems", "HFT"],
   },
+];
+
+// ─── Deep-Dive Enterprise Institutional Records ────────────────────────────────
+const institutionalRecords: InstitutionalRecord[] = [
   {
-    id: "workshop",
-    title: "The Sovereign Blueprint (Anti-Chaos Engine)",
-    subtitle: "Workshop.pink",
-    executiveSummary:
-      "A strategic governance system that generates \u201cProject Constitutions\u201d to tame chaotic, overly-opinionated AI builder agents.",
-    humanProblem:
-      "The \u201cTemplate Tyranny\u201d of modern AI. You ask a coding agent to build a simple landing page, and it confidently builds a full-stack monorepo you didn\u2019t ask for. Founders are reduced from visionaries to exasperated micromanagers.",
-    uxOutcomes:
-      "Restoring sanity and creative flow to founders. Workshop provides a \u201cLiving Primer\u201d\u2014a massive, human-readable and machine-parseable Markdown document that acts as the un-ignorable law for the AI, keeping it aligned with the human\u2019s actual vision.",
-    technicalProblem1:
-      "AI agents suffer from context window amnesia and fall into \u201ccircular logic hell\u201d during complex software builds.",
-    technicalProblem2:
-      "Discrepancies between development and production environments caused by rogue AI dependency choices.",
-    technicalOutcomes: [
-      "Developed a strict Constitutional Governance middleware pattern that enforces hard dependency limits (e.g., max 50 production dependencies), API timeout fallbacks (max 10s), and environment parity.",
-      "Engineered the \u201cAgentic Handshake,\u201d an API connection allowing the builder agent to continuously re-sync with the project\u2019s master constitution, bypassing context window limitations.",
-    ],
-    invitation: "Stop arguing with your tools. Give them a constitution.",
-    image: "/artwork/workshop.png",
+    client: "UnitedHealth Group / Optum",
+    role: "Senior Product Experience Designer & Fusion Strategist",
+    scale: "70M+ Patients • Flagship iOS & Android Apps",
+    description:
+      "Led design for UHG's flagship patient mobile application used by 70M+ Americans. Produced 80%+ of the Android experience and 50%+ of the iOS experience. When the initial mobile team disbanded in month one, inherited and unified the cross-org mobile design system across UnitedHealth and Optum with a team of 4. Embedded within Fusion (an elite internal McKinsey-style product & business consultancy), leading C-suite stakeholder facilitation, hospital acquisition digital rollouts, and enterprise cybersecurity workflow redesign.",
+    metrics: ["70M+ Daily Patients", "80% Android / 50% iOS", "Fusion C-Suite Facilitation"],
     icon: Shield,
-    tags: ["Governance", "Middleware", "Agent Systems", "Markdown"],
+    featured: true,
+  },
+  {
+    client: "Walmart Global Tech",
+    role: "Senior UX/UI Architect",
+    scale: "3.2M Global Associates • Enterprise LMS & Search",
+    description:
+      "Architected the Learning Management System (LMS) and enterprise knowledge platform from the ground up for the world's largest private workforce (3.2M+ employees). Spearheaded the migration from legacy infrastructure to GraphQL and graph databases, designing graph-driven search paradigms, automated content tagging, and administrative publishing engines adhering to the global Walmart design system.",
+    metrics: ["3.2M Employees", "GraphQL Architecture", "Enterprise Search Paradigm"],
+    icon: Zap,
+    featured: true,
+  },
+  {
+    client: "Custodia Bank",
+    role: "Sole Founding Product Designer",
+    scale: "Zero-to-One Federal Reserve SPDI Bank",
+    description:
+      "First and only designer for the chartered digital asset bank. Shipped the complete ground-up marketing website in 4 days and the full core banking application in 30 days to meet Federal Reserve master account evaluation deadlines. Hand-drew the iconic brand marks (The Horse, Rodeo) and built the design system from scratch. Solved the complex multi-engine settlement challenge across Fedwire/ACH, Money Market funds, and Bitcoin UTXO consolidation, conceiving the unified 'Frontier' settlement engine. The design system stood untouched in production for 2+ years without a subsequent design hire.",
+    metrics: ["4-Day Website Sprint", "30-Day Core Bank App", "3 Settlement Rails Unified"],
+    icon: Building2,
+    featured: true,
+  },
+  {
+    client: "Fidelity Investments (via BLDG-25)",
+    role: "Lead Product Designer",
+    scale: "1M+ Indexed Charities • First Cloud-Native Launch",
+    description:
+      "Embedded at Fidelity's Raleigh campus for 1.5 years to design the 'Giving Marketplace' from scratch. Enabled individual and corporate investors to direct investment dividends to over 1,000,000 global charities. Led the enterprise migration from clunky legacy design patterns to modern Material Design, defining end-to-end user flows and co-managing design delivery on Fidelity's first production cloud-native deployment.",
+    metrics: ["1M+ Charities Indexed", "First Cloud-Native App", "Material Design Migration"],
+    icon: TrendingUp,
+  },
+  {
+    client: "IronNet Cybersecurity (via BLDG-25)",
+    role: "Principal Systems Designer",
+    scale: "Nation-State Defense • Gen. Keith Alexander (Ex-NSA)",
+    description:
+      "Embedded with IronNet (founded by General Keith Alexander, former Director of the NSA and Commander of U.S. Cyber Command) to architect global device management, threat escalation matrices, and complex multi-tier Roles and Permissions (RBAC) across protected network endpoints.",
+    metrics: ["NSA Chief Pedigree", "Global Device Management", "Defense-Grade RBAC"],
+    icon: Shield,
+  },
+  {
+    client: "Martin Marietta (via BLDG-25)",
+    role: "Senior Product Designer",
+    scale: "S&P 500 Heavy Materials • Industrial Field Modernization",
+    description:
+      "Modernized legacy quarry testing and inventory management systems that had operated on the same Microsoft Excel spreadsheet since the late 1990s. Re-architected into a ruggedized, glove-friendly web application deployed on Panasonic Toughbooks for field operators in active quarry and asphalt production sites, optimizing for direct sunlight readability and zero-friction touchscreen interactions.",
+    metrics: ["Replaced 1990s Excel", "Glove-Friendly Touchbook UX", "Industrial Quarry Logistics"],
+    icon: HardHat,
+  },
+  {
+    client: "Ultralight Medical Imaging",
+    role: "Lead Interface & Hardware Designer",
+    scale: "Multimodal PACS • Cardiology & Ultrasound Diagnostics",
+    description:
+      "Spent 2.5 years designing the entire interface and hand-drawn diagnostic icon system for a high-density PACS medical imaging platform. Deployed across web, mobile, portable ultrasound physical hardware, and an NHS wearable smartwatch. Engineered a custom dark mode specifically calibrated for low-glare, high-contrast radiological reading rooms under strict HIPAA and diagnostic compliance.",
+    metrics: ["Multimodal Physical Hardware", "Custom Diagnostic Iconography", "NHS Wearable Deployment"],
+    icon: Activity,
+  },
+  {
+    client: "Foodler.com (Acquired by GrubHub)",
+    role: "Director of Business Operations",
+    scale: "$500M+ Processed Volume • 10x Acquisition Exit",
+    description:
+      "Managed two-thirds of company operations. Solo-engineered a proprietary algorithmic fraud detection system that slashed chargebacks by 83% ($6M to <$1M), cooperating directly with local police and FBI offices on criminal sting operations, contributing directly to Foodler's 10x revenue acquisition exit.",
+    metrics: ["-83% Fraud ($6M to <$1M)", "10x Acquisition Exit", "$500M+ Volume Processed"],
+    icon: TrendingUp,
   },
 ];
 
-const enterpriseCards = [
-  {
-    id: "bank",
-    title: "Architecting a Full-Reserve Digital Asset Bank",
-    label: "Zero-to-One Launch",
-    image: "/artwork/enterprise-vault.png",
-  },
-  {
-    id: "health",
-    title: "Scaling Flagship Patient Ecosystems for a Fortune 50 Healthcare Provider",
-    label: "35M+ Users",
-    image: "/artwork/enterprise-health.png",
-  },
-  {
-    id: "fraud",
-    title: "Engineering Fraud Detection & Operations for a Major Food Delivery Network",
-    label: "10x Exit",
-    image: "/artwork/enterprise-fraud.png",
-  },
-  {
-    id: "invest",
-    title: "Directing a Tier-1 Global Investment Firm through Cloud-Native App and Agile Design Processes",
-    label: "Enterprise",
-    image: "/artwork/enterprise-invest.png",
-  },
-];
+export default function PortfolioPage() {
+  const [activeTrack, setActiveTrack] = useState<PerspectiveTrack>("design");
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [contactSubject, setContactSubject] = useState<string | undefined>();
+  const [selectedStudy, setSelectedStudy] = useState<LivingProofData | null>(null);
 
-function BrandIcon({ className }: { className?: string }) {
+  const track = TRACKS[activeTrack];
+
+  const handleContactClick = (subject?: string) => {
+    setContactSubject(subject);
+    setIsContactOpen(true);
+  };
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <span
-      className={`font-mono font-bold select-none ${className || ""}`}
-      style={{ color: "#FE299E" }}
-      data-testid="brand-icon"
-    >
-      :-]
-    </span>
-  );
-}
-
-function HeroSection({ onContactClick }: { onContactClick: () => void }) {
-  return (
-    <section
-      className="relative min-h-[90vh] flex flex-col justify-center pt-14 md:pt-16"
-      data-testid="section-hero"
-    >
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Illustrated collage of design artifacts, systems diagrams, and product thinking tools"
-          width={1024}
-          height={559}
-          fetchPriority="high"
-          className="w-full h-full object-cover object-center"
-          data-testid="img-hero-bg"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-      </div>
-
-      <div className="relative z-10 px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto w-full">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="space-y-8 max-w-2xl bg-background/75 backdrop-blur-md rounded-xl p-6 md:p-10"
-        >
-          <motion.div variants={fadeUp} custom={0}>
-            <BrandIcon className="text-5xl md:text-7xl" />
-          </motion.div>
-
-          <motion.h1
-            variants={fadeUp}
-            custom={1}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight max-w-4xl"
-            data-testid="text-headline"
-          >
-            Principal Product Designer
-            <span className="text-muted-foreground"> &amp;</span> Systems Architect
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            custom={2}
-            className="text-lg md:text-xl font-medium text-foreground/80 max-w-2xl leading-relaxed"
-            data-testid="text-subheadline"
-          >
-            I build enterprise-scale design systems, zero-to-one fintech platforms,
-            and collaborative agentic AI models. My background spans 20+ years in art, business, and technology while my career has been focused on healthcare and FinTech applications.
-          </motion.p>
-
-          <motion.p
-            variants={fadeUp}
-            custom={3}
-            className="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed"
-            data-testid="text-intro"
-          >
-            I don&apos;t just push pixels. I align complex business strategy with
-            high-fidelity technical execution. I believe technology should feel
-            human, which is why my systems prioritize persistent memory, privacy,
-            and actual utility over AI hype. I&apos;m a &ldquo;high-bandwidth&rdquo;
-            thinker who bridges the gap between executive vision and engineering
-            reality.
-          </motion.p>
-
-          <motion.div
-            variants={fadeUp}
-            custom={4}
-            className="flex flex-wrap gap-3 pt-4"
-          >
-            <Button asChild data-testid="cta-resume">
-              <a href="/images/cyree_resume_2026.pdf" target="_blank" rel="noopener noreferrer">
-                <FileText className="w-4 h-4 mr-2" />
-                View Resume
-              </a>
-            </Button>
-            <Button variant="secondary" onClick={onContactClick} data-testid="cta-contact">
-              <Mail className="w-4 h-4 mr-2" />
-              Contact Me
-            </Button>
-            <Button variant="secondary" asChild data-testid="cta-deck">
-              <a
-                href="https://www.sketch.com/s/d826d733-5642-411a-8da3-72486d6164f0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Presentation className="w-4 h-4 mr-2" />
-                View Process Deck
-              </a>
-            </Button>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Disclaimer hook section ─────────────────────────────────────────────────
-function DisclaimerHookSection({ onContactClick }: { onContactClick: () => void }) {
-  return (
-    <section
-      className="px-6 md:px-12 lg:px-24 py-20 md:py-28 max-w-6xl mx-auto"
-      data-testid="section-disclaimer-hook"
-      aria-labelledby="disclaimer-hook-heading"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.7, ease: easeOut }}
-        className="space-y-7"
-      >
-        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          Why this portfolio is intentionally light
-        </p>
-
-        <h2
-          id="disclaimer-hook-heading"
-          className="text-2xl md:text-3xl font-bold tracking-tight leading-tight"
-          data-testid="text-disclaimer-headline"
-        >
-          Your design portfolio is a data-exfiltration honeypot. Nobody is talking about it.
-        </h2>
-
-        <div className="space-y-4 text-base md:text-[17px] text-foreground/80 leading-[1.7]">
-          <p data-testid="text-disclaimer-body-1">
-            Designers are the only profession required to publish their Chain-of-Thought to even
-            apply for a job. Process, trade-offs, screens, rationale &mdash; the exact reasoning
-            corpus that LLMs and adversarial actors are paying top dollar to harvest. DeepMind,
-            MI5, and the <em>Columbia Law Review</em> have all flagged it. Your design leadership
-            almost certainly has not.
-          </p>
-          <p data-testid="text-disclaimer-body-2">
-            This site is deliberately lightweight. The interesting client work isn't safe to
-            publish; what's linked here is independently built and safe to share. The full case
-            study explains the threat model, the architecture, and why every link on this page
-            jumps you to a different domain.
-          </p>
-          <p data-testid="text-disclaimer-body-3">
-            If you've ever required a portfolio from a candidate, you should read this before the
-            next requisition goes out.
-          </p>
-        </div>
-
-        <div className="flex flex-wrap gap-3 pt-2">
-          <Button asChild data-testid="cta-disclaimer-read">
-            <Link href="/essays/design-is-risk">Read the Full Piece</Link>
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={onContactClick}
-            data-testid="cta-disclaimer-talk"
-          >
-            Let's Talk
-          </Button>
-        </div>
-      </motion.div>
-    </section>
-  );
-}
-
-function CaseStudyModal({
-  study,
-  open,
-  onClose,
-}: {
-  study: CaseStudy;
-  open: boolean;
-  onClose: () => void;
-}) {
-  return (
-    <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent
-        className="max-w-3xl max-h-[85vh] overflow-y-auto p-0"
-        data-testid={`modal-${study.id}`}
-      >
-        <div className="relative w-full h-48 md:h-64 bg-muted rounded-t-lg">
-          <img
-            src={study.image}
-            alt={study.title}
-            width={1024}
-            height={559}
-            className="w-full h-full object-cover rounded-t-lg"
-            data-testid={`img-modal-${study.id}`}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent rounded-t-lg" />
-          <div className="absolute bottom-4 left-6 right-6">
-            <div className="flex flex-wrap gap-2 mb-2" role="list" aria-label="Technology tags">
-              {study.tags.map((tag) => (
-                <span
-                  key={tag}
-                  role="listitem"
-                  className="font-mono text-xs px-2 py-0.5 backdrop-blur-sm rounded-md border"
-                  style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
-                  data-testid={`tag-modal-${study.id}-${tag}`}
-                >
-                  {tag}
-                </span>
-              ))}
+    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#FE299E]/20">
+      {/* ── Perspective / Audience Track Switcher (Sticky Masthead Strip) ── */}
+      <div className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-2.5 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground hidden sm:inline-block">
+              Audience Perspective:
+            </span>
+            <div className="inline-flex rounded-lg border border-border/70 p-0.5 bg-muted/30">
+              {(["design", "development", "architecture"] as PerspectiveTrack[]).map((tKey) => {
+                const isSelected = activeTrack === tKey;
+                return (
+                  <button
+                    key={tKey}
+                    onClick={() => setActiveTrack(tKey)}
+                    className={`relative px-3 py-1 text-xs font-medium rounded-md transition-all duration-150 flex items-center gap-1.5 ${
+                      isSelected
+                        ? "bg-[#FE299E] text-white shadow-sm font-semibold"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    }`}
+                  >
+                    <span>{TRACKS[tKey].label}</span>
+                    {tKey === "design" && (
+                      <span
+                        className={`text-[9px] uppercase px-1 py-0.2 rounded font-mono ${
+                          isSelected ? "bg-white/20 text-white" : "bg-muted text-muted-foreground"
+                        }`}
+                      >
+                        Default
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
+
+          <div className="flex items-center gap-2">
+            <a
+              href={track.resumeFile}
+              download
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-muted-foreground hover:text-[#FE299E] transition-colors"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Resume</span>
+            </a>
+            <span className="text-border">|</span>
+            <Button
+              size="sm"
+              variant="outline"
+              className="h-7 text-xs border-[#FE299E]/40 text-[#FE299E] hover:bg-[#FE299E]/10"
+              onClick={() => handleContactClick("Direct Hire Inquiry")}
+            >
+              Hire Kyle
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Hero Section (Dynamic by Track) ── */}
+      <section className="relative min-h-[85vh] flex items-center pt-16 pb-16 overflow-hidden" data-testid="section-hero">
+        <div className="absolute inset-0 z-0">
+          <img
+            src={heroImage}
+            alt="Architectural diagrams and design artifacts"
+            width={1024}
+            height={559}
+            fetchPriority="high"
+            className="w-full h-full object-cover object-center opacity-15"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
 
-        <div className="px-6 md:px-8 pb-8 pt-2 space-y-8">
-          <DialogHeader className="space-y-2">
-            <p
-              className="font-mono text-xs uppercase tracking-widest text-muted-foreground"
-              data-testid={`text-modal-subtitle-${study.id}`}
-            >
-              {study.subtitle}
-            </p>
-            <DialogTitle className="text-2xl md:text-3xl font-bold tracking-tight">
-              {study.title}
-            </DialogTitle>
-            <DialogDescription className="text-base text-muted-foreground leading-relaxed">
-              {study.executiveSummary}
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="space-y-6 text-[15px] leading-[1.7]">
-            <div>
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
-                The Human Problem
-              </h3>
-              <p className="text-foreground/85" data-testid={`text-human-problem-${study.id}`}>
-                {study.humanProblem}
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
-                UX Outcomes
-              </h3>
-              <p className="text-foreground/85" data-testid={`text-ux-outcomes-${study.id}`}>
-                {study.uxOutcomes}
-              </p>
-            </div>
-
-            <div className="border-t border-border pt-6">
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-3">
-                Technical Challenges
-              </h3>
-              <div className="space-y-3">
-                <div className="flex gap-3">
-                  <span className="font-mono text-xs text-muted-foreground mt-1 shrink-0">01</span>
-                  <p className="text-foreground/85">{study.technicalProblem1}</p>
-                </div>
-                <div className="flex gap-3">
-                  <span className="font-mono text-xs text-muted-foreground mt-1 shrink-0">02</span>
-                  <p className="text-foreground/85">{study.technicalProblem2}</p>
-                </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 lg:px-24 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Column: Headline & Track Value Props */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="flex items-center gap-3">
+                <BrandMark size="md" />
+                <NamespaceBadge
+                  namespace="kyle-cyree"
+                  prefix="pipe\"
+                  category={track.categoryBadge}
+                  size="default"
+                />
               </div>
-            </div>
 
-            <div className="border-t border-border pt-6">
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-3">
-                Technical Outcomes
-              </h3>
-              <div className="space-y-4">
-                {study.technicalOutcomes.map((outcome, idx) => (
-                  <div key={idx} className="flex gap-3">
-                    <ChevronRight className="w-4 h-4 mt-1 shrink-0" style={{ color: "#FE299E" }} />
-                    <p className="text-foreground/85" data-testid={`text-outcome-${study.id}-${idx}`}>
-                      {outcome}
-                    </p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-editorial tracking-tight leading-[1.12]">
+                {track.headlineMain}{" "}
+                <span className="font-fraunces italic font-normal text-[#FE299E]">{track.headlineAmp}</span>{" "}
+                {track.headlineSub}
+              </h1>
+
+              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed font-sans max-w-xl">
+                {track.subhead}
+              </p>
+
+              {/* Dynamic Value Propositions */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-sm text-foreground/80">
+                {track.valueProps.map((vp, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#FE299E] shrink-0" />
+                    <span className="leading-snug">{vp.text}</span>
                   </div>
                 ))}
               </div>
-            </div>
 
-            <div className="border-t border-border pt-6">
-              <p
-                className="text-lg font-medium italic text-foreground/70"
-                data-testid={`text-invitation-${study.id}`}
-              >
-                {study.invitation}
-              </p>
-              {study.invitationLink && (
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-3 pt-3">
+                <Button
+                  size="lg"
+                  className="bg-[#FE299E] hover:bg-[#FE299E]/90 text-white font-medium shadow-sm transition-all"
+                  onClick={() => scrollTo("confidential-vault")}
+                >
+                  <Eye className="w-4 h-4 mr-2" />
+                  View Design Vault
+                </Button>
+
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-border/80 hover:border-foreground/40 text-foreground"
+                  onClick={() => scrollTo("enterprise-work")}
+                >
+                  Enterprise Case Studies
+                </Button>
+
                 <a
-                  href={study.invitationLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-sm mt-2 transition-colors"
-                  style={{ color: "#FE299E" }}
-                  data-testid={`link-invitation-${study.id}`}
+                  href={track.resumeFile}
+                  download
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {study.invitationLinkText}
-                  <ArrowUpRight className="w-3 h-3" />
+                  <Download className="w-4 h-4" />
+                  PDF Resume
                 </a>
-              )}
-              {!study.invitationLink && (
-                <p
-                  className="font-mono text-xs text-muted-foreground mt-2"
-                  data-testid={`text-private-${study.id}`}
-                >
-                  Private Repository &mdash; Architecture available upon request
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-const whitepaperTags = [
-  "Customer Experience",
-  "Scalable Agents",
-  "Knowledge Base Chatbots",
-  "Bitcoin",
-  "Developer Tools",
-];
-
-function AudioPlayer() {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const blobUrlRef = useRef<string | null>(null);
-  const [playing, setPlaying] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [ready, setReady] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [audioError, setAudioError] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/tts/emerald/status")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.ready) setReady(true);
-      })
-      .catch(() => {});
-
-    return () => {
-      if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
-    };
-  }, []);
-
-  const setAudioSourceFromResponse = async (res: Response) => {
-    const audio = audioRef.current;
-    if (!audio) return false;
-
-    const blob = await res.blob();
-    const cachedUrl = URL.createObjectURL(blob);
-    if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
-    blobUrlRef.current = cachedUrl;
-    audio.src = cachedUrl;
-    await audio.load();
-    return true;
-  };
-
-  const loadAndPlay = async () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    setLoading(true);
-    setAudioError(false);
-    try {
-      const res = await fetch("/api/tts/emerald");
-      if (res.status === 202) {
-        setLoading(false);
-        setAudioError(true);
-        return;
-      }
-      if (!res.ok) throw new Error("Failed to generate audio");
-      await setAudioSourceFromResponse(res);
-      setReady(true);
-      setLoading(false);
-      await audio.play();
-      setPlaying(true);
-    } catch {
-      setLoading(false);
-      setAudioError(true);
-    }
-  };
-
-  const handlePlayPause = async () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (!ready && !loading) {
-      await loadAndPlay();
-      return;
-    }
-
-    if (playing) {
-      audio.pause();
-      setPlaying(false);
-    } else {
-      if (!audio.src || audio.src === "") {
-        await loadAndPlay();
-        return;
-      }
-      await audio.play();
-      setPlaying(true);
-    }
-  };
-
-  const handleTimeUpdate = () => {
-    const audio = audioRef.current;
-    if (audio && audio.duration) {
-      setProgress((audio.currentTime / audio.duration) * 100);
-      setDuration(audio.duration);
-    }
-  };
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    const audio = audioRef.current;
-    if (!audio || !audio.duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = pct * audio.duration;
-  };
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    return `${m}:${s.toString().padStart(2, "0")}`;
-  };
-
-  return (
-    <div className="border border-border/60 rounded-lg p-4 space-y-3" data-testid="audio-player-emerald">
-      <audio
-        ref={audioRef}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={() => {
-          if (audioRef.current) setDuration(audioRef.current.duration);
-        }}
-        onEnded={() => setPlaying(false)}
-        preload="none"
-      />
-
-      <div className="flex items-center gap-3">
-        <Volume2 className="w-4 h-4 text-muted-foreground shrink-0" />
-        <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          Listen &mdash; AI Narration (Nova Voice)
-        </span>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <button
-          onClick={handlePlayPause}
-          disabled={loading}
-          className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors disabled:opacity-50"
-          style={{ backgroundColor: "#FE299E", color: "white" }}
-          data-testid="btn-play-narration"
-          aria-label={playing ? "Pause narration" : "Play narration"}
-        >
-          {loading ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
-          ) : playing ? (
-            <Pause className="w-4 h-4" />
-          ) : (
-            <Play className="w-4 h-4 ml-0.5" />
-          )}
-        </button>
-
-        <div className="flex-1 space-y-1">
-          <div
-            className="h-1.5 bg-muted rounded-full cursor-pointer relative overflow-hidden"
-            onClick={handleSeek}
-            data-testid="progress-bar-narration"
-          >
-            <div
-              className="absolute inset-y-0 left-0 rounded-full transition-all"
-              style={{ width: `${progress}%`, backgroundColor: "#FE299E" }}
-            />
-          </div>
-          <div className="flex justify-between">
-            <span className="font-mono text-[10px] text-muted-foreground">
-              {ready && audioRef.current ? formatTime(audioRef.current.currentTime) : "0:00"}
-            </span>
-            <span className="font-mono text-[10px] text-muted-foreground">
-              {duration > 0 ? formatTime(duration) : loading ? "Generating..." : "—:——"}
-            </span>
-          </div>
-        </div>
-
-        <a
-          href={ready ? audioRef.current?.src || "/api/tts/emerald" : "/api/tts/emerald"}
-          download="emerald-whitepaper-narration.mp3"
-          className="w-8 h-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors shrink-0"
-          title="Download narration MP3"
-          data-testid="btn-download-narration"
-          onClick={(e) => {
-            if (!ready) {
-              e.preventDefault();
-            }
-          }}
-        >
-          <Download className="w-4 h-4" />
-        </a>
-      </div>
-
-      {audioError && (
-        <p className="text-xs text-red-500" data-testid="text-audio-error">
-          Audio generation failed. Try again later.
-        </p>
-      )}
-
-      <p className="text-[11px] text-muted-foreground leading-relaxed">
-        Free to distribute. Generated with OpenAI Nova voice.
-      </p>
-    </div>
-  );
-}
-
-function WhitepaperModal({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  return (
-    <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent
-        className="max-w-3xl max-h-[85vh] overflow-y-auto p-0"
-        data-testid="modal-whitepaper"
-      >
-        <div className="relative w-full h-48 md:h-64 bg-muted rounded-t-lg">
-          <img
-            src="/artwork/emerald.png"
-            alt="Project Emerald — Sovereign CX Architecture for Bitcoin and privacy-first brands"
-            width={1920}
-            height={1080}
-            loading="lazy"
-            className="w-full h-full object-cover rounded-t-lg"
-            data-testid="img-modal-whitepaper"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent rounded-t-lg" />
-          <div className="absolute bottom-4 left-6 right-6">
-            <div className="flex flex-wrap gap-2 mb-2" role="list" aria-label="Technology tags">
-              {whitepaperTags.map((tag) => (
-                <span
-                  key={tag}
-                  role="listitem"
-                  className="font-mono text-xs px-2 py-0.5 backdrop-blur-sm rounded-md border"
-                  style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="px-6 md:px-8 pb-8 pt-2 space-y-8">
-          <DialogHeader className="space-y-2">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              Project Emerald
-            </p>
-            <DialogTitle className="text-2xl md:text-3xl font-bold tracking-tight">
-              The Human Layer is the Single Point of Failure
-            </DialogTitle>
-            <DialogDescription className="text-base text-muted-foreground leading-relaxed">
-              Private &amp; Anonymous Support for High-Stakes Brands/Products
-            </DialogDescription>
-          </DialogHeader>
-
-          <AudioPlayer />
-
-          <div className="flex flex-wrap gap-3">
-            <Button asChild size="sm" data-testid="cta-modal-download-whitepaper">
-              <a href="/emerald-whitepaper.pdf" download>
-                <Download className="w-4 h-4 mr-2" />
-                Download Whitepaper
-              </a>
-            </Button>
-            <Button variant="secondary" asChild size="sm" data-testid="cta-modal-view-repo">
-              <a
-                href="https://github.com/rorshockbtc/greater-than"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <SiGithub className="w-4 h-4 mr-2" />
-                View Repository
-              </a>
-            </Button>
-            <Button variant="secondary" asChild size="sm" data-testid="cta-modal-try-demo">
-              <a
-                href="https://greater.pink"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Try Demo
-              </a>
-            </Button>
-          </div>
-
-          <div className="space-y-6 text-[15px] leading-[1.7]">
-            <div>
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
-                The Thesis
-              </h3>
-              <p className="text-foreground/85">
-                Bitcoin has no CEO, no marketing department, and no HR. This is its greatest security feature
-                and market differentiator but it creates a massive communication debt. When protocol updates
-                happen&mdash;like the recent Bitcoin Core 28.0 release&mdash;the friction doesn&apos;t occur in
-                the code; it occurs between humans.
-              </p>
-              <p className="text-foreground/85 mt-3">
-                Emerald was engineered as a high-fidelity, sovereign &ldquo;Protocol Interpreter&rdquo; designed
-                to protect human capital by automating the friction of technical support without sacrificing
-                user privacy.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
-                Brief Context
-              </h3>
-              <p className="text-foreground/85">
-                This was not built on commission. It represents synergies of AI-specific R&amp;D performed over
-                18 months plus 20+ years of experience designing outcomes for users that reinforce brands rather
-                than disrupting customer confidence. The concept is open-sourced under the name &ldquo;Emerald.&rdquo;
-              </p>
-            </div>
-
-            <div className="border-t border-border pt-6">
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-3">
-                Escaping the &ldquo;Zendesk Trap&rdquo;
-              </h3>
-              <p className="text-foreground/85 mb-4">
-                Most companies rely on legacy CX tools that are fundamentally incompatible with a
-                &ldquo;Don&apos;t Trust, Verify&rdquo; ethos. They cost time, money, are difficult to implement,
-                and chip away at brand trust.
-              </p>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm border border-border/60 rounded-lg" data-testid="table-cx-comparison">
-                  <thead>
-                    <tr className="border-b border-border/60">
-                      <th className="text-left p-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Metric</th>
-                      <th className="text-left p-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Legacy CX</th>
-                      <th className="text-left p-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Emerald</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-foreground/85">
-                    <tr className="border-b border-border/40">
-                      <td className="p-3 font-medium">Base Seat Cost</td>
-                      <td className="p-3">$115&ndash;$169/agent/mo</td>
-                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>$0 (Self-hosted)</td>
-                    </tr>
-                    <tr className="border-b border-border/40">
-                      <td className="p-3 font-medium">AI Add-on Tax</td>
-                      <td className="p-3">$50/agent/mo</td>
-                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>$0 (Local-first)</td>
-                    </tr>
-                    <tr className="border-b border-border/40">
-                      <td className="p-3 font-medium">Resolution Fee</td>
-                      <td className="p-3">$1.50&ndash;$2.00/resolution</td>
-                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>&lt;$0.02</td>
-                    </tr>
-                    <tr className="border-b border-border/40">
-                      <td className="p-3 font-medium">Privacy Model</td>
-                      <td className="p-3">PII-heavy</td>
-                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>Zero-Knowledge</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 font-medium">Identity</td>
-                      <td className="p-3">Centralized DB</td>
-                      <td className="p-3 font-medium" style={{ color: "#01a9f4" }}>Sovereign Persistence</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p className="text-foreground/85 mt-4">
-                For an enterprise team of 50 agents, Zendesk costs exceed $13k/month before solving a
-                single ticket. Emerald provides deterministic, high-fidelity support at 1/1000th the
-                operational cost.
-              </p>
-            </div>
-
-            <div className="border-t border-border pt-6">
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-3">
-                Self-Sovereign Architecture
-              </h3>
-              <div className="space-y-4">
-                <div className="flex gap-3">
-                  <ChevronRight className="w-4 h-4 mt-1 shrink-0" style={{ color: "#FE299E" }} />
-                  <div>
-                    <p className="font-medium text-foreground/90 mb-1">Persistent Anonymity (Cryptographic Handshakes)</p>
-                    <p className="text-foreground/75">
-                      Identity decoupled from data using a PubKey-Signature handshake. Users interact
-                      anonymously; by signing a session hash with a NOSTR or PGP key, they persist context
-                      across devices without email login.
-                    </p>
-                    <code className="font-mono text-xs text-muted-foreground mt-2 block">
-                      Session_ID = SHA-256(User_PubKey + Session_Salt)
-                    </code>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <ChevronRight className="w-4 h-4 mt-1 shrink-0" style={{ color: "#FE299E" }} />
-                  <div>
-                    <p className="font-medium text-foreground/90 mb-1">Deterministic Orchestration via dspy.ts</p>
-                    <p className="text-foreground/75">
-                      Instead of probabilistic RAG, Emerald uses Programmatic Prompt Optimization. User intent
-                      maps to cryptographically verified documentation, delivering versioned technical specs
-                      rather than hallucinations.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <ChevronRight className="w-4 h-4 mt-1 shrink-0" style={{ color: "#FE299E" }} />
-                  <div>
-                    <p className="font-medium text-foreground/90 mb-1">Local-First &amp; Browser-Cached Memory</p>
-                    <p className="text-foreground/75">
-                      The browser is treated as a secure vault. PII is scrubbed locally before inference.
-                      A one-click &ldquo;Flush&rdquo; erases the user from system history entirely.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
 
-            <div className="border-t border-border pt-6">
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
-                Designing for Safety
-              </h3>
-              <p className="text-foreground/85">
-                In Bitcoin, &ldquo;ease of use&rdquo; can be a vulnerability. Emerald uses strategic friction&mdash;when
-                high-risk intent is detected (account freeze, time-locked transactions), the UI breaks the
-                chat paradigm and moves into a multi-step safety flow requiring manual acknowledgment of
-                irreversible actions.
-              </p>
-              <blockquote className="border-l-2 pl-4 mt-3 text-foreground/70 italic" style={{ borderColor: "#FE299E" }}>
-                Design-as-a-System means knowing when to stop the user from moving fast. Emerald is a
-                guardrail, not just a guide.
-              </blockquote>
-            </div>
-
-            <div className="border-t border-border pt-6">
-              <h3 className="font-semibold text-sm uppercase tracking-wider text-foreground/60 mb-2">
-                The Open Source Pivot
-              </h3>
-              <p className="text-foreground/85">
-                Built for Blockstream as a targeted CX solution. When leadership didn&apos;t move on the
-                hire, the IP was open-sourced. 250+ hours of preparation across four interview rounds,
-                months of GitHub analysis, and full product line decomposition went into this work.
-              </p>
-              <p className="text-lg font-medium italic text-foreground/70 mt-4">
-                It is far more important that Bitcoin remain &ldquo;hope&rdquo; for its users than me working
-                for any specific company.
-              </p>
-              <div className="flex flex-col gap-2 mt-3">
-                <a
-                  href="https://github.com/rorshockbtc/greater-than"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-sm transition-colors"
-                  style={{ color: "#FE299E" }}
-                  data-testid="link-modal-repo"
-                >
-                  View Repository <ArrowUpRight className="w-3 h-3" />
-                </a>
-                <a
-                  href="https://greater.pink"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-sm transition-colors"
-                  style={{ color: "#FE299E" }}
-                  data-testid="link-modal-demo"
-                >
-                  Try Live Demo <ArrowUpRight className="w-3 h-3" />
-                </a>
-                <a
-                  href="https://hire.colonhyphenbracket.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-sm transition-colors"
-                  style={{ color: "#FE299E" }}
-                  data-testid="link-modal-hire"
-                >
-                  hire.colonhyphenbracket.com <ArrowUpRight className="w-3 h-3" />
-                </a>
-              </div>
+            {/* Right Column: Albers & Vignelli Specimen Card */}
+            <div className="lg:col-span-5 flex justify-center">
+              <AlbersInteractionCard
+                perspective={activeTrack}
+                metrics={track.specimenMetrics}
+              />
             </div>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
+      </section>
 
-function WhitepaperSection() {
-  const [modalOpen, setModalOpen] = useState(false);
+      {/* ── Verified Institutional Pedigree Logo Bar ── */}
+      <ClientLogoBar />
 
-  return (
-    <section
-      className="px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto"
-      data-testid="section-whitepaper"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
-      >
-        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
-          Research
-        </p>
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tight" data-testid="text-whitepaper-heading">
-          Open Source Whitepaper
-        </h2>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5 }}
-      >
-        <div
-          className="group cursor-pointer grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 border border-border/60 rounded-xl overflow-hidden"
-          data-testid="card-whitepaper-emerald"
-          onClick={() => setModalOpen(true)}
-          role="button"
-          tabIndex={0}
-          aria-label="Read whitepaper: The Human Layer is the Single Point of Failure"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setModalOpen(true);
-            }
-          }}
-        >
-          <div className="relative w-full h-56 md:h-full min-h-[280px] bg-muted">
-            <img
-              src="/artwork/emerald.png"
-              alt="Project Emerald — Sovereign CX Architecture for Bitcoin and privacy-first brands"
-              width={1920}
-              height={1080}
-              loading="lazy"
-              className="w-full h-full object-cover"
-              data-testid="img-whitepaper-emerald"
-            />
-            <div className="absolute top-4 right-4 w-8 h-8 rounded-md bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <ArrowUpRight className="w-4 h-4" />
-            </div>
-          </div>
-
-          <div className="p-6 md:p-8 flex flex-col justify-center space-y-5">
-            <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4" style={{ color: "#FE299E" }} />
-              <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                Project Emerald
-              </span>
-            </div>
-
-            <h3
-              className="text-xl md:text-2xl font-bold tracking-tight leading-snug"
-              data-testid="text-whitepaper-title"
-            >
-              The Human Layer is the Single Point of Failure
-            </h3>
-
-            <p
-              className="text-sm md:text-base text-muted-foreground leading-relaxed"
-              data-testid="text-whitepaper-subtitle"
-            >
-              Project Emerald &mdash; Private &amp; Anonymous Support for High-Stakes Brands
-            </p>
-
-            <p
-              className="text-sm text-foreground/80 leading-relaxed"
-              data-testid="text-whitepaper-summary"
-            >
-              A sovereign &ldquo;Protocol Interpreter&rdquo; designed to protect human capital by
-              automating the friction of technical support without sacrificing user privacy.
-              Deterministic, high-fidelity support at 1/1000th the operational cost of any SaaS
-              support system.
-            </p>
-
-            <div className="flex flex-wrap gap-2 pt-1" role="list" aria-label="Whitepaper tags">
-              {whitepaperTags.map((tag) => (
-                <span
-                  key={tag}
-                  role="listitem"
-                  className="font-mono text-[11px] px-2 py-0.5 rounded-md border"
-                  style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
-                  data-testid={`tag-whitepaper-${tag.toLowerCase().replace(/\s+/g, "-")}`}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-3 pt-2" onClick={(e) => e.stopPropagation()}>
-              <Button asChild size="sm" data-testid="cta-download-whitepaper">
-                <a href="/emerald-whitepaper.pdf" download>
-                  <Download className="w-4 h-4 mr-2" />
-                  Download Whitepaper
-                </a>
-              </Button>
-              <Button variant="secondary" asChild size="sm" data-testid="cta-view-repo">
-                <a
-                  href="https://github.com/rorshockbtc/greater-than"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <SiGithub className="w-4 h-4 mr-2" />
-                  View Repository
-                </a>
-              </Button>
-              <Button variant="secondary" asChild size="sm" data-testid="cta-try-demo">
-                <a
-                  href="https://greater.pink"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  Try Demo
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      <WhitepaperModal open={modalOpen} onClose={() => setModalOpen(false)} />
-    </section>
-  );
-}
-
-function ShowcaseSection() {
-  const [activeStudy, setActiveStudy] = useState<CaseStudy | null>(null);
-
-  return (
-    <section
-      className="px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto"
-      data-testid="section-showcase"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
-      >
-        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
-          Public Work
-        </p>
-        <h2 className="text-2xl md:text-4xl font-bold tracking-tight leading-[1.2] max-w-3xl" data-testid="text-showcase-heading">
-          Independent products. No client IP at risk.
-        </h2>
-        <p className="text-base text-foreground/70 mt-4 max-w-2xl leading-relaxed" data-testid="text-showcase-lead">
-          These are the parts of my practice I can put under a microscope. Click any card for the
-          case study and the repo.
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {caseStudies.map((study, idx) => {
-          const Icon = study.icon;
-          const isLarge = idx === 0;
-          return (
-            <motion.div
-              key={study.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className={isLarge ? "md:col-span-2" : ""}
-            >
-              {isLarge ? (
-                <div
-                  className="group cursor-pointer"
-                  onClick={() => setActiveStudy(study)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`View case study: ${study.title}`}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setActiveStudy(study);
-                    }
-                  }}
-                  data-testid={`card-project-${study.id}`}
-                >
-                  <div className="relative w-full h-56 md:h-72 rounded-xl bg-muted">
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      width={1024}
-                      height={559}
-                      loading="lazy"
-                      className="w-full h-full object-cover rounded-xl"
-                      data-testid={`img-project-${study.id}`}
-                    />
-                    <div className="absolute top-4 right-4 w-8 h-8 rounded-md bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                  </div>
-
-                  <div className="pt-5 pb-4 space-y-3">
-                    <div className="flex items-center gap-2">
-                      <Icon className="w-4 h-4" style={{ color: "#FE299E" }} />
-                      <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                        {study.subtitle}
-                      </span>
-                    </div>
-                    <h3
-                      className="text-2xl md:text-3xl font-bold tracking-tight leading-snug"
-                      data-testid={`text-project-title-${study.id}`}
-                    >
-                      {study.title}
-                    </h3>
-                    <p
-                      className="text-base text-muted-foreground leading-relaxed max-w-3xl"
-                      data-testid={`text-project-summary-${study.id}`}
-                    >
-                      {study.executiveSummary}
-                    </p>
-                    <div className="flex flex-wrap gap-2 pt-1" role="list" aria-label="Tags">
-                      {study.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          role="listitem"
-                          className="font-mono text-[11px] px-2 py-0.5 rounded-md border"
-                          style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
-                          data-testid={`tag-${study.id}-${tag}`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <Card
-                  className="group cursor-pointer hover-elevate active-elevate-2 h-full bg-transparent border-border/60"
-                  onClick={() => setActiveStudy(study)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`View case study: ${study.title}`}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setActiveStudy(study);
-                    }
-                  }}
-                  data-testid={`card-project-${study.id}`}
-                >
-                  <div className="relative w-full h-40 md:h-48 rounded-t-xl bg-muted">
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      width={1024}
-                      height={559}
-                      loading="lazy"
-                      className="w-full h-full object-cover rounded-t-xl"
-                      data-testid={`img-project-${study.id}`}
-                    />
-                    <div className="absolute top-3 right-3 w-8 h-8 rounded-md bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                  </div>
-
-                  <div className="p-5 space-y-3">
-                    <div className="flex items-center gap-2">
-                      <Icon className="w-4 h-4" style={{ color: "#FE299E" }} />
-                      <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                        {study.subtitle}
-                      </span>
-                    </div>
-                    <h3
-                      className="text-lg md:text-xl font-bold tracking-tight leading-snug"
-                      data-testid={`text-project-title-${study.id}`}
-                    >
-                      {study.title}
-                    </h3>
-                    <p
-                      className="text-sm md:text-base text-muted-foreground line-clamp-3 leading-relaxed"
-                      data-testid={`text-project-summary-${study.id}`}
-                    >
-                      {study.executiveSummary}
-                    </p>
-                    <div className="flex flex-wrap gap-2 pt-1" role="list" aria-label="Tags">
-                      {study.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          role="listitem"
-                          className="font-mono text-[11px] px-2 py-0.5 rounded-md border"
-                          style={{ color: "#01a9f4", borderColor: "#01a9f4" }}
-                          data-testid={`tag-${study.id}-${tag}`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </Card>
-              )}
-            </motion.div>
-          );
-        })}
+      {/* ── Metric Strip ── */}
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-12 w-full">
+        <MetricStrip metrics={headlineMetrics} columns={4} />
       </div>
 
-      {activeStudy && (
-        <CaseStudyModal
-          study={activeStudy}
-          open={!!activeStudy}
-          onClose={() => setActiveStudy(null)}
-        />
-      )}
-    </section>
-  );
-}
-
-function EnterpriseVaultSection({ onContactClick }: { onContactClick: () => void }) {
-  const { toast } = useToast();
-
-  const handleEnterpriseClick = () => {
-    toast({
-      title: "This card is locked on purpose.",
-      description:
-        "The case study is real. Public access isn't. If you have a real reason to ask, contact me — happy to walk through any of these under appropriate NDA. Automated traffic is logged.",
-    });
-  };
-
-  return (
-    <section
-      className="px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-6xl mx-auto"
-      data-testid="section-vault"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
-      >
-        <div className="flex items-center gap-2 mb-2">
-          <Lock className="w-3.5 h-3.5 text-muted-foreground" />
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Enterprise Vault
+      {/* ── Confidential Design Vault (Passcode Protected) ── */}
+      <section id="confidential-vault" className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-12 w-full space-y-10">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="text-xs font-mono uppercase tracking-wider text-[#FE299E] border-[#FE299E]/40">
+              Confidential Work Vault
+            </Badge>
+            <span className="text-xs text-muted-foreground font-mono">Mutual NDA Protected</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold font-editorial tracking-tight">
+            Client Design Artifacts &amp; Interface Systems
+          </h2>
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+            High-resolution interface plates, settlement state machines, and design systems from chartered banking and enterprise deployments. Gated under client confidentiality agreements.
           </p>
         </div>
-        <h2
-          className="text-2xl md:text-4xl font-bold tracking-tight leading-[1.2] max-w-3xl"
-          data-testid="text-vault-heading"
-        >
-          These case studies exist. Public access doesn't.
-        </h2>
-        <p className="text-base text-foreground/70 mt-4 max-w-2xl leading-relaxed">
-          Real engagements across fintech, healthcare, fraud detection, and global investment
-          operations. The gating is deliberate &mdash; automated traffic, datacenter IPs, and
-          recruiters from low-signal postings get logged. If you have a real reason to ask, the
-          contact button works.
-        </p>
-      </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {enterpriseCards.map((card, idx) => (
-          <motion.div
-            key={card.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: idx * 0.08, duration: 0.4 }}
-          >
-            <Card
-              className="group cursor-pointer hover-elevate active-elevate-2 p-0"
-              onClick={handleEnterpriseClick}
-              role="button"
-              tabIndex={0}
-              aria-label={`${card.title} - Secure access required`}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  handleEnterpriseClick();
-                }
-              }}
-              data-testid={`card-enterprise-${card.id}`}
-            >
-              <div className="relative w-full h-40 md:h-48 rounded-t-xl bg-muted">
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  width={1024}
-                  height={559}
-                  loading="lazy"
-                  className="w-full h-full object-cover rounded-t-xl"
-                  data-testid={`img-enterprise-${card.id}`}
-                />
-                <div className="absolute top-3 right-3 w-7 h-7 rounded-md bg-background/70 backdrop-blur-sm flex items-center justify-center">
-                  <Lock className="w-3 h-3 text-muted-foreground" />
+        {/* Custodia Bank Vault */}
+        <ProtectedVault
+          id="vault-custodia"
+          title="Custodia Bank: Chartered Multi-Engine Banking System"
+          subtitle="Sole Designer • 4-day rebrand sprint, 30-day full core bank app, Money Market fund & UTXO management"
+          disclaimer="Includes proprietary banking workflows and on-chain UTXO allocation screens. Hand-drawn brand marks, typography system, and settlement engines. Enter passcode to inspect high-resolution plates."
+          images={custodiaVaultImages}
+        />
+
+        {/* Walmart Global Tech Vault */}
+        <ProtectedVault
+          id="vault-walmart"
+          title="Walmart Global Tech: Enterprise LMS & Search Architecture"
+          subtitle="3.2M Global Workforce • GraphQL migration, automated course tagging, and Content Distribution Platform"
+          disclaimer="High-fidelity administrative and search paradigm plates developed for Walmart's internal learning management platform."
+          images={walmartVaultImages}
+        />
+      </section>
+
+      {/* ── Enterprise Track Record (Deep-Dive Case Studies) ── */}
+      <section id="enterprise-work" className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 w-full space-y-10">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="text-xs font-mono uppercase tracking-wider text-[#FE299E] border-[#FE299E]/40">
+              Enterprise Pedigree
+            </Badge>
+            <span className="text-xs text-muted-foreground font-mono">Fortune 50 &bull; Defense &bull; Institutional FinTech</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold font-editorial tracking-tight">
+            Verified Institutional Impact
+          </h2>
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+            A decade of designing, modernizing, and engineering systems that operate under extreme regulatory, scale, and operational pressure.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {institutionalRecords.map((record, idx) => (
+            <InstitutionalCard key={idx} record={record} />
+          ))}
+        </div>
+      </section>
+
+      {/* ── Living Systems (Pipes Protocol & Open Source Proofs) ── */}
+      <section id="living-systems" className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 w-full space-y-10 border-t border-border/40">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="text-xs font-mono uppercase tracking-wider text-[#FE299E] border-[#FE299E]/40">
+              Living Products &amp; R&amp;D
+            </Badge>
+            <span className="text-xs text-muted-foreground font-mono">End-to-End Craft &bull; Zero-to-One</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold font-editorial tracking-tight">
+            Autonomous Systems Built as a &quot;Unit of One&quot;
+          </h2>
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+            Beyond enterprise client consulting, I invent, design, and ship production-grade protocols and tools. Here is live proof of my modern taste, code craftsmanship, and speed.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {publicWorkStudies.map((study) => (
+            <LivingProofCard
+              key={study.id}
+              data={study}
+              onClick={(clickedStudy) => setSelectedStudy(clickedStudy)}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* ── Video Artifacts & Live Demos ── */}
+      <VideoShowcase />
+
+      {/* ── Detail Modal for Living Proofs ── */}
+      {selectedStudy && (
+        <Dialog open={!!selectedStudy} onOpenChange={(open) => !open && setSelectedStudy(null)}>
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <div className="flex items-center gap-2 mb-2">
+                <NamespaceBadge namespace={selectedStudy.namespace} prefix="" category={selectedStudy.category} size="sm" />
+              </div>
+              <DialogTitle className="text-2xl font-editorial font-bold">{selectedStudy.title}</DialogTitle>
+              <DialogDescription className="text-base text-muted-foreground">{selectedStudy.summary}</DialogDescription>
+            </DialogHeader>
+
+            <div className="space-y-6 pt-4">
+              <div className="rounded-lg overflow-hidden border border-border/60 bg-muted">
+                <img src={selectedStudy.image} alt={selectedStudy.title} className="w-full h-auto object-cover max-h-80" />
+              </div>
+
+              {selectedStudy.humanProblem && (
+                <div className="space-y-2">
+                  <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-mono">The Human / Systems Problem</h4>
+                  <p className="text-sm leading-relaxed text-foreground/90">{selectedStudy.humanProblem}</p>
                 </div>
+              )}
+
+              {selectedStudy.systemsSolution && (
+                <div className="space-y-2">
+                  <h4 className="text-sm font-bold uppercase tracking-wider text-[#FE299E] font-mono">Systems Architecture Solution</h4>
+                  <p className="text-sm leading-relaxed text-foreground/90">{selectedStudy.systemsSolution}</p>
+                </div>
+              )}
+
+              {selectedStudy.technicalOutcomes && (
+                <div className="space-y-2">
+                  <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-mono">Key Technical &amp; Design Outcomes</h4>
+                  <ul className="space-y-2">
+                    {selectedStudy.technicalOutcomes.map((outcome, i) => (
+                      <li key={i} className="text-sm flex items-start gap-2 text-foreground/80">
+                        <Check className="w-4 h-4 text-[#FE299E] shrink-0 mt-0.5" />
+                        <span>{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-3 pt-4 border-t border-border/40">
+                {selectedStudy.liveUrl && (
+                  <a href={selectedStudy.liveUrl} target="_blank" rel="noopener noreferrer">
+                    <Button className="bg-[#FE299E] hover:bg-[#FE299E]/90 text-white">
+                      {selectedStudy.liveUrlText || "Visit Live Product"} <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </a>
+                )}
+                {selectedStudy.repoUrl && (
+                  <a href={selectedStudy.repoUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline">
+                      View Source Code <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </a>
+                )}
               </div>
-              <div className="p-5 space-y-2">
-                <span
-                  className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
-                  data-testid={`text-enterprise-label-${card.id}`}
-                >
-                  {card.label}
-                </span>
-                <h3
-                  className="text-sm md:text-base font-semibold leading-snug"
-                  data-testid={`text-enterprise-title-${card.id}`}
-                >
-                  {card.title}
-                </h3>
-              </div>
-            </Card>
-          </motion.div>
-        ))}
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+
+      {/* ── Published Thesis Callout ── */}
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-8 w-full">
+        <Card className="p-6 md:p-8 border-[#FE299E]/30 bg-gradient-to-r from-card to-[#FE299E]/5">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-2xl">
+              <Badge variant="outline" className="text-xs font-mono border-[#FE299E]/40 text-[#FE299E]">
+                Published Architectural Essay
+              </Badge>
+              <h3 className="text-2xl font-bold font-editorial tracking-tight">
+                Design Is Risk: The Architectural Defense Against Model Collapse
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Why unconstrained AI agent swarms produce catastrophic technical debt, and how constitutional harness engineering restores deterministic production guarantees.
+              </p>
+            </div>
+            <Link href="/essays/design-is-risk">
+              <Button className="bg-[#FE299E] hover:bg-[#FE299E]/90 text-white shrink-0 font-medium">
+                Read Full Essay <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </Card>
       </div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.3 }}
-        className="font-mono text-xs text-muted-foreground mt-6 text-center"
-        data-testid="text-vault-contact"
-      >
-        Full case studies available upon request &mdash;{" "}
-        <button
-          onClick={onContactClick}
-          className="underline underline-offset-2 transition-colors cursor-pointer bg-transparent border-none p-0 font-mono text-xs"
-          style={{ color: "#FE299E" }}
-          data-testid="link-vault-contact"
-        >
-          get in touch
-        </button>
-      </motion.p>
-    </section>
-  );
-}
+      {/* ── Conversion & Sprint Callout ── */}
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-12 w-full">
+        <SprintCallout onContactClick={handleContactClick} />
+      </div>
 
-export default function Portfolio() {
-  const [contactOpen, setContactOpen] = useState(false);
-
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <HeroSection onContactClick={() => setContactOpen(true)} />
-      <DisclaimerHookSection onContactClick={() => setContactOpen(true)} />
-      <WhitepaperSection />
-      <ShowcaseSection />
-      <EnterpriseVaultSection onContactClick={() => setContactOpen(true)} />
-      <ContactFormModal open={contactOpen} onOpenChange={setContactOpen} />
+      {/* ── Contact Modal ── */}
+      <ContactFormModal
+        open={isContactOpen}
+        onOpenChange={setIsContactOpen}
+        defaultSubject={contactSubject}
+      />
     </div>
   );
 }
