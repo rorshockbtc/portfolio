@@ -19,8 +19,12 @@ export interface LivingProofData {
   liveUrl?: string;
   liveUrlText?: string;
   repoUrl?: string;
+  passcode?: string;
   humanProblem?: string;
   systemsSolution?: string;
+  uiUxBreakdown?: string;
+  architectureBreakdown?: string;
+  developmentBreakdown?: string;
   technicalOutcomes?: string[];
 }
 

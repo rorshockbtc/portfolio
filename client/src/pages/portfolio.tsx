@@ -247,27 +247,138 @@ const headlineMetrics: MetricItem[] = [
   },
 ];
 
-// ─── Living Proofs (Public Flagships) ──────────────────────────────────────────
+// ─── Living Proofs (Public Flagships & Sovereign Systems) ─────────────────────
 const publicWorkStudies: LivingProofData[] = [
+  {
+    id: "cassandra",
+    namespace: "pipe\\career-intelligence",
+    category: "Autonomous AI Agent",
+    title: "Cassandra: High-Signal Career Agent & Vignelli Focus Mode",
+    subtitle: "jobseeker-agent (Focus Mode v5.0)",
+    summary:
+      "An autonomous career evaluation engine and deep-work interface designed to eliminate job-board dopamine traps, featuring the 'Sprint of 8' Focus Mode, continuous negative dismissal reinforcement, and a calming Massimo Vignelli editorial aesthetic.",
+    passcode: "hirekyle",
+    humanProblem:
+      "Job seeking in the modern tech market is a dehumanizing, high-volume slog dominated by predatory scrapers, low-signal AI 'claw wrappers', and constant rejection. The process breeds anxiety, dopamine burnout, and endless context switching.",
+    systemsSolution:
+      "Architected a calm, single-task deep-work system around the 'Sprint of 8'—an intentional one-hour batch of 8 curated roles (each taking 5-10 minutes of deep focus). Engineered a live reinforcement feedback loop: every role dismissal logs the explicit rejection reason into SQLite, which Cassandra dynamically injects into Gemini's system prompt as Critical Exclusion Patterns (-45 point penalty), training the model to think orthogonally and stop recommending bad fits.",
+    uiUxBreakdown:
+      "Substituted chaotic applicant portal feeds with an editorial Sandstone, Cream, and Terracotta palette governed by Massimo Vignelli's 8pt grid. Replaced company logos and noisy badges with high-DPI curated fine art and landscape photography to restore dignity, calm, and joy to the job-seeking ritual. Features a scroll-snap right navigation pillar and an overlay navigation drawer so users never lose their place.",
+    architectureBreakdown:
+      "Engineered an orthogonal job discovery pipeline that scores vacancies across multiple dimensions (leadership leverage, design-system maturity, sovereign alignment) rather than superficial keyword matching. Incorporates Glassdoor culture telemetry, automated short-answer question synthesis, and retrospective batch calibration.",
+    developmentBreakdown:
+      "Plain HTML5 and Vanilla JavaScript frontend backed by a Node.js and SQLite engine (jobs.db). Zero bloated UI dependencies to ensure instant local execution. Seamlessly integrates with the Gemini 2.5 Flash API for low-latency batch evaluations with structured JSON output enforcement.",
+    metrics: [
+      { label: "Focus Sprint Limit", value: "8 Roles", highlight: true },
+      { label: "Dismissal Penalty", value: "-45 Pts" },
+      { label: "Design System", value: "Vignelli 8pt" },
+    ],
+    technicalOutcomes: [
+      "Built the Sprint of 8 Focus Mode queue, keeping active evaluation sessions strictly bounded to 60-75 minutes of deep focus.",
+      "Created the continuous reinforcement dismissal pipeline in Node/SQLite, auto-injecting rejection rationales into subsequent Gemini prompt payloads.",
+      "Crafted custom Vignelli layout in CSS with sticky scroll-snap pillar, chapter preservation across tab transitions, and capsule scrollbars.",
+      "Secured private live web interface with client-side passcode authentication ('hirekyle').",
+    ],
+    image: "/images/cassandra/cassandra_combined.png",
+    icon: Activity,
+    tags: ["Focus Mode v5.0", "Vignelli 8pt Grid", "Gemini 2.5", "Reinforcement Learning", "Node.js & SQLite"],
+    liveUrl: "https://jobseeker-agent.up.railway.app",
+    liveUrlText: "Launch Private Interface (Passcode: hirekyle)",
+  },
+  {
+    id: "miracle",
+    namespace: "pipe\\civic-zero-trust",
+    category: "Zero-Cloud Analytics Engine",
+    title: "Miracle / Marigold: Zero-Cloud Civic Data & Election Audit Engine",
+    subtitle: "bolt.pipes.pink (Marigold Insights)",
+    summary:
+      "A local-compute analytical execution engine built for county clerks and election officers under FY26 FEMA HSGP election security mandates. Solved Mississippi's unopenable voter rolls with 100% in-browser WASM and Zero-PII cryptographic entity hydration.",
+    humanProblem:
+      "Civic and voter datasets are massive (millions of rows) and impossible for local county clerks and election volunteers to open without crashing Excel. In Mississippi, nobody could even get the official voter rolls to open. Meanwhile, passing citizen voter rolls to cloud AI violates strict privacy laws and creates catastrophic PII leakage liabilities.",
+    systemsSolution:
+      "Built bolt.pipes.pink in hours to allow citizens and officials to immediately open and inspect Mississippi's voter rolls directly in the browser. Productized it as Marigold Insights when early July 2026 federal policy released a massive FEMA funding bucket that county clerks had no idea how to spend. Aligned the software with mandatory FEMA HSGP 3% election security priorities, giving clerks an allowable expenditure to audit rolls locally on tax-funded data.",
+    uiUxBreakdown:
+      "Engineered 'Mari'—an AI civic concierge who speaks plain English, translating non-technical user questions into local SQL queries and rendering on-the-fly interactive Data Stories and charts. Designed specifically for county clerks who need audit answers in 3 minutes without understanding database administration.",
+    architectureBreakdown:
+      "Pioneered 'Zero-PII Hydration': when Mari analyzes voter records, names and addresses are stripped and replaced with cryptographic entity hashes ([ENTITY_HASH_123]) before reaching the LLM. The AI reasons over structure and anomalies; the local browser decrypts and re-hydrates real citizen names in real time into the UI. Zero bytes of PII ever leave the user's desk.",
+    developmentBreakdown:
+      "Runs 100% in client-side memory using DuckDB-WASM, SQLite, Web Workers, and Origin Private File System (OPFS). Real-time security scanners actively inspect incoming byte streams to neutralize XSS payloads. Employs in-memory Fellegi-Sunter and Levenshtein probabilistic record linkage for cross-precinct duplicate detection.",
+    metrics: [
+      { label: "Data Residency", value: "100% Local", highlight: true },
+      { label: "Audit Runtime", value: "<3 Minutes" },
+      { label: "FEMA Mandate", value: "HSGP Sec 3%" },
+    ],
+    technicalOutcomes: [
+      "Eliminated cloud PII liability by executing multi-gigabyte voter roll queries entirely within browser Web Workers and OPFS.",
+      "Engineered Zero-PII cryptographic hashing protocol, enabling safe LLM demographic audits without exposing voter identities.",
+      "Qualified under the mandatory 3% National Priority Area election security grant under the Homeland Security Grant Program.",
+      "Engineered in-memory Fellegi-Sunter and Levenshtein algorithms for air-gapped cross-precinct error detection.",
+    ],
+    image: "/images/marigold/marigold-hero.png",
+    icon: Shield,
+    tags: ["FEMA HSGP Compliant", "DuckDB-WASM", "Zero-PII Hydration", "OPFS Local Storage", "Mari AI Concierge"],
+    liveUrl: "https://bolt.pipes.pink",
+    liveUrlText: "Launch Civic Sandbox (bolt.pipes.pink)",
+  },
+  {
+    id: "semi",
+    namespace: "pipe\\epistemic-second-brain",
+    category: "Sovereign Cognitive Architecture",
+    title: "Semi (S;): The Epistemic Second Brain & Sparring Partner",
+    subtitle: "Semi-CHB Cognitive Architecture",
+    summary:
+      "An epistemic sparring partner and memory digitization engine. Built as an extension of Colon Hyphen Bracket (:-) to preserve intellectual perspective as sovereign property and allow future collaborators to query Kyle's comprehensive thoughts without onboarding fatigue.",
+    humanProblem:
+      "Collaborating with new partners or clients typically requires dozens of hours of synchronous onboarding meetings to transfer institutional context, design philosophy, and mental models. Meanwhile, mainstream AI assistants are sycophantic yes-men that forget context and reinforce biases.",
+    systemsSolution:
+      "Created Semi as an organic extension of Colon Hyphen Bracket (S; represents the pause between independent thoughts). Semi digitizes Kyle's memories, architectural theses, design systems, and work history into a persistent epistemic state. Collaborators can query Semi asynchronously to get deep, authoritative answers without demanding synchronous hours. Powers the core second-brain curation across Pipes.",
+    uiUxBreakdown:
+      "Constructed a dark-mode epistemic cockpit displaying 'Active Cognitive Threads' (such as 'The Biometric Soul' and 'Macroeconomics vs Local-First Systems'). Instead of a blank chatbot prompt, Semi surfaces the tensions between ideas and invites users to 'resume sparring' across persistent threads.",
+    architectureBreakdown:
+      "Operates as the core second-brain engine behind the Pipes Protocol. Features dual-mode storage (local vs cloud) and maintains an epistemic graph that tracks intellectual orbits across time, identifying contradictions and evolving philosophies without context drift.",
+    developmentBreakdown:
+      "Built with React 19, Tailwind CSS v4, Lucide icons, and integrated local storage toggles for zero-knowledge data retention. Structured with modular widget architecture (SemiWidget.tsx and SemiPipePage.tsx) designed to dock into any web platform.",
+    metrics: [
+      { label: "Cognitive State", value: "Persistent", highlight: true },
+      { label: "Brand Origin", value: "CHB Extension" },
+      { label: "Engine Role", value: "Pipes Driver" },
+    ],
+    technicalOutcomes: [
+      "Designed and implemented the S; epistemic state engine, digitizing architectural theses and design rationale into structured cognitive threads.",
+      "Integrated dual-mode local/cloud storage toggles, enabling complete offline sovereignty for private memory graphs.",
+      "Built the primary second-brain intelligence layer powering creator curation across the Pipes ecosystem.",
+    ],
+    image: "/artwork/workshop.png",
+    icon: Cpu,
+    tags: ["Epistemic State Engine", "Second Brain", "Active Cognitive Threads", "Local-First Storage", "CHB Brand Extension"],
+    liveUrl: "https://pipes.pink",
+    liveUrlText: "Explore in Pipes Protocol (pipes.pink)",
+  },
   {
     id: "pipes",
     namespace: "pipe\\multi-tenant-protocol",
     category: "Flagship Living Product",
-    title: "Pipes Protocol & Knowledge Marketplace",
-    subtitle: "Pipes.pink",
+    title: "Pipes Protocol & Sovereign Knowledge Marketplace",
+    subtitle: "Pipes.pink (Flagship Protocol)",
     summary:
-      "A sovereign knowledge protocol and marketplace that transforms human expertise into reusable, monetizable infrastructure with $0 marginal AI inference costs.",
+      "A sovereign knowledge protocol and marketplace that transforms human expertise into reusable, monetizable infrastructure with $0 marginal AI inference costs, halting the AI model collapse loop.",
     humanProblem:
       "Model collapse and AI amnesia. As foundation LLMs drown in synthetic data and hallucinations, verified human-curated context is the rarest asset. But standard SaaS burns expensive tokens on repetitive context dumps.",
     systemsSolution:
       "Architected the 'Reference Library Pattern' (Template + Keyword Match + Curated Knowledge = Deterministic Output at $0.00 marginal LLM cost). Built a runtime CSS variable injection engine that adapts the entire UI, palette, typography, and copy across 6 distinct personas in real time.",
+    uiUxBreakdown:
+      "Designed a fluid, multi-tenant interface powered by runtime CSS variable injection. The same underlying knowledge graph effortlessly transforms between Cyberpunk, Enterprise, Academic, and Vignelli typographic themes without page reloads.",
+    architectureBreakdown:
+      "Self-sovereign namespace registry with deeded equity mechanics (70/30 creator revenue split) anchored on cryptographic identity. Directly couples human curation to economic compensation to stop the extraction of human expertise.",
+    developmentBreakdown:
+      "Next.js, TypeScript, and Web Crypto APIs orchestrating client-side decryption and decentralized micro-transactions. Delivers 25-page, PhD-level synthesized outputs with zero external token burn.",
     metrics: [
       { label: "Marginal AI Cost", value: "$0.00", highlight: true },
       { label: "Persona Engine", value: "6 Live Themes" },
       { label: "Creator Equity", value: "70% Split" },
     ],
     technicalOutcomes: [
-      "Engineered the Reference Library pattern delivering 25-page, PhD-level outputs with zero external token expenditure by matching local keyword ontologies.",
+      "Engineered the Reference Library pattern delivering 25-page outputs with zero external token expenditure by matching local keyword ontologies.",
       "Multi-tenant CSS variable injection engine powering instantaneous aesthetic & typographic adaptation across 6 live audiences.",
       "Self-sovereign namespace registry with deeded equity mechanics (70/30 creator revenue split) anchored on cryptographic identity.",
     ],
@@ -305,32 +416,6 @@ const publicWorkStudies: LivingProofData[] = [
     liveUrl: "https://greater.pink",
     liveUrlText: "Try Live Demo (greater.pink)",
     repoUrl: "https://github.com/rorshockbtc/greater-than",
-  },
-  {
-    id: "harness",
-    namespace: "pipe\\harness-engineering",
-    category: "Agent Governance",
-    title: "General Practices (Agentic Harness Engineering)",
-    subtitle: "Formerly The Workshop",
-    summary:
-      "A constitutional governance framework built 18 months ahead of the industry to constrain rogue AI builder agents and enforce strict runtime parity.",
-    humanProblem:
-      "The 'Template Tyranny' of agentic coding. Unconstrained AI builder agents hallucinate monorepos, install 300 unvetted npm packages, fall into context amnesia, and break production parity.",
-    systemsSolution:
-      "Pioneered agent harness engineering ahead of mainstream industry adoption. Built a machine-parseable 'Living Primer' constitution with strict dependency caps (max 50), 10s API timeouts, and an automated agentic handshake that forces builders into rigorous compliance before merge.",
-    metrics: [
-      { label: "Market Timing", value: "+18 Mo Ahead", highlight: true },
-      { label: "Dependency Cap", value: "Max 50 Deps" },
-      { label: "Parity Enforcement", value: "Automated UAT" },
-    ],
-    technicalOutcomes: [
-      "Engineered the 'Agentic Handshake' API middleware, forcing LLM builders to validate against master project constitutions across every compute step.",
-      "Pre-Karpathy harness engineering: established automated UAT hooks, runtime boundary enforcement, and anti-pattern interceptors.",
-      "Zero-overhead architecture eliminating dev-to-production discrepancies across multi-agent workflows.",
-    ],
-    image: "/artwork/workshop.png",
-    icon: Cpu,
-    tags: ["Harness Engineering", "Constitutional Governance", "Multi-Agent Systems", "Runtime Constraints"],
   },
   {
     id: "slash",
@@ -723,6 +808,22 @@ export default function PortfolioPage() {
                 <img src={selectedStudy.image} alt={selectedStudy.title} className="w-full h-auto object-cover max-h-80" />
               </div>
 
+              {selectedStudy.passcode && (
+                <div className="p-3.5 rounded-lg border border-[#FE299E]/40 bg-[#FE299E]/5 flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#FE299E] font-semibold">
+                      Private Sovereign Deployment
+                    </span>
+                    <p className="text-xs text-foreground/80">
+                      Live demo is password-gated. Use passcode below for immediate inspection:
+                    </p>
+                  </div>
+                  <code className="px-2.5 py-1 rounded bg-black/60 border border-[#FE299E]/50 font-mono text-xs text-[#FE299E] font-bold">
+                    {selectedStudy.passcode}
+                  </code>
+                </div>
+              )}
+
               {selectedStudy.humanProblem && (
                 <div className="space-y-2">
                   <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-mono">The Human / Systems Problem</h4>
@@ -734,6 +835,33 @@ export default function PortfolioPage() {
                 <div className="space-y-2">
                   <h4 className="text-sm font-bold uppercase tracking-wider text-[#FE299E] font-mono">Systems Architecture Solution</h4>
                   <p className="text-sm leading-relaxed text-foreground/90">{selectedStudy.systemsSolution}</p>
+                </div>
+              )}
+
+              {selectedStudy.uiUxBreakdown && (
+                <div className="space-y-2 p-4 rounded-lg bg-card/60 border border-border/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#D9A206] font-mono flex items-center gap-1.5">
+                    <span>◈</span> UI/UX Craft &amp; Human Psychology
+                  </h4>
+                  <p className="text-sm leading-relaxed text-foreground/85">{selectedStudy.uiUxBreakdown}</p>
+                </div>
+              )}
+
+              {selectedStudy.architectureBreakdown && (
+                <div className="space-y-2 p-4 rounded-lg bg-card/60 border border-border/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#2A7B5C] font-mono flex items-center gap-1.5">
+                    <span>◈</span> Product Architecture &amp; Intelligence Loops
+                  </h4>
+                  <p className="text-sm leading-relaxed text-foreground/85">{selectedStudy.architectureBreakdown}</p>
+                </div>
+              )}
+
+              {selectedStudy.developmentBreakdown && (
+                <div className="space-y-2 p-4 rounded-lg bg-card/60 border border-border/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#D9777F] font-mono flex items-center gap-1.5">
+                    <span>◈</span> Full-Stack Development &amp; Local Runtime
+                  </h4>
+                  <p className="text-sm leading-relaxed text-foreground/85">{selectedStudy.developmentBreakdown}</p>
                 </div>
               )}
 
