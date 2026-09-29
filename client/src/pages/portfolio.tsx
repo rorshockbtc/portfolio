@@ -543,6 +543,20 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#FE299E]/20">
+      {/* ── Urgent Availability Banner ── */}
+      <div className="bg-[#FE299E] text-white text-[13px] md:text-sm font-medium py-2 px-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 z-50">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse shadow-[0_0_8px_rgba(134,239,172,0.6)]" />
+          <span className="text-center sm:text-left">Status: Available for immediate placement (Principal/Staff) & High-Leverage Consulting.</span>
+        </div>
+        <button
+          onClick={() => handleContactClick("Priority Placement Inquiry")}
+          className="text-xs bg-white text-[#FE299E] px-3 py-1 rounded font-bold hover:bg-white/90 transition-colors shadow-sm"
+        >
+          Hire Kyle
+        </button>
+      </div>
+
       {/* ── Perspective / Audience Track Switcher (Sticky Masthead Strip) ── */}
       <div className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-2.5 flex items-center justify-between gap-4">
@@ -699,6 +713,67 @@ export default function PortfolioPage() {
       <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-12 w-full">
         <MetricStrip metrics={headlineMetrics} columns={4} />
       </div>
+
+      {/* ── Hard Skills & Production Stack ── */}
+      <section className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-4 md:py-8 w-full">
+        <div className="p-8 rounded-2xl bg-muted/20 border border-border/50 space-y-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h2 className="text-2xl font-bold font-editorial tracking-tight mb-1">Core Capabilities & Production Stack</h2>
+              <p className="text-sm text-muted-foreground">The exact tools and architectural patterns I use to ship production software.</p>
+            </div>
+            <Badge variant="outline" className="w-fit text-xs font-mono uppercase tracking-wider text-[#FE299E] border-[#FE299E]/40 bg-[#FE299E]/5">
+              Machine Readable / ATS Friendly
+            </Badge>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="space-y-4">
+              <h3 className="font-semibold text-xs uppercase tracking-widest text-foreground/80 flex items-center gap-2">
+                <Cpu className="w-3.5 h-3.5 text-[#FE299E]" /> Systems & Arch
+              </h3>
+              <ul className="space-y-2.5 text-sm text-muted-foreground font-medium">
+                <li>TypeScript / Node.js</li>
+                <li>React 19 / Next.js</li>
+                <li>Low-Latency WebSockets</li>
+                <li>Zero-to-One Product Ops</li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h3 className="font-semibold text-xs uppercase tracking-widest text-foreground/80 flex items-center gap-2">
+                <Layers className="w-3.5 h-3.5 text-[#FE299E]" /> Data & Protocols
+              </h3>
+              <ul className="space-y-2.5 text-sm text-muted-foreground font-medium">
+                <li>SQLite / DuckDB-WASM</li>
+                <li>PostgreSQL / GraphQL</li>
+                <li>Bitcoin UTXO Orchestration</li>
+                <li>Decentralized PKI (NOSTR)</li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h3 className="font-semibold text-xs uppercase tracking-widest text-foreground/80 flex items-center gap-2">
+                <Zap className="w-3.5 h-3.5 text-[#FE299E]" /> AI & Agentic Intel
+              </h3>
+              <ul className="space-y-2.5 text-sm text-muted-foreground font-medium">
+                <li>Gemini 2.5 Flash / Pro API</li>
+                <li>Reinforcement Learning Loops</li>
+                <li>Zero-PII Cryptographic Hydration</li>
+                <li>Deterministic DSPy Pipelines</li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h3 className="font-semibold text-xs uppercase tracking-widest text-foreground/80 flex items-center gap-2">
+                <Eye className="w-3.5 h-3.5 text-[#FE299E]" /> Design & UI
+              </h3>
+              <ul className="space-y-2.5 text-sm text-muted-foreground font-medium">
+                <li>Figma / Design Systems</li>
+                <li>Tailwind CSS v4</li>
+                <li>Runtime CSS Variable Injection</li>
+                <li>Massimo Vignelli 8pt Grid</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── Confidential Design Vault (Passcode Protected) ── */}
       <section id="confidential-vault" className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-12 w-full space-y-10">
