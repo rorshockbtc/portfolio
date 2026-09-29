@@ -256,34 +256,34 @@ const publicWorkStudies: LivingProofData[] = [
     title: "Cassandra: High-Signal Career Agent & Vignelli Focus Mode",
     subtitle: "jobseeker-agent (Focus Mode v5.0)",
     summary:
-      "An autonomous career evaluation engine and deep-work interface designed to eliminate job-board dopamine traps, featuring the 'Sprint of 8' Focus Mode, continuous negative dismissal reinforcement, and a calming Massimo Vignelli editorial aesthetic.",
-    passcode: "hirekyle",
+      "An autonomous career evaluation engine and deep-work interface designed to eliminate job-board dopamine traps. Features the 'Sprint of 8' Focus Mode, continuous negative dismissal reinforcement, and a calming Massimo Vignelli editorial aesthetic.",
+    passcode: "onewordalllowercasehirekyle",
     humanProblem:
-      "Job seeking in the modern tech market is a dehumanizing, high-volume slog dominated by predatory scrapers, low-signal AI 'claw wrappers', and constant rejection. The process breeds anxiety, dopamine burnout, and endless context switching.",
+      "Job seeking in the modern tech market is a dehumanizing, high-volume slog dominated by predatory scrapers, low-signal AI 'claw wrappers', and constant rejection. The process breeds anxiety, dopamine burnout, and endless context switching. I wanted to give myself a way to interact with the job-seeking process that was more beautiful—something that gave me joy for a process that is otherwise not fun to do.",
     systemsSolution:
-      "Architected a calm, single-task deep-work system around the 'Sprint of 8'—an intentional one-hour batch of 8 curated roles (each taking 5-10 minutes of deep focus). Engineered a live reinforcement feedback loop: every role dismissal logs the explicit rejection reason into SQLite, which Cassandra dynamically injects into Gemini's system prompt as Critical Exclusion Patterns (-45 point penalty), training the model to think orthogonally and stop recommending bad fits.",
+      "Architected a calm, single-task deep-work system around the 'Sprint of 8'—an intentional one-hour batch of 8 curated roles (each taking 5-10 minutes of deep focus). 8 is a personal lucky number (my first baseball jersey), but it perfectly bounds a productive session. Engineered a live reinforcement feedback loop: Cassandra adapts to rejection reasons by logging explicit dismissals into SQLite, injecting them into Gemini's system prompt as Critical Exclusion Patterns to find progressively better matches over time.",
     uiUxBreakdown:
-      "Substituted chaotic applicant portal feeds with an editorial Sandstone, Cream, and Terracotta palette governed by Massimo Vignelli's 8pt grid. Replaced company logos and noisy badges with high-DPI curated fine art and landscape photography to restore dignity, calm, and joy to the job-seeking ritual. Features a scroll-snap right navigation pillar and an overlay navigation drawer so users never lose their place.",
+      "Substituted chaotic applicant portal feeds with an editorial Sandstone, Cream, and Terracotta palette governed by Massimo Vignelli's 8pt grid. To break out of the 'claw wrapper BS' and generic scraper sites, I replaced corporate logos and noisy badges with high-DPI curated fine art and landscape photography. This restores dignity, calm, and joy to the ritual. Features a scroll-snap right navigation pillar and an overlay navigation drawer so users never lose their place.",
     architectureBreakdown:
-      "Engineered an orthogonal job discovery pipeline that scores vacancies across multiple dimensions (leadership leverage, design-system maturity, sovereign alignment) rather than superficial keyword matching. Incorporates Glassdoor culture telemetry, automated short-answer question synthesis, and retrospective batch calibration.",
+      "Engineered an orthogonal job discovery pipeline that acts as my personal autonomous operator. Cassandra interfaces with employers on my behalf, scoring vacancies across multiple dimensions (leadership leverage, design-system maturity, sovereign alignment) rather than superficial keyword matching. Incorporates automated short-answer question synthesis, bespoke cover letter generation, and retrospective batch calibration.",
     developmentBreakdown:
-      "Plain HTML5 and Vanilla JavaScript frontend backed by a Node.js and SQLite engine (jobs.db). Zero bloated UI dependencies to ensure instant local execution. Seamlessly integrates with the Gemini 2.5 Flash API for low-latency batch evaluations with structured JSON output enforcement.",
+      "Built natively with plain HTML5 and Vanilla JavaScript on the frontend, backed by a Node.js and SQLite engine (jobs.db) for zero-latency local execution. Seamlessly integrates with the Gemini 2.5 Flash API for low-latency batch evaluations. Cassandra's orchestration is entirely machine-readable, making this very portfolio site a semantic reference point for Cassandra to send to other applications and employer agents.",
     metrics: [
       { label: "Focus Sprint Limit", value: "8 Roles", highlight: true },
-      { label: "Dismissal Penalty", value: "-45 Pts" },
+      { label: "Dismissal Penalty", value: "Adaptive" },
       { label: "Design System", value: "Vignelli 8pt" },
     ],
     technicalOutcomes: [
-      "Built the Sprint of 8 Focus Mode queue, keeping active evaluation sessions strictly bounded to 60-75 minutes of deep focus.",
-      "Created the continuous reinforcement dismissal pipeline in Node/SQLite, auto-injecting rejection rationales into subsequent Gemini prompt payloads.",
+      "Built the 'Sprint of 8' Focus Mode queue, keeping active evaluation sessions strictly bounded to roughly one hour of deep focus.",
+      "Created the continuous reinforcement dismissal pipeline in Node/SQLite, auto-injecting rejection rationales into subsequent LLM payloads.",
       "Crafted custom Vignelli layout in CSS with sticky scroll-snap pillar, chapter preservation across tab transitions, and capsule scrollbars.",
-      "Secured private live web interface with client-side passcode authentication ('hirekyle').",
+      "Secured private live web interface with client-side passcode authentication.",
     ],
     image: "/images/cassandra/cassandra_combined.png",
     icon: Activity,
-    tags: ["Focus Mode v5.0", "Vignelli 8pt Grid", "Gemini 2.5", "Reinforcement Learning", "Node.js & SQLite"],
+    tags: ["Autonomous Operator", "Vignelli 8pt Grid", "Gemini 2.5", "Reinforcement Learning", "Node.js & SQLite"],
     liveUrl: "https://jobseeker-agent.up.railway.app",
-    liveUrlText: "Launch Private Interface (Passcode: hirekyle)",
+    liveUrlText: "Launch Private Interface (Passcode: onewordalllowercasehirekyle)",
   },
   {
     id: "miracle",
