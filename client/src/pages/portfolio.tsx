@@ -505,7 +505,7 @@ const institutionalRecords: InstitutionalRecord[] = [
     icon: HardHat,
   },
   {
-    client: "Ultralight Medical Imaging",
+    client: "UltraLinq Medical Imaging",
     role: "Lead Interface & Hardware Designer",
     scale: "Multimodal PACS • Cardiology & Ultrasound Diagnostics",
     description:
@@ -525,12 +525,30 @@ const institutionalRecords: InstitutionalRecord[] = [
 ];
 
 export default function PortfolioPage() {
-  const [activeTrack, setActiveTrack] = useState<PerspectiveTrack>("design");
+  const [activeTrack, setActiveTrack] = useState<PerspectiveTrack>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const trackParam = params.get("track");
+      if (trackParam === "design" || trackParam === "development" || trackParam === "architecture") {
+        return trackParam;
+      }
+    }
+    return "design";
+  });
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [contactSubject, setContactSubject] = useState<string | undefined>();
   const [selectedStudy, setSelectedStudy] = useState<LivingProofData | null>(null);
 
   const track = TRACKS[activeTrack];
+
+  const handleTrackChange = (tKey: PerspectiveTrack) => {
+    setActiveTrack(tKey);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("track", tKey);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   const handleContactClick = (subject?: string) => {
     setContactSubject(subject);
@@ -543,22 +561,8 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#FE299E]/20">
-      {/* ── Urgent Availability Banner ── */}
-      <div className="bg-[#FE299E] text-white text-[13px] md:text-sm font-medium py-2 px-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 z-50">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse shadow-[0_0_8px_rgba(134,239,172,0.6)]" />
-          <span className="text-center sm:text-left">Status: Available for immediate placement (Principal/Staff) & High-Leverage Consulting.</span>
-        </div>
-        <button
-          onClick={() => handleContactClick("Priority Placement Inquiry")}
-          className="text-xs bg-white text-[#FE299E] px-3 py-1 rounded font-bold hover:bg-white/90 transition-colors shadow-sm"
-        >
-          Hire Kyle
-        </button>
-      </div>
-
       {/* ── Perspective / Audience Track Switcher (Sticky Masthead Strip) ── */}
-      <div className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-md">
+      <div className="sticky top-[88px] md:top-[96px] z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-md transition-all">
         <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-2.5 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground hidden sm:inline-block">
@@ -570,7 +574,7 @@ export default function PortfolioPage() {
                 return (
                   <button
                     key={tKey}
-                    onClick={() => setActiveTrack(tKey)}
+                    onClick={() => handleTrackChange(tKey)}
                     className={`relative px-3 py-1 text-xs font-medium rounded-md transition-all duration-150 flex items-center gap-1.5 ${
                       isSelected
                         ? "bg-[#FE299E] text-white shadow-sm font-semibold"

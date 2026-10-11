@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -40,6 +40,13 @@ interface ContactFormModalProps {
 export default function ContactFormModal({ open, onOpenChange, defaultSubject = "General Inquiry" }: ContactFormModalProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
+  const intentOptions = [
+    "1-Week Production Sprint ($10k)",
+    "Principal / Staff W2 Role",
+    "Fractional Lead Architect",
+    "Direct Hire Inquiry",
+  ];
+
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -49,6 +56,12 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
       message: "",
     },
   });
+
+  useEffect(() => {
+    if (open && defaultSubject) {
+      form.setValue("subject", defaultSubject);
+    }
+  }, [open, defaultSubject, form]);
 
   async function onSubmit(data: ContactFormValues) {
     setStatus("submitting");
@@ -151,6 +164,31 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
               data-testid="form-contact"
               noValidate
             >
+              <div>
+                <label className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground block mb-2">
+                  Select Project Track / Purpose:
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {intentOptions.map((opt) => {
+                    const isSelected = form.watch("subject") === opt;
+                    return (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => form.setValue("subject", opt)}
+                        className={`text-[11px] px-2.5 py-1 rounded-md border transition-all font-mono ${
+                          isSelected
+                            ? "bg-[#FE299E] text-white border-[#FE299E] font-semibold shadow-sm"
+                            : "bg-muted/40 text-muted-foreground border-border/60 hover:text-foreground hover:bg-muted/70"
+                        }`}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <FormField
                 control={form.control}
                 name="name"
@@ -215,7 +253,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                     <FormLabel>Message</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Tell us about your project..."
+                        placeholder="Tell us about your project or role..."
                         rows={4}
                         {...field}
                         data-testid="input-message"
@@ -227,7 +265,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
               />
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full bg-[#FE299E] hover:bg-[#D1007E] text-white"
                 disabled={status === "submitting"}
                 data-testid="button-submit-contact"
               >
@@ -239,10 +277,25 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                 ) : (
                   <>
                     <Send className="w-4 h-4 mr-2" />
-                    Send Message
+                    Send Inquiry
                   </>
                 )}
               </Button>
+
+              <div className="pt-2 text-center text-xs text-muted-foreground border-t border-border/40 space-y-0.5">
+                <p>
+                  Direct email:{" "}
+                  <a
+                    href="mailto:rorshock@protonmail.com"
+                    className="font-mono text-[#FE299E] hover:underline font-semibold"
+                  >
+                    rorshock@protonmail.com
+                  </a>
+                </p>
+                <p className="text-[10px] font-mono text-muted-foreground/70">
+                  Raleigh, NC &amp; US Remote &bull; Response within 24 hours guaranteed
+                </p>
+              </div>
             </form>
           </Form>
         )}
