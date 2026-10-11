@@ -24,41 +24,41 @@
   --elevate-1: rgba(43, 30, 25, 0.03);
   --elevate-2: rgba(43, 30, 25, 0.07);
 
-  /* Light Mode: Warm Sandstone Paper (Cassandra / Pipes Focus Mode) */
-  --background: 38 32% 96%;          /* #FAF6EE warm tactile paper, not stark white */
+  /* Light Mode: Warm Sandstone / Albers Paper (Rich Oatmeal/Sand tint, distinctly NOT white) */
+  --background: 38 28% 92%;          /* #EFE8DC warm tactile sand paper */
   --foreground: 16 27% 13%;          /* #2B1E19 rich coffee black */
-  --border: 36 22% 85%;              /* #E5DDD0 warm earthen border */
-  --card: 38 28% 94%;                /* #F4EFE6 warm sandstone card surface */
+  --border: 36 20% 82%;              /* #DBD3C4 warm earthen border */
+  --card: 38 32% 96%;                /* #FAF5EC warm ivory card */
   --card-foreground: 16 27% 13%;     /* #2B1E19 */
-  --card-border: 36 22% 85%;         /* #E5DDD0 */
-  --sidebar: 36 26% 91%;             /* #EDE5D8 */
+  --card-border: 36 20% 82%;         /* #DBD3C4 */
+  --sidebar: 36 25% 89%;             /* #E7DFD2 */
   --sidebar-foreground: 16 27% 13%;
-  --sidebar-border: 36 22% 85%;
-  --sidebar-primary: 13 74% 54%;
+  --sidebar-border: 36 20% 82%;
+  --sidebar-primary: 326 99% 58%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 38 28% 94%;
+  --sidebar-accent: 38 28% 92%;
   --sidebar-accent-foreground: 16 27% 13%;
-  --sidebar-ring: 13 74% 54%;
+  --sidebar-ring: 326 99% 58%;
   --popover: 38 32% 96%;
   --popover-foreground: 16 27% 13%;
-  --popover-border: 36 22% 85%;
-  --primary: 13 74% 54%;            /* #E05A36 Cassandra Terracotta */
+  --popover-border: 36 20% 82%;
+  --primary: 326 99% 58%;            /* #FE299E Canonical CHB / Pipes Hot Pink */
   --primary-foreground: 0 0% 100%;
-  --secondary: 36 24% 90%;           /* #EAE2D4 */
+  --secondary: 36 24% 88%;           /* #E5DCCE */
   --secondary-foreground: 16 27% 13%;
-  --muted: 36 24% 91%;               /* #ECE4D6 */
-  --muted-foreground: 14 15% 42%;     /* #78645C warm tobacco taupe */
+  --muted: 36 24% 89%;               /* #E7DFD2 */
+  --muted-foreground: 14 15% 40%;     /* #735F57 warm tobacco */
   --accent: 356 54% 66%;             /* #D9777F Dusty Rose */
   --accent-foreground: 16 27% 13%;
   --destructive: 0 84% 35%;
   --destructive-foreground: 0 0% 100%;
-  --input: 36 22% 82%;
-  --ring: 13 74% 54%;               /* Terracotta */
-  --chart-1: 13 74% 54%;
-  --chart-2: 356 54% 66%;
-  --chart-3: 157 49% 32%;
-  --chart-4: 44 95% 44%;
-  --chart-5: 326 99% 58%;
+  --input: 36 20% 80%;
+  --ring: 326 99% 58%;               /* #FE299E */
+  --chart-1: 326 99% 58%;            /* Hot Pink */
+  --chart-2: 195 99% 48%;            /* Cyan Blue */
+  --chart-3: 157 49% 32%;            /* Emerald */
+  --chart-4: 44 95% 44%;             /* Mustard Yellow */
+  --chart-5: 13 74% 55%;             /* Terracotta */
 
   --font-sans: 'Outfit', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: 'EB Garamond', 'Fraunces', Georgia, serif;

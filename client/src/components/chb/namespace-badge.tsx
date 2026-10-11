@@ -24,14 +24,14 @@ export function NamespaceBadge({
   };
 
   return (
-    <div className={cn("inline-flex items-center gap-2", className)}>
+    <div className={cn("inline-flex items-center gap-2 flex-wrap", className)}>
       <span
         className={cn(
-          "font-sans font-medium rounded-full backdrop-blur-sm transition-colors uppercase tracking-[0.15em]",
+          "font-sans font-medium rounded-full backdrop-blur-sm transition-colors uppercase tracking-[0.15em] shrink-0 whitespace-nowrap",
           sizeClasses[size],
           accent
-            ? "bg-[#E05A36]/10 border border-[#E05A36]/30 text-[#E05A36]"
-            : "bg-[#FAF6EE] border border-[#E5DDD0] text-[#2B1E19]"
+            ? "bg-[#FE299E]/10 border border-[#FE299E]/30 text-[#FE299E] font-semibold"
+            : "bg-[#FAF5EC] border border-[#DBD3C4] text-[#2B1E19]"
         )}
         data-testid={`badge-namespace-${namespace.replace(/[^a-zA-Z0-9]/g, "-")}`}
       >
@@ -40,7 +40,7 @@ export function NamespaceBadge({
       </span>
 
       {category && (
-        <span className="font-sans text-[11px] uppercase tracking-[0.15em] text-[#78645C] bg-[#EDE5D8] px-2.5 py-0.5 rounded-full border border-[#E5DDD0]">
+        <span className="font-sans text-[11px] uppercase tracking-[0.15em] text-[#735F57] bg-[#EFE8DC] px-2.5 py-0.5 rounded-full border border-[#DBD3C4] shrink-0 whitespace-nowrap font-medium">
           {category}
         </span>
       )}

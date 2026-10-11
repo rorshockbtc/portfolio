@@ -68,17 +68,17 @@ const socialLinks = [
 export default function FooterSection() {
   return (
     <footer
-      className="border-t border-[#E5DDD0] bg-[#FAF6EE] relative z-50"
+      className="border-t border-[#DBD3C4] bg-[#FAF5EC] relative z-50"
       role="contentinfo"
       aria-label="Site footer"
       data-testid="section-footer"
     >
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20 pb-28 md:pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 pb-28 md:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           <div className="md:col-span-4 space-y-4">
             <span
               className="font-sans font-bold text-4xl select-none block tracking-tighter"
-              style={{ color: "#E05A36" }}
+              style={{ color: "#FE299E" }}
               aria-hidden="true"
             >
               :-]

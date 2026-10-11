@@ -31,15 +31,15 @@ export function MetricStrip({ metrics, className, columns = 3 }: MetricStripProp
       {metrics.map((m, idx) => (
         <div
           key={idx}
-          className="p-4 bg-[#FAF6EE] rounded-xl border border-[#E5DDD0] flex flex-col justify-center space-y-1 shadow-sm"
+          className="p-4 bg-[#FAF5EC] rounded-xl border border-[#DBD3C4] flex flex-col justify-center space-y-1 shadow-sm"
         >
-          <p className="text-xs font-sans text-[#78645C] uppercase tracking-[0.18em] font-medium truncate">
+          <p className="text-xs font-sans text-[#735F57] uppercase tracking-[0.18em] font-medium truncate">
             {m.label}
           </p>
           <p
             className={cn(
               "text-2xl md:text-3xl font-serif font-bold tracking-tight truncate",
-              m.highlight ? "text-[#E05A36]" : "text-[#2B1E19]"
+              m.highlight ? "text-[#FE299E]" : "text-[#2B1E19]"
             )}
           >
             {m.value}
