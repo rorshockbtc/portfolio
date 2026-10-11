@@ -560,67 +560,9 @@ export default function PortfolioPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#FE299E]/20">
-      {/* ── Perspective / Audience Track Switcher (Sticky Masthead Strip) ── */}
-      <div className="sticky top-[88px] md:top-[96px] z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-md transition-all">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-2.5 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground hidden sm:inline-block">
-              Audience Perspective:
-            </span>
-            <div className="inline-flex rounded-lg border border-border/70 p-0.5 bg-muted/30">
-              {(["design", "development", "architecture"] as PerspectiveTrack[]).map((tKey) => {
-                const isSelected = activeTrack === tKey;
-                return (
-                  <button
-                    key={tKey}
-                    onClick={() => handleTrackChange(tKey)}
-                    className={`relative px-3 py-1 text-xs font-medium rounded-md transition-all duration-150 flex items-center gap-1.5 ${
-                      isSelected
-                        ? "bg-[#FE299E] text-white shadow-sm font-semibold"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    }`}
-                  >
-                    <span>{TRACKS[tKey].label}</span>
-                    {tKey === "design" && (
-                      <span
-                        className={`text-[9px] uppercase px-1 py-0.2 rounded font-mono ${
-                          isSelected ? "bg-white/20 text-white" : "bg-muted text-muted-foreground"
-                        }`}
-                      >
-                        Default
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <a
-              href={track.resumeFile}
-              download
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-muted-foreground hover:text-[#FE299E] transition-colors"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Resume</span>
-            </a>
-            <span className="text-border">|</span>
-            <Button
-              size="sm"
-              variant="outline"
-              className="h-7 text-xs border-[#FE299E]/40 text-[#FE299E] hover:bg-[#FE299E]/10"
-              onClick={() => handleContactClick("Direct Hire Inquiry")}
-            >
-              Hire Kyle
-            </Button>
-          </div>
-        </div>
-      </div>
-
+    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#E05A36]/20">
       {/* ── Hero Section (Dynamic by Track) ── */}
-      <section className="relative min-h-[85vh] flex items-center pt-16 pb-16 overflow-hidden" data-testid="section-hero">
+      <section className="relative min-h-[80vh] flex items-center pt-8 pb-16 overflow-hidden" data-testid="section-hero">
         <div className="absolute inset-0 z-0">
           <img
             src={heroImage}
@@ -628,51 +570,84 @@ export default function PortfolioPage() {
             width={1024}
             height={559}
             fetchPriority="high"
-            className="w-full h-full object-cover object-center opacity-15"
+            className="w-full h-full object-cover object-center opacity-10"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/70" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 lg:px-24 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            {/* Left Column: Headline & Track Value Props */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center gap-3">
-                <BrandMark size="md" />
-                <NamespaceBadge
-                  namespace="kyle-cyree"
-                  prefix="pipe\"
-                  category={track.categoryBadge}
-                  size="default"
-                />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+            {/* Left Column: Perspective Pill Selector, Headline & Track Value Props */}
+            <div className="lg:col-span-7 space-y-7">
+              {/* Perspective Track Selector (Organic In-Hero Segmented Control) */}
+              <div className="space-y-2">
+                <div className="inline-flex rounded-full border border-[#E5DDD0] p-1 bg-[#FAF6EE] shadow-sm">
+                  {(["design", "development", "architecture"] as PerspectiveTrack[]).map((tKey) => {
+                    const isSelected = activeTrack === tKey;
+                    return (
+                      <button
+                        key={tKey}
+                        onClick={() => handleTrackChange(tKey)}
+                        className={`px-4 py-1.5 text-xs font-sans uppercase tracking-[0.16em] font-medium rounded-full transition-all ${
+                          isSelected
+                            ? "bg-[#E05A36] text-white shadow-sm font-semibold"
+                            : "text-[#78645C] hover:text-[#2B1E19]"
+                        }`}
+                      >
+                        <span>{TRACKS[tKey].label}</span>
+                        {tKey === "design" && (
+                          <span
+                            className={`ml-1.5 text-[9px] uppercase px-1.5 py-0.5 rounded-full ${
+                              isSelected ? "bg-white/20 text-white" : "bg-[#EDE5D8] text-[#78645C]"
+                            }`}
+                          >
+                            Default
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-editorial tracking-tight leading-[1.12]">
-                {track.headlineMain}{" "}
-                <span className="font-fraunces italic font-normal text-[#FE299E]">{track.headlineAmp}</span>{" "}
-                {track.headlineSub}
-              </h1>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <BrandMark size="md" />
+                  <NamespaceBadge
+                    namespace="kyle-cyree"
+                    prefix="pipe\"
+                    category={track.categoryBadge}
+                    size="default"
+                  />
+                </div>
 
-              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed font-sans max-w-xl">
-                {track.subhead}
-              </p>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#2B1E19] tracking-tight leading-[1.12]">
+                  {track.headlineMain}{" "}
+                  <span className="font-serif italic font-normal text-[#E05A36]">{track.headlineAmp}</span>{" "}
+                  {track.headlineSub}
+                </h1>
+
+                <p className="text-lg md:text-xl text-[#78645C] leading-relaxed font-sans max-w-xl">
+                  {track.subhead}
+                </p>
+              </div>
 
               {/* Dynamic Value Propositions */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-sm text-foreground/80">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1 text-sm md:text-base text-[#2B1E19]/90 font-sans">
                 {track.valueProps.map((vp, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#FE299E] shrink-0" />
+                  <div key={idx} className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-[#E05A36] shrink-0" />
                     <span className="leading-snug">{vp.text}</span>
                   </div>
                 ))}
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-3 pt-3">
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Button
                   size="lg"
-                  className="bg-[#FE299E] hover:bg-[#FE299E]/90 text-white font-medium shadow-sm transition-all"
+                  className="bg-[#E05A36] hover:bg-[#C54320] text-white font-sans text-xs uppercase tracking-[0.15em] font-semibold rounded-full px-6 py-3 shadow-sm transition-all"
                   onClick={() => scrollTo("confidential-vault")}
                 >
                   <Eye className="w-4 h-4 mr-2" />
@@ -682,16 +657,16 @@ export default function PortfolioPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-border/80 hover:border-foreground/40 text-foreground"
+                  className="border-[#E5DDD0] bg-[#FAF6EE] hover:bg-[#F5EFE6] text-[#2B1E19] font-sans text-xs uppercase tracking-[0.15em] font-medium rounded-full px-6 py-3"
                   onClick={() => scrollTo("enterprise-work")}
                 >
-                  Enterprise Case Studies
+                  Enterprise Records
                 </Button>
 
                 <a
                   href={track.resumeFile}
                   download
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-sans uppercase tracking-[0.15em] font-semibold text-[#78645C] hover:text-[#2B1E19] transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   PDF Resume
@@ -719,23 +694,23 @@ export default function PortfolioPage() {
       </div>
 
       {/* ── Hard Skills & Production Stack ── */}
-      <section className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-4 md:py-8 w-full">
-        <div className="p-8 rounded-2xl bg-muted/20 border border-border/50 space-y-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <section className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-6 md:py-10 w-full">
+        <div className="p-8 md:p-10 rounded-2xl bg-[#FAF6EE] border border-[#E5DDD0] space-y-8 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#E5DDD0] pb-6">
             <div>
-              <h2 className="text-2xl font-bold font-editorial tracking-tight mb-1">Core Capabilities & Production Stack</h2>
-              <p className="text-sm text-muted-foreground">The exact tools and architectural patterns I use to ship production software.</p>
+              <h2 className="text-2xl md:text-3xl font-bold font-serif text-[#2B1E19] tracking-tight mb-1">Core Capabilities &amp; Production Stack</h2>
+              <p className="text-base text-[#78645C] font-sans">The exact tools and architectural patterns I use to ship production software.</p>
             </div>
-            <Badge variant="outline" className="w-fit text-xs font-mono uppercase tracking-wider text-[#FE299E] border-[#FE299E]/40 bg-[#FE299E]/5">
-              Machine Readable / ATS Friendly
+            <Badge variant="outline" className="w-fit text-xs font-sans uppercase tracking-[0.18em] text-[#E05A36] border-[#E05A36]/40 bg-[#E05A36]/5 rounded-full px-3 py-1">
+              Production Validated
             </Badge>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <h3 className="font-semibold text-xs uppercase tracking-widest text-foreground/80 flex items-center gap-2">
-                <Cpu className="w-3.5 h-3.5 text-[#FE299E]" /> Systems & Arch
+              <h3 className="font-semibold text-xs font-sans uppercase tracking-[0.2em] text-[#2B1E19] flex items-center gap-2">
+                <Cpu className="w-4 h-4 text-[#E05A36]" /> Systems &amp; Arch
               </h3>
-              <ul className="space-y-2.5 text-sm text-muted-foreground font-medium">
+              <ul className="space-y-2.5 text-sm md:text-base text-[#78645C] font-sans font-medium">
                 <li>TypeScript / Node.js</li>
                 <li>React 19 / Next.js</li>
                 <li>Low-Latency WebSockets</li>
@@ -743,10 +718,10 @@ export default function PortfolioPage() {
               </ul>
             </div>
             <div className="space-y-4">
-              <h3 className="font-semibold text-xs uppercase tracking-widest text-foreground/80 flex items-center gap-2">
-                <Layers className="w-3.5 h-3.5 text-[#FE299E]" /> Data & Protocols
+              <h3 className="font-semibold text-xs font-sans uppercase tracking-[0.2em] text-[#2B1E19] flex items-center gap-2">
+                <Layers className="w-4 h-4 text-[#E05A36]" /> Data &amp; Protocols
               </h3>
-              <ul className="space-y-2.5 text-sm text-muted-foreground font-medium">
+              <ul className="space-y-2.5 text-sm md:text-base text-[#78645C] font-sans font-medium">
                 <li>SQLite / DuckDB-WASM</li>
                 <li>PostgreSQL / GraphQL</li>
                 <li>Bitcoin UTXO Orchestration</li>
@@ -754,10 +729,10 @@ export default function PortfolioPage() {
               </ul>
             </div>
             <div className="space-y-4">
-              <h3 className="font-semibold text-xs uppercase tracking-widest text-foreground/80 flex items-center gap-2">
-                <Zap className="w-3.5 h-3.5 text-[#FE299E]" /> AI & Agentic Intel
+              <h3 className="font-semibold text-xs font-sans uppercase tracking-[0.2em] text-[#2B1E19] flex items-center gap-2">
+                <Zap className="w-4 h-4 text-[#E05A36]" /> AI &amp; Agentic Intel
               </h3>
-              <ul className="space-y-2.5 text-sm text-muted-foreground font-medium">
+              <ul className="space-y-2.5 text-sm md:text-base text-[#78645C] font-sans font-medium">
                 <li>Gemini 2.5 Flash / Pro API</li>
                 <li>Reinforcement Learning Loops</li>
                 <li>Zero-PII Cryptographic Hydration</li>
@@ -765,10 +740,10 @@ export default function PortfolioPage() {
               </ul>
             </div>
             <div className="space-y-4">
-              <h3 className="font-semibold text-xs uppercase tracking-widest text-foreground/80 flex items-center gap-2">
-                <Eye className="w-3.5 h-3.5 text-[#FE299E]" /> Design & UI
+              <h3 className="font-semibold text-xs font-sans uppercase tracking-[0.2em] text-[#2B1E19] flex items-center gap-2">
+                <Eye className="w-4 h-4 text-[#E05A36]" /> Design &amp; UI
               </h3>
-              <ul className="space-y-2.5 text-sm text-muted-foreground font-medium">
+              <ul className="space-y-2.5 text-sm md:text-base text-[#78645C] font-sans font-medium">
                 <li>Figma / Design Systems</li>
                 <li>Tailwind CSS v4</li>
                 <li>Runtime CSS Variable Injection</li>
@@ -783,15 +758,15 @@ export default function PortfolioPage() {
       <section id="confidential-vault" className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-12 w-full space-y-10">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-xs font-mono uppercase tracking-wider text-[#FE299E] border-[#FE299E]/40">
+            <Badge variant="outline" className="text-xs font-sans uppercase tracking-[0.18em] text-[#E05A36] border-[#E05A36]/40 rounded-full">
               Confidential Work Vault
             </Badge>
-            <span className="text-xs text-muted-foreground font-mono">Mutual NDA Protected</span>
+            <span className="text-xs text-[#78645C] font-sans uppercase tracking-wider">Mutual NDA Protected</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold font-editorial tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold font-serif text-[#2B1E19] tracking-tight">
             Client Design Artifacts &amp; Interface Systems
           </h2>
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+          <p className="text-base text-[#78645C] max-w-2xl leading-relaxed font-sans">
             High-resolution interface plates, settlement state machines, and design systems from chartered banking and enterprise deployments. Gated under client confidentiality agreements.
           </p>
         </div>
@@ -819,15 +794,15 @@ export default function PortfolioPage() {
       <section id="enterprise-work" className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 w-full space-y-10">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-xs font-mono uppercase tracking-wider text-[#FE299E] border-[#FE299E]/40">
+            <Badge variant="outline" className="text-xs font-sans uppercase tracking-[0.18em] text-[#E05A36] border-[#E05A36]/40 rounded-full">
               Enterprise Pedigree
             </Badge>
-            <span className="text-xs text-muted-foreground font-mono">Fortune 50 &bull; Defense &bull; Institutional FinTech</span>
+            <span className="text-xs text-[#78645C] font-sans uppercase tracking-wider">Fortune 50 &bull; Defense &bull; Institutional FinTech</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold font-editorial tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold font-serif text-[#2B1E19] tracking-tight">
             Verified Institutional Impact
           </h2>
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+          <p className="text-base text-[#78645C] max-w-2xl leading-relaxed font-sans">
             A decade of designing, modernizing, and engineering systems that operate under extreme regulatory, scale, and operational pressure.
           </p>
         </div>
@@ -840,18 +815,18 @@ export default function PortfolioPage() {
       </section>
 
       {/* ── Living Systems (Pipes Protocol & Open Source Proofs) ── */}
-      <section id="living-systems" className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 w-full space-y-10 border-t border-border/40">
+      <section id="living-systems" className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16 w-full space-y-10 border-t border-[#E5DDD0]">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-xs font-mono uppercase tracking-wider text-[#FE299E] border-[#FE299E]/40">
+            <Badge variant="outline" className="text-xs font-sans uppercase tracking-[0.18em] text-[#E05A36] border-[#E05A36]/40 rounded-full">
               Living Products &amp; R&amp;D
             </Badge>
-            <span className="text-xs text-muted-foreground font-mono">End-to-End Craft &bull; Zero-to-One</span>
+            <span className="text-xs text-[#78645C] font-sans uppercase tracking-wider">End-to-End Craft &bull; Zero-to-One</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold font-editorial tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold font-serif text-[#2B1E19] tracking-tight">
             Autonomous Systems Built as a &quot;Unit of One&quot;
           </h2>
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+          <p className="text-base text-[#78645C] max-w-2xl leading-relaxed font-sans">
             Beyond enterprise client consulting, I invent, design, and ship production-grade protocols and tools. Here is live proof of my modern taste, code craftsmanship, and speed.
           </p>
         </div>
@@ -873,31 +848,31 @@ export default function PortfolioPage() {
       {/* ── Detail Modal for Living Proofs ── */}
       {selectedStudy && (
         <Dialog open={!!selectedStudy} onOpenChange={(open) => !open && setSelectedStudy(null)}>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-[#FAF6EE] border-[#E5DDD0] text-[#2B1E19]">
             <DialogHeader>
               <div className="flex items-center gap-2 mb-2">
                 <NamespaceBadge namespace={selectedStudy.namespace} prefix="" category={selectedStudy.category} size="sm" />
               </div>
-              <DialogTitle className="text-2xl font-editorial font-bold">{selectedStudy.title}</DialogTitle>
-              <DialogDescription className="text-base text-muted-foreground">{selectedStudy.summary}</DialogDescription>
+              <DialogTitle className="text-3xl font-serif font-bold text-[#2B1E19] tracking-tight">{selectedStudy.title}</DialogTitle>
+              <DialogDescription className="text-base text-[#78645C] font-sans leading-relaxed">{selectedStudy.summary}</DialogDescription>
             </DialogHeader>
 
             <div className="space-y-6 pt-4">
-              <div className="rounded-lg overflow-hidden border border-border/60 bg-muted">
+              <div className="rounded-xl overflow-hidden border border-[#E5DDD0] bg-[#EDE5D8]">
                 <img src={selectedStudy.image} alt={selectedStudy.title} className="w-full h-auto object-cover max-h-80" />
               </div>
 
               {selectedStudy.passcode && (
-                <div className="p-3.5 rounded-lg border border-[#FE299E]/40 bg-[#FE299E]/5 flex items-center justify-between">
+                <div className="p-4 rounded-xl border border-[#E05A36]/40 bg-[#E05A36]/5 flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#FE299E] font-semibold">
+                    <span className="text-[11px] font-sans uppercase tracking-[0.18em] text-[#E05A36] font-bold">
                       Private Sovereign Deployment
                     </span>
-                    <p className="text-xs text-foreground/80">
+                    <p className="text-xs text-[#2B1E19]/80 font-sans">
                       Live demo is password-gated. Use passcode below for immediate inspection:
                     </p>
                   </div>
-                  <code className="px-2.5 py-1 rounded bg-black/60 border border-[#FE299E]/50 font-mono text-xs text-[#FE299E] font-bold">
+                  <code className="px-3 py-1.5 rounded-full bg-[#FAF6EE] border border-[#E05A36]/50 font-mono text-xs text-[#E05A36] font-bold shadow-sm">
                     {selectedStudy.passcode}
                   </code>
                 </div>
@@ -905,52 +880,52 @@ export default function PortfolioPage() {
 
               {selectedStudy.humanProblem && (
                 <div className="space-y-2">
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-mono">The Human / Systems Problem</h4>
-                  <p className="text-sm leading-relaxed text-foreground/90">{selectedStudy.humanProblem}</p>
+                  <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#78645C] font-sans">The Human / Systems Problem</h4>
+                  <p className="text-base leading-relaxed text-[#2B1E19]/90 font-sans">{selectedStudy.humanProblem}</p>
                 </div>
               )}
 
               {selectedStudy.systemsSolution && (
                 <div className="space-y-2">
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-[#FE299E] font-mono">Systems Architecture Solution</h4>
-                  <p className="text-sm leading-relaxed text-foreground/90">{selectedStudy.systemsSolution}</p>
+                  <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#E05A36] font-sans">Systems Architecture Solution</h4>
+                  <p className="text-base leading-relaxed text-[#2B1E19]/90 font-sans">{selectedStudy.systemsSolution}</p>
                 </div>
               )}
 
               {selectedStudy.uiUxBreakdown && (
-                <div className="space-y-2 p-4 rounded-lg bg-card/60 border border-border/60">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#D9A206] font-mono flex items-center gap-1.5">
+                <div className="space-y-2 p-5 rounded-xl bg-[#FAF6EE] border border-[#E5DDD0]">
+                  <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#B45309] font-sans flex items-center gap-1.5">
                     <span>◈</span> UI/UX Craft &amp; Human Psychology
                   </h4>
-                  <p className="text-sm leading-relaxed text-foreground/85">{selectedStudy.uiUxBreakdown}</p>
+                  <p className="text-sm md:text-base leading-relaxed text-[#2B1E19]/85 font-sans">{selectedStudy.uiUxBreakdown}</p>
                 </div>
               )}
 
               {selectedStudy.architectureBreakdown && (
-                <div className="space-y-2 p-4 rounded-lg bg-card/60 border border-border/60">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#2A7B5C] font-mono flex items-center gap-1.5">
+                <div className="space-y-2 p-5 rounded-xl bg-[#FAF6EE] border border-[#E5DDD0]">
+                  <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#1E5C44] font-sans flex items-center gap-1.5">
                     <span>◈</span> Product Architecture &amp; Intelligence Loops
                   </h4>
-                  <p className="text-sm leading-relaxed text-foreground/85">{selectedStudy.architectureBreakdown}</p>
+                  <p className="text-sm md:text-base leading-relaxed text-[#2B1E19]/85 font-sans">{selectedStudy.architectureBreakdown}</p>
                 </div>
               )}
 
               {selectedStudy.developmentBreakdown && (
-                <div className="space-y-2 p-4 rounded-lg bg-card/60 border border-border/60">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#D9777F] font-mono flex items-center gap-1.5">
+                <div className="space-y-2 p-5 rounded-xl bg-[#FAF6EE] border border-[#E5DDD0]">
+                  <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#991B1B] font-sans flex items-center gap-1.5">
                     <span>◈</span> Full-Stack Development &amp; Local Runtime
                   </h4>
-                  <p className="text-sm leading-relaxed text-foreground/85">{selectedStudy.developmentBreakdown}</p>
+                  <p className="text-sm md:text-base leading-relaxed text-[#2B1E19]/85 font-sans">{selectedStudy.developmentBreakdown}</p>
                 </div>
               )}
 
               {selectedStudy.technicalOutcomes && (
-                <div className="space-y-2">
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-mono">Key Technical &amp; Design Outcomes</h4>
+                <div className="space-y-3">
+                  <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#78645C] font-sans">Key Technical &amp; Design Outcomes</h4>
                   <ul className="space-y-2">
                     {selectedStudy.technicalOutcomes.map((outcome, i) => (
-                      <li key={i} className="text-sm flex items-start gap-2 text-foreground/80">
-                        <Check className="w-4 h-4 text-[#FE299E] shrink-0 mt-0.5" />
+                      <li key={i} className="text-sm md:text-base flex items-start gap-2.5 text-[#2B1E19]/85 font-sans">
+                        <Check className="w-4 h-4 text-[#E05A36] shrink-0 mt-1" />
                         <span>{outcome}</span>
                       </li>
                     ))}
@@ -958,17 +933,17 @@ export default function PortfolioPage() {
                 </div>
               )}
 
-              <div className="flex flex-wrap gap-3 pt-4 border-t border-border/40">
+              <div className="flex flex-wrap gap-3 pt-4 border-t border-[#E5DDD0]">
                 {selectedStudy.liveUrl && (
                   <a href={selectedStudy.liveUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="bg-[#FE299E] hover:bg-[#FE299E]/90 text-white">
+                    <Button className="bg-[#E05A36] hover:bg-[#C54320] text-white font-sans text-xs uppercase tracking-[0.15em] font-semibold rounded-full px-5 py-2.5">
                       {selectedStudy.liveUrlText || "Visit Live Product"} <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
                   </a>
                 )}
                 {selectedStudy.repoUrl && (
                   <a href={selectedStudy.repoUrl} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline">
+                    <Button variant="outline" className="border-[#E5DDD0] bg-[#FAF6EE] hover:bg-[#F5EFE6] text-[#2B1E19] font-sans text-xs uppercase tracking-[0.15em] font-medium rounded-full px-5 py-2.5">
                       View Source Code <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
                   </a>
@@ -981,21 +956,21 @@ export default function PortfolioPage() {
 
       {/* ── Published Thesis Callout ── */}
       <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-8 w-full">
-        <Card className="p-6 md:p-8 border-[#FE299E]/30 bg-gradient-to-r from-card to-[#FE299E]/5">
+        <Card className="p-8 md:p-10 border-[#E5DDD0] bg-[#FAF6EE] rounded-2xl shadow-sm">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
-              <Badge variant="outline" className="text-xs font-mono border-[#FE299E]/40 text-[#FE299E]">
+            <div className="space-y-3 max-w-2xl">
+              <Badge variant="outline" className="text-xs font-sans uppercase tracking-[0.18em] border-[#E05A36]/40 text-[#E05A36] rounded-full">
                 Published Architectural Essay
               </Badge>
-              <h3 className="text-2xl font-bold font-editorial tracking-tight">
+              <h3 className="text-2xl md:text-3xl font-bold font-serif text-[#2B1E19] tracking-tight">
                 Design Is Risk: The Architectural Defense Against Model Collapse
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-base text-[#78645C] leading-relaxed font-sans">
                 Why unconstrained AI agent swarms produce catastrophic technical debt, and how constitutional harness engineering restores deterministic production guarantees.
               </p>
             </div>
             <Link href="/essays/design-is-risk">
-              <Button className="bg-[#FE299E] hover:bg-[#FE299E]/90 text-white shrink-0 font-medium">
+              <Button className="bg-[#E05A36] hover:bg-[#C54320] text-white shrink-0 font-sans text-xs uppercase tracking-[0.15em] font-semibold rounded-full px-6 py-3">
                 Read Full Essay <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>

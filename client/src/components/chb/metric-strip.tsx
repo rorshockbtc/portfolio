@@ -22,7 +22,7 @@ export function MetricStrip({ metrics, className, columns = 3 }: MetricStripProp
   return (
     <div
       className={cn(
-        "grid gap-2 text-center font-mono",
+        "grid gap-3 text-center",
         colClasses[columns],
         className
       )}
@@ -31,15 +31,15 @@ export function MetricStrip({ metrics, className, columns = 3 }: MetricStripProp
       {metrics.map((m, idx) => (
         <div
           key={idx}
-          className="p-2 bg-muted/40 rounded-lg border border-border/40 flex flex-col justify-center"
+          className="p-4 bg-[#FAF6EE] rounded-xl border border-[#E5DDD0] flex flex-col justify-center space-y-1 shadow-sm"
         >
-          <p className="text-[10px] text-muted-foreground uppercase tracking-wider truncate">
+          <p className="text-xs font-sans text-[#78645C] uppercase tracking-[0.18em] font-medium truncate">
             {m.label}
           </p>
           <p
             className={cn(
-              "text-xs md:text-sm font-bold truncate mt-0.5",
-              m.highlight ? "text-[#FE299E]" : "text-foreground"
+              "text-2xl md:text-3xl font-serif font-bold tracking-tight truncate",
+              m.highlight ? "text-[#E05A36]" : "text-[#2B1E19]"
             )}
           >
             {m.value}

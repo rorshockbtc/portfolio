@@ -14,12 +14,12 @@ interface AlbersInteractionCardProps {
 export function AlbersInteractionCard({ perspective, metrics }: AlbersInteractionCardProps) {
   const quotes = {
     design: {
-      quote: "Pink isn't just a color. It's an attitude too.",
-      author: "Miley Cyrus",
-      subtext: "Josef Albers: 'The Interaction of Color' & Vignelli in CSS",
-      accentBg: "#EECEE2",
-      accentText: "#73385D",
-      borderAccent: "#E29EC8",
+      quote: "Styles come and go. Good design is a language, not a style.",
+      author: "Massimo Vignelli",
+      subtext: "Josef Albers: 'The Interaction of Color' & 8pt Grid Rigor",
+      accentBg: "#F7ECE1",
+      accentText: "#87381E",
+      borderAccent: "#E0A894",
     },
     development: {
       quote: "Computers generally understand zeroes and ones. The grid is divisible by eight.",
@@ -42,49 +42,49 @@ export function AlbersInteractionCard({ perspective, metrics }: AlbersInteractio
   const active = quotes[perspective];
 
   return (
-    <div className="w-full max-w-md rounded-xl border border-border/80 bg-card p-6 space-y-6 shadow-sm">
+    <div className="w-full max-w-md rounded-2xl border border-[#E5DDD0] bg-[#FAF6EE] p-6 space-y-6 shadow-sm">
       {/* Albers Specimen Surface Header */}
-      <div className="flex items-center justify-between border-b border-border/60 pb-3 text-[11px] font-mono uppercase tracking-[2px] text-muted-foreground">
+      <div className="flex items-center justify-between border-b border-[#E5DDD0] pb-3 text-xs font-sans uppercase tracking-[0.2em] text-[#78645C]">
         <div className="flex items-center gap-2">
           <BrandMark size="sm" />
-          <span>Albers Specimen</span>
+          <span className="font-medium">Albers Specimen</span>
         </div>
-        <span className="text-[#FE299E] font-semibold">8pt Grid Rigor</span>
+        <span className="text-[#E05A36] font-semibold">8pt Grid Rigor</span>
       </div>
 
       {/* Albers Color Interaction Quote Block */}
       <div
-        className="rounded-lg p-5 border transition-all duration-300"
+        className="rounded-xl p-5 border transition-all duration-300"
         style={{
           backgroundColor: active.accentBg,
           color: active.accentText,
           borderColor: active.borderAccent,
         }}
       >
-        <p className="font-editorial text-lg italic leading-snug">&ldquo;{active.quote}&rdquo;</p>
-        <div className="mt-3 pt-2 border-t border-black/10 flex items-center justify-between text-xs font-mono uppercase tracking-wider opacity-85">
-          <span>&mdash; {active.author}</span>
-          <span className="text-[10px] hidden sm:inline">{active.subtext}</span>
+        <p className="font-serif text-xl italic leading-snug">&ldquo;{active.quote}&rdquo;</p>
+        <div className="mt-3 pt-2 border-t border-black/10 flex items-center justify-between text-xs font-sans uppercase tracking-wider opacity-85">
+          <span className="font-medium">&mdash; {active.author}</span>
+          <span className="text-[11px] hidden sm:inline">{active.subtext}</span>
         </div>
       </div>
 
       {/* Vignelli-Inspired Hairline Metric Grid */}
-      <div className="grid grid-cols-2 gap-px bg-border/60 rounded-lg overflow-hidden border border-border/60">
+      <div className="grid grid-cols-2 gap-px bg-[#E5DDD0] rounded-xl overflow-hidden border border-[#E5DDD0]">
         {metrics.map((m, idx) => (
-          <div key={idx} className="bg-card p-4 space-y-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground block">
+          <div key={idx} className="bg-[#FAF6EE] p-4 space-y-1">
+            <span className="text-[11px] font-sans uppercase tracking-[0.18em] text-[#78645C] block font-medium">
               {m.label}
             </span>
-            <div className="text-xl font-bold font-editorial text-foreground tracking-tight">{m.value}</div>
-            <p className="text-[11px] text-muted-foreground leading-tight line-clamp-1">{m.subtext}</p>
+            <div className="text-2xl font-bold font-serif text-[#2B1E19] tracking-tight">{m.value}</div>
+            <p className="text-xs text-[#78645C] leading-tight line-clamp-1">{m.subtext}</p>
           </div>
         ))}
       </div>
 
       {/* Micro Specimen Footnote */}
-      <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pt-1">
+      <div className="flex items-center justify-between text-xs font-sans text-[#78645C] pt-1">
         <span>Colon Hyphen Bracket &bull; Design Manifesto</span>
-        <span className="text-[#FE299E]">100% Human-Made</span>
+        <span className="text-[#E05A36] font-medium">Human-Crafted</span>
       </div>
     </div>
   );

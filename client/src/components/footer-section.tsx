@@ -68,7 +68,7 @@ const socialLinks = [
 export default function FooterSection() {
   return (
     <footer
-      className="border-t border-border/40 bg-background relative z-50"
+      className="border-t border-[#E5DDD0] bg-[#FAF6EE] relative z-50"
       role="contentinfo"
       aria-label="Site footer"
       data-testid="section-footer"
@@ -77,23 +77,23 @@ export default function FooterSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           <div className="md:col-span-4 space-y-4">
             <span
-              className="font-mono font-bold text-4xl select-none block"
-              style={{ color: "#FE299E" }}
+              className="font-sans font-bold text-4xl select-none block tracking-tighter"
+              style={{ color: "#E05A36" }}
               aria-hidden="true"
             >
               :-]
             </span>
-            <p className="text-sm text-foreground/80 leading-relaxed max-w-xs">
+            <p className="text-base text-[#78645C] leading-relaxed max-w-xs font-sans">
               Architecture &amp; product design for products and companies that
               have something to say.
             </p>
-            <p className="font-mono text-[11px] text-muted-foreground tracking-wide">
+            <p className="font-sans text-xs text-[#78645C]/80 tracking-wide uppercase">
               Colon Hyphen Bracket, LLC
             </p>
           </div>
 
           <div className="md:col-span-2 space-y-4">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="font-sans text-xs uppercase tracking-[0.2em] text-[#78645C] font-semibold">
               Ecosystem
             </h3>
             <ul className="space-y-2.5" role="list">

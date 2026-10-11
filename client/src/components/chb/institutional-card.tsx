@@ -23,28 +23,28 @@ export function InstitutionalCard({ record, className }: InstitutionalCardProps)
   return (
     <Card
       className={cn(
-        "p-6 md:p-8 border-border/80 bg-card/70 backdrop-blur-sm space-y-4 shadow-sm",
-        record.featured && "border-[#FE299E]/40 shadow-md",
+        "p-6 md:p-8 border-[#E5DDD0] bg-[#FAF6EE] rounded-2xl space-y-5 shadow-sm transition-all hover:border-[#E05A36]/40",
+        record.featured && "border-[#E05A36]/40 shadow-md",
         className
       )}
       data-testid={`card-enterprise-${record.client.replace(/[^a-zA-Z0-9]/g, "-")}`}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/40 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E5DDD0] pb-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <Icon className="w-4 h-4 text-[#FE299E]" />
-            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            <Icon className="w-4 h-4 text-[#E05A36]" />
+            <span className="font-sans text-xs uppercase tracking-[0.18em] text-[#78645C] font-medium">
               {record.scale}
             </span>
           </div>
-          <h3 className="text-xl font-bold font-editorial tracking-tight">{record.client}</h3>
+          <h3 className="text-2xl font-bold font-serif text-[#2B1E19] tracking-tight">{record.client}</h3>
         </div>
-        <span className="font-mono text-xs px-2.5 py-1 rounded bg-muted/60 border border-border/60 text-foreground/80 self-start sm:self-auto">
+        <span className="font-sans text-xs px-3 py-1 rounded-full bg-[#EDE5D8] border border-[#E5DDD0] text-[#2B1E19] font-medium self-start sm:self-auto">
           {record.role}
         </span>
       </div>
 
-      <p className="text-sm text-muted-foreground leading-relaxed font-sans">
+      <p className="text-base text-[#78645C] leading-relaxed font-sans">
         {record.description}
       </p>
 
@@ -52,9 +52,9 @@ export function InstitutionalCard({ record, className }: InstitutionalCardProps)
         {record.metrics.map((metric) => (
           <span
             key={metric}
-            className="font-mono text-xs px-2.5 py-1 rounded-md bg-muted/40 border border-border/60 text-foreground font-medium flex items-center gap-1.5"
+            className="font-sans text-xs px-3 py-1.5 rounded-full bg-[#FAF6EE] border border-[#E5DDD0] text-[#2B1E19] font-medium flex items-center gap-1.5"
           >
-            <Check className="w-3.5 h-3.5 text-[#FE299E]" />
+            <Check className="w-3.5 h-3.5 text-[#E05A36]" />
             {metric}
           </span>
         ))}

@@ -63,40 +63,40 @@ export function ProtectedVault({
   };
 
   return (
-    <div id={id} className="rounded-xl border border-border/70 bg-card/60 p-6 md:p-8 space-y-6">
+    <div id={id} className="rounded-2xl border border-[#E5DDD0] bg-[#FAF6EE] p-6 md:p-8 space-y-6 shadow-sm">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/40 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#E5DDD0] pb-6">
         <div className="space-y-1.5">
           <div className="flex items-center gap-2.5">
             <div
-              className={`w-7 h-7 rounded-md flex items-center justify-center text-xs font-mono transition-colors ${
-                isUnlocked ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/15 text-amber-600 dark:text-amber-400"
+              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs transition-colors ${
+                isUnlocked ? "bg-emerald-600/15 text-emerald-700" : "bg-[#E05A36]/15 text-[#E05A36]"
               }`}
             >
-              {isUnlocked ? <Unlock className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}
+              {isUnlocked ? <Unlock className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
             </div>
-            <h3 className="text-xl font-bold font-editorial tracking-tight">{title}</h3>
+            <h3 className="text-2xl font-bold font-serif text-[#2B1E19] tracking-tight">{title}</h3>
             <Badge
               variant="outline"
-              className={`text-[11px] font-mono uppercase tracking-wider ${
+              className={`text-[11px] font-sans uppercase tracking-[0.15em] rounded-full ${
                 isUnlocked
-                  ? "border-emerald-500/40 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5"
-                  : "border-amber-500/40 text-amber-600 dark:text-amber-400 bg-amber-500/5"
+                  ? "border-emerald-600/40 text-emerald-700 bg-emerald-600/5"
+                  : "border-[#E05A36]/40 text-[#E05A36] bg-[#E05A36]/5"
               }`}
             >
-              {isUnlocked ? "Vault Unlocked" : "Confidential • Passcode Gated"}
+              {isUnlocked ? "Vault Unlocked" : "Confidential • Mutual NDA"}
             </Badge>
           </div>
-          <p className="text-sm text-muted-foreground">{subtitle}</p>
+          <p className="text-base text-[#78645C] font-sans">{subtitle}</p>
         </div>
 
         {isUnlocked && (
           <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground font-mono">Access Active</span>
+            <span className="text-xs text-[#78645C] font-sans uppercase tracking-wider">Access Active</span>
             <Button
               variant="ghost"
               size="sm"
-              className="text-xs h-8 text-muted-foreground hover:text-foreground"
+              className="text-xs h-8 text-[#78645C] hover:text-[#2B1E19]"
               onClick={() => {
                 sessionStorage.removeItem("chb_vault_unlocked");
                 setIsUnlocked(false);
@@ -111,13 +111,13 @@ export function ProtectedVault({
       {/* Locked State Prompt */}
       {!isUnlocked ? (
         <div className="py-8 px-4 max-w-xl mx-auto text-center space-y-5">
-          <div className="w-12 h-12 rounded-full bg-[#FE299E]/10 border border-[#FE299E]/20 text-[#FE299E] mx-auto flex items-center justify-center">
+          <div className="w-12 h-12 rounded-full bg-[#E05A36]/10 border border-[#E05A36]/25 text-[#E05A36] mx-auto flex items-center justify-center">
             <KeyRound className="w-5 h-5" />
           </div>
 
           <div className="space-y-2">
-            <h4 className="text-lg font-semibold tracking-tight">Enter Passcode to View Design Artifacts</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">{disclaimer}</p>
+            <h4 className="text-xl font-serif font-bold text-[#2B1E19] tracking-tight">Enter Passcode to Inspect High-Resolution Plates</h4>
+            <p className="text-sm text-[#78645C] leading-relaxed font-sans">{disclaimer}</p>
           </div>
 
           <form onSubmit={handleUnlock} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
@@ -129,9 +129,9 @@ export function ProtectedVault({
                 setInputCode(e.target.value);
                 if (error) setError(false);
               }}
-              className={`bg-background/80 font-mono text-sm ${error ? "border-destructive focus-visible:ring-destructive" : ""}`}
+              className={`bg-[#FAF6EE] border-[#E5DDD0] font-sans text-sm rounded-full px-4 ${error ? "border-destructive focus-visible:ring-destructive" : ""}`}
             />
-            <Button type="submit" className="bg-[#FE299E] hover:bg-[#FE299E]/90 text-white shrink-0">
+            <Button type="submit" className="bg-[#E05A36] hover:bg-[#C54320] text-white font-sans text-xs uppercase tracking-[0.15em] font-semibold rounded-full px-6 py-2 shrink-0">
               Unlock Vault
             </Button>
           </form>
@@ -142,11 +142,11 @@ export function ProtectedVault({
             </p>
           )}
 
-          <div className="pt-2 text-xs text-muted-foreground">
+          <div className="pt-2 text-xs text-[#78645C] font-sans">
             Recruiter or hiring manager without a code?{" "}
             <a
-              href="mailto:kyle@colonhyphenbracket.com?subject=Portfolio%20Passcode%20Request"
-              className="text-[#FE299E] hover:underline font-medium inline-flex items-center gap-1"
+              href="mailto:rorshock@protonmail.com?subject=Portfolio%20Passcode%20Request"
+              className="text-[#E05A36] hover:underline font-semibold inline-flex items-center gap-1"
             >
               Request Access Directly <ExternalLink className="w-3 h-3" />
             </a>
