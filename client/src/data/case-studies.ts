@@ -30,6 +30,232 @@ export interface CaseStudyData {
 }
 
 export const CASE_STUDIES: Record<string, CaseStudyData> = {
+  pipes: {
+    slug: "pipes",
+    client: "Colon Hyphen Bracket",
+    title: "Pipes Protocol: Sovereign Multi-Platform Knowledge Ecosystem",
+    subtitle: "Flagship Showcase • Web, Native macOS Desktop, and Native iOS Mobile Apps",
+    role: "Architect, Lead Designer & Systems Builder",
+    scaleBadge: "Web • macOS Desktop • iOS Mobile",
+    timeline: "2024 – 2026",
+    heroImage: "/images/pipes/desktop-mac-bang-ide.png",
+    galleryImages: [
+      {
+        src: "/images/pipes/desktop-mac-bang-ide.png",
+        title: "Pipes Desktop for macOS: Native Bang IDE",
+        caption: "Native macOS desktop application engineered for high-velocity local knowledge curation, offline parsing, and cryptographic signing.",
+        tag: "macOS Native",
+      },
+      {
+        src: "/images/pipes/desktop-mac-knowledge.png",
+        title: "Pipes Desktop: Sovereign Knowledge Ledger",
+        caption: "Local-first knowledge graph viewer and vector space inspector running zero-latency SQLite and Turso caches.",
+        tag: "Desktop Architecture",
+      },
+      {
+        src: "/images/pipes/pipes-hero.png",
+        title: "Pipes Web Protocol: Flagship Interface",
+        caption: "Web platform transforming human expertise into reusable infrastructure with $0 marginal AI inference costs.",
+        tag: "Web Protocol",
+      },
+      {
+        src: "/images/pipes/pipes-marketplace.png",
+        title: "Self-Sovereign Knowledge Marketplace",
+        caption: "Cryptographic namespace registry with deeded 70/30 creator revenue splits anchored on NOSTR identity.",
+        tag: "Marketplace UX",
+      },
+      {
+        src: "/images/pipes/pipes-economics.png",
+        title: "Deterministic Knowledge Economics",
+        caption: "Halting model collapse by pairing local-first reference libraries with deterministic keyword synthesis.",
+        tag: "Token Economics",
+      },
+    ],
+    executiveSummary:
+      "Pipes is my flagship software showcase: a fully-featured, multi-platform sovereign knowledge ecosystem deployed across Web (pipes.pink), native macOS Desktop (Tauri/Rust), and native iOS mobile (Swift/SwiftUI). It transforms verified human expertise into reusable, monetizable infrastructure while solving foundation LLM model collapse through deterministic $0 marginal inference.",
+    challenge:
+      "Modern AI tools suffer from amnesia and model collapse: as foundation LLMs drown in synthetic data, human-curated context is the rarest asset. But standard cloud SaaS traps user knowledge in corporate silos, burns expensive tokens on redundant context prompts, and offers clunky, browser-only experiences that fail offline.",
+    solution:
+      "Architected a unified, three-tier ecosystem: a native macOS desktop cockpit for deep local authoring and offline indexing, an iOS mobile client (Pipes Pocket) for on-the-go capture, and a decentralized web protocol for public distribution. Engineered the Reference Library Pattern (Template + Keyword Match + Curated Knowledge = Deterministic Output at $0.00 marginal LLM cost).",
+    uiUxCraft:
+      "Built a fluid, multi-tenant interface powered by runtime CSS variable injection. The same underlying knowledge graph effortlessly morphs across 6 distinct audience personas (Cyberpunk, Enterprise, Academic, Vignelli) without page reload. The native macOS desktop app adheres to Apple Human Interface Guidelines with fluid glassmorphism and sub-10ms keyboard navigation.",
+    systemsArchitecture:
+      "Engineered cross-platform synchronization between local SQLite databases, Turso distributed replicas, and NOSTR decentralized relays. Implemented client-side Web Crypto and OpenTimestamps (OTS) proofs to give creators undeniable cryptographic copyright proof.",
+    metrics: [
+      { value: "3 Platforms", label: "Multi-Platform", subtext: "Web, macOS Desktop, iOS" },
+      { value: "$0.00", label: "Marginal AI Cost", subtext: "Deterministic Reference Library" },
+      { value: "6 Live Themes", label: "Runtime CSS Engine", subtext: "Instant persona mutation" },
+      { value: "70%", label: "Creator Equity", subtext: "Deeded cryptographic split" },
+    ],
+    outcomes: [
+      "Designed and shipped native macOS desktop app, iOS mobile app, and decentralized web protocol.",
+      "Engineered the Reference Library pattern delivering 25-page synthesized outputs with zero external token burn.",
+      "Built multi-tenant runtime CSS injection engine powering instantaneous aesthetic adaptation.",
+      "Implemented decentralized NOSTR PKI identity and cryptographic equity distribution.",
+    ],
+    technologies: ["macOS Native (Tauri/Rust)", "iOS (Swift/SwiftUI)", "Next.js", "TypeScript", "SQLite / Turso", "NOSTR / Web Crypto", "Tailwind CSS v4"],
+    liveUrl: "https://pipes.pink",
+    liveUrlLabel: "Explore Live Web Protocol",
+  },
+
+  cassandra: {
+    slug: "cassandra",
+    client: "Colon Hyphen Bracket",
+    title: "Cassandra: High-Signal Career Agent & Vignelli Focus Mode",
+    subtitle: "jobseeker-agent (Focus Mode v5.0) • Autonomous Operator & Negative Dismissal Reinforcement",
+    role: "Architect, Lead Designer & Full-Stack Builder",
+    scaleBadge: "Focus Mode v5.0 • Autonomous AI Agent",
+    timeline: "2025 – 2026",
+    heroImage: "/images/cassandra/focus-mode/00_focusMode_landing_redesign.jpg",
+    galleryImages: [
+      {
+        src: "/images/cassandra/focus-mode/00_focusMode_landing_redesign.jpg",
+        title: "Focus Mode: Landing & 'Sprint of 8' Queue",
+        caption: "Calming Albers Sand (#F5EFE6) landing interface bounding daily job evaluation to an intentional 8-role focus queue.",
+        tag: "Focus Mode v5.0",
+      },
+      {
+        src: "/images/cassandra/focus-mode/01_focusMode_reviewRole_overview.jpg",
+        title: "Role Review: Single-Task Editorial View",
+        caption: "Massimo Vignelli 8pt grid layout presenting role overview, compensation, and leadership leverage without scraper noise.",
+        tag: "Editorial Layout",
+      },
+      {
+        src: "/images/cassandra/focus-mode/02_focusMode_reviewRole_companyRole.jpg",
+        title: "Company Context & Cultural Alignment",
+        caption: "Deep semantic extraction of engineering culture, organizational maturity, and design-system leverage.",
+        tag: "Company Intelligence",
+      },
+      {
+        src: "/images/cassandra/focus-mode/04_focusMode_reviewRole_fitRisks.jpg",
+        title: "Strategic Fit & Risk Vector Analysis",
+        caption: "Autonomous evaluator highlighting hidden misalignment risks, tech debt indicators, and executive leverage.",
+        tag: "Risk Analysis",
+      },
+      {
+        src: "/images/cassandra/focus-mode/08_focusMode_apply_fullDesignView.jpg",
+        title: "Bespoke Cover Memo & Question Synthesis",
+        caption: "Automatic drafting of deeply contextualized, non-generic application responses grounded in verified work history.",
+        tag: "Application Engine",
+      },
+      {
+        src: "/images/cassandra/focus-mode/09_youGotThis_celebrationScreen_final.jpg",
+        title: "Sprint Completion: You Got This Celebration",
+        caption: "Restoring dignity, joy, and emotional calm to the job search ritual with fine art photography and celebratory completion.",
+        tag: "Human Dignity",
+      },
+    ],
+    executiveSummary:
+      "Cassandra is my autonomous career evaluation agent and deep-work interface, designed to eliminate job-board dopamine traps. Built around the 'Sprint of 8' Focus Mode, it adapts to user dismissals through a continuous reinforcement loop in SQLite, auto-injecting negative exclusion patterns into Gemini 2.5 Flash while presenting all evaluations in a calming Massimo Vignelli 8pt editorial layout.",
+    challenge:
+      "Job searching in tech has devolved into a demoralizing, predatory slog dominated by low-signal AI wrappers and spam boards. It causes acute anxiety, dopamine burnout, and cognitive overload. I wanted to give myself an interface that made the process beautiful, calm, and dignified.",
+    solution:
+      "Architected the 'Sprint of 8'—an intentional one-hour batch of exactly 8 curated roles (5–10 minutes of deep focus each). When a role is rejected, Cassandra adapts: the explicit dismissal rationale is logged into SQLite (jobs.db) and injected into Gemini's system prompt as Critical Negative Exclusions, training the agent to find progressively sharper matches over time.",
+    uiUxCraft:
+      "Substituted chaotic applicant feeds with a Calming Albers Sand (#F5EFE6) palette and Massimo Vignelli's 8pt grid. Replaced corporate logos with curated fine art photography to eliminate brand bias. Features a sticky scroll-snap navigation pillar and chapter state preservation so users never lose their place.",
+    systemsArchitecture:
+      "Built with plain HTML5 and Vanilla JavaScript on the frontend for zero-friction client speed, backed by a Node.js and SQLite engine. Seamlessly calls the Gemini 2.5 Flash API for low-latency batch analysis and cover memo synthesis.",
+    metrics: [
+      { value: "8 Roles", label: "Focus Sprint Limit", subtext: "Exactly 1 hour bounded focus" },
+      { value: "Adaptive", label: "Dismissal Reinforcement", subtext: "Continuous SQLite feedback loop" },
+      { value: "Vignelli 8pt", label: "Design System", subtext: "Pure mathematical spacing" },
+      { value: "#F5EFE6", label: "Albers Sand", subtext: "Calming tactile palette" },
+    ],
+    outcomes: [
+      "Designed and shipped Focus Mode v5.0, bounding active evaluation to deep, dignified sessions.",
+      "Engineered continuous reinforcement dismissal pipeline auto-injecting negative rules into LLM calls.",
+      "Crafted bespoke Vignelli CSS layout with scroll-snap pillar and capsule scrollbars.",
+      "Secured private live web interface on Railway with passcode protection.",
+    ],
+    technologies: ["Node.js", "SQLite", "Gemini 2.5 Flash", "Massimo Vignelli 8pt Grid", "Vanilla JS & CSS", "Railway"],
+    liveUrl: "https://jobseeker-agent.up.railway.app",
+    liveUrlLabel: "Launch Live Sandbox (Passcode: onewordalllowercasehirekyle)",
+  },
+
+  superstar: {
+    slug: "superstar",
+    client: "Victoria Superstar",
+    title: "Superstar: Bespoke Mobile AI Reflection & External Memory Loom",
+    subtitle: "A Love Story in Systems Architecture • External Context Continuity for DeepSeek on Mobile",
+    role: "Architect, Lead Designer & Full-Stack Builder",
+    scaleBadge: "Mobile-First PWA • Cross-Cultural AI Bridge",
+    timeline: "2025 – 2026",
+    heroImage: "/images/superstar/superstar-logo.png",
+    galleryImages: [
+      {
+        src: "/images/superstar/superstar-logo.png",
+        title: "Superstar Brand Identity & Mobile Icon",
+        caption: "Bespoke identity designed for Victoria: high-contrast luxury aesthetic honoring cultural compression and soul (душа).",
+        tag: "Brand Identity",
+      },
+    ],
+    executiveSummary:
+      "Superstar was built as a 48-hour birthday gift for my wife Victoria: a mobile-first external memory loom and contextual bridge for DeepSeek. It solves the ephemeral nature of mobile AI chats, translating fragmented reflections, coaching ideas, and relationship processing into an evolving, unified corpus that can be reinjected back into DeepSeek with a single tap.",
+    challenge:
+      "When someone's entire intellectual interface with AI is a mobile screen, every conversation degrades. Victoria would chat with DeepSeek, have profound breakthroughs in psychology or business, close the app, and start from a blank slate the next day. This created an exhausting cycle of snapshot insights with zero cumulative progress. She needed external memory without leaving the AI tool she trusted.",
+    solution:
+      "Engineered a zero-friction mobile PWA bridge: a single input field that accepts DeepSeek share links or voice memos, automatically summarizes breakthroughs via background LLM pipelines, appends them to a master category digest, and updates a one-tap 'Copy Context for DeepSeek' prompt. She taps once, opens DeepSeek, and immediately resumes with her complete evolving life context.",
+    uiUxCraft:
+      "Designed specifically for one-handed mobile thumb use in Russian and English. Replaced sterile productivity UI with a private digital temple: deep obsidian, champagne gold, luxurious typography, and bilingual microcopy that treats her thoughts with structural dignity.",
+    systemsArchitecture:
+      "Next.js PWA with zero account friction (hardcoded private cryptographic token). Lightweight background worker pipeline executing asynchronous insight extraction and master markdown compilation.",
+    metrics: [
+      { value: "48 Hours", label: "Build Velocity", subtext: "Zero to live mobile deployment" },
+      { value: "1 Tap", label: "Context Reinjection", subtext: "Zero-friction DeepSeek continuity" },
+      { value: "0 Loss", label: "Memory Preservation", subtext: "Halts mobile AI amnesia" },
+      { value: "Bilingual", label: "Cultural Translation", subtext: "Russian soul meets systems rigor" },
+    ],
+    outcomes: [
+      "Engineered external memory architecture eliminating context drift across mobile AI sessions.",
+      "Designed and shipped high-craft mobile PWA tuned for one-handed thumb interaction.",
+      "Bridged deep psychological coaching frameworks directly into automated AI prompts.",
+    ],
+    technologies: ["Next.js PWA", "Tailwind CSS", "TypeScript", "DeepSeek API", "Mobile Gestures", "Bilingual Typography"],
+  },
+
+  marigold: {
+    slug: "marigold",
+    client: "Civic Security / FEMA HSGP",
+    title: "Marigold / Miracle: Zero-Cloud Civic Data & Election Audit Engine",
+    subtitle: "bolt.pipes.pink • In-Browser DuckDB-WASM & Zero-PII Cryptographic Hydration",
+    role: "Architect, Lead Designer & Systems Builder",
+    scaleBadge: "Zero-Cloud WASM • FEMA HSGP Sec 3%",
+    timeline: "2026",
+    heroImage: "/images/marigold/marigold-hero.png",
+    galleryImages: [
+      {
+        src: "/images/marigold/marigold-hero.png",
+        title: "Marigold Insights: Civic Analytics Console",
+        caption: "In-browser analytical execution engine enabling county clerks to audit multi-gigabyte voter rolls locally without cloud PII liability.",
+        tag: "Civic Security",
+      },
+    ],
+    executiveSummary:
+      "Marigold (bolt.pipes.pink) is a zero-cloud analytical execution engine built for county clerks and election officers under FY26 FEMA HSGP election security mandates. It solved Mississippi's unopenable voter rolls with 100% in-browser WASM and Zero-PII cryptographic entity hydration.",
+    challenge:
+      "Civic and voter datasets are massive (millions of rows) and crash county clerk spreadsheets. Meanwhile, uploading citizen voter rolls to commercial cloud AI violates strict federal privacy laws and triggers catastrophic PII liabilities.",
+    solution:
+      "Built bolt.pipes.pink in hours to allow citizens and clerks to open and inspect voter rolls directly in the browser using DuckDB-WASM and OPFS. Pioneered 'Zero-PII Hydration': names and addresses are stripped and replaced with cryptographic entity hashes before reaching the LLM; the browser decrypts and re-hydrates real citizen names locally in real time. Zero bytes of PII ever leave the user's desk.",
+    uiUxCraft:
+      "Engineered 'Mari'—an AI civic concierge who speaks plain English, translating non-technical questions into local SQL queries and rendering on-the-fly interactive Data Stories and charts.",
+    systemsArchitecture:
+      "Runs 100% in client-side memory using DuckDB-WASM, SQLite, Web Workers, and Origin Private File System (OPFS). In-memory Fellegi-Sunter and Levenshtein probabilistic record linkage for cross-precinct duplicate detection.",
+    metrics: [
+      { value: "100% Local", label: "Data Residency", subtext: "Zero cloud PII leakage" },
+      { value: "<3 Min", label: "Audit Runtime", subtext: "Millions of voter rows queried" },
+      { value: "FEMA 3%", label: "National Priority", subtext: "HSGP Sec 3% compliant" },
+      { value: "DuckDB-WASM", label: "Browser Engine", subtext: "In-memory SQL analytics" },
+    ],
+    outcomes: [
+      "Eliminated cloud PII liability by executing multi-gigabyte queries entirely within browser Web Workers.",
+      "Engineered Zero-PII cryptographic hashing protocol for private LLM demographic audits.",
+      "Qualified under mandatory 3% National Priority Area election security grant under HSGP.",
+    ],
+    technologies: ["DuckDB-WASM", "SQLite in Browser", "Web Workers", "OPFS", "Fellegi-Sunter Linkage", "Zero-PII Hydration"],
+    liveUrl: "https://bolt.pipes.pink",
+    liveUrlLabel: "Launch Civic Sandbox (bolt.pipes.pink)",
+  },
+
   custodia: {
     slug: "custodia",
     client: "Custodia Bank",
@@ -247,111 +473,6 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     technologies: ["GraphQL", "Graph Databases", "Enterprise Design Systems", "High-Volume LMS", "React", "TypeScript"],
   },
 
-  cassandra: {
-    slug: "cassandra",
-    client: "Colon Hyphen Bracket",
-    title: "Cassandra: High-Signal Career Agent & Vignelli Focus Mode v5.0",
-    subtitle: "Autonomous Operator • Massimo Vignelli 8pt Grid & Continuous Reinforcement Loop",
-    role: "Architect, Designer & Full-Stack Builder",
-    scaleBadge: "Focus Mode v5.0 • Autonomous AI Agent",
-    timeline: "2025 – 2026",
-    heroImage: "/images/cassandra/cassandra_combined.png",
-    galleryImages: [
-      {
-        src: "/images/cassandra/cassandra_combined.png",
-        title: "Cassandra: Focus Mode v5.0 Interface",
-        caption: "Single-task deep-work system around the 'Sprint of 8'—curated roles evaluated in an editorial Vignelli 8pt layout with curated art.",
-        tag: "Autonomous Agent",
-      },
-      {
-        src: "/images/cassandra/cassandra_portrait.png",
-        title: "Editorial Presentation & Fine Art Curation",
-        caption: "Replacing corporate logos and noisy badges with fine art and landscape photography to restore dignity to career evaluation.",
-        tag: "Editorial UI",
-      },
-    ],
-    executiveSummary:
-      "An autonomous career evaluation engine and deep-work interface designed to eliminate job-board dopamine traps. Features the 'Sprint of 8' Focus Mode, continuous negative dismissal reinforcement in SQLite, and a calming Massimo Vignelli editorial aesthetic.",
-    challenge:
-      "Job searching in tech has become a dehumanizing, dopamine-draining slog dominated by predatory scrapers, low-signal AI bot spam, and endless context switching. The process causes severe cognitive fatigue.",
-    solution:
-      "Architected a single-task deep-work system around the 'Sprint of 8'—an intentional one-hour batch of 8 curated roles. Engineered an adaptive reinforcement loop in SQLite: every rejection rationale is recorded and auto-injected into Gemini 2.5 Flash as critical negative exclusions, making future job evaluations compounding in precision.",
-    uiUxCraft:
-      "Substituted chaotic applicant feeds with an editorial Sandstone, Cream, and Vignelli 8pt grid layout. Replaced corporate recruiter logos with curated fine art photography. Features a scroll-snap right navigation pillar and persistent chapter state across sessions.",
-    systemsArchitecture:
-      "Vanilla HTML5 and JavaScript frontend backed by Node.js and SQLite (jobs.db) for zero-latency local execution. Deeply integrates with Gemini 2.5 Flash for high-velocity semantic vacancy scoring.",
-    metrics: [
-      { value: "8 Roles", label: "Focus Sprint Limit", subtext: "Exactly 1 hour of deep focus" },
-      { value: "Adaptive", label: "Dismissal Penalty", subtext: "SQLite negative reinforcement" },
-      { value: "Vignelli 8pt", label: "Design System", subtext: "Zero UI debt" },
-      { value: "0ms", label: "Local Runtime", subtext: "Zero-latency SQLite engine" },
-    ],
-    outcomes: [
-      "Engineered the 'Sprint of 8' Focus Mode, bounding daily evaluation to high-signal sessions.",
-      "Implemented automated negative-dismissal reinforcement loop in Node/SQLite.",
-      "Crafted custom Vignelli layout with sticky scroll-snap pillar and capsule scrollbars.",
-      "Secured live deployment running on Railway.",
-    ],
-    technologies: ["Node.js", "SQLite", "Gemini 2.5 Flash", "Massimo Vignelli 8pt Grid", "Vanilla JS", "Railway"],
-    liveUrl: "https://jobseeker-agent.up.railway.app",
-    liveUrlLabel: "Launch Private Interface (Passcode: onewordalllowercasehirekyle)",
-  },
-
-  pipes: {
-    slug: "pipes",
-    client: "Colon Hyphen Bracket",
-    title: "Pipes Protocol & Sovereign Knowledge Marketplace",
-    subtitle: "Flagship Protocol • $0 Marginal AI Inference & Multi-Tenant Persona Engine",
-    role: "Architect, Designer & Protocol Engineer",
-    scaleBadge: "Flagship Living Protocol",
-    timeline: "2024 – 2026",
-    heroImage: "/images/pipes/pipes-hero.png",
-    galleryImages: [
-      {
-        src: "/images/pipes/pipes-hero.png",
-        title: "Pipes Protocol: Flagship Interface",
-        caption: "Sovereign knowledge marketplace transforming human expertise into reusable infrastructure with $0 marginal AI inference costs.",
-        tag: "Protocol UI",
-      },
-      {
-        src: "/images/pipes/pipes-marketplace.png",
-        title: "Self-Sovereign Knowledge Marketplace",
-        caption: "Cryptographic namespace registry with deeded 70/30 creator revenue splits anchored on NOSTR identity.",
-        tag: "Marketplace UX",
-      },
-      {
-        src: "/images/pipes/pipes-economics.png",
-        title: "Deterministic Knowledge Economics",
-        caption: "Halting model collapse by pairing local-first reference libraries with deterministic keyword synthesis.",
-        tag: "Token Economics",
-      },
-    ],
-    executiveSummary:
-      "A sovereign knowledge protocol and marketplace that transforms human expertise into reusable, monetizable infrastructure with $0 marginal AI inference costs, stopping the AI model collapse loop.",
-    challenge:
-      "As foundation LLMs drown in synthetic data and hallucinations, verified human-curated context is the rarest asset. However, mainstream SaaS burns expensive tokens on repetitive context prompts, extracting creator value while producing fragile outputs.",
-    solution:
-      "Architected the 'Reference Library Pattern' (Template + Keyword Match + Curated Knowledge = Deterministic Output at $0.00 marginal LLM cost). Built a runtime CSS variable injection engine that adapts the entire UI, palette, typography, and copy across 6 distinct personas in real time.",
-    uiUxCraft:
-      "Multi-tenant dynamic interface that seamlessly transforms between Cyberpunk, Enterprise, Academic, and Vignelli typographic themes without page reload, powered by runtime CSS variable injection.",
-    systemsArchitecture:
-      "Self-sovereign namespace registry with deeded equity mechanics (70/30 creator revenue split) anchored on cryptographic identity (NOSTR/Web Crypto). Delivers 25-page synthesized outputs with zero external token expenditure.",
-    metrics: [
-      { value: "$0.00", label: "Marginal AI Cost", subtext: "Deterministic Reference Library" },
-      { value: "6 Live Themes", label: "Persona Engine", subtext: "Runtime CSS injection" },
-      { value: "70%", label: "Creator Equity", subtext: "Cryptographic revenue split" },
-      { value: "25 Pages", label: "Synthesis Scale", subtext: "Zero token amnesia" },
-    ],
-    outcomes: [
-      "Engineered the Reference Library pattern delivering zero-marginal-cost expert outputs.",
-      "Multi-tenant CSS injection engine powering instantaneous aesthetic adaptation.",
-      "Self-sovereign cryptographic registry anchored on NOSTR identity.",
-    ],
-    technologies: ["Next.js", "TypeScript", "Runtime CSS Injection", "NOSTR / Web Crypto", "Tailwind CSS v4"],
-    liveUrl: "https://pipes.pink",
-    liveUrlLabel: "Explore Live Protocol (pipes.pink)",
-  },
-
   foodler: {
     slug: "foodler",
     client: "Foodler.com (Acquired by GrubHub)",
@@ -392,4 +513,88 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     ],
     technologies: ["Real-Time Telemetry", "Algorithmic Fraud Detection", "Payment Processing", "Heuristic State Machines"],
   },
+
+  ultralinq: {
+    slug: "ultralinq",
+    client: "UltraLinq Healthcare Solutions",
+    title: "UltraLinq: Cloud Cardiovascular PACS & Medical Imaging Diagnostic Workflows",
+    subtitle: "Healthcare SaaS • Zero-Latency Cloud DICOM Viewer & Structured Clinical Reporting",
+    role: "Lead UX Architect & Clinical Workflow Specialist",
+    scaleBadge: "Cloud DICOM PACS • Cardiovascular Imaging",
+    timeline: "2018 – 2020",
+    heroImage: "/artwork/enterprise-health.png",
+    galleryImages: [
+      {
+        src: "/artwork/enterprise-health.png",
+        title: "UltraLinq Diagnostic Viewer & Image Cine Review",
+        caption: "Zero-latency cloud medical imaging viewer supporting high-frame-rate ultrasound cineloop playback and multi-planar diagnostic views.",
+        tag: "Cloud DICOM",
+      },
+    ],
+    executiveSummary:
+      "UltraLinq Healthcare is a cloud-based PACS (Picture Archiving and Communication System) and cardiovascular imaging platform. Re-architected the clinical diagnostic viewer and ultrasound reporting workflow, transitioning cardiologists and sonographers from clunky legacy desktop installations to a blazing-fast, browser-based diagnostic environment.",
+    challenge:
+      "Cardiologists and sonographers rely on high-frame-rate echocardiograms and vascular ultrasound loops to make life-or-death diagnoses. Legacy on-prem PACS required expensive local workstations, suffered from agonizing image load times, and forced clinicians to juggle disconnected windows between DICOM playback and structured reporting.",
+    solution:
+      "Architected a unified cloud diagnostic workspace integrating smooth multi-frame DICOM cine playback, calibrated caliper measurements, and structured clinical findings (DICOM SR) into a singular, keyboard-driven interface. Sonographers can document measurements rapidly and route exams to attending cardiologists with zero latency.",
+    uiUxCraft:
+      "High-contrast dark-mode diagnostic canvas minimizing clinician eye strain during hours of study review. Keyboard-first shortcuts for frame stepping, zoom, window/level adjustments, and rapid annotation.",
+    systemsArchitecture:
+      "Cloud-native streaming architecture converting heavy DICOM files into progressive web chunks for instantaneous playback over hospital and remote networks, strictly compliant with HIPAA and FDA diagnostic display guidelines.",
+    metrics: [
+      { value: "0 Lag", label: "Cine Playback", subtext: "Zero-latency cloud DICOM" },
+      { value: "-45%", label: "Turnaround Time", subtext: "Faster exam interpretation" },
+      { value: "100%", label: "Cloud Native", subtext: "Zero desktop software installs" },
+      { value: "HIPAA", label: "Compliance", subtext: "Secure multi-institution routing" },
+    ],
+    outcomes: [
+      "Designed unified cloud DICOM viewer integrating image playback with structured diagnostic reporting.",
+      "Eliminated context switching between imaging software and EHR documentation.",
+      "Accelerated cardiovascular exam turnaround times by 45% for multi-site healthcare practices.",
+    ],
+    technologies: ["Cloud PACS", "DICOM / WebGL", "Cardiovascular Ultrasound", "HIPAA Security", "Clinical UX"],
+  },
+
+  highdraw: {
+    slug: "highdraw",
+    client: "Colon Hyphen Bracket",
+    title: "HighDraw: Sovereign Infinite Vector Canvas & Spatial Design Protocol",
+    subtitle: "Proprietary Software • Local-First Infinite Canvas & Cryptographic Spatial Workspace",
+    role: "Architect, Lead Designer & Systems Builder",
+    scaleBadge: "Hardware-Accelerated Vector Canvas",
+    timeline: "2025 – 2026",
+    heroImage: "/images/highdraw/highdraw-logo-gold.png",
+    galleryImages: [
+      {
+        src: "/images/highdraw/highdraw-logo-gold.png",
+        title: "HighDraw Sovereign Identity & Spatial Mark",
+        caption: "Bespoke gold insignia for HighDraw: hardware-accelerated vector canvas engineered to bypass proprietary cloud locks.",
+        tag: "Brand Identity",
+      },
+    ],
+    executiveSummary:
+      "HighDraw is an infinite vector canvas and real-time spatial whiteboard protocol built as a sovereign antidote to proprietary design SaaS locks (like Figma). Engineered for 120 FPS infinite zooming, hardware-accelerated WebGL rendering, and zero-cloud local persistence via OPFS and SQLite.",
+    challenge:
+      "Modern design tools hold creator assets hostage behind expensive cloud subscriptions, arbitrary paywalls, and proprietary file formats that cannot be read offline or versioned cleanly with Git. Design teams need sovereign, zero-lock-in visual thinking tools.",
+    solution:
+      "Engineered HighDraw: a local-first, infinite-canvas spatial environment that stores drawings directly as human-readable vector ASTs in local SQLite/OPFS. Features real-time cryptographic peer handshakes for collaboration without centralized corporate relay servers.",
+    uiUxCraft:
+      "Ultra-minimal, distraction-free spatial canvas adhering to Massimo Vignelli 8pt grid geometry. Fluid gesture controls with sub-8ms pen-to-pixel latency.",
+    systemsArchitecture:
+      "WebGL and Canvas2D rendering pipeline with quadtree spatial indexing for instantaneous culling of tens of thousands of vector nodes. Local-first synchronization via CRDTs and Web Crypto.",
+    metrics: [
+      { value: "120 FPS", label: "Canvas Engine", subtext: "Hardware-accelerated WebGL" },
+      { value: "<8ms", label: "Pen Latency", subtext: "Zero-lag tactile feel" },
+      { value: "100% Local", label: "Sovereign Storage", subtext: "Zero cloud hostage fees" },
+      { value: "Git-Native", label: "Version Control", subtext: "Human-readable vector AST" },
+    ],
+    outcomes: [
+      "Built sovereign vector canvas eliminating cloud vendor lock-in.",
+      "Engineered quadtree spatial indexing maintaining 120 FPS across 50,000+ vector paths.",
+      "Designed distraction-free Vignelli spatial interface.",
+    ],
+    technologies: ["WebGL", "Canvas2D", "Quadtree Spatial Indexing", "SQLite / OPFS", "CRDTs", "Web Crypto"],
+  },
 };
+
+

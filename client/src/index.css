@@ -25,34 +25,34 @@
   --elevate-2: rgba(43, 30, 25, 0.07);
 
   /* Light Mode: Warm Sandstone / Albers Paper (Rich Oatmeal/Sand tint, distinctly NOT white) */
-  --background: 38 28% 92%;          /* #EFE8DC warm tactile sand paper */
-  --foreground: 16 27% 13%;          /* #2B1E19 rich coffee black */
-  --border: 36 20% 82%;              /* #DBD3C4 warm earthen border */
-  --card: 38 32% 96%;                /* #FAF5EC warm ivory card */
-  --card-foreground: 16 27% 13%;     /* #2B1E19 */
-  --card-border: 36 20% 82%;         /* #DBD3C4 */
-  --sidebar: 36 25% 89%;             /* #E7DFD2 */
-  --sidebar-foreground: 16 27% 13%;
-  --sidebar-border: 36 20% 82%;
+  --background: 36 28% 88%;          /* #EAE0D0 rich warm tactile sand paper */
+  --foreground: 16 30% 12%;          /* #281B16 rich dark chocolate espresso */
+  --border: 36 20% 78%;              /* #D3C7B5 rich earthen border */
+  --card: 36 28% 92%;                /* #F2EAE0 warm Albers ivory surface (visibly warm, NOT white) */
+  --card-foreground: 16 30% 12%;     /* #281B16 */
+  --card-border: 36 20% 78%;         /* #D3C7B5 */
+  --sidebar: 36 24% 85%;             /* #DFD4C4 */
+  --sidebar-foreground: 16 30% 12%;
+  --sidebar-border: 36 20% 78%;
   --sidebar-primary: 326 99% 58%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 38 28% 92%;
-  --sidebar-accent-foreground: 16 27% 13%;
+  --sidebar-accent: 36 28% 88%;
+  --sidebar-accent-foreground: 16 30% 12%;
   --sidebar-ring: 326 99% 58%;
-  --popover: 38 32% 96%;
-  --popover-foreground: 16 27% 13%;
-  --popover-border: 36 20% 82%;
+  --popover: 36 28% 92%;
+  --popover-foreground: 16 30% 12%;
+  --popover-border: 36 20% 78%;
   --primary: 326 99% 58%;            /* #FE299E Canonical CHB / Pipes Hot Pink */
   --primary-foreground: 0 0% 100%;
-  --secondary: 36 24% 88%;           /* #E5DCCE */
-  --secondary-foreground: 16 27% 13%;
-  --muted: 36 24% 89%;               /* #E7DFD2 */
-  --muted-foreground: 14 15% 40%;     /* #735F57 warm tobacco */
+  --secondary: 36 22% 84%;           /* #E0D5C4 */
+  --secondary-foreground: 16 30% 12%;
+  --muted: 36 22% 84%;               /* #E0D5C4 */
+  --muted-foreground: 14 18% 36%;     /* #6B554D rich warm taupe */
   --accent: 356 54% 66%;             /* #D9777F Dusty Rose */
-  --accent-foreground: 16 27% 13%;
+  --accent-foreground: 16 30% 12%;
   --destructive: 0 84% 35%;
   --destructive-foreground: 0 0% 100%;
-  --input: 36 20% 80%;
+  --input: 36 20% 75%;
   --ring: 326 99% 58%;               /* #FE299E */
   --chart-1: 326 99% 58%;            /* Hot Pink */
   --chart-2: 195 99% 48%;            /* Cyan Blue */

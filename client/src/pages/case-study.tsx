@@ -33,14 +33,14 @@ export default function CaseStudyPage() {
   if (!study) {
     return (
       <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-6 text-center">
-        <h1 className="text-3xl font-serif font-bold text-[#2B1E19] mb-4">Case Study Not Found</h1>
-        <p className="text-base text-[#735F57] mb-6 max-w-md">
+        <h1 className="text-3xl font-serif font-bold text-[#281B16] mb-4">Case Study Not Found</h1>
+        <p className="text-base text-[#6B554D] mb-6 max-w-md">
           The requested case study could not be located. Explore our selected flagship records:
         </p>
         <div className="flex flex-wrap gap-3 justify-center mb-8">
           {Object.values(CASE_STUDIES).map((s) => (
             <Link key={s.slug} href={`/case-studies/${s.slug}`}>
-              <Button variant="outline" className="border-[#DBD3C4] text-xs font-sans uppercase tracking-wider">
+              <Button variant="outline" className="border-[#D3C7B5] text-xs font-sans uppercase tracking-wider">
                 {s.client}
               </Button>
             </Link>
@@ -72,17 +72,17 @@ export default function CaseStudyPage() {
   return (
     <article className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#FE299E]/20">
       {/* ── Sticky Sub-Navigation Bar ── */}
-      <div className="sticky top-18 md:top-20 z-40 bg-[#FAF5EC]/95 backdrop-blur-md border-b border-[#DBD3C4] py-3">
+      <div className="sticky top-18 md:top-20 z-40 bg-[#F2EAE0]/95 backdrop-blur-md border-b border-[#D3C7B5] py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-sans uppercase tracking-[0.16em] font-semibold text-[#735F57] hover:text-[#2B1E19] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-sans uppercase tracking-[0.16em] font-semibold text-[#6B554D] hover:text-[#281B16] transition-colors"
           >
             <ArrowLeft className="w-4 h-4 text-[#FE299E]" /> Back to Selected Work
           </Link>
 
           <div className="hidden md:flex items-center gap-3 text-xs font-sans">
-            <span className="text-[#735F57] uppercase tracking-wider">Other Deep Dives:</span>
+            <span className="text-[#6B554D] uppercase tracking-wider">Other Deep Dives:</span>
             {Object.values(CASE_STUDIES)
               .filter((s) => s.slug !== study.slug)
               .slice(0, 4)
@@ -90,7 +90,7 @@ export default function CaseStudyPage() {
                 <Link
                   key={s.slug}
                   href={`/case-studies/${s.slug}`}
-                  className="font-medium text-[#735F57] hover:text-[#FE299E] transition-colors uppercase tracking-wider"
+                  className="font-medium text-[#6B554D] hover:text-[#FE299E] transition-colors uppercase tracking-wider"
                 >
                   {s.client}
                 </Link>
@@ -114,30 +114,30 @@ export default function CaseStudyPage() {
             <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
               {study.client}
             </span>
-            <span className="text-[#DBD3C4]">&bull;</span>
-            <Badge variant="outline" className="border-[#DBD3C4] bg-[#FAF5EC] text-[#735F57] text-[11px] font-mono uppercase tracking-wider">
+            <span className="text-[#D3C7B5]">&bull;</span>
+            <Badge variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] text-[#6B554D] text-[11px] font-mono uppercase tracking-wider">
               {study.scaleBadge}
             </Badge>
-            <span className="text-[#DBD3C4]">&bull;</span>
-            <span className="text-xs font-sans text-[#735F57]">{study.timeline}</span>
+            <span className="text-[#D3C7B5]">&bull;</span>
+            <span className="text-xs font-sans text-[#6B554D]">{study.timeline}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2B1E19] tracking-tight leading-[1.12]">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.12]">
             {study.title}
           </h1>
 
-          <p className="text-lg md:text-xl text-[#735F57] font-sans leading-relaxed max-w-3xl">
+          <p className="text-lg md:text-xl text-[#6B554D] font-sans leading-relaxed max-w-3xl">
             {study.subtitle}
           </p>
         </div>
 
         {/* Role & Actions */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-[#DBD3C4]">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-[#D3C7B5]">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-sans uppercase tracking-[0.16em] text-[#735F57] font-semibold">
+            <span className="text-xs font-sans uppercase tracking-[0.16em] text-[#6B554D] font-semibold">
               Role:
             </span>
-            <span className="text-xs font-sans font-bold text-[#2B1E19] px-3 py-1 rounded-full bg-[#E5DCCE]">
+            <span className="text-xs font-sans font-bold text-[#281B16] px-3 py-1 rounded-full bg-[#E4DACB]">
               {study.role}
             </span>
           </div>
@@ -152,7 +152,7 @@ export default function CaseStudyPage() {
             )}
             {study.repoUrl && (
               <a href={study.repoUrl} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="border-[#DBD3C4] bg-[#FAF5EC] text-[#2B1E19] hover:bg-[#EFE8DC] font-sans text-xs uppercase tracking-[0.15em] font-medium rounded-full px-5">
+                <Button variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:bg-[#EAE0D0] font-sans text-xs uppercase tracking-[0.15em] font-medium rounded-full px-5">
                   Inspect Source Code <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
                 </Button>
               </a>
@@ -164,23 +164,23 @@ export default function CaseStudyPage() {
       {/* ── Full-Bleed Primary Specimen Showcase ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full">
         <div
-          className="group relative rounded-3xl border border-[#DBD3C4] bg-[#FAF5EC] p-3 sm:p-6 shadow-xl overflow-hidden cursor-pointer"
+          className="group relative rounded-3xl border border-[#D3C7B5] bg-[#F2EAE0] p-3 sm:p-6 shadow-xl overflow-hidden cursor-pointer"
           onClick={() => setActiveImageIndex(0)}
         >
-          <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-[#EFE8DC] rounded-2xl overflow-hidden flex items-center justify-center border border-[#DBD3C4]/60">
+          <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-[#EAE0D0] rounded-2xl overflow-hidden flex items-center justify-center border border-[#D3C7B5]/60">
             <img
               src={study.heroImage}
               alt={study.title}
               className="w-full h-full object-contain p-2 sm:p-4 group-hover:scale-[1.02] transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-[#2B1E19]/0 group-hover:bg-[#2B1E19]/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-              <span className="px-4 py-2 rounded-full bg-[#FAF5EC]/95 text-[#2B1E19] text-xs font-sans font-bold shadow-lg flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all">
+            <div className="absolute inset-0 bg-[#281B16]/0 group-hover:bg-[#281B16]/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+              <span className="px-4 py-2 rounded-full bg-[#F2EAE0]/95 text-[#281B16] text-xs font-sans font-bold shadow-lg flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all">
                 <ZoomIn className="w-4 h-4 text-[#FE299E]" /> Click to Inspect Full-Resolution Interface
               </span>
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between text-xs text-[#735F57] font-sans px-2">
+          <div className="mt-4 flex items-center justify-between text-xs text-[#6B554D] font-sans px-2">
             <span>Primary Architecture &amp; Interface Plate</span>
             <span className="font-mono text-[11px] text-[#FE299E] font-semibold flex items-center gap-1">
               Click to Enlarge <ZoomIn className="w-3 h-3" />
@@ -195,16 +195,16 @@ export default function CaseStudyPage() {
           {study.metrics.map((m, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-2xl border border-[#DBD3C4] bg-[#FAF5EC] flex flex-col justify-center space-y-1 shadow-sm"
+              className="p-5 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] flex flex-col justify-center space-y-1 shadow-sm"
             >
-              <span className="text-[11px] font-sans uppercase tracking-[0.18em] text-[#735F57] font-semibold truncate">
+              <span className="text-[11px] font-sans uppercase tracking-[0.18em] text-[#6B554D] font-semibold truncate">
                 {m.label}
               </span>
-              <span className="text-2xl sm:text-3xl font-serif font-bold text-[#2B1E19] tracking-tight">
+              <span className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight">
                 {m.value}
               </span>
               {m.subtext && (
-                <p className="text-[11px] text-[#735F57] leading-tight font-sans">{m.subtext}</p>
+                <p className="text-[11px] text-[#6B554D] leading-tight font-sans">{m.subtext}</p>
               )}
             </div>
           ))}
@@ -216,23 +216,23 @@ export default function CaseStudyPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Left Column: Executive Summary, The Challenge & Systems Solution */}
           <div className="lg:col-span-7 space-y-8">
-            <div className="space-y-3 p-6 sm:p-8 rounded-3xl bg-[#FAF5EC] border border-[#DBD3C4] shadow-sm">
+            <div className="space-y-3 p-6 sm:p-8 rounded-3xl bg-[#F2EAE0] border border-[#D3C7B5] shadow-sm">
               <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
                 Executive Summary
               </span>
-              <p className="text-base sm:text-lg text-[#2B1E19] font-sans leading-relaxed">
+              <p className="text-base sm:text-lg text-[#281B16] font-sans leading-relaxed">
                 {study.executiveSummary}
               </p>
             </div>
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#735F57]" />
-                <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#2B1E19] tracking-tight">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#6B554D]" />
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#281B16] tracking-tight">
                   The Strategic Challenge
                 </h2>
               </div>
-              <p className="text-base text-[#735F57] font-sans leading-relaxed pl-4 border-l-2 border-[#DBD3C4]">
+              <p className="text-base text-[#6B554D] font-sans leading-relaxed pl-4 border-l-2 border-[#D3C7B5]">
                 {study.challenge}
               </p>
             </div>
@@ -240,20 +240,20 @@ export default function CaseStudyPage() {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#FE299E]" />
-                <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#2B1E19] tracking-tight">
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#281B16] tracking-tight">
                   The Systems Architecture Solution
                 </h2>
               </div>
-              <p className="text-base text-[#2B1E19]/90 font-sans leading-relaxed pl-4 border-l-2 border-[#FE299E]/40">
+              <p className="text-base text-[#281B16]/90 font-sans leading-relaxed pl-4 border-l-2 border-[#FE299E]/40">
                 {study.solution}
               </p>
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-lg font-serif font-bold text-[#2B1E19] tracking-tight">
+              <h3 className="text-lg font-serif font-bold text-[#281B16] tracking-tight">
                 Systems &amp; Protocol Execution
               </h3>
-              <p className="text-base text-[#735F57] font-sans leading-relaxed">
+              <p className="text-base text-[#6B554D] font-sans leading-relaxed">
                 {study.systemsArchitecture}
               </p>
             </div>
@@ -261,22 +261,22 @@ export default function CaseStudyPage() {
 
           {/* Right Column: UI/UX Craft, Technical Stack, and Verified Outcomes */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4 p-6 sm:p-8 rounded-3xl bg-[#FAF5EC] border border-[#DBD3C4] shadow-sm">
+            <div className="space-y-4 p-6 sm:p-8 rounded-3xl bg-[#F2EAE0] border border-[#D3C7B5] shadow-sm">
               <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
                 UI/UX Craft &amp; Psychology
               </span>
-              <p className="text-sm sm:text-base text-[#735F57] font-sans leading-relaxed">
+              <p className="text-sm sm:text-base text-[#6B554D] font-sans leading-relaxed">
                 {study.uiUxCraft}
               </p>
             </div>
 
-            <div className="space-y-4 p-6 sm:p-8 rounded-3xl bg-[#EFE8DC]/60 border border-[#DBD3C4] shadow-sm">
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#2B1E19]">
+            <div className="space-y-4 p-6 sm:p-8 rounded-3xl bg-[#EAE0D0]/60 border border-[#D3C7B5] shadow-sm">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#281B16]">
                 Verified Production Outcomes
               </span>
               <ul className="space-y-3">
                 {study.outcomes.map((outcome, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-[#2B1E19] font-sans">
+                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-[#281B16] font-sans">
                     <Check className="w-4 h-4 text-[#FE299E] shrink-0 mt-0.5" />
                     <span>{outcome}</span>
                   </li>
@@ -285,14 +285,14 @@ export default function CaseStudyPage() {
             </div>
 
             <div className="space-y-3">
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-semibold text-[#735F57]">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-semibold text-[#6B554D]">
                 Stack &amp; Methods
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {study.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 rounded-full bg-[#FAF5EC] border border-[#DBD3C4] text-xs font-sans text-[#2B1E19] font-medium"
+                    className="px-3 py-1 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] text-xs font-sans text-[#281B16] font-medium"
                   >
                     {tech}
                   </span>
@@ -301,7 +301,7 @@ export default function CaseStudyPage() {
             </div>
 
             {study.ndaNotice && (
-              <div className="p-4 rounded-2xl border border-[#DBD3C4] bg-[#FAF5EC] text-xs text-[#735F57] font-sans flex items-start gap-2.5">
+              <div className="p-4 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] text-xs text-[#6B554D] font-sans flex items-start gap-2.5">
                 <Shield className="w-4 h-4 text-[#FE299E] shrink-0 mt-0.5" />
                 <p className="leading-relaxed">{study.ndaNotice}</p>
               </div>
@@ -317,10 +317,10 @@ export default function CaseStudyPage() {
             <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
               Interface Gallery
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#2B1E19]">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16]">
               Additional Production Plates &amp; Workflows
             </h2>
-            <p className="text-sm text-[#735F57] font-sans">
+            <p className="text-sm text-[#6B554D] font-sans">
               Click any plate to inspect full high-resolution interface details.
             </p>
           </div>
@@ -329,18 +329,18 @@ export default function CaseStudyPage() {
             {study.galleryImages.map((img, idx) => (
               <div
                 key={idx}
-                className="group rounded-2xl border border-[#DBD3C4] bg-[#FAF5EC] overflow-hidden cursor-pointer hover:border-[#FE299E] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between"
+                className="group rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] overflow-hidden cursor-pointer hover:border-[#FE299E] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between"
                 onClick={() => setActiveImageIndex(idx)}
               >
-                <div className="relative aspect-[16/10] bg-[#EFE8DC] p-3 flex items-center justify-center border-b border-[#DBD3C4]">
+                <div className="relative aspect-[16/10] bg-[#EAE0D0] p-3 flex items-center justify-center border-b border-[#D3C7B5]">
                   <img
                     src={img.src}
                     alt={img.title}
                     className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-[#2B1E19]/0 group-hover:bg-[#2B1E19]/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <span className="px-3 py-1.5 rounded-full bg-[#FAF5EC]/95 text-[#2B1E19] text-xs font-sans font-bold shadow-md flex items-center gap-1.5">
+                  <div className="absolute inset-0 bg-[#281B16]/0 group-hover:bg-[#281B16]/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <span className="px-3 py-1.5 rounded-full bg-[#F2EAE0]/95 text-[#281B16] text-xs font-sans font-bold shadow-md flex items-center gap-1.5">
                       <ZoomIn className="w-3.5 h-3.5 text-[#FE299E]" /> Zoom
                     </span>
                   </div>
@@ -348,14 +348,14 @@ export default function CaseStudyPage() {
 
                 <div className="p-4 space-y-1">
                   <div className="flex items-center justify-between gap-2">
-                    <h3 className="font-sans font-bold text-xs text-[#2B1E19] truncate">{img.title}</h3>
+                    <h3 className="font-sans font-bold text-xs text-[#281B16] truncate">{img.title}</h3>
                     {img.tag && (
-                      <Badge variant="outline" className="text-[10px] font-mono border-[#DBD3C4] text-[#735F57]">
+                      <Badge variant="outline" className="text-[10px] font-mono border-[#D3C7B5] text-[#6B554D]">
                         {img.tag}
                       </Badge>
                     )}
                   </div>
-                  <p className="text-[11px] text-[#735F57] line-clamp-2 leading-relaxed font-sans">{img.caption}</p>
+                  <p className="text-[11px] text-[#6B554D] line-clamp-2 leading-relaxed font-sans">{img.caption}</p>
                 </div>
               </div>
             ))}
@@ -366,24 +366,24 @@ export default function CaseStudyPage() {
       {/* ── High-Resolution Lightbox Modal ── */}
       {activeImageIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-[#2B1E19]/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-[#281B16]/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200"
           onClick={() => setActiveImageIndex(null)}
         >
           <div
-            className="relative max-w-5xl w-full bg-[#FAF5EC] border border-[#DBD3C4] rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
+            className="relative max-w-5xl w-full bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-[#DBD3C4] px-6 py-4 bg-[#FAF5EC]">
+            <div className="flex items-center justify-between border-b border-[#D3C7B5] px-6 py-4 bg-[#F2EAE0]">
               <div className="space-y-0.5 pr-4">
                 <div className="flex items-center gap-2">
                   <Badge className="bg-[#FE299E] text-white text-[10px] font-mono uppercase tracking-wider px-2 py-0.5">
                     {study.galleryImages[activeImageIndex].tag || "Work Specimen"}
                   </Badge>
-                  <span className="text-xs font-mono text-[#735F57]">
+                  <span className="text-xs font-mono text-[#6B554D]">
                     {activeImageIndex + 1} of {study.galleryImages.length}
                   </span>
                 </div>
-                <h4 className="font-serif font-bold text-lg md:text-xl text-[#2B1E19]">
+                <h4 className="font-serif font-bold text-lg md:text-xl text-[#281B16]">
                   {study.galleryImages[activeImageIndex].title}
                 </h4>
               </div>
@@ -392,7 +392,7 @@ export default function CaseStudyPage() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-9 h-9 border-[#DBD3C4] bg-[#FAF5EC] text-[#2B1E19] hover:bg-[#EFE8DC]"
+                  className="rounded-full w-9 h-9 border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:bg-[#EAE0D0]"
                   onClick={handlePrevImage}
                   aria-label="Previous plate"
                 >
@@ -401,7 +401,7 @@ export default function CaseStudyPage() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-9 h-9 border-[#DBD3C4] bg-[#FAF5EC] text-[#2B1E19] hover:bg-[#EFE8DC]"
+                  className="rounded-full w-9 h-9 border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:bg-[#EAE0D0]"
                   onClick={handleNextImage}
                   aria-label="Next plate"
                 >
@@ -410,7 +410,7 @@ export default function CaseStudyPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-full w-9 h-9 text-[#735F57] hover:text-[#2B1E19] hover:bg-[#EFE8DC]"
+                  className="rounded-full w-9 h-9 text-[#6B554D] hover:text-[#281B16] hover:bg-[#EAE0D0]"
                   onClick={() => setActiveImageIndex(null)}
                   aria-label="Close modal"
                 >
@@ -419,17 +419,17 @@ export default function CaseStudyPage() {
               </div>
             </div>
 
-            <div className="flex-1 overflow-auto bg-[#EFE8DC]/80 p-4 sm:p-6 flex items-center justify-center min-h-[350px]">
+            <div className="flex-1 overflow-auto bg-[#EAE0D0]/80 p-4 sm:p-6 flex items-center justify-center min-h-[350px]">
               <img
                 src={study.galleryImages[activeImageIndex].src}
                 alt={study.galleryImages[activeImageIndex].title}
-                className="max-h-[68vh] w-auto max-w-full object-contain rounded-xl shadow-sm border border-[#DBD3C4]/60 bg-white"
+                className="max-h-[68vh] w-auto max-w-full object-contain rounded-xl shadow-sm border border-[#D3C7B5]/60 bg-white"
               />
             </div>
 
-            <div className="border-t border-[#DBD3C4] px-6 py-3.5 bg-[#FAF5EC] flex items-center justify-between text-xs text-[#735F57] font-sans">
+            <div className="border-t border-[#D3C7B5] px-6 py-3.5 bg-[#F2EAE0] flex items-center justify-between text-xs text-[#6B554D] font-sans">
               <p className="max-w-3xl leading-relaxed">{study.galleryImages[activeImageIndex].caption}</p>
-              <span className="hidden sm:inline font-mono text-[10px] text-[#735F57] shrink-0 ml-4">
+              <span className="hidden sm:inline font-mono text-[10px] text-[#6B554D] shrink-0 ml-4">
                 ESC to close &bull; Arrow keys to navigate
               </span>
             </div>
@@ -439,15 +439,15 @@ export default function CaseStudyPage() {
 
       {/* ── Sprint Conversion Banner ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
-        <div className="rounded-3xl border border-[#DBD3C4] bg-[#FAF5EC] p-8 md:p-12 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="rounded-3xl border border-[#D3C7B5] bg-[#F2EAE0] p-8 md:p-12 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-1.5">
               <Sparkles className="w-4 h-4" /> Immediate Availability
             </span>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#2B1E19] tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight">
               Ready to ship with this velocity?
             </h3>
-            <p className="text-base text-[#735F57] font-sans leading-relaxed">
+            <p className="text-base text-[#6B554D] font-sans leading-relaxed">
               Book a 1-week turnaround sprint ($10k flat). I audit the architecture, design the high-craft interface with Massimo Vignelli rigor, and ship production-ready code.
             </p>
           </div>
@@ -460,7 +460,7 @@ export default function CaseStudyPage() {
               Book 1-Week Sprint ($10k) <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
             <Link href="/">
-              <Button variant="outline" className="border-[#DBD3C4] bg-[#FAF5EC] hover:bg-[#EFE8DC] text-[#2B1E19] font-sans text-xs uppercase tracking-[0.16em] font-medium rounded-full px-6 py-3">
+              <Button variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] hover:bg-[#EAE0D0] text-[#281B16] font-sans text-xs uppercase tracking-[0.16em] font-medium rounded-full px-6 py-3">
                 View All Work
               </Button>
             </Link>

@@ -46,7 +46,7 @@ export function ColorsTypeGridsViewer() {
   };
 
   return (
-    <div className="w-full rounded-3xl border border-[#DBD3C4] bg-[#161413] text-[#f1ebd8] overflow-hidden shadow-2xl space-y-0">
+    <div className="w-full rounded-3xl border border-[#D3C7B5] bg-[#161413] text-[#f1ebd8] overflow-hidden shadow-2xl space-y-0">
       {/* Top Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 bg-[#110f0e] border-b border-white/10">
         <div className="space-y-0.5">

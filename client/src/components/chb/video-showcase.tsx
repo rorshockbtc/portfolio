@@ -83,18 +83,18 @@ export function VideoShowcase() {
   return (
     <section id="demos-livestreams" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full space-y-8">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#DBD3C4] pb-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#D3C7B5] pb-6">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="text-xs font-sans uppercase tracking-[0.18em] text-[#FE299E] border-[#FE299E]/40 rounded-full">
               Living Proofs &bull; Video Artifacts
             </Badge>
-            <span className="text-xs text-[#735F57] font-sans uppercase tracking-wider">Demos &bull; Livestreams &bull; Architecture</span>
+            <span className="text-xs text-[#6B554D] font-sans uppercase tracking-wider">Demos &bull; Livestreams &bull; Architecture</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold font-serif text-[#2B1E19] tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold font-serif text-[#281B16] tracking-tight">
             Live Demos &amp; Design Sessions
           </h2>
-          <p className="text-base text-[#735F57] max-w-2xl leading-relaxed font-sans">
+          <p className="text-base text-[#6B554D] max-w-2xl leading-relaxed font-sans">
             Real screen recordings, unedited design workflows, and architectural walkthroughs. See how I think through systems, explain complex concepts, and build software in the open.
           </p>
         </div>
@@ -108,7 +108,7 @@ export function VideoShowcase() {
               className={`px-4 py-1.5 text-xs font-sans uppercase tracking-[0.12em] rounded-full border transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? "bg-[#FE299E] text-white border-[#FE299E] font-semibold shadow-sm"
-                  : "bg-[#FAF5EC] text-[#735F57] border-[#DBD3C4] hover:text-[#2B1E19] hover:bg-[#EFE8DC]"
+                  : "bg-[#F2EAE0] text-[#6B554D] border-[#D3C7B5] hover:text-[#281B16] hover:bg-[#EAE0D0]"
               }`}
             >
               {cat}
@@ -122,12 +122,12 @@ export function VideoShowcase() {
         {filteredVideos.map((video) => (
           <div
             key={video.id}
-            className="group rounded-2xl border border-[#DBD3C4] bg-[#FAF5EC] overflow-hidden flex flex-col justify-between hover:border-[#FE299E] transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md"
+            className="group rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] overflow-hidden flex flex-col justify-between hover:border-[#FE299E] transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md"
             onClick={() => setActiveVideo(video)}
           >
             <div>
               {/* Thumbnail Container */}
-              <div className="relative aspect-[16/9] w-full bg-[#EFE8DC] overflow-hidden">
+              <div className="relative aspect-[16/9] w-full bg-[#EAE0D0] overflow-hidden">
                 <img
                   src={video.thumbnailUrl}
                   alt={video.title}
@@ -140,7 +140,7 @@ export function VideoShowcase() {
                   </div>
                 </div>
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="text-[11px] font-sans uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#FAF5EC]/95 text-[#2B1E19] border border-[#DBD3C4] backdrop-blur-sm font-semibold">
+                  <span className="text-[11px] font-sans uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#F2EAE0]/95 text-[#281B16] border border-[#D3C7B5] backdrop-blur-sm font-semibold">
                     {video.category}
                   </span>
                 </div>
@@ -148,16 +148,16 @@ export function VideoShowcase() {
 
               {/* Text Meta */}
               <div className="p-5 space-y-2">
-                <h3 className="text-xl font-bold font-serif text-[#2B1E19] leading-snug group-hover:text-[#FE299E] transition-colors">
+                <h3 className="text-xl font-bold font-serif text-[#281B16] leading-snug group-hover:text-[#FE299E] transition-colors">
                   {video.title}
                 </h3>
-                <p className="text-sm text-[#735F57] leading-relaxed line-clamp-2 font-sans">
+                <p className="text-sm text-[#6B554D] leading-relaxed line-clamp-2 font-sans">
                   {video.description}
                 </p>
               </div>
             </div>
 
-            <div className="px-5 pb-4 pt-2 border-t border-[#DBD3C4] flex items-center justify-between text-xs font-sans text-[#735F57]">
+            <div className="px-5 pb-4 pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans text-[#6B554D]">
               <span className="text-[#FE299E] font-semibold flex items-center gap-1 group-hover:underline">
                 Watch Demo <Play className="w-3 h-3 fill-current ml-0.5" />
               </span>
@@ -166,7 +166,7 @@ export function VideoShowcase() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="hover:text-[#2B1E19] inline-flex items-center gap-1 text-xs uppercase tracking-wider font-medium"
+                className="hover:text-[#281B16] inline-flex items-center gap-1 text-xs uppercase tracking-wider font-medium"
               >
                 YouTube <ExternalLink className="w-3 h-3" />
               </a>
@@ -181,7 +181,7 @@ export function VideoShowcase() {
           href="https://www.youtube.com/@KyleCyree"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-xs font-mono text-[#735F57] hover:text-[#FE299E] transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-xs font-mono text-[#6B554D] hover:text-[#FE299E] transition-colors font-medium"
         >
           <Video className="w-4 h-4" />
           <span>Explore All Livestreams &amp; Demos on YouTube (@KyleCyree)</span>
@@ -192,24 +192,24 @@ export function VideoShowcase() {
       {/* Embedded Video Lightbox Modal */}
       {activeVideo && (
         <div
-          className="fixed inset-0 z-50 bg-[#2B1E19]/85 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+          className="fixed inset-0 z-50 bg-[#281B16]/85 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
           onClick={() => setActiveVideo(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-[#FAF5EC] border border-[#DBD3C4] rounded-2xl p-4 md:p-6 overflow-hidden space-y-4 shadow-2xl"
+            className="relative max-w-4xl w-full bg-[#F2EAE0] border border-[#D3C7B5] rounded-2xl p-4 md:p-6 overflow-hidden space-y-4 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-[#DBD3C4] pb-3">
+            <div className="flex items-center justify-between border-b border-[#D3C7B5] pb-3">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#FE299E] font-bold">
                   {activeVideo.category}
                 </span>
-                <h4 className="font-serif font-bold text-lg text-[#2B1E19]">{activeVideo.title}</h4>
+                <h4 className="font-serif font-bold text-lg text-[#281B16]">{activeVideo.title}</h4>
               </div>
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full w-8 h-8 text-[#735F57] hover:text-[#2B1E19]"
+                className="rounded-full w-8 h-8 text-[#6B554D] hover:text-[#281B16]"
                 onClick={() => setActiveVideo(null)}
               >
                 <X className="w-4 h-4" />
@@ -226,7 +226,7 @@ export function VideoShowcase() {
               />
             </div>
 
-            <p className="text-xs text-[#735F57] leading-relaxed pt-1 font-sans">
+            <p className="text-xs text-[#6B554D] leading-relaxed pt-1 font-sans">
               {activeVideo.description}
             </p>
           </div>

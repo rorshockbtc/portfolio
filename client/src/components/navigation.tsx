@@ -40,8 +40,8 @@ export default function Navigation() {
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#EFE8DC]/95 backdrop-blur-xl border-b border-[#DBD3C4] shadow-sm"
-          : "bg-[#EFE8DC]/85 backdrop-blur-md border-b border-[#DBD3C4]/60"
+          ? "bg-[#EAE0D0]/95 backdrop-blur-xl border-b border-[#D3C7B5] shadow-sm"
+          : "bg-[#EAE0D0]/85 backdrop-blur-md border-b border-[#D3C7B5]/70"
       }`}
       role="banner"
     >
@@ -62,7 +62,7 @@ export default function Navigation() {
             alt="Colon Hyphen Bracket"
             className="h-5 md:h-6 w-auto opacity-95 hover:opacity-100 transition-opacity shrink-0"
           />
-          <span className="font-sans text-xs uppercase tracking-[0.25em] font-bold text-[#2B1E19] shrink-0 whitespace-nowrap">
+          <span className="font-sans text-xs uppercase tracking-[0.25em] font-bold text-[#281B16] shrink-0 whitespace-nowrap">
             // CYREE
           </span>
         </Link>
@@ -73,7 +73,7 @@ export default function Navigation() {
               <button
                 key={link.targetId}
                 onClick={() => handleNavClick(link.targetId)}
-                className="py-1 font-sans text-xs uppercase tracking-[0.18em] font-semibold text-[#735F57] hover:text-[#2B1E19] transition-colors cursor-pointer bg-transparent border-none p-0 whitespace-nowrap"
+                className="py-1 font-sans text-xs uppercase tracking-[0.18em] font-semibold text-[#6B554D] hover:text-[#281B16] transition-colors cursor-pointer bg-transparent border-none p-0 whitespace-nowrap"
                 role="menuitem"
                 data-testid={`nav-link-${link.targetId}`}
               >
@@ -83,7 +83,7 @@ export default function Navigation() {
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF5EC] border border-[#DBD3C4] text-[11px] font-sans text-[#735F57] shrink-0">
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] text-[11px] font-sans text-[#6B554D] shrink-0">
               <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
               <span>Available Q4</span>
             </div>
