@@ -1,28 +1,35 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import chbLogoBlack from "@assets/chb-logo-black_1775922247108.png";
 
 const navLinks = [
-  { label: "Design Vault", targetId: "confidential-vault" },
-  { label: "Track Record", targetId: "enterprise-work" },
-  { label: "Public Work", targetId: "living-systems" },
-  { label: "Demos", targetId: "demos-livestreams" },
+  { label: "Selected Work", targetId: "selected-work" },
+  { label: "Colors & Grids", targetId: "manifesto-blueprint" },
+  { label: "Live Demos", targetId: "demos-livestreams" },
+  { label: "About", targetId: "about-kyle" },
 ];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const handleNavClick = (targetId: string) => {
+    if (location !== "/") {
+      setLocation(`/#${targetId}`);
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } else {
+      const el = document.getElementById(targetId);
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
@@ -39,7 +46,7 @@ export default function Navigation() {
       role="banner"
     >
       <nav
-        className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between h-18 md:h-20 w-full"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-18 md:h-20 w-full"
         role="navigation"
         aria-label="Main navigation"
         data-testid="nav-main"
@@ -47,7 +54,7 @@ export default function Navigation() {
         <Link
           href="/"
           className="relative z-10 flex items-center gap-2.5 shrink-0 focus-visible:outline-none rounded-sm"
-          aria-label="Kyle Cyree — Principal Architect"
+          aria-label="Kyle Cyree — Principal Designer & Systems Architect"
           data-testid="nav-logo"
         >
           <img
@@ -65,7 +72,7 @@ export default function Navigation() {
             {navLinks.map((link) => (
               <button
                 key={link.targetId}
-                onClick={() => scrollTo(link.targetId)}
+                onClick={() => handleNavClick(link.targetId)}
                 className="py-1 font-sans text-xs uppercase tracking-[0.18em] font-semibold text-[#735F57] hover:text-[#2B1E19] transition-colors cursor-pointer bg-transparent border-none p-0 whitespace-nowrap"
                 role="menuitem"
                 data-testid={`nav-link-${link.targetId}`}
@@ -82,7 +89,7 @@ export default function Navigation() {
             </div>
 
             <button
-              onClick={() => scrollTo("sprint-offer")}
+              onClick={() => handleNavClick("sprint-offer")}
               className="font-sans text-xs uppercase tracking-[0.15em] px-4 md:px-5 py-2 md:py-2.5 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-semibold transition-all shadow-sm cursor-pointer shrink-0 whitespace-nowrap"
               data-testid="nav-cta-sprint"
             >

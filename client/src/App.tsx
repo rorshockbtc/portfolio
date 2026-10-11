@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/layout";
 import Portfolio from "@/pages/portfolio";
 import Studio from "@/pages/studio";
+import CaseStudyPage from "@/pages/case-study";
 import EssayDesignIsRisk from "@/pages/essay-design-is-risk";
 import NotFound from "@/pages/not-found";
 
@@ -19,6 +20,7 @@ function Router() {
         <Layout>
           <Switch>
             <Route path="/" component={Portfolio} />
+            <Route path="/case-studies/:slug" component={CaseStudyPage} />
             <Route path="/studio" component={Studio} />
             <Route component={NotFound} />
           </Switch>
