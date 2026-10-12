@@ -1,12 +1,10 @@
 {
+  "framework": "vite",
+  "outputDirectory": "dist",
   "buildCommand": "npm run build",
   "rewrites": [
     {
-      "source": "/api/contact",
-      "destination": "/api/contact"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!api/.*).*)",
       "destination": "/index.html"
     }
   ]

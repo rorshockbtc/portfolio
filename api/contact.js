@@ -1,4 +1,4 @@
-export default async function handler(req: any, res: any) {
+export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -57,11 +57,11 @@ export default async function handler(req: any, res: any) {
       success: true,
       message: "Inquiry received! Kyle will review your requirements and respond within 24 hours.",
     });
-  } catch (error: any) {
-    console.error("[CONTACT] Error:", error);
+  } catch (error) {
+    console.error("[CONTACT ERROR]", error);
     return res.status(500).json({
       success: false,
-      message: "Failed to process inquiry. Please email cubby@colonhyphenbracket.pink directly.",
+      message: "Failed to send message. Please contact directly via email.",
     });
   }
 }
