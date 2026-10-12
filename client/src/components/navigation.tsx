@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import chbLogoBlack from "@assets/chb-logo-black_1775922247108.png";
 import { openContactModal } from "@/lib/contact-events";
 
 const navLinks = [
@@ -60,7 +59,7 @@ export default function Navigation() {
             data-testid="nav-logo"
           >
             <img
-              src={chbLogoBlack}
+              src="/images/chb-logo-black.png"
               alt="Colon Hyphen Bracket"
               className="h-6 md:h-7 w-auto opacity-95 group-hover:opacity-100 transition-opacity shrink-0"
             />
