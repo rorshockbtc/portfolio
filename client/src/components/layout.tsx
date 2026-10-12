@@ -17,11 +17,11 @@ const pageTransition = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [contactSubject, setContactSubject] = useState("1-Week Production Sprint ($7,500)");
+  const [contactSubject, setContactSubject] = useState("1-week sprint ($7,500)");
 
   useEffect(() => {
     const handler = (e: any) => {
-      setContactSubject(e.detail?.subject || "1-Week Production Sprint ($7,500)");
+      setContactSubject(e.detail?.subject || "1-week sprint ($7,500)");
       setIsContactOpen(true);
     };
     window.addEventListener("open-contact-modal", handler);

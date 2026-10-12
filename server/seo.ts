@@ -33,10 +33,10 @@ const PAGE_META: Record<string, PageMeta> = {
   "/": {
     title: "Kyle Cyree — Principal Product Designer & Systems Architect",
     description:
-      "Kyle Cyree is a Principal Product Designer and Systems Architect with 20+ years spanning enterprise healthcare (UnitedHealth, 35M+ users), fintech (Fidelity, Custodia Bank), AI/ML ecosystems, and high-frequency trading systems.",
+      "Principal Product Designer and Systems Architect. 15 years in regulated industries: UnitedHealth Group patient apps (35M+ patients), Walmart internal search (3M users), and first design hire at Custodia Bank. I design it and write the TypeScript to ship it.",
     ogTitle: "Kyle Cyree — Principal Product Designer & Systems Architect | CHB",
     ogDescription:
-      "I build enterprise-scale design systems, zero-to-one fintech platforms, and collaborative agentic AI models. 20+ years spanning healthcare, fintech, and defense.",
+      "Fortune 10 scale, startup speed. 15 years designing healthcare, banking, and enterprise products, and building them in TypeScript.",
     ogType: "website",
     ogImageAlt: "Kyle Cyree — Principal Product Designer & Systems Architect at Colon Hyphen Bracket",
   },

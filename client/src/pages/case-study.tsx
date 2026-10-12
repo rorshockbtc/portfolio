@@ -169,7 +169,7 @@ export default function CaseStudyPage() {
           onClick={() => setActiveImageIndex(0)}
         >
           <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-[#EAE0D0] rounded-2xl overflow-hidden flex items-center justify-center border border-[#D3C7B5]/60">
-            <img
+            <img loading="lazy" decoding="async"
               src={study.heroImage}
               alt={study.title}
               className="w-full h-full object-contain p-2 sm:p-4 group-hover:scale-[1.02] transition-transform duration-500"
@@ -479,7 +479,7 @@ export default function CaseStudyPage() {
             </div>
 
             <div className="flex-1 overflow-auto bg-[#EAE0D0]/80 p-4 sm:p-6 flex items-center justify-center min-h-[350px]">
-              <img
+              <img loading="lazy" decoding="async"
                 src={study.galleryImages[activeImageIndex].src}
                 alt={study.galleryImages[activeImageIndex].title}
                 className="max-h-[68vh] w-auto max-w-full object-contain rounded-xl shadow-sm border border-[#D3C7B5]/60 bg-white"

@@ -3,11 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useStudioSections } from "@/hooks/use-studio-sections";
 
 const sectionLinks = [
-  { targetId: "confidential-vault", label: "Vault" },
-  { targetId: "enterprise-work", label: "Pedigree" },
-  { targetId: "living-systems", label: "Flagships" },
-  { targetId: "demos-livestreams", label: "Demos" },
-  { targetId: "sprint-offer", label: "Hire" },
+  { targetId: "experience", label: "Experience" },
+  { targetId: "selected-work", label: "Work" },
+  { targetId: "code", label: "Code" },
+  { targetId: "work-together", label: "Hire" },
 ];
 
 export default function MobileNav() {
@@ -71,7 +70,7 @@ export default function MobileNav() {
               <button
                 key={link.targetId}
                 onClick={() => scrollTo(link.targetId)}
-                className="flex items-center justify-center min-w-[44px] min-h-[44px] px-3 py-2 font-sans text-[10px] uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors cursor-pointer bg-transparent border-none"
+                className="flex items-center justify-center min-w-[44px] min-h-[44px] px-3 py-2 font-sans text-sm font-semibold text-[#5C4840] hover:text-[#281B16] transition-colors cursor-pointer bg-transparent border-none"
                 data-testid={`nav-mobile-${link.targetId}`}
               >
                 {link.label}

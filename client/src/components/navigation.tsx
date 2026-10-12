@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import { openContactModal } from "@/lib/contact-events";
 
 const navLinks = [
+  { label: "Experience", targetId: "experience" },
   { label: "Work", targetId: "selected-work" },
-  { label: "Systems", targetId: "living-systems" },
-  { label: "About", targetId: "about-kyle" },
+  { label: "Code", targetId: "code" },
+  { label: "Work with me", targetId: "work-together" },
 ];
 
 export default function Navigation() {
@@ -45,7 +46,7 @@ export default function Navigation() {
       role="banner"
     >
       <nav
-        className="max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-14 flex items-center justify-between h-20 md:h-22 w-full"
+        className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between h-20 md:h-22 w-full"
         role="navigation"
         aria-label="Main navigation"
         data-testid="nav-main"
@@ -63,19 +64,18 @@ export default function Navigation() {
               alt="Colon Hyphen Bracket"
               className="h-6 md:h-7 w-auto opacity-95 group-hover:opacity-100 transition-opacity shrink-0"
             />
-            <span className="font-sans text-xs uppercase tracking-[0.22em] font-bold text-[#281B16] shrink-0 whitespace-nowrap pl-2 border-l border-[#D3C7B5]">
+            <span className="hidden sm:inline font-sans text-xs uppercase tracking-[0.22em] font-bold text-[#281B16] shrink-0 whitespace-nowrap pl-2 border-l border-[#D3C7B5]">
               Kyle Cyree
             </span>
           </Link>
 
           {/* Middle: Streamlined Editorial Nav Links */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8 pl-4" role="menubar">
+          <div className="hidden lg:flex items-center gap-7 pl-4">
             {navLinks.map((link) => (
               <button
                 key={link.targetId}
                 onClick={() => handleNavClick(link.targetId)}
-                className="py-1 font-sans text-xs uppercase tracking-[0.18em] font-bold text-[#6B554D] hover:text-[#281B16] transition-colors cursor-pointer bg-transparent border-none p-0 whitespace-nowrap"
-                role="menuitem"
+                className="py-1 font-sans text-sm font-semibold text-[#5C4840] hover:text-[#281B16] transition-colors cursor-pointer bg-transparent border-none p-0 whitespace-nowrap"
                 data-testid={`nav-link-${link.targetId}`}
               >
                 {link.label}
@@ -86,17 +86,21 @@ export default function Navigation() {
 
         {/* Right: Availability Status & Sprint CTA */}
         <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-          <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] text-[11px] font-sans text-[#281B16] font-semibold shrink-0">
-            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-            <span>Available Q4</span>
-          </div>
+          <a
+            href="/resumes/kyle-cyree-resume.pdf"
+            target="_blank"
+            rel="noopener"
+            className="hidden lg:inline font-sans text-sm font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"
+          >
+            Resume
+          </a>
 
           <button
-            onClick={() => openContactModal("1-Week Production Sprint ($7,500)")}
-            className="font-sans text-xs uppercase tracking-[0.16em] px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-bold transition-all shadow-md hover:shadow-lg cursor-pointer shrink-0 whitespace-nowrap"
+            onClick={() => openContactModal("Full-time role (Principal / Staff)")}
+            className="font-sans text-sm px-5 sm:px-6 h-11 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-bold transition-all shadow-md hover:shadow-lg cursor-pointer shrink-0 whitespace-nowrap"
             data-testid="nav-cta-sprint"
           >
-            Book Sprint ($7,500)
+            Get in touch
           </button>
         </div>
       </nav>

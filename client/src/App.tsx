@@ -5,13 +5,17 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/layout";
 import Portfolio from "@/pages/portfolio";
-import Studio from "@/pages/studio";
-import CaseStudyPage from "@/pages/case-study";
-import EssayDesignIsRisk from "@/pages/essay-design-is-risk";
+import { lazy, Suspense } from "react";
 import NotFound from "@/pages/not-found";
+
+// Secondary routes load on demand so the homepage ships less JavaScript.
+const Studio = lazy(() => import("@/pages/studio"));
+const CaseStudyPage = lazy(() => import("@/pages/case-study"));
+const EssayDesignIsRisk = lazy(() => import("@/pages/essay-design-is-risk"));
 
 function Router() {
   return (
+    <Suspense fallback={<div className="min-h-screen bg-[#EAE0D0]" />}>
     <Switch>
       {/* Standalone essay — no nav/footer wrapper */}
       <Route path="/essays/design-is-risk" component={EssayDesignIsRisk} />
@@ -27,6 +31,7 @@ function Router() {
         </Layout>
       </Route>
     </Switch>
+    </Suspense>
   );
 }
 

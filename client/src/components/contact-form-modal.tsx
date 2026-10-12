@@ -37,15 +37,18 @@ interface ContactFormModalProps {
   defaultSubject?: string;
 }
 
-export default function ContactFormModal({ open, onOpenChange, defaultSubject = "1-Week Production Sprint ($7,500)" }: ContactFormModalProps) {
+const CONTACT_EMAIL = "rorshock@protonmail.com";
+
+export default function ContactFormModal({ open, onOpenChange, defaultSubject = "Full-time role (Principal / Staff)" }: ContactFormModalProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [lastDraft, setLastDraft] = useState<ContactFormValues | null>(null);
 
   const intentOptions = [
-    "1-Week Production Sprint ($7,500)",
-    "Principal / Staff W2 Role",
-    "Fractional Lead Architect",
-    "Direct Hire Inquiry",
+    "Full-time role (Principal / Staff)",
+    "1-week sprint ($7,500)",
+    "Fractional / contract",
+    "Just saying hi",
   ];
 
   const form = useForm<ContactFormValues>({
@@ -64,9 +67,17 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
     }
   }, [open, defaultSubject, form]);
 
+  const mailtoHref = (d: ContactFormValues | null) => {
+    const subject = d?.subject || defaultSubject || "Hello";
+    const body = d ? `${d.message}\n\n— ${d.name} (${d.email})` : "Hi Kyle,\n\n";
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   async function onSubmit(data: ContactFormValues) {
     setStatus("submitting");
     setErrorMessage("");
+    setLastDraft(data);
+    const botcheck = (document.getElementById("contact-botcheck") as HTMLInputElement | null)?.value;
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -74,28 +85,21 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
         body: JSON.stringify({
           name: data.name,
           email: data.email,
-          subject: data.subject || "1-Week Production Sprint ($7,500)",
+          subject: data.subject || defaultSubject,
           message: data.message,
-          sprintType: data.subject?.includes("$7,500") ? "1-Week Sprint ($7,500)" : undefined,
+          botcheck,
         }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to submit inquiry.");
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "The form couldn't send your message.");
       }
-
-      const result = await response.json();
-      if (result.success) {
-        setStatus("success");
-        form.reset();
-      } else {
-        throw new Error(result.message || "Submission failed");
-      }
+      setStatus("success");
+      form.reset();
     } catch (err: any) {
       console.error("[FORM] Submission error:", err);
-      // Even if network fails, provide graceful fallback
-      setErrorMessage(err?.message || "Something went wrong while sending your message.");
+      setErrorMessage(err?.message || "The form couldn't send your message.");
       setStatus("error");
     }
   }
@@ -113,22 +117,22 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent
-        className="max-w-md"
+        className="max-w-lg"
         data-testid="modal-contact"
         aria-describedby="contact-form-description"
       >
         <DialogHeader>
-          <DialogTitle className="text-xl font-serif font-bold text-[#281B16]" data-testid="text-contact-title">
-            Book 1-Week Sprint ($7,500) or Inquire
+          <DialogTitle className="text-2xl font-serif font-bold text-[#281B16]" data-testid="text-contact-title">
+            Get in touch
           </DialogTitle>
-          <DialogDescription id="contact-form-description" className="text-xs text-[#6B554D] font-sans">
-            Direct channel to Kyle Cyree. Response guaranteed within 24 hours.
+          <DialogDescription id="contact-form-description" className="text-sm text-[#6B554D] font-sans">
+            Goes straight to Kyle. You'll hear back within one business day.
           </DialogDescription>
         </DialogHeader>
 
         {status === "success" ? (
           <div
-            className="flex flex-col items-center gap-4 py-6 text-center space-y-2"
+            className="flex flex-col items-center gap-4 py-6 text-center"
             role="status"
             aria-live="polite"
             data-testid="contact-success"
@@ -136,64 +140,49 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
             <div className="w-14 h-14 rounded-full bg-[#FE299E]/10 flex items-center justify-center">
               <CheckCircle2 className="w-8 h-8 text-[#FE299E]" />
             </div>
-            <div className="space-y-1">
-              <h3 className="font-serif font-bold text-lg text-[#281B16]">Inquiry Dispatched Successfully!</h3>
-              <p className="text-xs text-[#6B554D] font-sans max-w-xs">
-                Your message has been logged directly into Kyle&apos;s queue. Expect a response within 24 hours.
+            <div className="space-y-2">
+              <h3 className="font-serif font-bold text-xl text-[#281B16]">Message sent</h3>
+              <p className="text-sm text-[#6B554D] font-sans max-w-sm">
+                Thanks. Kyle reads every message himself and will reply within one business day.
               </p>
             </div>
-
-            <div className="w-full bg-[#F2EAE0] border border-[#D3C7B5] rounded-xl p-3 text-left space-y-1.5 text-xs font-sans">
-              <div className="flex items-center justify-between text-[11px]">
-                <span className="text-[#6B554D]">Sprint Rate:</span>
-                <span className="font-bold text-[#281B16]">$7,500 Flat</span>
-              </div>
-              <div className="flex items-center justify-between text-[11px]">
-                <span className="text-[#6B554D]">Guaranteed Turnaround:</span>
-                <span className="font-bold text-[#281B16]">5 Business Days</span>
-              </div>
-              <div className="flex items-center justify-between text-[11px]">
-                <span className="text-[#6B554D]">Direct Channel:</span>
-                <span className="font-semibold text-[#FE299E]">cubby@colonhyphenbracket.pink</span>
-              </div>
-            </div>
-
             <Button
               onClick={handleClose}
-              className="w-full bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-xs uppercase tracking-wider font-bold rounded-full py-2.5"
+              className="w-full bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-sm font-bold rounded-full py-3"
               data-testid="button-close-success"
             >
-              Close Window
+              Close
             </Button>
           </div>
         ) : status === "error" ? (
           <div
-            className="flex flex-col items-center gap-4 py-6 text-center space-y-2"
+            className="flex flex-col items-center gap-4 py-6 text-center"
             role="alert"
             aria-live="assertive"
             data-testid="contact-error"
           >
             <AlertCircle className="w-12 h-12 text-[#E05A36]" />
-            <div className="space-y-1">
-              <h3 className="font-serif font-bold text-lg text-[#281B16]">Unable to Dispatch</h3>
-              <p className="text-xs text-[#6B554D] font-sans max-w-xs">
-                {errorMessage || "Network hiccup. Please reach Kyle directly via email."}
+            <div className="space-y-2">
+              <h3 className="font-serif font-bold text-xl text-[#281B16]">That didn't send</h3>
+              <p className="text-sm text-[#6B554D] font-sans max-w-sm">
+                {errorMessage} Your message is saved below, so one click opens it in your email app.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2.5 w-full pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 w-full pt-2">
               <a
-                href="mailto:cubby@colonhyphenbracket.pink?subject=1-Week%20Sprint%20Inquiry%20($7,500)&body=Hi%20Kyle,%0A%0AI'd%20like%20to%20book%20a%201-Week%20Turnaround%20Sprint%20($7,500)."
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white text-xs font-sans uppercase font-bold tracking-wider"
+                href={mailtoHref(lastDraft)}
+                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white text-sm font-sans font-bold"
+                data-testid="link-mailto-fallback"
               >
-                Send via Email Client &rarr;
+                Open in email &rarr;
               </a>
               <Button
                 variant="outline"
                 onClick={() => setStatus("idle")}
-                className="rounded-full text-xs font-sans"
+                className="rounded-full text-sm font-sans py-3"
                 data-testid="button-retry"
               >
-                Try Form Again
+                Try again
               </Button>
             </div>
           </div>
@@ -205,22 +194,25 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
               data-testid="form-contact"
               noValidate
             >
+              {/* Honeypot: hidden from humans and assistive tech */}
+              <input id="contact-botcheck" type="text" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
               <div>
-                <label className="text-[11px] font-sans uppercase tracking-wider text-muted-foreground block mb-2">
-                  Select Project Track / Purpose:
-                </label>
-                <div className="flex flex-wrap gap-1.5">
+                <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#6B554D] block mb-2">
+                  What's this about?
+                </span>
+                <div className="flex flex-wrap gap-2">
                   {intentOptions.map((opt) => {
                     const isSelected = form.watch("subject") === opt;
                     return (
                       <button
                         key={opt}
                         type="button"
+                        aria-pressed={isSelected}
                         onClick={() => form.setValue("subject", opt)}
-                        className={`text-[11px] px-2.5 py-1 rounded-md border transition-all font-sans ${
+                        className={`text-sm px-3 py-1.5 rounded-full border transition-all font-sans ${
                           isSelected
-                            ? "bg-[#FE299E] text-white border-[#FE299E] font-semibold shadow-sm"
-                            : "bg-muted/40 text-muted-foreground border-border/60 hover:text-foreground hover:bg-muted/70"
+                            ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-semibold"
+                            : "bg-transparent text-[#6B554D] border-[#D3C7B5] hover:text-[#281B16] hover:border-[#281B16]"
                         }`}
                       >
                         {opt}
@@ -294,7 +286,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                     <FormLabel>Message</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Tell us about your project or role..."
+                        placeholder="The role or project, timeline, and anything else useful."
                         rows={4}
                         {...field}
                         data-testid="input-message"
@@ -318,7 +310,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                 ) : (
                   <>
                     <Send className="w-4 h-4 mr-2" />
-                    Send Inquiry
+                    Send message
                   </>
                 )}
               </Button>
@@ -334,7 +326,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                   </a>
                 </p>
                 <p className="text-[10px] font-sans text-muted-foreground/70">
-                  Raleigh, NC &amp; US Remote &bull; Response within 24 hours guaranteed
+                  North Carolina · US remote · Replies within one business day
                 </p>
               </div>
             </form>

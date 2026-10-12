@@ -363,18 +363,18 @@ export const pipes = pgTable("pipes", {
 
   marigold: {
     slug: "marigold",
-    client: "Civic Security / FEMA HSGP",
+    client: "Open-source civic tech",
     title: "Marigold Insights: Zero-Cloud Civic Data & Election Audit Engine",
     subtitle: "bolt.pipes.pink • In-Browser DuckDB-WASM, Fellegi-Sunter Linkage & Zero-PII Hydration",
     role: "Architect, Lead Designer & Systems Builder",
-    scaleBadge: "2,000,000 Active Records • FEMA HSGP Sec 3%",
+    scaleBadge: "2,000,000 records • Open source (AGPL-3.0)",
     timeline: "2026",
     heroImage: "/images/marigold/02_marigold_workspace_dashboard_kanban.png",
     galleryImages: [
       {
         src: "/images/marigold/01_marigold_landing_hero.png",
         title: "Marigold Insights: Non-Partisan Civic Data Exploration",
-        caption: "Public sandbox landing page built under FY26 FEMA HSGP mandates, ensuring zero cloud PII exposure across all civic data exploration.",
+        caption: "Public sandbox landing page. All data exploration happens in the browser, so no personal data is sent to a server.",
         tag: "Public Portal",
       },
       {
@@ -403,7 +403,7 @@ export const pipes = pgTable("pipes", {
       },
     ],
     executiveSummary:
-      "Marigold (bolt.pipes.pink) is a zero-cloud analytical execution engine built for county clerks, election observers, and civic researchers under FY26 FEMA HSGP election security mandates. It solves Mississippi's massive, unopenable voter rolls with 100% in-browser DuckDB-WASM and Zero-PII cryptographic entity hydration.",
+      "Marigold (bolt.pipes.pink) is a zero-cloud analytical execution engine built for county clerks, election observers, and civic researchers, and designed to fit the election-security priority in FEMA's FY26 Homeland Security Grant Program. It makes Mississippi's huge, hard-to-open voter rolls workable with 100% in-browser DuckDB-WASM and Zero-PII cryptographic entity hydration.",
     challenge:
       "Civic and voter datasets are massive (millions of rows) and routinely crash county clerk spreadsheets. Meanwhile, uploading citizen voter rolls to commercial cloud AI violates strict federal privacy laws and triggers catastrophic PII liabilities.",
     solution:
@@ -416,7 +416,7 @@ export const pipes = pgTable("pipes", {
       { value: "2,000,000", label: "Active Records", subtext: "Audited in Mississippi roll" },
       { value: "100%", label: "Linkage Precision", subtext: "Fellegi-Sunter benchmark" },
       { value: "0 Bytes", label: "Cloud Exposure", subtext: "100% local client memory" },
-      { value: "FEMA 3%", label: "National Priority", subtext: "HSGP Sec 3% compliant" },
+      { value: "0 bytes", label: "PII uploaded", subtext: "Everything runs in the browser" },
     ],
     outcomes: [
       "Eliminated cloud PII liability by executing multi-gigabyte queries entirely within browser Web Workers.",
@@ -554,8 +554,8 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
       },
       {
         src: "/images/personal/kyle-victoria-maldives-end-the-fed.jpg",
-        title: "Kyle Cyree in the Maldives: 'End the Fed'",
-        caption: "Wearing the iconic Ron Paul 'End the Fed' shirt—capturing the sovereign, Austrian economics ethos and full-reserve banking heritage of Custodia Bank.",
+        title: "Kyle Cyree in the Maldives",
+        caption: "Off the clock, reading up on monetary history during the Custodia years.",
         tag: "Founder & Culture",
       },
     ],
@@ -632,31 +632,31 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     slug: "unitedhealth",
     client: "UnitedHealth Group / Optum",
     title: "Flagship Native Patient Mobile Apps & Fusion Strategic Consultancy",
-    subtitle: "Senior Product Experience Designer & Fusion Strategist • Serving 70M+ Americans",
+    subtitle: "Senior Product Experience Designer • Flagship apps for 35M+ patients",
     role: "Senior Product Designer & Fusion Strategist",
-    scaleBadge: "70M+ Patients • Flagship iOS & Android",
-    timeline: "2019 – 2021",
+    scaleBadge: "35M+ patients • Flagship iOS & Android",
+    timeline: "2020 – 2021",
     heroImage: "/artwork/enterprise-health.png",
     galleryImages: [
       {
         src: "/artwork/enterprise-health.png",
         title: "Flagship Mobile Experience: Unified Patient Portal",
-        caption: "Native iOS and Android patient ecosystem serving 70 million Americans, integrating telemedicine, claims, pharmacy, and real-time coverage.",
+        caption: "Native iOS and Android patient ecosystem serving 35M+ patients, integrating telemedicine, claims, pharmacy, and real-time coverage.",
         tag: "Mobile Architecture",
       },
     ],
     executiveSummary:
-      "Led product design for UnitedHealth Group's flagship patient mobile application used by over 70 million Americans. Personally produced 80%+ of the Android experience and 50%+ of the iOS experience. Embedded within Fusion (an elite internal McKinsey-style product & business consultancy), facilitating C-suite stakeholders, leading hospital acquisition rollouts, and unifying cross-org design systems across UnitedHealth and Optum.",
+      "Led product design for UnitedHealth Group's flagship patient mobile applications, serving 35M+ patients and 400K+ employees. Personally produced 80%+ of the Android experience and 50%+ of the iOS experience. Embedded within Fusion (an elite internal McKinsey-style product & business consultancy), facilitating C-suite stakeholders, leading hospital acquisition rollouts, and unifying cross-org design systems across UnitedHealth and Optum.",
     challenge:
       "When the initial external mobile agency disbanded in month one, millions of patients faced a fragmented, buggy app experience. Healthcare data is extraordinarily complex: insurance deductibles, co-pays, real-time prescription pricing, HIPAA compliance, and varying state regulations made patient workflows overwhelming and error-prone.",
     solution:
       "Inherited and unified the mobile design system with a lean team of four. Embedded directly with executive stakeholders inside Fusion to align business leadership, medical compliance officers, and engineering leads. Restructured patient pathways into clear, anxiety-free mental models that surfaced coverage details and immediate medical care options in under two taps.",
     uiUxCraft:
-      "Prioritized absolute clarity, WCAG AAA accessibility, and compassionate microcopy. Designed patient-friendly biometric sign-in, intuitive insurance card digital wallets, and simplified prescription lookup tools that reduced call center volume by millions of hours.",
+      "Prioritized absolute clarity, WCAG accessibility, and compassionate microcopy. Designed patient-friendly biometric sign-in, intuitive insurance card digital wallets, and simplified prescription lookup tools designed to keep patients out of the call-center queue.",
     systemsArchitecture:
       "Standardized multi-tenant design tokens across iOS (SwiftUI) and Android (Jetpack Compose). Orchestrated multi-brand theming allowing newly acquired regional hospital networks and Optum clinics to skin the flagship patient engine seamlessly.",
     metrics: [
-      { value: "70M+", label: "Active Patients", subtext: "Nationwide daily scale" },
+      { value: "35M+", label: "Patients", subtext: "Plus 400K+ employees" },
       { value: "80% / 50%", label: "Screen Ownership", subtext: "80% Android, 50% iOS" },
       { value: "Team of 4", label: "Design System Lead", subtext: "Rescued enterprise mobile launch" },
       { value: "Fusion", label: "C-Suite Advisory", subtext: "Internal executive consultancy" },
@@ -672,11 +672,11 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
 
   walmart: {
     slug: "walmart",
-    client: "Walmart Global Tech",
+    client: "Walmart (via PredictiveUX)",
     title: "Enterprise Learning Management System (LMS) & Graph Search Paradigm",
-    subtitle: "Senior UX/UI Architect • Empowering 3.2M Global Associates",
+    subtitle: "Senior UX/UI Architect at PredictiveUX • Internal tools for 3M employees",
     role: "Senior UX/UI Architect",
-    scaleBadge: "3.2M Global Workforce • LMS & Search",
+    scaleBadge: "3M employees • Enterprise search & LMS",
     timeline: "2021 – 2022",
     heroImage: "/images/walmart/walmart-search-results.png",
     galleryImages: [
@@ -695,14 +695,14 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
       {
         src: "/images/walmart/walmart-admin-manual.png",
         title: "Content Distribution Platform (CDP) Manual Admin",
-        caption: "Administrative manual entry and metadata taxonomy engine built for Walmart's global training platform serving 3.2M associates.",
+        caption: "Administrative manual entry and metadata taxonomy engine built for Walmart's global training platform serving 3M employees.",
         tag: "Global LMS",
       },
     ],
     executiveSummary:
-      "Architected the Learning Management System (LMS) and enterprise knowledge platform from the ground up for the world's largest private workforce (3.2M+ employees). Spearheaded the migration from legacy infrastructure to GraphQL and graph databases, designing graph-driven search paradigms, automated content tagging, and administrative publishing engines adhering to Walmart's global design system.",
+      "Architected the Learning Management System (LMS) and enterprise knowledge platform from the ground up for the world's largest private workforce (3M employees). Spearheaded the migration from legacy infrastructure to GraphQL and graph databases, designing graph-driven search paradigms, automated content tagging, and administrative publishing engines adhering to Walmart's global design system.",
     challenge:
-      "Walmart's global workforce of 3.2 million associates across retail stores, distribution centers, and corporate offices relied on fractured, legacy training portals. Associates struggled to find role-critical compliance and safety certifications, while internal instructional designers lacked safe, modern publishing tooling.",
+      "Walmart's global workforce of roughly 3 million employees across retail stores, distribution centers, and corporate offices relied on fractured, legacy training portals. Associates struggled to find role-critical compliance and safety certifications, while internal instructional designers lacked safe, modern publishing tooling.",
     solution:
       "Spearheaded a ground-up redesign of the Content Distribution Platform (CDP) powered by graph databases and GraphQL. Conceived an intuitive search paradigm that maps career paths, prerequisite certifications, and localized store procedures through rich semantic relationships rather than dead-end keyword lists.",
     uiUxCraft:
@@ -710,13 +710,13 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     systemsArchitecture:
       "Replaced brittle relational queries with a flexible GraphQL schema. Designed real-time metadata indexing and taxonomy services capable of handling millions of concurrent course completions across global time zones.",
     metrics: [
-      { value: "3.2M", label: "Global Associates", subtext: "World's largest private employer" },
+      { value: "3M", label: "Employees", subtext: "World's largest private employer" },
       { value: "GraphQL", label: "Graph Search", subtext: "Zero-latency curriculum discovery" },
       { value: "100%", label: "LMS Modernization", subtext: "Unified authoring and learner UX" },
       { value: "Fortune 1", label: "Enterprise Scale", subtext: "Mission-critical retail ops" },
     ],
     outcomes: [
-      "Architected the graph-driven search experience connecting 3.2M associates with tailored curriculum.",
+      "Architected the graph-driven search experience connecting 3M employees with tailored curriculum.",
       "Built the Content Distribution Platform administrative manual authoring suite.",
       "Eliminated course publishing regressions with state-driven deletion safeguards.",
     ],

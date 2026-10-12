@@ -1,67 +1,61 @@
+// Vercel serverless contact intake.
+// Delivery requires WEB3FORMS_ACCESS_KEY (free at https://web3forms.com, keyed to the inbox
+// that should receive leads). If it is missing or delivery fails, we return 503 so the
+// client shows a pre-filled mailto fallback instead of a fake "success".
+const CONTACT_EMAIL = "rorshock@protonmail.com";
+
 export default async function handler(req, res) {
-  // Set CORS headers
-  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
+  res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
+  if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") {
     return res.status(405).json({ success: false, message: "Method not allowed" });
   }
 
-  try {
-    const { name, email, subject, message, sprintType } = req.body || {};
+  const { name, email, subject, message, botcheck } = req.body || {};
 
-    if (!name || !email || !message) {
-      return res.status(400).json({
-        success: false,
-        message: "Name, email, and message are required.",
-      });
-    }
+  // Honeypot: bots fill hidden fields. Pretend success, deliver nothing.
+  if (botcheck) return res.status(200).json({ success: true });
 
-    const timestamp = new Date().toISOString();
-    console.log(`[CONTACT INTAKE] New submission at ${timestamp}: ${name} (${email}) - ${subject}`);
+  if (!name || !email || !message) {
+    return res.status(400).json({ success: false, message: "Name, email, and message are required." });
+  }
 
-    // Forward to Web3Forms if key configured
-    const web3Key = process.env.WEB3FORMS_ACCESS_KEY || process.env.VITE_WEB3FORMS_ACCESS_KEY;
-    if (web3Key) {
-      try {
-        await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            access_key: web3Key,
-            name,
-            email,
-            subject: subject || "1-Week Turnaround Sprint ($7,500)",
-            message,
-            sprint_type: sprintType || "1-Week Sprint ($7,500)",
-            to: "cubby@colonhyphenbracket.pink",
-            bcc: "rorshock@protonmail.com",
-            from_name: "CHB Portfolio",
-          }),
-        });
-      } catch (dispatchErr) {
-        console.warn("[CONTACT] Web3Forms dispatch warning:", dispatchErr);
-      }
-    }
-
-    return res.status(200).json({
-      success: true,
-      message: "Inquiry received! Kyle will review your requirements and respond within 24 hours.",
-    });
-  } catch (error) {
-    console.error("[CONTACT ERROR]", error);
-    return res.status(500).json({
+  const web3Key = process.env.WEB3FORMS_ACCESS_KEY;
+  if (!web3Key) {
+    console.error("[CONTACT] WEB3FORMS_ACCESS_KEY is not set; refusing to drop the lead silently.");
+    return res.status(503).json({
       success: false,
-      message: "Failed to send message. Please contact directly via email.",
+      message: `The form isn't connected right now. Please email ${CONTACT_EMAIL} directly.`,
+    });
+  }
+
+  try {
+    const r = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        access_key: web3Key,
+        subject: `[Portfolio] ${subject || "New inquiry"} from ${name}`,
+        from_name: "Kyle Cyree Portfolio",
+        replyto: email,
+        name,
+        email,
+        message,
+      }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok || data.success === false) {
+      throw new Error(data.message || `Web3Forms responded ${r.status}`);
+    }
+    return res.status(200).json({ success: true, message: "Thanks, your message reached Kyle. Expect a reply within one business day." });
+  } catch (err) {
+    console.error("[CONTACT] Delivery failed:", err);
+    return res.status(503).json({
+      success: false,
+      message: `Your message didn't go through. Please email ${CONTACT_EMAIL} directly.`,
     });
   }
 }

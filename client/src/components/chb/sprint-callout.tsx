@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Mail, Zap } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SprintCalloutProps {
@@ -7,105 +7,85 @@ interface SprintCalloutProps {
   className?: string;
 }
 
+const sprintIncludes = [
+  "Day 1: a working session with you and an audit of the product, the data, and the code",
+  "Days 2–4: redesign of the flows that matter most, built as real React/TypeScript",
+  "Day 5: handoff with the code, a short design system, and a recorded walkthrough",
+];
+
 export function SprintCallout({ onContactClick, className }: SprintCalloutProps) {
   return (
-    <section id="sprint-offer" className={cn("py-16 max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-14 w-full", className)} data-testid="section-sprint-offer">
-      <div className="border border-[#D3C7B5] bg-[#F2EAE0] rounded-3xl p-8 sm:p-12 lg:p-16 shadow-xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FE299E]/5 rounded-full blur-3xl pointer-events-none" />
+    <section
+      id="work-together"
+      aria-labelledby="work-together-heading"
+      className={cn("py-24 md:py-36 border-t border-[#D3C7B5] bg-[#281B16] text-[#F2EAE0]", className)}
+      data-testid="section-sprint-offer"
+    >
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-16">
+        <div className="max-w-4xl space-y-5">
+          <p className="font-sans text-sm uppercase tracking-[0.22em] font-bold text-[#FE299E]">Work with me</p>
+          <h2 id="work-together-heading" className="text-4xl sm:text-5xl lg:text-7xl font-serif font-bold tracking-tight leading-[1.02]">
+            Two ways to work together.
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
-          <div className="lg:col-span-8 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-sans bg-[#FE299E]/10 text-[#FE299E] border border-[#FE299E]/20 font-bold uppercase tracking-wider">
-              <Zap className="w-3.5 h-3.5" />
-              Immediate Availability &bull; Direct to Founder / Executive
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-0 lg:divide-x lg:divide-[#F2EAE0]/15">
+          {/* Full-time */}
+          <div className="space-y-7 lg:pr-16">
+            <div className="space-y-2">
+              <p className="font-sans text-sm font-bold uppercase tracking-[0.18em] text-[#F2EAE0]/60">Full-time</p>
+              <h3 className="text-3xl sm:text-4xl font-serif font-bold">Principal or Staff Product Designer</h3>
             </div>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-[#281B16] tracking-tight">
-              Need zero-to-one velocity or broken systems untangled right now?
-            </h2>
-
-            <p className="text-lg text-[#6B554D] leading-relaxed max-w-3xl font-sans">
-              I am available for high-impact 1-week turnaround sprints and selective fractional leadership while evaluating long-term principal roles. Bypass the 2-month hiring cycle and ship working, high-craft software in days.
+            <p className="text-lg sm:text-xl text-[#F2EAE0]/80 font-sans leading-relaxed">
+              Best fit: a team building something complex in healthcare, fintech, AI, or enterprise, that wants one person
+              who can go from strategy to systems to shipped interface. Remote in the US, or hybrid near Raleigh–Durham.
             </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-              <div className="border border-[#FE299E]/40 bg-[#FE299E]/5 rounded-2xl p-6 space-y-3 relative shadow-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-sans uppercase tracking-widest text-[#FE299E] font-bold">
-                    Fastest Path to Production
-                  </span>
-                  <span className="font-sans text-sm font-bold text-[#281B16] bg-[#F2EAE0] px-3 py-1 rounded-full border border-[#FE299E]/30 shadow-xs">
-                    $7,500 Flat
-                  </span>
-                </div>
-                <h3 className="font-serif font-bold text-lg text-[#281B16] flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#FE299E]" />
-                  1-Week Production Turnaround Sprint
-                </h3>
-                <p className="text-xs text-[#6B554D] leading-relaxed font-sans">
-                  5-day intensive. Audit the architecture, redesign the complete product UI with Massimo Vignelli typographic rigor, and ship production-ready React/TypeScript frontend code. Zero agency bloat.
-                </p>
-                <div className="pt-3 border-t border-[#D3C7B5]/60 text-xs font-sans text-[#281B16] flex items-center justify-between">
-                  <span className="font-medium">Timeline: 5 Business Days</span>
-                  <span className="text-[#FE299E] font-bold">1 Client at a Time</span>
-                </div>
-              </div>
-
-              <div className="border border-[#D3C7B5] bg-[#EAE0D0]/50 rounded-2xl p-6 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-sans uppercase tracking-widest text-[#6B554D] font-bold">
-                    Technical Leadership
-                  </span>
-                  <span className="font-sans text-xs font-semibold text-[#6B554D] bg-[#F2EAE0] px-3 py-1 rounded-full border border-[#D3C7B5]">
-                    Retainer / W2
-                  </span>
-                </div>
-                <h3 className="font-serif font-bold text-lg text-[#281B16] flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#FE299E]" />
-                  Principal Architect / Fractional Lead
-                </h3>
-                <p className="text-xs text-[#6B554D] leading-relaxed font-sans">
-                  Hands-on systems leadership: local-first zero-PII security, complex distributed protocols, multi-tenant design systems, and C-suite stakeholder facilitation (McKinsey-style Fusion pedigree).
-                </p>
-                <div className="pt-3 border-t border-[#D3C7B5]/60 text-xs font-sans text-[#6B554D] flex items-center justify-between">
-                  <span className="font-medium">Scope: 15-20 hrs/week or Full-Time</span>
-                  <span className="text-[#281B16] font-semibold">Remote / Raleigh</span>
-                </div>
-              </div>
-            </div>
+            <Button
+              size="lg"
+              onClick={() => onContactClick("Full-time role (Principal / Staff)")}
+              className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-base font-bold rounded-full h-14 px-9 cursor-pointer"
+              data-testid="btn-inquire-principal"
+            >
+              Talk about a role <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-end gap-6 border-t lg:border-t-0 lg:border-l border-[#D3C7B5] pt-6 lg:pt-0 lg:pl-10">
-            <div className="space-y-1.5 text-left lg:text-right">
-              <span className="font-sans text-xs uppercase tracking-wider text-[#6B554D] font-semibold">Location &amp; Speed</span>
-              <p className="font-serif font-bold text-lg text-[#281B16]">Raleigh, NC &amp; US Remote</p>
-              <p className="text-xs text-[#6B554D] font-sans">Response within 24 hours guaranteed</p>
+          {/* Sprint */}
+          <div className="space-y-7 lg:pl-16">
+            <div className="space-y-2">
+              <p className="font-sans text-sm font-bold uppercase tracking-[0.18em] text-[#F2EAE0]/60">Project</p>
+              <h3 className="text-3xl sm:text-4xl font-serif font-bold">
+                1-week sprint <span className="text-[#FE299E]">· $7,500 flat</span>
+              </h3>
             </div>
-
-            <div className="space-y-3 w-full lg:w-auto">
-              <Button
-                size="lg"
-                onClick={() => onContactClick("1-Week Production Sprint ($7,500)")}
-                className="w-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-wider font-bold rounded-full py-4 px-8 cursor-pointer shadow-md"
-                data-testid="btn-inquire-sprint"
-              >
-                <Zap className="w-4 h-4 mr-2" />
-                Book 1-Week Sprint ($7,500)
-              </Button>
-
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => onContactClick("Principal Role / Fractional Inquiry")}
-                className="w-full border-[#D3C7B5] bg-[#F2EAE0] hover:bg-[#EAE0D0] text-[#281B16] font-sans text-xs uppercase tracking-wider font-semibold rounded-full py-3.5 px-6"
-                data-testid="btn-inquire-principal"
-              >
-                <Mail className="w-4 h-4 mr-2" />
-                Discuss Principal Role
-              </Button>
-            </div>
+            <ul className="space-y-4">
+              {sprintIncludes.map((item) => (
+                <li key={item} className="flex gap-3 text-lg text-[#F2EAE0]/80 font-sans leading-relaxed">
+                  <Check className="w-5 h-5 mt-1 shrink-0 text-[#FE299E]" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-base text-[#F2EAE0]/60 font-sans">One client at a time, five business days, and a fixed price.</p>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => onContactClick("1-week sprint ($7,500)")}
+              className="border-[#F2EAE0]/40 bg-transparent hover:bg-[#F2EAE0] hover:text-[#281B16] text-[#F2EAE0] font-sans text-base font-bold rounded-full h-14 px-9 cursor-pointer"
+              data-testid="btn-inquire-sprint"
+            >
+              Book a sprint <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
           </div>
         </div>
+
+        <p className="pt-10 border-t border-[#F2EAE0]/15 text-lg font-sans text-[#F2EAE0]/70">
+          Prefer email?{" "}
+          <a href="mailto:rorshock@protonmail.com" className="font-semibold text-[#F2EAE0] underline decoration-[#FE299E] underline-offset-4">
+            rorshock@protonmail.com
+          </a>{" "}
+          · I reply within one business day.
+        </p>
       </div>
     </section>
   );

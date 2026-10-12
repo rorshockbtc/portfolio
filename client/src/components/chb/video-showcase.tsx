@@ -81,21 +81,16 @@ export function VideoShowcase() {
       : curatedVideos.filter((v) => v.category === selectedCategory);
 
   return (
-    <section id="demos-livestreams" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full space-y-8">
+    <section id="demos-livestreams" className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-24 md:py-32 w-full space-y-10">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#D3C7B5] pb-6">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-xs font-sans uppercase tracking-[0.18em] text-[#FE299E] border-[#FE299E]/40 rounded-full">
-              Living Proofs &bull; Video Artifacts
-            </Badge>
-            <span className="text-xs text-[#6B554D] font-sans uppercase tracking-wider">Demos &bull; Livestreams &bull; Architecture</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold font-serif text-[#281B16] tracking-tight">
-            Live Demos &amp; Design Sessions
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#D3C7B5] pb-8">
+        <div className="space-y-4">
+          <p className="font-sans text-sm uppercase tracking-[0.22em] font-bold text-[#FE299E]">Video</p>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-serif text-[#281B16] tracking-tight leading-[1.05]">
+            Watch me work
           </h2>
-          <p className="text-base text-[#6B554D] max-w-2xl leading-relaxed font-sans">
-            Real screen recordings, unedited design workflows, and architectural walkthroughs. See how I think through systems, explain complex concepts, and build software in the open.
+          <p className="text-lg sm:text-xl text-[#5C4840] max-w-2xl leading-relaxed font-sans">
+            Unedited screen recordings and walkthroughs, so you can see how I think through a system and build it.
           </p>
         </div>
 

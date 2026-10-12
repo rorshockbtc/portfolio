@@ -140,7 +140,7 @@ export function ColorsTypeGridsViewer() {
           </DialogHeader>
 
           <div className="flex-1 overflow-auto p-2 bg-[#0c0b0a] rounded-xl flex items-start justify-center">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/cassandra/colors-type-grids.jpg"
               alt="Full Resolution Colors Type Grids Poster"
               className="max-w-none w-full sm:w-[1200px] lg:w-[1800px] h-auto object-contain rounded shadow-2xl"
