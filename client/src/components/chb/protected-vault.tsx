@@ -98,7 +98,7 @@ export function ProtectedVault({
               <div className="p-3.5 space-y-1.5">
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-bold tracking-tight text-[#281B16] truncate">{img.title}</span>
-                  <Badge variant="outline" className="text-[10px] font-mono px-2 py-0.5 h-auto shrink-0 border-[#D3C7B5] bg-[#F2EAE0] text-[#6B554D] whitespace-nowrap">
+                  <Badge variant="outline" className="text-[10px] font-sans px-2 py-0.5 h-auto shrink-0 border-[#D3C7B5] bg-[#F2EAE0] text-[#6B554D] whitespace-nowrap">
                     {img.tag}
                   </Badge>
                 </div>
@@ -123,10 +123,10 @@ export function ProtectedVault({
             <div className="flex items-center justify-between border-b border-[#D3C7B5] px-6 py-4 bg-[#F2EAE0]">
               <div className="space-y-0.5 pr-4">
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-[#FE299E] text-white text-[10px] font-mono uppercase tracking-wider px-2 py-0.5">
+                  <Badge className="bg-[#FE299E] text-white text-[10px] font-sans uppercase tracking-wider px-2 py-0.5">
                     {images[activeImageIndex].tag}
                   </Badge>
-                  <span className="text-xs font-mono text-[#6B554D]">
+                  <span className="text-xs font-sans text-[#6B554D]">
                     {activeImageIndex + 1} of {images.length}
                   </span>
                 </div>
@@ -176,7 +176,7 @@ export function ProtectedVault({
             {/* Modal Footer Caption */}
             <div className="border-t border-[#D3C7B5] px-6 py-3.5 bg-[#F2EAE0] flex items-center justify-between text-xs text-[#6B554D] font-sans">
               <p className="max-w-3xl leading-relaxed">{images[activeImageIndex].caption}</p>
-              <span className="hidden sm:inline font-mono text-[10px] text-[#6B554D] shrink-0 ml-4">
+              <span className="hidden sm:inline font-sans text-[10px] text-[#6B554D] shrink-0 ml-4">
                 ESC to close &bull; Arrows to navigate
               </span>
             </div>

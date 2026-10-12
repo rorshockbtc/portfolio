@@ -47,18 +47,18 @@ export function TelemetryCockpit({
               <Activity className="w-4 h-4 text-[#FE299E]" />
             </div>
             <div>
-              <code className="text-sm font-mono font-semibold text-foreground">
+              <code className="text-sm font-sans font-semibold text-foreground">
                 pipe\{namespace}
               </code>
-              <p className="text-[11px] text-muted-foreground font-mono">{title}</p>
+              <p className="text-[11px] text-muted-foreground font-sans">{title}</p>
             </div>
           </div>
-          <Badge variant="secondary" className="font-mono text-[10px] bg-muted">
+          <Badge variant="secondary" className="font-sans text-[10px] bg-muted">
             {badgeText}
           </Badge>
         </div>
 
-        <div className="space-y-2.5 font-mono text-xs">
+        <div className="space-y-2.5 font-sans text-xs">
           {rows.map((row, idx) => (
             <div
               key={idx}
@@ -81,10 +81,10 @@ export function TelemetryCockpit({
         <div className="pt-2 border-t border-border/60 flex items-center justify-between text-xs">
           <div className="flex items-center gap-1.5 text-muted-foreground">
             <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
-            <span className="font-semibold text-foreground font-mono">{experienceYears}</span>
+            <span className="font-semibold text-foreground font-sans">{experienceYears}</span>
             <span>Execution Experience</span>
           </div>
-          <span className="font-mono text-[11px] text-[#FE299E] font-medium">{unitLabel}</span>
+          <span className="font-sans text-[11px] text-[#FE299E] font-medium">{unitLabel}</span>
         </div>
       </Card>
 
@@ -95,7 +95,7 @@ export function TelemetryCockpit({
           </div>
           <div className="text-xs">
             <p className="font-semibold text-foreground">{floatingBadgeTitle}</p>
-            <p className="text-[11px] text-muted-foreground font-mono">{floatingBadgeSub}</p>
+            <p className="text-[11px] text-muted-foreground font-sans">{floatingBadgeSub}</p>
           </div>
         </div>
       )}

@@ -111,11 +111,11 @@ export default function CaseStudyPage() {
       <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 w-full space-y-6">
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2.5">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
               {study.client}
             </span>
             <span className="text-[#D3C7B5]">&bull;</span>
-            <Badge variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] text-[#6B554D] text-[11px] font-mono uppercase tracking-wider">
+            <Badge variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] text-[#6B554D] text-[11px] font-sans uppercase tracking-wider">
               {study.scaleBadge}
             </Badge>
             <span className="text-[#D3C7B5]">&bull;</span>
@@ -182,7 +182,7 @@ export default function CaseStudyPage() {
 
           <div className="mt-4 flex items-center justify-between text-xs text-[#6B554D] font-sans px-2">
             <span>Primary Architecture &amp; Interface Plate</span>
-            <span className="font-mono text-[11px] text-[#FE299E] font-semibold flex items-center gap-1">
+            <span className="font-sans text-[11px] text-[#FE299E] font-semibold flex items-center gap-1">
               Click to Enlarge <ZoomIn className="w-3 h-3" />
             </span>
           </div>
@@ -217,7 +217,7 @@ export default function CaseStudyPage() {
           {/* Left Column: Executive Summary, The Challenge & Systems Solution */}
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-3 p-6 sm:p-8 rounded-3xl bg-[#F2EAE0] border border-[#D3C7B5] shadow-sm">
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
+              <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
                 Executive Summary
               </span>
               <p className="text-base sm:text-lg text-[#281B16] font-sans leading-relaxed">
@@ -262,7 +262,7 @@ export default function CaseStudyPage() {
           {/* Right Column: UI/UX Craft, Technical Stack, and Verified Outcomes */}
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-4 p-6 sm:p-8 rounded-3xl bg-[#F2EAE0] border border-[#D3C7B5] shadow-sm">
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
+              <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
                 UI/UX Craft &amp; Psychology
               </span>
               <p className="text-sm sm:text-base text-[#6B554D] font-sans leading-relaxed">
@@ -271,7 +271,7 @@ export default function CaseStudyPage() {
             </div>
 
             <div className="space-y-4 p-6 sm:p-8 rounded-3xl bg-[#EAE0D0]/60 border border-[#D3C7B5] shadow-sm">
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#281B16]">
+              <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-bold text-[#281B16]">
                 Verified Production Outcomes
               </span>
               <ul className="space-y-3">
@@ -285,7 +285,7 @@ export default function CaseStudyPage() {
             </div>
 
             <div className="space-y-3">
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-semibold text-[#6B554D]">
+              <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-semibold text-[#6B554D]">
                 Stack &amp; Methods
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -314,7 +314,7 @@ export default function CaseStudyPage() {
       {study.galleryImages.length > 1 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full space-y-6">
           <div className="space-y-1">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
               Interface Gallery
             </span>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16]">
@@ -350,7 +350,7 @@ export default function CaseStudyPage() {
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="font-sans font-bold text-xs text-[#281B16] truncate">{img.title}</h3>
                     {img.tag && (
-                      <Badge variant="outline" className="text-[10px] font-mono border-[#D3C7B5] text-[#6B554D]">
+                      <Badge variant="outline" className="text-[10px] font-sans border-[#D3C7B5] text-[#6B554D]">
                         {img.tag}
                       </Badge>
                     )}
@@ -376,10 +376,10 @@ export default function CaseStudyPage() {
             <div className="flex items-center justify-between border-b border-[#D3C7B5] px-6 py-4 bg-[#F2EAE0]">
               <div className="space-y-0.5 pr-4">
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-[#FE299E] text-white text-[10px] font-mono uppercase tracking-wider px-2 py-0.5">
+                  <Badge className="bg-[#FE299E] text-white text-[10px] font-sans uppercase tracking-wider px-2 py-0.5">
                     {study.galleryImages[activeImageIndex].tag || "Work Specimen"}
                   </Badge>
-                  <span className="text-xs font-mono text-[#6B554D]">
+                  <span className="text-xs font-sans text-[#6B554D]">
                     {activeImageIndex + 1} of {study.galleryImages.length}
                   </span>
                 </div>
@@ -429,7 +429,7 @@ export default function CaseStudyPage() {
 
             <div className="border-t border-[#D3C7B5] px-6 py-3.5 bg-[#F2EAE0] flex items-center justify-between text-xs text-[#6B554D] font-sans">
               <p className="max-w-3xl leading-relaxed">{study.galleryImages[activeImageIndex].caption}</p>
-              <span className="hidden sm:inline font-mono text-[10px] text-[#6B554D] shrink-0 ml-4">
+              <span className="hidden sm:inline font-sans text-[10px] text-[#6B554D] shrink-0 ml-4">
                 ESC to close &bull; Arrow keys to navigate
               </span>
             </div>
@@ -441,7 +441,7 @@ export default function CaseStudyPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
         <div className="rounded-3xl border border-[#D3C7B5] bg-[#F2EAE0] p-8 md:p-12 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-1.5">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-1.5">
               <Sparkles className="w-4 h-4" /> Immediate Availability
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight">

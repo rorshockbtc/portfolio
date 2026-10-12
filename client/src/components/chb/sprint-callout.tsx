@@ -15,7 +15,7 @@ export function SprintCallout({ onContactClick, className }: SprintCalloutProps)
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div className="lg:col-span-8 space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-[#FE299E]/10 text-[#FE299E] border border-[#FE299E]/20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-sans bg-[#FE299E]/10 text-[#FE299E] border border-[#FE299E]/20">
               <Zap className="w-3.5 h-3.5" />
               Immediate Availability &bull; Direct to Founder / Executive
             </div>
@@ -31,10 +31,10 @@ export function SprintCallout({ onContactClick, className }: SprintCalloutProps)
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
               <div className="border border-[#FE299E]/30 bg-[#FE299E]/5 rounded-xl p-5 space-y-3 relative">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#FE299E] font-bold">
+                  <span className="text-[10px] font-sans uppercase tracking-widest text-[#FE299E] font-bold">
                     Fastest Path to Production
                   </span>
-                  <span className="font-mono text-sm font-bold text-foreground bg-background px-2.5 py-0.5 rounded border border-border/60">
+                  <span className="font-sans text-sm font-bold text-foreground bg-background px-2.5 py-0.5 rounded border border-border/60">
                     $10,000 Flat
                   </span>
                 </div>
@@ -45,7 +45,7 @@ export function SprintCallout({ onContactClick, className }: SprintCalloutProps)
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   5-day intensive. Audit the architecture, redesign the complete product UI with Massimo Vignelli typographic rigor, and ship production-ready React/TypeScript frontend code. Zero agency bloat.
                 </p>
-                <div className="pt-2 border-t border-border/40 text-[11px] font-mono text-foreground/80 flex items-center justify-between">
+                <div className="pt-2 border-t border-border/40 text-[11px] font-sans text-foreground/80 flex items-center justify-between">
                   <span>Timeline: 5 Business Days</span>
                   <span className="text-[#FE299E] font-semibold">1 Client at a Time</span>
                 </div>
@@ -53,10 +53,10 @@ export function SprintCallout({ onContactClick, className }: SprintCalloutProps)
 
               <div className="border border-border/60 bg-background/60 rounded-xl p-5 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground font-semibold">
+                  <span className="text-[10px] font-sans uppercase tracking-widest text-muted-foreground font-semibold">
                     Technical Leadership
                   </span>
-                  <span className="font-mono text-xs font-semibold text-muted-foreground bg-muted/40 px-2 py-0.5 rounded">
+                  <span className="font-sans text-xs font-semibold text-muted-foreground bg-muted/40 px-2 py-0.5 rounded">
                     Retainer / W2
                   </span>
                 </div>
@@ -67,7 +67,7 @@ export function SprintCallout({ onContactClick, className }: SprintCalloutProps)
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Hands-on systems leadership: local-first zero-PII security, complex distributed protocols, multi-tenant design systems, and C-suite stakeholder facilitation (McKinsey-style Fusion pedigree).
                 </p>
-                <div className="pt-2 border-t border-border/40 text-[11px] font-mono text-foreground/80 flex items-center justify-between">
+                <div className="pt-2 border-t border-border/40 text-[11px] font-sans text-foreground/80 flex items-center justify-between">
                   <span>Scope: 15-20 hrs/week or Full-Time</span>
                   <span className="text-foreground/70">Remote / Raleigh</span>
                 </div>
@@ -77,9 +77,9 @@ export function SprintCallout({ onContactClick, className }: SprintCalloutProps)
 
           <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-end gap-5 border-t lg:border-t-0 lg:border-l border-border/60 pt-6 lg:pt-0 lg:pl-8">
             <div className="space-y-1.5 text-left lg:text-right">
-              <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">Location &amp; Speed</span>
+              <span className="font-sans text-xs uppercase tracking-wider text-muted-foreground">Location &amp; Speed</span>
               <p className="font-semibold text-base">Raleigh, NC &amp; US Remote</p>
-              <p className="text-xs text-muted-foreground font-mono">Response within 24 hours guaranteed</p>
+              <p className="text-xs text-muted-foreground font-sans">Response within 24 hours guaranteed</p>
             </div>
 
             <div className="space-y-2.5 w-full lg:w-auto">

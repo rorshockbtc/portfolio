@@ -181,7 +181,7 @@ export function VideoShowcase() {
           href="https://www.youtube.com/@KyleCyree"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-xs font-mono text-[#6B554D] hover:text-[#FE299E] transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-xs font-sans text-[#6B554D] hover:text-[#FE299E] transition-colors font-medium"
         >
           <Video className="w-4 h-4" />
           <span>Explore All Livestreams &amp; Demos on YouTube (@KyleCyree)</span>
@@ -201,7 +201,7 @@ export function VideoShowcase() {
           >
             <div className="flex items-center justify-between border-b border-[#D3C7B5] pb-3">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#FE299E] font-bold">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-[#FE299E] font-bold">
                   {activeVideo.category}
                 </span>
                 <h4 className="font-serif font-bold text-lg text-[#281B16]">{activeVideo.title}</h4>

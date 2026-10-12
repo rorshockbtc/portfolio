@@ -885,7 +885,7 @@ function OverlookedCard({
               <div key={i} className="mb-5">
                 <p className="italic leading-[1.7] text-[12px] md:text-[13px] text-foreground/60">{quoteText}</p>
                 {attribution && (
-                  <p className="mt-1 text-right text-[11px] font-mono text-foreground/40">{attribution}</p>
+                  <p className="mt-1 text-right text-[11px] font-sans text-foreground/40">{attribution}</p>
                 )}
               </div>
             );
@@ -932,7 +932,7 @@ function LabCard({
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.15em] transition-colors"
+          className="inline-flex items-center gap-1 font-sans text-[11px] uppercase tracking-[0.15em] transition-colors"
           style={{ color: "#FE299E" }}
           data-testid={`link-${testId}`}
         >

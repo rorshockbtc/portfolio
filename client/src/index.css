@@ -60,10 +60,10 @@
   --chart-4: 44 95% 44%;             /* Mustard Yellow */
   --chart-5: 13 74% 55%;             /* Terracotta */
 
-  --font-sans: 'Outfit', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Inter', 'Outfit', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: 'EB Garamond', 'Fraunces', Georgia, serif;
   --font-editorial: 'EB Garamond', 'Playfair Display', Georgia, serif;
-  --font-mono: 'Space Mono', 'Courier Prime', Menlo, monospace;
+  --font-mono: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'EB Garamond', 'Fraunces', Georgia, serif;
   --radius: 0.375rem;
 
@@ -325,7 +325,8 @@
   }
 
   .pipe-namespace {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
+    font-weight: 600;
     letter-spacing: -0.02em;
   }
 }

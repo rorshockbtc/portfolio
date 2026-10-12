@@ -42,7 +42,7 @@ export default function MobileNav() {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full font-mono text-[10px] uppercase tracking-[0.15em] transition-all duration-300 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full font-sans text-[10px] uppercase tracking-[0.15em] transition-all duration-300 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     activeSection === section.id
                       ? "text-white"
                       : "text-muted-foreground hover:text-foreground bg-transparent"
@@ -71,7 +71,7 @@ export default function MobileNav() {
               <button
                 key={link.targetId}
                 onClick={() => scrollTo(link.targetId)}
-                className="flex items-center justify-center min-w-[44px] min-h-[44px] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors cursor-pointer bg-transparent border-none"
+                className="flex items-center justify-center min-w-[44px] min-h-[44px] px-3 py-2 font-sans text-[10px] uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors cursor-pointer bg-transparent border-none"
                 data-testid={`nav-mobile-${link.targetId}`}
               >
                 {link.label}

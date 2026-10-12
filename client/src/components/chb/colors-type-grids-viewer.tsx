@@ -51,10 +51,10 @@ export function ColorsTypeGridsViewer() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 bg-[#110f0e] border-b border-white/10">
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] font-semibold text-[#FE299E]">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] font-semibold text-[#FE299E]">
               Design Systems Blueprint
             </span>
-            <Badge variant="outline" className="border-white/20 text-[#f1ebd8] text-[10px] font-mono uppercase">
+            <Badge variant="outline" className="border-white/20 text-[#f1ebd8] text-[10px] font-sans uppercase">
               3846 × 4800 Canvas
             </Badge>
           </div>
@@ -87,7 +87,7 @@ export function ColorsTypeGridsViewer() {
 
       {/* Guided 4-Column Jump Navigation */}
       <div className="flex items-center gap-2 px-6 py-2.5 bg-[#1c1917] border-b border-white/10 overflow-x-auto text-xs">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-white/50 shrink-0 flex items-center gap-1">
+        <span className="font-sans text-[11px] uppercase tracking-wider text-white/50 shrink-0 flex items-center gap-1">
           <Compass className="w-3 h-3 text-[#FE299E]" /> Jump To Column:
         </span>
         {columns.map((col, idx) => (
@@ -129,7 +129,7 @@ export function ColorsTypeGridsViewer() {
           >
             −
           </button>
-          <span className="font-mono text-[11px] w-12 text-center text-white/90">
+          <span className="font-sans text-[11px] w-12 text-center text-white/90">
             {Math.round(scale * 100)}%
           </span>
           <button
@@ -142,7 +142,7 @@ export function ColorsTypeGridsViewer() {
           <div className="w-px h-4 bg-white/20 mx-1" />
           <button
             onClick={handleResetZoom}
-            className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase hover:bg-white/20 transition-colors cursor-pointer"
+            className="px-2.5 py-1 rounded-full text-[11px] font-sans uppercase hover:bg-white/20 transition-colors cursor-pointer"
             title="Reset to 75% Reading Zoom"
           >
             75% View

@@ -42,7 +42,7 @@ export default function EssayDesignIsRisk() {
             <ArrowLeft className="w-4 h-4" />
             Back to Hire
           </a>
-          <span className="font-mono font-bold text-xl select-none" style={{ color: "#FE299E" }} aria-hidden="true">:-]</span>
+          <span className="font-sans font-bold text-xl select-none" style={{ color: "#FE299E" }} aria-hidden="true">:-]</span>
         </div>
       </header>
 
@@ -53,7 +53,7 @@ export default function EssayDesignIsRisk() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-6 mb-16 border-b border-border pb-12"
         >
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground">
             Design is Risk &mdash; A case study
           </p>
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-[1.1]" data-testid="text-essay-title">
@@ -63,14 +63,14 @@ export default function EssayDesignIsRisk() {
             A non-traditional design architecture case study on portfolio IP risk, CoT mining, and
             why this site is intentionally light.
           </p>
-          <p className="font-mono text-xs text-muted-foreground">Kyle Cyree &mdash; Colon Hyphen Bracket, LLC</p>
+          <p className="font-sans text-xs text-muted-foreground">Kyle Cyree &mdash; Colon Hyphen Bracket, LLC</p>
         </motion.div>
 
         <article className="space-y-14 text-[17px] leading-[1.78] text-foreground/85 max-w-[68ch]" data-testid="article-body">
 
           {/* Executive Summary */}
           <section className="space-y-5">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Executive Summary</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground">Executive Summary</p>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug text-foreground">
               Portfolio as security posture.
             </h2>
@@ -91,7 +91,7 @@ export default function EssayDesignIsRisk() {
 
           {/* 01 — Current State */}
           <section className="space-y-5 border-t border-border pt-12">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">01 / Current State</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground">01 / Current State</p>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug text-foreground">
               The hiring market has changed. Most people don't know it yet.
             </h2>
@@ -214,7 +214,7 @@ export default function EssayDesignIsRisk() {
 
           {/* 02 — Current State of LLMs */}
           <section className="space-y-5 border-t border-border pt-12">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">02 / Current State of LLMs (Large Language Models)</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground">02 / Current State of LLMs (Large Language Models)</p>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug text-foreground">
               Why CoT case studies became the highest-value seed corpus.
             </h2>
@@ -316,7 +316,7 @@ export default function EssayDesignIsRisk() {
 
           {/* 03 — How & why this portfolio */}
           <section className="space-y-5 border-t border-border pt-12">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">03 / How &amp; Why This Portfolio Is Constructed</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground">03 / How &amp; Why This Portfolio Is Constructed</p>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug text-foreground">
               External links are not a UX failure. They are the architecture.
             </h2>
@@ -357,7 +357,7 @@ export default function EssayDesignIsRisk() {
             </p>
 
             <div className="border border-border rounded-lg p-6 space-y-4 bg-muted/30">
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Q&amp;A</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground">Q&amp;A</p>
               <p className="font-semibold text-foreground">
                 Q: Why is your{" "}
                 <CitationLink href="https://www.sketch.com/s/d826d733-5642-411a-8da3-72486d6164f0">
@@ -407,7 +407,7 @@ export default function EssayDesignIsRisk() {
 
           {/* 04 — Why is this the headline */}
           <section className="space-y-5 border-t border-border pt-12">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">04 / Why is this the headline section in your design portfolio?</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground">04 / Why is this the headline section in your design portfolio?</p>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug text-foreground">
               Trust over decades. Users over vanity.
             </h2>

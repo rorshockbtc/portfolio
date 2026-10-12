@@ -165,7 +165,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
               noValidate
             >
               <div>
-                <label className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground block mb-2">
+                <label className="text-[11px] font-sans uppercase tracking-wider text-muted-foreground block mb-2">
                   Select Project Track / Purpose:
                 </label>
                 <div className="flex flex-wrap gap-1.5">
@@ -176,7 +176,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                         key={opt}
                         type="button"
                         onClick={() => form.setValue("subject", opt)}
-                        className={`text-[11px] px-2.5 py-1 rounded-md border transition-all font-mono ${
+                        className={`text-[11px] px-2.5 py-1 rounded-md border transition-all font-sans ${
                           isSelected
                             ? "bg-[#FE299E] text-white border-[#FE299E] font-semibold shadow-sm"
                             : "bg-muted/40 text-muted-foreground border-border/60 hover:text-foreground hover:bg-muted/70"
@@ -287,12 +287,12 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                   Direct email:{" "}
                   <a
                     href="mailto:rorshock@protonmail.com"
-                    className="font-mono text-[#FE299E] hover:underline font-semibold"
+                    className="font-sans text-[#FE299E] hover:underline font-semibold"
                   >
                     rorshock@protonmail.com
                   </a>
                 </p>
-                <p className="text-[10px] font-mono text-muted-foreground/70">
+                <p className="text-[10px] font-sans text-muted-foreground/70">
                   Raleigh, NC &amp; US Remote &bull; Response within 24 hours guaranteed
                 </p>
               </div>

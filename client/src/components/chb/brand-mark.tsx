@@ -15,7 +15,7 @@ export function BrandMark({ className, size = "md" }: BrandMarkProps) {
 
   return (
     <span
-      className={cn("font-mono font-bold select-none text-[#FE299E] inline-block", sizeClasses[size], className)}
+      className={cn("font-sans font-bold select-none text-[#FE299E] inline-block", sizeClasses[size], className)}
       aria-label="Colon Hyphen Bracket"
       data-testid="brand-mark"
     >

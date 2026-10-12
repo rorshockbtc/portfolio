@@ -115,7 +115,7 @@ export default function FooterSection() {
           </div>
 
           <div className="md:col-span-4 space-y-4">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               Further Reading
             </h3>
             <ul className="space-y-2.5" role="list" data-testid="list-further-reading">
@@ -128,7 +128,7 @@ export default function FooterSection() {
                     className="group inline-flex items-baseline gap-1.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300 leading-snug"
                     data-testid={`link-further-${item.pub.toLowerCase().replace(/\s+/g, "-")}`}
                   >
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80 shrink-0">
+                    <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80 shrink-0">
                       {item.pub}
                     </span>
                     <span className="text-foreground/70 group-hover:text-foreground">
@@ -142,7 +142,7 @@ export default function FooterSection() {
           </div>
 
           <div className="md:col-span-2 space-y-4">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               Connect
             </h3>
             <ul className="space-y-2.5" role="list">
@@ -176,13 +176,13 @@ export default function FooterSection() {
 
         <div className="mt-16 pt-6 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p
-            className="font-mono text-[10px] text-muted-foreground/60 tracking-wider"
+            className="font-sans text-[10px] text-muted-foreground/60 tracking-wider"
             data-testid="text-copyright"
           >
             &copy; 2026 CHB (Colon Hyphen Bracket, LLC). All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <p className="font-mono text-[10px] text-muted-foreground/40 tracking-wider">
+            <p className="font-sans text-[10px] text-muted-foreground/40 tracking-wider">
               Designed &amp; built with intention
             </p>
             <Button

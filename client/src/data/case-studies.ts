@@ -176,82 +176,131 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     slug: "superstar",
     client: "Victoria Superstar",
     title: "Superstar: Bespoke Mobile AI Reflection & External Memory Loom",
-    subtitle: "A Love Story in Systems Architecture • External Context Continuity for DeepSeek on Mobile",
+    subtitle: "A Love Letter in Systems Architecture • Dual-LLM Prompt Weaver & Context Continuity for DeepSeek",
     role: "Architect, Lead Designer & Full-Stack Builder",
-    scaleBadge: "Mobile-First PWA • Cross-Cultural AI Bridge",
+    scaleBadge: "Dual-LLM Synergy • DeepSeek Mobile Bridge",
     timeline: "2025 – 2026",
-    heroImage: "/images/superstar/superstar-logo.png",
+    heroImage: "/images/superstar/01_superstar_gate_popart_access_code.png",
     galleryImages: [
+      {
+        src: "/images/superstar/01_superstar_gate_popart_access_code.png",
+        title: "Pop-Art Access Gate: Built with ❤️ for Victoria",
+        caption: "Whimsical, glamorous surrealist gate featuring the iconic leopard armchair, crystal chandelier, ocean sunset horizon, and Vogue bookstack.",
+        tag: "Surrealist Gate",
+      },
+      {
+        src: "/images/superstar/02_superstar_prompt_crafter_empty.png",
+        title: "Prompt Weaver & One-Tap DeepSeek Bridge",
+        caption: "Clean, focused workspace showing Victoria's career transition context and the hot pink 'COPY & OPEN DEEPSEEK' action button.",
+        tag: "Prompt Weaver",
+      },
+      {
+        src: "/images/superstar/03_superstar_prompt_crafter_with_gemini_ideas.png",
+        title: "Dual-LLM Synergy: Gemini Pre-Synthesizer",
+        caption: "Integrated Gemini drawer automatically generating structured prompt ideas (Work, Personal Growth, Creative) before sending into DeepSeek.",
+        tag: "Dual-LLM Engine",
+      },
+      {
+        src: "/images/personal/kyle-victoria-palm-closeup.jpg",
+        title: "Kyle & Victoria: The Heart Behind Superstar",
+        caption: "Built as a 48-hour birthday gift to bridge Victoria's legal litigation background into international compliance with cumulative AI memory.",
+        tag: "Human Foundation",
+      },
       {
         src: "/images/superstar/superstar-logo.png",
         title: "Superstar Brand Identity & Mobile Icon",
-        caption: "Bespoke identity designed for Victoria: high-contrast luxury aesthetic honoring cultural compression and soul (душа).",
-        tag: "Brand Identity",
+        caption: "High-contrast luxury identity honoring cultural compression and soul (душа).",
+        tag: "Brand Mark",
       },
     ],
     executiveSummary:
-      "Superstar was built as a 48-hour birthday gift for my wife Victoria: a mobile-first external memory loom and contextual bridge for DeepSeek. It solves the ephemeral nature of mobile AI chats, translating fragmented reflections, coaching ideas, and relationship processing into an evolving, unified corpus that can be reinjected back into DeepSeek with a single tap.",
+      "Superstar was built as a 48-hour birthday gift for my wife Victoria: an ultra-simple mobile AI reflection loom and contextual bridge for DeepSeek. It solves the ephemeral amnesia of mobile AI chats, translating fragmented reflections, executive coaching thoughts, and career transition goals into an evolving, unified memory that reinjects into DeepSeek with a single tap.",
     challenge:
-      "When someone's entire intellectual interface with AI is a mobile screen, every conversation degrades. Victoria would chat with DeepSeek, have profound breakthroughs in psychology or business, close the app, and start from a blank slate the next day. This created an exhausting cycle of snapshot insights with zero cumulative progress. She needed external memory without leaving the AI tool she trusted.",
+      "When someone's entire intellectual interface with AI is a mobile screen, every conversation degrades. Victoria would chat with DeepSeek, have profound breakthroughs in international legal career repositioning, close the app, and start from a blank slate the next day. This created an exhausting cycle of snapshot insights with zero cumulative progress.",
     solution:
-      "Engineered a zero-friction mobile PWA bridge: a single input field that accepts DeepSeek share links or voice memos, automatically summarizes breakthroughs via background LLM pipelines, appends them to a master category digest, and updates a one-tap 'Copy Context for DeepSeek' prompt. She taps once, opens DeepSeek, and immediately resumes with her complete evolving life context.",
+      "Engineered an elegant dual-LLM synergy: an ultra-clean mobile web interface where Gemini 2.5 Flash helps Victoria brainstorm and structure her exact inquiry, auto-appends her master legal and personal background context, and provides a 1-tap 'COPY & OPEN DEEPSEEK' button. She pastes into DeepSeek with complete historical context and archives breakthroughs back into Superstar with zero friction.",
     uiUxCraft:
-      "Designed specifically for one-handed mobile thumb use in Russian and English. Replaced sterile productivity UI with a private digital temple: deep obsidian, champagne gold, luxurious typography, and bilingual microcopy that treats her thoughts with structural dignity.",
+      "Designed specifically for one-handed mobile thumb use. Replaced sterile productivity UI with a private digital temple: a whimsical surrealist Pop-Art gate (leopard armchair, crystal chandelier, ocean sunset arch, fashion bookstack), hot pink actions (#FE299E), and thoughtful microcopy that treats her thoughts with structural dignity.",
     systemsArchitecture:
-      "Next.js PWA with zero account friction (hardcoded private cryptographic token). Lightweight background worker pipeline executing asynchronous insight extraction and master markdown compilation.",
+      "Lightweight Next.js PWA with zero account friction (hardcoded private cryptographic PIN). Dual-LLM pipeline pairing Gemini 2.5 Flash for prompt structuring with DeepSeek for deep analytical reasoning.",
     metrics: [
       { value: "48 Hours", label: "Build Velocity", subtext: "Zero to live mobile deployment" },
       { value: "1 Tap", label: "Context Reinjection", subtext: "Zero-friction DeepSeek continuity" },
       { value: "0 Loss", label: "Memory Preservation", subtext: "Halts mobile AI amnesia" },
-      { value: "Bilingual", label: "Cultural Translation", subtext: "Russian soul meets systems rigor" },
+      { value: "Dual-LLM", label: "Synergy", subtext: "Gemini structuring + DeepSeek reasoning" },
     ],
     outcomes: [
       "Engineered external memory architecture eliminating context drift across mobile AI sessions.",
-      "Designed and shipped high-craft mobile PWA tuned for one-handed thumb interaction.",
-      "Bridged deep psychological coaching frameworks directly into automated AI prompts.",
+      "Crafted bespoke Pop-Art gate screen with surrealist illustration and PIN security.",
+      "Bridged deep international legal and compliance career frameworks directly into automated AI prompts.",
     ],
-    technologies: ["Next.js PWA", "Tailwind CSS", "TypeScript", "DeepSeek API", "Mobile Gestures", "Bilingual Typography"],
+    technologies: ["Next.js PWA", "Tailwind CSS", "TypeScript", "DeepSeek API", "Gemini 2.5 Flash", "Whisper Audio"],
   },
 
   marigold: {
     slug: "marigold",
     client: "Civic Security / FEMA HSGP",
-    title: "Marigold / Miracle: Zero-Cloud Civic Data & Election Audit Engine",
-    subtitle: "bolt.pipes.pink • In-Browser DuckDB-WASM & Zero-PII Cryptographic Hydration",
+    title: "Marigold Insights: Zero-Cloud Civic Data & Election Audit Engine",
+    subtitle: "bolt.pipes.pink • In-Browser DuckDB-WASM, Fellegi-Sunter Linkage & Zero-PII Hydration",
     role: "Architect, Lead Designer & Systems Builder",
-    scaleBadge: "Zero-Cloud WASM • FEMA HSGP Sec 3%",
+    scaleBadge: "2,000,000 Active Records • FEMA HSGP Sec 3%",
     timeline: "2026",
-    heroImage: "/images/marigold/marigold-hero.png",
+    heroImage: "/images/marigold/02_marigold_workspace_dashboard_kanban.png",
     galleryImages: [
       {
-        src: "/images/marigold/marigold-hero.png",
-        title: "Marigold Insights: Civic Analytics Console",
-        caption: "In-browser analytical execution engine enabling county clerks to audit multi-gigabyte voter rolls locally without cloud PII liability.",
-        tag: "Civic Security",
+        src: "/images/marigold/01_marigold_landing_hero.png",
+        title: "Marigold Insights: Non-Partisan Civic Data Exploration",
+        caption: "Public sandbox landing page built under FY26 FEMA HSGP mandates, ensuring zero cloud PII exposure across all civic data exploration.",
+        tag: "Public Portal",
+      },
+      {
+        src: "/images/marigold/02_marigold_workspace_dashboard_kanban.png",
+        title: "Mississippi Fair Elections: 2M Active Record Mission Kanban",
+        caption: "Local-compute workspace dashboard managing triage for 2,000,000 active voter records with automated single-day registration surge cohort detection.",
+        tag: "Mission Kanban",
+      },
+      {
+        src: "/images/marigold/03_marigold_linkage_lab_fellegi_sunter.png",
+        title: "Playbook Builder & Linkage Lab",
+        caption: "1,000-Pair Ground Truth Benchmark proving 100% Precision and 100% Recall using Fellegi-Sunter probabilistic record linkage in 10.2ms.",
+        tag: "Algorithmic Proof",
+      },
+      {
+        src: "/images/marigold/04_marigold_data_stories_ai_concierge.png",
+        title: "Data Investigation & AI Civic Concierge",
+        caption: "Interactive data investigation console pairing local SQL queries with AI narrative generation and on-the-fly regional distribution charts.",
+        tag: "Data Stories",
+      },
+      {
+        src: "/images/marigold/05_marigold_developer_docs_sdk.png",
+        title: "Developer Docs & Zero-PII Cryptographic SDK",
+        caption: "Official Node.js / TypeScript SDK documentation handling client-side AES-256-GCM encryption, IV nonce generation, and auth tag validation locally.",
+        tag: "Official SDK",
       },
     ],
     executiveSummary:
-      "Marigold (bolt.pipes.pink) is a zero-cloud analytical execution engine built for county clerks and election officers under FY26 FEMA HSGP election security mandates. It solved Mississippi's unopenable voter rolls with 100% in-browser WASM and Zero-PII cryptographic entity hydration.",
+      "Marigold (bolt.pipes.pink) is a zero-cloud analytical execution engine built for county clerks, election observers, and civic researchers under FY26 FEMA HSGP election security mandates. It solves Mississippi's massive, unopenable voter rolls with 100% in-browser DuckDB-WASM and Zero-PII cryptographic entity hydration.",
     challenge:
-      "Civic and voter datasets are massive (millions of rows) and crash county clerk spreadsheets. Meanwhile, uploading citizen voter rolls to commercial cloud AI violates strict federal privacy laws and triggers catastrophic PII liabilities.",
+      "Civic and voter datasets are massive (millions of rows) and routinely crash county clerk spreadsheets. Meanwhile, uploading citizen voter rolls to commercial cloud AI violates strict federal privacy laws and triggers catastrophic PII liabilities.",
     solution:
-      "Built bolt.pipes.pink in hours to allow citizens and clerks to open and inspect voter rolls directly in the browser using DuckDB-WASM and OPFS. Pioneered 'Zero-PII Hydration': names and addresses are stripped and replaced with cryptographic entity hashes before reaching the LLM; the browser decrypts and re-hydrates real citizen names locally in real time. Zero bytes of PII ever leave the user's desk.",
+      "Built bolt.pipes.pink to allow citizens and clerks to inspect voter rolls directly in the browser using DuckDB-WASM and OPFS. Pioneered 'Zero-PII Hydration': names and addresses are stripped and replaced with cryptographic entity hashes before reaching the LLM; the browser decrypts and re-hydrates real citizen names locally in client memory. Zero bytes of PII ever leave the user's desk.",
     uiUxCraft:
-      "Engineered 'Mari'—an AI civic concierge who speaks plain English, translating non-technical questions into local SQL queries and rendering on-the-fly interactive Data Stories and charts.",
+      "Designed an editorial civic workstation featuring a Calming Albers Sand palette (#F5EFE6), Mission Kanban for registration spike triage, interactive Fellegi-Sunter linkage simulators, and 'Mari'—an AI civic concierge who translates non-technical inquiries into local SQL queries and dynamic data stories.",
     systemsArchitecture:
-      "Runs 100% in client-side memory using DuckDB-WASM, SQLite, Web Workers, and Origin Private File System (OPFS). In-memory Fellegi-Sunter and Levenshtein probabilistic record linkage for cross-precinct duplicate detection.",
+      "Runs 100% in client-side memory using DuckDB-WASM, SQLite, Web Workers, and Origin Private File System (OPFS). In-memory Fellegi-Sunter and Levenshtein probabilistic record linkage executes 1,000-pair benchmarks in 10.2ms with 100% precision and zero false accusations.",
     metrics: [
-      { value: "100% Local", label: "Data Residency", subtext: "Zero cloud PII leakage" },
-      { value: "<3 Min", label: "Audit Runtime", subtext: "Millions of voter rows queried" },
+      { value: "2,000,000", label: "Active Records", subtext: "Audited in Mississippi roll" },
+      { value: "100%", label: "Linkage Precision", subtext: "Fellegi-Sunter benchmark" },
+      { value: "0 Bytes", label: "Cloud Exposure", subtext: "100% local client memory" },
       { value: "FEMA 3%", label: "National Priority", subtext: "HSGP Sec 3% compliant" },
-      { value: "DuckDB-WASM", label: "Browser Engine", subtext: "In-memory SQL analytics" },
     ],
     outcomes: [
       "Eliminated cloud PII liability by executing multi-gigabyte queries entirely within browser Web Workers.",
       "Engineered Zero-PII cryptographic hashing protocol for private LLM demographic audits.",
+      "Built Mission Kanban and Fellegi-Sunter linkage lab benchmarked at 100% precision.",
       "Qualified under mandatory 3% National Priority Area election security grant under HSGP.",
     ],
-    technologies: ["DuckDB-WASM", "SQLite in Browser", "Web Workers", "OPFS", "Fellegi-Sunter Linkage", "Zero-PII Hydration"],
+    technologies: ["DuckDB-WASM", "SQLite in Browser", "Web Workers", "OPFS", "Fellegi-Sunter Linkage", "Zero-PII Cryptography"],
     liveUrl: "https://bolt.pipes.pink",
     liveUrlLabel: "Launch Civic Sandbox (bolt.pipes.pink)",
   },
@@ -307,6 +356,12 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
         title: "Multi-Engine Balance Allocation",
         caption: "Unified liquidity allocation panel reconciling on-chain Bitcoin confirmations with off-chain fiat ledger balances.",
         tag: "Liquidity UX",
+      },
+      {
+        src: "/images/personal/kyle-victoria-maldives-end-the-fed.jpg",
+        title: "Kyle Cyree in the Maldives: 'End the Fed'",
+        caption: "Wearing the iconic Ron Paul 'End the Fed' shirt—capturing the sovereign, Austrian economics ethos and full-reserve banking heritage of Custodia Bank.",
+        tag: "Founder & Culture",
       },
     ],
     executiveSummary:
@@ -557,44 +612,136 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
 
   highdraw: {
     slug: "highdraw",
-    client: "Colon Hyphen Bracket",
-    title: "HighDraw: Sovereign Infinite Vector Canvas & Spatial Design Protocol",
-    subtitle: "Proprietary Software • Local-First Infinite Canvas & Cryptographic Spatial Workspace",
-    role: "Architect, Lead Designer & Systems Builder",
-    scaleBadge: "Hardware-Accelerated Vector Canvas",
+    client: "High Draw Golf Apparel Co.",
+    title: "High Draw: Honest Mid-Market Golf Apparel Brand & E-Commerce Architecture",
+    subtitle: "Direct-to-Consumer • Custom DTC Engine, Ball Flight Tracer Identity & Garment Craftsmanship",
+    role: "Founder, Lead Designer & Full-Stack Builder",
+    scaleBadge: "DTC E-Commerce • Technical Apparel",
     timeline: "2025 – 2026",
-    heroImage: "/images/highdraw/highdraw-logo-gold.png",
+    heroImage: "/images/highdraw/01_highdraw_hero_pebble_beach.png",
     galleryImages: [
       {
+        src: "/images/highdraw/01_highdraw_hero_pebble_beach.png",
+        title: "Coastal Links Hero: Designed for Sport. Crafted for Life.",
+        caption: "Bespoke high-conversion storefront communicating tour-grade drape, honest mid-market pricing ($48 vs $125 boutique retail), and technical fabric specs.",
+        tag: "Storefront UX",
+      },
+      {
+        src: "/images/highdraw/02_highdraw_collection_polos_pullover.png",
+        title: "Product Collection: Men's, Women's & Layering",
+        caption: "Clean, high-craft product catalog showcasing Men's Midnight Navy, Women's Carolina Blue, and the Tour Tech Quarter-Zip Pullover.",
+        tag: "Collection Catalog",
+      },
+      {
+        src: "/images/highdraw/03_highdraw_pdp_midnight_navy_folded.png",
+        title: "Product Detail Page: Technical Garment Engineering",
+        caption: "High-velocity PDP highlighting 180 GSM micro-pique stretch blend, 100+ washes tested guarantee, and fused stay-flat collar stand engineering.",
+        tag: "Conversion PDP",
+      },
+      {
+        src: "/images/highdraw/04_highdraw_pdp_black_desk_accessories.png",
+        title: "Craftsmanship Plate: Embroidered Ball Flight Tracer",
+        caption: "Detailed accessory plate featuring wooden tees, brass ball markers, and the iconic embroidered High Draw ball flight tracer mark.",
+        tag: "Craftsmanship",
+      },
+      {
         src: "/images/highdraw/highdraw-logo-gold.png",
-        title: "HighDraw Sovereign Identity & Spatial Mark",
-        caption: "Bespoke gold insignia for HighDraw: hardware-accelerated vector canvas engineered to bypass proprietary cloud locks.",
-        tag: "Brand Identity",
+        title: "High Draw Iconic Ball Flight Tracer Mark",
+        caption: "The signature High Draw insignia: a soaring right-to-left ball flight tracer rendered in championship gold.",
+        tag: "Brand Mark",
       },
     ],
     executiveSummary:
-      "HighDraw is an infinite vector canvas and real-time spatial whiteboard protocol built as a sovereign antidote to proprietary design SaaS locks (like Figma). Engineered for 120 FPS infinite zooming, hardware-accelerated WebGL rendering, and zero-cloud local persistence via OPFS and SQLite.",
+      "High Draw Golf Apparel Co. was founded to solve a glaring problem in golf lifestyle retail: boutique legacy brands charging $125+ for basic polyester polos with collars that curl into bacon after three washes. I created the complete brand identity, engineered the custom direct-to-consumer e-commerce storefront, and spec'd the physical garment manufacturing (180 GSM matte micro-pique with a fused stay-flat collar stand) sold direct to golfers for $48.",
     challenge:
-      "Modern design tools hold creator assets hostage behind expensive cloud subscriptions, arbitrary paywalls, and proprietary file formats that cannot be read offline or versioned cleanly with Git. Design teams need sovereign, zero-lock-in visual thinking tools.",
+      "Modern DTC golf brands rely on generic Shopify themes with clunky sizing apps, slow product image carousels, and inflated retail markups that alienate everyday players. The brand needed an unmistakable identity, transparent technical garment credibility, and sub-100ms conversion flows.",
     solution:
-      "Engineered HighDraw: a local-first, infinite-canvas spatial environment that stores drawings directly as human-readable vector ASTs in local SQLite/OPFS. Features real-time cryptographic peer handshakes for collaboration without centralized corporate relay servers.",
+      "Designed the signature 'Ball Flight Tracer' brand mark and built a bespoke, high-velocity e-commerce experience. Engineered visual bundle drawers ('Frequently Bought Together'), interactive fabric zoom, dynamic inventory urgency badges, and transparent pricing breakdowns ($48 vs $125 boutique retail).",
     uiUxCraft:
-      "Ultra-minimal, distraction-free spatial canvas adhering to Massimo Vignelli 8pt grid geometry. Fluid gesture controls with sub-8ms pen-to-pixel latency.",
+      "Evoked the quiet luxury of iconic coastal links (Pebble Beach, Cypress Point) through warm Albers cream paper surfaces, deep forest green and midnight navy palettes, and crisp editorial typography. Zero template bloat.",
     systemsArchitecture:
-      "WebGL and Canvas2D rendering pipeline with quadtree spatial indexing for instantaneous culling of tens of thousands of vector nodes. Local-first synchronization via CRDTs and Web Crypto.",
+      "Custom headless e-commerce frontend with instant optimistic cart updates, zero-latency image prefetching, and seamless Stripe/Shopify checkout integration.",
     metrics: [
-      { value: "120 FPS", label: "Canvas Engine", subtext: "Hardware-accelerated WebGL" },
-      { value: "<8ms", label: "Pen Latency", subtext: "Zero-lag tactile feel" },
-      { value: "100% Local", label: "Sovereign Storage", subtext: "Zero cloud hostage fees" },
-      { value: "Git-Native", label: "Version Control", subtext: "Human-readable vector AST" },
+      { value: "$48 vs $125", label: "Honest Pricing", subtext: "Direct-to-golfer value" },
+      { value: "180 GSM", label: "Technical Blend", subtext: "Matte micro-pique stretch" },
+      { value: "100+ Washes", label: "Collar Guarantee", subtext: "Fused stay-flat collar stand" },
+      { value: "DTC", label: "E-Commerce", subtext: "Zero agency overhead" },
     ],
     outcomes: [
-      "Built sovereign vector canvas eliminating cloud vendor lock-in.",
-      "Engineered quadtree spatial indexing maintaining 120 FPS across 50,000+ vector paths.",
-      "Designed distraction-free Vignelli spatial interface.",
+      "Designed complete brand identity and signature Ball Flight Tracer trademark.",
+      "Engineered high-converting direct-to-consumer storefront with frictionless bundle mechanics.",
+      "Formulated physical garment specs: 180 GSM micro-pique with fused stay-flat collar stand.",
     ],
-    technologies: ["WebGL", "Canvas2D", "Quadtree Spatial Indexing", "SQLite / OPFS", "CRDTs", "Web Crypto"],
+    technologies: ["Headless E-Commerce", "Tailwind CSS", "Next.js", "Stripe API", "Brand Identity", "Garment Engineering"],
+  },
+
+  clubhouse1099: {
+    slug: "clubhouse1099",
+    client: "Clubhouse 1099",
+    title: "Clubhouse 1099: Private Venture Scout Network & Automated Voice Lead Pipeline",
+    subtitle: "clubhouse1099.com • Geographically Capped Scout Network, Whisper Audio CRM & Mileage Tax Trail",
+    role: "Architect, Lead Designer & Full-Stack Builder",
+    scaleBadge: "535 Capped Seats Nationwide • Automated Whisper CRM",
+    timeline: "2025 – 2026",
+    heroImage: "/images/clubhouse1099/01_clubhouse1099_landing_hero.png",
+    galleryImages: [
+      {
+        src: "/images/clubhouse1099/01_clubhouse1099_landing_hero.png",
+        title: "Landing Page: Help Community Enterprises Endure",
+        caption: "Private, geographically capped network of 535 Regional Venture Scouts sourcing enterprise technology transformations for Main Street businesses.",
+        tag: "Private Network",
+      },
+      {
+        src: "/images/clubhouse1099/02_clubhouse1099_manifesto_honest_diagnostics.png",
+        title: "The Clubhouse Guide: Honest Diagnostics for Main Street",
+        caption: "The master mechanic diagnostic philosophy: inspecting business bottlenecks without selling unneeded software bloat.",
+        tag: "Manifesto",
+      },
+      {
+        src: "/images/clubhouse1099/03_clubhouse1099_scout_dashboard_earnings.png",
+        title: "Scout Dashboard: Transparent Commission Tiers & Mileage Trail",
+        caption: "Automated scout earnings tracking (10% commission on closed engagements from $500 tasks to $75k+ retainers) and 2026 Mileage Tax Trail.",
+        tag: "Scout Dashboard",
+      },
+      {
+        src: "/images/clubhouse1099/04_clubhouse1099_voice_whisper_recording.png",
+        title: "In-Browser Voice Note Recording & Route Selector",
+        caption: "Frictionless scout workflow: one-tap in-browser audio capture with automated Whisper transcription and route selection for tax deductions.",
+        tag: "Voice Pipeline",
+      },
+      {
+        src: "/images/clubhouse1099/05_clubhouse1099_lead_enrichment_crm.png",
+        title: "Lead Enrichment CRM: Whisper Transcript & Motivation Slider",
+        caption: "Automated lead intake parsing voice notes, relationship context, contact metadata, and a 1–10 Motivation Rating slider ('Casual Chat' to 'Ready to Buy').",
+        tag: "Lead CRM",
+      },
+    ],
+    executiveSummary:
+      "Clubhouse 1099 (clubhouse1099.com) is a private, geographically-capped network of 535 Regional Venture Scouts—trusted community leaders, investors, and active networkers who connect underserved Main Street businesses with elite engineering transformations. I designed and shipped the complete platform, featuring in-browser Whisper audio recording, automated voice-to-lead CRM enrichment, and an IRS mileage tax trail logger.",
+    challenge:
+      "Local community enterprises (family dealerships, regional medical practices, local manufacturers) are desperate for modern technology but terrified of predatory agencies selling bloated six-figure retainers. Meanwhile, local connectors who know these business owners have no dignified, automated mechanism to make introductions or track compensation.",
+    solution:
+      "Created Clubhouse 1099 around a 'Master Mechanic' diagnostic ethos: scouts introduce businesses, an elite architect performs an honest diagnostic, and the scout receives a transparent 10% commission on every closed engagement. Built an ultra-fast voice note interface where scouts simply record a 30-second voice memo while driving away from a meeting; Whisper automatically extracts contact details, relationship context, and client motivation.",
+    uiUxCraft:
+      "Editorial, dignified country club aesthetic: British racing fairway green (#0F3E2E), cream surfaces, elegant serif headlines ('Help Community Enterprises Endure'), and intuitive scout input sliders.",
+    systemsArchitecture:
+      "Full-stack web application with in-browser MediaRecorder audio streaming, OpenAI Whisper transcription worker, structured GPT entity extraction, and automated IRS mileage tracking.",
+    metrics: [
+      { value: "535 Seats", label: "Nationwide Footprint", subtext: "Geographically capped network" },
+      { value: "10%", label: "Scout Commission", subtext: "Transparent contract payouts" },
+      { value: "Whisper AI", label: "Audio Transcription", subtext: "Instant voice-to-lead CRM" },
+      { value: "IRS Trail", label: "Tax Logger", subtext: "Automated mileage deduction" },
+    ],
+    outcomes: [
+      "Designed and launched private scout network capped at 535 regional seats nationwide.",
+      "Engineered in-browser voice note intake pipeline using Whisper for instant lead enrichment.",
+      "Built automated 10% commission tracking and IRS mileage deduction ledger.",
+    ],
+    technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Whisper Audio API", "MediaRecorder", "Stripe Connect"],
+    liveUrl: "https://clubhouse1099.com",
+    liveUrlLabel: "Visit Clubhouse 1099 (clubhouse1099.com)",
   },
 };
+
 
 
