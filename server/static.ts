@@ -4,10 +4,12 @@ import path from "path";
 import { injectSeoMeta, buildSiteUrl } from "./seo";
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(__dirname, "public");
-  if (!fs.existsSync(distPath)) {
+  const distPath = fs.existsSync(path.resolve(__dirname, "public", "index.html"))
+    ? path.resolve(__dirname, "public")
+    : __dirname;
+  if (!fs.existsSync(path.resolve(distPath, "index.html"))) {
     throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
+      `Could not find index.html in: ${distPath}, make sure to build the client first`,
     );
   }
 
