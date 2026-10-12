@@ -16,6 +16,7 @@ import {
   Sparkles,
   ArrowRight,
   Cpu,
+  Calendar,
 } from "lucide-react";
 import ContactFormModal from "@/components/contact-form-modal";
 
@@ -496,33 +497,37 @@ export default function CaseStudyPage() {
         </div>
       )}
 
-      {/* ── Sprint Conversion Banner ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
-        <div className="rounded-3xl border border-[#D3C7B5] bg-[#F2EAE0] p-8 md:p-12 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4" /> Immediate Availability
+      {/* ── High-Conversion Velocity Banner ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 w-full">
+        <div className="rounded-3xl border border-[#D3C7B5] bg-[#F2EAE0] p-8 md:p-12 shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div className="space-y-3 max-w-2xl">
+            <span className="font-sans text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4" /> Studio of One · Surgical Deploy
             </span>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight">
-              Ready to ship with this velocity?
+            <h3 className="text-2xl sm:text-4xl font-serif font-bold text-[#281B16] tracking-tight">
+              Need this velocity on your product?
             </h3>
-            <p className="text-base text-[#6B554D] font-sans leading-relaxed">
-              Book a 1-week turnaround sprint ($7,500 flat). I audit the architecture, design the high-craft interface with Massimo Vignelli rigor, and ship production-ready code.
+            <p className="text-base sm:text-lg text-[#6B554D] font-sans leading-relaxed">
+              Whether you need a 1-week rapid sprint ($7,500) to unblock a flagship feature, a 2–4 week surgical systems overhaul ($15k–$25k), or a dedicated Product Architect for an embedded role—let's look at the problem together.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full lg:w-auto">
+            <a
+              href="https://calendly.com/cubby-colonhyphenbracket/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-7 py-4 shadow-md transition-all text-center"
+            >
+              <Calendar className="w-4 h-4" /> Book 30-Min Intro Call
+            </a>
             <Button
-              className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-full px-7 py-3 shadow-md cursor-pointer"
+              variant="outline"
+              className="border-[#281B16]/30 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-6 py-4 cursor-pointer"
               onClick={() => setIsContactOpen(true)}
             >
-              Book 1-Week Sprint ($7,500) <ArrowRight className="w-4 h-4 ml-2" />
+              Inquire for Sprint ($7,500)
             </Button>
-            <Link href="/">
-              <Button variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] hover:bg-[#EAE0D0] text-[#281B16] font-sans text-xs uppercase tracking-[0.16em] font-medium rounded-full px-6 py-3">
-                View All Work
-              </Button>
-            </Link>
           </div>
         </div>
       </section>

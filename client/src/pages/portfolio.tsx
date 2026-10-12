@@ -19,6 +19,7 @@ import {
   GitCommit,
   Maximize2,
   Compass,
+  Calendar,
 } from "lucide-react";
 import { openContactModal } from "@/lib/contact-events";
 import {
@@ -28,6 +29,7 @@ import {
   SprintCallout,
 } from "@/components/chb";
 import { ExperienceSection } from "@/components/chb/experience-section";
+import { TestimonialsSection } from "@/components/chb/testimonials-section";
 
 export default function PortfolioPage() {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; caption: string } | null>(null);
@@ -45,38 +47,46 @@ export default function PortfolioPage() {
             <div className="lg:col-span-8 space-y-9 order-2 lg:order-1">
               <p className="flex items-center gap-3 font-sans text-xs sm:text-sm uppercase tracking-[0.16em] sm:tracking-[0.22em] font-bold text-[#FE299E]">
                 <BrandMark size="md" />
-                <span>Principal Product Designer<span className="hidden sm:inline"> &amp; Systems Architect</span></span>
+                <span>Product Architect<span className="hidden sm:inline"> &amp; R&amp;D Lead</span></span>
               </p>
 
               <h1 className="text-[3.25rem] leading-[1] sm:text-7xl lg:text-[5.25rem] 2xl:text-[5.75rem] font-serif font-black text-[#281B16] tracking-tight">
                 Architect the system. <br className="hidden sm:block" />
                 <span className="italic font-normal text-[#FE299E]">Design the interface.</span> <br className="hidden sm:block" />
-                Ship the code.
+                Ship the prototype.
               </h1>
 
-              <p className="text-xl sm:text-2xl lg:text-[1.65rem] text-[#5C4840] font-sans leading-[1.55] max-w-3xl">
-                I'm Kyle Cyree. For 15 years I've designed products in regulated industries where mistakes are expensive:
+              <p className="text-xl sm:text-2xl lg:text-[1.55rem] text-[#5C4840] font-sans leading-[1.55] max-w-3xl">
+                I'm Kyle Cyree. I operate as a surgical "studio of one." For 15 years I've led systems in regulated environments where mistakes cost millions:
                 UnitedHealth Group's patient apps <strong className="text-[#281B16] font-semibold">(35M+ patients)</strong>,
                 Walmart's internal search <strong className="text-[#281B16] font-semibold">(3M users)</strong>, and a chartered bank I joined as the
-                first designer. I design the product, model the data, and write the TypeScript that ships it.
+                first designer. I model data from first principles, design interfaces with Swiss discipline, and ship working TypeScript and Next.js prototypes backed by public GitHub repositories.
               </p>
 
               <div className="flex flex-wrap items-center gap-4 pt-1">
-                <Button
-                  size="lg"
-                  className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-base font-bold rounded-full px-9 h-14 shadow-lg transition-all cursor-pointer"
-                  onClick={() => openContactModal("Full-time role (Principal / Staff)")}
-                  data-testid="button-hire"
+                <a
+                  href="https://calendly.com/cubby-colonhyphenbracket/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-base font-bold rounded-full px-8 h-14 shadow-lg transition-all cursor-pointer"
                 >
-                  Hire me <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
+                  <Calendar className="w-5 h-5" /> Book 30-min call
+                </a>
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-[#281B16]/25 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-base font-bold rounded-full px-8 h-14 cursor-pointer"
                   onClick={() => openContactModal("1-week sprint ($7,500)")}
                 >
-                  Book a 1-week sprint · $7,500
+                  1-week sprint · $7,500
+                </Button>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="text-[#281B16] hover:bg-[#D3C7B5]/40 font-sans text-sm sm:text-base font-bold rounded-full px-5 h-14 cursor-pointer"
+                  onClick={() => openContactModal("Full-time role (Product Architect / Staff)")}
+                >
+                  Inquire for full-time &rarr;
                 </Button>
               </div>
 
@@ -111,7 +121,7 @@ export default function PortfolioPage() {
                 <figcaption className="space-y-3 px-1">
                   <p className="flex items-center gap-2 font-sans text-sm font-bold text-[#281B16]">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" aria-hidden="true" />
-                    Open to Principal / Staff roles and sprints
+                    Open to Product Architect roles &amp; sprints
                   </p>
                   <p className="text-base text-[#5C4840] font-sans leading-relaxed hidden sm:block">
                     North Carolina · US remote<br />
@@ -119,6 +129,32 @@ export default function PortfolioPage() {
                   </p>
                 </figcaption>
               </figure>
+            </div>
+          </div>
+
+          {/* ── Recruiter 30-Second Fast-Track Strip ── */}
+          <div className="mt-16 pt-8 border-t border-[#D3C7B5] grid grid-cols-2 md:grid-cols-4 gap-6 text-sm font-sans">
+            <div>
+              <span className="text-xs uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Target Roles</span>
+              <span className="font-semibold text-[#281B16] block">Product Architect</span>
+              <span className="text-xs text-[#5C4840]">R&amp;D Lead · Principal Designer</span>
+            </div>
+            <div>
+              <span className="text-xs uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Pedigree</span>
+              <span className="font-semibold text-[#281B16] block">15+ Years Regulated</span>
+              <span className="text-xs text-[#5C4840]">Healthcare, Fintech, Retail Search</span>
+            </div>
+            <div>
+              <span className="text-xs uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Location &amp; Degrees</span>
+              <span className="font-semibold text-[#281B16] block">US Remote (NC Base)</span>
+              <span className="text-xs text-[#5C4840]">MBA (Kenan-Flagler) · MFA (Emerson)</span>
+            </div>
+            <div>
+              <span className="text-xs uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Availability</span>
+              <span className="font-semibold text-[#281B16] block flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" /> Immediate
+              </span>
+              <span className="text-xs text-[#5C4840]">Sprints &amp; Staff/Principal Roles</span>
             </div>
           </div>
         </div>
@@ -675,20 +711,20 @@ export default function PortfolioPage() {
 
           {/* Row 1: Dual Feature (7 / 5 Split) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-            {/* Maldives */}
+            {/* Maldives: Monetary Literacy & Sovereign Systems */}
             <div
               onClick={() =>
                 setLightboxImage({
-                  src: "/images/personal/kyle-victoria-maldives-end-the-fed.jpg",
-                  caption: "Maldives. Catching up on monetary history while designing Bitcoin custody at Custodia.",
+                  src: "/images/personal/kyle-victoria-maldives-beach-walk.jpg",
+                  caption: "Maldives. 10 years of open monetary research, financial education, and banking access advocacy—systems thinking that informed the institutional settlement rails at Custodia Bank.",
                 })
               }
               className="lg:col-span-7 group cursor-zoom-in space-y-4"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#D3C7B5] bg-[#F2EAE0]">
                 <img loading="lazy" decoding="async"
-                  src="/images/personal/kyle-victoria-maldives-end-the-fed.jpg"
-                  alt="Kyle Cyree reading on an overwater deck in the Maldives"
+                  src="/images/personal/kyle-victoria-maldives-beach-walk.jpg"
+                  alt="Kyle and Victoria Cyree walking along the Maldives beach"
                   className="w-full aspect-[16/10] object-cover group-hover:scale-[1.01] transition-transform duration-500"
                 />
                 <div className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-[#110f0e]/85 backdrop-blur-md text-white text-xs font-sans font-bold flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -698,14 +734,14 @@ export default function PortfolioPage() {
               <div className="space-y-1.5 px-1">
                 <div className="flex items-center gap-2">
                   <span className="font-sans text-xs uppercase font-bold tracking-wider text-[#FE299E]">
-                    Maldives
+                    Maldives · Monetary Research
                   </span>
                 </div>
                 <h3 className="font-serif font-bold text-2xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
-                  Homework for a bank job
+                  Monetary Literacy &amp; Banking Access
                 </h3>
                 <p className="text-base text-[#6B554D] font-sans leading-relaxed">
-                  Reading up on the history of money while I was designing settlement and Bitcoin custody for Custodia Bank.
+                  A decade of research in Austrian economics, inflation dynamics, and open monetary networks—the systems foundation behind designing multi-engine settlement rails and Bitcoin UTXO custody at Custodia Bank.
                 </p>
               </div>
             </div>
@@ -918,6 +954,9 @@ export default function PortfolioPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Social Proof & LinkedIn Recommendations ── */}
+      <TestimonialsSection />
 
       {/* ── Conversion Sprint Offer ($7,500 / 1 Week) ── */}
       <SprintCallout onContactClick={(subject) => openContactModal(subject || "1-week sprint ($7,500)")} />

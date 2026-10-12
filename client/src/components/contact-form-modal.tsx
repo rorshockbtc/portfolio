@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, Loader2, Calendar, MessageSquare } from "lucide-react";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
@@ -38,17 +38,23 @@ interface ContactFormModalProps {
 }
 
 const CONTACT_EMAIL = "rorshock@protonmail.com";
+const CALENDLY_URL = "https://calendly.com/cubby-colonhyphenbracket/30min";
 
-export default function ContactFormModal({ open, onOpenChange, defaultSubject = "Full-time role (Principal / Staff)" }: ContactFormModalProps) {
+export default function ContactFormModal({
+  open,
+  onOpenChange,
+  defaultSubject = "Full-time role (Product Architect / Staff)",
+}: ContactFormModalProps) {
+  const [activeTab, setActiveTab] = useState<"message" | "calendar">("message");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [lastDraft, setLastDraft] = useState<ContactFormValues | null>(null);
 
   const intentOptions = [
-    "Full-time role (Principal / Staff)",
     "1-week sprint ($7,500)",
-    "Fractional / contract",
-    "Just saying hi",
+    "2-4 week systems engagement ($15k-$25k)",
+    "Full-time role (Product Architect / Staff)",
+    "Introductory chat / consultation",
   ];
 
   const form = useForm<ContactFormValues>({
@@ -68,7 +74,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
   }, [open, defaultSubject, form]);
 
   const mailtoHref = (d: ContactFormValues | null) => {
-    const subject = d?.subject || defaultSubject || "Hello";
+    const subject = d?.subject || defaultSubject || "Inquiry for Kyle Cyree";
     const body = d ? `${d.message}\n\n— ${d.name} (${d.email})` : "Hi Kyle,\n\n";
     return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
@@ -109,6 +115,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
       onOpenChange(false);
       setTimeout(() => {
         setStatus("idle");
+        setActiveTab("message");
         form.reset();
       }, 300);
     }
@@ -117,20 +124,72 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent
-        className="max-w-lg"
+        className="max-w-lg bg-[#F2EAE0] border-[#D3C7B5] text-[#281B16]"
         data-testid="modal-contact"
         aria-describedby="contact-form-description"
       >
         <DialogHeader>
-          <DialogTitle className="text-2xl font-serif font-bold text-[#281B16]" data-testid="text-contact-title">
-            Get in touch
+          <DialogTitle className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16]" data-testid="text-contact-title">
+            Connect with Kyle
           </DialogTitle>
           <DialogDescription id="contact-form-description" className="text-sm text-[#6B554D] font-sans">
-            Goes straight to Kyle. You'll hear back within one business day.
+            Direct access to Kyle Cyree. North Carolina · US Remote · Replies within 1 business day.
           </DialogDescription>
         </DialogHeader>
 
-        {status === "success" ? (
+        {/* Tab Selector */}
+        <div className="flex rounded-full bg-[#EAE0D0] p-1 border border-[#D3C7B5] my-1">
+          <button
+            type="button"
+            onClick={() => setActiveTab("message")}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
+              activeTab === "message"
+                ? "bg-[#281B16] text-[#F2EAE0] shadow-sm"
+                : "text-[#6B554D] hover:text-[#281B16]"
+            }`}
+          >
+            <MessageSquare className="w-3.5 h-3.5" /> Send a Message
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("calendar")}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
+              activeTab === "calendar"
+                ? "bg-[#281B16] text-[#F2EAE0] shadow-sm"
+                : "text-[#6B554D] hover:text-[#281B16]"
+            }`}
+          >
+            <Calendar className="w-3.5 h-3.5 text-[#FE299E]" /> Pick a Time (Calendly)
+          </button>
+        </div>
+
+        {activeTab === "calendar" ? (
+          /* Instant Calendly Booking Tab */
+          <div className="py-6 space-y-6 text-center animate-in fade-in duration-200">
+            <div className="w-16 h-16 rounded-full bg-[#FE299E]/10 flex items-center justify-center mx-auto">
+              <Calendar className="w-8 h-8 text-[#FE299E]" />
+            </div>
+            <div className="space-y-2 max-w-sm mx-auto">
+              <h3 className="font-serif font-bold text-xl text-[#281B16]">30-Minute Introduction</h3>
+              <p className="text-sm text-[#6B554D] font-sans leading-relaxed">
+                Skip the back-and-forth email queue. Pick an open 30-minute slot directly on Kyle's calendar to discuss your product architecture, sprint scope, or a full-time role.
+              </p>
+            </div>
+            <div className="pt-2">
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white text-sm font-sans font-bold shadow-lg transition-all"
+              >
+                Open Kyle's Calendly &rarr;
+              </a>
+            </div>
+            <p className="text-xs text-[#8C7469] font-sans">
+              Instant Google Meet invite automatically generated.
+            </p>
+          </div>
+        ) : status === "success" ? (
           <div
             className="flex flex-col items-center gap-4 py-6 text-center"
             role="status"
@@ -179,7 +238,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
               <Button
                 variant="outline"
                 onClick={() => setStatus("idle")}
-                className="rounded-full text-sm font-sans py-3"
+                className="rounded-full text-sm font-sans py-3 border-[#D3C7B5]"
                 data-testid="button-retry"
               >
                 Try again
@@ -196,6 +255,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
             >
               {/* Honeypot: hidden from humans and assistive tech */}
               <input id="contact-botcheck" type="text" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+
               <div>
                 <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#6B554D] block mb-2">
                   What's this about?
@@ -209,7 +269,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                         type="button"
                         aria-pressed={isSelected}
                         onClick={() => form.setValue("subject", opt)}
-                        className={`text-sm px-3 py-1.5 rounded-full border transition-all font-sans ${
+                        className={`text-xs sm:text-sm px-3 py-1.5 rounded-full border transition-all font-sans cursor-pointer ${
                           isSelected
                             ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-semibold"
                             : "bg-transparent text-[#6B554D] border-[#D3C7B5] hover:text-[#281B16] hover:border-[#281B16]"
@@ -227,10 +287,11 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel className="text-xs uppercase font-bold tracking-wider text-[#5C4840]">Name</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Your name"
+                        className="bg-[#EAE0D0] border-[#D3C7B5] text-[#281B16] focus-visible:ring-[#FE299E]"
                         {...field}
                         data-testid="input-name"
                         autoComplete="name"
@@ -240,16 +301,18 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-xs uppercase font-bold tracking-wider text-[#5C4840]">Email</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
                         placeholder="you@example.com"
+                        className="bg-[#EAE0D0] border-[#D3C7B5] text-[#281B16] focus-visible:ring-[#FE299E]"
                         {...field}
                         data-testid="input-email"
                         autoComplete="email"
@@ -259,17 +322,19 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="subject"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Subject <span className="text-muted-foreground font-normal">(optional)</span>
+                    <FormLabel className="text-xs uppercase font-bold tracking-wider text-[#5C4840]">
+                      Subject <span className="text-muted-foreground font-normal lowercase">(optional)</span>
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="What's this about?"
+                        className="bg-[#EAE0D0] border-[#D3C7B5] text-[#281B16] focus-visible:ring-[#FE299E]"
                         {...field}
                         data-testid="input-subject"
                       />
@@ -278,16 +343,18 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Message</FormLabel>
+                    <FormLabel className="text-xs uppercase font-bold tracking-wider text-[#5C4840]">Message</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="The role or project, timeline, and anything else useful."
-                        rows={4}
+                        placeholder="Tell me the problem, timeline, or role scope."
+                        rows={3}
+                        className="bg-[#EAE0D0] border-[#D3C7B5] text-[#281B16] focus-visible:ring-[#FE299E]"
                         {...field}
                         data-testid="input-message"
                       />
@@ -296,9 +363,10 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                   </FormItem>
                 )}
               />
+
               <Button
                 type="submit"
-                className="w-full bg-[#FE299E] hover:bg-[#D1007E] text-white"
+                className="w-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-sm font-bold rounded-full py-3.5 cursor-pointer shadow-md"
                 disabled={status === "submitting"}
                 data-testid="button-submit-contact"
               >
@@ -315,7 +383,7 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                 )}
               </Button>
 
-              <div className="pt-2 text-center text-xs text-muted-foreground border-t border-border/40 space-y-0.5">
+              <div className="pt-2 text-center text-xs text-[#6B554D] border-t border-[#D3C7B5] space-y-1">
                 <p>
                   Direct email:{" "}
                   <a
@@ -325,8 +393,8 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
                     rorshock@protonmail.com
                   </a>
                 </p>
-                <p className="text-[10px] font-sans text-muted-foreground/70">
-                  North Carolina · US remote · Replies within one business day
+                <p className="text-[11px] font-sans text-[#8C7469]">
+                  North Carolina · US remote · Replies within 1 business day
                 </p>
               </div>
             </form>
