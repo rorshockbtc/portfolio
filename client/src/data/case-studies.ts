@@ -552,12 +552,6 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
         caption: "Unified liquidity allocation panel reconciling on-chain Bitcoin confirmations with off-chain fiat ledger balances.",
         tag: "Liquidity UX",
       },
-      {
-        src: "/images/personal/kyle-victoria-maldives-end-the-fed.jpg",
-        title: "Kyle Cyree in the Maldives",
-        caption: "Off the clock, reading up on monetary history during the Custodia years.",
-        tag: "Founder & Culture",
-      },
     ],
     executiveSummary:
       "As the first and only designer at Custodia Bank (a chartered Federal Reserve Special Purpose Depository Institution), I designed and shipped the complete ground-up marketing website in 4 days, followed by the entire core banking application in 30 days to meet strict Federal Reserve master account evaluation deadlines. The design system stood untouched in production for 2+ years without a subsequent design hire.",
