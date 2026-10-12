@@ -5,6 +5,26 @@ export interface CaseStudyImage {
   tag?: string;
 }
 
+export interface StackTier {
+  role: string;
+  tech: string;
+  rationale: string;
+}
+
+export interface CodeSnippet {
+  title: string;
+  language: string;
+  code: string;
+  explanation: string;
+}
+
+export interface CodebaseBreakdown {
+  headline: string;
+  philosophy: string;
+  stackArchitecture: StackTier[];
+  codeSnippets?: CodeSnippet[];
+}
+
 export interface CaseStudyData {
   slug: string;
   client: string;
@@ -20,6 +40,7 @@ export interface CaseStudyData {
   solution: string;
   uiUxCraft: string;
   systemsArchitecture: string;
+  codebaseBreakdown?: CodebaseBreakdown;
   metrics: { value: string; label: string; subtext?: string }[];
   outcomes: string[];
   technologies: string[];
@@ -96,6 +117,78 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     technologies: ["macOS Native (Tauri/Rust)", "iOS (Swift/SwiftUI)", "Next.js", "TypeScript", "SQLite / Turso", "NOSTR / Web Crypto", "Tailwind CSS v4"],
     liveUrl: "https://pipes.pink",
     liveUrlLabel: "Explore Live Web Protocol",
+    codebaseBreakdown: {
+      headline: "How I Architect & Code Sovereign Platforms as a Unit of One",
+      philosophy:
+        "I am not an abstract software engineer who lives in theoretical microservices, nor a Figma-only designer who hands off unbuildable mocks. I am a Principal Systems Architect who writes production TypeScript, Next.js, Rust, and Python because the translation gap between design and engineering is where early-stage tech dies. I write the code to ensure the system architecture, mathematical Vignelli grid, and zero-PII security rules ship intact.",
+      stackArchitecture: [
+        {
+          role: "Web & Protocol Application Layer",
+          tech: "TypeScript + Next.js (App Router)",
+          rationale:
+            "TypeScript guarantees strict type-safety across distributed schemas and Drizzle ORM models. Next.js provides high-velocity SSR for public pipe exploration while maintaining client-side WASM and Web Worker execution.",
+        },
+        {
+          role: "Native Desktop Engine (macOS Bang IDE)",
+          tech: "Tauri 2.0 + Rust",
+          rationale:
+            "Replaced heavy 400MB Electron containers with native Rust bindings. Provides sub-10ms IPC communication, local file system sandboxing, and direct hardware vector acceleration with minimal memory footprint.",
+        },
+        {
+          role: "Local Storage & Vector Indexing",
+          tech: "SQLite + Turso LibSQL + Python",
+          rationale:
+            "Zero-cloud egress guarantee. Knowledge nodes and vectors reside in local SQLite databases synchronized via cryptographic hashes. Pragmatic Python micro-scripts handle deterministic tokenization and OpenTimestamps (OTS) proofs.",
+        },
+        {
+          role: "Mobile Capture & Synchronization",
+          tech: "iOS (Swift & SwiftUI)",
+          rationale:
+            "Native iOS client for on-the-go voice and quick note ingestion, syncing peer-to-peer into the sovereign knowledge ledger with zero telemetry tracking.",
+        },
+      ],
+      codeSnippets: [
+        {
+          title: "The Ampersand Knowledge Graph (server/ampersand.ts)",
+          language: "typescript",
+          code: `// Deterministic Knowledge Graph with Typed Relationships
+export interface AmpersandNode {
+  id: string;
+  nodeType: 'content' | 'pipe' | 'user' | 'concept' | 'topic' | 'source';
+  entityId?: string;
+  properties: Record<string, unknown>;
+  embedding?: number[];
+  createdAt: Date;
+}
+
+export interface AmpersandEdge {
+  fromNodeId: string;
+  toNodeId: string;
+  edgeType: 'RELATES_TO' | 'CONTAINS' | 'CURATED_BY' | 'REFERENCES' | 'INSPIRED_BY' | 'COMPLEMENTS' | 'CONTRADICTS';
+  weight: number;
+  confidence?: number;
+}`,
+          explanation:
+            "The foundational graph data model enabling deterministic knowledge traversal without burning redundant LLM context tokens.",
+        },
+        {
+          title: "Cryptographic Namespace Registry (shared/schema.ts)",
+          language: "typescript",
+          code: `// Drizzle ORM Schema: Deeded Namespace Property & Revenue Split
+export const pipes = pgTable("pipes", {
+  id: varchar("id").primaryKey().default(sql\`gen_random_uuid()\`),
+  namespace: varchar("namespace").notNull().unique(), // e.g. "pipe\\\\mississippi-voters"
+  curatorId: varchar("curator_id").notNull().references(() => users.id),
+  biasStatement: text("bias_statement"),
+  revenueSharePercent: real("revenue_share_percent").default(70), // 70% Creator Equity
+  pricingTier: varchar("pricing_tier"), // "premium", "standard", "niche"
+  qualityScore: real("quality_score").default(0),
+});`,
+          explanation:
+            "Deeded property schema ensuring curators own their namespaces cryptographically with 70% perpetual equity distribution.",
+        },
+      ],
+    },
   },
 
   cassandra: {
@@ -235,6 +328,37 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       "Bridged deep international legal and compliance career frameworks directly into automated AI prompts.",
     ],
     technologies: ["Next.js PWA", "Tailwind CSS", "TypeScript", "DeepSeek API", "Gemini 2.5 Flash", "Whisper Audio"],
+    codebaseBreakdown: {
+      headline: "Dual-LLM Prompt Weaver & Context Continuity Architecture",
+      philosophy:
+        "Superstar was built as a 48-hour birthday gift for my wife Victoria to solve the ephemeral amnesia of mobile AI chats. I architected a dual-LLM synergy: an ultra-clean mobile web interface where Gemini 2.5 Flash helps Victoria brainstorm and structure her exact inquiry, auto-appends her master legal and personal background context, and provides a 1-tap bridge into DeepSeek for analytical reasoning.",
+      stackArchitecture: [
+        {
+          role: "Mobile-First PWA Layer",
+          tech: "Next.js + Tailwind CSS",
+          rationale:
+            "Engineered for one-handed mobile thumb use with instant load times, offline caching, and zero app-store friction.",
+        },
+        {
+          role: "Dual-LLM Synergy Engine",
+          tech: "Gemini 2.5 Flash + DeepSeek Bridge",
+          rationale:
+            "Gemini acts as the high-velocity contextual drafter; DeepSeek receives the unified master prompt for deep analytical reasoning.",
+        },
+        {
+          role: "Zero-Account Private Access",
+          tech: "Cryptographic PIN Gate",
+          rationale:
+            "Zero passwords, zero corporate SSO, zero telemetry tracking—just a private digital sanctuary guarded by a hardcoded cryptographic PIN.",
+        },
+        {
+          role: "Context Continuity Loom",
+          tech: "Local-First Persistent Storage",
+          rationale:
+            "Preserves cumulative career transition context across sessions, eliminating repetitive explanations and context drift.",
+        },
+      ],
+    },
   },
 
   marigold: {
@@ -303,6 +427,77 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     technologies: ["DuckDB-WASM", "SQLite in Browser", "Web Workers", "OPFS", "Fellegi-Sunter Linkage", "Zero-PII Cryptography"],
     liveUrl: "https://bolt.pipes.pink",
     liveUrlLabel: "Launch Civic Sandbox (bolt.pipes.pink)",
+    codebaseBreakdown: {
+      headline: "Zero-Cloud In-Browser DuckDB-WASM & Fellegi-Sunter Linkage Engine",
+      philosophy:
+        "When handling 2,000,000 active voter records, pushing citizen data to a cloud database or external LLM API creates catastrophic PII liability and violates federal election security statutes. I engineered Marigold to run entirely in client-side memory using DuckDB-WASM, Web Workers, and OPFS. The AI only ever sees cryptographically blinded hashes—real voter identities are re-hydrated locally in browser RAM.",
+      stackArchitecture: [
+        {
+          role: "In-Browser Analytical SQL Engine",
+          tech: "DuckDB-WASM + OPFS (Origin Private File System)",
+          rationale:
+            "Executes multi-column aggregations and cohort filtering across 2M rows in under 40ms directly inside the user's browser, eliminating all cloud compute and database hosting bills.",
+        },
+        {
+          role: "Non-Blocking Multi-Thread Pipeline",
+          tech: "Web Workers + Comlink",
+          rationale:
+            "Offloads data ingestion, Parquet parsing, and probabilistic record linkage away from the main JavaScript UI thread, keeping the 60fps Vignelli interface buttery smooth during heavy scans.",
+        },
+        {
+          role: "Probabilistic Entity Resolution",
+          tech: "Fellegi-Sunter Algorithm + Levenshtein Distance",
+          rationale:
+            "Evaluates agreement/disagreement frequency weights across name, DOB, and street address. Benchmarked at 1,000 record pairs in 10.2ms with 100% precision and zero false accusations.",
+        },
+        {
+          role: "Zero-PII Cryptographic Shield",
+          tech: "Web Crypto API (AES-256-GCM + SHA-256 Nonces)",
+          rationale:
+            "Blinds citizen identifiers into synthetic entity tokens before AI prompt generation. The browser decrypts and injects genuine names locally upon model response.",
+        },
+      ],
+      codeSnippets: [
+        {
+          title: "In-Browser DuckDB-WASM Worker Execution (client/src/workers/duckdb.worker.ts)",
+          language: "typescript",
+          code: `// DuckDB-WASM Client-Side Execution Worker
+import * as duckdb from "@duckdb/duckdb-wasm";
+
+export async function executeVoterAudit(query: string, localBuffer: Uint8Array) {
+  const db = await duckdb.AsyncDuckDB.create(bundle);
+  const conn = await db.connect();
+  
+  // Register local OPFS Parquet or CSV buffer with Zero Cloud Egress
+  await db.registerFileBuffer("voter_roll.parquet", localBuffer);
+  
+  // Execute high-throughput analytical query in-browser
+  const table = await conn.query(query);
+  return table.toArray().map((row) => row.toJSON());
+}`,
+          explanation:
+            "Executes analytical queries directly in the client's browser Web Worker, guaranteeing zero bytes of sensitive voter rolls ever leave the local machine.",
+        },
+        {
+          title: "Zero-PII Client Hydration Protocol (client/src/lib/zero-pii.ts)",
+          language: "typescript",
+          code: `// Deterministic Token Blinding for LLM Safe Context
+export interface BlindingMap {
+  [blindId: string]: { realName: string; precinct: string };
+}
+
+export function blindVoterRecord(record: VoterRecord): { blindedContext: string; map: BlindingMap } {
+  const blindToken = "ENT_" + crypto.randomUUID().slice(0, 8);
+  return {
+    blindedContext: \`Subject \${blindToken} registered in precinct \${record.precinctCode}\`,
+    map: { [blindToken]: { realName: record.fullName, precinct: record.precinctCode } }
+  };
+}`,
+          explanation:
+            "Replaces real names with cryptographic tokens prior to LLM analysis, re-hydrating identity client-side upon response.",
+        },
+      ],
+    },
   },
 
   custodia: {
@@ -740,6 +935,87 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Whisper Audio API", "MediaRecorder", "Stripe Connect"],
     liveUrl: "https://clubhouse1099.com",
     liveUrlLabel: "Visit Clubhouse 1099 (clubhouse1099.com)",
+    codebaseBreakdown: {
+      headline: "Voice-First Venture Scout Architecture & Automated Whisper Pipeline",
+      philosophy:
+        "Regional venture scouts and community connectors are on the move—driving between dealerships, clinics, and manufacturing facilities. They don't fill out multi-page web forms. I built Clubhouse 1099 around zero-friction audio capture: scouts tap a single button, speak for 30 seconds, and the system extracts structured leads, calculates IRS mileage deductions, and logs 10% commission splits automatically.",
+      stackArchitecture: [
+        {
+          role: "In-Browser Voice Streaming",
+          tech: "MediaRecorder API + Web Audio API",
+          rationale:
+            "Captures crisp uncompressed audio directly in mobile and desktop browsers with real-time decibel level meters and automatic silence trimming.",
+        },
+        {
+          role: "Automated Transcription & Entity Extraction",
+          tech: "Whisper API + Structured JSON Extraction",
+          rationale:
+            "Converts unstructured spoken observations into verified business names, decision-maker contacts, motivation levels (1–10), and technical pain points.",
+        },
+        {
+          role: "Compliance & Tax Audit Ledger",
+          tech: "IRS Standard Mileage Engine + Geocoding",
+          rationale:
+            "Automatically logs route waypoints and calculates 2026 IRS mileage deductions for scouts, packaging deductible travel receipts with their commission statements.",
+        },
+        {
+          role: "Capped National Seat Allocation",
+          tech: "PostgreSQL Geographic Constraint Registry",
+          rationale:
+            "Enforces strict regional scarcity—exactly 535 Congressional-district mapped seats nationwide with real-time seat availability maps.",
+        },
+      ],
+      codeSnippets: [
+        {
+          title: "In-Browser Audio Capture & Streaming (client/src/hooks/use-audio-recorder.ts)",
+          language: "typescript",
+          code: `// High-Fidelity Mobile In-Browser Audio Streamer
+export function useVoiceScoutRecorder() {
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+  const audioChunks = useRef<Blob[]>([]);
+
+  const startRecording = async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const recorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+    
+    recorder.ondataavailable = (e) => audioChunks.current.push(e.data);
+    recorder.start(250); // 250ms time-slice for responsive buffer
+    setMediaRecorder(recorder);
+  };
+
+  return { startRecording, stopRecording };
+}`,
+          explanation:
+            "Handles resilient browser-side audio capture across mobile Safari and Chrome without third-party app installations.",
+        },
+        {
+          title: "Automated Scout Lead Extraction (server/routes/scout-voice.ts)",
+          language: "typescript",
+          code: `// Whisper + Structured Schema Extraction Pipeline
+export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string) {
+  // Step 1: Whisper Transcription
+  const transcription = await openai.audio.transcriptions.create({
+    file: audioBuffer,
+    model: "whisper-1",
+  });
+
+  // Step 2: Structured Entity Extraction
+  const leadIntelligence = await extractLeadEntities(transcription.text);
+  
+  // Step 3: Insert into Lead Ledger with 10% Scout Commission Attribution
+  return await db.insert(scoutLeads).values({
+    scoutId,
+    businessName: leadIntelligence.businessName,
+    motivationScore: leadIntelligence.motivationRating, // 1-10
+    transcript: transcription.text,
+    commissionTier: "10_PERCENT_STANDARD",
+  });
+}`,
+          explanation:
+            "Transforms spoken stream-of-consciousness field notes into relational database records and attributed commission claims.",
+        },
+      ],
+    },
   },
 };
 

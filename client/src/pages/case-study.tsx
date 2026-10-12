@@ -15,6 +15,7 @@ import {
   Layers,
   Sparkles,
   ArrowRight,
+  Cpu,
 } from "lucide-react";
 import ContactFormModal from "@/components/contact-form-modal";
 
@@ -310,9 +311,67 @@ export default function CaseStudyPage() {
         </div>
       </section>
 
+      {/* ── Architecture, Stack & Real Codebase Deconstruction ── */}
+      {study.codebaseBreakdown && (
+        <section className="max-w-[1540px] mx-auto px-6 sm:px-10 lg:px-16 pb-20 w-full space-y-10">
+          <div className="border-t border-[#D3C7B5] pt-12 space-y-4">
+            <span className="font-sans text-xs sm:text-sm uppercase tracking-[0.25em] font-bold text-[#FE299E] flex items-center gap-2">
+              <Cpu className="w-4 h-4 text-[#FE299E]" /> Architectural &amp; Codebase Deconstruction
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#281B16] tracking-tight">
+              {study.codebaseBreakdown.headline}
+            </h2>
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#F2EAE0] border border-[#D3C7B5] shadow-sm">
+              <p className="text-base sm:text-lg text-[#281B16] font-sans leading-relaxed italic">
+                &ldquo;{study.codebaseBreakdown.philosophy}&rdquo;
+              </p>
+            </div>
+          </div>
+
+          {/* 4-Tier Stack Architecture Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {study.codebaseBreakdown.stackArchitecture.map((tier, idx) => (
+              <div key={idx} className="p-6 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] space-y-3 shadow-sm">
+                <span className="text-[11px] font-sans uppercase font-bold tracking-wider text-[#FE299E] block">
+                  {tier.role}
+                </span>
+                <h3 className="font-serif font-bold text-lg text-[#281B16]">{tier.tech}</h3>
+                <p className="text-xs sm:text-sm text-[#6B554D] font-sans leading-relaxed">{tier.rationale}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Real Code Snippets */}
+          {study.codebaseBreakdown.codeSnippets && (
+            <div className="space-y-6 pt-4">
+              {study.codebaseBreakdown.codeSnippets.map((snippet, idx) => (
+                <div key={idx} className="rounded-3xl border border-[#D3C7B5] bg-[#161413] text-[#f1ebd8] overflow-hidden shadow-xl">
+                  <div className="flex items-center justify-between px-6 py-4 bg-[#110f0e] border-b border-white/10">
+                    <span className="font-sans text-xs uppercase tracking-wider font-bold text-[#FE299E]">
+                      {snippet.title}
+                    </span>
+                    <Badge variant="outline" className="border-white/20 text-white/70 text-[10px] uppercase font-sans">
+                      {snippet.language}
+                    </Badge>
+                  </div>
+                  <div className="p-6 overflow-x-auto text-xs sm:text-sm font-sans leading-relaxed text-[#f1ebd8]/90">
+                    <pre className="font-sans">
+                      <code>{snippet.code}</code>
+                    </pre>
+                  </div>
+                  <div className="px-6 py-3 bg-[#110f0e] border-t border-white/10 text-xs text-[#f1ebd8]/60 font-sans">
+                    {snippet.explanation}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
       {/* ── Multi-Plate Gallery Section (If > 1 Image) ── */}
       {study.galleryImages.length > 1 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full space-y-6">
+        <section className="max-w-[1540px] mx-auto px-6 sm:px-10 lg:px-16 pb-16 w-full space-y-6">
           <div className="space-y-1">
             <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
               Interface Gallery

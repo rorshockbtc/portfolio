@@ -24,6 +24,8 @@ import {
   ShoppingBag,
   Maximize2,
   Zap,
+  Camera,
+  Compass,
 } from "lucide-react";
 import { openContactModal } from "@/lib/contact-events";
 import {
@@ -979,6 +981,207 @@ export default function PortfolioPage() {
 
       {/* ── Video Showcase & Live Demos ── */}
       <VideoShowcase />
+
+      {/* ── SPREAD 07: IN THE FIELD — THE HUMAN BEHIND THE ARCHITECTURE ── */}
+      <section id="in-the-field" className="py-28 md:py-40 border-t border-[#D3C7B5] bg-[#EAE0D0]">
+        <div className="max-w-[1540px] mx-auto px-6 sm:px-10 lg:px-16 space-y-16">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#D3C7B5] pb-10">
+            <div className="space-y-3 max-w-4xl">
+              <span className="font-sans text-xs sm:text-sm uppercase tracking-[0.25em] font-bold text-[#FE299E] flex items-center gap-2">
+                <Compass className="w-4 h-4 text-[#FE299E]" /> 07 / In the Field &bull; Life, Craft &amp; Autonomy
+              </span>
+              <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-[#281B16] tracking-tight">
+                The Human Behind the Architecture
+              </h2>
+              <p className="text-xl sm:text-2xl text-[#6B554D] font-sans leading-relaxed">
+                Architecture isn&apos;t conceived in an ivory tower—it is forged in real environments with real humans. Sovereignty, human dignity, and intense focus across borders.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 text-xs sm:text-sm font-sans text-[#6B554D]">
+              <span className="font-bold text-[#281B16] flex items-center gap-1.5">
+                <Camera className="w-4 h-4 text-[#FE299E]" /> 5 Photographic Plates
+              </span>
+              <span>&bull;</span>
+              <span>Click Any Photo to Inspect</span>
+            </div>
+          </div>
+
+          {/* Row 1: Dual Feature (7 / 5 Split) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            {/* Maldives: "End the Fed" Deck */}
+            <div
+              onClick={() =>
+                setLightboxImage({
+                  src: "/images/personal/kyle-victoria-maldives-end-the-fed.jpg",
+                  caption: "Monetary Sovereignty & Full-Reserve Banking — Overwater deck, Maldives. Reading Ron Paul's 'End the Fed' while architecting sovereign financial rails.",
+                })
+              }
+              className="lg:col-span-7 group cursor-zoom-in space-y-4"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#D3C7B5] bg-[#F2EAE0]">
+                <img
+                  src="/images/personal/kyle-victoria-maldives-end-the-fed.jpg"
+                  alt="Kyle Cyree reading End the Fed on overwater deck in the Maldives"
+                  className="w-full aspect-[16/10] object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                />
+                <div className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-[#110f0e]/85 backdrop-blur-md text-white text-xs font-sans font-bold flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Maximize2 className="w-3.5 h-3.5 text-[#FE299E]" /> Full Resolution
+                </div>
+              </div>
+              <div className="space-y-1.5 px-1">
+                <div className="flex items-center gap-2">
+                  <span className="font-sans text-xs uppercase font-bold tracking-wider text-[#FE299E]">
+                    Monetary Sovereignty &bull; Maldives
+                  </span>
+                </div>
+                <h3 className="font-serif font-bold text-2xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                  Austrian Economics &amp; Full-Reserve Banking
+                </h3>
+                <p className="text-base text-[#6B554D] font-sans leading-relaxed">
+                  Overwater deck, Indian Ocean. Deep immersion in monetary history (Ron Paul&apos;s <em>End the Fed</em>) while architecting multi-engine settlement rails and Bitcoin UTXO custody for Custodia Bank.
+                </p>
+              </div>
+            </div>
+
+            {/* Kyle & Victoria: Palm Tree Portrait */}
+            <div
+              onClick={() =>
+                setLightboxImage({
+                  src: "/images/personal/kyle-victoria-palm-closeup.jpg",
+                  caption: "The Heart of the Craft — Kyle & Victoria. Behind every production sprint, venture launch, and sovereign protocol is a life rooted in partnership and shared focus.",
+                })
+              }
+              className="lg:col-span-5 group cursor-zoom-in space-y-4"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#D3C7B5] bg-[#F2EAE0]">
+                <img
+                  src="/images/personal/kyle-victoria-palm-closeup.jpg"
+                  alt="Kyle & Victoria Cyree"
+                  className="w-full aspect-[16/10] lg:aspect-square object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                />
+                <div className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-[#110f0e]/85 backdrop-blur-md text-white text-xs font-sans font-bold flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Maximize2 className="w-3.5 h-3.5 text-[#FE299E]" /> Full Resolution
+                </div>
+              </div>
+              <div className="space-y-1.5 px-1">
+                <div className="flex items-center gap-2">
+                  <span className="font-sans text-xs uppercase font-bold tracking-wider text-[#FE299E]">
+                    The Heart of the Craft &bull; Partnership
+                  </span>
+                </div>
+                <h3 className="font-serif font-bold text-2xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                  Kyle &amp; Victoria: The Unit of Two
+                </h3>
+                <p className="text-base text-[#6B554D] font-sans leading-relaxed">
+                  Behind every relentless 5,000-commit repository, venture launch, and 1-week sprint is a shared life built on disciplined focus, quiet dignity, and mutual purpose.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 2: Field Triad (3-Column Layout) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 pt-4">
+            {/* Andes Market: Field Research & Human Dignity */}
+            <div
+              onClick={() =>
+                setLightboxImage({
+                  src: "/images/personal/kyle-victoria-andes-market.jpg",
+                  caption: "Field Research & Human Dignity — High Andes indigenous market, Ecuador. Understanding real human exchange, tactile craft, and resilient informal trade networks.",
+                })
+              }
+              className="group cursor-zoom-in space-y-4"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#D3C7B5] bg-[#F2EAE0]">
+                <img
+                  src="/images/personal/kyle-victoria-andes-market.jpg"
+                  alt="Field study in high Andes indigenous market in Ecuador"
+                  className="w-full aspect-[4/3] object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                />
+                <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-[#110f0e]/85 backdrop-blur-md text-white text-[11px] font-sans font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
+                </div>
+              </div>
+              <div className="space-y-1 px-1">
+                <span className="font-sans text-xs uppercase font-bold tracking-wider text-[#FE299E] block">
+                  Field Research &bull; High Andes, Ecuador
+                </span>
+                <h4 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                  Human Dignity &amp; Tactile Trade
+                </h4>
+                <p className="text-sm text-[#6B554D] font-sans leading-relaxed">
+                  Observing indigenous commerce, generational wool craft, and resilient community trade networks that survive without central intermediaries.
+                </p>
+              </div>
+            </div>
+
+            {/* Medellín Mural: Color & Typography */}
+            <div
+              onClick={() =>
+                setLightboxImage({
+                  src: "/images/personal/kyle-victoria-colombia-mural.jpg",
+                  caption: "Typography, Color & Regeneration — Comuna 13, Medellín, Colombia. Studying monumental urban typography, vivid chromatic contrast, and cultural renaissance through graphic craft.",
+                })
+              }
+              className="group cursor-zoom-in space-y-4"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#D3C7B5] bg-[#F2EAE0]">
+                <img
+                  src="/images/personal/kyle-victoria-colombia-mural.jpg"
+                  alt="Street mural and urban typography in Comuna 13, Medellín, Colombia"
+                  className="w-full aspect-[4/3] object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                />
+                <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-[#110f0e]/85 backdrop-blur-md text-white text-[11px] font-sans font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
+                </div>
+              </div>
+              <div className="space-y-1 px-1">
+                <span className="font-sans text-xs uppercase font-bold tracking-wider text-[#FE299E] block">
+                  Design Systems &bull; Medellín, Colombia
+                </span>
+                <h4 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                  Monumental Color &amp; Typography
+                </h4>
+                <p className="text-sm text-[#6B554D] font-sans leading-relaxed">
+                  Immersing in monumental street art scale, Josef Albers chromatic vibration, and community transformation powered by visual courage.
+                </p>
+              </div>
+            </div>
+
+            {/* Overwater Steps: Radical Autonomy */}
+            <div
+              onClick={() =>
+                setLightboxImage({
+                  src: "/images/personal/kyle-victoria-overwater-steps.jpg",
+                  caption: "Radical Autonomy & Deep Focus — Indian Ocean lagoon. Shipping production code with zero office overhead, proving the 'Unit of One' execution model.",
+                })
+              }
+              className="group cursor-zoom-in space-y-4"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#D3C7B5] bg-[#F2EAE0]">
+                <img
+                  src="/images/personal/kyle-victoria-overwater-steps.jpg"
+                  alt="Extreme focus and remote autonomy on overwater steps in the Maldives"
+                  className="w-full aspect-[4/3] object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                />
+                <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-[#110f0e]/85 backdrop-blur-md text-white text-[11px] font-sans font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
+                </div>
+              </div>
+              <div className="space-y-1 px-1">
+                <span className="font-sans text-xs uppercase font-bold tracking-wider text-[#FE299E] block">
+                  Autonomy &bull; Indian Ocean
+                </span>
+                <h4 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                  Radical Focus &amp; Zero Agency Bloat
+                </h4>
+                <p className="text-sm text-[#6B554D] font-sans leading-relaxed">
+                  Delivering complex systems architecture and production code from anywhere on Earth with zero bureaucracy, demonstrating the true leverage of the Unit of One.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── ABOUT KYLE & "THE UNIT OF ONE" (OPEN EDITORIAL ESSAY) ── */}
       <section id="about-kyle" className="py-28 md:py-44 border-t border-[#D3C7B5] bg-[#F2EAE0]/50">
