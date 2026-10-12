@@ -707,21 +707,21 @@ export default function PortfolioPage() {
 
           {/* Row 1: Dual Feature (7 / 5 Split) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-            {/* Maldives: Monetary Literacy & Sovereign Systems */}
+            {/* Coastal & Purpose: Kyle & Victoria */}
             <div
               onClick={() =>
                 setLightboxImage({
-                  src: "/images/personal/kyle-victoria-maldives-beach-walk.jpg",
-                  caption: "Maldives. 10 years of open monetary research, financial education, and banking access advocacy—systems thinking that informed the institutional settlement rails at Custodia Bank.",
+                  src: "/images/personal/kyle-victoria-coastal-ring.jpg",
+                  caption: "Kyle & Victoria. Grounded in quiet discipline, mutual purpose, and deep focus.",
                 })
               }
               className="lg:col-span-7 group cursor-zoom-in space-y-4"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#D3C7B5] bg-[#F2EAE0]">
                 <img loading="lazy" decoding="async"
-                  src="/images/personal/kyle-victoria-maldives-beach-walk.jpg"
-                  alt="Kyle and Victoria Cyree walking along the Maldives beach"
-                  className="w-full aspect-[16/10] object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                  src="/images/personal/kyle-victoria-coastal-ring.jpg"
+                  alt="Kyle and Victoria Cyree"
+                  className="w-full aspect-[16/10] object-cover object-[50%_35%] group-hover:scale-[1.01] transition-transform duration-500"
                 />
                 <div className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-[#110f0e]/85 backdrop-blur-md text-white text-xs font-sans font-bold flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Maximize2 className="w-3.5 h-3.5 text-[#FE299E]" /> Full Resolution
@@ -730,14 +730,14 @@ export default function PortfolioPage() {
               <div className="space-y-1.5 px-1">
                 <div className="flex items-center gap-2">
                   <span className="font-sans text-xs uppercase font-bold tracking-wider text-[#FE299E]">
-                    Maldives · Monetary Research
+                    Field &amp; Focus
                   </span>
                 </div>
                 <h3 className="font-serif font-bold text-2xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
-                  Monetary Literacy &amp; Banking Access
+                  Systems Built on Discipline
                 </h3>
                 <p className="text-base text-[#6B554D] font-sans leading-relaxed">
-                  A decade of research in Austrian economics, inflation dynamics, and open monetary networks—the systems foundation behind designing multi-engine settlement rails and Bitcoin UTXO custody at Custodia Bank.
+                  Behind every 5,000-commit repository, venture launch, and 1-week sprint is a shared life rooted in disciplined focus and mutual purpose.
                 </p>
               </div>
             </div>
@@ -846,11 +846,11 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            {/* Overwater Steps: Radical Autonomy */}
+            {/* Sunset Maldives: Radical Autonomy */}
             <div
               onClick={() =>
                 setLightboxImage({
-                  src: "/images/personal/kyle-victoria-overwater-steps.jpg",
+                  src: "/images/personal/kyle-victoria-sunset-beach.jpg",
                   caption: "Indian Ocean. Time off is when the big structural ideas show up.",
                 })
               }
@@ -858,8 +858,8 @@ export default function PortfolioPage() {
             >
               <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#D3C7B5] bg-[#F2EAE0]">
                 <img loading="lazy" decoding="async"
-                  src="/images/personal/kyle-victoria-overwater-steps.jpg"
-                  alt="Overwater steps in the Maldives"
+                  src="/images/personal/kyle-victoria-sunset-beach.jpg"
+                  alt="Kyle and Victoria Cyree at sunset in the Maldives"
                   className="w-full aspect-[4/3] object-cover group-hover:scale-[1.01] transition-transform duration-500"
                 />
                 <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-[#110f0e]/85 backdrop-blur-md text-white text-[11px] font-sans font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
