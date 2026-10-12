@@ -504,10 +504,10 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     slug: "custodia",
     client: "Custodia Bank",
     title: "Zero-to-One Federal Reserve SPDI Banking System & Brand Architecture",
-    subtitle: "Sole Founding Product Designer • 4-Day Rebrand Sprint & 30-Day Core Bank Launch",
-    role: "Sole Founding Product Designer",
+    subtitle: "Lead Product Designer (First Design Hire) • 4-Day Rebrand Sprint & 30-Day Core Bank Launch",
+    role: "Lead Product Designer (First Design Hire)",
     scaleBadge: "Chartered Full-Reserve SPDI Bank",
-    timeline: "2021 – 2023",
+    timeline: "Jan 2022 – Sep 2024",
     heroImage: "/images/custodia/mm-01.png",
     galleryImages: [
       {
@@ -573,7 +573,7 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
       { value: "4 Days", label: "Brand & Web Sprint", subtext: "Zero to live production" },
       { value: "30 Days", label: "Core Banking App", subtext: "Fed regulatory evaluation ready" },
       { value: "3 Rails", label: "Settlement Engines", subtext: "Fedwire, MM & Bitcoin UTXO" },
-      { value: "2+ Years", label: "System Longevity", subtext: "Zero subsequent design hires needed" },
+      { value: "100+", label: "Prototyping Sprints", subtext: "Cross-functional team velocity" },
     ],
     outcomes: [
       "Shipped complete institutional brand identity, marketing site, and design system in a 4-day sprint.",
@@ -633,7 +633,7 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     client: "UnitedHealth Group / Optum",
     title: "Flagship Native Patient Mobile Apps & Fusion Strategic Consultancy",
     subtitle: "Senior Product Experience Designer • Flagship apps for 35M+ patients",
-    role: "Senior Product Designer & Fusion Strategist",
+    role: "Senior Product Experience Designer",
     scaleBadge: "35M+ patients • Flagship iOS & Android",
     timeline: "2020 – 2021",
     heroImage: "/artwork/enterprise-health.png",
@@ -657,17 +657,18 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
       "Standardized multi-tenant design tokens across iOS (SwiftUI) and Android (Jetpack Compose). Orchestrated multi-brand theming allowing newly acquired regional hospital networks and Optum clinics to skin the flagship patient engine seamlessly.",
     metrics: [
       { value: "35M+", label: "Patients", subtext: "Plus 400K+ employees" },
+      { value: "Apple Health", label: "Advocacy", subtext: "Estimated hundreds of millions impact" },
       { value: "80% / 50%", label: "Screen Ownership", subtext: "80% Android, 50% iOS" },
-      { value: "Team of 4", label: "Design System Lead", subtext: "Rescued enterprise mobile launch" },
-      { value: "Fusion", label: "C-Suite Advisory", subtext: "Internal executive consultancy" },
+      { value: "Fortune 10", label: "Enterprise Scale", subtext: "Optum & UHG" },
     ],
     outcomes: [
       "Unified the cross-organizational mobile design system across UnitedHealth Group and Optum.",
       "Designed and shipped 80%+ of Android and 50%+ of iOS flagship screens.",
+      "Championed UHG's adoption of Apple Health guidelines and integrations, impacting tens of millions of patients.",
       "Facilitated C-suite executive alignment across major regional hospital acquisitions.",
-      "Significantly elevated app store ratings from sub-2 stars to high-4 star tier.",
     ],
     technologies: ["Native iOS (SwiftUI)", "Native Android", "Multi-Tenant Design Systems", "Executive Stakeholder Facilitation", "HIPAA Compliance"],
+    ndaNotice: "Proprietary patient telemetry, internal hospital portal URLs, and sensitive corporate identifiers are redacted under healthcare compliance and mutual confidentiality agreements.",
   },
 
   walmart: {
@@ -675,9 +676,9 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     client: "Walmart (via PredictiveUX)",
     title: "Enterprise Learning Management System (LMS) & Graph Search Paradigm",
     subtitle: "Senior UX/UI Architect at PredictiveUX • Internal tools for 3M employees",
-    role: "Senior UX/UI Architect",
+    role: "Senior UX/UI Architect (via PredictiveUX)",
     scaleBadge: "3M employees • Enterprise search & LMS",
-    timeline: "2021 – 2022",
+    timeline: "Oct 2021 – Oct 2022",
     heroImage: "/images/walmart/walmart-search-results.png",
     galleryImages: [
       {
@@ -721,6 +722,7 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
       "Eliminated course publishing regressions with state-driven deletion safeguards.",
     ],
     technologies: ["GraphQL", "Graph Databases", "Enterprise Design Systems", "High-Volume LMS", "React", "TypeScript"],
+    ndaNotice: "Enterprise search schemas, internal associate directory taxonomies, and internal portal screenshots are presented under nondisclosure terms. Certain proprietary identifiers have been generalized.",
   },
 
   foodler: {
