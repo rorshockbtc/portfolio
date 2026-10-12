@@ -25,7 +25,6 @@ import { openContactModal } from "@/lib/contact-events";
 import {
   BrandMark,
   ClientLogoBar,
-  VideoShowcase,
   SprintCallout,
 } from "@/components/chb";
 import { ExperienceSection } from "@/components/chb/experience-section";
@@ -688,9 +687,6 @@ export default function PortfolioPage() {
           </ul>
         </div>
       </section>
-
-      {/* ── Video Showcase & Live Demos ── */}
-      <VideoShowcase />
 
       {/* ── SPREAD 07: IN THE FIELD — THE HUMAN BEHIND THE ARCHITECTURE ── */}
       <section id="in-the-field" className="py-28 md:py-40 border-t border-[#D3C7B5] bg-[#EAE0D0]">
