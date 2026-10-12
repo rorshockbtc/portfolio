@@ -100,6 +100,61 @@ export async function registerRoutes(
     res.json({ ready: cached, generating });
   });
 
+  // ── Sprint Inquiry & Contact Intake ──────────────────────────────────────────
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, subject, message, sprintType } = req.body || {};
+      if (!name || !email || !message) {
+        return res.status(400).json({
+          success: false,
+          message: "Name, email, and message are required.",
+        });
+      }
+
+      const timestamp = new Date().toISOString();
+      console.log(`[CONTACT INTAKE] New submission at ${timestamp}`);
+      console.log(`  Name: ${name}`);
+      console.log(`  Email: ${email}`);
+      console.log(`  Subject: ${subject || "1-Week Turnaround Sprint ($7,500)"}`);
+      console.log(`  Sprint: ${sprintType || "1-Week Sprint ($7,500)"}`);
+      console.log(`  Message: ${message}`);
+
+      // Forward to Web3Forms if access key is present
+      const web3Key = process.env.WEB3FORMS_ACCESS_KEY || process.env.VITE_WEB3FORMS_ACCESS_KEY;
+      if (web3Key) {
+        try {
+          await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              access_key: web3Key,
+              name,
+              email,
+              subject: subject || "1-Week Turnaround Sprint ($7,500)",
+              message,
+              to: "cubby@colonhyphenbracket.pink",
+              bcc: "rorshock@protonmail.com",
+              from_name: "CHB Portfolio",
+            }),
+          });
+        } catch (err) {
+          console.warn("[CONTACT] Web3Forms dispatch warning:", err);
+        }
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "Inquiry received! Kyle will review your requirements and respond within 24 hours.",
+      });
+    } catch (error: any) {
+      console.error("[CONTACT] Error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to process inquiry. Please email cubby@colonhyphenbracket.pink directly.",
+      });
+    }
+  });
+
   // ── robots.txt ──────────────────────────────────────────────────────────────
   app.get("/robots.txt", (req, res) => {
     const siteUrl = buildSiteUrl(req);

@@ -119,9 +119,9 @@ const enterpriseClients: ClientBrand[] = [
 
 export function ClientLogoBar() {
   return (
-    <div className="w-full border-y border-[#D3C7B5] bg-[#F2EAE0]/90 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#D3C7B5]/60 pb-3">
+    <div className="w-full border-y border-[#D3C7B5] bg-[#F2EAE0]/90 py-10">
+      <div className="max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-14 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D3C7B5]/60 pb-4">
           <span className="text-xs font-sans uppercase tracking-[0.2em] font-bold text-[#6B554D]">
             Verified Enterprise Production Systems
           </span>
@@ -130,8 +130,8 @@ export function ClientLogoBar() {
           </span>
         </div>
 
-        {/* Large, Authoritative Typographic Logo Roster */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-5 items-center">
+        {/* Authoritative Typographic Logo Roster */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 lg:gap-8 items-start">
           {enterpriseClients.map((client, idx) => (
             <div
               key={idx}

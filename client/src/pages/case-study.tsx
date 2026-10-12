@@ -99,10 +99,10 @@ export default function CaseStudyPage() {
 
           <Button
             size="sm"
-            className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-[11px] uppercase tracking-[0.15em] font-semibold rounded-full px-4 shrink-0"
+            className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-[11px] uppercase tracking-[0.15em] font-bold rounded-full px-4 shrink-0 shadow-sm cursor-pointer"
             onClick={() => setIsContactOpen(true)}
           >
-            Hire Kyle ($10k Sprint)
+            Hire Kyle ($7,500 Sprint)
           </Button>
         </div>
       </div>
@@ -448,16 +448,16 @@ export default function CaseStudyPage() {
               Ready to ship with this velocity?
             </h3>
             <p className="text-base text-[#6B554D] font-sans leading-relaxed">
-              Book a 1-week turnaround sprint ($10k flat). I audit the architecture, design the high-craft interface with Massimo Vignelli rigor, and ship production-ready code.
+              Book a 1-week turnaround sprint ($7,500 flat). I audit the architecture, design the high-craft interface with Massimo Vignelli rigor, and ship production-ready code.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-3 shrink-0">
             <Button
-              className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-full px-7 py-3 shadow-md"
+              className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-full px-7 py-3 shadow-md cursor-pointer"
               onClick={() => setIsContactOpen(true)}
             >
-              Book 1-Week Sprint ($10k) <ArrowRight className="w-4 h-4 ml-2" />
+              Book 1-Week Sprint ($7,500) <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
             <Link href="/">
               <Button variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] hover:bg-[#EAE0D0] text-[#281B16] font-sans text-xs uppercase tracking-[0.16em] font-medium rounded-full px-6 py-3">

@@ -37,11 +37,12 @@ interface ContactFormModalProps {
   defaultSubject?: string;
 }
 
-export default function ContactFormModal({ open, onOpenChange, defaultSubject = "General Inquiry" }: ContactFormModalProps) {
+export default function ContactFormModal({ open, onOpenChange, defaultSubject = "1-Week Production Sprint ($7,500)" }: ContactFormModalProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const intentOptions = [
-    "1-Week Production Sprint ($10k)",
+    "1-Week Production Sprint ($7,500)",
     "Principal / Staff W2 Role",
     "Fractional Lead Architect",
     "Direct Hire Inquiry",
@@ -65,22 +66,25 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
 
   async function onSubmit(data: ContactFormValues) {
     setStatus("submitting");
+    setErrorMessage("");
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
           name: data.name,
           email: data.email,
-          subject: data.subject || "Portfolio Contact",
+          subject: data.subject || "1-Week Production Sprint ($7,500)",
           message: data.message,
-          to: "cubby@colonhyphenbracket.pink",
-          bcc: "rorshock@protonmail.com",
-          from_name: "CHB Portfolio",
+          sprintType: data.subject?.includes("$7,500") ? "1-Week Sprint ($7,500)" : undefined,
         }),
       });
-      if (!response.ok) throw new Error("Submission failed");
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to submit inquiry.");
+      }
+
       const result = await response.json();
       if (result.success) {
         setStatus("success");
@@ -88,7 +92,10 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
       } else {
         throw new Error(result.message || "Submission failed");
       }
-    } catch {
+    } catch (err: any) {
+      console.error("[FORM] Submission error:", err);
+      // Even if network fails, provide graceful fallback
+      setErrorMessage(err?.message || "Something went wrong while sending your message.");
       setStatus("error");
     }
   }
@@ -111,48 +118,82 @@ export default function ContactFormModal({ open, onOpenChange, defaultSubject = 
         aria-describedby="contact-form-description"
       >
         <DialogHeader>
-          <DialogTitle className="text-lg font-semibold" data-testid="text-contact-title">
-            Get in Touch
+          <DialogTitle className="text-xl font-serif font-bold text-[#281B16]" data-testid="text-contact-title">
+            Book 1-Week Sprint ($7,500) or Inquire
           </DialogTitle>
-          <DialogDescription id="contact-form-description">
-            Send a message and we'll get back to you shortly.
+          <DialogDescription id="contact-form-description" className="text-xs text-[#6B554D] font-sans">
+            Direct channel to Kyle Cyree. Response guaranteed within 24 hours.
           </DialogDescription>
         </DialogHeader>
 
         {status === "success" ? (
           <div
-            className="flex flex-col items-center gap-4 py-8"
+            className="flex flex-col items-center gap-4 py-6 text-center space-y-2"
             role="status"
             aria-live="polite"
             data-testid="contact-success"
           >
-            <CheckCircle2 className="w-12 h-12" style={{ color: "#FE299E" }} />
-            <p className="text-center font-medium">Message sent successfully!</p>
-            <p className="text-sm text-muted-foreground text-center">
-              We'll be in touch soon.
-            </p>
-            <Button onClick={handleClose} data-testid="button-close-success">
-              Close
+            <div className="w-14 h-14 rounded-full bg-[#FE299E]/10 flex items-center justify-center">
+              <CheckCircle2 className="w-8 h-8 text-[#FE299E]" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-serif font-bold text-lg text-[#281B16]">Inquiry Dispatched Successfully!</h3>
+              <p className="text-xs text-[#6B554D] font-sans max-w-xs">
+                Your message has been logged directly into Kyle&apos;s queue. Expect a response within 24 hours.
+              </p>
+            </div>
+
+            <div className="w-full bg-[#F2EAE0] border border-[#D3C7B5] rounded-xl p-3 text-left space-y-1.5 text-xs font-sans">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-[#6B554D]">Sprint Rate:</span>
+                <span className="font-bold text-[#281B16]">$7,500 Flat</span>
+              </div>
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-[#6B554D]">Guaranteed Turnaround:</span>
+                <span className="font-bold text-[#281B16]">5 Business Days</span>
+              </div>
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-[#6B554D]">Direct Channel:</span>
+                <span className="font-semibold text-[#FE299E]">cubby@colonhyphenbracket.pink</span>
+              </div>
+            </div>
+
+            <Button
+              onClick={handleClose}
+              className="w-full bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-xs uppercase tracking-wider font-bold rounded-full py-2.5"
+              data-testid="button-close-success"
+            >
+              Close Window
             </Button>
           </div>
         ) : status === "error" ? (
           <div
-            className="flex flex-col items-center gap-4 py-8"
+            className="flex flex-col items-center gap-4 py-6 text-center space-y-2"
             role="alert"
             aria-live="assertive"
             data-testid="contact-error"
           >
-            <AlertCircle className="w-12 h-12 text-destructive" />
-            <p className="text-center font-medium">Something went wrong</p>
-            <p className="text-sm text-muted-foreground text-center">
-              Please try again or email us directly.
-            </p>
-            <div className="flex gap-3">
-              <Button onClick={() => setStatus("idle")} data-testid="button-retry">
-                Try Again
-              </Button>
-              <Button variant="secondary" onClick={handleClose} data-testid="button-close-error">
-                Close
+            <AlertCircle className="w-12 h-12 text-[#E05A36]" />
+            <div className="space-y-1">
+              <h3 className="font-serif font-bold text-lg text-[#281B16]">Unable to Dispatch</h3>
+              <p className="text-xs text-[#6B554D] font-sans max-w-xs">
+                {errorMessage || "Network hiccup. Please reach Kyle directly via email."}
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2.5 w-full pt-2">
+              <a
+                href="mailto:cubby@colonhyphenbracket.pink?subject=1-Week%20Sprint%20Inquiry%20($7,500)&body=Hi%20Kyle,%0A%0AI'd%20like%20to%20book%20a%201-Week%20Turnaround%20Sprint%20($7,500)."
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white text-xs font-sans uppercase font-bold tracking-wider"
+              >
+                Send via Email Client &rarr;
+              </a>
+              <Button
+                variant="outline"
+                onClick={() => setStatus("idle")}
+                className="rounded-full text-xs font-sans"
+                data-testid="button-retry"
+              >
+                Try Form Again
               </Button>
             </div>
           </div>
