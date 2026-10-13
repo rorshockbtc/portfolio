@@ -8,3 +8,4 @@ export { SprintCallout } from "./sprint-callout";
 export { ProtectedVault } from "./protected-vault";
 export { ClientLogoBar } from "./client-logo-bar";
 export { AlbersInteractionCard } from "./albers-interaction-card";
+export { TechStack } from "./tech-stack";

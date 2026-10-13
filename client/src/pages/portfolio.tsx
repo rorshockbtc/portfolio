@@ -26,6 +26,7 @@ import {
   BrandMark,
   ClientLogoBar,
   SprintCallout,
+  TechStack,
 } from "@/components/chb";
 import { ExperienceSection } from "@/components/chb/experience-section";
 import { TestimonialsSection } from "@/components/chb/testimonials-section";
@@ -132,7 +133,7 @@ export default function PortfolioPage() {
           </div>
 
           {/* ── Recruiter 30-Second Fast-Track Strip ── */}
-          <div className="mt-16 pt-8 border-t border-[#D3C7B5] grid grid-cols-2 md:grid-cols-4 gap-6 text-sm font-sans">
+          <div className="mt-16 pt-8 border-t border-[#D3C7B5] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-sm font-sans">
             <div>
               <span className="text-xs uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Target Roles</span>
               <span className="font-semibold text-[#281B16] block">Product Architect</span>
@@ -142,6 +143,13 @@ export default function PortfolioPage() {
               <span className="text-xs uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Pedigree</span>
               <span className="font-semibold text-[#281B16] block">15+ Years Regulated</span>
               <span className="text-xs text-[#5C4840]">Healthcare, Fintech, Retail Search</span>
+            </div>
+            <div>
+              <span className="text-xs uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Production Stack</span>
+              <a href="#code-stack" className="group font-semibold text-[#281B16] hover:text-[#FE299E] transition-colors block">
+                Next.js · TypeScript &darr;
+              </a>
+              <span className="text-xs text-[#5C4840]">AI Prototyping · Python · Rust</span>
             </div>
             <div>
               <span className="text-xs uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Location &amp; Degrees</span>
@@ -626,14 +634,13 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
             <div className="lg:col-span-7 space-y-5">
               <p className="font-sans text-sm uppercase tracking-[0.22em] font-bold text-[#FE299E] flex items-center gap-2">
-                <GitBranch className="w-4 h-4" /> Code
+                <GitBranch className="w-4 h-4" /> Code &amp; Systems
               </p>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.05]">
                 A designer who ships code.
               </h2>
               <p className="text-lg sm:text-xl text-[#5C4840] font-sans leading-relaxed max-w-2xl">
-                I'm a designer first, but I build what I design. Day to day that's TypeScript with React and Next.js, plus Node,
-                some Python, and a little Rust. Most of my client work is private. These repos are public.
+                I'm a systems architect, product designer, and prompt engineer who understands code. I model data schemas from first principles, design interfaces with Swiss discipline, and leverage AI to write backend logic and ship functional prototypes in days instead of quarters. Day to day that's TypeScript with React and Next.js, plus Node, Python, and a little Rust. Most of my client work is private. These repos are public.
               </p>
             </div>
             <div className="lg:col-span-5 lg:justify-self-end">
@@ -685,6 +692,9 @@ export default function PortfolioPage() {
               </li>
             ))}
           </ul>
+
+          {/* ── ARCHITECTURAL CAPABILITIES & PRODUCTION STACK ── */}
+          <TechStack />
         </div>
       </section>
 
