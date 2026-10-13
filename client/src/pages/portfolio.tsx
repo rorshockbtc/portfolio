@@ -640,7 +640,7 @@ export default function PortfolioPage() {
                 A designer who ships code.
               </h2>
               <p className="text-lg sm:text-xl text-[#5C4840] font-sans leading-relaxed max-w-2xl">
-                I'm a systems architect, product designer, and prompt engineer who understands code. I model data schemas from first principles, design interfaces with Swiss discipline, and leverage AI to write backend logic and ship functional prototypes in days instead of quarters. Day to day that's TypeScript with React and Next.js, plus Node, Python, and a little Rust. Most of my client work is private. These repos are public.
+                Most of my enterprise client work is under NDA, so I build and release open-source systems in public. Day to day that's TypeScript with React and Next.js, backed by Python, DuckDB-WASM, WebGPU, and Rust when local performance or data pipelines demand it.
               </p>
             </div>
             <div className="lg:col-span-5 lg:justify-self-end">
