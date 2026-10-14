@@ -1,6 +1,8 @@
-import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Copy, Check } from "lucide-react";
 import { SiLinkedin, SiGithub } from "react-icons/si";
 import { Button } from "@/components/ui/button";
+import { openContactModal } from "@/lib/contact-events";
 
 const productLinks = [
   { name: "hash.pink", href: "https://hash.pink" },
@@ -66,6 +68,14 @@ const socialLinks = [
 ];
 
 export default function FooterSection() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("rorshock@protonmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <footer
       className="border-t border-[#D3C7B5] bg-[#F2EAE0] relative z-50"
@@ -161,14 +171,29 @@ export default function FooterSection() {
                   </a>
                 </li>
               ))}
-              <li>
+              <li className="space-y-1.5">
                 <a
                   href="mailto:rorshock@protonmail.com"
-                  className="inline-flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300 break-all"
                   data-testid="link-footer-email"
                 >
                   rorshock@protonmail.com
                 </a>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider border border-[#D3C7B5] bg-[#EAE0D0] text-[#5C4840] hover:border-[#FE299E] hover:text-[#281B16] transition-colors cursor-pointer"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3 h-3 text-emerald-600" /> Copied email
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3 h-3 text-[#FE299E]" /> Copy email
+                    </>
+                  )}
+                </button>
               </li>
             </ul>
           </div>
@@ -186,11 +211,12 @@ export default function FooterSection() {
               Designed &amp; built with intention
             </p>
             <Button
-              asChild
               size="sm"
+              onClick={() => openContactModal("1-week sprint ($7,500)")}
+              className="cursor-pointer rounded-full bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-xs font-bold px-4"
               data-testid="cta-footer-contact"
             >
-              <a href="mailto:rorshock@protonmail.com">Contact Us</a>
+              Get in touch
             </Button>
           </div>
         </div>

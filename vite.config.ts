@@ -20,6 +20,15 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "wouter"],
+          "vendor-motion": ["framer-motion"],
+          "vendor-icons": ["lucide-react", "react-icons"],
+        },
+      },
+    },
   },
   server: {
     fs: {

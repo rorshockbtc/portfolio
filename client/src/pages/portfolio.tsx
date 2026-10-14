@@ -20,6 +20,8 @@ import {
   Maximize2,
   Compass,
   Calendar,
+  Copy,
+  Check,
 } from "lucide-react";
 import { openContactModal } from "@/lib/contact-events";
 import {
@@ -33,6 +35,13 @@ import { TestimonialsSection } from "@/components/chb/testimonials-section";
 
 export default function PortfolioPage() {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; caption: string } | null>(null);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("rorshock@protonmail.com");
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -94,9 +103,27 @@ export default function PortfolioPage() {
                 <a href="/resumes/kyle-cyree-resume.pdf" target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]">
                   <Download className="w-4 h-4" /> Resume (PDF)
                 </a>
-                <a href="mailto:rorshock@protonmail.com" className="font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]">
-                  rorshock@protonmail.com
-                </a>
+                <span className="inline-flex items-center gap-2">
+                  <a href="mailto:rorshock@protonmail.com" className="font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]">
+                    rorshock@protonmail.com
+                  </a>
+                  <button
+                    type="button"
+                    onClick={copyEmail}
+                    aria-label="Copy email address"
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-sans font-bold uppercase tracking-wider border border-[#D3C7B5] bg-[#F2EAE0] text-[#5C4840] hover:border-[#FE299E] hover:text-[#281B16] transition-colors cursor-pointer"
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <Check className="w-3 h-3 text-emerald-600" /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3 h-3 text-[#FE299E]" /> Copy
+                      </>
+                    )}
+                  </button>
+                </span>
                 <a href="https://www.linkedin.com/in/kyle-cyree/" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]">
                   LinkedIn
                 </a>

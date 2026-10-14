@@ -3,7 +3,8 @@ import path from "path";
 import { CASE_STUDIES } from "../client/src/data/case-studies.ts";
 
 const ROOT = process.cwd();
-const DIST_INDEX = path.resolve(ROOT, "dist/index.html");
+const DIST_DIR = path.resolve(ROOT, "dist");
+const DIST_INDEX = path.resolve(DIST_DIR, "index.html");
 
 if (!fs.existsSync(DIST_INDEX)) {
   console.error("dist/index.html not found, skipping postbuild SEO generation.");
@@ -77,9 +78,51 @@ for (const [slug, study] of Object.entries(CASE_STUDIES)) {
       `<meta name="twitter:image:alt" content="${escapeHtml(pageTitle)}" />`
     );
 
-  const outDir = path.resolve(ROOT, "dist/case-studies", slug);
+  const outDir = path.resolve(DIST_DIR, "case-studies", slug);
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.resolve(outDir, "index.html"), html, "utf-8");
 }
 
-console.log(`Generated static SEO/OG entry points for ${Object.keys(CASE_STUDIES).length} case studies.`);
+// Generate robots.txt
+const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: https://hire.colonhyphenbracket.pink/sitemap.xml
+`;
+fs.writeFileSync(path.resolve(DIST_DIR, "robots.txt"), robotsTxt, "utf-8");
+fs.writeFileSync(path.resolve(ROOT, "client/public/robots.txt"), robotsTxt, "utf-8");
+
+// Generate sitemap.xml
+const today = new Date().toISOString().split("T")[0];
+const staticRoutes = [
+  { loc: "https://hire.colonhyphenbracket.pink/", priority: "1.0" },
+  { loc: "https://hire.colonhyphenbracket.pink/studio", priority: "0.8" },
+  { loc: "https://hire.colonhyphenbracket.pink/essays/design-is-risk", priority: "0.8" },
+];
+const caseStudyRoutes = Object.keys(CASE_STUDIES).map((slug) => ({
+  loc: `https://hire.colonhyphenbracket.pink/case-studies/${slug}`,
+  priority: ["custodia", "unitedhealth", "walmart", "pipes"].includes(slug) ? "0.9" : "0.7",
+}));
+
+const allUrls = [...staticRoutes, ...caseStudyRoutes]
+  .map(
+    (u) => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`
+  )
+  .join("\n");
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${allUrls}
+</urlset>
+`;
+fs.writeFileSync(path.resolve(DIST_DIR, "sitemap.xml"), sitemapXml, "utf-8");
+fs.writeFileSync(path.resolve(ROOT, "client/public/sitemap.xml"), sitemapXml, "utf-8");
+
+console.log(
+  `Generated static SEO/OG entry points for ${Object.keys(CASE_STUDIES).length} case studies, plus robots.txt and sitemap.xml.`
+);

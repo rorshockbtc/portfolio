@@ -1,15 +1,21 @@
 {
-  "name": "Colon Hyphen Bracket — Kyle Cyree",
-  "short_name": "CHB",
+  "name": "Kyle Cyree — Colon Hyphen Bracket",
+  "short_name": "Kyle Cyree",
   "description": "Portfolio and studio site for Kyle Cyree — Product Architect & R&D Lead.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#FE299E",
+  "background_color": "#EAE0D0",
+  "theme_color": "#281B16",
   "icons": [
     {
-      "src": "/images/favicon.png",
+      "src": "/favicon.svg",
       "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png",
       "purpose": "any maskable"
     }

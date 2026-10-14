@@ -30,7 +30,30 @@ export default function CaseStudyPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [slug]);
+    if (study) {
+      document.title = `${study.client}: ${study.title} | Kyle Cyree`;
+    }
+    return () => {
+      document.title = "Kyle Cyree | Product Architect & R&D Lead";
+    };
+  }, [slug, study]);
+
+  useEffect(() => {
+    if (activeImageIndex === null || !study) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveImageIndex(null);
+      } else if (e.key === "ArrowRight") {
+        setActiveImageIndex((prev) => (prev !== null ? (prev + 1) % study.galleryImages.length : null));
+      } else if (e.key === "ArrowLeft") {
+        setActiveImageIndex((prev) =>
+          prev !== null ? (prev - 1 + study.galleryImages.length) % study.galleryImages.length : null
+        );
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeImageIndex, study]);
 
   if (!study) {
     return (
@@ -356,8 +379,8 @@ export default function CaseStudyPage() {
                       {snippet.language}
                     </Badge>
                   </div>
-                  <div className="p-6 overflow-x-auto text-xs sm:text-sm font-sans leading-relaxed text-[#f1ebd8]/90">
-                    <pre className="font-sans">
+                  <div className="p-6 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed text-[#f1ebd8]/90">
+                    <pre className="font-mono">
                       <code>{snippet.code}</code>
                     </pre>
                   </div>
@@ -497,6 +520,57 @@ export default function CaseStudyPage() {
           </div>
         </div>
       )}
+
+      {/* ── Continue Exploring: Next Case Studies ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 w-full space-y-6">
+        <div className="flex items-center justify-between border-t border-[#D3C7B5] pt-10">
+          <div className="space-y-1">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] block">
+              Continue Reading
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16]">
+              Explore more architectural records
+            </h2>
+          </div>
+          <Link
+            href="/"
+            className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-[0.14em] font-bold text-[#6B554D] hover:text-[#FE299E] transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 text-[#FE299E]" /> Full Portfolio Index
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {["custodia", "unitedhealth", "walmart", "pipes"]
+            .filter((s) => s !== study.slug)
+            .slice(0, 3)
+            .map((nextSlug) => {
+              const nextStudy = CASE_STUDIES[nextSlug];
+              if (!nextStudy) return null;
+              return (
+                <Link key={nextSlug} href={`/case-studies/${nextSlug}`}>
+                  <div className="group h-full rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] p-6 hover:border-[#FE299E] transition-all cursor-pointer flex flex-col justify-between space-y-5 shadow-xs">
+                    <div className="space-y-2">
+                      <span className="font-sans text-[11px] uppercase tracking-[0.18em] font-bold text-[#FE299E] block">
+                        {nextStudy.client}
+                      </span>
+                      <h3 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors leading-snug">
+                        {nextStudy.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#6B554D] font-sans line-clamp-2 leading-relaxed">
+                        {nextStudy.subtitle}
+                      </p>
+                    </div>
+                    <div className="pt-3 border-t border-[#D3C7B5]/60 flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
+                      <span>Read Case Study</span>
+                      <ArrowRight className="w-4 h-4 text-[#FE299E] group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+        </div>
+      </section>
 
       {/* ── High-Conversion Velocity Banner ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 w-full">
