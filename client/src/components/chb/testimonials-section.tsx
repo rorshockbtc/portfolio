@@ -216,15 +216,15 @@ export function TestimonialsSection() {
             variant="outline"
             size="lg"
             onClick={() => setShowAll(!showAll)}
-            className="border-[#281B16]/30 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-sm font-bold rounded-full px-8 py-3.5 cursor-pointer transition-all"
+            className="w-full sm:w-auto justify-center whitespace-normal border-[#281B16]/30 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs sm:text-sm font-bold rounded-full px-5 sm:px-8 py-3.5 cursor-pointer transition-all"
           >
             {showAll ? (
               <>
-                Collapse recommendations <ChevronUp className="w-4 h-4 ml-2" />
+                Collapse recommendations <ChevronUp className="w-4 h-4 ml-2 shrink-0" />
               </>
             ) : (
               <>
-                Read all 11 verified recommendations <ChevronDown className="w-4 h-4 ml-2" />
+                Read all 11 verified recommendations <ChevronDown className="w-4 h-4 ml-2 shrink-0" />
               </>
             )}
           </Button>

@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         <Navigation />
 
-        <main id="main-content" className="flex-1 pt-20 pb-16 md:pb-0">
+        <main id="main-content" className="flex-1 pt-16 sm:pt-20 pb-16 md:pb-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={location}

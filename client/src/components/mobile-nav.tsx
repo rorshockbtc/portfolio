@@ -10,15 +10,23 @@ const sectionLinks = [
 ];
 
 export default function MobileNav() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const { sections, activeSection, scrollToSection } = useStudioSections();
   const isStudioPage = location === "/studio";
   const hasSections = isStudioPage && sections.length > 0;
 
   const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (location !== "/") {
+      setLocation("/");
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 120);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   };
 

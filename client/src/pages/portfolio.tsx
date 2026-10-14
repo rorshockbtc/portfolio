@@ -41,41 +41,41 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen bg-[#EAE0D0] text-[#281B16] flex flex-col selection:bg-[#FE299E]/20">
       {/* ── HERO ── */}
-      <section className="relative pt-14 md:pt-24 pb-20 md:pb-32" data-testid="section-hero">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-            <div className="lg:col-span-8 space-y-9 order-2 lg:order-1">
+      <section className="relative pt-8 sm:pt-14 md:pt-24 pb-16 md:pb-32" data-testid="section-hero">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-16 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-20 items-center">
+            <div className="lg:col-span-8 space-y-6 sm:space-y-9 order-2 lg:order-1">
               <p className="flex items-center gap-3 font-sans text-xs sm:text-sm uppercase tracking-[0.16em] sm:tracking-[0.22em] font-bold text-[#FE299E]">
                 <BrandMark size="md" />
                 <span>Product Architect<span className="hidden sm:inline"> &amp; R&amp;D Lead</span></span>
               </p>
 
-              <h1 className="text-[3.25rem] leading-[1] sm:text-7xl lg:text-[5.25rem] 2xl:text-[5.75rem] font-serif font-black text-[#281B16] tracking-tight">
-                Architect the system. <br className="hidden sm:block" />
-                <span className="italic font-normal text-[#FE299E]">Design the interface.</span> <br className="hidden sm:block" />
-                Ship the prototype.
+              <h1 className="text-[2.4rem] leading-[1.04] sm:text-7xl lg:text-[5.25rem] 2xl:text-[5.75rem] font-serif font-black text-[#281B16] tracking-tight">
+                <span className="block">Architect the system.</span>
+                <span className="block italic font-normal text-[#FE299E]">Design the interface.</span>
+                <span className="block">Ship the prototype.</span>
               </h1>
 
-              <p className="text-xl sm:text-2xl lg:text-[1.55rem] text-[#5C4840] font-sans leading-[1.55] max-w-3xl">
+              <p className="text-lg sm:text-2xl lg:text-[1.55rem] text-[#5C4840] font-sans leading-[1.55] max-w-3xl">
                 I'm Kyle Cyree. I operate as a surgical "studio of one." For 15 years I've led systems in regulated environments where mistakes cost millions:
                 UnitedHealth Group's patient apps <strong className="text-[#281B16] font-semibold">(35M+ patients)</strong>,
                 Walmart's internal search <strong className="text-[#281B16] font-semibold">(3M users)</strong>, and a chartered bank I joined as the
                 first designer. I model data from first principles, design interfaces with Swiss discipline, and ship working TypeScript and Next.js prototypes backed by public GitHub repositories.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-1">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
                 <a
                   href="https://calendly.com/cubby-colonhyphenbracket/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-base font-bold rounded-full px-8 h-14 shadow-lg transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-base font-bold rounded-full px-6 sm:px-8 h-13 sm:h-14 shadow-lg transition-all cursor-pointer"
                 >
-                  <Calendar className="w-5 h-5" /> Book 30-min call
+                  <Calendar className="w-5 h-5 shrink-0" /> Book 30-min call
                 </a>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-[#281B16]/25 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-base font-bold rounded-full px-8 h-14 cursor-pointer"
+                  className="border-[#281B16]/25 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-base font-bold rounded-full px-6 sm:px-8 h-13 sm:h-14 cursor-pointer"
                   onClick={() => openContactModal("1-week sprint ($7,500)")}
                 >
                   1-week sprint · $7,500
@@ -83,14 +83,14 @@ export default function PortfolioPage() {
                 <Button
                   size="lg"
                   variant="ghost"
-                  className="text-[#281B16] hover:bg-[#D3C7B5]/40 font-sans text-sm sm:text-base font-bold rounded-full px-5 h-14 cursor-pointer"
+                  className="text-[#281B16] hover:bg-[#D3C7B5]/40 font-sans text-sm sm:text-base font-bold rounded-full px-5 h-12 sm:h-14 cursor-pointer"
                   onClick={() => openContactModal("Full-time role (Product Architect / Staff)")}
                 >
                   Inquire for full-time &rarr;
                 </Button>
               </div>
 
-              <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-base font-sans text-[#5C4840]">
+              <div className="flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-3 text-sm sm:text-base font-sans text-[#5C4840]">
                 <a href="/resumes/kyle-cyree-resume.pdf" target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]">
                   <Download className="w-4 h-4" /> Resume (PDF)
                 </a>
@@ -107,7 +107,7 @@ export default function PortfolioPage() {
             </div>
 
             <div className="lg:col-span-4 order-1 lg:order-2">
-              <figure className="max-w-[260px] sm:max-w-sm lg:max-w-none mx-auto lg:mx-0 space-y-5">
+              <figure className="max-w-[210px] sm:max-w-sm lg:max-w-none mx-auto lg:mx-0 space-y-3 sm:space-y-5">
                 <div className="relative aspect-[4/5] w-full rounded-[2rem] overflow-hidden bg-[#E4DACB] shadow-2xl">
                   <img
                     src="/images/kyle-portrait.jpg"
@@ -118,9 +118,9 @@ export default function PortfolioPage() {
                     className="w-full h-full object-cover object-[50%_35%]"
                   />
                 </div>
-                <figcaption className="space-y-3 px-1">
-                  <p className="flex items-center gap-2 font-sans text-sm font-bold text-[#281B16]">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" aria-hidden="true" />
+                <figcaption className="space-y-2 px-1 text-center lg:text-left">
+                  <p className="inline-flex lg:flex items-center justify-center lg:justify-start gap-2 font-sans text-xs sm:text-sm font-bold text-[#281B16]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
                     Open to Product Architect roles &amp; sprints
                   </p>
                   <p className="text-base text-[#5C4840] font-sans leading-relaxed hidden sm:block">
@@ -211,7 +211,7 @@ export default function PortfolioPage() {
             </div>
 
             <Link href="/case-studies/custodia">
-              <Button className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.16em] font-bold rounded-full px-8 py-4 shadow-lg shrink-0 cursor-pointer">
+              <Button className="w-full sm:w-auto justify-center bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.1em] sm:tracking-[0.16em] font-bold rounded-full px-5 sm:px-8 py-4 shadow-lg shrink-0 cursor-pointer">
                 Open Custodia Case Study &rarr;
               </Button>
             </Link>
@@ -292,7 +292,7 @@ export default function PortfolioPage() {
             </div>
 
             <Link href="/case-studies/unitedhealth">
-              <Button className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.16em] font-bold rounded-full px-8 py-4 shadow-lg shrink-0 cursor-pointer">
+              <Button className="w-full sm:w-auto justify-center bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.1em] sm:tracking-[0.16em] font-bold rounded-full px-5 sm:px-8 py-4 shadow-lg shrink-0 cursor-pointer">
                 Open UnitedHealth Case Study &rarr;
               </Button>
             </Link>
@@ -356,7 +356,7 @@ export default function PortfolioPage() {
             </div>
 
             <Link href="/case-studies/walmart">
-              <Button className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.16em] font-bold rounded-full px-8 py-4 shadow-lg shrink-0 cursor-pointer">
+              <Button className="w-full sm:w-auto justify-center bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.1em] sm:tracking-[0.16em] font-bold rounded-full px-5 sm:px-8 py-4 shadow-lg shrink-0 cursor-pointer">
                 Open Walmart Case Study &rarr;
               </Button>
             </Link>
@@ -420,7 +420,7 @@ export default function PortfolioPage() {
             </div>
 
             <Link href="/case-studies/pipes">
-              <Button className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.16em] font-bold rounded-full px-8 py-4 shadow-lg shrink-0 cursor-pointer">
+              <Button className="w-full sm:w-auto justify-center bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.1em] sm:tracking-[0.16em] font-bold rounded-full px-5 sm:px-8 py-4 shadow-lg shrink-0 cursor-pointer">
                 Open Pipes Case Study &rarr;
               </Button>
             </Link>

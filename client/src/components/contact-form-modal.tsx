@@ -138,28 +138,28 @@ export default function ContactFormModal({
         </DialogHeader>
 
         {/* Tab Selector */}
-        <div className="flex rounded-full bg-[#EAE0D0] p-1 border border-[#D3C7B5] my-1">
+        <div className="flex rounded-full bg-[#EAE0D0] p-1 border border-[#D3C7B5] my-0.5">
           <button
             type="button"
             onClick={() => setActiveTab("message")}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
+            className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 text-[11px] sm:text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "message"
                 ? "bg-[#281B16] text-[#F2EAE0] shadow-sm"
                 : "text-[#6B554D] hover:text-[#281B16]"
             }`}
           >
-            <MessageSquare className="w-3.5 h-3.5" /> Send a Message
+            <MessageSquare className="w-3.5 h-3.5 shrink-0" /> Send a Message
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("calendar")}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
+            className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 text-[11px] sm:text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "calendar"
                 ? "bg-[#281B16] text-[#F2EAE0] shadow-sm"
                 : "text-[#6B554D] hover:text-[#281B16]"
             }`}
           >
-            <Calendar className="w-3.5 h-3.5 text-[#FE299E]" /> Pick a Time (Calendly)
+            <Calendar className="w-3.5 h-3.5 text-[#FE299E] shrink-0" /> Pick a Time<span className="hidden sm:inline"> (Calendly)</span>
           </button>
         </div>
 

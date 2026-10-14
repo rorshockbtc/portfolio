@@ -190,21 +190,21 @@ export function TechStack() {
             By architecting data schemas and prototyping in code with AI acceleration, decisions that usually take 6 cross-functional meetings get validated in a single afternoon.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3 shrink-0">
+        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
           <button
             type="button"
             onClick={() => openContactModal("1-week sprint ($7,500)")}
-            className="inline-flex items-center gap-2 px-6 h-12 rounded-full bg-[#FE299E] hover:bg-[#D81B80] text-white font-sans text-sm font-bold transition-colors whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-12 rounded-full bg-[#FE299E] hover:bg-[#D81B80] text-white font-sans text-xs sm:text-sm font-bold transition-colors whitespace-nowrap"
           >
-            Scope a 1-Week Sprint · $7,500 <ArrowRight className="w-4 h-4" />
+            Scope a 1-Week Sprint · $7,500 <ArrowRight className="w-4 h-4 shrink-0" />
           </button>
           <a
             href="https://calendly.com/cubby-colonhyphenbracket/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 h-12 rounded-full border border-[#281B16]/25 hover:border-[#281B16] text-[#281B16] font-sans text-sm font-bold transition-colors whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-full border border-[#281B16]/25 hover:border-[#281B16] text-[#281B16] font-sans text-xs sm:text-sm font-bold transition-colors whitespace-nowrap"
           >
-            <Calendar className="w-4 h-4 text-[#FE299E]" /> Book 30-min call
+            <Calendar className="w-4 h-4 text-[#FE299E] shrink-0" /> Book 30-min call
           </a>
         </div>
       </div>

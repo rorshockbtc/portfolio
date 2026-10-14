@@ -46,23 +46,23 @@ export default function Navigation() {
       role="banner"
     >
       <nav
-        className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between h-20 md:h-22 w-full"
+        className="max-w-[1400px] mx-auto px-4 sm:px-10 lg:px-16 flex items-center justify-between gap-3 h-16 sm:h-20 md:h-22 w-full"
         role="navigation"
         aria-label="Main navigation"
         data-testid="nav-main"
       >
         {/* Left: Brand Identity */}
-        <div className="flex items-center gap-6 lg:gap-8">
+        <div className="flex items-center gap-4 lg:gap-8 min-w-0">
           <Link
             href="/"
-            className="flex items-center gap-3 shrink-0 focus-visible:outline-none group"
-            aria-label="Kyle Cyree — Principal Designer & Systems Architect"
+            className="flex items-center gap-3 min-w-0 focus-visible:outline-none group"
+            aria-label="Kyle Cyree — Product Architect & R&D Lead"
             data-testid="nav-logo"
           >
             <img
               src="/images/chb-logo-black.png"
               alt="Colon Hyphen Bracket"
-              className="h-6 md:h-7 w-auto opacity-95 group-hover:opacity-100 transition-opacity shrink-0"
+              className="h-[17px] sm:h-6 md:h-7 w-auto max-w-[175px] sm:max-w-none object-contain opacity-95 group-hover:opacity-100 transition-opacity shrink-0"
             />
             <span className="hidden sm:inline font-sans text-xs uppercase tracking-[0.22em] font-bold text-[#281B16] shrink-0 whitespace-nowrap pl-2 border-l border-[#D3C7B5]">
               Kyle Cyree
@@ -96,8 +96,8 @@ export default function Navigation() {
           </a>
 
           <button
-            onClick={() => openContactModal("Full-time role (Principal / Staff)")}
-            className="font-sans text-sm px-5 sm:px-6 h-11 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-bold transition-all shadow-md hover:shadow-lg cursor-pointer shrink-0 whitespace-nowrap"
+            onClick={() => openContactModal("Full-time role (Product Architect / Staff)")}
+            className="font-sans text-xs sm:text-sm px-4 sm:px-6 h-9 sm:h-11 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-bold transition-all shadow-md hover:shadow-lg cursor-pointer shrink-0 whitespace-nowrap"
             data-testid="nav-cta-sprint"
           >
             Get in touch

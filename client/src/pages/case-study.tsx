@@ -74,13 +74,14 @@ export default function CaseStudyPage() {
   return (
     <article className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#FE299E]/20">
       {/* ── Sticky Sub-Navigation Bar ── */}
-      <div className="sticky top-18 md:top-20 z-40 bg-[#F2EAE0]/95 backdrop-blur-md border-b border-[#D3C7B5] py-3">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+      <div className="sticky top-16 sm:top-20 z-40 bg-[#F2EAE0]/95 backdrop-blur-md border-b border-[#D3C7B5] py-2.5 sm:py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-sans uppercase tracking-[0.16em] font-semibold text-[#6B554D] hover:text-[#281B16] transition-colors"
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans uppercase tracking-[0.12em] sm:tracking-[0.16em] font-semibold text-[#6B554D] hover:text-[#281B16] transition-colors whitespace-nowrap"
           >
-            <ArrowLeft className="w-4 h-4 text-[#FE299E]" /> Back to Selected Work
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FE299E] shrink-0" />
+            <span>Back<span className="hidden xs:inline sm:inline"> to Work</span></span>
           </Link>
 
           <div className="hidden md:flex items-center gap-3 text-xs font-sans">
@@ -101,10 +102,10 @@ export default function CaseStudyPage() {
 
           <Button
             size="sm"
-            className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-[11px] uppercase tracking-[0.15em] font-bold rounded-full px-4 shrink-0 shadow-sm cursor-pointer"
+            className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.1em] sm:tracking-[0.15em] font-bold rounded-full px-3.5 sm:px-4 shrink-0 shadow-sm cursor-pointer"
             onClick={() => setIsContactOpen(true)}
           >
-            Hire Kyle ($7,500 Sprint)
+            Hire Kyle · $7,500
           </Button>
         </div>
       </div>
