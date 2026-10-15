@@ -435,14 +435,14 @@ export default function PortfolioPage() {
                 </span>
                 <span className="text-[#D3C7B5]">&bull;</span>
                 <Badge variant="outline" className="border-[#D3C7B5] text-xs font-sans uppercase font-bold tracking-wider bg-[#F2EAE0] text-[#281B16]">
-                  Web &bull; macOS Desktop &bull; iOS Mobile
+                  Web Protocol &bull; MCP &amp; REST &bull; macOS &amp; iOS
                 </Badge>
               </div>
               <h3 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#281B16] tracking-tight">
-                Pipes: a private, local-first knowledge app for web, Mac, and iPhone
+                Pipes.Pink: Sovereign Knowledge Protocol, Marketplace &amp; Native IDE
               </h3>
               <p className="text-xl sm:text-2xl text-[#6B554D] font-sans leading-relaxed">
-                My flagship product, designed, architected, and built solo from zero to production. A native macOS app for writing and searching your notes locally, an iPhone app for quick capture, and a web app for publishing. The AI runs on your own machine, so your writing stays private and there's no per-query cloud bill. Built with TypeScript, Next.js, Tauri, and SQLite vector embeddings.
+                My flagship product—designed, architected, and built solo from zero to production. Experts package verified primary sources into cryptographically deeded namespaces (<code className="font-mono text-lg bg-[#EAE0D0] px-2 py-0.5 rounded">pipe\bitcoin</code>, <code className="font-mono text-lg bg-[#EAE0D0] px-2 py-0.5 rounded">pipe\my-first-bitcoin</code>), AI agents pay 70% micro-royalties to cite them via Model Context Protocol (MCP) and HTTP 402 gates, and organizations mount zero-hallucination WebGPU + DuckDB-WASM tutors in 90+ languages across Web, macOS (<code className="font-mono text-lg bg-[#EAE0D0] px-2 py-0.5 rounded">! BANG</code> IDE), and iOS.
               </p>
             </div>
 
@@ -461,17 +461,17 @@ export default function PortfolioPage() {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/pipes/desktop-mac-bang-ide.png"
-                      alt="Pipes macOS Desktop App: Native Bang IDE"
+                      src="/images/pipes/pipes-hero.png"
+                      alt="Pipes.Pink Web Protocol: A Sovereign Library for Human Knowledge"
                       className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500"
                     />
                   </div>
                   <div className="space-y-1 px-1">
                     <span className="font-sans text-xs sm:text-sm uppercase font-bold tracking-wider text-[#281B16] block">
-                      macOS Desktop &bull; Native Bang IDE
+                      Web Protocol &amp; Marketplace &bull; pipes.pink
                     </span>
                     <p className="text-sm text-[#6B554D] font-sans">
-                      Local-first note taking and knowledge search with zero cloud latency.
+                      Content-addressed knowledge namespaces, 70% creator royalties via MCP/HTTP 402, and on-device WebGPU + DuckDB-WASM execution.
                     </p>
                   </div>
                 </div>
@@ -481,17 +481,17 @@ export default function PortfolioPage() {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/pipes/pipes-hero.png"
-                      alt="Pipes Web App"
+                      src="/images/pipes/desktop-mac-bang-ide.png"
+                      alt="Pipes macOS Desktop App: Native ! BANG IDE & Catalogue"
                       className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500"
                     />
                   </div>
                   <div className="space-y-1 px-1">
                     <span className="font-sans text-xs sm:text-sm uppercase font-bold tracking-wider text-[#281B16] block">
-                      Web Protocol &bull; pipes.pink
+                      macOS Native &bull; ! BANG Curator &amp; Developer IDE
                     </span>
                     <p className="text-sm text-[#6B554D] font-sans">
-                      Publishing and sharing notes with on-device AI synthesis.
+                      Tauri 2.0 + Rust desktop studio with 500k-record DuckDB analysis, folder watcher sync, and agency CMS deployment.
                     </p>
                   </div>
                 </div>
@@ -501,11 +501,11 @@ export default function PortfolioPage() {
                 <div className="flex flex-wrap items-center gap-5 sm:gap-8">
                   <span className="font-bold text-[#281B16]">Built &amp; Shipped Solo</span>
                   <span>&bull;</span>
-                  <span className="font-bold text-[#281B16]">macOS, iOS &amp; Web</span>
+                  <span className="font-bold text-[#281B16]">MCP &amp; HTTP 402 Agent Gate</span>
                   <span>&bull;</span>
-                  <span className="font-bold text-[#281B16]">Local On-Device AI</span>
+                  <span className="font-bold text-[#281B16]">WebGPU + DuckDB-WASM</span>
                   <span>&bull;</span>
-                  <span className="font-bold text-[#281B16]">TypeScript + Next.js</span>
+                  <span className="font-bold text-[#281B16]">Web, macOS (Tauri/Rust) &amp; iOS</span>
                 </div>
                 <span className="font-sans text-[#FE299E] font-bold group-hover:underline">
                   Read full case study &rarr;

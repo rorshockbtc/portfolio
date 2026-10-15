@@ -54,97 +54,115 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
   pipes: {
     slug: "pipes",
     client: "Colon Hyphen Bracket",
-    title: "Pipes Protocol: Sovereign Multi-Platform Knowledge Ecosystem",
-    subtitle: "Flagship Showcase • Web, Native macOS Desktop, and Native iOS Mobile Apps",
+    title: "Pipes Protocol: Sovereign Knowledge Marketplace, MCP Agent Gate & Native IDE",
+    subtitle: "Flagship Showcase • Web Protocol (pipes.pink), MCP/HTTP 402 Agent Economics, WebGPU Classrooms & Native macOS IDE",
     role: "Architect, Lead Designer & Systems Builder",
-    scaleBadge: "Web • macOS Desktop • iOS Mobile",
+    scaleBadge: "Web Protocol • MCP & REST • macOS & iOS",
     timeline: "2024 – 2026",
-    heroImage: "/images/pipes/desktop-mac-bang-ide.png",
+    heroImage: "/images/pipes/pipes-hero.png",
     galleryImages: [
       {
-        src: "/images/pipes/desktop-mac-bang-ide.png",
-        title: "Pipes Desktop for macOS: Native Bang IDE",
-        caption: "Native macOS desktop application engineered for high-velocity local knowledge curation, offline parsing, and cryptographic signing.",
-        tag: "macOS Native",
-      },
-      {
-        src: "/images/pipes/desktop-mac-knowledge.png",
-        title: "Pipes Desktop: Sovereign Knowledge Ledger",
-        caption: "Local-first knowledge graph viewer and vector space inspector running zero-latency SQLite and Turso caches.",
-        tag: "Desktop Architecture",
-      },
-      {
         src: "/images/pipes/pipes-hero.png",
-        title: "Pipes Web Protocol: Flagship Interface",
-        caption: "Web platform transforming human expertise into reusable infrastructure with $0 marginal AI inference costs.",
+        title: "Pipes.Pink Web Protocol: A Sovereign Library for Human Knowledge",
+        caption: "The flagship Pipes.Pink interface where domain experts publish verified primary sources into content-addressed namespaces and earn royalties when AI agents cite them.",
         tag: "Web Protocol",
       },
       {
         src: "/images/pipes/pipes-marketplace.png",
-        title: "Self-Sovereign Knowledge Marketplace",
-        caption: "Cryptographic namespace registry with deeded 70/30 creator revenue splits anchored on NOSTR identity.",
+        title: "Explore Marketplace: Discover & Claim Curated Knowledge Canons",
+        caption: "Namespace discovery directory across Foundations, Systems, Craft, Frontier, and Civic domains—filtering deeply curated (100+ source) active knowledge streams.",
         tag: "Marketplace UX",
       },
       {
+        src: "/images/pipes/pipes-namespace-bitcoin.png",
+        title: "Sovereign Pipe Room: pipe\\bitcoin & Greater WebGPU Engine",
+        caption: "Claimed namespace room housing 120 cryptographically sealed primary sources with interactive Library inspection, Podcast synthesis, and zero-hallucination Greater (>) WebGPU chat.",
+        tag: "Sovereign Namespace",
+      },
+      {
+        src: "/images/pipes/pipes-classroom-mpb.png",
+        title: "Enterprise & Global Classroom Platform: pipe\\my-first-bitcoin",
+        caption: "Turnkey sovereign classroom featuring 15-second Greater CLI mount (npx @pipes/greater), 90+ language instant curriculum translator, 100% editable canon, and Sanity CMS GROQ ingestion.",
+        tag: "90+ Language Classroom",
+      },
+      {
         src: "/images/pipes/pipes-economics.png",
-        title: "Deterministic Knowledge Economics",
-        caption: "Halting model collapse by pairing local-first reference libraries with deterministic keyword synthesis.",
-        tag: "Token Economics",
+        title: "Curator Economics & HTTP 402 MCP Agent Gate",
+        caption: "Sovereign payout engine enforcing a 70% creator revenue share and HTTP 402 payment gates for Claude Desktop, Cursor IDE, and autonomous agent queries in USD or Bitcoin Sats.",
+        tag: "MCP & HTTP 402 Gate",
+      },
+      {
+        src: "/images/pipes/pipes-dev-mcp-hub.png",
+        title: "Developer Hub (dev-hub v1.0): Immutable Context Graphs for Agents",
+        caption: "REST and Model Context Protocol (MCP) developer portal providing SHA-256 content-addressed context graphs, subscription credit economics, and WebGPU edge indexing.",
+        tag: "Developer Hub",
+      },
+      {
+        src: "/images/pipes/pipes-podcast-pavilion.png",
+        title: "The Sovereign Podcast Pavilion: Autonomous 2-Host Neural Audio",
+        caption: "Multi-speaker neural audio overview studio (Semi & Greater) synthesizing synchronized interactive transcripts directly from cryptographically verified primary-source pipes.",
+        tag: "Neural Audio Studio",
+      },
+      {
+        src: "/images/pipes/desktop-mac-bang-ide.png",
+        title: "Pipes Desktop for macOS: Native ! BANG Curator & Developer IDE",
+        caption: "Native Tauri 2.0 + Rust macOS studio featuring 480+ local pipes, folder watcher sync, 500k-record DuckDB analyzer, co-op classroom management, and one-click agency CMS deployment.",
+        tag: "macOS Native IDE",
       },
     ],
     executiveSummary:
-      "Pipes is my flagship software showcase: a fully-featured, multi-platform sovereign knowledge ecosystem deployed across Web (pipes.pink), native macOS Desktop (Tauri/Rust), and native iOS mobile (Swift/SwiftUI). It transforms verified human expertise into reusable, monetizable infrastructure while solving foundation LLM model collapse through deterministic $0 marginal inference.",
+      "Pipes (pipes.pink) is my flagship software ecosystem: a content-addressed sovereign knowledge protocol, marketplace, and multi-platform studio deployed across Web, Model Context Protocol (MCP), native macOS Desktop (Tauri/Rust), and native iOS (Swift/SwiftUI). Experts curate primary sources into deeded namespaces (like pipe\\bitcoin and pipe\\my-first-bitcoin), AI agents pay micro-royalties via HTTP 402 gates to cite verified truth, and educators deploy zero-hallucination WebGPU + DuckDB-WASM tutors across 90+ languages at $0 marginal cloud inference cost.",
     challenge:
-      "Modern AI tools suffer from amnesia and model collapse: as foundation LLMs drown in synthetic data, human-curated context is the rarest asset. But standard cloud SaaS traps user knowledge in corporate silos, burns expensive tokens on redundant context prompts, and offers clunky, browser-only experiences that fail offline.",
+      "As foundation LLMs drown in synthetic slop and suffer from model collapse, verified human-curated primary sources are the rarest asset on the internet. Yet domain experts, authors, and open-source curricula have their work scraped for free by AI labs while enterprises burn thousands of dollars per month on fragile cloud RAG pipelines that still hallucinate.",
     solution:
-      "Architected a unified, three-tier ecosystem: a native macOS desktop cockpit for deep local authoring and offline indexing, an iOS mobile client (Pipes Pocket) for on-the-go capture, and a decentralized web protocol for public distribution. Engineered the Reference Library Pattern (Template + Keyword Match + Curated Knowledge = Deterministic Output at $0.00 marginal LLM cost).",
+      "Architected a full-stack sovereign knowledge protocol and marketplace: (1) SHA-256 content-addressed Merkle-DAG namespaces where curators own deeded property and earn 70% royalties via an HTTP 402 / MCP agent gate; (2) the turnkey Greater (>) embeddable tutor powered by in-browser DuckDB-WASM and WebGPU for $0-compute, 90+ language classroom localization; (3) the Sovereign Podcast Pavilion for autonomous 2-host neural audio synthesis; and (4) the native macOS ! BANG IDE for local folder-watching, 500k-record DuckDB analytics, and agency CMS deployment.",
     uiUxCraft:
-      "Built a fluid, multi-tenant interface powered by runtime CSS variable injection. The same underlying knowledge graph effortlessly morphs across 6 distinct audience personas (Cyberpunk, Enterprise, Academic, Vignelli) without page reload. The native macOS desktop app adheres to Apple Human Interface Guidelines with fluid glassmorphism and sub-10ms keyboard navigation.",
+      "Designed a high-craft editorial and technical interface spanning public knowledge discovery, interactive namespace rooms (Library, Greater Chat, Mount & Desktop, Podcast), enterprise curriculum translation studios, and a native macOS desktop cockpit. Coupled with a runtime CSS variable engine that adapts across 6 distinct aesthetic personas without page reloads.",
     systemsArchitecture:
-      "Engineered cross-platform synchronization between local SQLite databases, Turso distributed replicas, and NOSTR decentralized relays. Implemented client-side Web Crypto and OpenTimestamps (OTS) proofs to give creators undeniable cryptographic copyright proof.",
+      "Engineered a SHA-256 Merkle-DAG knowledge graph (the Ampersand Graph) synchronized across PostgreSQL/Drizzle, local SQLite/Turso replicas, and in-browser DuckDB-WASM + WebGPU vector caches. Integrated Model Context Protocol (MCP) and HTTP 402 payment gates for Claude Desktop and Cursor IDE, Sanity CMS GROQ ingestion bridges, OpenTimestamps (OTS) cryptographic provenance, and non-custodial Bitcoin Lightning (Breez SDK) + USD royalty settlement.",
     metrics: [
-      { value: "3 Platforms", label: "Multi-Platform", subtext: "Web, macOS Desktop, iOS" },
-      { value: "$0.00", label: "Marginal AI Cost", subtext: "Deterministic Reference Library" },
-      { value: "6 Live Themes", label: "Runtime CSS Engine", subtext: "Instant persona mutation" },
-      { value: "70%", label: "Creator Equity", subtext: "Deeded cryptographic split" },
+      { value: "70%", label: "Creator Royalties", subtext: "Deeded MCP & HTTP 402 split" },
+      { value: "90+ Langs", label: "Sovereign Classrooms", subtext: "Turnkey Greater (>) WebGPU tutor" },
+      { value: "$0.00", label: "Marginal Cloud AI Cost", subtext: "In-browser DuckDB-WASM + WebGPU" },
+      { value: "3 Platforms", label: "Unified Ecosystem", subtext: "Web Protocol, macOS IDE, iOS" },
     ],
     outcomes: [
-      "Designed and shipped native macOS desktop app, iOS mobile app, and decentralized web protocol.",
-      "Engineered the Reference Library pattern delivering 25-page synthesized outputs with zero external token burn.",
-      "Built multi-tenant runtime CSS injection engine powering instantaneous aesthetic adaptation.",
-      "Implemented decentralized NOSTR PKI identity and cryptographic equity distribution.",
+      "Designed and shipped the complete pipes.pink web protocol, Explore marketplace, Developer MCP Hub, Podcast Pavilion, and native macOS ! BANG IDE.",
+      "Built the turnkey pipe\\my-first-bitcoin classroom platform with 15-second CLI mounting (npx @pipes/greater), Sanity CMS ingestion, and 90+ language localization.",
+      "Engineered the Curator Economics & HTTP 402 MCP Gate enabling creators to monetize autonomous AI agent citations across Claude Desktop, Cursor, and REST.",
+      "Eliminated recurring cloud RAG server bills by executing hybrid vector + keyword synthesis locally via DuckDB-WASM, WebGPU, and the deterministic Reference Library pattern.",
     ],
-    technologies: ["macOS Native (Tauri/Rust)", "iOS (Swift/SwiftUI)", "Next.js", "TypeScript", "SQLite / Turso", "NOSTR / Web Crypto", "Tailwind CSS v4"],
+    technologies: ["Next.js & TypeScript", "MCP & HTTP 402 Gate", "WebGPU & DuckDB-WASM", "macOS Native (Tauri 2.0/Rust)", "iOS (Swift/SwiftUI)", "PostgreSQL / Drizzle / SQLite", "Bitcoin Lightning / Web Crypto"],
     liveUrl: "https://pipes.pink",
-    liveUrlLabel: "Explore Live Web Protocol",
+    liveUrlLabel: "Explore Live Pipes.Pink Protocol",
     codebaseBreakdown: {
       headline: "How I Architect & Code Sovereign Platforms as a Unit of One",
       philosophy:
         "I am not an abstract software engineer who lives in theoretical microservices, nor a Figma-only designer who hands off unbuildable mocks. I am a Principal Systems Architect who writes production TypeScript, Next.js, Rust, and Python because the translation gap between design and engineering is where early-stage tech dies. I write the code to ensure the system architecture, mathematical Vignelli grid, and zero-PII security rules ship intact.",
       stackArchitecture: [
         {
-          role: "Web & Protocol Application Layer",
-          tech: "TypeScript + Next.js (App Router)",
+          role: "Web Protocol, Marketplace & MCP Agent Gate",
+          tech: "TypeScript + Next.js + Model Context Protocol (MCP)",
           rationale:
-            "TypeScript guarantees strict type-safety across distributed schemas and Drizzle ORM models. Next.js provides high-velocity SSR for public pipe exploration while maintaining client-side WASM and Web Worker execution.",
+            "TypeScript guarantees strict type-safety across SHA-256 Merkle-DAG nodes and Drizzle ORM schemas. Next.js powers the public Explore marketplace, namespace rooms, and HTTP 402 MCP endpoints for Claude Desktop and Cursor IDE.",
         },
         {
-          role: "Native Desktop Engine (macOS Bang IDE)",
+          role: "Zero-Cloud Edge Inference & Sovereign Classrooms",
+          tech: "DuckDB-WASM + WebGPU + Greater (>) CLI",
+          rationale:
+            "Shifts vector search, 500k-record analytics, and curriculum synthesis directly into the client browser or desktop GPU—delivering 10–30ms local queries and 90+ language classroom localization at $0 marginal cloud cost.",
+        },
+        {
+          role: "Native Desktop Engine (macOS ! BANG IDE)",
           tech: "Tauri 2.0 + Rust",
           rationale:
-            "Replaced heavy 400MB Electron containers with native Rust bindings. Provides sub-10ms IPC communication, local file system sandboxing, and direct hardware vector acceleration with minimal memory footprint.",
+            "Replaces bloated Electron containers with native Rust bindings. Powers local folder-watcher ingestion, co-op classroom management, DuckDB analytics, and one-click agency CMS deployments with minimal memory footprint.",
         },
         {
-          role: "Local Storage & Vector Indexing",
-          tech: "SQLite + Turso LibSQL + Python",
+          role: "Cryptographic Provenance & Royalty Settlement",
+          tech: "SHA-256 Merkle-DAG + OpenTimestamps + Lightning/USD",
           rationale:
-            "Zero-cloud egress guarantee. Knowledge nodes and vectors reside in local SQLite databases synchronized via cryptographic hashes. Pragmatic Python micro-scripts handle deterministic tokenization and OpenTimestamps (OTS) proofs.",
-        },
-        {
-          role: "Mobile Capture & Synchronization",
-          tech: "iOS (Swift & SwiftUI)",
-          rationale:
-            "Native iOS client for on-the-go voice and quick note ingestion, syncing peer-to-peer into the sovereign knowledge ledger with zero telemetry tracking.",
+            "Every curated source and assertion is content-addressed and anchored via OpenTimestamps (OTS), enforcing a deeded 70% creator revenue share and 0.25% permanent registrar equity floor.",
         },
       ],
       codeSnippets: [
@@ -177,7 +195,7 @@ export interface AmpersandEdge {
           code: `// Drizzle ORM Schema: Deeded Namespace Property & Revenue Split
 export const pipes = pgTable("pipes", {
   id: varchar("id").primaryKey().default(sql\`gen_random_uuid()\`),
-  namespace: varchar("namespace").notNull().unique(), // e.g. "pipe\\\\mississippi-voters"
+  namespace: varchar("namespace").notNull().unique(), // e.g. "pipe\\\\bitcoin"
   curatorId: varchar("curator_id").notNull().references(() => users.id),
   biasStatement: text("bias_statement"),
   revenueSharePercent: real("revenue_share_percent").default(70), // 70% Creator Equity
