@@ -193,11 +193,17 @@ export default function CaseStudyPage() {
           className="group relative rounded-3xl border border-[#D3C7B5] bg-[#F2EAE0] p-3 sm:p-6 shadow-xl overflow-hidden cursor-pointer"
           onClick={() => setActiveImageIndex(0)}
         >
-          <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-[#EAE0D0] rounded-2xl overflow-hidden flex items-center justify-center border border-[#D3C7B5]/60">
+          <div
+            className={`relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-2xl overflow-hidden flex items-center justify-center border ${
+              study.slug === "pipes"
+                ? "bg-[#231814] border-[#3D2C24] shadow-inner"
+                : "bg-[#EAE0D0] border-[#D3C7B5]/60"
+            }`}
+          >
             <img loading="lazy" decoding="async"
               src={study.heroImage}
               alt={study.title}
-              className="w-full h-full object-contain p-2 sm:p-4 group-hover:scale-[1.02] transition-transform duration-500"
+              className="w-full h-full object-contain p-2 sm:p-4 drop-shadow-2xl group-hover:scale-[1.02] transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-[#281B16]/0 group-hover:bg-[#281B16]/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
               <span className="px-4 py-2 rounded-full bg-[#F2EAE0]/95 text-[#281B16] text-xs font-sans font-bold shadow-lg flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all">
@@ -246,7 +252,7 @@ export default function CaseStudyPage() {
               <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
                 Executive Summary
               </span>
-              <p className="text-base sm:text-lg text-[#281B16] font-sans leading-relaxed">
+              <p className="text-base sm:text-lg text-[#281B16] font-sans leading-relaxed max-w-[65ch]">
                 {study.executiveSummary}
               </p>
             </div>
@@ -258,7 +264,7 @@ export default function CaseStudyPage() {
                   The Strategic Challenge
                 </h2>
               </div>
-              <p className="text-base text-[#6B554D] font-sans leading-relaxed pl-4 border-l-2 border-[#D3C7B5]">
+              <p className="text-base text-[#6B554D] font-sans leading-relaxed pl-4 border-l-2 border-[#D3C7B5] max-w-[65ch]">
                 {study.challenge}
               </p>
             </div>
@@ -270,7 +276,7 @@ export default function CaseStudyPage() {
                   The Systems Architecture Solution
                 </h2>
               </div>
-              <p className="text-base text-[#281B16]/90 font-sans leading-relaxed pl-4 border-l-2 border-[#FE299E]/40">
+              <p className="text-base text-[#281B16]/90 font-sans leading-relaxed pl-4 border-l-2 border-[#FE299E]/40 max-w-[65ch]">
                 {study.solution}
               </p>
             </div>
@@ -279,7 +285,7 @@ export default function CaseStudyPage() {
               <h3 className="text-lg font-serif font-bold text-[#281B16] tracking-tight">
                 Systems &amp; Protocol Execution
               </h3>
-              <p className="text-base text-[#6B554D] font-sans leading-relaxed">
+              <p className="text-base text-[#6B554D] font-sans leading-relaxed max-w-[65ch]">
                 {study.systemsArchitecture}
               </p>
             </div>
@@ -291,7 +297,7 @@ export default function CaseStudyPage() {
               <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
                 UI/UX Craft &amp; Psychology
               </span>
-              <p className="text-sm sm:text-base text-[#6B554D] font-sans leading-relaxed">
+              <p className="text-sm sm:text-base text-[#6B554D] font-sans leading-relaxed max-w-[60ch]">
                 {study.uiUxCraft}
               </p>
             </div>
@@ -347,7 +353,7 @@ export default function CaseStudyPage() {
               {study.codebaseBreakdown.headline}
             </h2>
             <div className="p-6 sm:p-8 rounded-3xl bg-[#F2EAE0] border border-[#D3C7B5] shadow-sm">
-              <p className="text-base sm:text-lg text-[#281B16] font-sans leading-relaxed italic">
+              <p className="text-base sm:text-lg text-[#281B16] font-sans leading-relaxed italic max-w-[75ch]">
                 &ldquo;{study.codebaseBreakdown.philosophy}&rdquo;
               </p>
             </div>
@@ -409,21 +415,25 @@ export default function CaseStudyPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {study.galleryImages.map((img, idx) => (
               <div
                 key={idx}
                 className="group rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] overflow-hidden cursor-pointer hover:border-[#FE299E] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between"
                 onClick={() => setActiveImageIndex(idx)}
               >
-                <div className="relative aspect-[16/10] bg-[#EAE0D0] p-3 flex items-center justify-center border-b border-[#D3C7B5]">
+                <div
+                  className={`relative aspect-[16/10] p-3 flex items-center justify-center border-b border-[#D3C7B5] ${
+                    study.slug === "pipes" ? "bg-[#231814]" : "bg-[#EAE0D0]"
+                  }`}
+                >
                   <img
                     src={img.src}
                     alt={img.title}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-contain rounded-lg shadow-lg group-hover:scale-[1.03] transition-transform duration-300"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-[#281B16]/0 group-hover:bg-[#281B16]/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <div className="absolute inset-0 bg-[#281B16]/0 group-hover:bg-[#281B16]/25 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                     <span className="px-3 py-1.5 rounded-full bg-[#F2EAE0]/95 text-[#281B16] text-xs font-sans font-bold shadow-md flex items-center gap-1.5">
                       <ZoomIn className="w-3.5 h-3.5 text-[#FE299E]" /> Zoom
                     </span>
@@ -434,7 +444,7 @@ export default function CaseStudyPage() {
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="font-sans font-bold text-xs text-[#281B16] truncate">{img.title}</h3>
                     {img.tag && (
-                      <Badge variant="outline" className="text-[10px] font-sans border-[#D3C7B5] text-[#6B554D]">
+                      <Badge variant="outline" className="text-[10px] font-sans border-[#D3C7B5] text-[#6B554D] shrink-0">
                         {img.tag}
                       </Badge>
                     )}
@@ -503,11 +513,15 @@ export default function CaseStudyPage() {
               </div>
             </div>
 
-            <div className="flex-1 overflow-auto bg-[#EAE0D0]/80 p-4 sm:p-6 flex items-center justify-center min-h-[350px]">
+            <div
+              className={`flex-1 overflow-auto p-4 sm:p-6 flex items-center justify-center min-h-[350px] ${
+                study.slug === "pipes" ? "bg-[#231814]" : "bg-[#EAE0D0]/80"
+              }`}
+            >
               <img loading="lazy" decoding="async"
                 src={study.galleryImages[activeImageIndex].src}
                 alt={study.galleryImages[activeImageIndex].title}
-                className="max-h-[68vh] w-auto max-w-full object-contain rounded-xl shadow-sm border border-[#D3C7B5]/60 bg-white"
+                className="max-h-[68vh] w-auto max-w-full object-contain rounded-xl shadow-2xl border border-[#D3C7B5]/40 bg-white"
               />
             </div>
 

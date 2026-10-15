@@ -54,10 +54,10 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
   pipes: {
     slug: "pipes",
     client: "Colon Hyphen Bracket",
-    title: "Pipes Protocol: Sovereign Knowledge Marketplace, MCP Agent Gate & Native IDE",
-    subtitle: "Flagship Showcase • Web Protocol (pipes.pink), MCP/HTTP 402 Agent Economics, WebGPU Classrooms & Native macOS IDE",
+    title: "Pipes Protocol: Sovereign Knowledge Marketplace, Hash Atelier & SEMI (;-])",
+    subtitle: "Flagship Showcase • Web Protocol (pipes.pink), Integrated Hash Studio + SEMI Socratic Agent, MCP/HTTP 402 Gate & macOS IDE",
     role: "Architect, Lead Designer & Systems Builder",
-    scaleBadge: "Web Protocol • MCP & REST • macOS & iOS",
+    scaleBadge: "Web Protocol • Hash & SEMI • MCP • macOS & iOS",
     timeline: "2024 – 2026",
     heroImage: "/images/pipes/pipes-hero.png",
     galleryImages: [
@@ -68,6 +68,12 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
         tag: "Web Protocol",
       },
       {
+        src: "/images/pipes/pipes-hash-studio-semi.png",
+        title: "Integrated Hash Studio & SEMI (;-]) Socratic Sparring Atelier",
+        caption: "Redesigned inside Pipes (/write): a private-by-default epistemic vault with live Socratic sparring from SEMI (;-]), 1-click Substack ingestion, and cryptographic 'Seal to Pipe' publishing.",
+        tag: "Hash & SEMI (;-])",
+      },
+      {
         src: "/images/pipes/pipes-marketplace.png",
         title: "Explore Marketplace: Discover & Claim Curated Knowledge Canons",
         caption: "Namespace discovery directory across Foundations, Systems, Craft, Frontier, and Civic domains—filtering deeply curated (100+ source) active knowledge streams.",
@@ -75,8 +81,8 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       },
       {
         src: "/images/pipes/pipes-namespace-bitcoin.png",
-        title: "Sovereign Pipe Room: pipe\\bitcoin & Greater WebGPU Engine",
-        caption: "Claimed namespace room housing 120 cryptographically sealed primary sources with interactive Library inspection, Podcast synthesis, and zero-hallucination Greater (>) WebGPU chat.",
+        title: "Sovereign Pipe Room: pipe\\bitcoin Primary-Source Library",
+        caption: "Claimed namespace room housing cryptographically sealed BIP specifications and primary sources with interactive Library inspection, Greater (>) WebGPU chat, and Ask Semi.",
         tag: "Sovereign Namespace",
       },
       {
@@ -86,16 +92,16 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
         tag: "90+ Language Classroom",
       },
       {
+        src: "/images/pipes/pipes-dev-mcp-hub.png",
+        title: "Developer Hub (dev-hub v1.0): Immutable Context Graphs for Agents",
+        caption: "REST and Model Context Protocol (MCP) developer portal providing SHA-256 content-addressed context graphs, 1-click MCP setup, and WebGPU edge indexing.",
+        tag: "Developer Hub",
+      },
+      {
         src: "/images/pipes/pipes-economics.png",
         title: "Curator Economics & HTTP 402 MCP Agent Gate",
         caption: "Sovereign payout engine enforcing a 70% creator revenue share and HTTP 402 payment gates for Claude Desktop, Cursor IDE, and autonomous agent queries in USD or Bitcoin Sats.",
         tag: "MCP & HTTP 402 Gate",
-      },
-      {
-        src: "/images/pipes/pipes-dev-mcp-hub.png",
-        title: "Developer Hub (dev-hub v1.0): Immutable Context Graphs for Agents",
-        caption: "REST and Model Context Protocol (MCP) developer portal providing SHA-256 content-addressed context graphs, subscription credit economics, and WebGPU edge indexing.",
-        tag: "Developer Hub",
       },
       {
         src: "/images/pipes/pipes-podcast-pavilion.png",
@@ -111,26 +117,26 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       },
     ],
     executiveSummary:
-      "Pipes (pipes.pink) is my flagship software ecosystem: a content-addressed sovereign knowledge protocol, marketplace, and multi-platform studio deployed across Web, Model Context Protocol (MCP), native macOS Desktop (Tauri/Rust), and native iOS (Swift/SwiftUI). Experts curate primary sources into deeded namespaces (like pipe\\bitcoin and pipe\\my-first-bitcoin), AI agents pay micro-royalties via HTTP 402 gates to cite verified truth, and educators deploy zero-hallucination WebGPU + DuckDB-WASM tutors across 90+ languages at $0 marginal cloud inference cost.",
+      "Pipes (pipes.pink) is my flagship software ecosystem: a content-addressed sovereign knowledge protocol, marketplace, and epistemic writing studio deployed across Web, Model Context Protocol (MCP), native macOS Desktop (Tauri/Rust), and iOS. Inside Pipes, creators draft in the redesigned Hash Sanctuary alongside SEMI (;-])—a Socratic editor-in-residence with persistent memory—before sealing verified monographs into SHA-256 namespaces (like pipe\\bitcoin and pipe\\my-first-bitcoin) where AI agents pay 70% micro-royalties via HTTP 402 gates.",
     challenge:
       "As foundation LLMs drown in synthetic slop and suffer from model collapse, verified human-curated primary sources are the rarest asset on the internet. Yet domain experts, authors, and open-source curricula have their work scraped for free by AI labs while enterprises burn thousands of dollars per month on fragile cloud RAG pipelines that still hallucinate.",
     solution:
-      "Architected a full-stack sovereign knowledge protocol and marketplace: (1) SHA-256 content-addressed Merkle-DAG namespaces where curators own deeded property and earn 70% royalties via an HTTP 402 / MCP agent gate; (2) the turnkey Greater (>) embeddable tutor powered by in-browser DuckDB-WASM and WebGPU for $0-compute, 90+ language classroom localization; (3) the Sovereign Podcast Pavilion for autonomous 2-host neural audio synthesis; and (4) the native macOS ! BANG IDE for local folder-watching, 500k-record DuckDB analytics, and agency CMS deployment.",
+      "Architected a unified, four-pillar ecosystem: (1) the integrated Hash Sanctuary (/write) and SEMI (;-]) Socratic sparring partner for private thinking, 3D Galaxy exploration, and 1-click Substack ingestion; (2) SHA-256 Merkle-DAG namespaces where curators own deeded property and earn 70% royalties via an HTTP 402 / MCP agent gate; (3) the turnkey Greater (>) WebGPU + DuckDB-WASM classroom tutor across 90+ languages; and (4) the Sovereign Podcast Pavilion (Semi & Greater 2-host neural audio) plus native macOS ! BANG IDE.",
     uiUxCraft:
-      "Designed a high-craft editorial and technical interface spanning public knowledge discovery, interactive namespace rooms (Library, Greater Chat, Mount & Desktop, Podcast), enterprise curriculum translation studios, and a native macOS desktop cockpit. Coupled with a runtime CSS variable engine that adapts across 6 distinct aesthetic personas without page reloads.",
+      "Designed a cohesive editorial and technical interface spanning the redesigned Hash & SEMI Socratic Atelier, interactive namespace rooms (Library, Greater Chat, Podcast), enterprise 90+ language curriculum studios, and a native macOS desktop cockpit—coupled with a runtime CSS variable engine that adapts across 6 distinct aesthetic personas.",
     systemsArchitecture:
-      "Engineered a SHA-256 Merkle-DAG knowledge graph (the Ampersand Graph) synchronized across PostgreSQL/Drizzle, local SQLite/Turso replicas, and in-browser DuckDB-WASM + WebGPU vector caches. Integrated Model Context Protocol (MCP) and HTTP 402 payment gates for Claude Desktop and Cursor IDE, Sanity CMS GROQ ingestion bridges, OpenTimestamps (OTS) cryptographic provenance, and non-custodial Bitcoin Lightning (Breez SDK) + USD royalty settlement.",
+      "Engineered a SHA-256 Merkle-DAG knowledge graph (the Ampersand Graph) synchronized across PostgreSQL/Drizzle, local SQLite/Turso replicas, and in-browser DuckDB-WASM + WebGPU vector caches. Integrated SEMI's persistent Socratic memory vault, Model Context Protocol (MCP) and HTTP 402 payment gates for Claude Desktop and Cursor IDE, Sanity CMS GROQ bridges, OpenTimestamps (OTS) provenance, and non-custodial Bitcoin Lightning + USD royalty settlement.",
     metrics: [
       { value: "70%", label: "Creator Royalties", subtext: "Deeded MCP & HTTP 402 split" },
       { value: "90+ Langs", label: "Sovereign Classrooms", subtext: "Turnkey Greater (>) WebGPU tutor" },
       { value: "$0.00", label: "Marginal Cloud AI Cost", subtext: "In-browser DuckDB-WASM + WebGPU" },
-      { value: "3 Platforms", label: "Unified Ecosystem", subtext: "Web Protocol, macOS IDE, iOS" },
+      { value: "Hash + SEMI", label: "Epistemic Atelier", subtext: "Socratic sparring & Seal-to-Pipe" },
     ],
     outcomes: [
-      "Designed and shipped the complete pipes.pink web protocol, Explore marketplace, Developer MCP Hub, Podcast Pavilion, and native macOS ! BANG IDE.",
+      "Unified the redesigned Hash writing sanctuary and SEMI (;-]) Socratic editor-in-residence directly into pipes.pink with 1-click 'Seal to Pipe' cryptographic publishing.",
+      "Designed and shipped the Explore marketplace, Developer MCP Hub, 2-Host Sovereign Podcast Pavilion (Semi & Greater), and native macOS ! BANG IDE.",
       "Built the turnkey pipe\\my-first-bitcoin classroom platform with 15-second CLI mounting (npx @pipes/greater), Sanity CMS ingestion, and 90+ language localization.",
       "Engineered the Curator Economics & HTTP 402 MCP Gate enabling creators to monetize autonomous AI agent citations across Claude Desktop, Cursor, and REST.",
-      "Eliminated recurring cloud RAG server bills by executing hybrid vector + keyword synthesis locally via DuckDB-WASM, WebGPU, and the deterministic Reference Library pattern.",
     ],
     technologies: ["Next.js & TypeScript", "MCP & HTTP 402 Gate", "WebGPU & DuckDB-WASM", "macOS Native (Tauri 2.0/Rust)", "iOS (Swift/SwiftUI)", "PostgreSQL / Drizzle / SQLite", "Bitcoin Lightning / Web Crypto"],
     liveUrl: "https://pipes.pink",

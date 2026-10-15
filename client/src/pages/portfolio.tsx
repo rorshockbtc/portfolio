@@ -435,14 +435,14 @@ export default function PortfolioPage() {
                 </span>
                 <span className="text-[#D3C7B5]">&bull;</span>
                 <Badge variant="outline" className="border-[#D3C7B5] text-xs font-sans uppercase font-bold tracking-wider bg-[#F2EAE0] text-[#281B16]">
-                  Web Protocol &bull; MCP &amp; REST &bull; macOS &amp; iOS
+                  Web Protocol &bull; Hash &amp; SEMI (;-]) &bull; MCP &amp; macOS
                 </Badge>
               </div>
               <h3 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#281B16] tracking-tight">
-                Pipes.Pink: Sovereign Knowledge Protocol, Marketplace &amp; Native IDE
+                Pipes.Pink: Sovereign Knowledge Protocol, Hash Atelier &amp; SEMI (;-])
               </h3>
-              <p className="text-xl sm:text-2xl text-[#6B554D] font-sans leading-relaxed">
-                My flagship product—designed, architected, and built solo from zero to production. Experts package verified primary sources into cryptographically deeded namespaces (<code className="font-mono text-lg bg-[#EAE0D0] px-2 py-0.5 rounded">pipe\bitcoin</code>, <code className="font-mono text-lg bg-[#EAE0D0] px-2 py-0.5 rounded">pipe\my-first-bitcoin</code>), AI agents pay 70% micro-royalties to cite them via Model Context Protocol (MCP) and HTTP 402 gates, and organizations mount zero-hallucination WebGPU + DuckDB-WASM tutors in 90+ languages across Web, macOS (<code className="font-mono text-lg bg-[#EAE0D0] px-2 py-0.5 rounded">! BANG</code> IDE), and iOS.
+              <p className="text-xl sm:text-2xl text-[#6B554D] font-sans leading-relaxed max-w-[65ch]">
+                My flagship product—designed, architected, and built solo from zero to production. Creators draft inside the redesigned <strong>Hash Sanctuary</strong> alongside <strong>SEMI (;-])</strong>, a Socratic editor-in-residence with persistent memory, then seal verified primary sources into deeded namespaces (<code className="font-mono text-lg bg-[#EAE0D0] px-2 py-0.5 rounded">pipe\bitcoin</code>, <code className="font-mono text-lg bg-[#EAE0D0] px-2 py-0.5 rounded">pipe\my-first-bitcoin</code>) where AI agents pay 70% micro-royalties via MCP &amp; HTTP 402 gates.
               </p>
             </div>
 
@@ -456,14 +456,14 @@ export default function PortfolioPage() {
           <Link href="/case-studies/pipes">
             <div className="group cursor-pointer space-y-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                <div className="lg:col-span-7 space-y-3">
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#D3C7B5] bg-[#EAE0D0]">
+                <div className="lg:col-span-6 space-y-3">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#3D2C24] bg-[#231814] p-3 sm:p-4">
                     <img
                       loading="lazy"
                       decoding="async"
                       src="/images/pipes/pipes-hero.png"
                       alt="Pipes.Pink Web Protocol: A Sovereign Library for Human Knowledge"
-                      className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                      className="w-full h-auto object-cover rounded-2xl shadow-lg group-hover:scale-[1.01] transition-transform duration-500"
                     />
                   </div>
                   <div className="space-y-1 px-1">
@@ -476,22 +476,22 @@ export default function PortfolioPage() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 space-y-3">
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#D3C7B5] bg-[#EAE0D0]">
+                <div className="lg:col-span-6 space-y-3">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#3D2C24] bg-[#231814] p-3 sm:p-4">
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/pipes/desktop-mac-bang-ide.png"
-                      alt="Pipes macOS Desktop App: Native ! BANG IDE & Catalogue"
-                      className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                      src="/images/pipes/pipes-hash-studio-semi.png"
+                      alt="Integrated Hash Studio and SEMI (;-]) Socratic Sparring Atelier inside Pipes.Pink"
+                      className="w-full h-auto object-cover rounded-2xl shadow-lg group-hover:scale-[1.01] transition-transform duration-500"
                     />
                   </div>
                   <div className="space-y-1 px-1">
                     <span className="font-sans text-xs sm:text-sm uppercase font-bold tracking-wider text-[#281B16] block">
-                      macOS Native &bull; ! BANG Curator &amp; Developer IDE
+                      Integrated Hash Sanctuary &bull; SEMI (;-]) Socratic Sparring
                     </span>
                     <p className="text-sm text-[#6B554D] font-sans">
-                      Tauri 2.0 + Rust desktop studio with 500k-record DuckDB analysis, folder watcher sync, and agency CMS deployment.
+                      Redesigned epistemic writing vault inside Pipes with live Socratic sparring from SEMI (;-]), 1-click Substack ingestion, and cryptographic "Seal to Pipe" publishing.
                     </p>
                   </div>
                 </div>
@@ -501,9 +501,9 @@ export default function PortfolioPage() {
                 <div className="flex flex-wrap items-center gap-5 sm:gap-8">
                   <span className="font-bold text-[#281B16]">Built &amp; Shipped Solo</span>
                   <span>&bull;</span>
-                  <span className="font-bold text-[#281B16]">MCP &amp; HTTP 402 Agent Gate</span>
+                  <span className="font-bold text-[#281B16]">Hash &amp; SEMI (;-]) Atelier</span>
                   <span>&bull;</span>
-                  <span className="font-bold text-[#281B16]">WebGPU + DuckDB-WASM</span>
+                  <span className="font-bold text-[#281B16]">MCP &amp; HTTP 402 Agent Gate</span>
                   <span>&bull;</span>
                   <span className="font-bold text-[#281B16]">Web, macOS (Tauri/Rust) &amp; iOS</span>
                 </div>
@@ -686,7 +686,7 @@ export default function PortfolioPage() {
             {[
               { v: "670+", l: "Public commits on GitHub" },
               { v: "8", l: "Public repositories" },
-              { v: "3", l: "Open-source projects (MIT / AGPL)" },
+              { v: "4", l: "Featured open-source repositories" },
               { v: "TS", l: "TypeScript first, Python and Rust when needed" },
             ].map((x) => (
               <div key={x.l} className="space-y-2 md:px-8 first:md:pl-0">
@@ -696,25 +696,28 @@ export default function PortfolioPage() {
             ))}
           </dl>
 
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-4">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-4">
             {[
               { repo: "marigold", license: "AGPL-3.0", desc: "Voter-roll search and audit that runs entirely in the browser on DuckDB-WASM. No personal data leaves the machine.", stack: "TypeScript · DuckDB-WASM · Apache Arrow" },
-              { repo: "greater-than", license: "MIT", desc: "Support bots that run the model in the browser with WebGPU and Transformers.js, so there's no per-message cloud cost.", stack: "TypeScript · WebGPU · Transformers.js" },
-              { repo: "pipes-native", license: "Source available", desc: "The Pipes Mac and iPhone apps: local notes, local search, and local AI.", stack: "TypeScript · Tauri · Rust · Swift" },
+              { repo: "greater-than", license: "MIT", desc: "Sovereign-by-default support bots that run inference in the browser with WebGPU and Transformers.js at $0 cloud cost.", stack: "TypeScript · WebGPU · Transformers.js" },
+              { repo: "pipes-native", license: "Source available", desc: "The Pipes macOS (! BANG IDE) and iOS companion apps: local folder sync, DuckDB analytics, and sovereign studio.", stack: "TypeScript · Tauri · Rust · Swift" },
+              { repo: "antigravity-skills", license: "Open Source", desc: "Curated collection of production Agent Skills, MCP workflows, and deterministic harnesses for autonomous coding agents.", stack: "Agent Harnesses · MCP · Prompt Engineering" },
             ].map((r) => (
               <li key={r.repo}>
                 <a
                   href={`https://github.com/rorshockbtc/${r.repo}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block space-y-3 py-6 border-b border-[#D3C7B5] hover:border-[#FE299E] transition-colors"
+                  className="group h-full flex flex-col justify-between space-y-3 py-6 border-b border-[#D3C7B5] hover:border-[#FE299E] transition-colors"
                 >
-                  <span className="flex items-baseline justify-between gap-4">
-                    <span className="font-serif text-2xl font-bold text-[#281B16] group-hover:text-[#FE299E] transition-colors">{r.repo}</span>
-                    <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#8A736A]">{r.license}</span>
-                  </span>
-                  <span className="block text-lg text-[#5C4840] font-sans leading-relaxed">{r.desc}</span>
-                  <span className="block text-sm font-sans font-semibold text-[#281B16]">{r.stack} &rarr;</span>
+                  <div className="space-y-3">
+                    <span className="flex items-baseline justify-between gap-3">
+                      <span className="font-serif text-xl lg:text-2xl font-bold text-[#281B16] group-hover:text-[#FE299E] transition-colors">{r.repo}</span>
+                      <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-[#8A736A] shrink-0">{r.license}</span>
+                    </span>
+                    <span className="block text-base text-[#5C4840] font-sans leading-relaxed">{r.desc}</span>
+                  </div>
+                  <span className="block text-xs sm:text-sm font-sans font-semibold text-[#281B16] pt-2">{r.stack} &rarr;</span>
                 </a>
               </li>
             ))}
