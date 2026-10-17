@@ -21,12 +21,12 @@ const roles: Role[] = [
   {
     id: "chb",
     company: "Colon Hyphen Bracket",
-    title: "Founder & Builder",
+    title: "Founder & Product Architect",
     dates: "2018 – Present",
-    headline: "I design, build, and ship my own products end to end.",
+    headline: "I architect, design, and ship my own products end to end.",
     points: [
-      "Shipped a journaling app, a persistent-memory chatbot, an open-source voter-roll audit tool, and a market-making bot platform for Polymarket, each one solo from idea to production.",
-      "Mostly TypeScript with React/Next.js and Node, some Python, and a little Rust.",
+      "Architected and shipped Pipes.Pink (sovereign knowledge protocol & marketplace with the integrated Hash Sanctuary and SEMI (;-]) Socratic agent), Marigold Insights (2M-record in-browser DuckDB-WASM voter-roll audit engine), Greater-Than (WebGPU local support bots), and Cassandra—each solo from data schema to production.",
+      "Mostly TypeScript with React/Next.js and Node, backed by Python, DuckDB-WASM, and Rust through AI-accelerated engineering.",
     ],
     caseStudy: "pipes",
   },
@@ -123,8 +123,8 @@ export function ExperienceSection() {
             15 years, from operations to principal design.
           </h2>
           <p className="text-lg sm:text-xl text-[#5C4840] font-sans leading-relaxed">
-            I started out running operations and fighting fraud, then moved into design leadership, and now I write the code too.
-            That's why I tend to start with the business problem.
+            I started out running operations and fighting fraud, then moved into design leadership, and now I architect and ship the working software too.
+            That's why I always start with the business problem.
           </p>
           <a
             href="/resumes/kyle-cyree-resume.pdf"

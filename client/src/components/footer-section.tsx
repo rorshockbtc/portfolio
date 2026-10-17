@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { openContactModal } from "@/lib/contact-events";
 
 const productLinks = [
-  { name: "hash.pink", href: "https://hash.pink" },
-  { name: "colonhyphenbracket.pink", href: "https://colonhyphenbracket.pink" },
-  { name: "pipes.pink", href: "https://pipes.pink" },
-  { name: "semi.pink", href: "https://semi.pink" },
+  { name: "pipes.pink (Hash & SEMI)", href: "https://pipes.pink", external: true },
+  { name: "bolt.pipes.pink (Marigold)", href: "https://bolt.pipes.pink", external: true },
+  { name: "greater.pink (WebGPU)", href: "https://greater.pink", external: true },
+  { name: "colonhyphenbracket.pink", href: "https://colonhyphenbracket.pink", external: true },
+  { name: "Essay: Design is Risk", href: "/essays/design-is-risk", external: false },
+  { name: "Essay: Albers & Vignelli", href: "/case-studies/colors-type-grids", external: false },
 ];
 
 const furtherReading = [
@@ -111,10 +113,9 @@ export default function FooterSection() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="group inline-flex items-center gap-1.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
-                    data-testid={`link-product-${link.name.split(".")[0]}`}
+                    data-testid={`link-product-${link.name.split(".")[0].toLowerCase().replace(/[^a-z0-9]/g, "-")}`}
                   >
                     {link.name}
                     <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover:opacity-60 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />

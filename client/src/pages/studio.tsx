@@ -215,7 +215,7 @@ export default function Studio() {
             style={{ fontSize: "clamp(2.5rem, min(8.33vw, 10vh), 10rem)" }}
             data-testid="text-studio-hero-heading"
           >
-            architecture Partner for the Stuck &amp; UnderServed.
+            Architecture Partner for the Stuck &amp; Underserved.
           </motion.h1>
 
           <motion.p

@@ -545,7 +545,9 @@ export default function PortfolioPage() {
               </div>
               <div className="pt-4 border-t border-[#D3C7B5]/60 flex items-center justify-between text-xs sm:text-sm font-sans font-bold text-[#281B16]">
                 <span>2010 – 2015</span>
-                <span className="text-[#8A736A] uppercase tracking-wider">83% fraud drop</span>
+                <Link href="/case-studies/foodler" className="text-[#FE299E] hover:underline">
+                  Case Study &rarr;
+                </Link>
               </div>
             </div>
 
@@ -631,23 +633,25 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            {/* Colors Type Grids */}
+            {/* Colors Type Grids & Design is Risk Essays */}
             <div className="space-y-4 p-8 rounded-3xl bg-[#F2EAE0] border border-[#D3C7B5] flex flex-col justify-between">
               <div className="space-y-3">
                 <span className="text-xs font-sans uppercase font-bold tracking-wider text-[#FE299E]">
-                  Design Manifesto &bull; Pure CSS
+                  Essays &bull; Grids &amp; Security Posture
                 </span>
                 <h4 className="font-serif font-bold text-2xl text-[#281B16]">
-                  Albers &amp; Vignelli in CSS
+                  Albers &amp; Vignelli + Design is Risk
                 </h4>
                 <p className="text-base text-[#6B554D] font-sans leading-relaxed">
-                  My design essay on grids, typography, and color relativity, constructed entirely in mathematical CSS. It demonstrates why spatial discipline keeps digital software from generic AI homogeneity.
+                  Two foundational essays: why mathematical CSS grids and Albers color relativity prevent generic AI homogeneity, and how CoT scraping turned design portfolios into an enterprise IP risk.
                 </p>
               </div>
-              <div className="pt-4 border-t border-[#D3C7B5]/60 flex items-center justify-between text-xs sm:text-sm font-sans font-bold text-[#281B16]">
-                <span>Essay</span>
+              <div className="pt-4 border-t border-[#D3C7B5]/60 flex items-center justify-between gap-3 text-xs sm:text-sm font-sans font-bold text-[#281B16]">
                 <Link href="/case-studies/colors-type-grids" className="text-[#FE299E] hover:underline">
-                  Read Essay &rarr;
+                  Albers &amp; Vignelli &rarr;
+                </Link>
+                <Link href="/essays/design-is-risk" className="text-[#281B16] hover:text-[#FE299E] underline decoration-[#D3C7B5] underline-offset-4">
+                  Design is Risk &rarr;
                 </Link>
               </div>
             </div>
@@ -664,10 +668,10 @@ export default function PortfolioPage() {
                 <GitBranch className="w-4 h-4" /> Code &amp; Systems
               </p>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.05]">
-                A designer who ships code.
+                Systems architect. Prompt engineer. Builder.
               </h2>
-              <p className="text-lg sm:text-xl text-[#5C4840] font-sans leading-relaxed max-w-2xl">
-                Most of my enterprise client work is under NDA, so I build and release open-source systems in public. Day to day that's TypeScript with React and Next.js, backed by Python, DuckDB-WASM, WebGPU, and Rust when local performance or data pipelines demand it.
+              <p className="text-lg sm:text-xl text-[#5C4840] font-sans leading-relaxed max-w-[65ch]">
+                Most of my enterprise client work is under NDA, so I architect and release open-source systems in public. I'm a systems architect and prompt engineer who reads code, defines strict data schemas and mathematical UI grids, and uses AI acceleration—especially on the backend—to ship working TypeScript/Next.js, Python, and Rust software.
               </p>
             </div>
             <div className="lg:col-span-5 lg:justify-self-end">
@@ -777,7 +781,7 @@ export default function PortfolioPage() {
                   Systems Built on Discipline
                 </h3>
                 <p className="text-base text-[#6B554D] font-sans leading-relaxed">
-                  Behind every 5,000-commit repository, venture launch, and 1-week sprint is a shared life rooted in disciplined focus and mutual purpose.
+                  Behind every production repository, venture launch, and 1-week sprint is a shared life rooted in disciplined focus and mutual purpose.
                 </p>
               </div>
             </div>
@@ -926,24 +930,65 @@ export default function PortfolioPage() {
       <section id="about-kyle" className="py-28 md:py-44 border-t border-[#D3C7B5] bg-[#F2EAE0]/50">
         <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
-            {/* Left: Gallery Photograph (Frameless) */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative max-w-lg w-full space-y-4">
-                <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#D3C7B5]">
-                  <img loading="lazy" decoding="async"
-                    src="/images/personal/kyle-victoria-sunset-beach.jpg"
-                    alt="Kyle Cyree — Golden Hour on the Beach"
-                    className="w-full aspect-square object-cover"
-                  />
-                </div>
-                <div className="pt-2 text-center space-y-1">
-                  <span className="font-serif font-bold text-2xl text-[#281B16] block">Kyle Cyree</span>
-                  <span className="font-sans text-xs sm:text-sm text-[#FE299E] font-bold uppercase tracking-wider block">
-                    The &quot;Unit of One&quot;
+            {/* Left: The "Unit of One" Operating Specification Card */}
+            <div className="lg:col-span-5">
+              <div className="rounded-3xl bg-[#281B16] text-[#F2EAE0] p-8 sm:p-10 shadow-2xl border border-[#3D2C24] space-y-7">
+                <div className="flex items-center justify-between border-b border-[#F2EAE0]/15 pb-5">
+                  <div>
+                    <span className="font-sans text-[11px] uppercase tracking-[0.22em] font-bold text-[#FE299E] block">
+                      Operating Architecture
+                    </span>
+                    <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#F2EAE0] mt-1">
+                      The &ldquo;Unit of One&rdquo; Loop
+                    </h3>
+                  </div>
+                  <span className="font-sans font-bold text-2xl text-[#FE299E] select-none" aria-hidden="true">
+                    :-]
                   </span>
-                  <p className="text-xs sm:text-sm text-[#6B554D] font-sans">
-                    Principal Product Designer &amp; Systems Architect
-                  </p>
+                </div>
+
+                <ol className="space-y-5 font-sans">
+                  {[
+                    {
+                      step: "01",
+                      title: "Executive & Regulatory Strategy",
+                      desc: "UNC Kenan-Flagler MBA rigor applied to OCC/FDIC banking, HIPAA clinical workflows, and enterprise service blueprints.",
+                    },
+                    {
+                      step: "02",
+                      title: "First-Principles Data Modeling",
+                      desc: "Relational PostgreSQL/Drizzle schemas, local-first DuckDB-WASM tables, and zero-PII security boundaries before pixels.",
+                    },
+                    {
+                      step: "03",
+                      title: "Swiss Grid & Interaction Craft",
+                      desc: "Mathematical Vignelli grids, Albers color systems, and high-density institutional interfaces in Figma, Sketch, and CSS.",
+                    },
+                    {
+                      step: "04",
+                      title: "AI-Accelerated Shipping",
+                      desc: "Prompt & harness engineering that turns specifications into working Next.js/TypeScript, Python, and Rust software without handoff loss.",
+                    },
+                  ].map((item) => (
+                    <li key={item.step} className="flex items-start gap-4">
+                      <span className="font-mono text-xs font-bold text-[#FE299E] bg-[#FE299E]/15 border border-[#FE299E]/30 rounded-lg px-2.5 py-1 shrink-0 mt-0.5">
+                        {item.step}
+                      </span>
+                      <div className="space-y-1">
+                        <h4 className="font-serif font-bold text-lg text-[#F2EAE0] leading-snug">
+                          {item.title}
+                        </h4>
+                        <p className="text-xs sm:text-sm text-[#F2EAE0]/75 leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+
+                <div className="pt-4 border-t border-[#F2EAE0]/15 flex items-center justify-between text-xs font-sans text-[#F2EAE0]/65">
+                  <span>Kyle Cyree · Principal Architect</span>
+                  <span className="text-[#FE299E] font-bold uppercase tracking-wider">Zero Handoff Loss</span>
                 </div>
               </div>
             </div>
@@ -956,12 +1001,12 @@ export default function PortfolioPage() {
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#281B16] tracking-tight">
                 Why teams hire me
               </h2>
-              <div className="space-y-6 text-xl sm:text-2xl text-[#6B554D] font-sans leading-relaxed">
+              <div className="space-y-6 text-xl sm:text-2xl text-[#6B554D] font-sans leading-relaxed max-w-[60ch]">
                 <p>
-                  Most product teams lose momentum in the handoffs between strategy, design, and engineering. Designers mock up things that are hard to build, engineers rebuild them from scratch, and leadership wonders why shipping takes nine months.
+                  Most product teams lose momentum in the handoffs between strategy, design, and engineering. Designers mock up screens detached from the data model, engineers rebuild them under deadline pressure, and leadership wonders why shipping takes nine months.
                 </p>
                 <p>
-                  I close that gap. I can run the room with executives, model the data, design the experience, and write the front-end code, so the version that ships is the version we agreed on.
+                  I close that gap. I run the room with executives, model the data from first principles, design the interface on a mathematical grid, and use AI-accelerated engineering to ship working TypeScript and Next.js software—so the system that ships is the system we agreed on.
                 </p>
               </div>
 
@@ -981,7 +1026,7 @@ export default function PortfolioPage() {
                 </div>
                 <div className="space-y-1">
                   <span className="font-sans text-xs uppercase tracking-wider text-[#FE299E] font-bold block">
-                    Production Code
+                    AI-Native Execution
                   </span>
                   <span className="font-serif font-bold text-xl text-[#281B16] block">No lost handoffs</span>
                 </div>

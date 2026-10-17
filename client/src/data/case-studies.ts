@@ -141,10 +141,11 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     technologies: ["Next.js & TypeScript", "MCP & HTTP 402 Gate", "WebGPU & DuckDB-WASM", "macOS Native (Tauri 2.0/Rust)", "iOS (Swift/SwiftUI)", "PostgreSQL / Drizzle / SQLite", "Bitcoin Lightning / Web Crypto"],
     liveUrl: "https://pipes.pink",
     liveUrlLabel: "Explore Live Pipes.Pink Protocol",
+    repoUrl: "https://github.com/rorshockbtc/pipes-native",
     codebaseBreakdown: {
-      headline: "How I Architect & Code Sovereign Platforms as a Unit of One",
+      headline: "How I Architect & Ship Sovereign Platforms as a Unit of One",
       philosophy:
-        "I am not an abstract software engineer who lives in theoretical microservices, nor a Figma-only designer who hands off unbuildable mocks. I am a Principal Systems Architect who writes production TypeScript, Next.js, Rust, and Python because the translation gap between design and engineering is where early-stage tech dies. I write the code to ensure the system architecture, mathematical Vignelli grid, and zero-PII security rules ship intact.",
+        "The translation gap between design and engineering is where early-stage tech dies. As a systems architect and prompt engineer who reads code, I model the relational schemas from first principles, lock the mathematical Vignelli grid in CSS, and orchestrate AI agents—especially on the backend—to ship full-stack TypeScript, Next.js, Python, and Rust systems with zero handoff loss.",
       stackArchitecture: [
         {
           role: "Web Protocol, Marketplace & MCP Agent Gate",
@@ -440,7 +441,7 @@ export const pipes = pgTable("pipes", {
       { value: "2,000,000", label: "Active Records", subtext: "Audited in Mississippi roll" },
       { value: "100%", label: "Linkage Precision", subtext: "Fellegi-Sunter benchmark" },
       { value: "0 Bytes", label: "Cloud Exposure", subtext: "100% local client memory" },
-      { value: "0 bytes", label: "PII uploaded", subtext: "Everything runs in the browser" },
+      { value: "10.2ms", label: "1,000-Pair Audit", subtext: "In-browser Web Worker speed" },
     ],
     outcomes: [
       "Eliminated cloud PII liability by executing multi-gigabyte queries entirely within browser Web Workers.",
@@ -451,6 +452,7 @@ export const pipes = pgTable("pipes", {
     technologies: ["DuckDB-WASM", "SQLite in Browser", "Web Workers", "OPFS", "Fellegi-Sunter Linkage", "Zero-PII Cryptography"],
     liveUrl: "https://bolt.pipes.pink",
     liveUrlLabel: "Launch Civic Sandbox (bolt.pipes.pink)",
+    repoUrl: "https://github.com/rorshockbtc/marigold",
     codebaseBreakdown: {
       headline: "Zero-Cloud In-Browser DuckDB-WASM & Fellegi-Sunter Linkage Engine",
       philosophy:
@@ -750,7 +752,7 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     subtitle: "Director of Business Operations • Slashing Chargebacks by 83% ($6M to <$1M)",
     role: "Director of Business Operations",
     scaleBadge: "$500M+ Volume • 10x Acquisition Exit",
-    timeline: "2012 – 2017",
+    timeline: "2010 – 2015",
     heroImage: "/artwork/enterprise-fraud.png",
     galleryImages: [
       {
@@ -788,10 +790,10 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     slug: "ultralinq",
     client: "UltraLinq Healthcare Solutions",
     title: "UltraLinq: Cloud Cardiovascular PACS & Medical Imaging Diagnostic Workflows",
-    subtitle: "Healthcare SaaS • Zero-Latency Cloud DICOM Viewer & Structured Clinical Reporting",
-    role: "Lead UX Architect & Clinical Workflow Specialist",
+    subtitle: "Design Director • Zero-Latency Cloud DICOM Viewer & Structured Clinical Reporting",
+    role: "Design Director & Clinical Workflow Architect",
     scaleBadge: "Cloud DICOM PACS • Cardiovascular Imaging",
-    timeline: "2018 – 2020",
+    timeline: "2016 – 2018",
     heroImage: "/artwork/enterprise-health.png",
     galleryImages: [
       {
