@@ -81,11 +81,30 @@ export default function Navigation() {
                 {link.label}
               </button>
             ))}
+            <Link
+              href={location === "/studio" ? "/" : "/studio"}
+              className={`py-1 px-3 rounded-full font-sans text-xs uppercase tracking-[0.16em] font-bold transition-all whitespace-nowrap border ${
+                location === "/studio"
+                  ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16]"
+                  : "bg-[#F2EAE0] text-[#281B16] border-[#D3C7B5] hover:border-[#FE299E] hover:text-[#FE299E]"
+              }`}
+              data-testid="nav-link-studio"
+            >
+              {location === "/studio" ? "← Principal Portfolio" : "CHB Studio · Business"}
+            </Link>
           </div>
         </div>
 
         {/* Right: Availability Status & Sprint CTA */}
-        <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
+          <Link
+            href={location === "/studio" ? "/" : "/studio"}
+            className="lg:hidden font-sans text-[11px] uppercase tracking-[0.12em] font-bold px-3 py-1.5 rounded-full border border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:border-[#FE299E] whitespace-nowrap"
+            data-testid="nav-link-studio-mobile-top"
+          >
+            {location === "/studio" ? "Portfolio" : "Studio"}
+          </Link>
+
           <a
             href="/resumes/kyle-cyree-resume.pdf"
             target="_blank"

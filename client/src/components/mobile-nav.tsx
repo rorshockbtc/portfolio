@@ -37,11 +37,11 @@ export default function MobileNav() {
       aria-label={hasSections ? "Section navigation" : "Page navigation"}
       data-testid="nav-mobile-bottom"
     >
-      <div className="bg-background/90 backdrop-blur-xl border-t border-border/40 safe-area-bottom">
+      <div className="bg-[#EAE0D0]/95 backdrop-blur-xl border-t border-[#D3C7B5] safe-area-bottom">
         {hasSections ? (
           <div className="px-3 py-2">
             <div
-              className="flex gap-1 overflow-x-auto scrollbar-hide py-1 -mx-1 px-1"
+              className="flex gap-1.5 overflow-x-auto scrollbar-hide py-1 -mx-1 px-1"
               role="tablist"
               aria-label="Page sections"
             >
@@ -49,23 +49,18 @@ export default function MobileNav() {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full font-sans text-[10px] uppercase tracking-[0.15em] transition-all duration-300 min-w-[44px] min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-sm font-mono text-[10px] uppercase tracking-[0.14em] transition-all duration-200 min-w-[44px] min-h-[40px] cursor-pointer border ${
                     activeSection === section.id
-                      ? "text-white"
-                      : "text-muted-foreground hover:text-foreground bg-transparent"
+                      ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16]"
+                      : "bg-[#F2EAE0] text-[#5C4840] border-[#D3C7B5] hover:text-[#281B16]"
                   }`}
-                  style={
-                    activeSection === section.id
-                      ? { backgroundColor: "#FE299E" }
-                      : undefined
-                  }
                   role="tab"
                   aria-selected={activeSection === section.id}
                   aria-controls={section.id}
                   data-testid={`nav-mobile-section-${section.id}`}
                 >
-                  <span className="font-bold">{section.number}</span>
-                  <span className="hidden xs:inline whitespace-nowrap">
+                  <span className="font-bold text-[#FE299E]">{section.number}</span>
+                  <span className="whitespace-nowrap">
                     {section.shortLabel}
                   </span>
                 </button>
@@ -78,12 +73,20 @@ export default function MobileNav() {
               <button
                 key={link.targetId}
                 onClick={() => scrollTo(link.targetId)}
-                className="flex items-center justify-center min-w-[44px] min-h-[44px] px-3 py-2 font-sans text-sm font-semibold text-[#5C4840] hover:text-[#281B16] transition-colors cursor-pointer bg-transparent border-none"
+                className="flex items-center justify-center min-w-[44px] min-h-[44px] px-2.5 py-2 font-sans text-xs font-semibold text-[#5C4840] hover:text-[#281B16] transition-colors cursor-pointer bg-transparent border-none"
                 data-testid={`nav-mobile-${link.targetId}`}
               >
                 {link.label}
               </button>
             ))}
+            <Link
+              href="/studio"
+              className="flex items-center gap-1.5 justify-center min-h-[36px] px-3 py-1.5 rounded-sm bg-[#281B16] text-[#F2EAE0] font-mono text-[10px] font-bold uppercase tracking-[0.12em] no-underline"
+              data-testid="nav-mobile-studio"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FE299E]" />
+              Studio
+            </Link>
           </div>
         )}
       </div>

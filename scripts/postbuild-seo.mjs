@@ -83,6 +83,72 @@ for (const [slug, study] of Object.entries(CASE_STUDIES)) {
   fs.writeFileSync(path.resolve(outDir, "index.html"), html, "utf-8");
 }
 
+// Generate dedicated static SEO/OG entry point for /studio
+{
+  const studioTitle =
+    "Colon Hyphen Bracket, LLC (:-]) — Systems & Product Architecture Studio | Kyle Cyree";
+  const studioDesc =
+    "Principal-led product architecture studio and proprietary R&D lab. Creators of Pipes.Pink, Hash Sanctuary, SEMI (;-]), Greater (>), Marigold Insights, and Clubhouse 1099. Fixed-fee 1-week sprints ($7,500) and systems engagements.";
+  const studioUrl = "https://hire.colonhyphenbracket.pink/studio";
+  const studioOgImage =
+    "https://hire.colonhyphenbracket.pink/images/studio/studio-hero-architecture.png";
+
+  const studioHtml = baseHtml
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(studioTitle)}</title>`)
+    .replace(
+      /<meta name="description" content="[^"]*" \/>/,
+      `<meta name="description" content="${escapeHtml(studioDesc)}" />`
+    )
+    .replace(
+      /<link rel="canonical" href="[^"]*" \/>/,
+      `<link rel="canonical" href="${studioUrl}" />`
+    )
+    .replace(
+      /<meta property="og:title" content="[^"]*" \/>/,
+      `<meta property="og:title" content="${escapeHtml(studioTitle)}" />`
+    )
+    .replace(
+      /<meta property="og:description" content="[^"]*" \/>/,
+      `<meta property="og:description" content="${escapeHtml(studioDesc)}" />`
+    )
+    .replace(
+      /<meta property="og:url" content="[^"]*" \/>/,
+      `<meta property="og:url" content="${studioUrl}" />`
+    )
+    .replace(
+      /<meta property="og:image" content="[^"]*" \/>/,
+      `<meta property="og:image" content="${studioOgImage}" />`
+    )
+    .replace(
+      /<meta property="og:image:secure_url" content="[^"]*" \/>/,
+      `<meta property="og:image:secure_url" content="${studioOgImage}" />`
+    )
+    .replace(
+      /<meta property="og:image:alt" content="[^"]*" \/>/,
+      `<meta property="og:image:alt" content="${escapeHtml(studioTitle)}" />`
+    )
+    .replace(
+      /<meta name="twitter:title" content="[^"]*" \/>/,
+      `<meta name="twitter:title" content="${escapeHtml(studioTitle)}" />`
+    )
+    .replace(
+      /<meta name="twitter:description" content="[^"]*" \/>/,
+      `<meta name="twitter:description" content="${escapeHtml(studioDesc)}" />`
+    )
+    .replace(
+      /<meta name="twitter:image" content="[^"]*" \/>/,
+      `<meta name="twitter:image" content="${studioOgImage}" />`
+    )
+    .replace(
+      /<meta name="twitter:image:alt" content="[^"]*" \/>/,
+      `<meta name="twitter:image:alt" content="${escapeHtml(studioTitle)}" />`
+    );
+
+  const studioDir = path.resolve(DIST_DIR, "studio");
+  fs.mkdirSync(studioDir, { recursive: true });
+  fs.writeFileSync(path.resolve(studioDir, "index.html"), studioHtml, "utf-8");
+}
+
 // Generate robots.txt
 const robotsTxt = `User-agent: *
 Allow: /
@@ -96,7 +162,7 @@ fs.writeFileSync(path.resolve(ROOT, "client/public/robots.txt"), robotsTxt, "utf
 const today = new Date().toISOString().split("T")[0];
 const staticRoutes = [
   { loc: "https://hire.colonhyphenbracket.pink/", priority: "1.0" },
-  { loc: "https://hire.colonhyphenbracket.pink/studio", priority: "0.8" },
+  { loc: "https://hire.colonhyphenbracket.pink/studio", priority: "0.95" },
   { loc: "https://hire.colonhyphenbracket.pink/essays/design-is-risk", priority: "0.8" },
 ];
 const caseStudyRoutes = Object.keys(CASE_STUDIES).map((slug) => ({
@@ -124,5 +190,5 @@ fs.writeFileSync(path.resolve(DIST_DIR, "sitemap.xml"), sitemapXml, "utf-8");
 fs.writeFileSync(path.resolve(ROOT, "client/public/sitemap.xml"), sitemapXml, "utf-8");
 
 console.log(
-  `Generated static SEO/OG entry points for ${Object.keys(CASE_STUDIES).length} case studies, plus robots.txt and sitemap.xml.`
+  `Generated static SEO/OG entry points for /studio and ${Object.keys(CASE_STUDIES).length} case studies, plus robots.txt and sitemap.xml.`
 );

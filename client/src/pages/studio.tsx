@@ -1,122 +1,508 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, useScroll, useTransform, useInView, MotionConfig } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { motion, MotionConfig } from "framer-motion";
+import {
+  ArrowUpRight,
+  ArrowRight,
+  Calendar,
+  CheckCircle2,
+  Cpu,
+  Database,
+  ExternalLink,
+  Layers,
+  Lock,
+  Sparkles,
+  Terminal,
+  ZoomIn,
+  ChevronLeft,
+  ChevronRight,
+  ShieldCheck,
+  Compass,
+} from "lucide-react";
 import { useStudioSections } from "@/hooks/use-studio-sections";
 import ContactFormModal from "@/components/contact-form-modal";
-
+import { BrandMark, ClientLogoBar, SprintCallout } from "@/components/chb";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const SECTIONS = [
-  { id: "thesis", number: "01", shortLabel: "the thesis" },
-  { id: "overlooked", number: "02", shortLabel: "the overlooked" },
-  { id: "regulated", number: "03", shortLabel: "regulated systems" },
-  { id: "lab", number: "04", shortLabel: "the lab" },
-  { id: "engagement", number: "05", shortLabel: "engagement" },
+  { id: "thesis", number: "01", shortLabel: "The Thesis" },
+  { id: "overlooked", number: "02", shortLabel: "The Overlooked" },
+  { id: "regulated", number: "03", shortLabel: "Regulated Systems" },
+  { id: "lab", number: "04", shortLabel: "The Lab (16-Mo Suite)" },
+  { id: "engagement", number: "05", shortLabel: "Manifesto & Pricing" },
 ];
 
-const ease = [0.16, 1, 0.3, 1] as const;
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-};
-
-const textReveal = {
-  hidden: { opacity: 0, x: -60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.9, ease } },
-};
-
-const itemFade = {
-  hidden: { opacity: 0, x: -40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease } },
-};
-
-const imgRevealRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1.1, ease } },
-};
-
-function PinkBullet() {
-  return (
-    <span
-      className="mt-[6px] shrink-0 select-none"
-      style={{ color: "#FE299E", fontSize: "9px", lineHeight: 1 }}
-      aria-hidden="true"
-    >
-      ▲
-    </span>
-  );
+interface LabViewItem {
+  id: string;
+  category: "protocol" | "atelier" | "education" | "desktop" | "venture";
+  categoryLabel: string;
+  badge: string;
+  title: string;
+  subtitle: string;
+  shippedDate: string;
+  liveUrl?: string;
+  liveLabel?: string;
+  caseStudyHref: string;
+  src: string;
+  highlights: string[];
 }
 
-function StickyNav({ activeSection, visible }: { activeSection: string; visible: boolean }) {
-  return (
-    <motion.nav
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : 30 }}
-      transition={{ duration: 0.6, ease }}
-      className="hidden lg:flex fixed right-0 top-0 bottom-0 z-40 flex-col justify-center items-start"
-      style={{
-        width: "26%",
-        paddingLeft: "clamp(24px, 2.08vw, 40px)",
-        pointerEvents: visible ? "auto" : "none",
-      }}
-      role="navigation"
-      aria-label="Section navigation"
-      data-testid="nav-sticky"
-    >
-      <div
-        className="flex flex-col"
-        style={{ background: "rgba(255,255,255,0.9)", padding: "18px 28px 18px 20px" }}
-      >
-        {SECTIONS.map((s) => (
-          <a
-            key={s.id}
-            href={`#${s.id}`}
-            onClick={(e) => {
-              e.preventDefault();
-              const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-              document.getElementById(s.id)?.scrollIntoView({
-                behavior: prefersReducedMotion ? "auto" : "smooth",
-                block: "start",
-              });
-            }}
-            className={`block py-[6px] font-display text-[12px] lowercase tracking-[0.08em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm whitespace-nowrap ${
-              activeSection === s.id ? "" : "text-foreground/80"
-            }`}
-            style={
-              activeSection === s.id
-                ? { color: "#FE299E", fontWeight: 700 }
-                : {}
-            }
-            aria-current={activeSection === s.id ? "true" : undefined}
-            data-testid={`nav-sticky-${s.id}`}
-          >
-            {s.number} // {s.shortLabel}
-          </a>
-        ))}
-      </div>
-    </motion.nav>
-  );
-}
+const LAB_VIEWS: LabViewItem[] = [
+  {
+    id: "pipes-hero",
+    category: "protocol",
+    categoryLabel: "Pipes.Pink Protocol",
+    badge: "01 // MERKLE-DAG WEB PROTOCOL",
+    title: "Pipes.Pink — The Sovereign Knowledge Network",
+    subtitle:
+      "Content-addressed SHA-256 Merkle-DAG where expert curators deed permanent pipe\\ namespaces, link ideas via the Ampersand (&) Graph, and earn 70% royalties when AI agents query their vaults.",
+    shippedDate: "Shipped 2025–2026 · Production",
+    liveUrl: "https://pipes.pink",
+    liveLabel: "pipes.pink",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/pipes-hero.png",
+    highlights: [
+      "SHA-256 content-addressed Merkle-DAG nodes",
+      "Deeded pipe\\ namespaces ($9/yr registration)",
+      "Ampersand (&) bidirectional citation graph",
+      "Zero algorithmic feed manipulation",
+    ],
+  },
+  {
+    id: "hash-studio-semi",
+    category: "atelier",
+    categoryLabel: "Hash + SEMI (;-])",
+    badge: "02 // INTEGRATED HASH SANCTUARY & SEMI (;-])",
+    title: "Hash Epistemic Sanctuary & SEMI (;-]) Socratic Editor-in-Residence",
+    subtitle:
+      "Hash and SEMI were unified directly inside Pipes.Pink (/write): a distraction-free literary sanctuary with a 3D Knowledge Galaxy, 1-click Substack archive migration, persistent Socratic memory, and cryptographic 'Seal to Pipe' publishing.",
+    shippedDate: "Unified in Pipes v4 · Production",
+    liveUrl: "https://pipes.pink/write",
+    liveLabel: "pipes.pink/write",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/pipes-hash-studio-semi.png",
+    highlights: [
+      "Unified Hash Sanctuary + SEMI (;-]) Socratic Editor",
+      "3D Knowledge Galaxy & live semantic memory recall",
+      "1-Click Substack ZIP & RSS archive ingestion",
+      "Cryptographic 'Seal to Pipe' Merkle-DAG minting",
+    ],
+  },
+  {
+    id: "pipes-marketplace",
+    category: "protocol",
+    categoryLabel: "Pipes.Pink Protocol",
+    badge: "03 // CURATED PIPE MARKETPLACE",
+    title: "Sovereign Pipe Marketplace & Namespace Discovery",
+    subtitle:
+      "High-signal directory of verified knowledge vaults across Bitcoin, AI safety, classical education, and independent journalism—each with transparent node counts, citation density, and MCP endpoint status.",
+    shippedDate: "Shipped 2025–2026 · Production",
+    liveUrl: "https://pipes.pink/explore",
+    liveLabel: "pipes.pink/explore",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/pipes-marketplace.png",
+    highlights: [
+      "Verified sovereign namespaces across 18+ domains",
+      "Live node & citation telemetry per vault",
+      "Instant browser-native Graph & Classroom mounting",
+      "Direct creator patronage & agent licensing",
+    ],
+  },
+  {
+    id: "pipes-namespace-bitcoin",
+    category: "protocol",
+    categoryLabel: "Pipes.Pink Protocol",
+    badge: "04 // DEEDED NAMESPACE ROOM",
+    title: "Sovereign Pipe Room — pipe\\bitcoin & Curated Signal Streams",
+    subtitle:
+      "Inside a deeded Pipe Room: high-contrast editorial typography, multi-tier provenance badges, verifiable SHA-256 node hashes, and interactive Socratic interrogation of the curator's corpus.",
+    shippedDate: "Shipped 2025–2026 · Production",
+    liveUrl: "https://pipes.pink",
+    liveLabel: "pipes.pink",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/pipes-namespace-bitcoin.png",
+    highlights: [
+      "Deeded namespace governance & cryptographic lineage",
+      "Multi-source synthesis across essays, transcripts & PDFs",
+      "Reader-side Greater (>) local AI interrogation",
+      "WCAG AAA archival warm-paper contrast",
+    ],
+  },
+  {
+    id: "pipes-classroom-mpb",
+    category: "education",
+    categoryLabel: "Classrooms & Audio",
+    badge: "05 // 90+ LANGUAGE SOVEREIGN CLASSROOMS",
+    title: "Turnkey Sovereign Classrooms — pipe\\my-first-bitcoin & Greater (>)",
+    subtitle:
+      "Any educator, classical academy, or open-source diploma program can mount a 90+ language interactive classroom in 15 seconds via npx @pipes/greater—powered by WebGPU local inference and DuckDB-WASM.",
+    shippedDate: "Shipped 2025–2026 · Production",
+    liveUrl: "https://greater.pink",
+    liveLabel: "greater.pink",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/pipes-classroom-mpb.png",
+    highlights: [
+      "15-second CLI classroom deployment (npx @pipes/greater)",
+      "90+ language localized curriculum & Socratic tutor",
+      "Zero student PII sent to cloud AI providers",
+      "Built for classical schools, co-ops & global NGOs",
+    ],
+  },
+  {
+    id: "pipes-podcast-pavilion",
+    category: "education",
+    categoryLabel: "Classrooms & Audio",
+    badge: "06 // SOVEREIGN PODCAST PAVILION",
+    title: "Autonomous 2-Host Neural Audio Studio — Semi & Greater",
+    subtitle:
+      "Transforms sealed written Pipe nodes into broadcast-grade two-host dialectic episodes between Semi (;-]) and Greater (>), complete with chapter markers, synchronized transcripts, and RSS syndication.",
+    shippedDate: "Shipped 2026 · Production",
+    liveUrl: "https://pipes.pink",
+    liveLabel: "pipes.pink",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/pipes-podcast-pavilion.png",
+    highlights: [
+      "Dual-persona dialectic synthesis (Semi & Greater)",
+      "Synchronized paragraph-level audio transcript",
+      "Automatic citation callouts & Merkle node links",
+      "Zero-editing broadcast-ready mastering",
+    ],
+  },
+  {
+    id: "pipes-dev-mcp-hub",
+    category: "protocol",
+    categoryLabel: "Pipes.Pink Protocol",
+    badge: "07 // MCP SERVER & HTTP 402 AGENT GATE",
+    title: "Developer Hub — Model Context Protocol (MCP) & HTTP 402 Royalties",
+    subtitle:
+      "Exposes every public or licensed Pipe as a standardized MCP server and CLI SDK so Claude, Cursor, and autonomous agents pay creators 70% royalties per cryptographic citation.",
+    shippedDate: "Shipped 2026 · Production",
+    liveUrl: "https://pipes.pink/developers",
+    liveLabel: "pipes.pink/developers",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/pipes-dev-mcp-hub.png",
+    highlights: [
+      "Native Model Context Protocol (MCP) JSON-RPC server",
+      "HTTP 402 Payment Required agent metering gate",
+      "70% creator / 30% protocol royalty split",
+      "TypeScript CLI & zero-config Cursor/Claude integration",
+    ],
+  },
+  {
+    id: "pipes-economics",
+    category: "protocol",
+    categoryLabel: "Pipes.Pink Protocol",
+    badge: "08 // SOVEREIGN CREATOR ECONOMICS",
+    title: "The 70% Royalty Ledger & Anti-Slop Economic Engine",
+    subtitle:
+      "Replaces ad-driven engagement farming with deterministic unit economics: $9/year namespace deeds, cryptographic proof-of-authorship, and automated micropayouts whenever an AI agent cites your work.",
+    shippedDate: "Shipped 2026 · Production",
+    liveUrl: "https://pipes.pink",
+    liveLabel: "pipes.pink",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/pipes-economics.png",
+    highlights: [
+      "$9/yr sovereign namespace registration",
+      "70% net revenue share on AI & enterprise licensing",
+      "Immutable attribution across derivative works",
+      "Built for independent writers, researchers & labs",
+    ],
+  },
+  {
+    id: "desktop-mac-bang-ide",
+    category: "desktop",
+    categoryLabel: "Desktop IDE",
+    badge: "09 // NATIVE MACOS TAURI 2.0 + RUST IDE",
+    title: "Pipes Native (! BANG) — Local-First macOS Knowledge & Code IDE",
+    subtitle:
+      "A native macOS desktop application built in Tauri 2.0 and Rust that mounts your local filesystem, Obsidian vaults, and Git repositories into the Pipes Merkle-DAG with hardware-accelerated local LLM inference.",
+    shippedDate: "Shipped 2026 · macOS Native",
+    liveUrl: "https://pipes.pink",
+    liveLabel: "pipes.pink",
+    caseStudyHref: "/case-studies/pipes",
+    src: "/images/pipes/desktop-mac-bang-ide.png",
+    highlights: [
+      "Native Tauri 2.0 + Rust binary with sub-40MB footprint",
+      "Local SQLite + DuckDB-WASM vector & graph indexing",
+      "Command-first ! BANG operator palette",
+      "Air-gapped local model execution via Apple Metal",
+    ],
+  },
+  {
+    id: "marigold-kanban",
+    category: "venture",
+    categoryLabel: "Marigold & Venture Engines",
+    badge: "10 // MARIGOLD ZERO-PII CIVIC ENGINE",
+    title: "Marigold Insights — 2,000,000-Record Browser-Native Audit & Kanban",
+    subtitle:
+      "Zero-cloud civic and enterprise data room running DuckDB-WASM + Apache Arrow entirely inside the client browser—executing 10.2ms Fellegi-Sunter probabilistic record linkage across 2M voter records with zero server PII.",
+    shippedDate: "Shipped 2025–2026 · bolt.pipes.pink",
+    liveUrl: "https://bolt.pipes.pink",
+    liveLabel: "bolt.pipes.pink",
+    caseStudyHref: "/case-studies/marigold",
+    src: "/images/marigold/02_marigold_workspace_dashboard_kanban.png",
+    highlights: [
+      "2,000,000 records queried in <15ms via DuckDB-WASM",
+      "10.2ms Fellegi-Sunter probabilistic entity resolution",
+      "Web Crypto AES-GCM zero-knowledge client hydration",
+      "Built for election audits, healthcare & regulated ops",
+    ],
+  },
+  {
+    id: "clubhouse-scout-crm",
+    category: "venture",
+    categoryLabel: "Marigold & Venture Engines",
+    badge: "11 // CLUBHOUSE 1099 VENTURE SCOUT NETWORK",
+    title: "Clubhouse 1099 — 535-Seat Regional Venture Scout & Whisper Field CRM",
+    subtitle:
+      "Geographically capped 535-seat B2B venture scout platform with in-browser Whisper voice-to-lead extraction, automated IRS 1099 mileage & commission ledgers, and High Draw DTC golf integration.",
+    shippedDate: "Shipped 2025–2026 · clubhouse1099.com",
+    liveUrl: "https://clubhouse1099.com",
+    liveLabel: "clubhouse1099.com",
+    caseStudyHref: "/case-studies/clubhouse-1099",
+    src: "/images/clubhouse1099/03_clubhouse1099_scout_dashboard_earnings.png",
+    highlights: [
+      "Capped 535 US Congressional-district territory model",
+      "On-device Whisper voice-note to structured CRM pipeline",
+      "Real-time commission splits & IRS tax-ready ledger",
+      "Paired with High Draw (highdraw.com) custom DTC engine",
+    ],
+  },
+  {
+    id: "cassandra-focus-v5",
+    category: "venture",
+    categoryLabel: "Marigold & Venture Engines",
+    badge: "12 // CASSANDRA FOCUS MODE V5.0",
+    title: "Cassandra Focus Mode v5.0 — Zero-Cloud Epistemic Writing & Diff Engine",
+    subtitle:
+      "The pure client-side writing instrument that pioneered our sentence-level semantic heatmap and deterministic editorial diffing before merging its DNA into the Pipes Hash Sanctuary.",
+    shippedDate: "Shipped 2025 · Production Archive",
+    caseStudyHref: "/case-studies/cassandra",
+    src: "/images/cassandra/focus-mode/00_focusMode_landing_redesign.jpg",
+    highlights: [
+      "Sentence-level cadence & readability telemetry",
+      "Deterministic side-by-side Socratic diff review",
+      "100% local IndexedDB persistence with zero cloud sync",
+      "Foundational architecture for Hash & Superstar",
+    ],
+  },
+];
 
-export default function Studio() {
+const OVERLOOKED_VERTICALS = [
+  {
+    number: "02.A",
+    tag: "VENTURE ARCHITECTURE // SEED TO SERIES B",
+    title: "Startups: From Zero-to-One to Series B Velocity",
+    image: "/images/studio/studio-overlooked-startups.png",
+    imageAlt:
+      "Architectural blueprint showing raw startup vectors passing through a geometric prism into a structured Swiss grid system",
+    quote:
+      '"If you don\'t reach product-market fit in a sprint, it\'s almost always a design & distribution problem—not a backend problem." — Adapted from Nikita Bier',
+    problem:
+      "Most early-stage startups burn six months and $400k hiring four specialists—a PM, a UI designer, a frontend dev, and a backend engineer—only to spend 80% of their runway in Slack translation loops.",
+    bullets: [
+      "Collapse the 4-person product pod into a single Principal Systems Architect who designs the schema, crafts the UI on a mathematical grid, and ships the production codebase.",
+      "Interactive, investor-ready full-stack prototypes and production MVPs shipped in 1 to 4 weeks—not static Figma slide decks.",
+      "Built-in growth telemetry, deterministic AI agent harnesses, and clean React / TypeScript / Postgres / Rust architecture your future engineering hires will love.",
+    ],
+    shippedProof: {
+      label: "Shipped Proof (Last 16 Months)",
+      items: [
+        { name: "Pipes.Pink Protocol", href: "/case-studies/pipes" },
+        { name: "Clubhouse 1099", href: "/case-studies/clubhouse-1099" },
+        { name: "Superstar Memory Loom", href: "/case-studies/superstar" },
+      ],
+    },
+  },
+  {
+    number: "02.B",
+    tag: "SOVEREIGN EDUCATION // CLASSICAL ACADEMIES & FAMILIES",
+    title: "Private Schools, Homeschool Co-Ops & Families",
+    image: "/images/studio/studio-overlooked-schools.png",
+    imageAlt:
+      "Architectural drafting of a classical monograph, brass astrolabe, and branching sovereign knowledge tree",
+    quote:
+      "Big EdTech treats students as ad-tech data exhaust. Classical academies, micro-schools, and families deserve sovereign tools that cultivate deep literacy—not dopamine loops.",
+    problem:
+      "Independent schools and homeschool networks are forced to duct-tape bloated enterprise LMS platforms together while worrying about cloud AI chatbots harvesting student data or hallucinating answers.",
+    bullets: [
+      "Turnkey Sovereign Classrooms (Greater >): deploy a 90+ language Socratic curriculum in 15 seconds with WebGPU local AI that never sends student PII to the cloud.",
+      "Epistemic writing instruments (Hash & Cassandra) that teach students how to structure arguments, cite primary sources, and think alongside a Socratic tutor rather than copy-pasting AI slop.",
+      "Custom parent/faculty portals, tuition & enrollment workflows, and local-first archival libraries priced for independent schools.",
+    ],
+    shippedProof: {
+      label: "Shipped Proof (Last 16 Months)",
+      items: [
+        { name: "Greater (>) 90+ Lang Classrooms", href: "/case-studies/pipes" },
+        { name: "pipe\\my-first-bitcoin", href: "/case-studies/pipes" },
+        { name: "Cassandra Focus Mode v5", href: "/case-studies/cassandra" },
+      ],
+    },
+  },
+  {
+    number: "02.C",
+    tag: "INSTITUTIONAL SANCTUARY // FAITH & CIVIC STEWARDSHIP",
+    title: "Faith-Based, Non-Profit & Civic Organizations",
+    image: "/images/studio/studio-overlooked-faith.png",
+    imageAlt:
+      "Architectural elevation of sacred timber arches and Josef Albers nested color-interaction squares on warm cream paper",
+    quote:
+      "Mission-driven institutions carry centuries of wisdom and high-trust community relationships, yet are routinely handed clunky, extractive software from the 2000s.",
+    problem:
+      "Churches, dioceses, classical foundations, and civic watchdogs need modern digital sanctuary—places where scholarship, sermons, donor stewardship, and community records are preserved with dignity and zero surveillance.",
+    bullets: [
+      "Permanent, content-addressed publishing archives & podcast pavilions that turn decades of homilies, lectures, and manuscripts into searchable, citation-backed knowledge graphs.",
+      "Zero-PII civic and donor analytics (powered by our Marigold DuckDB-WASM engine) so sensitive member and parishioner records never leave your hardware unencrypted.",
+      "Dignified, book-grade typography and accessible interfaces engineered so elders and digital natives alike can navigate effortlessly.",
+    ],
+    shippedProof: {
+      label: "Shipped Proof (Last 16 Months)",
+      items: [
+        { name: "Marigold Zero-PII Civic Engine", href: "/case-studies/marigold" },
+        { name: "Sovereign Podcast Pavilion", href: "/case-studies/pipes" },
+        { name: "Albers & Vignelli Type System", href: "/case-studies/colors-type-grids" },
+      ],
+    },
+  },
+  {
+    number: "02.D",
+    tag: "AMERICAN ENTERPRISE // MAIN STREET & REGIONAL OPERATORS",
+    title: "Main Street, Independent Commerce & Field Teams",
+    image: "/images/studio/studio-overlooked-mainstreet.png",
+    imageAlt:
+      "Architectural elevation of classic American brick-and-mortar storefronts linked by subterranean fiber optic lines and a drafting caliper",
+    quote:
+      "Silicon Valley builds for Fortune 500 procurement committees. We build high-margin operational weapons for the independent businesses that actually run the country.",
+    problem:
+      "Regional distributors, specialty manufacturers, hospitality groups, and 1099 field sales teams get gouged by SaaS per-seat licensing while still running critical operations on brittle spreadsheets.",
+    bullets: [
+      "Voice-first field CRMs and mobile operations tools: let reps speak a 20-second voice note in the parking lot and automatically extract structured CRM records, follow-ups, and IRS mileage logs.",
+      "Bespoke DTC e-commerce & physics-backed configurators (like High Draw Golf) that convert at 3x template Shopify themes without ongoing agency retainers.",
+      "Automated multi-location inventory, vendor reconciliation, and private AI operations copilots that pay for themselves in weeks.",
+    ],
+    shippedProof: {
+      label: "Shipped Proof (Last 16 Months)",
+      items: [
+        { name: "Clubhouse 1099 Whisper CRM", href: "/case-studies/clubhouse-1099" },
+        { name: "High Draw Custom DTC Engine", href: "/case-studies/high-draw" },
+        { name: "Foodler $80M Exit Architecture", href: "/case-studies/foodler" },
+      ],
+    },
+  },
+];
+
+const REGULATED_PROOFS = [
+  {
+    client: "Custodia Bank",
+    domain: "Digital Asset Custody & Programmable Dollar (Avit / Cait)",
+    metric: "$71M+ Raised · 2 US Patents",
+    summary:
+      "VP of Product & Design. Architected the institutional custody platform, multi-sig cryptographic approval ceremonies, and programmable treasury UX for the first special-purpose depository institution.",
+    href: "/case-studies/custodia-bank",
+  },
+  {
+    client: "UnitedHealth Group",
+    domain: "Optum Clinical & Consumer Health Ecosystem",
+    metric: "35,000,000+ Active Members",
+    summary:
+      "Principal UX & Systems Architect. Unified fragmented pharmacy, claims, and care-navigation flows into a single HIPAA-compliant design system serving over 35 million Americans.",
+    href: "/case-studies/unitedhealth",
+  },
+  {
+    client: "Marigold Insights",
+    domain: "Zero-PII Civic & Election Integrity Data Room",
+    metric: "2,000,000 Records · 10.2ms Linkage",
+    summary:
+      "Founder & Principal Architect. Built a browser-native DuckDB-WASM + Web Crypto analytical workbench performing Fellegi-Sunter entity resolution with zero cloud PII exposure.",
+    href: "/case-studies/marigold",
+  },
+  {
+    client: "UltraLinq Healthcare",
+    domain: "Cloud PACS & Diagnostic Ultrasound Telemetry",
+    metric: "100,000+ Physicians · Acquired",
+    summary:
+      "Redesigned the real-time diagnostic imaging workstation and structured clinical reporting workflow used by cardiologists and vascular labs worldwide.",
+    href: "/case-studies/ultralinq",
+  },
+  {
+    client: "Walmart Global Tech",
+    domain: "Enterprise Associate & Supply Chain Operations",
+    metric: "3,000,000+ Daily Users",
+    summary:
+      "Architected mission-critical enterprise tools and real-time operational dashboards deployed across thousands of supercenters and distribution hubs.",
+    href: "/case-studies/walmart",
+  },
+  {
+    client: "IronNet Cybersecurity",
+    domain: "Collective Defense & Network Traffic Radar",
+    metric: "$300M+ Public Listing · NSA Pedigree",
+    summary:
+      "Designed the real-time behavioral threat-hunting interface and sovereign collective-defense command center for national critical infrastructure.",
+    href: "/case-studies/ironnet",
+  },
+];
+
+const LAB_CAPABILITIES = [
+  {
+    code: "LAB // 01",
+    icon: Database,
+    title: "Content-Addressed Merkle-DAGs (pipes.pink)",
+    body: "Every essay, dataset, and curriculum module we publish is hashed into an immutable SHA-256 Merkle-DAG node and connected via the Ampersand (&) citation operator—guaranteeing cryptographic provenance and zero link rot.",
+  },
+  {
+    code: "LAB // 02",
+    icon: Sparkles,
+    title: "Socratic & Epistemic AI (Hash + SEMI ;-])",
+    body: "Instead of generative slop machines that replace human thought, we build Socratic counterparts (SEMI ;-]) with persistent 3D semantic memory that challenge assumptions, surface counter-arguments, and sharpen the author's voice.",
+  },
+  {
+    code: "LAB // 03",
+    icon: Cpu,
+    title: "Zero-Cloud WebGPU & DuckDB-WASM (Greater > & Marigold)",
+    body: "We run 2,000,000-row analytical joins (10.2ms Fellegi-Sunter linkage) and local WebGPU LLM inference directly inside the user's browser or native Rust binary—eliminating cloud GPU bills and server-side PII liability.",
+  },
+  {
+    code: "LAB // 04",
+    icon: Terminal,
+    title: "MCP Servers & HTTP 402 Creator Royalties",
+    body: "Our vaults expose native Model Context Protocol (MCP) endpoints gated by HTTP 402 micropayments—returning 70% of licensing revenue directly to human domain experts whenever AI agents cite their work.",
+  },
+  {
+    code: "LAB // 05",
+    icon: Layers,
+    title: "Native macOS (! BANG IDE) & Neural Audio",
+    body: "From our Tauri 2.0 + Rust desktop IDE (! BANG) to our two-host Sovereign Podcast Pavilion (Semi & Greater), we ship cohesive cross-platform ecosystems from a single unified TypeScript/Rust architecture.",
+  },
+  {
+    code: "LAB // 06",
+    icon: ShieldCheck,
+    title: "50+ Patents, Trademarks & Defensive Disclosures",
+    body: "With 2 granted US banking/cryptography patents and 50+ patent disclosures and trademarks spanning Merkle-DAG curation, local-first AI harnesses, and visual design systems, CHB builds defensible IP for ourselves and our clients.",
+  },
+];
+
+export default function StudioPage() {
+  const [activeSection, setActiveSection] = useState("thesis");
+  const [activeLabCategory, setActiveLabCategory] = useState<string>("all");
+  const [selectedLabIndex, setSelectedLabIndex] = useState<number>(0);
+  const [lightboxImage, setLightboxImage] = useState<{
+    src: string;
+    title: string;
+    subtitle?: string;
+  } | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
-  const [activeSection, setActiveSectionLocal] = useState("thesis");
-  const [stickyVisible, setStickyVisible] = useState(false);
-  const { setSections, setActiveSection } = useStudioSections();
-  const sectionRefs = useRef<Map<string, IntersectionObserverEntry>>(new Map());
-  const heroRef = useRef<HTMLDivElement>(null);
+  const [contactDefaultTab, setContactDefaultTab] = useState<"calendly" | "message">("calendly");
 
-  const { scrollYProgress: heroScrollProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroTextY = useTransform(heroScrollProgress, [0, 1], [0, -120]);
-  const heroOpacity = useTransform(heroScrollProgress, [0, 0.6], [1, 0]);
-  const heroBgScale = useTransform(heroScrollProgress, [0, 1], [1, 1.08]);
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const { setSections, setActiveSection: setCtxActive } = useStudioSections();
+
+  const openContact = useCallback((tab: "calendly" | "message" = "calendly") => {
+    setContactDefaultTab(tab);
+    setContactOpen(true);
+  }, []);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -125,861 +511,1419 @@ export default function Studio() {
   }, [setSections]);
 
   useEffect(() => {
-    const heroEl = heroRef.current;
-    if (!heroEl) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => setStickyVisible(!entry.isIntersecting),
-      { threshold: 0.05 }
-    );
-    obs.observe(heroEl);
-    return () => obs.disconnect();
+    setCtxActive(activeSection);
+  }, [activeSection, setCtxActive]);
+
+  const handleScroll = useCallback(() => {
+    const offsets = SECTIONS.map((s) => {
+      const el = sectionRefs.current[s.id];
+      if (!el) return { id: s.id, top: Infinity };
+      return { id: s.id, top: Math.abs(el.getBoundingClientRect().top - 180) };
+    });
+    const closest = offsets.reduce((a, b) => (a.top < b.top ? a : b));
+    setActiveSection(closest.id);
   }, []);
 
-  const updateActive = useCallback(() => {
-    let current = "";
-    let maxRatio = 0;
-    sectionRefs.current.forEach((entry, id) => {
-      if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-        maxRatio = entry.intersectionRatio;
-        current = id;
-      }
-    });
-    if (!current) {
-      let minTop = Infinity;
-      sectionRefs.current.forEach((entry, id) => {
-        if (entry.boundingClientRect.top >= 0 && entry.boundingClientRect.top < minTop) {
-          minTop = entry.boundingClientRect.top;
-          current = id;
-        }
-      });
-    }
-    if (current) {
-      setActiveSectionLocal(current);
-      setActiveSection(current);
-    }
-  }, [setActiveSection]);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.getAttribute("id");
-          if (id) sectionRefs.current.set(id, entry);
-        });
-        updateActive();
-      },
-      { threshold: [0, 0.1, 0.25, 0.5], rootMargin: "-80px 0px -20% 0px" }
-    );
-    SECTIONS.forEach((s) => {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, [updateActive]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const filteredLabViews =
+    activeLabCategory === "all"
+      ? LAB_VIEWS
+      : LAB_VIEWS.filter((v) => v.category === activeLabCategory);
+
+  const safeLabIndex =
+    selectedLabIndex >= filteredLabViews.length ? 0 : selectedLabIndex;
+  const activeLabView = filteredLabViews[safeLabIndex] || LAB_VIEWS[0];
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <StickyNav activeSection={activeSection} visible={stickyVisible} />
-
-      {/* ═══════════════════════════════ HERO ═══════════════════════════════ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[75vh] md:min-h-[85vh] lg:min-h-[95vh] flex items-start pt-20 md:pt-28 pb-16 md:pb-20"
-        data-testid="section-studio-hero"
-        aria-labelledby="studio-hero-heading"
-      >
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.img
-            src="/images/studio/hero.webp"
-            alt="Blueprint technical drawing of architectural systems — CHB Studio hero"
-            width={1920}
-            height={1080}
-            fetchPriority="high"
-            className="w-full h-full object-cover opacity-[0.28]"
-            style={{ scale: heroBgScale }}
-            data-testid="img-studio-hero-bg"
-          />
-        </div>
-
-        <motion.div
-          style={{ y: heroTextY, opacity: heroOpacity }}
-          className="relative z-10 studio-content"
+      <div className="min-h-screen bg-[#EAE0D0] text-[#281B16] pb-24 md:pb-0">
+        {/* Sticky Swiss-Grid Section Sub-Header (Desktop) */}
+        <div
+          className="hidden md:block sticky top-16 z-30 bg-[#EAE0D0]/95 backdrop-blur-md border-b border-[#D3C7B5]"
+          role="navigation"
+          aria-label="Studio section index"
+          data-testid="nav-studio-subbar"
         >
-          <motion.h1
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, delay: 0.2, ease }}
-            id="studio-hero-heading"
-            className="font-display leading-[1.2] tracking-[-0.02em]"
-            style={{ fontSize: "clamp(2.5rem, min(8.33vw, 10vh), 10rem)" }}
-            data-testid="text-studio-hero-heading"
-          >
-            Architecture Partner for the Stuck &amp; Underserved.
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.7, ease }}
-            className="mt-8 md:mt-10 text-foreground leading-[1.5] text-[20px] md:text-[26px] lg:text-[30px]"
-            style={{ fontWeight: 300 }}
-            data-testid="text-studio-hero-subtitle"
-          >
-            CHB applies tasteful, measured order to complex products &amp; growing businesses that have the words but need a voice.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 1.1, ease }}
-            className="mt-10"
-          >
-            <Button
-              onClick={() => setContactOpen(true)}
-              data-testid="cta-studio-contact"
-            >
-              Contact Us
-            </Button>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* ═══════════════════════════════ 01 — THE THESIS ═══════════════════════════════ */}
-      <section
-        id="thesis"
-        className="relative py-28 md:py-40 lg:py-48 overflow-hidden"
-        aria-labelledby="heading-thesis"
-        data-testid="section-thesis"
-      >
-        {/* Full-bleed US map — no left margin, offset so west coast is partially cut */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/studio/section-bg-01.webp"
-            alt="US map outline representing CHB's nationwide client reach"
-            width={1400}
-            height={764}
-            className="w-full h-full object-cover"
-            style={{ objectPosition: "right center" }}
-            loading="lazy"
-          />
-          {/* Gradient: white top → reveal map in middle → white bottom */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, #FFFFFF 17%, rgba(255,255,255,0.75) 80%, #FFFFFF 100%)",
-            }}
-          />
-        </div>
-
-        <div className="relative z-10">
-          {/* Heading outside studio-content so right-margin doesn't cause wrapping */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={stagger}
-            style={{ paddingLeft: "clamp(24px, 2.08vw, 40px)", paddingRight: "clamp(24px, 2.08vw, 40px)" }}
-          >
-            <motion.h2
-              variants={textReveal}
-              id="heading-thesis"
-              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20 lg:whitespace-nowrap"
-              style={{ fontSize: "clamp(1.5rem, 3.3vw, 4rem)" }}
-              data-testid="text-thesis-heading"
-            >
-              there's a joke all DEvELOPERS know:<br />
-              good, fast, &amp; cheap. pick 2.
-            </motion.h2>
-          </motion.div>
-
-          {/* Body text inside studio-content (26% right padding for nav) */}
-          <div className="studio-content">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={stagger}
-          >
-            <div className="space-y-8" style={{ maxWidth: "68ch" }}>
-              <motion.p
-                variants={itemFade}
-                className="text-foreground/70 leading-[1.85] text-[16px] md:text-[18px]"
-                style={{ textShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
-                data-testid="text-thesis-p1"
-              >
-                With CHB, you get all three by hiring a Director/Staff level Product Architect. You get better results faster for less expense. We move at the speed of thought, outpacing traditional agencies because they have a lot of organizational complexity and often subcontract work to less experienced employees who spend time exploring instead of building.
-              </motion.p>
-              <motion.p
-                variants={itemFade}
-                className="text-foreground/70 leading-[1.85] text-[16px] md:text-[18px]"
-                style={{ textShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
-                data-testid="text-thesis-p2"
-              >
-                Big Tech, Big Business, and Big Agencies are out of reach and out of touch with the rest of America. CHB takes scary digital initiatives and humanizes them. While the brand name is a bit of a mouthful, it's easy enough for everyone to understand that we turn business complexities into a smile.
-              </motion.p>
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 h-12 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#6B554D]">
+              <span className="w-2 h-2 rounded-full bg-[#FE299E]" />
+              <span className="font-bold text-[#281B16]">CHB Studio</span>
+              <span className="text-[#C4B5A2]">/</span>
+              <span>Practice & Proprietary Lab</span>
             </div>
-          </motion.div>
+
+            <div className="flex items-center gap-1 lg:gap-2 overflow-x-auto scrollbar-hide">
+              {SECTIONS.map((s) => {
+                const isActive = activeSection === s.id;
+                return (
+                  <button
+                    key={s.id}
+                    onClick={() => scrollToSection(s.id)}
+                    className={`px-3 py-1.5 rounded-sm font-mono text-[11px] uppercase tracking-[0.13em] transition-all cursor-pointer border ${
+                      isActive
+                        ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-bold"
+                        : "bg-transparent text-[#5C4840] border-transparent hover:border-[#D3C7B5] hover:bg-[#F2EAE0]/60 hover:text-[#281B16]"
+                    }`}
+                    data-testid={`nav-studio-pill-${s.id}`}
+                  >
+                    <span className="text-[#FE299E] mr-1.5 font-bold">{s.number}</span>
+                    {s.shortLabel}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="hidden xl:flex items-center gap-3">
+              <button
+                onClick={() => openContact("calendly")}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#FE299E] text-white font-mono text-[10px] font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors cursor-pointer border-none"
+                data-testid="button-subbar-book"
+              >
+                <Calendar className="w-3 h-3" />
+                Book Sprint
+              </button>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* ═══════════════════════════════ 02 — THE OVERLOOKED ═══════════════════════════════ */}
-      <section
-        id="overlooked"
-        className="py-28 md:py-40 lg:py-48"
-        aria-labelledby="heading-overlooked"
-        data-testid="section-overlooked"
-      >
-        <div className="studio-content">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-            variants={stagger}
-          >
-            <motion.h2
-              variants={textReveal}
-              id="heading-overlooked"
-              className="font-display leading-[1.2] tracking-[-0.02em] mb-16 md:mb-24"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 4.5rem)" }}
-              data-testid="text-overlooked-heading"
-            >
-              architecture FOR ThE OvERLOOKED
-            </motion.h2>
-
-            <div className="grid sm:grid-cols-2 gap-x-10 gap-y-14 md:gap-x-12 md:gap-y-16 [&>*:nth-child(n+3)]:border-t [&>*:nth-child(n+3)]:border-border/20 [&>*:nth-child(n+3)]:pt-14 md:[&>*:nth-child(n+3)]:pt-16">
-              <OverlookedCard
-                title="STARTUPS"
-                subtitle="idea to series b"
-                image="/images/studio/card-startups.webp"
-                imageAlt="Abstract visualization of startup growth trajectory"
-                imageWidth={1000}
-                imageHeight={583}
-                imagePosition="center"
-                items={[
-                  `"Everyone talks about 10x engineers but the real risk for most companies is not whether you can build it, it's if you're building the right thing. A designer that can distill why a user is adopting and then prototype the most clear version of that insight will save you millions." –Nikita Bier`,
-                  "Full-time designers are rarely a right fit for most smaller startups. Most traditional designers are \"Figma Experts\" but lack an understanding of scalable systems design. While AI has come a long way, the product architecture and customer journey pieces are the hardest for most founders to get right.",
-                  "CHB helps startups with small projects, as fractional design leadership, or as a partner during fundraising rounds focused on communication.",
-                ]}
-                testId="overlooked-startups"
-              />
-              <OverlookedCard
-                title="private SChOOLS &amp; FaMILIES"
-                image="/images/studio/card-schools.webp"
-                imageAlt="Educational setting representing schools and family learning"
-                imageWidth={1000}
-                imageHeight={424}
-                imagePosition="center 40%"
-                items={[
-                  "Private schools often lack the same resources as public schools and must rely on the same educational platforms that may not align with student needs or parent expectations.",
-                  "Likewise, families who homeschool or who have goals to capture loved one's memories often have to rely on hostile applications build by Big Tech.",
-                  "CHB has experience designing for education (Texas Tech University, Emerson College, Kaplan) and has proprietary software ready to be tailored to the family use case.",
-                ]}
-                testId="overlooked-schools"
-              />
-              <OverlookedCard
-                title="FaITh-BaSED organizations"
-                image="/images/studio/card-faith.webp"
-                imageAlt="Architectural detail representing faith-based community spaces"
-                imageWidth={1000}
-                imageHeight={424}
-                imagePosition="60% center"
-                items={[
-                  "It is challenging for youth groups, pastors, priests, churches, or other religious institutions to find a technology partner that can deliver on-time, within budget, and who is aligned to their values-based doctrines.",
-                  "CHB helps faith-based organizations build websites, reach out to congregations, and even develop custom apps for operations teams, spiritual leadership, or for members of the organization.",
-                  "Since CHB has architected for small startups all the way to Fidelity Investments and UnitedHealth, the security we offer is unmatched for your needs.",
-                ]}
-                testId="overlooked-faith"
-              />
-              <OverlookedCard
-                title="SMaLL BUSINESSES"
-                image="/images/studio/card-small-biz.webp"
-                imageAlt="Small business storefront visualization"
-                imageWidth={800}
-                imageHeight={339}
-                imagePosition="center center"
-                items={[
-                  "So many small businesses use platforms like SquareSpace, Wix, Shopify, WordPress, or other template-based website builder tools that are challenging to modify and force small businesses to acquiesce.",
-                  "Sometimes, the best thing is a de-coupled store front or marketing site and retaining your checkout flow or inventory management system as a separate concern.",
-                  "Other times, for specialized use cases such as B2B sales, none of the website builders can satisfy a company's communication standards with prospective clients. CHB is comfortable designing digital storefronts, funnels, workflows and more to support your small business's growth.",
-                ]}
-                testId="overlooked-smallbiz"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════ 03 — REGULATED SYSTEMS ═══════════════════════════════ */}
-      <section
-        id="regulated"
-        className="relative py-28 md:py-40 lg:py-48 overflow-hidden"
-        aria-labelledby="heading-regulated"
-        data-testid="section-regulated"
-      >
-        {/* Single grid: heading + body left (74%), images right (26%) — images align to heading top */}
-        <div className="lg:grid lg:grid-cols-[74%_26%] items-stretch">
-          {/* Left column: heading + body */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={stagger}
-            style={{ paddingLeft: "clamp(24px, 2.08vw, 40px)" }}
-            className="pr-6 lg:pr-20"
-          >
-            <motion.h2
-              variants={textReveal}
-              id="heading-regulated"
-              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 4.5rem)" }}
-              data-testid="text-regulated-heading"
-            >
-              UNBLOCKING health &amp;<br />financial tech
-            </motion.h2>
-            <motion.p
-              variants={itemFade}
-              className="text-foreground/70 leading-[1.8] text-[16px] md:text-[17px] mb-7"
-              data-testid="text-regulated-p1"
-            >
-              In high-stakes environments like banking and healthcare, regulation is often used as an excuse for stagnation. We are used to regulated systems but we do ensure that security and compliance don't come at the cost of human-centered design. Having worked within the strictures of Fidelity, Walmart, UnitedHealth, Custodia Bank, and the DoD we understand how to architect systems that balance "bank-grade" with intuitively simple.
-            </motion.p>
-            <motion.p
-              variants={itemFade}
-              className="text-foreground/70 leading-[1.8] text-[16px] md:text-[17px] mb-10"
-              data-testid="text-regulated-p2"
-            >
-              Large financial and medical institutions are often paralyzed by their own internal inefficiencies, processes, and dependencies. By operating as a single-core studio, we bypass the layers of bureaucratic consensus that slow down responsive innovation. CHB is competent within these systems, but since we've been forced to "drink our own champagne," we have developed a way of working that's differentiated.
-            </motion.p>
-
-            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 pt-4" data-testid="list-regulated-points">
-              {[
-                "For small or large companies who need to get unstuck",
-                "Design can include everything from IA to UI, Dev is full-stack",
-                "Architecture can span from sales/comms all the way to systems dev",
-                "While we can build good apps & products, you should still rely on internal legal, compliance, & security practices!",
-                "Process is close to fully auditable by default, code versioned with Git",
-              ].map((item, i) => (
-                <motion.p
-                  key={i}
-                  variants={itemFade}
-                  className="flex items-start gap-2 text-[15px] md:text-[16px] text-foreground/70 leading-[1.7]"
-                >
-                  <PinkBullet />
-                  <span>{item}</span>
-                </motion.p>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right column: single tall building image, bleeding to right edge */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={imgRevealRight}
-            className="hidden lg:block overflow-hidden self-stretch"
-          >
-            <img
-              src="/images/studio/side-health-fintech.webp"
-              alt="Architectural cross-section of a building representing systematic health and financial tech design"
-              width={900}
-              height={1613}
-              className="w-full h-full object-cover object-center"
-              style={{ opacity: 0.7, display: "block" }}
-              loading="lazy"
-              data-testid="img-regulated-building-1"
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════ 04 — THE LAB ═══════════════════════════════ */}
-      <section
-        id="lab"
-        className="relative"
-        aria-labelledby="heading-lab"
-        data-testid="section-lab"
-      >
-        {/* Heading above image — black text, left-aligned within studio-content */}
-        <div className="studio-content pt-20 md:pt-28 pb-6 md:pb-8">
-          <motion.h2
-            id="heading-lab"
-            className="font-display leading-[1.05] tracking-[-0.02em] lg:whitespace-nowrap"
-            style={{ fontSize: "clamp(2rem, 5.5vw, 6.5rem)", color: "hsl(var(--foreground))" }}
-            initial={{ opacity: 0, x: -80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.0, ease }}
-            data-testid="text-lab-heading"
-          >
-            proprietary TEChNOLOGY
-          </motion.h2>
-        </div>
-
-        {/* Machine image: 74% wide, flush left — leaves right margin for sticky nav */}
-        <div className="overflow-hidden w-full lg:w-[74%]">
-          <motion.img
-            src="/images/studio/feature-prop-tech.webp"
-            alt="Steampunk-style machine illustration representing CHB's proprietary technology systems"
-            width={1200}
-            height={655}
-            className="w-full object-cover"
-            style={{ display: "block", maxHeight: "82vh" }}
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4, ease }}
-            loading="lazy"
-            data-testid="img-lab-feature"
-          />
-        </div>
-
-        {/* Cards below the image */}
-        <div className="studio-content py-20 md:py-28">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-            variants={stagger}
-          >
-            <div className="grid sm:grid-cols-2 gap-x-12 gap-y-14 md:gap-x-20 md:gap-y-20">
-              <LabCard
-                title="KNOWLEDGE bases:"
-                items={[
-                  "Knowledge Bases (using GraphQL) can drive internal & external comms",
-                  "Can be hosted in the cloud, managed locally, or be integrated into tools",
-                  "Optional fine-grain control + on-prem deployment increases safety",
-                ]}
-                testId="lab-knowledge"
-              />
-              <LabCard
-                title="PRIvaCY first:"
-                items={[
-                  "Privacy comes from our background in Bitcoin, banking, and healthcare",
-                  "Privacy is a human right that is critical for communities to defend",
-                  "Nothing is perfectly private, but it can sometimes be Pretty Good Privacy",
-                ]}
-                testId="lab-privacy"
-              />
-              <LabCard
-                title="LOCaL-first models:"
-                items={[
-                  "CHB has worked with popular LLMs, browser-based AI, & built our own models and modules",
-                  "We have developed user-signed and agentic handshakes using SHA-256 and other encryption algorithms",
-                  "Nothing is fully trusted until it can run without cloud dependency",
-                ]}
-                testId="lab-local"
-              />
-              <LabCard
-                title="focused on cuRaTORS:"
-                items={[
-                  "The \u201ccurator economy\u201d is focused on human traits AI can\u2019t match",
-                  "Our 5-year thesis sees many traditional jobs becoming curation-based",
-                  "We are excited about this and would love to talk about it!",
-                ]}
-                testId="lab-curators"
-              />
-              <LabCard
-                title="GReaTer > (than):"
-                items={[
-                  "An open-source, persona-aware conversational AI built on the Emerald architecture",
-                  "Designed for brands that need sovereign, privacy-first support without Big Tech dependency",
-                  "Runs on your choice of model \u2014 local or cloud \u2014 with deterministic orchestration via dspy.ts",
-                ]}
-                testId="lab-greater"
-                link={{ label: "greater.pink", href: "https://greater.pink" }}
-              />
-            </div>
-
-            <motion.p
-              variants={itemFade}
-              className="mt-20 text-[18px] md:text-[20px] font-medium text-foreground leading-relaxed"
-              data-testid="text-lab-patents"
-            >
-              Our proprietary technology includes much more than is listed here. We have{" "}
-              <strong style={{ color: "#FE299E" }}>50+ patents and trademarks pending.</strong>
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════ TOPOGRAPHY DIVIDER ═══════════════════════════════ */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.4 }}
-        className="relative overflow-hidden h-[180px] md:h-[260px] lg:h-[320px]"
-        data-testid="divider-topography"
-        aria-hidden="true"
-      >
-        <img
-          src="/images/studio/divider-topo.webp"
-          alt="Watercolor topographic map section break"
-          width={1400}
-          height={593}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </motion.div>
-
-      {/* ═══════════════════════════════ 05 — ENGAGEMENT (Manifesto + Working + Models) ═══════════════════════════════ */}
-      <section
-        id="engagement"
-        className="py-28 md:py-40 lg:py-48"
-        aria-labelledby="heading-manifesto"
-        data-testid="section-engagement"
-      >
-        {/* MANIFESTO — single column, large editorial type */}
-        <div className="studio-content">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={stagger}
-          >
-            <motion.h2
-              variants={textReveal}
-              id="heading-manifesto"
-              className="font-display leading-[1.2] tracking-[-0.02em] mb-14 md:mb-20"
-              style={{ fontSize: "clamp(2rem, 5.5vw, 5.5rem)" }}
-              data-testid="text-manifesto-heading"
-            >
-              our DESIGN manifesto
-            </motion.h2>
-
-            {/* Single wide column, editorial body text — constrained for ~10 words/line */}
-            <div className="space-y-10 text-foreground/70 leading-[1.75] text-[17px] md:text-[18px] lg:text-[19px]" style={{ maxWidth: "63ch" }}>
-              <motion.p variants={itemFade} data-testid="text-manifesto-p1">
-                <span className="float-left font-display leading-[0.8] mr-3 mt-1" style={{ fontSize: "clamp(3.5rem, 5vw, 5rem)", color: "hsl(var(--foreground))" }}>I</span>f poetry is language under pressure, design is measured order applied to ideational chaos. Most technical debt isn't built in the code—it's built in meetings where fragmented roles dilute a vision until it's unrecognizable. At CHB, design is the universal language that aligns the hacker, the hustler, the visionary, and the end-user into a single, unified system.
-              </motion.p>
-              <motion.p variants={itemFade} data-testid="text-manifesto-p2">
-                Agencies are costly and slow because they are fragmented. They spend your budget on meetings to discuss ideas rather than time spent building. We bypass this cost because the person defining the brand positioning is the same person architecting the site/app design and the backend. There is no hand-off, zero loss in translation, and no committee-driven consensus that turns vibrant, living ideas into beige could-have-beens.
-              </motion.p>
-              <motion.p variants={itemFade} data-testid="text-manifesto-p3">
-                A product is only successful if the company feels a sense of camaraderie with it. We don't just build apps; we design digital expressions that the team is actually excited to own and we document everything for successful, resilient handoffs. Whether we are designing a simplified MedTech interface for an 80-year-old grandmother or a high-velocity workflow for technical users, our goal is the same: meeting the end user exactly where they are.
-              </motion.p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* WORKING WITH CHB — full-bleed background image, unified scrim over 74% content */}
-        <div className="relative mt-20 md:mt-36 lg:mt-48 overflow-hidden" data-testid="section-working-with-chb">
-          {/* Full-bleed background at 40% opacity */}
-          <motion.img
-            src="/images/studio/callout-workflow.webp"
-            alt="Steampunk workflow illustration representing CHB's collaborative engagement process"
-            width={1400}
-            height={781}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ opacity: 0.4 }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.4 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4 }}
-            loading="lazy"
-            data-testid="img-working-callout"
-          />
-
-          {/* Content: capped at 74% so text never runs behind sticky nav */}
-          <div className="relative z-10 w-full lg:w-[74%]">
-            <div className="flex flex-col lg:flex-row items-stretch py-20 md:py-28 lg:py-36 gap-0">
-              {/* Left: white scrim + stacked heading + button + fig */}
+        {/* ============================================================
+            HERO SECTION — THE STUDIO & PROPRIETARY R&D PRACTICE
+           ============================================================ */}
+        <section
+          className="relative pt-24 md:pt-20 pb-12 md:pb-16 border-b border-[#D3C7B5]"
+          data-testid="section-studio-hero"
+        >
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+              {/* Left 7 Cols: Editorial Studio Positioning */}
               <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={stagger}
-                style={{
-                  background: "rgba(255,255,255,0.90)",
-                  padding: "clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem) clamp(24px, 2.08vw, 40px)",
-                  flexShrink: 0,
-                }}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="lg:col-span-7"
               >
-                {/* Stacked heading: one word per line */}
-                <div
-                  className="font-display tracking-[-0.02em]"
-                  style={{ fontSize: "clamp(2.2rem, 6vw, 7.5rem)", lineHeight: 1.0 }}
-                  data-testid="text-working-heading"
-                >
-                  {["working", "with", "COLON", "hyphen", "BRaCKET"].map((word, i) => (
-                    <motion.div
-                      key={word}
-                      initial={{ opacity: 0, x: -60 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, amount: 0.1 }}
-                      transition={{ duration: 0.9, ease, delay: i * 0.15 }}
-                    >
-                      {word}
-                    </motion.div>
-                  ))}
+                <div className="flex flex-wrap items-center gap-3 mb-5">
+                  <BrandMark size="sm" />
+                  <span className="text-[#C4B5A2]">·</span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#6B554D] font-semibold">
+                    Colon Hyphen Bracket, LLC · Est. 2012 · Re-Architected 2026
+                  </span>
                 </div>
 
-                <motion.div variants={itemFade} className="mt-8">
-                  <Button
-                    onClick={() => setContactOpen(true)}
-                    data-testid="cta-working-contact"
+                <h1 className="font-serif text-4xl sm:text-5xl lg:text-[62px] text-[#281B16] tracking-tight leading-[1.04] mb-6">
+                  Architecture partner for the{" "}
+                  <span className="italic font-normal text-[#FE299E]">
+                    stuck &amp; underserved.
+                  </span>
+                </h1>
+
+                <p className="font-serif text-xl md:text-2xl text-[#3D2C24] leading-[1.5] mb-6 max-w-[62ch]">
+                  Colon Hyphen Bracket (<span className="font-mono text-lg text-[#FE299E]">:-]</span>) is a principal-led product architecture studio and proprietary R&amp;D lab. We replace bloated 12-person agency retainers with a single 25-year Systems Architect equipped with deterministic AI harnesses—shipping regulated banking infrastructure, zero-PII data rooms, and sovereign knowledge protocols in weeks instead of quarters.
+                </p>
+
+                <p className="font-sans text-sm md:text-base text-[#5C4840] leading-relaxed mb-8 max-w-[64ch]">
+                  In the 16 months since we first published our studio manifesto, we didn&apos;t just advise clients—we shipped{" "}
+                  <Link href="/case-studies/pipes" className="text-[#281B16] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
+                    Pipes.Pink
+                  </Link>{" "}
+                  (a content-addressed Merkle-DAG web protocol), unified{" "}
+                  <Link href="/case-studies/pipes" className="text-[#281B16] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
+                    Hash Sanctuary &amp; SEMI (;-])
+                  </Link>
+                  , launched 90+ language sovereign classrooms (<span className="font-mono text-xs text-[#281B16]">greater.pink</span>), built{" "}
+                  <Link href="/case-studies/marigold" className="text-[#281B16] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
+                    Marigold Insights
+                  </Link>{" "}
+                  (2M-record browser-native DuckDB-WASM analytics), and scaled{" "}
+                  <Link href="/case-studies/clubhouse-1099" className="text-[#281B16] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
+                    Clubhouse 1099
+                  </Link>
+                  .
+                </p>
+
+                {/* Primary Studio CTAs */}
+                <div className="flex flex-wrap items-center gap-3.5 mb-8">
+                  <button
+                    onClick={() => openContact("calendly")}
+                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-sm bg-[#281B16] text-[#F2EAE0] font-sans text-xs font-bold uppercase tracking-[0.15em] hover:bg-[#FE299E] hover:text-white transition-colors cursor-pointer border-none shadow-sm"
+                    data-testid="button-studio-hero-book"
                   >
-                    Contact Us
-                  </Button>
-                </motion.div>
+                    <Calendar className="w-4 h-4 text-[#FE299E] group-hover:text-white" />
+                    Book 30-Min Intro Call
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
 
-                <motion.p
-                  variants={itemFade}
-                  className="mt-3 text-[13px] text-foreground/50 italic"
-                  data-testid="text-fig-caption"
-                >
-                  Fig. 1
-                </motion.p>
+                  <button
+                    onClick={() => scrollToSection("engagement")}
+                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-[#F2EAE0] text-[#281B16] border border-[#281B16]/30 hover:border-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.13em] transition-colors cursor-pointer"
+                    data-testid="button-studio-hero-sprint"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-[#FE299E]" />
+                    1-Week Sprint · $7,500
+                  </button>
+
+                  <button
+                    onClick={() => scrollToSection("lab")}
+                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-transparent text-[#5C4840] hover:text-[#281B16] font-mono text-xs uppercase tracking-[0.13em] transition-colors cursor-pointer border border-[#D3C7B5]"
+                    data-testid="button-studio-hero-lab"
+                  >
+                    Explore 16-Month Lab Suite ↓
+                  </button>
+                </div>
+
+                {/* Cross-Link to Principal Portfolio */}
+                <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-2 rounded-sm bg-[#F2EAE0] border border-[#D3C7B5] text-xs text-[#5C4840]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6B554D] font-bold">
+                    Hiring Full-Time or Fractional VP / Principal?
+                  </span>
+                  <Link
+                    href="/"
+                    className="inline-flex items-center gap-1 font-sans font-bold text-[#281B16] hover:text-[#FE299E] no-underline"
+                    data-testid="link-hero-to-portfolio"
+                  >
+                    View Kyle&apos;s Principal Portfolio &amp; 14 Case Studies
+                    <ArrowRight className="w-3.5 h-3.5 text-[#FE299E]" />
+                  </Link>
+                </div>
               </motion.div>
 
-              {/* Right: body text — light scrim so it's readable over the image */}
+              {/* Right 5 Cols: Museum-Grade Architectural Blueprint Plate */}
               <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={stagger}
-                className="flex-1 space-y-7 text-foreground/90 leading-[1.8] text-[16px] md:text-[17px]"
-                style={{
-                  background: "rgba(255,255,255,0.82)",
-                  padding: "clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4vw, 3rem)",
-                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="lg:col-span-5"
               >
-                <motion.p variants={imgRevealRight} data-testid="text-working-p1">
-                  CHB doesn't need a month-long discovery cycle to discover your product's "mood." We need a 30 to 120 minute high-intensity data dump. You provide the raw fuel—the copy, the technical dependencies, and the "why"—and CHB's system ingests that data to articulate a finished result. We don't throw darts in the dark, we execute with precision because we can visualize the outcome.
-                </motion.p>
-                <motion.p variants={imgRevealRight} data-testid="text-working-p2">
-                  The most efficient way to work is also the most affordable. If you trust the architect to make the decisions, we move at the speed of thought. If you want to move at a slower pace, CHB is happy to deep dive alongside you. We offer a Performance Tier for Trust: simple daily rates, zero bureaucracy, and high-fidelity output delivered in days, not months.
-                </motion.p>
+                <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-3.5 md:p-5 shadow-[0_20px_50px_rgba(40,27,22,0.08)]">
+                  <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#D3C7B5]">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6B554D] font-bold">
+                      FIG. 00 // SOVEREIGN SYSTEMS &amp; SWISS GRID PRACTICE
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#FE299E] font-bold">
+                      ALBERS · VIGNELLI · RAMS
+                    </span>
+                  </div>
+
+                  <div
+                    className="relative overflow-hidden rounded-sm border border-[#D3C7B5] bg-[#EAE0D0] group cursor-pointer"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: "/images/studio/studio-hero-architecture.png",
+                        title: "Colon Hyphen Bracket — Systems & Product Architecture Blueprint",
+                        subtitle:
+                          "Precision geometric grid study uniting Merkle-DAG topology, golden-ratio drafting, and Josef Albers warm sandstone materiality.",
+                      })
+                    }
+                  >
+                    <img
+                      src="/images/studio/studio-hero-architecture.png"
+                      onError={(e) => {
+                        if (!e.currentTarget.src.endsWith(".svg")) {
+                          e.currentTarget.src = "/images/studio/studio-hero-architecture.svg";
+                        }
+                      }}
+                      alt="Architectural blueprint and Swiss grid system study on warm sandstone paper"
+                      className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    />
+                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#281B16]/85 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5 opacity-90 group-hover:opacity-100">
+                      <ZoomIn className="w-3 h-3 text-[#FE299E]" />
+                      Inspect Plate
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2 pt-3.5 mt-3.5 border-t border-[#D3C7B5] text-left">
+                    <div>
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6B554D]">
+                        Principal Pedigree
+                      </div>
+                      <div className="font-serif text-base font-bold text-[#281B16]">
+                        25+ Yrs · $450M+
+                      </div>
+                    </div>
+                    <div className="border-l border-[#D3C7B5] pl-2.5">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6B554D]">
+                        Proprietary IP
+                      </div>
+                      <div className="font-serif text-base font-bold text-[#281B16]">
+                        2 Patents · 50+ Pending
+                      </div>
+                    </div>
+                    <div className="border-l border-[#D3C7B5] pl-2.5">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6B554D]">
+                        Lab Output (16 Mo)
+                      </div>
+                      <div className="font-serif text-base font-bold text-[#FE299E]">
+                        6 Live Platforms
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
+            </div>
+
+            {/* 5-Column Studio Fast-Track Ledger */}
+            <div className="mt-12 pt-8 border-t border-[#D3C7B5] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              <div className="bg-[#F2EAE0] border border-[#D3C7B5] p-4 rounded-sm">
+                <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1">
+                  01 // THE THESIS
+                </div>
+                <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
+                  Good, Fast &amp; Affordable
+                </div>
+                <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                  How one Principal Architect + custom AI harnesses outperforms a 10-person agency pod.
+                </p>
+              </div>
+
+              <div className="bg-[#F2EAE0] border border-[#D3C7B5] p-4 rounded-sm">
+                <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1">
+                  02 // THE OVERLOOKED
+                </div>
+                <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
+                  Startups, Schools &amp; Main St.
+                </div>
+                <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                  Sovereign software for high-conviction builders, classical academies, faith orgs &amp; field teams.
+                </p>
+              </div>
+
+              <div className="bg-[#F2EAE0] border border-[#D3C7B5] p-4 rounded-sm">
+                <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1">
+                  03 // REGULATED TECH
+                </div>
+                <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
+                  Banking, Health &amp; Defense
+                </div>
+                <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                  Proven across Custodia Bank ($71M+), UnitedHealth (35M+ users), Walmart (3M) &amp; IronNet.
+                </p>
+              </div>
+
+              <div className="bg-[#F2EAE0] border border-[#D3C7B5] p-4 rounded-sm">
+                <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1">
+                  04 // THE LAB (16 MO)
+                </div>
+                <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
+                  Pipes, Hash, SEMI &amp; Marigold
+                </div>
+                <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                  Explore 12 live production views from our sovereign protocol, WebGPU classroom &amp; DuckDB suite.
+                </p>
+              </div>
+
+              <div className="bg-[#281B16] text-[#F2EAE0] border border-[#281B16] p-4 rounded-sm">
+                <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1">
+                  05 // FIXED-FEE VELOCITY
+                </div>
+                <div className="font-serif text-lg font-bold text-[#F2EAE0] mb-1">
+                  $7.5k Sprint · $15k–$25k Build
+                </div>
+                <p className="font-sans text-xs text-[#D3C7B5] leading-relaxed">
+                  Zero hourly billing games. Clear scope, direct principal execution, and clean Git handoff.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* ENGAGEMENT MODELS — no heading, no contact button */}
-        <div className="studio-content mt-20 md:mt-36 lg:mt-48">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-            variants={stagger}
-          >
-            <div className="grid sm:grid-cols-2 gap-8 md:gap-10">
-              <EngagementCard
-                title="SIMPLE engagements:"
-                items={[
-                  "Hire us for 1 day or 1 year, it's your decision",
-                  "Rates typically start at $1200/day and include time + materials (negotiable)",
-                  "The longer the engagement, the lower the daily/hourly price",
-                ]}
-                testId="model-simple"
-              />
-              <EngagementCard
-                title="EaSIER handoffs:"
-                items={[
-                  "CHB's work is fully-documented & we are happy to teach your team",
-                  "Deliverables are made in a tool anyone can work with (conversational AI)",
-                  "Full deployments + current system integrations are available",
-                ]}
-                testId="model-handoffs"
-              />
-              <EngagementCard
-                title="FaSTER & BETTER:"
-                items={[
-                  "Most agencies sell you on the dream team, then subcontract to a junior",
-                  "CHB is faster because our team has been doing this for 20+ years",
-                  "Better is defined as: faster to market, faster to value, designed for ensuring client sovereignty post-engagement",
-                ]}
-                testId="model-faster"
-              />
-              <EngagementCard
-                title="PERSONaL touch:"
-                items={[
-                  "CHB has no extended organizational structure. We\u2019re a phone call away.",
-                  "Directly interact with the person designing and developing for you",
-                  "We hold an MFA, MBA, and have design, marketing, and engineering expertise\u2014we\u2019ll have something in common!",
-                ]}
-                testId="model-personal"
-              />
+        {/* Infinite-Scrolling Enterprise & Venture Pedigree Bar */}
+        <ClientLogoBar />
+
+        {/* ============================================================
+            SECTION 01 // THE THESIS — GOOD, FAST & CHEAP. PICK ALL THREE.
+           ============================================================ */}
+        <section
+          id="thesis"
+          ref={(el) => {
+            sectionRefs.current.thesis = el;
+          }}
+          className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-28"
+          data-testid="section-thesis"
+        >
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+            {/* Section Eyebrow */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
+              <div className="flex items-center gap-3">
+                <span className="px-2.5 py-1 rounded-sm bg-[#281B16] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.16em]">
+                  01 // THE THESIS
+                </span>
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                  Why the Traditional Agency Model Is Broken
+                </span>
+              </div>
+              <span className="font-mono text-[11px] text-[#6B554D]">
+                STUDIO OF ONE · ZERO HANDOFF TAX
+              </span>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      <ContactFormModal open={contactOpen} onOpenChange={setContactOpen} />
-    </div>
-    </MotionConfig>
-  );
-}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+              {/* Left 6 Cols: Editorial Thesis */}
+              <div className="lg:col-span-6">
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#FE299E] font-bold mb-3">
+                  There&apos;s a Joke All Developers Know:
+                </p>
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#281B16] tracking-tight leading-[1.08] mb-6">
+                  &ldquo;Good, Fast, &amp; Cheap.{" "}
+                  <span className="italic font-normal text-[#FE299E]">
+                    Pick All Three.&rdquo;
+                  </span>
+                </h2>
 
-function OverlookedCard({
-  title,
-  subtitle,
-  image,
-  imageAlt,
-  imageWidth,
-  imageHeight,
-  imagePosition,
-  items,
-  testId,
-}: {
-  title: string;
-  subtitle?: string;
-  image: string;
-  imageAlt: string;
-  imageWidth: number;
-  imageHeight: number;
-  imagePosition: string;
-  items: string[];
-  testId: string;
-}) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const hasQuoteLead = items.length > 0 && (items[0].startsWith('"') || items[0].startsWith('\u201c'));
+                <div className="space-y-5 font-serif text-lg md:text-xl text-[#3D2C24] leading-[1.65] max-w-[64ch]">
+                  <p>
+                    For thirty years, big consultancies and dev shops have hidden behind the Iron Triangle: if you want software that is{" "}
+                    <strong className="font-semibold text-[#281B16]">good</strong> and{" "}
+                    <strong className="font-semibold text-[#281B16]">fast</strong>, it won&apos;t be affordable; if it&apos;s{" "}
+                    <strong className="font-semibold text-[#281B16]">good</strong> and{" "}
+                    <strong className="font-semibold text-[#281B16]">affordable</strong>, you&apos;ll wait nine months.
+                  </p>
+                  <p>
+                    Here is the truth they won&apos;t tell you: the Iron Triangle was never a law of physics. It was a side effect of{" "}
+                    <strong className="font-semibold text-[#281B16]">communication overhead</strong>. When a client hires a traditional agency, 75% of the budget evaporates into telephone-game handoffs between account executives, junior researchers, wireframe designers, frontend contractors, and backend teams who never talk to the customer.
+                  </p>
+                  <p>
+                    At <strong className="font-semibold text-[#281B16]">Colon Hyphen Bracket</strong>, we collapse that entire chain into a single Principal Systems Architect with 25 years of institutional pattern recognition—augmented by deterministic AI coding harnesses, automated schema validators, and a battle-tested component library.
+                  </p>
+                </div>
 
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, ease }}
-      className="group"
-      data-testid={`card-${testId}`}
-    >
-      <div className="aspect-[4/3] overflow-hidden mb-6 bg-muted">
-        <img
-          src={image}
-          alt={imageAlt}
-          width={imageWidth}
-          height={imageHeight}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-          style={{ objectPosition: imagePosition }}
-          loading="lazy"
-          data-testid={`img-${testId}`}
+                {/* 4 Thesis Proof Pillars */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                  <div className="bg-[#F2EAE0] border border-[#D3C7B5] p-5 rounded-sm">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1.5">
+                      PILLAR 01 // ZERO TRANSLATION LOSS
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-[#281B16] mb-1.5">
+                      The Architect Is the Builder
+                    </h3>
+                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                      The person who interviews your stakeholders in the morning is the same person modeling your database schema at noon and shipping production TypeScript by evening.
+                    </p>
+                  </div>
+
+                  <div className="bg-[#F2EAE0] border border-[#D3C7B5] p-5 rounded-sm">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1.5">
+                      PILLAR 02 // AI HARNESS MULTIPLIER
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-[#281B16] mb-1.5">
+                      10x Output, Principal Judgment
+                    </h3>
+                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                      Junior devs use AI to generate brittle boilerplate. A 25-year architect uses custom MCP harnesses to execute verified systems architecture at 10x speed.
+                    </p>
+                  </div>
+
+                  <div className="bg-[#F2EAE0] border border-[#D3C7B5] p-5 rounded-sm">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1.5">
+                      PILLAR 03 // PRODUCTION CODE FIRST
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-[#281B16] mb-1.5">
+                      Working Software Over Slide Decks
+                    </h3>
+                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                      We don&apos;t spend 8 weeks billing you for static Figma pictures that engineers later reject. We design directly in responsive, accessible, production-ready code.
+                    </p>
+                  </div>
+
+                  <div className="bg-[#F2EAE0] border border-[#D3C7B5] p-5 rounded-sm">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1.5">
+                      PILLAR 04 // SOVEREIGN OWNERSHIP
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-[#281B16] mb-1.5">
+                      Zero Lock-In Handoff
+                    </h3>
+                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                      Every sprint ends with a clean, documented Git repository, architectural decision records (ADRs), and zero hostage retainers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right 6 Cols: The Architectural Comparison Ledger */}
+              <div className="lg:col-span-6">
+                <div className="bg-[#281B16] text-[#F2EAE0] rounded-sm border border-[#3D2C24] p-6 md:p-8 shadow-[0_24px_60px_rgba(40,27,22,0.16)]">
+                  <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-6 border-b border-[#3D2C24]">
+                    <div>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#FE299E] font-bold block">
+                        ARCHITECTURAL AUDIT // ECONOMIES OF PRECISION
+                      </span>
+                      <h3 className="font-serif text-2xl md:text-3xl text-[#F2EAE0] mt-1">
+                        Big Agency Retainer vs. CHB Studio Sprint
+                      </h3>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-sm bg-[#FE299E]/15 border border-[#FE299E]/40 font-mono text-[10px] text-[#FE299E] uppercase tracking-[0.14em]">
+                      2026 Benchmark
+                    </span>
+                  </div>
+
+                  <div className="space-y-4">
+                    {[
+                      {
+                        dimension: "Time to Working Production Software",
+                        agency: "4 to 9 Months (after 6 weeks of discovery slides)",
+                        chb: "5 Days (1-Week Sprint) to 4 Weeks (Full System)",
+                      },
+                      {
+                        dimension: "Who Actually Does the Work",
+                        agency: "Senior partner pitches you; junior contractors build it",
+                        chb: "100% Principal Architect (Kyle) from intake to Git push",
+                      },
+                      {
+                        dimension: "Design-to-Engineering Handoff",
+                        agency: "200-page Figma spec that loses 40% fidelity in Jira",
+                        chb: "Zero handoff—designed & shipped directly in React/TS/Rust",
+                      },
+                      {
+                        dimension: "AI & Data Privacy Architecture",
+                        agency: "Generic OpenAI wrapper leaking customer PII to the cloud",
+                        chb: "Local-first DuckDB-WASM, WebGPU & zero-knowledge schemas",
+                      },
+                      {
+                        dimension: "Typical Engagement Investment",
+                        agency: "$150,000 – $500,000+ open-ended monthly burn",
+                        chb: "$7,500 Fixed 1-Week Sprint · $15k–$25k Systems Build",
+                      },
+                    ].map((row, idx) => (
+                      <div
+                        key={idx}
+                        className="p-4 rounded-sm bg-[#32221C] border border-[#46332B]"
+                      >
+                        <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#D3C7B5] mb-2">
+                          0{idx + 1} // {row.dimension}
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="text-xs font-sans text-[#B09E94] bg-[#231814] p-2.5 rounded-sm border border-[#3D2C24]">
+                            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#8C7A6B] block mb-0.5">
+                              Traditional Agency
+                            </span>
+                            {row.agency}
+                          </div>
+                          <div className="text-xs font-sans text-[#F2EAE0] bg-[#281B16] p-2.5 rounded-sm border border-[#FE299E]/50">
+                            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#FE299E] font-bold block mb-0.5">
+                              Colon Hyphen Bracket :-]
+                            </span>
+                            {row.chb}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 pt-5 border-t border-[#3D2C24] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <p className="font-serif italic text-sm text-[#D3C7B5]">
+                      &ldquo;We don&apos;t bill you for meetings. We bill you for solved architecture.&rdquo;
+                    </p>
+                    <button
+                      onClick={() => openContact("calendly")}
+                      className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm bg-[#FE299E] text-white font-mono text-[11px] font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors cursor-pointer border-none shrink-0"
+                      data-testid="button-thesis-book"
+                    >
+                      Scope a 1-Week Sprint
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            SECTION 02 // THE OVERLOOKED — ARCHITECTURE FOR THE OVERLOOKED
+           ============================================================ */}
+        <section
+          id="overlooked"
+          ref={(el) => {
+            sectionRefs.current.overlooked = el;
+          }}
+          className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-28"
+          data-testid="section-overlooked"
+        >
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+            {/* Section Eyebrow */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
+              <div className="flex items-center gap-3">
+                <span className="px-2.5 py-1 rounded-sm bg-[#281B16] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.16em]">
+                  02 // THE OVERLOOKED
+                </span>
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                  Sovereign Software for Underserved Verticals
+                </span>
+              </div>
+              <span className="font-mono text-[11px] text-[#6B554D]">
+                4 CORE VERTICALS · LIVE SHIPPED PROOF
+              </span>
+            </div>
+
+            {/* Section Header Copy */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14 items-end">
+              <div className="lg:col-span-7">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#281B16] tracking-tight leading-[1.08]">
+                  Architecture for the{" "}
+                  <span className="italic font-normal text-[#FE299E]">
+                    overlooked.
+                  </span>
+                </h2>
+              </div>
+              <div className="lg:col-span-5">
+                <p className="font-serif text-lg text-[#3D2C24] leading-[1.6]">
+                  Modern enterprise software has a blind spot. Every SaaS platform is priced and bloated for coastal conglomerates with 40-person IT departments—leaving high-velocity startups, classical schools, faith institutions, and Main Street operators behind. We build specifically for them.
+                </p>
+              </div>
+            </div>
+
+            {/* 2x2 Grid of Museum-Grade Vertical Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {OVERLOOKED_VERTICALS.map((card) => (
+                <article
+                  key={card.number}
+                  className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm overflow-hidden flex flex-col justify-between shadow-[0_12px_34px_rgba(40,27,22,0.05)]"
+                  data-testid={`card-overlooked-${card.number}`}
+                >
+                  <div>
+                    {/* Top Technical Bar */}
+                    <div className="px-6 py-3.5 border-b border-[#D3C7B5] flex items-center justify-between gap-2 bg-[#EAE0D0]/55">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#281B16] font-bold">
+                        {card.number} // {card.tag}
+                      </span>
+                      <span className="w-2 h-2 rounded-full bg-[#FE299E]" />
+                    </div>
+
+                    {/* Framed Editorial Illustration */}
+                    <div
+                      className="relative aspect-[16/10] bg-[#EAE0D0] border-b border-[#D3C7B5] overflow-hidden group cursor-pointer"
+                      onClick={() =>
+                        setLightboxImage({
+                          src: card.image,
+                          title: card.title,
+                          subtitle: card.quote,
+                        })
+                      }
+                    >
+                      <img
+                        src={card.image}
+                        onError={(e) => {
+                          if (!e.currentTarget.src.endsWith(".svg")) {
+                            e.currentTarget.src = card.image.replace(/\.png$/, ".svg");
+                          }
+                        }}
+                        alt={card.imageAlt}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      />
+                      <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#281B16]/80 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ZoomIn className="w-3 h-3 text-[#FE299E]" />
+                        Inspect Plate
+                      </div>
+                    </div>
+
+                    {/* Card Content */}
+                    <div className="p-6 md:p-8">
+                      <h3 className="font-serif text-2xl md:text-3xl text-[#281B16] tracking-tight leading-snug mb-3">
+                        {card.title}
+                      </h3>
+
+                      <blockquote className="pl-3.5 border-l-2 border-[#FE299E] font-serif italic text-base text-[#5C4840] mb-4">
+                        {card.quote}
+                      </blockquote>
+
+                      <p className="font-sans text-sm text-[#3D2C24] leading-relaxed mb-5">
+                        {card.problem}
+                      </p>
+
+                      <ul className="space-y-2.5 mb-6">
+                        {card.bullets.map((b, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-2.5 font-sans text-xs md:text-sm text-[#5C4840] leading-relaxed"
+                          >
+                            <span
+                              className="mt-1.5 text-[#FE299E] text-[9px] shrink-0 select-none"
+                              aria-hidden="true"
+                            >
+                              ▲
+                            </span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Card Footer: Live Shipped Proof Links */}
+                  <div className="px-6 md:px-8 py-4 bg-[#EAE0D0]/60 border-t border-[#D3C7B5] flex flex-wrap items-center justify-between gap-2">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6B554D] font-bold">
+                      {card.shippedProof.label}:
+                    </span>
+                    <div className="flex flex-wrap items-center gap-2">
+                      {card.shippedProof.items.map((proof) => (
+                        <Link
+                          key={proof.name}
+                          href={proof.href}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] font-mono text-[10px] text-[#281B16] hover:text-[#FE299E] no-underline transition-colors"
+                        >
+                          {proof.name}
+                          <ArrowUpRight className="w-3 h-3 text-[#FE299E]" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            SECTION 03 // REGULATED SYSTEMS — HEALTH, FINTECH & DEFENSE
+           ============================================================ */}
+        <section
+          id="regulated"
+          ref={(el) => {
+            sectionRefs.current.regulated = el;
+          }}
+          className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-28"
+          data-testid="section-regulated"
+        >
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+            {/* Section Eyebrow */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
+              <div className="flex items-center gap-3">
+                <span className="px-2.5 py-1 rounded-sm bg-[#281B16] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.16em]">
+                  03 // REGULATED SYSTEMS
+                </span>
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                  Unblocking High-Compliance Financial, Clinical &amp; Civic Tech
+                </span>
+              </div>
+              <span className="font-mono text-[11px] text-[#6B554D]">
+                HIPAA · FED MASTER ACCOUNT · SOC2 · ZERO-PII
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-14">
+              {/* Left 6 Cols: Regulated Narrative */}
+              <div className="lg:col-span-6">
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#FE299E] font-bold mb-3">
+                  High-Stakes Systems Architecture
+                </p>
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#281B16] tracking-tight leading-[1.08] mb-6">
+                  Unblocking{" "}
+                  <span className="italic font-normal text-[#FE299E]">
+                    health, financial &amp; civic
+                  </span>{" "}
+                  technology.
+                </h2>
+
+                <div className="space-y-4 font-serif text-lg md:text-xl text-[#3D2C24] leading-[1.65] max-w-[64ch] mb-6">
+                  <p>
+                    In regulated industries, most teams face a false choice: move fast and fail the audit, or hire an enterprise consultancy that buries clinicians, bankers, and analysts under 47-field compliance forms.
+                  </p>
+                  <p>
+                    Having served as <strong className="font-semibold text-[#281B16]">VP of Product &amp; Design at Custodia Bank</strong> (raising $71M+ and co-inventing 2 US patents for programmable dollars and digital asset custody) and <strong className="font-semibold text-[#281B16]">Principal Architect at UnitedHealth Group</strong> (35M+ users), we design systems where cryptographic security and regulatory compliance are baked into the data model—so the human interface stays effortless.
+                  </p>
+                </div>
+
+                <ul className="space-y-3">
+                  {[
+                    "Cryptographic Custody & Multi-Sig Ceremony UX: hardware-key quorum workflows, air-gapped signing, and verifiable audit trails that prevent fat-finger treasury loss.",
+                    "Zero-PII Browser Analytics (DuckDB-WASM): run complex healthcare claims, voter roll, or financial reconciliation inside the client browser without transmitting raw PII to cloud servers.",
+                    "Clinical & Diagnostic Speed: PACS imaging and EHR interfaces engineered to save physicians clicks per patient while maintaining full HIPAA traceability.",
+                    "Deterministic AI Guardrails: schema-constrained agent harnesses with human-in-the-loop cryptographic sign-off for regulated underwriting and legal review.",
+                  ].map((item, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-3 font-sans text-xs md:text-sm text-[#5C4840] leading-relaxed"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-[#FE299E] shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right 6 Cols: Regulated Monolith Plate */}
+              <div className="lg:col-span-6">
+                <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-4 md:p-6 shadow-[0_20px_50px_rgba(40,27,22,0.08)]">
+                  <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#D3C7B5]">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6B554D] font-bold">
+                      FIG. 03 // 3-TIER REGULATED ARCHITECTURE CROSS-SECTION
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#2A7B5C] font-bold">
+                      CRYPTOGRAPHIC · CLINICAL · INSTITUTIONAL
+                    </span>
+                  </div>
+
+                  <div
+                    className="relative overflow-hidden rounded-sm border border-[#D3C7B5] bg-[#EAE0D0] group cursor-pointer"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: "/images/studio/studio-regulated-monolith.png",
+                        title: "Regulated Banking, Clinical & Civic Systems Blueprint",
+                        subtitle:
+                          "Three-tier architectural cross-section uniting cryptographic vault geometry, clinical waveform telemetry, and institutional command ledgers.",
+                      })
+                    }
+                  >
+                    <img
+                      src="/images/studio/studio-regulated-monolith.png"
+                      onError={(e) => {
+                        if (!e.currentTarget.src.endsWith(".svg")) {
+                          e.currentTarget.src = "/images/studio/studio-regulated-monolith.svg";
+                        }
+                      }}
+                      alt="Three-tier architectural blueprint uniting cryptographic vault geometry, clinical telemetry, and institutional Swiss grid ledger"
+                      loading="lazy"
+                      className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    />
+                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#281B16]/85 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5">
+                      <ZoomIn className="w-3 h-3 text-[#FE299E]" />
+                      Inspect Plate
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-[#D3C7B5] flex flex-wrap items-center justify-between gap-2 text-xs text-[#5C4840]">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6B554D]">
+                      PATENTED CUSTODY &amp; ZERO-KNOWLEDGE TELEMETRY
+                    </span>
+                    <Link
+                      href="/case-studies/custodia-bank"
+                      className="font-mono text-[11px] font-bold text-[#281B16] hover:text-[#FE299E] no-underline inline-flex items-center gap-1"
+                    >
+                      Read Custodia Bank Case Study
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#FE299E]" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 6 Regulated Production Proof Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {REGULATED_PROOFS.map((item) => (
+                <Link
+                  key={item.client}
+                  href={item.href}
+                  className="group bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] rounded-sm p-6 transition-all no-underline flex flex-col justify-between"
+                  data-testid={`card-regulated-${item.client.toLowerCase().replace(/\s+/g, "-")}`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold">
+                        {item.metric}
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 text-[#6B554D] group-hover:text-[#FE299E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-[#281B16] group-hover:text-[#FE299E] transition-colors mb-1">
+                      {item.client}
+                    </h3>
+                    <div className="font-mono text-[11px] text-[#6B554D] mb-3">
+                      {item.domain}
+                    </div>
+                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                      {item.summary}
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-[#D3C7B5]/70 font-mono text-[10px] uppercase tracking-[0.14em] text-[#281B16] font-bold flex items-center gap-1">
+                    Inspect Architecture Case Study
+                    <ArrowRight className="w-3 h-3 text-[#FE299E]" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            SECTION 04 // THE LAB — WHAT WE'VE SHIPPED IN THE LAST 16 MONTHS
+           ============================================================ */}
+        <section
+          id="lab"
+          ref={(el) => {
+            sectionRefs.current.lab = el;
+          }}
+          className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-28"
+          data-testid="section-lab"
+        >
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+            {/* Section Eyebrow */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
+              <div className="flex items-center gap-3">
+                <span className="px-2.5 py-1 rounded-sm bg-[#FE299E] text-white font-mono text-xs font-bold uppercase tracking-[0.16em]">
+                  04 // THE LAB · 16-MONTH R&amp;D SUITE
+                </span>
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                  Proprietary Technology &amp; Live Sovereign Ecosystem
+                </span>
+              </div>
+              <span className="font-mono text-[11px] text-[#281B16] font-bold">
+                12 PRODUCTION VIEWS · 50+ PATENTS &amp; TRADEMARKS PENDING
+              </span>
+            </div>
+
+            {/* Section Headline */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 items-end">
+              <div className="lg:col-span-7">
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#FE299E] font-bold mb-2">
+                  We Don&apos;t Just Advise. We Ship Our Own Category-Defining Software.
+                </p>
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#281B16] tracking-tight leading-[1.08]">
+                  Proprietary technology shipped in the{" "}
+                  <span className="italic font-normal text-[#FE299E]">
+                    last 16 months.
+                  </span>
+                </h2>
+              </div>
+              <div className="lg:col-span-5">
+                <p className="font-serif text-lg text-[#3D2C24] leading-[1.6]">
+                  When we first launched this studio page 16 months ago, we promised a roadmap of privacy-first local AI, curator economics, and sovereign education tools. Here is the receipts-first look at every platform and view we have engineered and shipped into production since.
+                </p>
+              </div>
+            </div>
+
+            {/* Category Filter Tabs for the 12-View Sovereign Stack Explorer */}
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+              <div
+                className="flex flex-wrap items-center gap-2"
+                role="tablist"
+                aria-label="Filter Lab production views"
+              >
+                {[
+                  { id: "all", label: "All 12 Views" },
+                  { id: "protocol", label: "Pipes.Pink Protocol (5)" },
+                  { id: "atelier", label: "Hash Sanctuary + SEMI ;-] (1)" },
+                  { id: "education", label: "Classrooms & Podcast Pavilion (2)" },
+                  { id: "desktop", label: "macOS ! BANG IDE (1)" },
+                  { id: "venture", label: "Marigold, Clubhouse & Cassandra (3)" },
+                ].map((tab) => {
+                  const active = activeLabCategory === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => {
+                        setActiveLabCategory(tab.id);
+                        setSelectedLabIndex(0);
+                      }}
+                      className={`px-3.5 py-2 rounded-sm font-mono text-[11px] uppercase tracking-[0.13em] transition-all cursor-pointer border ${
+                        active
+                          ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-bold"
+                          : "bg-[#F2EAE0] text-[#5C4840] border-[#D3C7B5] hover:border-[#281B16] hover:text-[#281B16]"
+                      }`}
+                      data-testid={`button-lab-filter-${tab.id}`}
+                    >
+                      {tab.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() =>
+                    setSelectedLabIndex((prev) =>
+                      prev <= 0 ? filteredLabViews.length - 1 : prev - 1
+                    )
+                  }
+                  className="p-2 rounded-sm bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#281B16] text-[#281B16] cursor-pointer"
+                  aria-label="Previous lab view"
+                  data-testid="button-lab-prev"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <span className="font-mono text-xs text-[#5C4840] px-2">
+                  View {safeLabIndex + 1} of {filteredLabViews.length}
+                </span>
+                <button
+                  onClick={() =>
+                    setSelectedLabIndex((prev) =>
+                      prev >= filteredLabViews.length - 1 ? 0 : prev + 1
+                    )
+                  }
+                  className="p-2 rounded-sm bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#281B16] text-[#281B16] cursor-pointer"
+                  aria-label="Next lab view"
+                  data-testid="button-lab-next"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Interactive Dark Espresso Studio Matting Showcase (12 Live Views) */}
+            <div
+              className="bg-[#231814] text-[#F2EAE0] rounded-sm border border-[#3D2C24] p-5 md:p-8 shadow-[0_28px_70px_rgba(35,24,20,0.22)] mb-12"
+              data-testid="showcase-lab-explorer"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                {/* Left 7 Cols: Framed Retina Product Screenshot on Dark Espresso Matting */}
+                <div className="lg:col-span-7">
+                  <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#3D2C24]">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FE299E]" />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#D3C7B5] font-bold">
+                        {activeLabView.badge}
+                      </span>
+                    </div>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#B09E94]">
+                      {activeLabView.shippedDate}
+                    </span>
+                  </div>
+
+                  <div
+                    className="relative rounded-sm overflow-hidden border border-[#4A372E] bg-[#18100D] group cursor-pointer shadow-[0_18px_45px_rgba(0,0,0,0.45)]"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: activeLabView.src,
+                        title: activeLabView.title,
+                        subtitle: activeLabView.subtitle,
+                      })
+                    }
+                  >
+                    <img
+                      src={activeLabView.src}
+                      alt={activeLabView.title}
+                      className="w-full aspect-[16/10] object-cover object-top group-hover:scale-[1.015] transition-transform duration-500"
+                    />
+                    <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-sm bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.14em] flex items-center gap-1.5">
+                      <ZoomIn className="w-3.5 h-3.5 text-[#FE299E]" />
+                      Inspect Full-Resolution View
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right 5 Cols: View Architecture Details & Links */}
+                <div className="lg:col-span-5 flex flex-col justify-between">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-[#32221C] border border-[#4A372E] font-mono text-[10px] uppercase tracking-[0.14em] text-[#FE299E] mb-3">
+                      {activeLabView.categoryLabel}
+                    </div>
+
+                    <h3 className="font-serif text-2xl md:text-3xl text-[#F2EAE0] leading-snug mb-3">
+                      {activeLabView.title}
+                    </h3>
+
+                    <p className="font-sans text-sm text-[#D3C7B5] leading-relaxed mb-6">
+                      {activeLabView.subtitle}
+                    </p>
+
+                    <div className="bg-[#1B120F] border border-[#3D2C24] rounded-sm p-4 mb-6">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#B09E94] mb-2.5">
+                        ARCHITECTURAL HIGHLIGHTS //
+                      </div>
+                      <ul className="space-y-2">
+                        {activeLabView.highlights.map((h, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-2 font-sans text-xs text-[#EAE0D0]"
+                          >
+                            <span className="text-[#FE299E] font-mono text-[10px] mt-0.5">
+                              ▲
+                            </span>
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[#3D2C24]">
+                    <Link
+                      href={activeLabView.caseStudyHref}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-[#FE299E] text-white font-mono text-[11px] font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors no-underline"
+                      data-testid="link-lab-view-casestudy"
+                    >
+                      Read Architectural Case Study
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+
+                    {activeLabView.liveUrl && (
+                      <a
+                        href={activeLabView.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] text-[#F2EAE0] border border-[#4A372E] font-mono text-[11px] uppercase tracking-[0.14em] no-underline transition-colors"
+                        data-testid="link-lab-view-live"
+                      >
+                        Launch {activeLabView.liveLabel}
+                        <ExternalLink className="w-3.5 h-3.5 text-[#FE299E]" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Thumbnail Filmstrip Selector across all Filtered Views */}
+              <div className="mt-7 pt-5 border-t border-[#3D2C24]">
+                <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#B09E94] mb-3">
+                  SELECT PRODUCTION VIEW ({filteredLabViews.length} AVAILABLE) //
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">
+                  {filteredLabViews.map((view, idx) => {
+                    const isSelected = idx === safeLabIndex;
+                    return (
+                      <button
+                        key={view.id}
+                        onClick={() => setSelectedLabIndex(idx)}
+                        className={`text-left p-2 rounded-sm border transition-all cursor-pointer ${
+                          isSelected
+                            ? "bg-[#32221C] border-[#FE299E] ring-1 ring-[#FE299E]"
+                            : "bg-[#1B120F] border-[#3D2C24] opacity-75 hover:opacity-100 hover:border-[#6B554D]"
+                        }`}
+                        data-testid={`button-lab-thumb-${view.id}`}
+                      >
+                        <div className="aspect-[16/10] rounded-sm overflow-hidden bg-[#120C0A] mb-1.5 border border-[#2D201A]">
+                          <img
+                            src={view.src}
+                            alt={view.title}
+                            loading="lazy"
+                            className="w-full h-full object-cover object-top"
+                          />
+                        </div>
+                        <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#FE299E] truncate">
+                          {view.categoryLabel}
+                        </div>
+                        <div className="font-sans text-[11px] font-medium text-[#F2EAE0] truncate">
+                          {view.title}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* 6 Lab Capability Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {LAB_CAPABILITIES.map((cap) => {
+                const IconComponent = cap.icon;
+                return (
+                  <div
+                    key={cap.code}
+                    className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-6 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-4">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#FE299E] font-bold">
+                          {cap.code}
+                        </span>
+                        <div className="w-8 h-8 rounded-sm bg-[#281B16] text-[#FE299E] flex items-center justify-center">
+                          <IconComponent className="w-4 h-4" />
+                        </div>
+                      </div>
+                      <h3 className="font-serif text-xl font-bold text-[#281B16] mb-2">
+                        {cap.title}
+                      </h3>
+                      <p className="font-sans text-xs md:text-sm text-[#5C4840] leading-relaxed">
+                        {cap.body}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            SECTION 05 // MANIFESTO, WORKFLOW LOOM & ENGAGEMENT MODELS
+           ============================================================ */}
+        <section
+          id="engagement"
+          ref={(el) => {
+            sectionRefs.current.engagement = el;
+          }}
+          className="py-20 md:py-28 scroll-mt-28"
+          data-testid="section-engagement"
+        >
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+            {/* Section Eyebrow */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
+              <div className="flex items-center gap-3">
+                <span className="px-2.5 py-1 rounded-sm bg-[#281B16] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.16em]">
+                  05 // MANIFESTO &amp; ENGAGEMENT
+                </span>
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                  Our Design Philosophy &amp; How We Work Together
+                </span>
+              </div>
+              <span className="font-mono text-[11px] text-[#6B554D]">
+                WARM SANDSTONE · SWISS GRID · FIXED-FEE SPRINTS
+              </span>
+            </div>
+
+            {/* Part A: Our Design Manifesto */}
+            <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-8 md:p-12 mb-16 shadow-[0_16px_45px_rgba(40,27,22,0.05)]">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                <div className="lg:col-span-5">
+                  <div className="font-mono text-xs uppercase tracking-[0.18em] text-[#FE299E] font-bold mb-2">
+                    Our Design Manifesto
+                  </div>
+                  <h2 className="font-serif text-3xl sm:text-4xl text-[#281B16] tracking-tight leading-[1.1] mb-4">
+                    Software should feel like an{" "}
+                    <span className="italic font-normal text-[#FE299E]">
+                      archival monograph
+                    </span>{" "}
+                    &amp; a precision instrument.
+                  </h2>
+                  <p className="font-sans text-xs md:text-sm text-[#5C4840] leading-relaxed mb-6">
+                    Inspired by Josef Albers&apos;s{" "}
+                    <em>Interaction of Color</em>, Massimo Vignelli&apos;s architectural grids, and Dieter Rams&apos;s industrial honesty, every system we ship rejects dark-pattern bloat in favor of warm paper surfaces, mathematical proportion, and verifiable truth.
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Link
+                      href="/case-studies/colors-type-grids"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-[#281B16] text-[#F2EAE0] font-mono text-[11px] uppercase tracking-[0.13em] hover:bg-[#FE299E] hover:text-white no-underline transition-colors"
+                      data-testid="link-manifesto-design-system"
+                    >
+                      Inspect Colors, Type &amp; Grids Study
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
+                    <Link
+                      href="/essays/design-is-risk"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-[#EAE0D0] text-[#281B16] border border-[#D3C7B5] hover:border-[#281B16] font-mono text-[11px] uppercase tracking-[0.13em] no-underline transition-colors"
+                      data-testid="link-manifesto-essay"
+                    >
+                      Read &ldquo;Design Is Risk&rdquo;
+                      <ArrowRight className="w-3.5 h-3.5 text-[#FE299E]" />
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-7 font-serif text-lg md:text-xl text-[#3D2C24] leading-[1.68] space-y-4 border-t lg:border-t-0 lg:border-l border-[#D3C7B5] pt-6 lg:pt-0 lg:pl-10">
+                  <p className="first-letter:float-left first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:text-[#FE299E] first-letter:mr-3 first-letter:leading-none">
+                    We believe that how a tool looks and how its database is normalized are the exact same conversation. When an interface is cluttered, it is almost always because the underlying domain model is confused. When a user has to click seven times to complete a workflow, it is because the architect designed for the org chart rather than the human being.
+                  </p>
+                  <p>
+                    Whether we are designing a multi-signature treasury ceremony for a regulated bank, a 2,000,000-row civic audit workbench, or a Socratic writing sanctuary for classical scholars, our standard never changes:{" "}
+                    <strong className="font-semibold text-[#281B16]">
+                      clarity over decoration, local sovereignty over cloud surveillance, and shipped code over bureaucracy.
+                    </strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Part B: Working With Colon Hyphen Bracket + Fig. 1 Operating Loom */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+              <div className="lg:col-span-6">
+                <div className="font-mono text-xs uppercase tracking-[0.18em] text-[#FE299E] font-bold mb-2">
+                  The Operating Protocol
+                </div>
+                <h3 className="font-serif text-3xl sm:text-4xl text-[#281B16] tracking-tight leading-[1.1] mb-4">
+                  Working with{" "}
+                  <span className="italic font-normal text-[#FE299E]">
+                    Colon Hyphen Bracket.
+                  </span>
+                </h3>
+                <p className="font-serif text-lg text-[#3D2C24] leading-[1.6] mb-6">
+                  We respect your time. Instead of dragging your leadership team through weeks of low-signal discovery workshops, every engagement begins with a focused{" "}
+                  <strong className="font-semibold text-[#281B16]">
+                    30-to-120 minute high-intensity architectural intake
+                  </strong>{" "}
+                  where we map your constraints, audit your existing repositories or workflows, and lock in a deterministic sprint deliverable.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    {
+                      code: "01 // SIMPLE ENGAGEMENTS",
+                      title: "Fixed-Fee Clarity",
+                      desc: "No surprise change orders or runaway hourly billing. Start with a $7,500 1-Week Rapid Sprint or a $15k–$25k 2–4 Week Systems Engagement.",
+                    },
+                    {
+                      code: "02 // EASIER HANDOFFS",
+                      title: "Clean Git & ADRs",
+                      desc: "Your engineering team receives production TypeScript/React/Rust code, Storybook/Tailwind tokens, and clear Architectural Decision Records.",
+                    },
+                    {
+                      code: "03 // FASTER & BETTER",
+                      title: "AI-Accelerated Craft",
+                      desc: "We bring our own proprietary agent harnesses, DuckDB-WASM templates, and Swiss-grid primitives so Day 1 starts at 80% velocity.",
+                    },
+                    {
+                      code: "04 // PERSONAL TOUCH",
+                      title: "Direct Principal Access",
+                      desc: "You work directly with Kyle—never an account manager or junior subcontractor. Asynchronous Loom updates and live working sessions included.",
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.code}
+                      className="bg-[#F2EAE0] border border-[#D3C7B5] p-4 rounded-sm"
+                    >
+                      <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold mb-1">
+                        {item.code}
+                      </div>
+                      <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
+                        {item.title}
+                      </div>
+                      <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right 6 Cols: Fig. 1 — The CHB Operating Loom Plate */}
+              <div className="lg:col-span-6">
+                <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-4 md:p-6 shadow-[0_20px_50px_rgba(40,27,22,0.08)]">
+                  <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#D3C7B5]">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6B554D] font-bold">
+                      FIG. 01 // THE CHB OPERATING LOOM (INTAKE TO PRODUCTION)
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#FE299E] font-bold">
+                      30–120 MIN INTAKE → SHIPPED CODE
+                    </span>
+                  </div>
+
+                  <div
+                    className="relative overflow-hidden rounded-sm border border-[#D3C7B5] bg-[#EAE0D0] group cursor-pointer"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: "/images/studio/studio-workflow-loom.png",
+                        title: "Fig. 1 — The Colon Hyphen Bracket Operating Loom",
+                        subtitle:
+                          "Four-stage architectural schematic: (1) 30–120 Min High-Signal Intake, (2) First-Principles Schema & Grid Modeling, (3) AI-Harness Accelerated Build, (4) Sealed Production Handoff.",
+                      })
+                    }
+                  >
+                    <img
+                      src="/images/studio/studio-workflow-loom.png"
+                      onError={(e) => {
+                        if (!e.currentTarget.src.endsWith(".svg")) {
+                          e.currentTarget.src = "/images/studio/studio-workflow-loom.svg";
+                        }
+                      }}
+                      alt="Bauhaus and Massimo Vignelli 4-stage horizontal systems diagram showing raw signal weaving into a sealed software monograph"
+                      loading="lazy"
+                      className="w-full aspect-[16/9] object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    />
+                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#281B16]/85 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5">
+                      <ZoomIn className="w-3 h-3 text-[#FE299E]" />
+                      Inspect Fig. 1
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-4 gap-2 pt-3.5 mt-3.5 border-t border-[#D3C7B5] font-mono text-[10px] text-[#5C4840]">
+                    <div>
+                      <span className="text-[#FE299E] font-bold block">STAGE 01</span>
+                      30–120m Intake
+                    </div>
+                    <div className="border-l border-[#D3C7B5] pl-2">
+                      <span className="text-[#FE299E] font-bold block">STAGE 02</span>
+                      Schema &amp; Grid
+                    </div>
+                    <div className="border-l border-[#D3C7B5] pl-2">
+                      <span className="text-[#FE299E] font-bold block">STAGE 03</span>
+                      Harness Build
+                    </div>
+                    <div className="border-l border-[#D3C7B5] pl-2">
+                      <span className="text-[#FE299E] font-bold block">STAGE 04</span>
+                      Git Handoff
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Embedded Canonical Sprint & Engagement Callout */}
+          <SprintCallout
+            onContactClick={() => openContact("calendly")}
+          />
+        </section>
+
+        {/* ============================================================
+            STUDIO FOOTER LEDGER
+           ============================================================ */}
+        <footer className="bg-[#281B16] text-[#F2EAE0] border-t border-[#3D2C24] py-12">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <BrandMark size="sm" />
+              <div>
+                <div className="font-serif text-lg text-[#F2EAE0] font-bold">
+                  Colon Hyphen Bracket, LLC
+                </div>
+                <div className="font-mono text-[11px] text-[#B09E94]">
+                  Systems &amp; Product Architecture Studio · Salt Lake City &amp; Remote
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/"
+                className="font-mono text-xs uppercase tracking-[0.14em] text-[#D3C7B5] hover:text-[#FE299E] no-underline"
+              >
+                ← Principal Portfolio
+              </Link>
+              <Link
+                href="/case-studies/pipes"
+                className="font-mono text-xs uppercase tracking-[0.14em] text-[#D3C7B5] hover:text-[#FE299E] no-underline"
+              >
+                Pipes.Pink Case Study
+              </Link>
+              <button
+                onClick={() => openContact("calendly")}
+                className="px-4 py-2 rounded-sm bg-[#FE299E] text-white font-mono text-xs font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors cursor-pointer border-none"
+              >
+                Book Intro Call
+              </button>
+            </div>
+          </div>
+        </footer>
+
+        {/* Full-Resolution Architectural Plate & Screenshot Lightbox */}
+        <Dialog
+          open={!!lightboxImage}
+          onOpenChange={(open) => !open && setLightboxImage(null)}
+        >
+          <DialogContent className="max-w-[92vw] md:max-w-5xl bg-[#231814] border-[#3D2C24] text-[#F2EAE0] p-4 md:p-6">
+            <DialogTitle className="font-serif text-xl md:text-2xl text-[#F2EAE0]">
+              {lightboxImage?.title}
+            </DialogTitle>
+            {lightboxImage?.subtitle && (
+              <p className="font-sans text-xs md:text-sm text-[#D3C7B5] mt-1">
+                {lightboxImage.subtitle}
+              </p>
+            )}
+            {lightboxImage && (
+              <div className="mt-3 rounded-sm overflow-hidden border border-[#4A372E] bg-[#140D0B] max-h-[75vh] flex items-center justify-center">
+                <img
+                  src={lightboxImage.src}
+                  onError={(e) => {
+                    if (
+                      lightboxImage.src.includes("/images/studio/") &&
+                      !e.currentTarget.src.endsWith(".svg")
+                    ) {
+                      e.currentTarget.src = lightboxImage.src.replace(/\.png$/, ".svg");
+                    }
+                  }}
+                  alt={lightboxImage.title}
+                  className="max-h-[73vh] w-auto object-contain"
+                />
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+
+        <ContactFormModal
+          open={contactOpen}
+          onOpenChange={setContactOpen}
+          defaultTab={contactDefaultTab}
         />
       </div>
-      <h3
-        className="font-display tracking-tight mb-4 leading-[1.2]"
-        style={{ fontSize: "clamp(1.4rem, 2.2vw, 2rem)" }}
-        data-testid={`text-${testId}-title`}
-      >
-        {title}
-        {subtitle && (
-          <span className="font-display" style={{ opacity: 0.45, fontSize: "0.65em", marginLeft: "0.35em" }}>
-            ({subtitle})
-          </span>
-        )}
-      </h3>
-
-      <div className="space-y-4 text-foreground/70 leading-[1.75]">
-        {items.map((item, i) => {
-          const isQuote = i === 0 && hasQuoteLead;
-          if (isQuote) {
-            const dashIdx = item.lastIndexOf('–');
-            const quoteText = dashIdx > -1 ? item.slice(0, dashIdx).trim() : item;
-            const attribution = dashIdx > -1 ? item.slice(dashIdx).trim() : null;
-            return (
-              <div key={i} className="mb-5">
-                <p className="italic leading-[1.7] text-[12px] md:text-[13px] text-foreground/60">{quoteText}</p>
-                {attribution && (
-                  <p className="mt-1 text-right text-[11px] font-sans text-foreground/40">{attribution}</p>
-                )}
-              </div>
-            );
-          }
-          return (
-            <p key={i} className="text-[14px] md:text-[15px]">{item}</p>
-          );
-        })}
-      </div>
-    </motion.div>
-  );
-}
-
-function LabCard({
-  title,
-  items,
-  testId,
-  link,
-}: {
-  title: string;
-  items: string[];
-  testId: string;
-  link?: { label: string; href: string };
-}) {
-  return (
-    <motion.div variants={itemFade} className="space-y-5" data-testid={`card-${testId}`}>
-      <h3
-        className="font-display tracking-tight leading-[1.2]"
-        style={{ fontSize: "clamp(1rem, 1.25vw, 1.5rem)" }}
-        data-testid={`text-${testId}-title`}
-      >
-        {title}
-      </h3>
-      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/70 leading-[1.7]" role="list">
-        {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2">
-            <PinkBullet />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-      {link && (
-        <a
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 font-sans text-[11px] uppercase tracking-[0.15em] transition-colors"
-          style={{ color: "#FE299E" }}
-          data-testid={`link-${testId}`}
-        >
-          {link.label} <ArrowUpRight className="w-3 h-3" />
-        </a>
-      )}
-    </motion.div>
-  );
-}
-
-function EngagementCard({
-  title,
-  items,
-  testId,
-}: {
-  title: string;
-  items: string[];
-  testId: string;
-}) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, ease }}
-      className="pt-6 pb-10"
-      data-testid={`card-${testId}`}
-      style={{ borderTop: "2px solid #FE299E" }}
-    >
-      <h3
-        className="font-display leading-[1.2] mb-6 tracking-[-0.01em]"
-        style={{ fontSize: "clamp(1.35rem, 2.2vw, 2rem)" }}
-        data-testid={`text-${testId}-title`}
-      >
-        {title}
-      </h3>
-      <ul className="space-y-3 text-[15px] md:text-[16px] text-foreground/70 leading-[1.7]" role="list">
-        {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2">
-            <PinkBullet />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </motion.div>
+    </MotionConfig>
   );
 }

@@ -4,6 +4,10 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
+      "source": "/studio",
+      "destination": "/studio/index.html"
+    },
+    {
       "source": "/case-studies/:slug",
       "destination": "/case-studies/:slug/index.html"
     },
