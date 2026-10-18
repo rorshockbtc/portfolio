@@ -1,20 +1,11 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
   ArrowRight,
   Download,
   ExternalLink,
-  Laptop,
-  Smartphone,
-  Globe,
-  Sparkles,
-  Shield,
-  Layers,
-  Cpu,
-  Database,
   GitBranch,
   GitCommit,
   Maximize2,
@@ -43,34 +34,30 @@ export default function PortfolioPage() {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   return (
     <div className="min-h-screen bg-[#EAE0D0] text-[#281B16] flex flex-col selection:bg-[#FE299E]/20">
-      {/* ── HERO ── */}
-      <section className="relative pt-8 sm:pt-12 md:pt-16 pb-14 md:pb-20" data-testid="section-hero">
+      {/* ── VIEWPORT 01: HERO + FAST-TRACK STRIP + TRACK RECORD ── */}
+      <section className="relative pt-6 sm:pt-8 md:pt-10 pb-8 md:pb-10" data-testid="section-hero">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-16 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-8 space-y-6 sm:space-y-7 order-2 lg:order-1">
-              <p className="flex items-center gap-3 font-mono text-xs sm:text-sm uppercase tracking-[0.18em] font-bold text-[#FE299E]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12 items-center">
+            <div className="lg:col-span-8 space-y-4 sm:space-y-5 order-2 lg:order-1">
+              <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] font-bold text-[#FE299E]">
                 <BrandMark size="md" />
-                <span>Product Architect &amp; R&amp;D Lead</span>
+                <span>Product Architect &amp; R&amp;D Lead · Principal Product Designer</span>
               </p>
 
-              <h1 className="text-[2.35rem] leading-[1.1] sm:text-6xl lg:text-[4.65rem] font-serif font-black text-[#281B16] tracking-tight space-y-1">
+              <h1 className="text-[2.2rem] leading-[1.08] sm:text-5xl lg:text-[4.15rem] font-serif font-black text-[#281B16] tracking-tight space-y-0.5">
                 <span className="block">Architect the system.</span>
                 <span className="block italic font-normal text-[#FE299E]">Design the interface.</span>
                 <span className="block">Ship the prototype.</span>
               </h1>
 
-              <div className="space-y-4 max-w-[62ch]">
-                <p className="text-lg sm:text-xl lg:text-2xl text-[#281B16] font-serif leading-[1.6]">
-                  I&apos;m Kyle Cyree. For 15 years I&apos;ve led product architecture in regulated environments where mistakes cost millions: UnitedHealth Group&apos;s patient apps <strong className="font-semibold">(35M+ patients)</strong>, Walmart&apos;s enterprise search <strong className="font-semibold">(3M users)</strong>, and Custodia Bank as first design hire.
+              <div className="space-y-3 max-w-[64ch]">
+                <p className="text-base sm:text-lg lg:text-xl text-[#281B16] font-serif leading-[1.58]">
+                  I&apos;m Kyle Cyree. For 15+ years I&apos;ve led product architecture in regulated environments where mistakes cost millions: <strong className="font-semibold">Custodia Bank</strong>&apos;s institutional Money Market &amp; custody platform (first design hire), 2 years embedded at <strong className="font-semibold">Fidelity Investments</strong>, <strong className="font-semibold">UnitedHealth Group</strong> <strong className="font-semibold">(35M+ patients)</strong>, and <strong className="font-semibold">Walmart</strong> <strong className="font-semibold">(3M users)</strong>.
                 </p>
-                <p className="text-base sm:text-lg text-[#4A3A32] font-sans leading-[1.75]">
-                  I operate as a surgical &ldquo;studio of one&rdquo;—modeling data from first principles, designing interfaces on a mathematical Swiss grid, and shipping working TypeScript, Next.js, and Rust software backed by public GitHub repositories.
+                <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.7]">
+                  I bridge executive strategy (MBA, UNC Kenan-Flagler), first-principles data modeling, mathematical Swiss grids, and AI-accelerated engineering to ship working TypeScript, Next.js, DuckDB-WASM, and Rust software without handoff loss.
                 </p>
               </div>
 
@@ -79,31 +66,31 @@ export default function PortfolioPage() {
                   href="https://calendly.com/cubby-colonhyphenbracket/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-sm sm:text-base font-bold rounded-full px-6 sm:px-7 h-12 sm:h-13 shadow-md transition-all cursor-pointer whitespace-nowrap no-underline"
+                  className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm font-bold rounded-full px-6 h-11 shadow-md transition-all cursor-pointer whitespace-nowrap no-underline"
                 >
                   <Calendar className="w-4 h-4 shrink-0" /> Book 30-min call
                 </a>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-[#281B16]/30 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-sm sm:text-base font-bold rounded-full px-6 sm:px-7 h-12 sm:h-13 cursor-pointer whitespace-nowrap"
-                  onClick={() => openContactModal("1-week sprint ($7,500)")}
+                  className="border-[#281B16]/40 bg-[#F2EAE0] hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs sm:text-sm font-bold rounded-full px-6 h-11 cursor-pointer whitespace-nowrap"
+                  onClick={() => openContactModal("Full-time role (Product Architect / Staff)")}
                 >
-                  1-week sprint · $7,500
+                  Discuss Full-Time Role →
                 </Button>
                 <Button
                   size="lg"
                   variant="ghost"
-                  className="text-[#281B16] hover:bg-[#D3C7B5]/40 font-sans text-sm sm:text-base font-bold rounded-full px-5 h-12 cursor-pointer whitespace-nowrap"
-                  onClick={() => openContactModal("Full-time role (Product Architect / Staff)")}
+                  className="text-[#281B16] hover:bg-[#D3C7B5]/40 font-sans text-xs sm:text-sm font-bold rounded-full px-4 h-11 cursor-pointer whitespace-nowrap"
+                  onClick={() => openContactModal("1-week sprint ($7,500)")}
                 >
-                  Full-time roles →
+                  Or 1-week trial sprint · $7,500
                 </Button>
               </div>
 
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-sm font-sans text-[#4A3A32] pt-1">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm font-sans text-[#4A3A32] pt-0.5">
                 <a href="/resumes/kyle-cyree-resume.pdf" target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] whitespace-nowrap">
-                  <Download className="w-4 h-4 text-[#FE299E]" /> Resume (PDF)
+                  <Download className="w-3.5 h-3.5 text-[#FE299E]" /> Resume (PDF)
                 </a>
                 <span className="inline-flex items-center gap-2 whitespace-nowrap">
                   <a href="mailto:rorshock@protonmail.com" className="font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]">
@@ -113,7 +100,7 @@ export default function PortfolioPage() {
                     type="button"
                     onClick={copyEmail}
                     aria-label="Copy email address"
-                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-sans font-bold uppercase tracking-wider border border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:border-[#FE299E] transition-colors cursor-pointer whitespace-nowrap"
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider border border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:border-[#FE299E] transition-colors cursor-pointer whitespace-nowrap"
                   >
                     {copiedEmail ? (
                       <>
@@ -135,9 +122,9 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-4 order-1 lg:order-2">
-              <figure className="max-w-[200px] sm:max-w-xs lg:max-w-none mx-auto lg:mx-0 space-y-3">
-                <div className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden bg-[#E4DACB] border border-[#D3C7B5] shadow-xl">
+            <div className="lg:col-span-4 order-1 lg:order-2 flex justify-center lg:justify-end">
+              <figure className="w-full max-w-[180px] sm:max-w-[240px] lg:max-w-[300px] space-y-2.5">
+                <div className="relative aspect-[4/4.6] max-h-[340px] w-full rounded-3xl overflow-hidden bg-[#E4DACB] border border-[#D3C7B5] shadow-xl">
                   <img
                     src="/images/kyle-portrait.jpg"
                     alt="Kyle Cyree"
@@ -147,108 +134,105 @@ export default function PortfolioPage() {
                     className="w-full h-full object-cover object-[50%_35%]"
                   />
                 </div>
-                <figcaption className="space-y-1.5 px-1 text-center lg:text-left">
-                  <p className="inline-flex lg:flex items-center justify-center lg:justify-start gap-2 font-sans text-xs sm:text-sm font-bold text-[#281B16]">
+                <figcaption className="space-y-1 px-1 text-center lg:text-left">
+                  <p className="inline-flex lg:flex items-center justify-center lg:justify-start gap-2 font-sans text-xs font-bold text-[#281B16]">
                     <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
-                    Open to Product Architect roles &amp; sprints
+                    Available for Executive W2 or Turnkey B2B
                   </p>
-                  <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-relaxed hidden sm:block">
-                    North Carolina · US Remote · MBA, UNC Chapel Hill · MFA, Emerson
+                  <p className="text-[11px] sm:text-xs text-[#4A3A32] font-sans leading-snug hidden sm:block">
+                    North Carolina (EST/CST Remote) · MBA, UNC · MFA, Emerson
                   </p>
                 </figcaption>
               </figure>
             </div>
           </div>
 
-          {/* ── Recruiter 30-Second Fast-Track Strip ── */}
-          <div className="mt-12 pt-6 border-t border-[#D3C7B5] grid grid-cols-2 lg:grid-cols-4 gap-6 text-sm font-sans">
+          {/* ── Recruiter & Founder 15-Second Fast-Track Strip ── */}
+          <div className="mt-7 pt-4 border-t border-[#D3C7B5] grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-xs sm:text-sm font-sans">
             <div>
-              <span className="font-mono text-[11px] uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Target Roles</span>
+              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block mb-0.5">Target Roles</span>
               <span className="font-semibold text-[#281B16] block">Product Architect · R&amp;D Lead</span>
               <span className="text-xs text-[#4A3A32]">Principal Designer · Staff IC</span>
             </div>
             <div>
-              <span className="font-mono text-[11px] uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Regulated Pedigree</span>
-              <span className="font-semibold text-[#281B16] block">15+ Years Enterprise &amp; Zero-to-One</span>
-              <span className="text-xs text-[#4A3A32]">Healthcare (35M), Banking, Retail (3M)</span>
+              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block mb-0.5">Fintech, Wealth &amp; Health</span>
+              <span className="font-semibold text-[#281B16] block">Custodia Bank · Fidelity · UHG</span>
+              <span className="text-xs text-[#4A3A32]">Money Market, Custody, 35M+ Mobile</span>
             </div>
             <div>
-              <span className="font-mono text-[11px] uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Production Stack</span>
+              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block mb-0.5">Production Stack</span>
               <a href="#code" className="font-semibold text-[#281B16] hover:text-[#FE299E] transition-colors block">
                 TypeScript · Next.js · DuckDB ↓
               </a>
               <span className="text-xs text-[#4A3A32]">AI Harnesses · Python · Rust / Tauri</span>
             </div>
             <div>
-              <span className="font-mono text-[11px] uppercase font-bold tracking-wider text-[#FE299E] block mb-1">Education &amp; Base</span>
+              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block mb-0.5">Education &amp; Base</span>
               <span className="font-semibold text-[#281B16] block">MBA (UNC) · MFA (Emerson)</span>
-              <span className="text-xs text-[#4A3A32]">US Remote (NC) · Immediate Sprint / Role</span>
+              <span className="text-xs text-[#4A3A32]">US Citizen · NC Remote (EST/CST)</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 01 // Enterprise Client Logo Roster ── */}
+      {/* ── 01 // Enterprise Client Logo Strip (Fits at bottom of Viewport 01) ── */}
       <ClientLogoBar />
 
-      {/* ── 02 // SELECTED WORK: FOUR DEFINING PILLARS ── */}
-      <section id="selected-work" className="py-16 md:py-24 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 w-full space-y-16 md:space-y-20 scroll-mt-20">
-        {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end border-b-2 border-[#281B16] pb-8">
-          <div className="lg:col-span-8 space-y-2">
+      {/* ── 02 // SELECTED WORK: EACH PILLAR GROUP FITS WITHIN ONE VIEWPORT ── */}
+      <section id="selected-work" className="py-12 md:py-16 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 w-full space-y-12 md:space-y-14 scroll-mt-16">
+        {/* Compact Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b-2 border-[#281B16] pb-5">
+          <div className="space-y-1">
             <span className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] block">
               02 // SELECTED ARCHITECTURAL WORK
             </span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.06]">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.06]">
               Four pillars of systems design &amp; code.
             </h2>
           </div>
-          <div className="lg:col-span-4">
-            <p className="text-base sm:text-lg text-[#4A3A32] font-sans leading-[1.7]">
-              Zero-to-one banking architecture, national healthcare scale, workforce search for 3M people, and the sovereign knowledge protocol I built solo.
-            </p>
-          </div>
+          <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.65] max-w-md">
+            Zero-to-one banking &amp; treasury architecture, national healthcare scale (35M+), enterprise graph search (3M), and the sovereign knowledge protocol I built solo.
+          </p>
         </div>
 
-        {/* ── PILLAR 01: CUSTODIA BANK ── */}
-        <article className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-6 sm:p-10 shadow-[0_16px_40px_rgba(40,27,22,0.05)]">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 mb-8 border-b border-[#D3C7B5]">
-            <div className="space-y-3 max-w-3xl">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="font-mono text-xs uppercase tracking-[0.18em] font-bold px-3 py-1 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
-                  01 / Regulated Fintech
+        {/* ── VIEWPORT 02.A: PILLAR 01 — CUSTODIA BANK (FITS IN 1 VIEWPORT) ── */}
+        <article className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-5 sm:p-7 shadow-[0_12px_32px_rgba(40,27,22,0.05)] scroll-mt-20">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 mb-5 border-b border-[#D3C7B5]">
+            <div className="space-y-1.5 max-w-3xl">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] font-bold px-2.5 py-0.5 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
+                  01 / Regulated Fintech &amp; Treasury
                 </span>
                 <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#4A3A32]">
-                  Chartered Wyoming Bank · First Design Hire · $71M+ Raised
+                  Chartered Wyoming SPDI Bank · First Design Hire · $71M+ Raised
                 </span>
               </div>
-              <h3 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-serif font-bold text-[#281B16] tracking-tight leading-[1.1]">
-                Custodia Bank: core banking platform &amp; brand
+              <h3 className="text-xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.12]">
+                Custodia Bank: Institutional Money Market, Fedwire &amp; Bitcoin Custody
               </h3>
-              <p className="text-base sm:text-lg text-[#4A3A32] font-sans leading-[1.72]">
-                First and only designer at a chartered Federal Reserve Special Purpose Depository Institution. Shipped the ground-up rebrand in 4 days and the core banking application in 30 days ahead of Federal Reserve master account review—unifying Fedwire fiat rails, Money Market yield accrual, and multi-sig Bitcoin UTXO custody into one institutional interface.
+              <p className="text-xs sm:text-sm md:text-base text-[#4A3A32] font-sans leading-[1.65]">
+                First and only designer at a chartered Federal Reserve Special Purpose Depository Institution. Shipped the ground-up rebrand in 4 days and the core banking application in 30 days ahead of Federal Reserve master account review—unifying Fedwire fiat rails, Money Market yield accrual, and multi-sig Bitcoin UTXO custody.
               </p>
             </div>
 
             <div className="shrink-0">
               <Link
                 href="/case-studies/custodia"
-                className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-6 py-3.5 shadow-sm transition-all whitespace-nowrap no-underline"
+                className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-3 shadow-sm transition-all whitespace-nowrap no-underline"
               >
                 Custodia Case Study →
               </Link>
             </div>
           </div>
 
-          {/* Balanced 6/6 Swiss Plate Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-            <div className="lg:col-span-6 rounded-2xl bg-[#EAE0D0]/70 border border-[#D3C7B5] p-4 sm:p-5 flex flex-col justify-between space-y-4">
-              <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2.5">
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] font-bold text-[#281B16]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
+            <div className="lg:col-span-6 rounded-2xl bg-[#EAE0D0]/70 border border-[#D3C7B5] p-4 flex flex-col justify-between space-y-3">
+              <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2">
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#281B16]">
                   FIG 01.A // INSTITUTIONAL MONEY MARKET
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
-                  FEDWIRE &amp; TREASURY
+                  FEDWIRE &amp; TREASURY YIELD
                 </span>
               </div>
 
@@ -259,7 +243,7 @@ export default function PortfolioPage() {
                     caption: "Custodia Bank Institutional Money Market Dashboard",
                   })
                 }
-                className="group relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-lg flex items-center justify-center cursor-zoom-in p-2"
+                className="group relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
               >
                 <img
                   loading="lazy"
@@ -268,24 +252,24 @@ export default function PortfolioPage() {
                   alt="Custodia Bank Institutional Money Market Dashboard"
                   className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
                 />
-                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[11px] font-mono uppercase tracking-wider flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <h4 className="font-serif font-bold text-lg text-[#281B16]">
+              <div>
+                <h4 className="font-serif font-bold text-base sm:text-lg text-[#281B16]">
                   Institutional Money Market &amp; Treasury Yield Console
                 </h4>
-                <p className="text-sm text-[#4A3A32] font-sans leading-[1.65]">
+                <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.6]">
                   Northern Institutional Trust onboarding, Fedwire settlement, and programmable treasury controls for corporate fiduciaries.
                 </p>
               </div>
             </div>
 
-            <div className="lg:col-span-6 rounded-2xl bg-[#EAE0D0]/70 border border-[#D3C7B5] p-4 sm:p-5 flex flex-col justify-between space-y-4">
-              <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2.5">
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] font-bold text-[#281B16]">
+            <div className="lg:col-span-6 rounded-2xl bg-[#EAE0D0]/70 border border-[#D3C7B5] p-4 flex flex-col justify-between space-y-3">
+              <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2">
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#281B16]">
                   FIG 01.B // MULTI-SIG BITCOIN CUSTODY
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
@@ -300,7 +284,7 @@ export default function PortfolioPage() {
                     caption: "Custodia Bank Bitcoin UTXO Manager Console",
                   })
                 }
-                className="group relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-lg flex items-center justify-center cursor-zoom-in p-2"
+                className="group relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
               >
                 <img
                   loading="lazy"
@@ -309,357 +293,312 @@ export default function PortfolioPage() {
                   alt="Custodia Bank Bitcoin UTXO Manager Console"
                   className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
                 />
-                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[11px] font-mono uppercase tracking-wider flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <h4 className="font-serif font-bold text-lg text-[#281B16]">
+              <div>
+                <h4 className="font-serif font-bold text-base sm:text-lg text-[#281B16]">
                   Segregated Bitcoin Custody &amp; UTXO Audit Ledger
                 </h4>
-                <p className="text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                  Granular UTXO transaction provenance, hardware-quorum withdrawal ceremonies, and real-time chain-of-custody verification.
+                <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.6]">
+                  Hardware-enforced multi-signature quorum approvals and real-time UTXO provenance for institutional digital assets.
                 </p>
               </div>
             </div>
           </div>
         </article>
 
-        {/* ── PILLAR 02 & 03: UNITEDHEALTH GROUP + WALMART (SIDE-BY-SIDE OR STACKED CLEANLY) ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Pillar 02: UnitedHealth Group */}
-          <article className="lg:col-span-6 bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-[0_16px_40px_rgba(40,27,22,0.05)]">
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D3C7B5] pb-4">
-                <span className="font-mono text-xs uppercase tracking-[0.18em] font-bold px-3 py-1 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
-                  02 / Healthcare Systems
+        {/* ── VIEWPORT 02.B: PILLARS 02 & 03 — UNITEDHEALTH GROUP (35M+) & WALMART (3M) SIDE-BY-SIDE (FITS IN 1 VIEWPORT) ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* PILLAR 02: UNITEDHEALTH GROUP */}
+          <article className="lg:col-span-6 bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-5 sm:p-6 shadow-[0_12px_32px_rgba(40,27,22,0.05)] flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D3C7B5] pb-3">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] font-bold px-2.5 py-0.5 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
+                  02 / National Healthcare
                 </span>
-                <span className="font-mono text-xs font-bold text-[#4A3A32]">
-                  35M+ Patients · 1.8★ → 4.7★
+                <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#4A3A32]">
+                  35M+ Patients · $100M+ Impact
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.12]">
-                UnitedHealth Group &amp; Optum: flagship patient mobile apps
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.14]">
+                UnitedHealth Group &amp; Optum: Flagship Mobile Suite
               </h3>
 
-              <p className="text-base text-[#4A3A32] font-sans leading-[1.72]">
-                Principal designer for UHG&apos;s flagship native iOS and Android patient apps (35M+ patients). Led the strategic push for Apple Health adoption and personally produced 80%+ of Android and 50%+ of iOS screens, lifting app ratings from sub-2 stars to 4.7★.
+              <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">
+                Principal designer in an internal executive consulting team for UHG&apos;s flagship iOS and Android patient apps (35M+ patients, 400K+ employees). Produced 80%+ of Android and 50%+ of iOS screens and championed Apple Health integration ($100M+ revenue impact), lifting ratings from sub-2 stars to the high-4 tier.
               </p>
-            </div>
 
-            <div className="space-y-5">
               <div
                 onClick={() =>
                   setLightboxImage({
-                    src: "/artwork/enterprise-health.png",
-                    caption: "UnitedHealth Native Patient App Suite",
+                    src: "/images/uhg/uhg-hero.png",
+                    caption: "UnitedHealth Group & Optum Mobile Patient Ecosystem (35M+ Patients)",
                   })
                 }
-                className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#231814] border border-[#3D2C24] shadow-lg p-3 sm:p-4 flex items-center justify-center cursor-zoom-in"
+                className="group relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
               >
                 <img
                   loading="lazy"
                   decoding="async"
-                  src="/artwork/enterprise-health.png"
-                  alt="UnitedHealth Native Patient App Suite"
-                  className="w-full h-full object-contain rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
+                  src="/images/uhg/uhg-hero.png"
+                  alt="UnitedHealth Group Mobile App Architecture"
+                  className="w-full h-full object-contain rounded-xl group-hover:scale-[1.015] transition-transform duration-500"
                 />
-                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[11px] font-mono uppercase tracking-wider flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
                 </div>
               </div>
+            </div>
 
-              <div className="flex items-center justify-between gap-4 pt-2 border-t border-[#D3C7B5]">
-                <span className="font-mono text-xs text-[#4A3A32] font-semibold">
-                  Fortune 10 · iOS &amp; Android Design System
-                </span>
-                <Link
-                  href="/case-studies/unitedhealth"
-                  className="inline-flex items-center justify-center bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-2.5 shadow-xs transition-all whitespace-nowrap no-underline"
-                >
-                  UHG Case Study →
-                </Link>
-              </div>
+            <div className="pt-3 border-t border-[#D3C7B5] flex items-center justify-between gap-4">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#4A3A32] font-semibold">
+                HIPAA · iOS &amp; Android · Service Design
+              </span>
+              <Link
+                href="/case-studies/unitedhealth"
+                className="inline-flex items-center justify-center gap-1.5 bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-4 py-2.5 transition-all whitespace-nowrap no-underline"
+              >
+                UnitedHealth Study →
+              </Link>
             </div>
           </article>
 
-          {/* Pillar 03: Walmart */}
-          <article className="lg:col-span-6 bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-[0_16px_40px_rgba(40,27,22,0.05)]">
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D3C7B5] pb-4">
-                <span className="font-mono text-xs uppercase tracking-[0.18em] font-bold px-3 py-1 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
-                  03 / Enterprise Workforce
+          {/* PILLAR 03: WALMART GLOBAL TECH */}
+          <article className="lg:col-span-6 bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-5 sm:p-6 shadow-[0_12px_32px_rgba(40,27,22,0.05)] flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D3C7B5] pb-3">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] font-bold px-2.5 py-0.5 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
+                  03 / Enterprise Graph Search
                 </span>
-                <span className="font-mono text-xs font-bold text-[#4A3A32]">
-                  3M Associates · GraphQL Search
+                <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#4A3A32]">
+                  3M Employees · Fortune 1
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.12]">
-                Walmart: graph-powered enterprise search &amp; training
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.14]">
+                Walmart: GraphQL Workforce Search &amp; Discovery
               </h3>
 
-              <p className="text-base text-[#4A3A32] font-sans leading-[1.72]">
-                Senior UX/UI Architect (via PredictiveUX). Architected the enterprise search paradigms and Content Distribution Platform for the world&apos;s largest private workforce (3M direct users), replacing keyword lookups with real-time GraphQL discovery.
+              <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">
+                Led UX and information architecture (via PredictiveUX) for Walmart&apos;s internal enterprise search and Content Distribution Platform serving 3 million associates—replacing legacy keyword lookups with GraphQL and graph-database discovery for career pathways and compliance.
               </p>
-            </div>
 
-            <div className="space-y-5">
               <div
                 onClick={() =>
                   setLightboxImage({
-                    src: "/images/walmart/walmart-search-results.png",
-                    caption: "Walmart Enterprise Graph Search Results Interface",
+                    src: "/images/walmart/walmart-hero.png",
+                    caption: "Walmart Enterprise Search & GraphQL Content Distribution Platform (3M Users)",
                   })
                 }
-                className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#231814] border border-[#3D2C24] shadow-lg p-3 sm:p-4 flex items-center justify-center cursor-zoom-in"
+                className="group relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
               >
                 <img
                   loading="lazy"
                   decoding="async"
-                  src="/images/walmart/walmart-search-results.png"
-                  alt="Walmart Enterprise Graph Search Results Interface"
-                  className="w-full h-full object-contain rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
+                  src="/images/walmart/walmart-hero.png"
+                  alt="Walmart Enterprise Search Architecture"
+                  className="w-full h-full object-cover object-top rounded-xl group-hover:scale-[1.015] transition-transform duration-500"
                 />
-                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[11px] font-mono uppercase tracking-wider flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
                 </div>
               </div>
+            </div>
 
-              <div className="flex items-center justify-between gap-4 pt-2 border-t border-[#D3C7B5]">
-                <span className="font-mono text-xs text-[#4A3A32] font-semibold">
-                  Fortune 1 · Global Retail Floor Terminals
-                </span>
-                <Link
-                  href="/case-studies/walmart"
-                  className="inline-flex items-center justify-center bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-2.5 shadow-xs transition-all whitespace-nowrap no-underline"
-                >
-                  Walmart Case Study →
-                </Link>
-              </div>
+            <div className="pt-3 border-t border-[#D3C7B5] flex items-center justify-between gap-4">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#4A3A32] font-semibold">
+                GraphQL · Graph DB · 3M Associates
+              </span>
+              <Link
+                href="/case-studies/walmart"
+                className="inline-flex items-center justify-center gap-1.5 bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-4 py-2.5 transition-all whitespace-nowrap no-underline"
+              >
+                Walmart Study →
+              </Link>
             </div>
           </article>
         </div>
 
-        {/* ── PILLAR 04: PIPES.PINK (SOLO-BUILT SOVEREIGN KNOWLEDGE ECOSYSTEM) ── */}
-        <article className="bg-[#F2EAE0] border-2 border-[#281B16] rounded-3xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(40,27,22,0.08)]">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 mb-8 border-b border-[#D3C7B5]">
-            <div className="space-y-3 max-w-3xl">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="font-mono text-xs uppercase tracking-[0.18em] font-bold px-3 py-1 rounded-full bg-[#FE299E] text-white whitespace-nowrap">
-                  04 / Flagship Sovereign Ecosystem
-                </span>
-                <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#4A3A32]">
-                  Built Solo · Web Protocol · # Hash + ;-] SEMI · macOS IDE
-                </span>
-              </div>
-              <h3 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-serif font-bold text-[#281B16] tracking-tight leading-[1.1]">
-                Pipes.Pink: Sovereign Knowledge Protocol, Hash &amp; SEMI (;-])
-              </h3>
-              <p className="text-base sm:text-lg text-[#4A3A32] font-sans leading-[1.72]">
-                Designed, architected, and shipped solo from zero to production. Creators draft inside the integrated <strong className="text-[#281B16]"># Hash Sanctuary</strong> alongside <strong className="text-[#281B16]">SEMI (;-])</strong>, a Socratic editor-in-residence with persistent memory, then seal verified sources into deeded namespaces (<code className="font-mono text-sm bg-[#EAE0D0] border border-[#D3C7B5] px-1.5 py-0.5 rounded text-[#281B16]">pipe\bitcoin</code>) where AI agents pay 70% micro-royalties via MCP &amp; HTTP 402.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-              <a
-                href="https://pipes.pink"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-3 shadow-sm transition-all whitespace-nowrap no-underline"
-              >
-                Claim Pipe ($9/yr) <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-              <a
-                href="https://pipes.pink/write"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-3 transition-all whitespace-nowrap no-underline"
-              >
-                Try # Hash + ;-] Semi ↗
-              </a>
-              <Link
-                href="/case-studies/pipes"
-                className="inline-flex items-center justify-center gap-1 bg-[#EAE0D0] hover:bg-[#D3C7B5] text-[#281B16] border border-[#281B16]/25 font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-3 transition-all whitespace-nowrap no-underline"
-              >
-                Pipes Case Study →
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-            {/* Plate 04.A */}
-            <div className="lg:col-span-6 rounded-2xl bg-[#EAE0D0]/70 border border-[#D3C7B5] p-4 sm:p-5 flex flex-col justify-between space-y-4">
-              <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2.5">
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] font-bold text-[#281B16]">
-                  FIG 04.A // PIPES.PINK SOVEREIGN PROTOCOL
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
-                  MERKLE-DAG · 70% ROYALTIES
-                </span>
+        {/* ── VIEWPORT 02.C: PILLAR 04 — PIPES.PINK + 4-CARD ARCHIVE STRIP (FITS IN 1 VIEWPORT) ── */}
+        <div className="space-y-6">
+          <article className="bg-[#231814] text-[#F2EAE0] border border-[#3D2C24] rounded-3xl p-5 sm:p-7 shadow-[0_18px_45px_rgba(35,24,20,0.16)]">
+            <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 pb-5 mb-5 border-b border-[#3D2C24]">
+              <div className="space-y-1.5 max-w-3xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] font-bold px-2.5 py-0.5 rounded-full bg-[#FE299E] text-white whitespace-nowrap">
+                    04 / Solo R&amp;D Protocol
+                  </span>
+                  <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#E4DACB]">
+                    Next.js · Tauri 2.0 / Rust · Swift · DuckDB-WASM · WebGPU
+                  </span>
+                </div>
+                <h3 className="text-xl sm:text-3xl font-serif font-bold text-[#F2EAE0] tracking-tight leading-[1.12]">
+                  Pipes.Pink: Sovereign Knowledge Protocol, # Hash &amp; ;-] Semi
+                </h3>
+                <p className="text-xs sm:text-sm md:text-base text-[#E4DACB] font-sans leading-[1.65]">
+                  Designed, architected, and engineered solo from zero to production: a multi-platform knowledge protocol uniting deeded namespaces (<code className="text-[#FE299E] font-mono">pipe\topic</code>), the integrated <strong className="text-white"># Hash</strong> writing studio and <strong className="text-white">;-] Semi</strong> Socratic agent, 90+ language classrooms (<strong className="text-white">&gt; Greater</strong>), and a native macOS Rust IDE (<strong className="text-white">! BANG</strong>).
+                </p>
               </div>
 
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/images/pipes/pipes-hero.png",
-                    caption: "Pipes.Pink Web Protocol: A Sovereign Library for Human Knowledge",
-                  })
-                }
-                className="group relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-[#3D2C24] bg-[#231814] p-2 shadow-lg flex items-center justify-center cursor-zoom-in"
-              >
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="/images/pipes/pipes-hero.png"
-                  alt="Pipes.Pink Web Protocol: A Sovereign Library for Human Knowledge"
-                  className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
-                />
-                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[11px] font-mono uppercase tracking-wider flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <Link
+                  href="/case-studies/pipes"
+                  className="inline-flex items-center justify-center gap-1.5 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-2.5 shadow-sm transition-all whitespace-nowrap no-underline"
+                >
+                  Pipes Case Study →
+                </Link>
+                <a
+                  href="https://pipes.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 bg-[#32221C] hover:bg-[#3D2C24] text-[#F2EAE0] border border-[#4A372E] hover:border-[#FE299E] font-mono text-xs uppercase tracking-[0.13em] font-bold rounded-full px-4 py-2.5 transition-all whitespace-nowrap no-underline"
+                >
+                  <span>| | | Launch pipes.pink</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#FE299E] shrink-0" />
+                </a>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
+              <div className="lg:col-span-6 rounded-2xl bg-[#1B120F] border border-[#3D2C24] p-4 flex flex-col justify-between space-y-3">
+                <div className="flex items-center justify-between gap-2 border-b border-[#3D2C24] pb-2">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#F2EAE0]">
+                    FIG 04.A // PIPES.PINK PROTOCOL &amp; MARKETPLACE
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
+                    MERKLE-DAG VAULTS
+                  </span>
+                </div>
+
+                <div
+                  onClick={() =>
+                    setLightboxImage({
+                      src: "/images/pipes/pipes-hero.png",
+                      caption: "Pipes.Pink Sovereign Knowledge Network & Deeded Namespace Marketplace",
+                    })
+                  }
+                  className="group relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#120C0A] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
+                >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/pipes/pipes-hero.png"
+                    alt="Pipes.Pink Sovereign Knowledge Network"
+                    className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
+                  />
+                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <h4 className="font-serif font-bold text-lg text-[#281B16]">
-                  Web Protocol &amp; Marketplace · pipes.pink
-                </h4>
-                <p className="text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                  Content-addressed knowledge namespaces, 70% creator royalties via MCP/HTTP 402, and on-device WebGPU + DuckDB-WASM execution.
-                </p>
-              </div>
-            </div>
+              <div className="lg:col-span-6 rounded-2xl bg-[#1B120F] border border-[#3D2C24] p-4 flex flex-col justify-between space-y-3">
+                <div className="flex items-center justify-between gap-2 border-b border-[#3D2C24] pb-2">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#F2EAE0]">
+                    FIG 04.B // INTEGRATED # HASH &amp; ;-] SEMI STUDIO
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
+                    SOCRATIC AI MEMORY
+                  </span>
+                </div>
 
-            {/* Plate 04.B */}
-            <div className="lg:col-span-6 rounded-2xl bg-[#EAE0D0]/70 border border-[#D3C7B5] p-4 sm:p-5 flex flex-col justify-between space-y-4">
-              <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2.5">
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] font-bold text-[#281B16]">
-                  FIG 04.B // INTEGRATED # HASH &amp; ;-] SEMI ATELIER
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
-                  SOCRATIC WRITING VAULT
-                </span>
-              </div>
-
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/images/pipes/pipes-hash-studio-semi.png",
-                    caption: "Integrated Hash Studio and SEMI (;-]) Socratic Sparring Atelier inside Pipes.Pink",
-                  })
-                }
-                className="group relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-[#3D2C24] bg-[#231814] p-2 shadow-lg flex items-center justify-center cursor-zoom-in"
-              >
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="/images/pipes/pipes-hash-studio-semi.png"
-                  alt="Integrated Hash Studio and SEMI (;-]) Socratic Sparring Atelier inside Pipes.Pink"
-                  className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
-                />
-                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[11px] font-mono uppercase tracking-wider flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
+                <div
+                  onClick={() =>
+                    setLightboxImage({
+                      src: "/images/pipes/pipes-hash-studio-semi.png",
+                      caption: "Integrated # Hash Epistemic Sanctuary & ;-] Semi Socratic Editor inside Pipes.Pink",
+                    })
+                  }
+                  className="group relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#120C0A] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
+                >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/pipes/pipes-hash-studio-semi.png"
+                    alt="Integrated Hash Studio and Semi Socratic Agent"
+                    className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
+                  />
+                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
+                  </div>
                 </div>
               </div>
+            </div>
+          </article>
 
+          {/* Compact 4-Column Archive Strip (Fits at bottom of Pillar 04 Viewport) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link href="/case-studies/marigold" className="group p-4 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-2.5 no-underline">
               <div className="space-y-1">
-                <h4 className="font-serif font-bold text-lg text-[#281B16]">
-                  Integrated Hash Sanctuary · SEMI (;-]) Socratic Sparring
-                </h4>
-                <p className="text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                  Distraction-free epistemic writing vault inside Pipes with live Socratic sparring from SEMI (;-]), 1-click Substack ingestion, and cryptographic publishing.
-                </p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        {/* ── COMPACT ARCHIVAL CASE STUDIES & FOUNDATIONAL ESSAYS STRIP ── */}
-        <div className="space-y-6 pt-6 border-t border-[#D3C7B5]">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
-            <div>
-              <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] block">
-                02.B // ADDITIONAL CASE STUDIES &amp; ESSAYS
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight">
-                More shipped systems &amp; architectural writing
-              </h3>
-            </div>
-            <Link href="/studio" className="font-sans text-xs sm:text-sm font-bold text-[#281B16] hover:text-[#FE299E] underline decoration-[#FE299E] underline-offset-4 whitespace-nowrap">
-              Explore all 12 R&amp;D views in CHB Studio →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <Link href="/case-studies/marigold" className="group p-5 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-4 no-underline">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
-                  DuckDB-WASM · Civic Audit
+                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
+                  DuckDB-WASM · Zero-PII Audit
                 </span>
-                <h4 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
-                  Marigold Insights
+                <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                  Marigold Insights (500k+)
                 </h4>
-                <p className="text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                  2M-record voter-roll audit engine running in-browser via DuckDB-WASM &amp; Apache Arrow with zero cloud PII.
+                <p className="text-xs text-[#4A3A32] font-sans leading-[1.6]">
+                  500k+-record voter-roll &amp; entity-resolution engine running in-browser via DuckDB-WASM &amp; Apache Arrow.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
+              <div className="pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
                 <span>Read Case Study</span>
                 <span>→</span>
               </div>
             </Link>
 
-            <Link href="/case-studies/foodler" className="group p-5 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-4 no-underline">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
+            <Link href="/case-studies/foodler" className="group p-4 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-2.5 no-underline">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
                   Fraud Systems · Grubhub Exit
                 </span>
-                <h4 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors">
                   Foodler ($500M+ Vol)
                 </h4>
-                <p className="text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                  Engineered proprietary fraud detection that cut chargebacks 83% ($6M to &lt;$1M), contributing to a 10x exit.
+                <p className="text-xs text-[#4A3A32] font-sans leading-[1.6]">
+                  Engineered proprietary fraud detection that cut chargebacks 83% ($6M to &lt;$1M), driving a 10x exit.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
+              <div className="pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
                 <span>Read Case Study</span>
                 <span>→</span>
               </div>
             </Link>
 
-            <Link href="/case-studies/colors-type-grids" className="group p-5 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-4 no-underline">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
+            <Link href="/case-studies/colors-type-grids" className="group p-4 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-2.5 no-underline">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
                   Design System Monograph
                 </span>
-                <h4 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors">
                   Albers, Vignelli &amp; Grids
                 </h4>
-                <p className="text-sm text-[#4A3A32] font-sans leading-[1.65]">
+                <p className="text-xs text-[#4A3A32] font-sans leading-[1.6]">
                   Why mathematical CSS grids and Josef Albers color relativity prevent generic AI interface homogeneity.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
+              <div className="pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
                 <span>Read Interactive Study</span>
                 <span>→</span>
               </div>
             </Link>
 
-            <Link href="/essays/design-is-risk" className="group p-5 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-4 no-underline">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
+            <Link href="/essays/design-is-risk" className="group p-4 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-2.5 no-underline">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
                   Security &amp; IP Essay
                 </span>
-                <h4 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors">
                   Design is Risk
                 </h4>
-                <p className="text-sm text-[#4A3A32] font-sans leading-[1.65]">
+                <p className="text-xs text-[#4A3A32] font-sans leading-[1.6]">
                   How adversarial AI distillation and chain-of-thought scraping turned traditional portfolios into an IP risk.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
+              <div className="pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
                 <span>Read Essay</span>
                 <span>→</span>
               </div>
@@ -668,22 +607,22 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 03 // CAREER TIMELINE (ACCORDION) ── */}
+      {/* ── VIEWPORT 03: CAREER TIMELINE & EDUCATION (FITS IN 1 VIEWPORT) ── */}
       <ExperienceSection />
 
-      {/* ── 04 // CODE & SYSTEMS ARCHITECTURE ── */}
-      <section id="code" className="py-16 md:py-24 border-t border-[#D3C7B5] bg-[#E4DACB]/45 scroll-mt-20">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-12">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b-2 border-[#281B16] pb-8">
-            <div className="space-y-3 max-w-3xl">
+      {/* ── VIEWPORT 04: CODE & PRODUCTION STACK (FITS IN 1 VIEWPORT) ── */}
+      <section id="code" className="py-12 md:py-16 border-t border-[#D3C7B5] bg-[#E4DACB]/45 scroll-mt-16">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b-2 border-[#281B16] pb-5">
+            <div className="space-y-1.5 max-w-3xl">
               <p className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] flex items-center gap-2">
-                <GitBranch className="w-4 h-4" /> 04 // CODE &amp; OPEN-SOURCE SYSTEMS
+                <GitBranch className="w-3.5 h-3.5" /> 04 // AUTHORED CODE &amp; PRODUCTION STACK
               </p>
-              <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.08]">
+              <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.08]">
                 Systems architect. Prompt engineer. Builder.
               </h2>
-              <p className="text-base sm:text-lg text-[#4A3A32] font-sans leading-[1.72]">
-                Because most enterprise work is under NDA, I architect and release open-source systems in public—defining strict relational schemas, mathematical UI grids, and deterministic AI harnesses to ship working TypeScript, Python, and Rust software.
+              <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.68]">
+                Because most enterprise work is under NDA, I architect and release my own systems in public—defining relational schemas, mathematical UI grids, and deterministic AI harnesses in TypeScript, Python, and Rust.
               </p>
             </div>
             <div className="shrink-0">
@@ -691,71 +630,71 @@ export default function PortfolioPage() {
                 href="https://github.com/rorshockbtc"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 h-12 rounded-full bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-sm font-bold transition-colors shadow-sm whitespace-nowrap no-underline"
+                className="inline-flex items-center gap-2 px-5 h-10 rounded-full bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-xs sm:text-sm font-bold transition-colors shadow-sm whitespace-nowrap no-underline"
               >
                 <GitCommit className="w-4 h-4 text-[#FE299E]" /> github.com/rorshockbtc ↗
               </a>
             </div>
           </div>
 
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { repo: "marigold", license: "AGPL-3.0", desc: "Voter-roll search and audit running entirely in the browser on DuckDB-WASM. Zero personal data leaves the machine.", stack: "TypeScript · DuckDB-WASM" },
-              { repo: "greater-than", license: "MIT", desc: "Sovereign-by-default support bots that run inference in the browser with WebGPU and Transformers.js at $0 cloud cost.", stack: "TypeScript · WebGPU" },
-              { repo: "pipes-native", license: "Source available", desc: "The Pipes macOS (! BANG IDE) and iOS companion apps: local folder sync, DuckDB analytics, and sovereign studio.", stack: "Tauri · Rust · Swift" },
+              { repo: "marigold", license: "AGPL-3.0 · Original", desc: "In-browser Fellegi-Sunter record linkage and civic-data auditing across 500k+ records via DuckDB-WASM and Apache Arrow with zero server PII.", stack: "TypeScript · DuckDB-WASM · Arrow" },
+              { repo: "greater-than", license: "MIT · Original", desc: "Sovereign-by-default support bots and classroom tutors running local inference in the browser with WebGPU and Transformers.js at $0 cloud cost.", stack: "TypeScript · WebGPU · Local LLM" },
+              { repo: "pipes-native", license: "Source Available · Original", desc: "The Pipes macOS (! BANG IDE) and iOS companion apps: local folder sync, SQLite/DuckDB vector indexing, and sovereign studio.", stack: "Tauri 2.0 · Rust · Swift" },
             ].map((r) => (
               <li key={r.repo} className="h-full">
                 <a
                   href={`https://github.com/rorshockbtc/${r.repo}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group h-full flex flex-col justify-between space-y-4 p-6 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all shadow-xs no-underline"
+                  className="group h-full flex flex-col justify-between space-y-3 p-5 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all shadow-xs no-underline"
                 >
-                  <div className="space-y-2.5">
-                    <span className="flex items-baseline justify-between gap-2 border-b border-[#D3C7B5] pb-2.5">
-                      <span className="font-serif text-xl font-bold text-[#281B16] group-hover:text-[#FE299E] transition-colors">{r.repo}</span>
+                  <div className="space-y-2">
+                    <span className="flex items-baseline justify-between gap-2 border-b border-[#D3C7B5] pb-2">
+                      <span className="font-serif text-lg sm:text-xl font-bold text-[#281B16] group-hover:text-[#FE299E] transition-colors">{r.repo}</span>
                       <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EAE0D0] text-[#281B16] shrink-0 whitespace-nowrap">{r.license}</span>
                     </span>
-                    <span className="block text-sm text-[#4A3A32] font-sans leading-[1.68]">{r.desc}</span>
+                    <span className="block text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">{r.desc}</span>
                   </div>
-                  <span className="block text-xs font-mono font-bold text-[#281B16] group-hover:text-[#FE299E] pt-2.5 border-t border-[#D3C7B5] whitespace-nowrap">{r.stack} ↗</span>
+                  <span className="block text-xs font-mono font-bold text-[#281B16] group-hover:text-[#FE299E] pt-2 border-t border-[#D3C7B5] whitespace-nowrap">{r.stack} ↗</span>
                 </a>
               </li>
             ))}
           </ul>
 
-          {/* ── 4-Layer Architectural Capabilities Matrix ── */}
+          {/* ── 4-Layer Architectural Capabilities Matrix (Compact 4-Column Row) ── */}
           <TechStack />
         </div>
       </section>
 
-      {/* ── 05 // HOW I WORK & FIELD STUDIES (COMBINED, STREAMLINED EDITORIAL SECTION) ── */}
-      <section id="about-kyle" className="py-16 md:py-24 border-t border-[#D3C7B5] bg-[#EAE0D0]">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-16">
-          {/* Part A: The Unit of One Loop */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      {/* ── VIEWPORT 05: HOW I WORK & FIELD STUDIES (FITS IN 1 VIEWPORT) ── */}
+      <section id="about-kyle" className="py-12 md:py-16 border-t border-[#D3C7B5] bg-[#EAE0D0] scroll-mt-16">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-10">
+          {/* Part A: The Unit of One Loop + Why Teams Hire Me */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             <div className="lg:col-span-5">
-              <div className="rounded-3xl bg-[#281B16] text-[#F2EAE0] p-7 sm:p-9 shadow-xl border border-[#3D2C24] space-y-6">
-                <div className="flex items-center justify-between border-b border-[#F2EAE0]/15 pb-4">
+              <div className="rounded-3xl bg-[#281B16] text-[#F2EAE0] p-6 sm:p-7 shadow-xl border border-[#3D2C24] space-y-4">
+                <div className="flex items-center justify-between border-b border-[#F2EAE0]/15 pb-3">
                   <div>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E] block">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-[#FE299E] block">
                       Operating Architecture
                     </span>
-                    <h3 className="font-serif font-bold text-2xl text-[#F2EAE0] mt-0.5">
+                    <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#F2EAE0] mt-0.5">
                       The &ldquo;Unit of One&rdquo; Loop
                     </h3>
                   </div>
-                  <span className="font-sans font-bold text-2xl text-[#FE299E] select-none" aria-hidden="true">
+                  <span className="font-sans font-bold text-xl text-[#FE299E] select-none" aria-hidden="true">
                     :-]
                   </span>
                 </div>
 
-                <ol className="space-y-4 font-sans">
+                <ol className="space-y-3 font-sans">
                   {[
                     {
                       step: "01",
                       title: "Executive & Regulatory Strategy",
-                      desc: "UNC Kenan-Flagler MBA rigor applied to OCC/FDIC banking, HIPAA clinical workflows, and service blueprints.",
+                      desc: "UNC Kenan-Flagler MBA rigor applied to OCC/FDIC banking, wealth management, and HIPAA workflows.",
                     },
                     {
                       step: "02",
@@ -770,18 +709,18 @@ export default function PortfolioPage() {
                     {
                       step: "04",
                       title: "AI-Accelerated Shipping",
-                      desc: "Prompt & harness engineering that turns specs into working Next.js, TypeScript, and Rust software without handoff loss.",
+                      desc: "Prompt & harness engineering that turns specs into working Next.js, TypeScript, and Rust software.",
                     },
                   ].map((item) => (
-                    <li key={item.step} className="flex items-start gap-3.5">
-                      <span className="font-mono text-xs font-bold text-[#FE299E] bg-[#FE299E]/15 border border-[#FE299E]/30 rounded-lg px-2 py-0.5 shrink-0 mt-0.5">
+                    <li key={item.step} className="flex items-start gap-3">
+                      <span className="font-mono text-[11px] font-bold text-[#FE299E] bg-[#FE299E]/15 border border-[#FE299E]/30 rounded-lg px-2 py-0.5 shrink-0 mt-0.5">
                         {item.step}
                       </span>
                       <div className="space-y-0.5">
-                        <h4 className="font-serif font-bold text-base sm:text-lg text-[#F2EAE0] leading-snug">
+                        <h4 className="font-serif font-bold text-sm sm:text-base text-[#F2EAE0] leading-snug">
                           {item.title}
                         </h4>
-                        <p className="text-xs sm:text-sm text-[#E4DACB] leading-[1.65]">
+                        <p className="text-xs text-[#E4DACB] leading-[1.6]">
                           {item.desc}
                         </p>
                       </div>
@@ -791,62 +730,60 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-4">
               <span className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] block">
                 05 // HOW I WORK
               </span>
-              <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.08]">
-                Why teams hire me.
+              <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.08]">
+                Why founders &amp; executive teams hire me.
               </h2>
-              <div className="space-y-4 text-lg sm:text-xl text-[#4A3A32] font-sans leading-[1.72] max-w-[60ch]">
+              <div className="space-y-3 text-sm sm:text-base lg:text-lg text-[#4A3A32] font-sans leading-[1.7] max-w-[62ch]">
                 <p>
-                  Most product teams lose momentum in the handoffs between strategy, design, and engineering. Designers mock up screens detached from the data model, engineers rebuild them under deadline pressure, and leadership wonders why shipping takes nine months.
+                  Most product teams lose months in the translation loop between strategy, design, and engineering. Designers mock up screens detached from the data model, engineers rebuild them under deadline pressure, and leadership wonders why shipping takes two quarters.
                 </p>
                 <p>
-                  I close that gap. I run the room with executives, model the data from first principles, design the interface on a mathematical grid, and use AI-accelerated engineering to ship working software—so the system that ships is the system we agreed on.
+                  I close that gap. I align with executives on business outcomes, model the relational or graph schema from first principles, design the interface on a mathematical grid, and use AI-accelerated engineering to ship working software—so the system that ships is the system we agreed on.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-4 border-t border-[#D3C7B5]">
+              <div className="grid grid-cols-3 gap-4 pt-3 border-t border-[#D3C7B5]">
                 <div>
-                  <span className="font-mono text-xs uppercase tracking-wider text-[#FE299E] font-bold block">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#FE299E] font-bold block">
                     System Architecture
                   </span>
-                  <span className="font-serif font-bold text-lg text-[#281B16] block mt-0.5">Zero-to-one, fast</span>
+                  <span className="font-serif font-bold text-sm sm:text-base text-[#281B16] block mt-0.5">Zero-to-one, fast</span>
                 </div>
                 <div>
-                  <span className="font-mono text-xs uppercase tracking-wider text-[#FE299E] font-bold block">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#FE299E] font-bold block">
                     Design Systems
                   </span>
-                  <span className="font-serif font-bold text-lg text-[#281B16] block mt-0.5">Systems, not screens</span>
+                  <span className="font-serif font-bold text-sm sm:text-base text-[#281B16] block mt-0.5">Systems, not screens</span>
                 </div>
                 <div>
-                  <span className="font-mono text-xs uppercase tracking-wider text-[#FE299E] font-bold block">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#FE299E] font-bold block">
                     AI-Native Execution
                   </span>
-                  <span className="font-serif font-bold text-lg text-[#281B16] block mt-0.5">No lost handoffs</span>
+                  <span className="font-serif font-bold text-sm sm:text-base text-[#281B16] block mt-0.5">No lost handoffs</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Part B: Streamlined 3-Column Field Studies Row */}
-          <div id="in-the-field" className="pt-12 border-t border-[#D3C7B5] space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-              <div>
-                <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-2">
-                  <Compass className="w-3.5 h-3.5 text-[#FE299E]" /> OUTSIDE WORK &amp; FIELD STUDIES
+          {/* Part B: Compact 3-Column Field Studies Strip (Fits in same viewport) */}
+          <div id="in-the-field" className="pt-6 border-t border-[#D3C7B5] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-1.5">
+                  <Compass className="w-3.5 h-3.5 text-[#FE299E]" /> FIELD STUDIES
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] mt-1">
-                  Where the ideas come from
+                <span className="text-[#4A3A32]">·</span>
+                <h3 className="text-lg sm:text-xl font-serif font-bold text-[#281B16]">
+                  Outside work: studying trust, color &amp; human exchange in the field
                 </h3>
               </div>
-              <p className="text-sm sm:text-base text-[#4A3A32] font-sans max-w-md leading-[1.65]">
-                Travelling with my wife, Victoria: indigenous markets in the Andes, murals in Medellín, and studying how trust works in the real world.
-              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div
                 onClick={() =>
                   setLightboxImage({
@@ -854,26 +791,26 @@ export default function PortfolioPage() {
                     caption: "Kyle & Victoria. Grounded in quiet discipline, mutual purpose, and deep focus.",
                   })
                 }
-                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-4 flex flex-col justify-between space-y-3 shadow-xs"
+                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-3.5 flex items-center gap-4 shadow-xs"
               >
-                <div className="relative rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
+                <div className="relative w-24 sm:w-28 aspect-[4/3] shrink-0 rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
                   <img
                     loading="lazy"
                     decoding="async"
                     src="/images/personal/kyle-victoria-coastal-ring.jpg"
                     alt="Kyle and Victoria Cyree"
-                    className="w-full aspect-[4/3] object-cover object-[50%_35%] group-hover:scale-[1.01] transition-transform duration-500"
+                    className="w-full h-full object-cover object-[50%_35%] group-hover:scale-[1.03] transition-transform duration-500"
                   />
                 </div>
-                <div className="space-y-1 px-0.5">
-                  <span className="font-mono text-[11px] uppercase font-bold tracking-wider text-[#FE299E] block">
+                <div className="space-y-0.5 min-w-0">
+                  <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block">
                     Partnership &amp; Focus
                   </span>
-                  <h4 className="font-serif font-bold text-lg text-[#281B16]">
+                  <h4 className="font-serif font-bold text-base text-[#281B16] truncate">
                     Kyle &amp; Victoria
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                    Victoria is my partner in life and work—exploring architecture, craft, and resilient human systems across continents.
+                  <p className="text-xs text-[#4A3A32] font-sans leading-[1.5] line-clamp-2">
+                    Exploring architecture, craft, and resilient human systems across continents.
                   </p>
                 </div>
               </div>
@@ -885,26 +822,26 @@ export default function PortfolioPage() {
                     caption: "High Andes indigenous market, Ecuador. Studying real human exchange and tactile craft.",
                   })
                 }
-                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-4 flex flex-col justify-between space-y-3 shadow-xs"
+                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-3.5 flex items-center gap-4 shadow-xs"
               >
-                <div className="relative rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
+                <div className="relative w-24 sm:w-28 aspect-[4/3] shrink-0 rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
                   <img
                     loading="lazy"
                     decoding="async"
                     src="/images/personal/kyle-victoria-andes-market.jpg"
                     alt="Field study in high Andes indigenous market in Ecuador"
-                    className="w-full aspect-[4/3] object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                   />
                 </div>
-                <div className="space-y-1 px-0.5">
-                  <span className="font-mono text-[11px] uppercase font-bold tracking-wider text-[#FE299E] block">
+                <div className="space-y-0.5 min-w-0">
+                  <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block">
                     High Andes, Ecuador
                   </span>
-                  <h4 className="font-serif font-bold text-lg text-[#281B16]">
-                    Human Dignity &amp; Tactile Trade
+                  <h4 className="font-serif font-bold text-base text-[#281B16] truncate">
+                    Tactile Trade &amp; Trust
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                    Watching how high-trust commerce works in a market with no apps, no algorithms, and no middlemen.
+                  <p className="text-xs text-[#4A3A32] font-sans leading-[1.5] line-clamp-2">
+                    How high-trust commerce works with no apps, no algorithms, and no middlemen.
                   </p>
                 </div>
               </div>
@@ -916,26 +853,26 @@ export default function PortfolioPage() {
                     caption: "Comuna 13, Medellín, Colombia. Monumental urban typography and chromatic contrast.",
                   })
                 }
-                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-4 flex flex-col justify-between space-y-3 shadow-xs"
+                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-3.5 flex items-center gap-4 shadow-xs"
               >
-                <div className="relative rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
+                <div className="relative w-24 sm:w-28 aspect-[4/3] shrink-0 rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
                   <img
                     loading="lazy"
                     decoding="async"
                     src="/images/personal/kyle-victoria-colombia-mural.jpg"
                     alt="Street mural and urban typography in Comuna 13, Medellín, Colombia"
-                    className="w-full aspect-[4/3] object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                   />
                 </div>
-                <div className="space-y-1 px-0.5">
-                  <span className="font-mono text-[11px] uppercase font-bold tracking-wider text-[#FE299E] block">
+                <div className="space-y-0.5 min-w-0">
+                  <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block">
                     Medellín, Colombia
                   </span>
-                  <h4 className="font-serif font-bold text-lg text-[#281B16]">
+                  <h4 className="font-serif font-bold text-base text-[#281B16] truncate">
                     Monumental Color &amp; Type
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                    Comuna 13&apos;s murals are a masterclass in scale, chromatic contrast, and typography.
+                  <p className="text-xs text-[#4A3A32] font-sans leading-[1.5] line-clamp-2">
+                    Comuna 13&apos;s murals are a masterclass in scale, chromatic contrast, and type.
                   </p>
                 </div>
               </div>
@@ -944,11 +881,11 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 06 // Social Proof & LinkedIn Recommendations ── */}
+      {/* ── VIEWPORT 06: EXECUTIVE ENDORSEMENTS (FITS IN 1 VIEWPORT) ── */}
       <TestimonialsSection />
 
-      {/* ── 07 // Conversion Sprint Offer ($7,500 / 1 Week) ── */}
-      <SprintCallout onContactClick={(subject) => openContactModal(subject || "1-week sprint ($7,500)")} />
+      {/* ── VIEWPORT 07: WORK TOGETHER — FULL-TIME OR SURGICAL SPRINTS (FITS IN 1 VIEWPORT) ── */}
+      <SprintCallout onContactClick={(subject) => openContactModal(subject || "Full-time role (Product Architect / Staff)")} />
 
       {/* Fullscreen Lightbox Dialog */}
       <Dialog open={!!lightboxImage} onOpenChange={(open) => !open && setLightboxImage(null)}>

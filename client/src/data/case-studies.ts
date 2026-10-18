@@ -392,7 +392,7 @@ export const pipes = pgTable("pipes", {
     title: "Marigold Insights: Zero-Cloud Civic Data & Election Audit Engine",
     subtitle: "bolt.pipes.pink • In-Browser DuckDB-WASM, Fellegi-Sunter Linkage & Zero-PII Hydration",
     role: "Architect, Lead Designer & Systems Builder",
-    scaleBadge: "2,000,000 records • Open source (AGPL-3.0)",
+    scaleBadge: "500,000+ records • Open source (AGPL-3.0)",
     timeline: "2026",
     heroImage: "/images/marigold/02_marigold_workspace_dashboard_kanban.png",
     galleryImages: [
@@ -404,8 +404,8 @@ export const pipes = pgTable("pipes", {
       },
       {
         src: "/images/marigold/02_marigold_workspace_dashboard_kanban.png",
-        title: "Mississippi Fair Elections: 2M Active Record Mission Kanban",
-        caption: "Local-compute workspace dashboard managing triage for 2,000,000 active voter records with automated single-day registration surge cohort detection.",
+        title: "Mississippi Fair Elections: 500k+ Active Record Mission Kanban",
+        caption: "Local-compute workspace dashboard managing triage for 500,000+ active voter records with automated single-day registration surge cohort detection.",
         tag: "Mission Kanban",
       },
       {
@@ -430,7 +430,7 @@ export const pipes = pgTable("pipes", {
     executiveSummary:
       "Marigold (bolt.pipes.pink) is a zero-cloud analytical execution engine built for county clerks, election observers, and civic researchers, and designed to fit the election-security priority in FEMA's FY26 Homeland Security Grant Program. It makes Mississippi's huge, hard-to-open voter rolls workable with 100% in-browser DuckDB-WASM and Zero-PII cryptographic entity hydration.",
     challenge:
-      "Civic and voter datasets are massive (millions of rows) and routinely crash county clerk spreadsheets. Meanwhile, uploading citizen voter rolls to commercial cloud AI violates strict federal privacy laws and triggers catastrophic PII liabilities.",
+      "Civic and voter datasets are massive (hundreds of thousands of rows) and routinely crash county clerk spreadsheets. Meanwhile, uploading citizen voter rolls to commercial cloud AI violates strict federal privacy laws and triggers catastrophic PII liabilities.",
     solution:
       "Built bolt.pipes.pink to allow citizens and clerks to inspect voter rolls directly in the browser using DuckDB-WASM and OPFS. Pioneered 'Zero-PII Hydration': names and addresses are stripped and replaced with cryptographic entity hashes before reaching the LLM; the browser decrypts and re-hydrates real citizen names locally in client memory. Zero bytes of PII ever leave the user's desk.",
     uiUxCraft:
@@ -438,7 +438,7 @@ export const pipes = pgTable("pipes", {
     systemsArchitecture:
       "Runs 100% in client-side memory using DuckDB-WASM, SQLite, Web Workers, and Origin Private File System (OPFS). In-memory Fellegi-Sunter and Levenshtein probabilistic record linkage executes 1,000-pair benchmarks in 10.2ms with 100% precision and zero false accusations.",
     metrics: [
-      { value: "2,000,000", label: "Active Records", subtext: "Audited in Mississippi roll" },
+      { value: "500,000+", label: "Active Records", subtext: "Audited in-browser via DuckDB-WASM" },
       { value: "100%", label: "Linkage Precision", subtext: "Fellegi-Sunter benchmark" },
       { value: "0 Bytes", label: "Cloud Exposure", subtext: "100% local client memory" },
       { value: "10.2ms", label: "1,000-Pair Audit", subtext: "In-browser Web Worker speed" },
@@ -456,13 +456,13 @@ export const pipes = pgTable("pipes", {
     codebaseBreakdown: {
       headline: "Zero-Cloud In-Browser DuckDB-WASM & Fellegi-Sunter Linkage Engine",
       philosophy:
-        "When handling 2,000,000 active voter records, pushing citizen data to a cloud database or external LLM API creates catastrophic PII liability and violates federal election security statutes. I engineered Marigold to run entirely in client-side memory using DuckDB-WASM, Web Workers, and OPFS. The AI only ever sees cryptographically blinded hashes—real voter identities are re-hydrated locally in browser RAM.",
+        "When handling 500,000+ active voter records, pushing citizen data to a cloud database or external LLM API creates catastrophic PII liability and violates federal election security statutes. I engineered Marigold to run entirely in client-side memory using DuckDB-WASM, Web Workers, and OPFS. The AI only ever sees cryptographically blinded hashes—real voter identities are re-hydrated locally in browser RAM.",
       stackArchitecture: [
         {
           role: "In-Browser Analytical SQL Engine",
           tech: "DuckDB-WASM + OPFS (Origin Private File System)",
           rationale:
-            "Executes multi-column aggregations and cohort filtering across 2M rows in under 40ms directly inside the user's browser, eliminating all cloud compute and database hosting bills.",
+            "Executes multi-column aggregations and cohort filtering across 500k+ rows in under 40ms directly inside the user's browser, eliminating all cloud compute and database hosting bills.",
         },
         {
           role: "Non-Blocking Multi-Thread Pipeline",
