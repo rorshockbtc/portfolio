@@ -698,12 +698,11 @@ export default function PortfolioPage() {
             </div>
           </div>
 
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { repo: "marigold", license: "AGPL-3.0", desc: "Voter-roll search and audit running entirely in the browser on DuckDB-WASM. Zero personal data leaves the machine.", stack: "TypeScript · DuckDB-WASM" },
               { repo: "greater-than", license: "MIT", desc: "Sovereign-by-default support bots that run inference in the browser with WebGPU and Transformers.js at $0 cloud cost.", stack: "TypeScript · WebGPU" },
               { repo: "pipes-native", license: "Source available", desc: "The Pipes macOS (! BANG IDE) and iOS companion apps: local folder sync, DuckDB analytics, and sovereign studio.", stack: "Tauri · Rust · Swift" },
-              { repo: "antigravity-skills", license: "Open Source", desc: "Curated collection of production Agent Skills, MCP workflows, and deterministic harnesses for coding agents.", stack: "MCP · Agent Harnesses" },
             ].map((r) => (
               <li key={r.repo} className="h-full">
                 <a

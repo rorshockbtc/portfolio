@@ -76,53 +76,44 @@ const pillars: StackPillar[] = [
 
 export function TechStack() {
   return (
-    <div id="code-stack" className="space-y-8 pt-10 border-t border-[#D3C7B5] scroll-mt-28">
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
-        <div className="space-y-2 max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#FE299E]" aria-hidden="true" />
-            Architectural Capabilities &amp; Production Stack
+    <div id="code-stack" className="space-y-6 pt-8 border-t border-[#D3C7B5] scroll-mt-28">
+      {/* Compact Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
+            04.B // ARCHITECTURAL CAPABILITIES &amp; PRODUCTION STACK
           </p>
-          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight leading-snug">
-            Four layers of execution: from relational schema to production UI.
+          <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#281B16] tracking-tight mt-0.5">
+            Four layers of execution: from relational schema to production UI
           </h3>
         </div>
-        <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.7] max-w-md">
-          First-principles data modeling, mathematical Vignelli grids, and AI-accelerated TypeScript, Python, and Rust engineering.
-        </p>
       </div>
 
-      {/* 4-Pillar Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Compact 4-Column Capability Row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {pillars.map((pillar) => {
           const Icon = pillar.icon;
           return (
             <div
               key={pillar.number}
-              className="group p-6 sm:p-7 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-5"
+              className="group p-5 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-4"
             >
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Top Bar: Number & Category */}
-                <div className="flex items-center justify-between gap-4 border-b border-[#D3C7B5] pb-3">
-                  <div className="flex items-center gap-2.5">
-                    <span className="font-mono text-xs font-bold text-[#FE299E] px-2 py-0.5 rounded bg-[#FE299E]/10 whitespace-nowrap">
-                      LAYER {pillar.number}
-                    </span>
-                    <span className="font-mono text-xs text-[#4A3A32] font-bold uppercase tracking-wider">
-                      {pillar.role}
-                    </span>
-                  </div>
+                <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2.5">
+                  <span className="font-mono text-[11px] font-bold text-[#FE299E] px-2 py-0.5 rounded bg-[#FE299E]/10 whitespace-nowrap">
+                    LAYER {pillar.number}
+                  </span>
                   <Icon className="w-4 h-4 text-[#4A3A32] group-hover:text-[#FE299E] transition-colors shrink-0" />
                 </div>
 
                 {/* Title */}
-                <h4 className="font-serif text-xl sm:text-2xl font-bold text-[#281B16] tracking-tight leading-snug">
+                <h4 className="font-serif text-lg font-bold text-[#281B16] tracking-tight leading-snug">
                   {pillar.category}
                 </h4>
 
                 {/* Description */}
-                <p className="font-sans text-sm sm:text-base text-[#4A3A32] leading-[1.7]">
+                <p className="font-sans text-xs sm:text-sm text-[#4A3A32] leading-[1.68]">
                   {pillar.description}
                 </p>
 
@@ -131,7 +122,7 @@ export function TechStack() {
                   {pillar.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-[#EAE0D0] text-[#281B16] border border-[#D3C7B5] whitespace-nowrap"
+                      className="font-mono text-[11px] font-semibold px-2 py-0.5 rounded bg-[#EAE0D0] text-[#281B16] border border-[#D3C7B5] whitespace-nowrap"
                     >
                       {tag}
                     </span>
@@ -140,10 +131,7 @@ export function TechStack() {
               </div>
 
               {/* Bottom Live Proof Links */}
-              <div className="pt-3 border-t border-[#D3C7B5]/70 flex flex-wrap items-center gap-x-4 gap-y-1.5 font-sans text-xs">
-                <span className="font-mono text-[11px] uppercase tracking-wider font-bold text-[#4A3A32]">
-                  Shipped in:
-                </span>
+              <div className="pt-2.5 border-t border-[#D3C7B5]/70 flex flex-col gap-1 font-sans text-xs">
                 {pillar.proofLinks.map((proof) =>
                   proof.external ? (
                     <a
@@ -151,17 +139,19 @@ export function TechStack() {
                       href={proof.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#281B16] hover:text-[#FE299E] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] transition-colors whitespace-nowrap"
+                      className="inline-flex items-center justify-between font-sans text-xs font-bold text-[#281B16] hover:text-[#FE299E] transition-colors whitespace-nowrap no-underline"
                     >
-                      {proof.label} <ArrowUpRight className="w-3 h-3 text-[#FE299E]" />
+                      <span>{proof.label}</span>
+                      <ArrowUpRight className="w-3 h-3 text-[#FE299E] shrink-0" />
                     </a>
                   ) : (
                     <Link
                       key={proof.label}
                       href={proof.href}
-                      className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#281B16] hover:text-[#FE299E] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] transition-colors whitespace-nowrap"
+                      className="inline-flex items-center justify-between font-sans text-xs font-bold text-[#281B16] hover:text-[#FE299E] transition-colors whitespace-nowrap no-underline"
                     >
-                      {proof.label} <ArrowRight className="w-3 h-3 text-[#FE299E]" />
+                      <span>{proof.label}</span>
+                      <ArrowRight className="w-3 h-3 text-[#FE299E] shrink-0" />
                     </Link>
                   )
                 )}
