@@ -76,60 +76,62 @@ const pillars: StackPillar[] = [
 
 export function TechStack() {
   return (
-    <div id="code-stack" className="space-y-12 pt-16 border-t border-[#D3C7B5] scroll-mt-28">
+    <div id="code-stack" className="space-y-8 pt-10 border-t border-[#D3C7B5] scroll-mt-28">
       {/* Header */}
-      <div className="max-w-3xl space-y-4">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#FE299E]" aria-hidden="true" />
-          Architectural Capabilities &amp; Production Stack
-        </p>
-        <h3 className="text-3xl sm:text-4xl font-serif font-bold text-[#281B16] tracking-tight leading-tight">
-          How I build: architecture, craft, and AI velocity.
-        </h3>
-        <p className="text-base sm:text-lg text-[#5C4840] font-sans leading-relaxed">
-          I'm a systems architect, product designer, and prompt engineer who can read and reason about code. I don't claim to be a low-level compiler hacker—I model data schemas from first principles, craft interfaces with Swiss discipline, inspect pull requests, and use AI acceleration (especially on the backend) to ship working software in days instead of quarters.
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+        <div className="space-y-2 max-w-2xl">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#FE299E]" aria-hidden="true" />
+            Architectural Capabilities &amp; Production Stack
+          </p>
+          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight leading-snug">
+            Four layers of execution: from relational schema to production UI.
+          </h3>
+        </div>
+        <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.7] max-w-md">
+          First-principles data modeling, mathematical Vignelli grids, and AI-accelerated TypeScript, Python, and Rust engineering.
         </p>
       </div>
 
       {/* 4-Pillar Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {pillars.map((pillar) => {
           const Icon = pillar.icon;
           return (
             <div
               key={pillar.number}
-              className="group p-8 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0]/70 hover:border-[#FE299E] hover:bg-[#F2EAE0] transition-all flex flex-col justify-between space-y-6"
+              className="group p-6 sm:p-7 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-5"
             >
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {/* Top Bar: Number & Category */}
-                <div className="flex items-center justify-between gap-4 border-b border-[#D3C7B5]/60 pb-4">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-bold text-[#FE299E] px-2 py-0.5 rounded bg-[#FE299E]/10">
+                <div className="flex items-center justify-between gap-4 border-b border-[#D3C7B5] pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-mono text-xs font-bold text-[#FE299E] px-2 py-0.5 rounded bg-[#FE299E]/10 whitespace-nowrap">
                       LAYER {pillar.number}
                     </span>
-                    <span className="font-mono text-xs text-[#8A736A] font-semibold uppercase tracking-wider">
+                    <span className="font-mono text-xs text-[#4A3A32] font-bold uppercase tracking-wider">
                       {pillar.role}
                     </span>
                   </div>
-                  <Icon className="w-5 h-5 text-[#8A736A] group-hover:text-[#FE299E] transition-colors" />
+                  <Icon className="w-4 h-4 text-[#4A3A32] group-hover:text-[#FE299E] transition-colors shrink-0" />
                 </div>
 
                 {/* Title */}
-                <h4 className="font-serif text-2xl font-bold text-[#281B16] tracking-tight">
+                <h4 className="font-serif text-xl sm:text-2xl font-bold text-[#281B16] tracking-tight leading-snug">
                   {pillar.category}
                 </h4>
 
                 {/* Description */}
-                <p className="font-sans text-sm sm:text-base text-[#5C4840] leading-relaxed">
+                <p className="font-sans text-sm sm:text-base text-[#4A3A32] leading-[1.7]">
                   {pillar.description}
                 </p>
 
                 {/* Tech Pills */}
-                <div className="flex flex-wrap gap-2 pt-1">
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {pillar.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-[#E4DACB] text-[#281B16] border border-[#D3C7B5]/40"
+                      className="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-[#EAE0D0] text-[#281B16] border border-[#D3C7B5] whitespace-nowrap"
                     >
                       {tag}
                     </span>
@@ -137,76 +139,36 @@ export function TechStack() {
                 </div>
               </div>
 
-              {/* Bottom Deliverables + Live Proof Links */}
-              <div className="pt-4 border-t border-[#D3C7B5]/60 space-y-3 font-sans text-xs sm:text-sm text-[#6B554D]">
-                <div>
-                  <span className="font-semibold text-[#281B16] uppercase tracking-wider text-[11px] block mb-1">
-                    Key Deliverables
-                  </span>
-                  {pillar.deliverables}
-                </div>
-                <div className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5">
-                  <span className="font-mono text-[11px] uppercase tracking-wider font-bold text-[#8A736A]">
-                    Shipped in:
-                  </span>
-                  {pillar.proofLinks.map((proof) =>
-                    proof.external ? (
-                      <a
-                        key={proof.label}
-                        href={proof.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#281B16] hover:text-[#FE299E] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] transition-colors"
-                      >
-                        {proof.label} <ArrowUpRight className="w-3 h-3 text-[#FE299E]" />
-                      </a>
-                    ) : (
-                      <Link
-                        key={proof.label}
-                        href={proof.href}
-                        className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#281B16] hover:text-[#FE299E] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] transition-colors"
-                      >
-                        {proof.label} <ArrowRight className="w-3 h-3 text-[#FE299E]" />
-                      </Link>
-                    )
-                  )}
-                </div>
+              {/* Bottom Live Proof Links */}
+              <div className="pt-3 border-t border-[#D3C7B5]/70 flex flex-wrap items-center gap-x-4 gap-y-1.5 font-sans text-xs">
+                <span className="font-mono text-[11px] uppercase tracking-wider font-bold text-[#4A3A32]">
+                  Shipped in:
+                </span>
+                {pillar.proofLinks.map((proof) =>
+                  proof.external ? (
+                    <a
+                      key={proof.label}
+                      href={proof.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#281B16] hover:text-[#FE299E] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] transition-colors whitespace-nowrap"
+                    >
+                      {proof.label} <ArrowUpRight className="w-3 h-3 text-[#FE299E]" />
+                    </a>
+                  ) : (
+                    <Link
+                      key={proof.label}
+                      href={proof.href}
+                      className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#281B16] hover:text-[#FE299E] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] transition-colors whitespace-nowrap"
+                    >
+                      {proof.label} <ArrowRight className="w-3 h-3 text-[#FE299E]" />
+                    </Link>
+                  )
+                )}
               </div>
             </div>
           );
         })}
-      </div>
-
-      {/* Grounding Ethos & Conversion Callout */}
-      <div className="p-6 sm:p-8 rounded-2xl border border-[#D3C7B5] bg-[#EAE0D0] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-        <div className="space-y-1.5 max-w-2xl">
-          <p className="font-sans text-xs uppercase tracking-widest font-bold text-[#FE299E]">
-            Operating as a Unit of One
-          </p>
-          <p className="font-serif text-lg sm:text-xl font-bold text-[#281B16]">
-            Eliminating the lossy handoff between design, product management, and engineering.
-          </p>
-          <p className="font-sans text-sm text-[#5C4840]">
-            By architecting data schemas and prototyping in code with AI acceleration, decisions that usually take 6 cross-functional meetings get validated in a single afternoon.
-          </p>
-        </div>
-        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
-          <button
-            type="button"
-            onClick={() => openContactModal("1-week sprint ($7,500)")}
-            className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-12 rounded-full bg-[#FE299E] hover:bg-[#D81B80] text-white font-sans text-xs sm:text-sm font-bold transition-colors whitespace-nowrap"
-          >
-            Scope a 1-Week Sprint · $7,500 <ArrowRight className="w-4 h-4 shrink-0" />
-          </button>
-          <a
-            href="https://calendly.com/cubby-colonhyphenbracket/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-full border border-[#281B16]/25 hover:border-[#281B16] text-[#281B16] font-sans text-xs sm:text-sm font-bold transition-colors whitespace-nowrap"
-          >
-            <Calendar className="w-4 h-4 text-[#FE299E] shrink-0" /> Book 30-min call
-          </a>
-        </div>
       </div>
     </div>
   );

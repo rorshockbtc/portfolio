@@ -571,7 +571,7 @@ export default function StudioPage() {
                   <button
                     key={s.id}
                     onClick={() => scrollToSection(s.id)}
-                    className={`px-3 py-1.5 rounded-sm font-mono text-[11px] uppercase tracking-[0.13em] transition-all cursor-pointer border ${
+                    className={`px-3 py-1.5 rounded-sm font-mono text-[11px] uppercase tracking-[0.13em] transition-all cursor-pointer border whitespace-nowrap ${
                       isActive
                         ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-bold"
                         : "bg-transparent text-[#4A3A32] border-transparent hover:border-[#D3C7B5] hover:bg-[#F2EAE0]/60 hover:text-[#281B16]"
@@ -590,7 +590,7 @@ export default function StudioPage() {
                 href="https://pipes.pink"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#281B16] text-[#F2EAE0] hover:bg-[#FE299E] hover:text-white font-mono text-[10px] font-bold uppercase tracking-[0.14em] transition-colors no-underline"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#281B16] text-[#F2EAE0] hover:bg-[#FE299E] hover:text-white font-mono text-[10px] font-bold uppercase tracking-[0.14em] transition-colors no-underline whitespace-nowrap"
                 data-testid="button-subbar-pipes"
               >
                 <span className="text-[#FE299E] font-bold">| | |</span>
@@ -599,7 +599,7 @@ export default function StudioPage() {
               </a>
               <button
                 onClick={() => openContact("calendly")}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#FE299E] text-white font-mono text-[10px] font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors cursor-pointer border-none"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#FE299E] text-white font-mono text-[10px] font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors cursor-pointer border-none whitespace-nowrap"
                 data-testid="button-subbar-book"
               >
                 <Calendar className="w-3 h-3" />
@@ -633,18 +633,18 @@ export default function StudioPage() {
                   </span>
                 </div>
 
-                <h1 className="font-serif text-4xl sm:text-5xl lg:text-[62px] text-[#281B16] tracking-tight leading-[1.04] mb-6">
+                <h1 className="font-serif text-4xl sm:text-5xl lg:text-[62px] text-[#281B16] tracking-tight leading-[1.08] mb-6">
                   Architecture partner for the{" "}
                   <span className="italic font-normal text-[#FE299E]">
                     stuck &amp; underserved.
                   </span>
                 </h1>
 
-                <p className="font-serif text-xl md:text-2xl text-[#281B16] leading-[1.5] mb-6 max-w-[62ch]">
+                <p className="font-serif text-xl md:text-2xl text-[#281B16] leading-[1.6] mb-6 max-w-[60ch]">
                   Colon Hyphen Bracket (<span className="font-mono text-lg text-[#FE299E] font-bold">:-]</span>) is a principal-led product architecture studio and proprietary R&amp;D lab. We replace bloated 12-person agency retainers with a single 25-year Systems Architect equipped with deterministic AI harnesses—shipping regulated banking infrastructure, zero-PII data rooms, and sovereign knowledge protocols in weeks instead of quarters.
                 </p>
 
-                <p className="font-sans text-sm md:text-base text-[#4A3A32] leading-relaxed mb-7 max-w-[64ch]">
+                <p className="font-sans text-[15px] md:text-[16px] text-[#4A3A32] leading-[1.75] mb-8 max-w-[62ch]">
                   In the 16 months since we first published our studio manifesto, we didn&apos;t just advise clients—we shipped{" "}
                   <Link href="/case-studies/pipes" className="text-[#281B16] font-bold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
                     Pipes.Pink
@@ -668,34 +668,34 @@ export default function StudioPage() {
                 <div className="flex flex-wrap items-center gap-3 mb-6">
                   <button
                     onClick={() => openContact("calendly")}
-                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-sm bg-[#281B16] text-[#F2EAE0] font-sans text-xs font-bold uppercase tracking-[0.15em] hover:bg-[#FE299E] hover:text-white transition-colors cursor-pointer border-none shadow-sm"
+                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-sm bg-[#281B16] text-[#F2EAE0] font-sans text-xs font-bold uppercase tracking-[0.15em] hover:bg-[#FE299E] hover:text-white transition-colors cursor-pointer border-none shadow-sm whitespace-nowrap"
                     data-testid="button-studio-hero-book"
                   >
-                    <Calendar className="w-4 h-4 text-[#FE299E]" />
+                    <Calendar className="w-4 h-4 text-[#FE299E] shrink-0" />
                     Book 30-Min Intro Call
-                    <ArrowUpRight className="w-4 h-4" />
+                    <ArrowUpRight className="w-4 h-4 shrink-0" />
                   </button>
 
                   <a
                     href="https://pipes.pink"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-[#FE299E] hover:bg-[#d81b80] text-white font-mono text-xs font-bold uppercase tracking-[0.13em] transition-colors shadow-sm no-underline"
+                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-[#FE299E] hover:bg-[#d81b80] text-white font-mono text-xs font-bold uppercase tracking-[0.13em] transition-colors shadow-sm no-underline whitespace-nowrap"
                     data-testid="link-studio-hero-pipes"
                   >
                     <span>| | | Claim Your Pipe ($9/yr)</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
+                    <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                   </a>
 
                   <a
                     href="https://pipes.pink/write"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-[#F2EAE0] text-[#281B16] border border-[#281B16] hover:border-[#FE299E] hover:text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.13em] transition-colors no-underline"
+                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-[#F2EAE0] text-[#281B16] border border-[#281B16] hover:border-[#FE299E] hover:text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.13em] transition-colors no-underline whitespace-nowrap"
                     data-testid="link-studio-hero-hash"
                   >
                     <span>Open # Hash + ;-] Semi Free</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-[#FE299E]" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[#FE299E] shrink-0" />
                   </a>
                 </div>
 
@@ -714,8 +714,8 @@ export default function StudioPage() {
                       rel="noopener noreferrer"
                       className="px-3 py-2 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] border border-[#4A372E] hover:border-[#FE299E] text-left transition-colors no-underline block"
                     >
-                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block">| | | PIPES.PINK</span>
-                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block">Claim Pipe · $9/yr &nearr;</span>
+                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block whitespace-nowrap">| | | PIPES.PINK</span>
+                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block whitespace-nowrap">Claim Pipe · $9/yr ↗</span>
                     </a>
                     <a
                       href="https://pipes.pink/write"
@@ -723,8 +723,8 @@ export default function StudioPage() {
                       rel="noopener noreferrer"
                       className="px-3 py-2 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] border border-[#4A372E] hover:border-[#FE299E] text-left transition-colors no-underline block"
                     >
-                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block"># HASH + ;-] SEMI</span>
-                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block">Writing Studio · Free &nearr;</span>
+                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block whitespace-nowrap"># HASH + ;-] SEMI</span>
+                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block whitespace-nowrap">Writing Studio · Free ↗</span>
                     </a>
                     <a
                       href="https://greater.pink"
@@ -732,8 +732,8 @@ export default function StudioPage() {
                       rel="noopener noreferrer"
                       className="px-3 py-2 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] border border-[#4A372E] hover:border-[#FE299E] text-left transition-colors no-underline block"
                     >
-                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block">&gt; GREATER.PINK</span>
-                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block">90+ Lang Classroom &nearr;</span>
+                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block whitespace-nowrap">&gt; GREATER.PINK</span>
+                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block whitespace-nowrap">90+ Lang Classroom ↗</span>
                     </a>
                     <a
                       href="https://bolt.pipes.pink"
@@ -741,8 +741,8 @@ export default function StudioPage() {
                       rel="noopener noreferrer"
                       className="px-3 py-2 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] border border-[#4A372E] hover:border-[#FE299E] text-left transition-colors no-underline block"
                     >
-                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block">&amp; MARIGOLD</span>
-                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block">2M-Row DuckDB &nearr;</span>
+                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block whitespace-nowrap">&amp; MARIGOLD</span>
+                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block whitespace-nowrap">2M-Row DuckDB ↗</span>
                     </a>
                   </div>
                 </div>

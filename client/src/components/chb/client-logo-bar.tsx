@@ -45,27 +45,24 @@ export function ClientLogoBar() {
   return (
     <section
       aria-labelledby="track-record-heading"
-      className="w-full border-y border-[#D3C7B5] bg-[#F2EAE0] py-20 md:py-28 overflow-hidden"
+      className="w-full border-y border-[#D3C7B5] bg-[#F2EAE0] py-12 md:py-16 overflow-hidden"
     >
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
-          <div className="lg:col-span-6 space-y-4">
-            <p className="font-sans text-sm uppercase tracking-[0.22em] font-bold text-[#FE299E]">
-              Track record
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-5 space-y-2">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
+              01 // Enterprise Track Record
             </p>
-            <h2 id="track-record-heading" className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.05]">
+            <h2 id="track-record-heading" className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.12]">
               Fortune 10 scale. Startup speed. Regulated industries.
             </h2>
-            <p className="text-lg sm:text-xl text-[#5C4840] font-sans leading-relaxed max-w-2xl">
-              Healthcare, banking, retail, and cybersecurity, where a bad design decision becomes a compliance problem.
-            </p>
           </div>
-          <dl className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 lg:pl-8">
+          <dl className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:pl-6 border-t lg:border-t-0 lg:border-l border-[#D3C7B5] pt-6 lg:pt-0">
             {proofPoints.map((p) => (
-              <div key={p.value} className="space-y-2">
+              <div key={p.value} className="space-y-1.5">
                 <dt className="sr-only">{p.label}</dt>
-                <dd className="text-5xl lg:text-6xl font-serif font-bold text-[#281B16] tabular-nums leading-none">{p.value}</dd>
-                <dd className="text-base text-[#5C4840] font-sans leading-snug">{p.label}</dd>
+                <dd className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#281B16] tabular-nums leading-none">{p.value}</dd>
+                <dd className="text-sm text-[#4A3A32] font-sans leading-relaxed">{p.label}</dd>
               </div>
             ))}
           </dl>
@@ -73,12 +70,12 @@ export function ClientLogoBar() {
       </div>
 
       {/* Full-bleed marquee. Pauses on hover/focus; static, wrapping list for reduced motion. */}
-      <div className="group relative mt-16 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] motion-reduce:[mask-image:none]">
-        <ul className="animate-marquee group-hover:[animation-play-state:paused] items-center py-6 border-y border-[#D3C7B5]/70 motion-reduce:hidden">
+      <div className="group relative mt-10 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] motion-reduce:[mask-image:none]">
+        <ul className="animate-marquee group-hover:[animation-play-state:paused] items-center py-5 border-t border-[#D3C7B5]/70 motion-reduce:hidden">
           {companies.map((c) => <Wordmark key={`a-${c.id}`} c={c} />)}
           {companies.map((c) => <Wordmark key={`b-${c.id}`} c={c} />)}
         </ul>
-        <ul className="hidden motion-reduce:flex flex-wrap justify-center gap-y-8 py-6 border-y border-[#D3C7B5]/70">
+        <ul className="hidden motion-reduce:flex flex-wrap justify-center gap-y-6 py-5 border-t border-[#D3C7B5]/70">
           {companies.map((c) => <Wordmark key={`r-${c.id}`} c={c} />)}
         </ul>
       </div>

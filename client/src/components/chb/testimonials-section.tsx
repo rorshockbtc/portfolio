@@ -117,54 +117,54 @@ export function TestimonialsSection() {
     <section
       id="recommendations"
       aria-labelledby="testimonials-heading"
-      className="py-24 md:py-36 border-t border-[#D3C7B5] bg-[#F2EAE0]"
+      className="py-16 md:py-24 border-t border-[#D3C7B5] bg-[#F2EAE0]"
       data-testid="section-testimonials"
     >
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-16">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-12">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#D3C7B5] pb-10">
-          <div className="space-y-3 max-w-4xl">
-            <span className="font-sans text-xs sm:text-sm uppercase tracking-[0.25em] font-bold text-[#FE299E] flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#FE299E]" /> Social Proof &amp; Endorsements
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#D3C7B5] pb-8">
+          <div className="space-y-2 max-w-3xl">
+            <span className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#FE299E]" /> 06 // Endorsements
             </span>
-            <h2 id="testimonials-heading" className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-[#281B16] tracking-tight">
+            <h2 id="testimonials-heading" className="text-3xl sm:text-5xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.08]">
               What leaders &amp; engineers say.
             </h2>
-            <p className="text-xl sm:text-2xl text-[#6B554D] font-sans leading-relaxed">
-              Perspectives from direct managers, healthcare strategy directors, software engineers, and MBA peers who have worked shoulder-to-shoulder with Kyle in the trenches.
+            <p className="text-base sm:text-lg text-[#4A3A32] font-sans leading-[1.7]">
+              Direct managers, healthcare strategy directors, software engineers, and MBA peers who have worked shoulder-to-shoulder with Kyle.
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs font-sans text-[#6B554D] bg-[#EAE0D0] px-4 py-2 rounded-full border border-[#D3C7B5] shrink-0 self-start lg:self-end">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          <div className="inline-flex items-center gap-2 text-xs font-sans font-semibold text-[#281B16] bg-[#EAE0D0] px-4 py-2 rounded-full border border-[#D3C7B5] shrink-0 self-start lg:self-end whitespace-nowrap">
+            <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
             <span>11 Verified LinkedIn Recommendations</span>
           </div>
         </div>
 
         {/* Featured 4-Card Primary Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {featured.map((t) => (
             <article
               key={t.name}
-              className="bg-[#EAE0D0] rounded-3xl p-8 sm:p-10 border border-[#D3C7B5] shadow-sm flex flex-col justify-between space-y-8 hover:border-[#281B16]/30 transition-colors"
+              className="bg-[#EAE0D0] rounded-2xl p-6 sm:p-8 border border-[#D3C7B5] shadow-xs flex flex-col justify-between space-y-6 hover:border-[#281B16]/30 transition-colors"
             >
-              <div className="space-y-5">
-                <Quote className="w-9 h-9 text-[#FE299E] opacity-70" aria-hidden="true" />
-                <p className="text-lg sm:text-xl text-[#281B16] font-sans leading-[1.65] italic">
-                  "{t.featuredQuote}"
+              <div className="space-y-4">
+                <Quote className="w-7 h-7 text-[#FE299E] opacity-70" aria-hidden="true" />
+                <p className="text-base sm:text-lg text-[#281B16] font-sans leading-[1.7] italic">
+                  &ldquo;{t.featuredQuote}&rdquo;
                 </p>
               </div>
 
-              <div className="pt-6 border-t border-[#D3C7B5] flex items-center justify-between gap-4">
-                <div className="space-y-1">
-                  <h3 className="font-serif font-bold text-xl text-[#281B16]">{t.name}</h3>
-                  <p className="text-sm font-sans font-semibold text-[#5C4840]">{t.role}</p>
-                  <p className="text-xs font-sans text-[#8C7469]">{t.context}</p>
+              <div className="pt-5 border-t border-[#D3C7B5] flex items-center justify-between gap-4">
+                <div className="space-y-0.5">
+                  <h3 className="font-serif font-bold text-lg text-[#281B16]">{t.name}</h3>
+                  <p className="text-xs sm:text-sm font-sans font-semibold text-[#4A3A32]">{t.role}</p>
+                  <p className="text-xs font-sans text-[#4A3A32]">{t.context}</p>
                 </div>
                 <a
                   href={t.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] flex items-center justify-center text-[#281B16] hover:bg-[#FE299E] hover:text-white hover:border-[#FE299E] transition-colors shrink-0"
+                  className="w-9 h-9 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] flex items-center justify-center text-[#281B16] hover:bg-[#FE299E] hover:text-white hover:border-[#FE299E] transition-colors shrink-0"
                   aria-label={`View ${t.name}'s LinkedIn profile`}
                 >
                   <Linkedin className="w-4 h-4" />
@@ -176,24 +176,24 @@ export function TestimonialsSection() {
 
         {/* Expandable Archive for Remaining Recommendations */}
         {showAll && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4 animate-in fade-in duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2 animate-in fade-in duration-300">
             {secondary.map((t) => (
               <article
                 key={t.name}
-                className="bg-[#EAE0D0]/70 rounded-2xl p-6 sm:p-7 border border-[#D3C7B5] shadow-xs flex flex-col justify-between space-y-6"
+                className="bg-[#EAE0D0]/70 rounded-2xl p-6 border border-[#D3C7B5] shadow-xs flex flex-col justify-between space-y-5"
               >
                 <div className="space-y-3">
-                  <Quote className="w-6 h-6 text-[#FE299E] opacity-50" aria-hidden="true" />
-                  <p className="text-base text-[#281B16] font-sans leading-relaxed italic">
-                    "{t.featuredQuote}"
+                  <Quote className="w-5 h-5 text-[#FE299E] opacity-60" aria-hidden="true" />
+                  <p className="text-sm sm:text-base text-[#281B16] font-sans leading-[1.7] italic">
+                    &ldquo;{t.featuredQuote}&rdquo;
                   </p>
                 </div>
 
                 <div className="pt-4 border-t border-[#D3C7B5]/60 flex items-center justify-between gap-3">
                   <div className="space-y-0.5">
                     <h4 className="font-serif font-bold text-base text-[#281B16]">{t.name}</h4>
-                    <p className="text-xs font-sans text-[#5C4840] line-clamp-1">{t.role}</p>
-                    <p className="text-[11px] font-sans text-[#8C7469]">{t.context}</p>
+                    <p className="text-xs font-sans text-[#4A3A32] line-clamp-1">{t.role}</p>
+                    <p className="text-[11px] font-sans text-[#4A3A32]">{t.context}</p>
                   </div>
                   <a
                     href={t.linkedin}
@@ -211,12 +211,12 @@ export function TestimonialsSection() {
         )}
 
         {/* Toggle Button */}
-        <div className="text-center pt-2">
+        <div className="text-center pt-1">
           <Button
             variant="outline"
             size="lg"
             onClick={() => setShowAll(!showAll)}
-            className="w-full sm:w-auto justify-center whitespace-normal border-[#281B16]/30 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs sm:text-sm font-bold rounded-full px-5 sm:px-8 py-3.5 cursor-pointer transition-all"
+            className="w-auto justify-center whitespace-nowrap border-[#281B16]/30 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs sm:text-sm font-bold rounded-full px-6 sm:px-8 py-3 cursor-pointer transition-all"
           >
             {showAll ? (
               <>
@@ -224,7 +224,7 @@ export function TestimonialsSection() {
               </>
             ) : (
               <>
-                Read all 11 verified recommendations <ChevronDown className="w-4 h-4 ml-2 shrink-0" />
+                Read all 11 recommendations <ChevronDown className="w-4 h-4 ml-2 shrink-0" />
               </>
             )}
           </Button>
