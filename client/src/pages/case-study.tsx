@@ -98,17 +98,17 @@ export default function CaseStudyPage() {
     <article className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#FE299E]/20">
       {/* ── Sticky Sub-Navigation Bar ── */}
       <div className="sticky top-16 sm:top-20 z-40 bg-[#F2EAE0]/95 backdrop-blur-md border-b border-[#D3C7B5] py-2.5 sm:py-3">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between gap-2 sm:gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans uppercase tracking-[0.12em] sm:tracking-[0.16em] font-semibold text-[#6B554D] hover:text-[#281B16] transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans uppercase tracking-[0.12em] sm:tracking-[0.16em] font-semibold text-[#4A3A32] hover:text-[#281B16] transition-colors whitespace-nowrap"
           >
             <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FE299E] shrink-0" />
             <span>Back<span className="hidden xs:inline sm:inline"> to Work</span></span>
           </Link>
 
           <div className="hidden md:flex items-center gap-3 text-xs font-sans">
-            <span className="text-[#6B554D] uppercase tracking-wider">Other Deep Dives:</span>
+            <span className="text-[#4A3A32] font-semibold uppercase tracking-wider">Other Deep Dives:</span>
             {Object.values(CASE_STUDIES)
               .filter((s) => s.slug !== study.slug)
               .slice(0, 4)
@@ -116,51 +116,61 @@ export default function CaseStudyPage() {
                 <Link
                   key={s.slug}
                   href={`/case-studies/${s.slug}`}
-                  className="font-medium text-[#6B554D] hover:text-[#FE299E] transition-colors uppercase tracking-wider"
+                  className="font-semibold text-[#4A3A32] hover:text-[#FE299E] transition-colors uppercase tracking-wider"
                 >
                   {s.client}
                 </Link>
               ))}
           </div>
 
-          <Button
-            size="sm"
-            className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.1em] sm:tracking-[0.15em] font-bold rounded-full px-3.5 sm:px-4 shrink-0 shadow-sm cursor-pointer"
-            onClick={() => setIsContactOpen(true)}
-          >
-            Hire Kyle · $7,500
-          </Button>
+          <div className="flex items-center gap-2 shrink-0">
+            <a
+              href="https://pipes.pink"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.12em] font-bold transition-colors no-underline"
+            >
+              | | | Claim Pipe ($9/yr)
+            </a>
+            <Button
+              size="sm"
+              className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.1em] sm:tracking-[0.15em] font-bold rounded-full px-3.5 sm:px-4 shrink-0 shadow-sm cursor-pointer"
+              onClick={() => setIsContactOpen(true)}
+            >
+              Hire Kyle · $7,500
+            </Button>
+          </div>
         </div>
       </div>
 
       {/* ── Case Study Header ── */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 w-full space-y-6">
+      <header className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pt-10 pb-8 w-full space-y-6">
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2.5">
             <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
               {study.client}
             </span>
             <span className="text-[#D3C7B5]">&bull;</span>
-            <Badge variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] text-[#6B554D] text-[11px] font-sans uppercase tracking-wider">
+            <Badge variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] text-[#3D2C24] font-semibold text-[11px] font-sans uppercase tracking-wider">
               {study.scaleBadge}
             </Badge>
             <span className="text-[#D3C7B5]">&bull;</span>
-            <span className="text-xs font-sans text-[#6B554D]">{study.timeline}</span>
+            <span className="text-xs font-sans text-[#4A3A32] font-semibold">{study.timeline}</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.12]">
             {study.title}
           </h1>
 
-          <p className="text-lg md:text-xl text-[#6B554D] font-sans leading-relaxed max-w-3xl">
+          <p className="text-lg md:text-xl text-[#4A3A32] font-sans leading-relaxed max-w-3xl">
             {study.subtitle}
           </p>
         </div>
 
         {/* Role & Actions */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-[#D3C7B5]">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#D3C7B5]">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-sans uppercase tracking-[0.16em] text-[#6B554D] font-semibold">
+            <span className="text-xs font-sans uppercase tracking-[0.16em] text-[#4A3A32] font-semibold">
               Role:
             </span>
             <span className="text-xs font-sans font-bold text-[#281B16] px-3 py-1 rounded-full bg-[#E4DACB]">
@@ -169,16 +179,30 @@ export default function CaseStudyPage() {
           </div>
 
           <div className="flex flex-wrap gap-2.5">
-            {study.liveUrl && (
-              <a href={study.liveUrl} target="_blank" rel="noopener noreferrer">
-                <Button className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.15em] font-semibold rounded-full px-5">
+            {study.slug === "pipes" && (
+              <>
+                <a href="https://pipes.pink" target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <Button className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.15em] font-bold rounded-full px-5 cursor-pointer">
+                    | | | Claim Your Pipe ($9/yr) <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+                  </Button>
+                </a>
+                <a href="https://pipes.pink/write" target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <Button className="bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-xs uppercase tracking-[0.15em] font-bold rounded-full px-5 cursor-pointer">
+                    Open # Hash + ;-] Semi Free <ExternalLink className="w-3.5 h-3.5 ml-1.5 text-[#FE299E]" />
+                  </Button>
+                </a>
+              </>
+            )}
+            {study.liveUrl && study.slug !== "pipes" && (
+              <a href={study.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
+                <Button className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.15em] font-semibold rounded-full px-5 cursor-pointer">
                   {study.liveUrlLabel || "Visit Live Product"} <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
                 </Button>
               </a>
             )}
             {study.repoUrl && (
-              <a href={study.repoUrl} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:bg-[#EAE0D0] font-sans text-xs uppercase tracking-[0.15em] font-medium rounded-full px-5">
+              <a href={study.repoUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
+                <Button variant="outline" className="border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:bg-[#EAE0D0] font-sans text-xs uppercase tracking-[0.15em] font-semibold rounded-full px-5 cursor-pointer">
                   Inspect Source Code <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
                 </Button>
               </a>
@@ -188,33 +212,27 @@ export default function CaseStudyPage() {
       </header>
 
       {/* ── Full-Bleed Primary Specimen Showcase ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full">
+      <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-12 w-full">
         <div
           className="group relative rounded-3xl border border-[#D3C7B5] bg-[#F2EAE0] p-3 sm:p-6 shadow-xl overflow-hidden cursor-pointer"
           onClick={() => setActiveImageIndex(0)}
         >
-          <div
-            className={`relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-2xl overflow-hidden flex items-center justify-center border ${
-              study.slug === "pipes"
-                ? "bg-[#231814] border-[#3D2C24] shadow-inner"
-                : "bg-[#EAE0D0] border-[#D3C7B5]/60"
-            }`}
-          >
+          <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-2xl overflow-hidden flex items-center justify-center border bg-[#231814] border-[#3D2C24] shadow-inner">
             <img loading="lazy" decoding="async"
               src={study.heroImage}
               alt={study.title}
               className="w-full h-full object-contain p-2 sm:p-4 drop-shadow-2xl group-hover:scale-[1.02] transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-[#281B16]/0 group-hover:bg-[#281B16]/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+            <div className="absolute inset-0 bg-[#281B16]/0 group-hover:bg-[#281B16]/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
               <span className="px-4 py-2 rounded-full bg-[#F2EAE0]/95 text-[#281B16] text-xs font-sans font-bold shadow-lg flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all">
                 <ZoomIn className="w-4 h-4 text-[#FE299E]" /> Click to Inspect Full-Resolution Interface
               </span>
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between text-xs text-[#6B554D] font-sans px-2">
+          <div className="mt-4 flex items-center justify-between text-xs text-[#4A3A32] font-semibold font-sans px-2">
             <span>Primary Architecture &amp; Interface Plate</span>
-            <span className="font-sans text-[11px] text-[#FE299E] font-semibold flex items-center gap-1">
+            <span className="font-sans text-[11px] text-[#FE299E] font-bold flex items-center gap-1">
               Click to Enlarge <ZoomIn className="w-3 h-3" />
             </span>
           </div>
@@ -222,21 +240,21 @@ export default function CaseStudyPage() {
       </section>
 
       {/* ── Key Impact Metrics Grid ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 w-full">
+      <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-14 w-full">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {study.metrics.map((m, idx) => (
             <div
               key={idx}
               className="p-5 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] flex flex-col justify-center space-y-1 shadow-sm"
             >
-              <span className="text-[11px] font-sans uppercase tracking-[0.18em] text-[#6B554D] font-semibold truncate">
+              <span className="text-[11px] font-sans uppercase tracking-[0.18em] text-[#4A3A32] font-bold truncate">
                 {m.label}
               </span>
               <span className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight">
                 {m.value}
               </span>
               {m.subtext && (
-                <p className="text-[11px] text-[#6B554D] leading-tight font-sans">{m.subtext}</p>
+                <p className="text-[11px] text-[#4A3A32] leading-tight font-sans">{m.subtext}</p>
               )}
             </div>
           ))}
@@ -244,7 +262,7 @@ export default function CaseStudyPage() {
       </section>
 
       {/* ── Deep-Dive Case Study Narrative (2-Column Architecture Layout) ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
+      <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-16 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Left Column: Executive Summary, The Challenge & Systems Solution */}
           <div className="lg:col-span-7 space-y-8">
@@ -259,12 +277,12 @@ export default function CaseStudyPage() {
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#6B554D]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#3D2C24]" />
                 <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#281B16] tracking-tight">
                   The Strategic Challenge
                 </h2>
               </div>
-              <p className="text-base text-[#6B554D] font-sans leading-relaxed pl-4 border-l-2 border-[#D3C7B5] max-w-[65ch]">
+              <p className="text-base text-[#4A3A32] font-sans leading-relaxed pl-4 border-l-2 border-[#D3C7B5] max-w-[65ch]">
                 {study.challenge}
               </p>
             </div>
@@ -276,7 +294,7 @@ export default function CaseStudyPage() {
                   The Systems Architecture Solution
                 </h2>
               </div>
-              <p className="text-base text-[#281B16]/90 font-sans leading-relaxed pl-4 border-l-2 border-[#FE299E]/40 max-w-[65ch]">
+              <p className="text-base text-[#281B16] font-sans leading-relaxed pl-4 border-l-2 border-[#FE299E]/40 max-w-[65ch]">
                 {study.solution}
               </p>
             </div>
@@ -285,7 +303,7 @@ export default function CaseStudyPage() {
               <h3 className="text-lg font-serif font-bold text-[#281B16] tracking-tight">
                 Systems &amp; Protocol Execution
               </h3>
-              <p className="text-base text-[#6B554D] font-sans leading-relaxed max-w-[65ch]">
+              <p className="text-base text-[#4A3A32] font-sans leading-relaxed max-w-[65ch]">
                 {study.systemsArchitecture}
               </p>
             </div>
@@ -297,7 +315,7 @@ export default function CaseStudyPage() {
               <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">
                 UI/UX Craft &amp; Psychology
               </span>
-              <p className="text-sm sm:text-base text-[#6B554D] font-sans leading-relaxed max-w-[60ch]">
+              <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-relaxed max-w-[60ch]">
                 {study.uiUxCraft}
               </p>
             </div>
@@ -317,14 +335,14 @@ export default function CaseStudyPage() {
             </div>
 
             <div className="space-y-3">
-              <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-semibold text-[#6B554D]">
+              <span className="font-sans text-[11px] uppercase tracking-[0.2em] font-bold text-[#4A3A32]">
                 Stack &amp; Methods
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {study.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] text-xs font-sans text-[#281B16] font-medium"
+                    className="px-3 py-1 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] text-xs font-sans text-[#281B16] font-semibold"
                   >
                     {tech}
                   </span>
@@ -333,7 +351,7 @@ export default function CaseStudyPage() {
             </div>
 
             {study.ndaNotice && (
-              <div className="p-4 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] text-xs text-[#6B554D] font-sans flex items-start gap-2.5">
+              <div className="p-4 rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] text-xs text-[#4A3A32] font-sans flex items-start gap-2.5">
                 <Shield className="w-4 h-4 text-[#FE299E] shrink-0 mt-0.5" />
                 <p className="leading-relaxed">{study.ndaNotice}</p>
               </div>
@@ -344,7 +362,7 @@ export default function CaseStudyPage() {
 
       {/* ── Architecture, Stack & Real Codebase Deconstruction ── */}
       {study.codebaseBreakdown && (
-        <section className="max-w-[1540px] mx-auto px-6 sm:px-10 lg:px-16 pb-20 w-full space-y-10">
+        <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-20 w-full space-y-10">
           <div className="border-t border-[#D3C7B5] pt-12 space-y-4">
             <span className="font-sans text-xs sm:text-sm uppercase tracking-[0.25em] font-bold text-[#FE299E] flex items-center gap-2">
               <Cpu className="w-4 h-4 text-[#FE299E]" /> Architectural &amp; Codebase Deconstruction
@@ -367,7 +385,7 @@ export default function CaseStudyPage() {
                   {tier.role}
                 </span>
                 <h3 className="font-serif font-bold text-lg text-[#281B16]">{tier.tech}</h3>
-                <p className="text-xs sm:text-sm text-[#6B554D] font-sans leading-relaxed">{tier.rationale}</p>
+                <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-relaxed">{tier.rationale}</p>
               </div>
             ))}
           </div>
@@ -381,16 +399,16 @@ export default function CaseStudyPage() {
                     <span className="font-sans text-xs uppercase tracking-wider font-bold text-[#FE299E]">
                       {snippet.title}
                     </span>
-                    <Badge variant="outline" className="border-white/20 text-white/70 text-[10px] uppercase font-sans">
+                    <Badge variant="outline" className="border-white/20 text-white/80 text-[10px] uppercase font-sans">
                       {snippet.language}
                     </Badge>
                   </div>
-                  <div className="p-6 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed text-[#f1ebd8]/90">
+                  <div className="p-6 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed text-[#f1ebd8]">
                     <pre className="font-mono">
                       <code>{snippet.code}</code>
                     </pre>
                   </div>
-                  <div className="px-6 py-3 bg-[#110f0e] border-t border-white/10 text-xs text-[#f1ebd8]/60 font-sans">
+                  <div className="px-6 py-3 bg-[#110f0e] border-t border-white/10 text-xs text-[#E4DACB] font-sans">
                     {snippet.explanation}
                   </div>
                 </div>
@@ -402,7 +420,7 @@ export default function CaseStudyPage() {
 
       {/* ── Multi-Plate Gallery Section (If > 1 Image) ── */}
       {study.galleryImages.length > 1 && (
-        <section className="max-w-[1540px] mx-auto px-6 sm:px-10 lg:px-16 pb-16 w-full space-y-6">
+        <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-16 w-full space-y-6">
           <div className="space-y-1">
             <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E]">
               Interface Gallery
@@ -410,7 +428,7 @@ export default function CaseStudyPage() {
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16]">
               Additional Production Plates &amp; Workflows
             </h2>
-            <p className="text-sm text-[#6B554D] font-sans">
+            <p className="text-sm text-[#4A3A32] font-sans">
               Click any plate to inspect full high-resolution interface details.
             </p>
           </div>
@@ -422,11 +440,7 @@ export default function CaseStudyPage() {
                 className="group rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] overflow-hidden cursor-pointer hover:border-[#FE299E] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between"
                 onClick={() => setActiveImageIndex(idx)}
               >
-                <div
-                  className={`relative aspect-[16/10] p-3 flex items-center justify-center border-b border-[#D3C7B5] ${
-                    study.slug === "pipes" ? "bg-[#231814]" : "bg-[#EAE0D0]"
-                  }`}
-                >
+                <div className="relative aspect-[16/10] p-3 flex items-center justify-center border-b border-[#3D2C24] bg-[#231814]">
                   <img
                     src={img.src}
                     alt={img.title}
@@ -444,12 +458,12 @@ export default function CaseStudyPage() {
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="font-sans font-bold text-xs text-[#281B16] truncate">{img.title}</h3>
                     {img.tag && (
-                      <Badge variant="outline" className="text-[10px] font-sans border-[#D3C7B5] text-[#6B554D] shrink-0">
+                      <Badge variant="outline" className="text-[10px] font-sans border-[#D3C7B5] text-[#3D2C24] font-semibold shrink-0">
                         {img.tag}
                       </Badge>
                     )}
                   </div>
-                  <p className="text-[11px] text-[#6B554D] line-clamp-2 leading-relaxed font-sans">{img.caption}</p>
+                  <p className="text-[11px] text-[#4A3A32] line-clamp-2 leading-relaxed font-sans">{img.caption}</p>
                 </div>
               </div>
             ))}
@@ -473,7 +487,7 @@ export default function CaseStudyPage() {
                   <Badge className="bg-[#FE299E] text-white text-[10px] font-sans uppercase tracking-wider px-2 py-0.5">
                     {study.galleryImages[activeImageIndex].tag || "Work Specimen"}
                   </Badge>
-                  <span className="text-xs font-sans text-[#6B554D]">
+                  <span className="text-xs font-sans text-[#4A3A32] font-semibold">
                     {activeImageIndex + 1} of {study.galleryImages.length}
                   </span>
                 </div>
@@ -504,7 +518,7 @@ export default function CaseStudyPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-full w-9 h-9 text-[#6B554D] hover:text-[#281B16] hover:bg-[#EAE0D0]"
+                  className="rounded-full w-9 h-9 text-[#4A3A32] hover:text-[#281B16] hover:bg-[#EAE0D0]"
                   onClick={() => setActiveImageIndex(null)}
                   aria-label="Close modal"
                 >
@@ -513,11 +527,7 @@ export default function CaseStudyPage() {
               </div>
             </div>
 
-            <div
-              className={`flex-1 overflow-auto p-4 sm:p-6 flex items-center justify-center min-h-[350px] ${
-                study.slug === "pipes" ? "bg-[#231814]" : "bg-[#EAE0D0]/80"
-              }`}
-            >
+            <div className="flex-1 overflow-auto p-4 sm:p-6 flex items-center justify-center min-h-[350px] bg-[#231814]">
               <img loading="lazy" decoding="async"
                 src={study.galleryImages[activeImageIndex].src}
                 alt={study.galleryImages[activeImageIndex].title}
@@ -525,9 +535,9 @@ export default function CaseStudyPage() {
               />
             </div>
 
-            <div className="border-t border-[#D3C7B5] px-6 py-3.5 bg-[#F2EAE0] flex items-center justify-between text-xs text-[#6B554D] font-sans">
+            <div className="border-t border-[#D3C7B5] px-6 py-3.5 bg-[#F2EAE0] flex items-center justify-between text-xs text-[#4A3A32] font-sans">
               <p className="max-w-3xl leading-relaxed">{study.galleryImages[activeImageIndex].caption}</p>
-              <span className="hidden sm:inline font-sans text-[10px] text-[#6B554D] shrink-0 ml-4">
+              <span className="hidden sm:inline font-sans text-[10px] text-[#4A3A32] font-semibold shrink-0 ml-4">
                 ESC to close &bull; Arrow keys to navigate
               </span>
             </div>
@@ -536,7 +546,7 @@ export default function CaseStudyPage() {
       )}
 
       {/* ── Continue Exploring: Next Case Studies ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 w-full space-y-6">
+      <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-14 w-full space-y-6">
         <div className="flex items-center justify-between border-t border-[#D3C7B5] pt-10">
           <div className="space-y-1">
             <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] block">
@@ -548,7 +558,7 @@ export default function CaseStudyPage() {
           </div>
           <Link
             href="/"
-            className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-[0.14em] font-bold text-[#6B554D] hover:text-[#FE299E] transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-[0.14em] font-bold text-[#4A3A32] hover:text-[#FE299E] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5 text-[#FE299E]" /> Full Portfolio Index
           </Link>
@@ -562,7 +572,7 @@ export default function CaseStudyPage() {
               const nextStudy = CASE_STUDIES[nextSlug];
               if (!nextStudy) return null;
               return (
-                <Link key={nextSlug} href={`/case-studies/${nextSlug}`}>
+                <Link key={nextSlug} href={`/case-studies/${nextSlug}`} className="block h-full no-underline">
                   <div className="group h-full rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] p-6 hover:border-[#FE299E] transition-all cursor-pointer flex flex-col justify-between space-y-5 shadow-xs">
                     <div className="space-y-2">
                       <span className="font-sans text-[11px] uppercase tracking-[0.18em] font-bold text-[#FE299E] block">
@@ -571,7 +581,7 @@ export default function CaseStudyPage() {
                       <h3 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors leading-snug">
                         {nextStudy.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#6B554D] font-sans line-clamp-2 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-[#4A3A32] font-sans line-clamp-2 leading-relaxed">
                         {nextStudy.subtitle}
                       </p>
                     </div>
@@ -587,7 +597,7 @@ export default function CaseStudyPage() {
       </section>
 
       {/* ── High-Conversion Velocity Banner ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 w-full">
+      <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-20 w-full">
         <div className="rounded-3xl border border-[#D3C7B5] bg-[#F2EAE0] p-8 md:p-12 shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div className="space-y-3 max-w-2xl">
             <span className="font-sans text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] flex items-center gap-1.5">
@@ -596,23 +606,23 @@ export default function CaseStudyPage() {
             <h3 className="text-2xl sm:text-4xl font-serif font-bold text-[#281B16] tracking-tight">
               Need this velocity on your product?
             </h3>
-            <p className="text-base sm:text-lg text-[#6B554D] font-sans leading-relaxed">
+            <p className="text-base sm:text-lg text-[#4A3A32] font-sans leading-relaxed">
               Whether you need a 1-week rapid sprint ($7,500) to unblock a flagship feature, a 2–4 week surgical systems overhaul ($15k–$25k), or a dedicated Product Architect for an embedded role—let's look at the problem together.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full lg:w-auto">
+          <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 shrink-0 w-full lg:w-auto">
             <a
               href="https://calendly.com/cubby-colonhyphenbracket/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-7 py-4 shadow-md transition-all text-center"
+              className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-7 py-4 shadow-md transition-all text-center no-underline"
             >
               <Calendar className="w-4 h-4" /> Book 30-Min Intro Call
             </a>
             <Button
               variant="outline"
-              className="border-[#281B16]/30 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-6 py-4 cursor-pointer"
+              className="border-[#281B16]/30 bg-transparent hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-6 py-4 h-auto cursor-pointer"
               onClick={() => setIsContactOpen(true)}
             >
               Inquire for Sprint ($7,500)

@@ -70,12 +70,12 @@ export default function Navigation() {
           </Link>
 
           {/* Middle: Streamlined Editorial Nav Links */}
-          <div className="hidden lg:flex items-center gap-7 pl-4">
+          <div className="hidden lg:flex items-center gap-6 pl-4">
             {navLinks.map((link) => (
               <button
                 key={link.targetId}
                 onClick={() => handleNavClick(link.targetId)}
-                className="py-1 font-sans text-sm font-semibold text-[#5C4840] hover:text-[#281B16] transition-colors cursor-pointer bg-transparent border-none p-0 whitespace-nowrap"
+                className="py-1 font-sans text-sm font-semibold text-[#4A3A32] hover:text-[#281B16] transition-colors cursor-pointer bg-transparent border-none p-0 whitespace-nowrap"
                 data-testid={`nav-link-${link.targetId}`}
               >
                 {link.label}
@@ -83,7 +83,7 @@ export default function Navigation() {
             ))}
             <Link
               href={location === "/studio" ? "/" : "/studio"}
-              className={`py-1 px-3 rounded-full font-sans text-xs uppercase tracking-[0.16em] font-bold transition-all whitespace-nowrap border ${
+              className={`py-1.5 px-3.5 rounded-full font-sans text-xs uppercase tracking-[0.14em] font-bold transition-all whitespace-nowrap border no-underline ${
                 location === "/studio"
                   ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16]"
                   : "bg-[#F2EAE0] text-[#281B16] border-[#D3C7B5] hover:border-[#FE299E] hover:text-[#FE299E]"
@@ -92,6 +92,15 @@ export default function Navigation() {
             >
               {location === "/studio" ? "← Principal Portfolio" : "CHB Studio · Business"}
             </Link>
+            <a
+              href="https://pipes.pink"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-1.5 px-3.5 rounded-full font-sans text-xs uppercase tracking-[0.14em] font-bold transition-all whitespace-nowrap border bg-[#281B16] text-[#F2EAE0] border-[#281B16] hover:bg-[#FE299E] hover:border-[#FE299E] hover:text-white no-underline"
+              data-testid="nav-link-pipes"
+            >
+              | | | Pipes.Pink ↗
+            </a>
           </div>
         </div>
 

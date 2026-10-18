@@ -551,17 +551,17 @@ export default function StudioPage() {
       <div className="min-h-screen bg-[#EAE0D0] text-[#281B16] pb-24 md:pb-0">
         {/* Sticky Swiss-Grid Section Sub-Header (Desktop) */}
         <div
-          className="hidden md:block sticky top-16 z-30 bg-[#EAE0D0]/95 backdrop-blur-md border-b border-[#D3C7B5]"
+          className="hidden md:block sticky top-16 sm:top-20 z-30 bg-[#EAE0D0]/95 backdrop-blur-md border-b border-[#D3C7B5]"
           role="navigation"
           aria-label="Studio section index"
           data-testid="nav-studio-subbar"
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 h-12 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#6B554D]">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 h-12 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#4A3A32]">
               <span className="w-2 h-2 rounded-full bg-[#FE299E]" />
               <span className="font-bold text-[#281B16]">CHB Studio</span>
-              <span className="text-[#C4B5A2]">/</span>
-              <span>Practice & Proprietary Lab</span>
+              <span className="text-[#4A3A32]">/</span>
+              <span>Practice &amp; Proprietary Lab</span>
             </div>
 
             <div className="flex items-center gap-1 lg:gap-2 overflow-x-auto scrollbar-hide">
@@ -574,7 +574,7 @@ export default function StudioPage() {
                     className={`px-3 py-1.5 rounded-sm font-mono text-[11px] uppercase tracking-[0.13em] transition-all cursor-pointer border ${
                       isActive
                         ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-bold"
-                        : "bg-transparent text-[#5C4840] border-transparent hover:border-[#D3C7B5] hover:bg-[#F2EAE0]/60 hover:text-[#281B16]"
+                        : "bg-transparent text-[#4A3A32] border-transparent hover:border-[#D3C7B5] hover:bg-[#F2EAE0]/60 hover:text-[#281B16]"
                     }`}
                     data-testid={`nav-studio-pill-${s.id}`}
                   >
@@ -585,7 +585,18 @@ export default function StudioPage() {
               })}
             </div>
 
-            <div className="hidden xl:flex items-center gap-3">
+            <div className="hidden xl:flex items-center gap-2.5">
+              <a
+                href="https://pipes.pink"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#281B16] text-[#F2EAE0] hover:bg-[#FE299E] hover:text-white font-mono text-[10px] font-bold uppercase tracking-[0.14em] transition-colors no-underline"
+                data-testid="button-subbar-pipes"
+              >
+                <span className="text-[#FE299E] font-bold">| | |</span>
+                Claim Pipe ($9/yr)
+                <ExternalLink className="w-3 h-3" />
+              </a>
               <button
                 onClick={() => openContact("calendly")}
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#FE299E] text-white font-mono text-[10px] font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors cursor-pointer border-none"
@@ -602,11 +613,11 @@ export default function StudioPage() {
             HERO SECTION — THE STUDIO & PROPRIETARY R&D PRACTICE
            ============================================================ */}
         <section
-          className="relative pt-24 md:pt-20 pb-12 md:pb-16 border-b border-[#D3C7B5]"
+          className="relative pt-10 md:pt-14 pb-14 md:pb-20 border-b border-[#D3C7B5]"
           data-testid="section-studio-hero"
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               {/* Left 7 Cols: Editorial Studio Positioning */}
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
@@ -616,8 +627,8 @@ export default function StudioPage() {
               >
                 <div className="flex flex-wrap items-center gap-3 mb-5">
                   <BrandMark size="sm" />
-                  <span className="text-[#C4B5A2]">·</span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#6B554D] font-semibold">
+                  <span className="text-[#4A3A32]">·</span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#4A3A32] font-bold">
                     Colon Hyphen Bracket, LLC · Est. 2012 · Re-Architected 2026
                   </span>
                 </div>
@@ -629,63 +640,116 @@ export default function StudioPage() {
                   </span>
                 </h1>
 
-                <p className="font-serif text-xl md:text-2xl text-[#3D2C24] leading-[1.5] mb-6 max-w-[62ch]">
-                  Colon Hyphen Bracket (<span className="font-mono text-lg text-[#FE299E]">:-]</span>) is a principal-led product architecture studio and proprietary R&amp;D lab. We replace bloated 12-person agency retainers with a single 25-year Systems Architect equipped with deterministic AI harnesses—shipping regulated banking infrastructure, zero-PII data rooms, and sovereign knowledge protocols in weeks instead of quarters.
+                <p className="font-serif text-xl md:text-2xl text-[#281B16] leading-[1.5] mb-6 max-w-[62ch]">
+                  Colon Hyphen Bracket (<span className="font-mono text-lg text-[#FE299E] font-bold">:-]</span>) is a principal-led product architecture studio and proprietary R&amp;D lab. We replace bloated 12-person agency retainers with a single 25-year Systems Architect equipped with deterministic AI harnesses—shipping regulated banking infrastructure, zero-PII data rooms, and sovereign knowledge protocols in weeks instead of quarters.
                 </p>
 
-                <p className="font-sans text-sm md:text-base text-[#5C4840] leading-relaxed mb-8 max-w-[64ch]">
+                <p className="font-sans text-sm md:text-base text-[#4A3A32] leading-relaxed mb-7 max-w-[64ch]">
                   In the 16 months since we first published our studio manifesto, we didn&apos;t just advise clients—we shipped{" "}
-                  <Link href="/case-studies/pipes" className="text-[#281B16] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
+                  <Link href="/case-studies/pipes" className="text-[#281B16] font-bold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
                     Pipes.Pink
                   </Link>{" "}
                   (a content-addressed Merkle-DAG web protocol), unified{" "}
-                  <Link href="/case-studies/pipes" className="text-[#281B16] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
-                    Hash Sanctuary &amp; SEMI (;-])
+                  <Link href="/case-studies/pipes" className="text-[#281B16] font-bold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
+                    # Hash Sanctuary &amp; SEMI (;-])
                   </Link>
-                  , launched 90+ language sovereign classrooms (<span className="font-mono text-xs text-[#281B16]">greater.pink</span>), built{" "}
-                  <Link href="/case-studies/marigold" className="text-[#281B16] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
+                  , launched 90+ language sovereign classrooms (<span className="font-mono text-xs font-bold text-[#281B16]">greater.pink</span>), built{" "}
+                  <Link href="/case-studies/marigold" className="text-[#281B16] font-bold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
                     Marigold Insights
                   </Link>{" "}
                   (2M-record browser-native DuckDB-WASM analytics), and scaled{" "}
-                  <Link href="/case-studies/clubhouse-1099" className="text-[#281B16] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
+                  <Link href="/case-studies/clubhouse-1099" className="text-[#281B16] font-bold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]">
                     Clubhouse 1099
                   </Link>
                   .
                 </p>
 
-                {/* Primary Studio CTAs */}
-                <div className="flex flex-wrap items-center gap-3.5 mb-8">
+                {/* Primary Studio & Pipes Ecosystem CTAs */}
+                <div className="flex flex-wrap items-center gap-3 mb-6">
                   <button
                     onClick={() => openContact("calendly")}
                     className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-sm bg-[#281B16] text-[#F2EAE0] font-sans text-xs font-bold uppercase tracking-[0.15em] hover:bg-[#FE299E] hover:text-white transition-colors cursor-pointer border-none shadow-sm"
                     data-testid="button-studio-hero-book"
                   >
-                    <Calendar className="w-4 h-4 text-[#FE299E] group-hover:text-white" />
+                    <Calendar className="w-4 h-4 text-[#FE299E]" />
                     Book 30-Min Intro Call
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
 
-                  <button
-                    onClick={() => scrollToSection("engagement")}
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-[#F2EAE0] text-[#281B16] border border-[#281B16]/30 hover:border-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.13em] transition-colors cursor-pointer"
-                    data-testid="button-studio-hero-sprint"
+                  <a
+                    href="https://pipes.pink"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-[#FE299E] hover:bg-[#d81b80] text-white font-mono text-xs font-bold uppercase tracking-[0.13em] transition-colors shadow-sm no-underline"
+                    data-testid="link-studio-hero-pipes"
                   >
-                    <span className="w-2 h-2 rounded-full bg-[#FE299E]" />
-                    1-Week Sprint · $7,500
-                  </button>
+                    <span>| | | Claim Your Pipe ($9/yr)</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
 
-                  <button
-                    onClick={() => scrollToSection("lab")}
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-transparent text-[#5C4840] hover:text-[#281B16] font-mono text-xs uppercase tracking-[0.13em] transition-colors cursor-pointer border border-[#D3C7B5]"
-                    data-testid="button-studio-hero-lab"
+                  <a
+                    href="https://pipes.pink/write"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-sm bg-[#F2EAE0] text-[#281B16] border border-[#281B16] hover:border-[#FE299E] hover:text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.13em] transition-colors no-underline"
+                    data-testid="link-studio-hero-hash"
                   >
-                    Explore 16-Month Lab Suite ↓
-                  </button>
+                    <span>Open # Hash + ;-] Semi Free</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#FE299E]" />
+                  </a>
+                </div>
+
+                {/* Live Sovereign Ecosystem Quick-Launch Bar */}
+                <div className="p-4 rounded-sm bg-[#231814] text-[#F2EAE0] border border-[#3D2C24] mb-6 space-y-2.5">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono uppercase tracking-[0.15em]">
+                    <span className="text-[#FE299E] font-bold">
+                      LIVE SOVEREIGN ECOSYSTEM // SIGN UP OR LAUNCH IN BROWSER
+                    </span>
+                    <span className="text-[#E4DACB]">70% CREATOR ROYALTIES · ZERO CLOUD PII</span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                    <a
+                      href="https://pipes.pink"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] border border-[#4A372E] hover:border-[#FE299E] text-left transition-colors no-underline block"
+                    >
+                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block">| | | PIPES.PINK</span>
+                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block">Claim Pipe · $9/yr &nearr;</span>
+                    </a>
+                    <a
+                      href="https://pipes.pink/write"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] border border-[#4A372E] hover:border-[#FE299E] text-left transition-colors no-underline block"
+                    >
+                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block"># HASH + ;-] SEMI</span>
+                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block">Writing Studio · Free &nearr;</span>
+                    </a>
+                    <a
+                      href="https://greater.pink"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] border border-[#4A372E] hover:border-[#FE299E] text-left transition-colors no-underline block"
+                    >
+                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block">&gt; GREATER.PINK</span>
+                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block">90+ Lang Classroom &nearr;</span>
+                    </a>
+                    <a
+                      href="https://bolt.pipes.pink"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] border border-[#4A372E] hover:border-[#FE299E] text-left transition-colors no-underline block"
+                    >
+                      <span className="font-mono text-[10px] font-bold text-[#FE299E] block">&amp; MARIGOLD</span>
+                      <span className="font-sans text-xs font-semibold text-[#F2EAE0] block">2M-Row DuckDB &nearr;</span>
+                    </a>
+                  </div>
                 </div>
 
                 {/* Cross-Link to Principal Portfolio */}
-                <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-2 rounded-sm bg-[#F2EAE0] border border-[#D3C7B5] text-xs text-[#5C4840]">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6B554D] font-bold">
+                <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-2 rounded-sm bg-[#F2EAE0] border border-[#D3C7B5] text-xs text-[#4A3A32]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#281B16] font-bold">
                     Hiring Full-Time or Fractional VP / Principal?
                   </span>
                   <Link
@@ -706,9 +770,9 @@ export default function StudioPage() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="lg:col-span-5"
               >
-                <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-3.5 md:p-5 shadow-[0_20px_50px_rgba(40,27,22,0.08)]">
+                <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-4 md:p-5 shadow-[0_20px_50px_rgba(40,27,22,0.08)]">
                   <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#D3C7B5]">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6B554D] font-bold">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#281B16] font-bold">
                       FIG. 00 // SOVEREIGN SYSTEMS &amp; SWISS GRID PRACTICE
                     </span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#FE299E] font-bold">
@@ -737,7 +801,7 @@ export default function StudioPage() {
                       alt="Architectural blueprint and Swiss grid system study on warm sandstone paper"
                       className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     />
-                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#281B16]/85 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5 opacity-90 group-hover:opacity-100">
+                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#281B16]/90 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5 opacity-90 group-hover:opacity-100">
                       <ZoomIn className="w-3 h-3 text-[#FE299E]" />
                       Inspect Plate
                     </div>
@@ -745,7 +809,7 @@ export default function StudioPage() {
 
                   <div className="grid grid-cols-3 gap-2 pt-3.5 mt-3.5 border-t border-[#D3C7B5] text-left">
                     <div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6B554D]">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#4A3A32] font-bold">
                         Principal Pedigree
                       </div>
                       <div className="font-serif text-base font-bold text-[#281B16]">
@@ -753,7 +817,7 @@ export default function StudioPage() {
                       </div>
                     </div>
                     <div className="border-l border-[#D3C7B5] pl-2.5">
-                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6B554D]">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#4A3A32] font-bold">
                         Proprietary IP
                       </div>
                       <div className="font-serif text-base font-bold text-[#281B16]">
@@ -761,7 +825,7 @@ export default function StudioPage() {
                       </div>
                     </div>
                     <div className="border-l border-[#D3C7B5] pl-2.5">
-                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6B554D]">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#4A3A32] font-bold">
                         Lab Output (16 Mo)
                       </div>
                       <div className="font-serif text-base font-bold text-[#FE299E]">
@@ -782,7 +846,7 @@ export default function StudioPage() {
                 <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
                   Good, Fast &amp; Affordable
                 </div>
-                <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                   How one Principal Architect + custom AI harnesses outperforms a 10-person agency pod.
                 </p>
               </div>
@@ -794,7 +858,7 @@ export default function StudioPage() {
                 <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
                   Startups, Schools &amp; Main St.
                 </div>
-                <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                   Sovereign software for high-conviction builders, classical academies, faith orgs &amp; field teams.
                 </p>
               </div>
@@ -806,7 +870,7 @@ export default function StudioPage() {
                 <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
                   Banking, Health &amp; Defense
                 </div>
-                <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                   Proven across Custodia Bank ($71M+), UnitedHealth (35M+ users), Walmart (3M) &amp; IronNet.
                 </p>
               </div>
@@ -818,7 +882,7 @@ export default function StudioPage() {
                 <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
                   Pipes, Hash, SEMI &amp; Marigold
                 </div>
-                <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                   Explore 12 live production views from our sovereign protocol, WebGPU classroom &amp; DuckDB suite.
                 </p>
               </div>
@@ -830,7 +894,7 @@ export default function StudioPage() {
                 <div className="font-serif text-lg font-bold text-[#F2EAE0] mb-1">
                   $7.5k Sprint · $15k–$25k Build
                 </div>
-                <p className="font-sans text-xs text-[#D3C7B5] leading-relaxed">
+                <p className="font-sans text-xs text-[#E4DACB] leading-relaxed">
                   Zero hourly billing games. Clear scope, direct principal execution, and clean Git handoff.
                 </p>
               </div>
@@ -849,21 +913,21 @@ export default function StudioPage() {
           ref={(el) => {
             sectionRefs.current.thesis = el;
           }}
-          className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-28"
+          className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-32"
           data-testid="section-thesis"
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
             {/* Section Eyebrow */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
               <div className="flex items-center gap-3">
                 <span className="px-2.5 py-1 rounded-sm bg-[#281B16] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.16em]">
                   01 // THE THESIS
                 </span>
-                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#4A3A32] font-bold">
                   Why the Traditional Agency Model Is Broken
                 </span>
               </div>
-              <span className="font-mono text-[11px] text-[#6B554D]">
+              <span className="font-mono text-[11px] text-[#4A3A32] font-bold">
                 STUDIO OF ONE · ZERO HANDOFF TAX
               </span>
             </div>
@@ -881,7 +945,7 @@ export default function StudioPage() {
                   </span>
                 </h2>
 
-                <div className="space-y-5 font-serif text-lg md:text-xl text-[#3D2C24] leading-[1.65] max-w-[64ch]">
+                <div className="space-y-5 font-serif text-lg md:text-xl text-[#281B16] leading-[1.65] max-w-[64ch]">
                   <p>
                     For thirty years, big consultancies and dev shops have hidden behind the Iron Triangle: if you want software that is{" "}
                     <strong className="font-semibold text-[#281B16]">good</strong> and{" "}
@@ -907,7 +971,7 @@ export default function StudioPage() {
                     <h3 className="font-serif text-xl font-bold text-[#281B16] mb-1.5">
                       The Architect Is the Builder
                     </h3>
-                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                    <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                       The person who interviews your stakeholders in the morning is the same person modeling your database schema at noon and shipping production TypeScript by evening.
                     </p>
                   </div>
@@ -919,7 +983,7 @@ export default function StudioPage() {
                     <h3 className="font-serif text-xl font-bold text-[#281B16] mb-1.5">
                       10x Output, Principal Judgment
                     </h3>
-                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                    <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                       Junior devs use AI to generate brittle boilerplate. A 25-year architect uses custom MCP harnesses to execute verified systems architecture at 10x speed.
                     </p>
                   </div>
@@ -931,7 +995,7 @@ export default function StudioPage() {
                     <h3 className="font-serif text-xl font-bold text-[#281B16] mb-1.5">
                       Working Software Over Slide Decks
                     </h3>
-                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                    <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                       We don&apos;t spend 8 weeks billing you for static Figma pictures that engineers later reject. We design directly in responsive, accessible, production-ready code.
                     </p>
                   </div>
@@ -943,7 +1007,7 @@ export default function StudioPage() {
                     <h3 className="font-serif text-xl font-bold text-[#281B16] mb-1.5">
                       Zero Lock-In Handoff
                     </h3>
-                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                    <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                       Every sprint ends with a clean, documented Git repository, architectural decision records (ADRs), and zero hostage retainers.
                     </p>
                   </div>
@@ -962,7 +1026,7 @@ export default function StudioPage() {
                         Big Agency Retainer vs. CHB Studio Sprint
                       </h3>
                     </div>
-                    <span className="px-2.5 py-1 rounded-sm bg-[#FE299E]/15 border border-[#FE299E]/40 font-mono text-[10px] text-[#FE299E] uppercase tracking-[0.14em]">
+                    <span className="px-2.5 py-1 rounded-sm bg-[#FE299E]/15 border border-[#FE299E]/40 font-mono text-[10px] text-[#FE299E] font-bold uppercase tracking-[0.14em]">
                       2026 Benchmark
                     </span>
                   </div>
@@ -999,17 +1063,17 @@ export default function StudioPage() {
                         key={idx}
                         className="p-4 rounded-sm bg-[#32221C] border border-[#46332B]"
                       >
-                        <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#D3C7B5] mb-2">
+                        <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#F2EAE0] font-bold mb-2">
                           0{idx + 1} // {row.dimension}
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <div className="text-xs font-sans text-[#B09E94] bg-[#231814] p-2.5 rounded-sm border border-[#3D2C24]">
-                            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#8C7A6B] block mb-0.5">
+                          <div className="text-xs font-sans text-[#E4DACB] bg-[#231814] p-2.5 rounded-sm border border-[#3D2C24]">
+                            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#D3C7B5] font-bold block mb-0.5">
                               Traditional Agency
                             </span>
                             {row.agency}
                           </div>
-                          <div className="text-xs font-sans text-[#F2EAE0] bg-[#281B16] p-2.5 rounded-sm border border-[#FE299E]/50">
+                          <div className="text-xs font-sans text-[#F2EAE0] bg-[#281B16] p-2.5 rounded-sm border border-[#FE299E]/60">
                             <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#FE299E] font-bold block mb-0.5">
                               Colon Hyphen Bracket :-]
                             </span>
@@ -1021,7 +1085,7 @@ export default function StudioPage() {
                   </div>
 
                   <div className="mt-6 pt-5 border-t border-[#3D2C24] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <p className="font-serif italic text-sm text-[#D3C7B5]">
+                    <p className="font-serif italic text-sm text-[#F2EAE0]">
                       &ldquo;We don&apos;t bill you for meetings. We bill you for solved architecture.&rdquo;
                     </p>
                     <button
@@ -1050,18 +1114,18 @@ export default function StudioPage() {
           className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-28"
           data-testid="section-overlooked"
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
             {/* Section Eyebrow */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
               <div className="flex items-center gap-3">
                 <span className="px-2.5 py-1 rounded-sm bg-[#281B16] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.16em]">
                   02 // THE OVERLOOKED
                 </span>
-                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#4A3A32] font-semibold">
                   Sovereign Software for Underserved Verticals
                 </span>
               </div>
-              <span className="font-mono text-[11px] text-[#6B554D]">
+              <span className="font-mono text-[11px] text-[#4A3A32] font-semibold">
                 4 CORE VERTICALS · LIVE SHIPPED PROOF
               </span>
             </div>
@@ -1077,7 +1141,7 @@ export default function StudioPage() {
                 </h2>
               </div>
               <div className="lg:col-span-5">
-                <p className="font-serif text-lg text-[#3D2C24] leading-[1.6]">
+                <p className="font-serif text-lg text-[#281B16] leading-[1.6]">
                   Modern enterprise software has a blind spot. Every SaaS platform is priced and bloated for coastal conglomerates with 40-person IT departments—leaving high-velocity startups, classical schools, faith institutions, and Main Street operators behind. We build specifically for them.
                 </p>
               </div>
@@ -1122,7 +1186,7 @@ export default function StudioPage() {
                         loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
                       />
-                      <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#281B16]/80 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#281B16]/85 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         <ZoomIn className="w-3 h-3 text-[#FE299E]" />
                         Inspect Plate
                       </div>
@@ -1134,11 +1198,11 @@ export default function StudioPage() {
                         {card.title}
                       </h3>
 
-                      <blockquote className="pl-3.5 border-l-2 border-[#FE299E] font-serif italic text-base text-[#5C4840] mb-4">
+                      <blockquote className="pl-3.5 border-l-2 border-[#FE299E] font-serif italic text-base text-[#3D2C24] mb-4">
                         {card.quote}
                       </blockquote>
 
-                      <p className="font-sans text-sm text-[#3D2C24] leading-relaxed mb-5">
+                      <p className="font-sans text-sm text-[#281B16] leading-relaxed mb-5">
                         {card.problem}
                       </p>
 
@@ -1146,7 +1210,7 @@ export default function StudioPage() {
                         {card.bullets.map((b, i) => (
                           <li
                             key={i}
-                            className="flex items-start gap-2.5 font-sans text-xs md:text-sm text-[#5C4840] leading-relaxed"
+                            className="flex items-start gap-2.5 font-sans text-xs md:text-sm text-[#4A3A32] leading-relaxed"
                           >
                             <span
                               className="mt-1.5 text-[#FE299E] text-[9px] shrink-0 select-none"
@@ -1163,7 +1227,7 @@ export default function StudioPage() {
 
                   {/* Card Footer: Live Shipped Proof Links */}
                   <div className="px-6 md:px-8 py-4 bg-[#EAE0D0]/60 border-t border-[#D3C7B5] flex flex-wrap items-center justify-between gap-2">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6B554D] font-bold">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#3D2C24] font-bold">
                       {card.shippedProof.label}:
                     </span>
                     <div className="flex flex-wrap items-center gap-2">
@@ -1171,7 +1235,7 @@ export default function StudioPage() {
                         <Link
                           key={proof.name}
                           href={proof.href}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] font-mono text-[10px] text-[#281B16] hover:text-[#FE299E] no-underline transition-colors"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] font-mono text-[10px] text-[#281B16] font-semibold hover:text-[#FE299E] no-underline transition-colors"
                         >
                           {proof.name}
                           <ArrowUpRight className="w-3 h-3 text-[#FE299E]" />
@@ -1196,18 +1260,18 @@ export default function StudioPage() {
           className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-28"
           data-testid="section-regulated"
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
             {/* Section Eyebrow */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
               <div className="flex items-center gap-3">
                 <span className="px-2.5 py-1 rounded-sm bg-[#281B16] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.16em]">
                   03 // REGULATED SYSTEMS
                 </span>
-                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#4A3A32] font-semibold">
                   Unblocking High-Compliance Financial, Clinical &amp; Civic Tech
                 </span>
               </div>
-              <span className="font-mono text-[11px] text-[#6B554D]">
+              <span className="font-mono text-[11px] text-[#4A3A32] font-semibold">
                 HIPAA · FED MASTER ACCOUNT · SOC2 · ZERO-PII
               </span>
             </div>
@@ -1226,7 +1290,7 @@ export default function StudioPage() {
                   technology.
                 </h2>
 
-                <div className="space-y-4 font-serif text-lg md:text-xl text-[#3D2C24] leading-[1.65] max-w-[64ch] mb-6">
+                <div className="space-y-4 font-serif text-lg md:text-xl text-[#281B16] leading-[1.65] max-w-[64ch] mb-6">
                   <p>
                     In regulated industries, most teams face a false choice: move fast and fail the audit, or hire an enterprise consultancy that buries clinicians, bankers, and analysts under 47-field compliance forms.
                   </p>
@@ -1244,7 +1308,7 @@ export default function StudioPage() {
                   ].map((item, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-3 font-sans text-xs md:text-sm text-[#5C4840] leading-relaxed"
+                      className="flex items-start gap-3 font-sans text-xs md:text-sm text-[#4A3A32] leading-relaxed"
                     >
                       <CheckCircle2 className="w-4 h-4 text-[#FE299E] shrink-0 mt-0.5" />
                       <span>{item}</span>
@@ -1257,7 +1321,7 @@ export default function StudioPage() {
               <div className="lg:col-span-6">
                 <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-4 md:p-6 shadow-[0_20px_50px_rgba(40,27,22,0.08)]">
                   <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#D3C7B5]">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6B554D] font-bold">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#3D2C24] font-bold">
                       FIG. 03 // 3-TIER REGULATED ARCHITECTURE CROSS-SECTION
                     </span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#2A7B5C] font-bold">
@@ -1293,8 +1357,8 @@ export default function StudioPage() {
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-[#D3C7B5] flex flex-wrap items-center justify-between gap-2 text-xs text-[#5C4840]">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6B554D]">
+                  <div className="mt-4 pt-3 border-t border-[#D3C7B5] flex flex-wrap items-center justify-between gap-2 text-xs text-[#4A3A32]">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#3D2C24] font-semibold">
                       PATENTED CUSTODY &amp; ZERO-KNOWLEDGE TELEMETRY
                     </span>
                     <Link
@@ -1323,15 +1387,15 @@ export default function StudioPage() {
                       <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#FE299E] font-bold">
                         {item.metric}
                       </span>
-                      <ArrowUpRight className="w-4 h-4 text-[#6B554D] group-hover:text-[#FE299E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowUpRight className="w-4 h-4 text-[#4A3A32] group-hover:text-[#FE299E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
                     <h3 className="font-serif text-2xl font-bold text-[#281B16] group-hover:text-[#FE299E] transition-colors mb-1">
                       {item.client}
                     </h3>
-                    <div className="font-mono text-[11px] text-[#6B554D] mb-3">
+                    <div className="font-mono text-[11px] text-[#3D2C24] font-semibold mb-3">
                       {item.domain}
                     </div>
-                    <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                    <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                       {item.summary}
                     </p>
                   </div>
@@ -1356,14 +1420,14 @@ export default function StudioPage() {
           className="py-20 md:py-28 border-b border-[#D3C7B5] scroll-mt-28"
           data-testid="section-lab"
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
             {/* Section Eyebrow */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
               <div className="flex items-center gap-3">
                 <span className="px-2.5 py-1 rounded-sm bg-[#FE299E] text-white font-mono text-xs font-bold uppercase tracking-[0.16em]">
                   04 // THE LAB · 16-MONTH R&amp;D SUITE
                 </span>
-                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#4A3A32] font-semibold">
                   Proprietary Technology &amp; Live Sovereign Ecosystem
                 </span>
               </div>
@@ -1386,7 +1450,7 @@ export default function StudioPage() {
                 </h2>
               </div>
               <div className="lg:col-span-5">
-                <p className="font-serif text-lg text-[#3D2C24] leading-[1.6]">
+                <p className="font-serif text-lg text-[#281B16] leading-[1.6]">
                   When we first launched this studio page 16 months ago, we promised a roadmap of privacy-first local AI, curator economics, and sovereign education tools. Here is the receipts-first look at every platform and view we have engineered and shipped into production since.
                 </p>
               </div>
@@ -1418,7 +1482,7 @@ export default function StudioPage() {
                       className={`px-3.5 py-2 rounded-sm font-mono text-[11px] uppercase tracking-[0.13em] transition-all cursor-pointer border ${
                         active
                           ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-bold"
-                          : "bg-[#F2EAE0] text-[#5C4840] border-[#D3C7B5] hover:border-[#281B16] hover:text-[#281B16]"
+                          : "bg-[#F2EAE0] text-[#3D2C24] font-semibold border-[#D3C7B5] hover:border-[#281B16] hover:text-[#281B16]"
                       }`}
                       data-testid={`button-lab-filter-${tab.id}`}
                     >
@@ -1441,7 +1505,7 @@ export default function StudioPage() {
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
-                <span className="font-mono text-xs text-[#5C4840] px-2">
+                <span className="font-mono text-xs text-[#281B16] font-semibold px-2">
                   View {safeLabIndex + 1} of {filteredLabViews.length}
                 </span>
                 <button
@@ -1470,11 +1534,11 @@ export default function StudioPage() {
                   <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#3D2C24]">
                     <div className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-[#FE299E]" />
-                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#D3C7B5] font-bold">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#F2EAE0] font-bold">
                         {activeLabView.badge}
                       </span>
                     </div>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#B09E94]">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#E4DACB]">
                       {activeLabView.shippedDate}
                     </span>
                   </div>
@@ -1504,7 +1568,7 @@ export default function StudioPage() {
                 {/* Right 5 Cols: View Architecture Details & Links */}
                 <div className="lg:col-span-5 flex flex-col justify-between">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-[#32221C] border border-[#4A372E] font-mono text-[10px] uppercase tracking-[0.14em] text-[#FE299E] mb-3">
+                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-[#32221C] border border-[#4A372E] font-mono text-[10px] uppercase tracking-[0.14em] text-[#FE299E] font-bold mb-3">
                       {activeLabView.categoryLabel}
                     </div>
 
@@ -1512,19 +1576,19 @@ export default function StudioPage() {
                       {activeLabView.title}
                     </h3>
 
-                    <p className="font-sans text-sm text-[#D3C7B5] leading-relaxed mb-6">
+                    <p className="font-sans text-sm text-[#E4DACB] leading-relaxed mb-6">
                       {activeLabView.subtitle}
                     </p>
 
                     <div className="bg-[#1B120F] border border-[#3D2C24] rounded-sm p-4 mb-6">
-                      <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#B09E94] mb-2.5">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#E4DACB] font-bold mb-2.5">
                         ARCHITECTURAL HIGHLIGHTS //
                       </div>
                       <ul className="space-y-2">
                         {activeLabView.highlights.map((h, i) => (
                           <li
                             key={i}
-                            className="flex items-start gap-2 font-sans text-xs text-[#EAE0D0]"
+                            className="flex items-start gap-2 font-sans text-xs text-[#F2EAE0]"
                           >
                             <span className="text-[#FE299E] font-mono text-[10px] mt-0.5">
                               ▲
@@ -1537,34 +1601,34 @@ export default function StudioPage() {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[#3D2C24]">
-                    <Link
-                      href={activeLabView.caseStudyHref}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-[#FE299E] text-white font-mono text-[11px] font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors no-underline"
-                      data-testid="link-lab-view-casestudy"
-                    >
-                      Read Architectural Case Study
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-
                     {activeLabView.liveUrl && (
                       <a
                         href={activeLabView.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] text-[#F2EAE0] border border-[#4A372E] font-mono text-[11px] uppercase tracking-[0.14em] no-underline transition-colors"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-sm bg-[#FE299E] hover:bg-[#d81b80] text-white font-mono text-[11px] font-bold uppercase tracking-[0.14em] no-underline transition-colors"
                         data-testid="link-lab-view-live"
                       >
                         Launch {activeLabView.liveLabel}
-                        <ExternalLink className="w-3.5 h-3.5 text-[#FE299E]" />
+                        <ExternalLink className="w-3.5 h-3.5 text-white" />
                       </a>
                     )}
+
+                    <Link
+                      href={activeLabView.caseStudyHref}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-[#32221C] hover:bg-[#3D2C24] text-[#F2EAE0] border border-[#4A372E] font-mono text-[11px] font-bold uppercase tracking-[0.14em] transition-colors no-underline"
+                      data-testid="link-lab-view-casestudy"
+                    >
+                      Read Case Study
+                      <ArrowRight className="w-3.5 h-3.5 text-[#FE299E]" />
+                    </Link>
                   </div>
                 </div>
               </div>
 
               {/* Thumbnail Filmstrip Selector across all Filtered Views */}
               <div className="mt-7 pt-5 border-t border-[#3D2C24]">
-                <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#B09E94] mb-3">
+                <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#E4DACB] font-bold mb-3">
                   SELECT PRODUCTION VIEW ({filteredLabViews.length} AVAILABLE) //
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">
@@ -1577,7 +1641,7 @@ export default function StudioPage() {
                         className={`text-left p-2 rounded-sm border transition-all cursor-pointer ${
                           isSelected
                             ? "bg-[#32221C] border-[#FE299E] ring-1 ring-[#FE299E]"
-                            : "bg-[#1B120F] border-[#3D2C24] opacity-75 hover:opacity-100 hover:border-[#6B554D]"
+                            : "bg-[#1B120F] border-[#3D2C24] opacity-80 hover:opacity-100 hover:border-[#6B554D]"
                         }`}
                         data-testid={`button-lab-thumb-${view.id}`}
                       >
@@ -1589,7 +1653,7 @@ export default function StudioPage() {
                             className="w-full h-full object-cover object-top"
                           />
                         </div>
-                        <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#FE299E] truncate">
+                        <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#FE299E] font-bold truncate">
                           {view.categoryLabel}
                         </div>
                         <div className="font-sans text-[11px] font-medium text-[#F2EAE0] truncate">
@@ -1603,7 +1667,7 @@ export default function StudioPage() {
             </div>
 
             {/* 6 Lab Capability Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
               {LAB_CAPABILITIES.map((cap) => {
                 const IconComponent = cap.icon;
                 return (
@@ -1623,13 +1687,117 @@ export default function StudioPage() {
                       <h3 className="font-serif text-xl font-bold text-[#281B16] mb-2">
                         {cap.title}
                       </h3>
-                      <p className="font-sans text-xs md:text-sm text-[#5C4840] leading-relaxed">
+                      <p className="font-sans text-xs md:text-sm text-[#4A3A32] leading-relaxed">
                         {cap.body}
                       </p>
                     </div>
                   </div>
                 );
               })}
+            </div>
+
+            {/* 3-Tier Sovereign Ecosystem & R&D Studio Conversion Matrix */}
+            <div className="bg-[#231814] text-[#F2EAE0] border border-[#3D2C24] rounded-sm p-6 md:p-10 shadow-[0_24px_60px_rgba(35,24,20,0.2)]">
+              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-[#3D2C24]">
+                <div>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#FE299E] font-bold block mb-1">
+                    LIVE SOVEREIGN ECOSYSTEM · DIRECT ACCESS
+                  </span>
+                  <h3 className="font-serif text-2xl sm:text-3xl text-[#F2EAE0]">
+                    Use our live products today—or deploy our studio on yours.
+                  </h3>
+                </div>
+                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#E4DACB] font-semibold">
+                  ZERO-CLOUD TELEMETRY · 70% CURATOR ROYALTIES · FIXED-FEE SPRINTS
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Tier 01: Free Hash & SEMI Studio */}
+                <div className="bg-[#2D1F1A] border border-[#46332B] rounded-sm p-6 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#E4DACB] font-bold">
+                        01 // PRIVATE AI SANCTUARY
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-sm bg-[#231814] text-[#F2EAE0] border border-[#46332B] font-mono text-xs font-bold">
+                        FREE
+                      </span>
+                    </div>
+                    <h4 className="font-serif text-2xl text-[#F2EAE0] font-bold mb-2">
+                      # Hash &amp; ;-] Semi Studio
+                    </h4>
+                    <p className="font-sans text-xs sm:text-sm text-[#E4DACB] leading-relaxed mb-5">
+                      Write, research, and synthesize inside an encrypted local-first Markdown notebook paired with SEMI—our Socratic multi-model agent (Claude, Gemini, Grok, Local WebGPU).
+                    </p>
+                  </div>
+                  <a
+                    href="https://pipes.pink/write"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-sm bg-[#F2EAE0] hover:bg-white text-[#281B16] font-mono text-xs font-bold uppercase tracking-[0.14em] no-underline transition-colors"
+                  >
+                    Open # Hash + ;-] Semi Free
+                    <ExternalLink className="w-3.5 h-3.5 text-[#FE299E]" />
+                  </a>
+                </div>
+
+                {/* Tier 02: Claim a Deeded Pipe ($9/yr) */}
+                <div className="bg-[#2D1F1A] border-2 border-[#FE299E] rounded-sm p-6 flex flex-col justify-between relative shadow-[0_12px_35px_rgba(254,41,158,0.14)]">
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#FE299E] font-bold">
+                        02 // SOVEREIGN CURATION PROTOCOL
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-sm bg-[#FE299E] text-white font-mono text-xs font-bold">
+                        $9 / YR
+                      </span>
+                    </div>
+                    <h4 className="font-serif text-2xl text-[#F2EAE0] font-bold mb-2">
+                      Claim a Deeded Pipe on Pipes.Pink
+                    </h4>
+                    <p className="font-sans text-xs sm:text-sm text-[#E4DACB] leading-relaxed mb-5">
+                      Own your canonical namespace (`pipes.pink/|topic`), curate high-signal knowledge libraries or classrooms, and earn a 70% pro-rata share of protocol subscription revenue.
+                    </p>
+                  </div>
+                  <a
+                    href="https://pipes.pink"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-sm bg-[#FE299E] hover:bg-[#d81b80] text-white font-mono text-xs font-bold uppercase tracking-[0.14em] no-underline transition-colors"
+                  >
+                    | | | Claim Your Pipe ($9/yr)
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+
+                {/* Tier 03: 1-Week Rapid R&D Sprint ($7,500) */}
+                <div className="bg-[#2D1F1A] border border-[#46332B] rounded-sm p-6 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#E4DACB] font-bold">
+                        03 // PRINCIPAL STUDIO DEPLOY
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-sm bg-[#231814] text-[#FE299E] border border-[#FE299E]/50 font-mono text-xs font-bold">
+                        $7,500
+                      </span>
+                    </div>
+                    <h4 className="font-serif text-2xl text-[#F2EAE0] font-bold mb-2">
+                      1-Week Surgical R&amp;D Sprint
+                    </h4>
+                    <p className="font-sans text-xs sm:text-sm text-[#E4DACB] leading-relaxed mb-5">
+                      Have a regulated workflow, zero-PII DuckDB analytics engine, or flagship AI product that needs to ship now? Work directly with Kyle to unblock and ship production code in 5 days.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => openContact("calendly")}
+                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-sm bg-[#3D2C24] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white border border-[#5C4840] font-mono text-xs font-bold uppercase tracking-[0.14em] transition-colors cursor-pointer"
+                  >
+                    Book 1-Week Sprint ($7,500)
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1645,18 +1813,18 @@ export default function StudioPage() {
           className="py-20 md:py-28 scroll-mt-28"
           data-testid="section-engagement"
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
             {/* Section Eyebrow */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-[#D3C7B5]">
               <div className="flex items-center gap-3">
                 <span className="px-2.5 py-1 rounded-sm bg-[#281B16] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.16em]">
                   05 // MANIFESTO &amp; ENGAGEMENT
                 </span>
-                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#6B554D]">
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#4A3A32] font-semibold">
                   Our Design Philosophy &amp; How We Work Together
                 </span>
               </div>
-              <span className="font-mono text-[11px] text-[#6B554D]">
+              <span className="font-mono text-[11px] text-[#4A3A32] font-semibold">
                 WARM SANDSTONE · SWISS GRID · FIXED-FEE SPRINTS
               </span>
             </div>
@@ -1675,7 +1843,7 @@ export default function StudioPage() {
                     </span>{" "}
                     &amp; a precision instrument.
                   </h2>
-                  <p className="font-sans text-xs md:text-sm text-[#5C4840] leading-relaxed mb-6">
+                  <p className="font-sans text-xs md:text-sm text-[#4A3A32] leading-relaxed mb-6">
                     Inspired by Josef Albers&apos;s{" "}
                     <em>Interaction of Color</em>, Massimo Vignelli&apos;s architectural grids, and Dieter Rams&apos;s industrial honesty, every system we ship rejects dark-pattern bloat in favor of warm paper surfaces, mathematical proportion, and verifiable truth.
                   </p>
@@ -1700,7 +1868,7 @@ export default function StudioPage() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-7 font-serif text-lg md:text-xl text-[#3D2C24] leading-[1.68] space-y-4 border-t lg:border-t-0 lg:border-l border-[#D3C7B5] pt-6 lg:pt-0 lg:pl-10">
+                <div className="lg:col-span-7 font-serif text-lg md:text-xl text-[#281B16] leading-[1.68] space-y-4 border-t lg:border-t-0 lg:border-l border-[#D3C7B5] pt-6 lg:pt-0 lg:pl-10">
                   <p className="first-letter:float-left first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:text-[#FE299E] first-letter:mr-3 first-letter:leading-none">
                     We believe that how a tool looks and how its database is normalized are the exact same conversation. When an interface is cluttered, it is almost always because the underlying domain model is confused. When a user has to click seven times to complete a workflow, it is because the architect designed for the org chart rather than the human being.
                   </p>
@@ -1726,7 +1894,7 @@ export default function StudioPage() {
                     Colon Hyphen Bracket.
                   </span>
                 </h3>
-                <p className="font-serif text-lg text-[#3D2C24] leading-[1.6] mb-6">
+                <p className="font-serif text-lg text-[#281B16] leading-[1.6] mb-6">
                   We respect your time. Instead of dragging your leadership team through weeks of low-signal discovery workshops, every engagement begins with a focused{" "}
                   <strong className="font-semibold text-[#281B16]">
                     30-to-120 minute high-intensity architectural intake
@@ -1767,7 +1935,7 @@ export default function StudioPage() {
                       <div className="font-serif text-lg font-bold text-[#281B16] mb-1">
                         {item.title}
                       </div>
-                      <p className="font-sans text-xs text-[#5C4840] leading-relaxed">
+                      <p className="font-sans text-xs text-[#4A3A32] leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
@@ -1779,7 +1947,7 @@ export default function StudioPage() {
               <div className="lg:col-span-6">
                 <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-sm p-4 md:p-6 shadow-[0_20px_50px_rgba(40,27,22,0.08)]">
                   <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#D3C7B5]">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6B554D] font-bold">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#3D2C24] font-bold">
                       FIG. 01 // THE CHB OPERATING LOOM (INTAKE TO PRODUCTION)
                     </span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#FE299E] font-bold">
@@ -1815,7 +1983,7 @@ export default function StudioPage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-4 gap-2 pt-3.5 mt-3.5 border-t border-[#D3C7B5] font-mono text-[10px] text-[#5C4840]">
+                  <div className="grid grid-cols-4 gap-2 pt-3.5 mt-3.5 border-t border-[#D3C7B5] font-mono text-[10px] text-[#3D2C24] font-semibold">
                     <div>
                       <span className="text-[#FE299E] font-bold block">STAGE 01</span>
                       30–120m Intake
@@ -1843,46 +2011,6 @@ export default function StudioPage() {
             onContactClick={() => openContact("calendly")}
           />
         </section>
-
-        {/* ============================================================
-            STUDIO FOOTER LEDGER
-           ============================================================ */}
-        <footer className="bg-[#281B16] text-[#F2EAE0] border-t border-[#3D2C24] py-12">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <BrandMark size="sm" />
-              <div>
-                <div className="font-serif text-lg text-[#F2EAE0] font-bold">
-                  Colon Hyphen Bracket, LLC
-                </div>
-                <div className="font-mono text-[11px] text-[#B09E94]">
-                  Systems &amp; Product Architecture Studio · Salt Lake City &amp; Remote
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="/"
-                className="font-mono text-xs uppercase tracking-[0.14em] text-[#D3C7B5] hover:text-[#FE299E] no-underline"
-              >
-                ← Principal Portfolio
-              </Link>
-              <Link
-                href="/case-studies/pipes"
-                className="font-mono text-xs uppercase tracking-[0.14em] text-[#D3C7B5] hover:text-[#FE299E] no-underline"
-              >
-                Pipes.Pink Case Study
-              </Link>
-              <button
-                onClick={() => openContact("calendly")}
-                className="px-4 py-2 rounded-sm bg-[#FE299E] text-white font-mono text-xs font-bold uppercase tracking-[0.14em] hover:bg-[#d81b80] transition-colors cursor-pointer border-none"
-              >
-                Book Intro Call
-              </button>
-            </div>
-          </div>
-        </footer>
 
         {/* Full-Resolution Architectural Plate & Screenshot Lightbox */}
         <Dialog

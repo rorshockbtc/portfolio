@@ -85,7 +85,46 @@ export default function FooterSection() {
       aria-label="Site footer"
       data-testid="section-footer"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 pb-28 md:pb-20">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-16 md:py-20 pb-28 md:pb-20">
+        {/* Pre-Footer Sovereign Ecosystem & Studio Conversion Strip */}
+        <div className="mb-14 pb-10 border-b border-[#D3C7B5] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div className="space-y-1.5">
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#FE299E] font-bold block">
+              COLON HYPHEN BRACKET · SOVEREIGN ECOSYSTEM &amp; R&amp;D STUDIO
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#281B16] tracking-tight">
+              Claim your Pipe, write in Hash + Semi, or scope a 1-week sprint.
+            </h2>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href="https://pipes.pink"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs font-bold uppercase tracking-[0.14em] transition-colors no-underline shadow-xs"
+            >
+              | | | Claim Your Pipe ($9/yr)
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="https://pipes.pink/write"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-xs font-bold uppercase tracking-[0.14em] transition-colors no-underline"
+            >
+              Open # Hash + ;-] Semi Free
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#FE299E]" />
+            </a>
+            <Button
+              size="sm"
+              onClick={() => openContactModal("1-week sprint ($7,500)")}
+              className="cursor-pointer rounded-full bg-[#EAE0D0] hover:bg-[#281B16] text-[#281B16] hover:text-[#F2EAE0] border border-[#D3C7B5] font-sans text-xs font-bold uppercase tracking-[0.14em] px-5 py-2.5 h-auto"
+            >
+              Book $7,500 Sprint
+            </Button>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           <div className="md:col-span-4 space-y-4">
             <span
@@ -95,17 +134,17 @@ export default function FooterSection() {
             >
               :-]
             </span>
-            <p className="text-base text-[#78645C] leading-relaxed max-w-xs font-sans">
+            <p className="text-base text-[#4A3A32] leading-relaxed max-w-xs font-sans">
               Architecture &amp; product design for products and companies that
               have something to say.
             </p>
-            <p className="font-sans text-xs text-[#78645C]/80 tracking-wide uppercase">
+            <p className="font-sans text-xs text-[#3D2C24] font-semibold tracking-wide uppercase">
               Colon Hyphen Bracket, LLC
             </p>
           </div>
 
           <div className="md:col-span-2 space-y-4">
-            <h3 className="font-sans text-xs uppercase tracking-[0.2em] text-[#78645C] font-semibold">
+            <h3 className="font-sans text-xs uppercase tracking-[0.2em] text-[#281B16] font-bold">
               Ecosystem
             </h3>
             <ul className="space-y-2.5" role="list">
@@ -114,11 +153,11 @@ export default function FooterSection() {
                   <a
                     href={link.href}
                     {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group inline-flex items-center gap-1.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
+                    className="group inline-flex items-center gap-1.5 text-sm text-[#4A3A32] font-medium hover:text-[#281B16] transition-colors duration-300"
                     data-testid={`link-product-${link.name.split(".")[0].toLowerCase().replace(/[^a-z0-9]/g, "-")}`}
                   >
                     {link.name}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover:opacity-60 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
+                    <ArrowUpRight className="w-3 h-3 text-[#FE299E] opacity-70 group-hover:opacity-100 transition-all duration-300" />
                   </a>
                 </li>
               ))}
@@ -126,7 +165,7 @@ export default function FooterSection() {
           </div>
 
           <div className="md:col-span-4 space-y-4">
-            <h3 className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="font-sans text-xs uppercase tracking-[0.2em] text-[#281B16] font-bold">
               Further Reading
             </h3>
             <ul className="space-y-2.5" role="list" data-testid="list-further-reading">
@@ -136,16 +175,16 @@ export default function FooterSection() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-baseline gap-1.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300 leading-snug"
+                    className="group inline-flex items-baseline gap-2 text-sm text-[#4A3A32] hover:text-[#281B16] transition-colors duration-300 leading-snug"
                     data-testid={`link-further-${item.pub.toLowerCase().replace(/\s+/g, "-")}`}
                   >
-                    <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80 shrink-0">
+                    <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#281B16] font-bold shrink-0">
                       {item.pub}
                     </span>
-                    <span className="text-foreground/70 group-hover:text-foreground">
+                    <span className="text-[#4A3A32] group-hover:text-[#281B16]">
                       {item.title}
                     </span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover:opacity-60 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300 shrink-0" />
+                    <ArrowUpRight className="w-3 h-3 text-[#FE299E] opacity-60 group-hover:opacity-100 transition-all duration-300 shrink-0" />
                   </a>
                 </li>
               ))}
@@ -153,7 +192,7 @@ export default function FooterSection() {
           </div>
 
           <div className="md:col-span-2 space-y-4">
-            <h3 className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="font-sans text-xs uppercase tracking-[0.2em] text-[#281B16] font-bold">
               Connect
             </h3>
             <ul className="space-y-2.5" role="list">
@@ -163,11 +202,11 @@ export default function FooterSection() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
+                    className="inline-flex items-center gap-2 text-sm text-[#4A3A32] font-medium hover:text-[#281B16] transition-colors duration-300"
                     aria-label={link.name}
                     data-testid={`link-social-${link.name.toLowerCase()}`}
                   >
-                    <link.icon className="w-4 h-4" />
+                    <link.icon className="w-4 h-4 text-[#281B16]" />
                     {link.name}
                   </a>
                 </li>
@@ -175,7 +214,7 @@ export default function FooterSection() {
               <li className="space-y-1.5">
                 <a
                   href="mailto:rorshock@protonmail.com"
-                  className="inline-flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300 break-all"
+                  className="inline-flex items-center gap-2 text-sm text-[#4A3A32] font-medium hover:text-[#281B16] transition-colors duration-300 break-all"
                   data-testid="link-footer-email"
                 >
                   rorshock@protonmail.com
@@ -183,11 +222,11 @@ export default function FooterSection() {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider border border-[#D3C7B5] bg-[#EAE0D0] text-[#5C4840] hover:border-[#FE299E] hover:text-[#281B16] transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider border border-[#D3C7B5] bg-[#EAE0D0] text-[#281B16] hover:border-[#FE299E] hover:text-[#FE299E] transition-colors cursor-pointer"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-3 h-3 text-emerald-600" /> Copied email
+                      <Check className="w-3 h-3 text-emerald-700" /> Copied email
                     </>
                   ) : (
                     <>
@@ -200,15 +239,15 @@ export default function FooterSection() {
           </div>
         </div>
 
-        <div className="mt-16 pt-6 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-16 pt-6 border-t border-[#D3C7B5] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p
-            className="font-sans text-[10px] text-muted-foreground/60 tracking-wider"
+            className="font-sans text-xs text-[#4A3A32] font-medium tracking-wider"
             data-testid="text-copyright"
           >
             &copy; 2026 CHB (Colon Hyphen Bracket, LLC). All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <p className="font-sans text-[10px] text-muted-foreground/40 tracking-wider">
+            <p className="font-sans text-xs text-[#4A3A32] tracking-wider">
               Designed &amp; built with intention
             </p>
             <Button
