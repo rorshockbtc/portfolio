@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useStudioSections } from "@/hooks/use-studio-sections";
 
 const sectionLinks = [
-  { targetId: "experience", label: "Experience" },
-  { targetId: "selected-work", label: "Work" },
+  { targetId: "selected-work", label: "Pillars" },
+  { targetId: "case-studies", label: "Studies" },
+  { targetId: "experience", label: "Exp" },
   { targetId: "code", label: "Code" },
   { targetId: "work-together", label: "Hire" },
 ];

@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { openContactModal } from "@/lib/contact-events";
 
 const navLinks = [
-  { label: "Work", targetId: "selected-work" },
+  { label: "Pillars", targetId: "selected-work" },
+  { label: "Case Studies (12)", targetId: "case-studies" },
   { label: "Experience", targetId: "experience" },
   { label: "Code", targetId: "code" },
 ];

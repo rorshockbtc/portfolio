@@ -50,6 +50,23 @@ export interface CaseStudyData {
   ndaNotice?: string;
 }
 
+export const CASE_STUDY_ORDER = [
+  "custodia",
+  "unitedhealth",
+  "walmart",
+  "pipes",
+  "marigold",
+  "cassandra",
+  "superstar",
+  "clubhouse1099",
+  "foodler",
+  "ultralinq",
+  "highdraw",
+  "colors-type-grids",
+] as const;
+
+export type CaseStudySlug = (typeof CASE_STUDY_ORDER)[number];
+
 export const CASE_STUDIES: Record<string, CaseStudyData> = {
   pipes: {
     slug: "pipes",

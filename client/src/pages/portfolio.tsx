@@ -13,6 +13,9 @@ import {
   Calendar,
   Copy,
   Check,
+  ChevronRight,
+  Sparkles,
+  Filter,
 } from "lucide-react";
 import { openContactModal } from "@/lib/contact-events";
 import {
@@ -24,9 +27,157 @@ import {
 import { ExperienceSection } from "@/components/chb/experience-section";
 import { TestimonialsSection } from "@/components/chb/testimonials-section";
 
+interface CatalogItem {
+  slug: string;
+  order: string;
+  client: string;
+  title: string;
+  summary: string;
+  domain: "fintech" | "enterprise" | "ai" | "design";
+  domainLabel: string;
+  scaleBadge: string;
+  timeline: string;
+}
+
+const ALL_CATALOG_STUDIES: CatalogItem[] = [
+  {
+    slug: "custodia",
+    order: "01",
+    client: "Custodia Bank",
+    title: "Institutional Money Market, Fedwire & Bitcoin Custody",
+    summary: "Ground-up rebrand in 4 days & core banking app in 30 days for chartered Federal Reserve SPDI bank ahead of Fed master account review.",
+    domain: "fintech",
+    domainLabel: "Fintech & Banking",
+    scaleBadge: "Chartered SPDI Bank · $71M Raised",
+    timeline: "Jan 2022 – Sep 2024",
+  },
+  {
+    slug: "unitedhealth",
+    order: "02",
+    client: "UnitedHealth Group / Optum",
+    title: "Flagship Native Patient Mobile Apps & Fusion Consultancy",
+    summary: "Led mobile UX for 35M+ patients and 400K+ employees. Produced 80%+ Android and 50%+ iOS screens, championing Apple Health integration.",
+    domain: "enterprise",
+    domainLabel: "Enterprise Monoliths",
+    scaleBadge: "35M+ Patients · Fortune 10",
+    timeline: "2020 – 2021",
+  },
+  {
+    slug: "walmart",
+    order: "03",
+    client: "Walmart Global Tech",
+    title: "Enterprise Learning Management & Graph Search",
+    summary: "Replaced legacy keyword search with GraphQL graph-database discovery and Content Distribution Platform for 3M associates.",
+    domain: "enterprise",
+    domainLabel: "Enterprise Monoliths",
+    scaleBadge: "3M Associates · Fortune 1",
+    timeline: "Oct 2021 – Oct 2022",
+  },
+  {
+    slug: "pipes",
+    order: "04",
+    client: "Pipes Protocol (CHB)",
+    title: "Sovereign Knowledge Protocol, Hash Atelier & SEMI",
+    summary: "Built sovereign knowledge engine (pipes.pink), integrated Hash Studio, SEMI Socratic AI agent, and MCP/HTTP 402 micro-settlement gate.",
+    domain: "ai",
+    domainLabel: "Sovereign AI & Protocols",
+    scaleBadge: "Web Protocol · MCP 402 Gate",
+    timeline: "2024 – Present",
+  },
+  {
+    slug: "marigold",
+    order: "05",
+    client: "Marigold Insights",
+    title: "Zero-Cloud Civic Data & Election Audit Engine",
+    summary: "In-browser analytical engine running Fellegi-Sunter record linkage across 500k+ records via DuckDB-WASM and zero-PII cryptographic hydration.",
+    domain: "ai",
+    domainLabel: "Sovereign AI & Protocols",
+    scaleBadge: "500k+ Records · DuckDB-WASM",
+    timeline: "2026",
+  },
+  {
+    slug: "cassandra",
+    order: "06",
+    client: "Cassandra AI",
+    title: "AI Orchestration, Focus Mode & Socratic Triage",
+    summary: "Streamlined executive candidate triage with deterministic model steering, structured evaluation matrices, and distraction-free Focus Mode.",
+    domain: "ai",
+    domainLabel: "Sovereign AI & Protocols",
+    scaleBadge: "Socratic AI · Zero Hallucination",
+    timeline: "2025",
+  },
+  {
+    slug: "superstar",
+    order: "07",
+    client: "Superstar Memory Loom",
+    title: "Context Continuity & Persistent Local Memory",
+    summary: "Local-first cognitive storage preserving career transition context across sessions, eliminating repetitive explanations and context drift.",
+    domain: "ai",
+    domainLabel: "Sovereign AI & Protocols",
+    scaleBadge: "Context Loom · Local-First Memory",
+    timeline: "2025",
+  },
+  {
+    slug: "clubhouse1099",
+    order: "08",
+    client: "Clubhouse 1099",
+    title: "Whisper Voice-CRM & Real Estate Agent Operating System",
+    summary: "Turned unstructured voice memos into validated CRM lead records using Whisper AI transcription and automated triage for 1099 agents.",
+    domain: "ai",
+    domainLabel: "Sovereign AI & Protocols",
+    scaleBadge: "Whisper Voice AI · 1099 CRM",
+    timeline: "2025",
+  },
+  {
+    slug: "foodler",
+    order: "09",
+    client: "Foodler (Acquired by Grubhub)",
+    title: "High-Velocity Logistics Engine & Bitcoin Checkout",
+    summary: "Engineered proprietary fraud detection that cut chargebacks 83% ($6M to <$1M), driving $500M+ order volume exit to Grubhub.",
+    domain: "fintech",
+    domainLabel: "Fintech & Banking",
+    scaleBadge: "$500M+ Volume · Grubhub Exit",
+    timeline: "2012 – 2017",
+  },
+  {
+    slug: "ultralinq",
+    order: "10",
+    client: "UltraLinq Healthcare",
+    title: "Cloud PACS & DICOM Medical Imaging Platform",
+    summary: "Engineered web-native zero-footprint medical imaging viewer for FDA-regulated cardiology telehealth, replacing heavy desktop workstations.",
+    domain: "enterprise",
+    domainLabel: "Enterprise Monoliths",
+    scaleBadge: "Cloud PACS · FDA Regulated",
+    timeline: "2018 – 2020",
+  },
+  {
+    slug: "highdraw",
+    order: "11",
+    client: "High Draw Luxury Apparel",
+    title: "Custom DTC E-Commerce Platform & Identity",
+    summary: "Ground-up headless e-commerce store, product detail experience, and brand mark launched at Pebble Beach Concours d'Elegance.",
+    domain: "design",
+    domainLabel: "Design Systems & DTC",
+    scaleBadge: "Pebble Beach Launch · Custom DTC",
+    timeline: "2024 – 2025",
+  },
+  {
+    slug: "colors-type-grids",
+    order: "12",
+    client: "Albers & Vignelli Systems",
+    title: "Design Tokens, Typographic Scales & 8pt Grid",
+    summary: "Mathematical CSS grids and Josef Albers color relativity preventing generic AI interface homogeneity across digital products.",
+    domain: "design",
+    domainLabel: "Design Systems & DTC",
+    scaleBadge: "Mathematical 8pt Grid · Specimen",
+    timeline: "CHB System Standard",
+  },
+];
+
 export default function PortfolioPage() {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; caption: string } | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [selectedDomain, setSelectedDomain] = useState<string>("all");
 
   const copyEmail = () => {
     navigator.clipboard.writeText("rorshock@protonmail.com");
@@ -335,7 +486,7 @@ export default function PortfolioPage() {
               <div
                 onClick={() =>
                   setLightboxImage({
-                    src: "/images/uhg/uhg-hero.png",
+                    src: "/artwork/enterprise-health.png",
                     caption: "UnitedHealth Group & Optum Mobile Patient Ecosystem (35M+ Patients)",
                   })
                 }
@@ -344,7 +495,10 @@ export default function PortfolioPage() {
                 <img
                   loading="lazy"
                   decoding="async"
-                  src="/images/uhg/uhg-hero.png"
+                  src="/artwork/enterprise-health.png"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "/images/uhg/uhg-hero.png";
+                  }}
                   alt="UnitedHealth Group Mobile App Architecture"
                   className="w-full h-full object-contain rounded-xl group-hover:scale-[1.015] transition-transform duration-500"
                 />
@@ -390,7 +544,7 @@ export default function PortfolioPage() {
               <div
                 onClick={() =>
                   setLightboxImage({
-                    src: "/images/walmart/walmart-hero.png",
+                    src: "/images/walmart/walmart-search-results.png",
                     caption: "Walmart Enterprise Search & GraphQL Content Distribution Platform (3M Users)",
                   })
                 }
@@ -399,9 +553,12 @@ export default function PortfolioPage() {
                 <img
                   loading="lazy"
                   decoding="async"
-                  src="/images/walmart/walmart-hero.png"
+                  src="/images/walmart/walmart-search-results.png"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "/images/walmart/walmart-hero.png";
+                  }}
                   alt="Walmart Enterprise Search Architecture"
-                  className="w-full h-full object-cover object-top rounded-xl group-hover:scale-[1.015] transition-transform duration-500"
+                  className="w-full h-full object-contain rounded-xl group-hover:scale-[1.015] transition-transform duration-500"
                 />
                 <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
@@ -530,79 +687,137 @@ export default function PortfolioPage() {
             </div>
           </article>
 
-          {/* Compact 4-Column Archive Strip (Fits at bottom of Pillar 04 Viewport) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/case-studies/marigold" className="group p-4 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-2.5 no-underline">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
-                  DuckDB-WASM · Zero-PII Audit
-                </span>
-                <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors">
-                  Marigold Insights (500k+)
-                </h4>
-                <p className="text-xs text-[#4A3A32] font-sans leading-[1.6]">
-                  500k+-record voter-roll &amp; entity-resolution engine running in-browser via DuckDB-WASM &amp; Apache Arrow.
+          {/* ── SECTION 02.B: FULL CASE STUDY DIRECTORY & WALKTHROUGH FLOW (12 STUDIES) ── */}
+          <div id="case-studies" className="pt-10 border-t border-[#D3C7B5] space-y-6 scroll-mt-20">
+            {/* Walkthrough Announcement Banner */}
+            <div className="rounded-3xl border-2 border-[#281B16] bg-[#281B16] text-[#F2EAE0] p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+              <div className="space-y-2 max-w-3xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-full bg-[#FE299E] text-white">
+                    02.B // GUIDED WALKTHROUGH
+                  </span>
+                  <span className="font-mono text-xs uppercase tracking-wider text-[#D3C7B5]">
+                    12 Shipped Case Studies
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-serif font-bold tracking-tight text-[#F2EAE0]">
+                  Every case study, systems proof &amp; production rollout.
+                </h3>
+                <p className="text-xs sm:text-sm text-[#D3C7B5] font-sans leading-relaxed">
+                  From chartered Federal Reserve SPDI banking to national healthcare and sovereign AI. Walk through all 12 deep dives in order with keyboard shortcuts (← →), or jump directly to any study below.
                 </p>
               </div>
-              <div className="pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
-                <span>Read Case Study</span>
-                <span>→</span>
-              </div>
-            </Link>
 
-            <Link href="/case-studies/foodler" className="group p-4 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-2.5 no-underline">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
-                  Fraud Systems · Grubhub Exit
-                </span>
-                <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors">
-                  Foodler ($500M+ Vol)
-                </h4>
-                <p className="text-xs text-[#4A3A32] font-sans leading-[1.6]">
-                  Engineered proprietary fraud detection that cut chargebacks 83% ($6M to &lt;$1M), driving a 10x exit.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
-                <span>Read Case Study</span>
-                <span>→</span>
-              </div>
-            </Link>
+              <Link
+                href="/case-studies/custodia"
+                className="inline-flex items-center gap-2.5 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-7 py-4 shadow-md transition-all whitespace-nowrap shrink-0 no-underline"
+              >
+                <span>Start Walkthrough (01 of 12)</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
-            <Link href="/case-studies/colors-type-grids" className="group p-4 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-2.5 no-underline">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
-                  Design System Monograph
+            {/* Filter Chips Bar */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full">
+                <span className="text-xs font-mono font-bold uppercase text-[#4A3A32] flex items-center gap-1 mr-1">
+                  <Filter className="w-3 h-3 text-[#FE299E]" /> Filter:
                 </span>
-                <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors">
-                  Albers, Vignelli &amp; Grids
-                </h4>
-                <p className="text-xs text-[#4A3A32] font-sans leading-[1.6]">
-                  Why mathematical CSS grids and Josef Albers color relativity prevent generic AI interface homogeneity.
-                </p>
+                {[
+                  { id: "all", label: "All 12 Studies" },
+                  { id: "fintech", label: "Fintech & Banking (2)" },
+                  { id: "enterprise", label: "Enterprise Monoliths (3)" },
+                  { id: "ai", label: "Sovereign AI & Protocols (5)" },
+                  { id: "design", label: "Design Systems & DTC (2)" },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setSelectedDomain(tab.id)}
+                    className={`px-3 py-1.5 rounded-full font-mono text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer border ${
+                      selectedDomain === tab.id
+                        ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16]"
+                        : "bg-[#F2EAE0] text-[#4A3A32] border-[#D3C7B5] hover:border-[#FE299E] hover:text-[#281B16]"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
               </div>
-              <div className="pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
-                <span>Read Interactive Study</span>
-                <span>→</span>
-              </div>
-            </Link>
 
-            <Link href="/essays/design-is-risk" className="group p-4 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-2.5 no-underline">
+              <span className="font-mono text-xs text-[#4A3A32] font-semibold hidden md:inline">
+                Showing {selectedDomain === "all" ? ALL_CATALOG_STUDIES.length : ALL_CATALOG_STUDIES.filter((s) => s.domain === selectedDomain).length} of 12
+              </span>
+            </div>
+
+            {/* 12-Card Catalog Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {ALL_CATALOG_STUDIES.filter((item) => selectedDomain === "all" || item.domain === selectedDomain).map(
+                (item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/case-studies/${item.slug}`}
+                    className="group p-5 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-3.5 no-underline shadow-xs hover:shadow-md"
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between gap-1 border-b border-[#D3C7B5]/60 pb-2">
+                        <span className="font-mono text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-[#281B16] text-[#FE299E]">
+                          STUDY {item.order}
+                        </span>
+                        <span className="font-mono text-[10px] font-bold text-[#4A3A32] truncate max-w-[130px]">
+                          {item.timeline}
+                        </span>
+                      </div>
+
+                      <div>
+                        <span className="font-mono text-[10px] uppercase font-bold text-[#FE299E] block mb-0.5">
+                          {item.domainLabel}
+                        </span>
+                        <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors leading-snug">
+                          {item.client}
+                        </h4>
+                      </div>
+
+                      <p className="text-xs text-[#4A3A32] font-sans leading-[1.6] line-clamp-3">
+                        {item.summary}
+                      </p>
+
+                      <div className="pt-1">
+                        <span className="inline-block font-mono text-[10px] font-bold text-[#281B16] px-2 py-0.5 rounded bg-[#EAE0D0] border border-[#D3C7B5]">
+                          {item.scaleBadge}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2.5 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
+                      <span>Read Case Study</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                )
+              )}
+            </div>
+
+            {/* Monograph Essay Callout */}
+            <div className="p-5 rounded-2xl bg-[#EAE0D0]/80 border border-[#D3C7B5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#FE299E] block">
-                  Security &amp; IP Essay
+                <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block">
+                  Security &amp; IP Monograph
                 </span>
-                <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors">
-                  Design is Risk
+                <h4 className="font-serif font-bold text-lg text-[#281B16]">
+                  Design is Risk: Why traditional portfolio transparency invites IP distillation
                 </h4>
-                <p className="text-xs text-[#4A3A32] font-sans leading-[1.6]">
-                  How adversarial AI distillation and chain-of-thought scraping turned traditional portfolios into an IP risk.
+                <p className="text-xs text-[#4A3A32] font-sans max-w-3xl">
+                  An architectural essay on how adversarial AI reasoning and chain-of-thought scraping turned public portfolio wireframes into competitive vulnerability.
                 </p>
               </div>
-              <div className="pt-2 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
+              <Link
+                href="/essays/design-is-risk"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-sans text-xs uppercase tracking-wider font-bold transition-colors whitespace-nowrap shrink-0 no-underline"
+              >
                 <span>Read Essay</span>
-                <span>→</span>
-              </div>
-            </Link>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

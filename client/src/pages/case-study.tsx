@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useRoute, Link } from "wouter";
-import { CASE_STUDIES, type CaseStudyData, type CaseStudyImage } from "@/data/case-studies";
+import { useRoute, useLocation, Link } from "wouter";
+import { CASE_STUDIES, CASE_STUDY_ORDER, type CaseStudyData, type CaseStudyImage } from "@/data/case-studies";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -11,6 +11,7 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Shield,
   Layers,
   Sparkles,
@@ -22,14 +23,25 @@ import ContactFormModal from "@/components/contact-form-modal";
 
 export default function CaseStudyPage() {
   const [, params] = useRoute("/case-studies/:slug");
+  const [, setLocation] = useLocation();
   const slug = params?.slug || "";
   const study: CaseStudyData | undefined = CASE_STUDIES[slug];
 
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Sequential Walkthrough pointers
+  const currentIndex = CASE_STUDY_ORDER.indexOf(slug as any);
+  const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+  const prevSlug = CASE_STUDY_ORDER[(safeIndex - 1 + CASE_STUDY_ORDER.length) % CASE_STUDY_ORDER.length];
+  const nextSlug = CASE_STUDY_ORDER[(safeIndex + 1) % CASE_STUDY_ORDER.length];
+  const prevStudy = CASE_STUDIES[prevSlug];
+  const nextStudy = CASE_STUDIES[nextSlug];
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setIsMenuOpen(false);
     if (study) {
       document.title = `${study.client}: ${study.title} | Kyle Cyree`;
     }
@@ -39,21 +51,38 @@ export default function CaseStudyPage() {
   }, [slug, study]);
 
   useEffect(() => {
-    if (activeImageIndex === null || !study) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setActiveImageIndex(null);
-      } else if (e.key === "ArrowRight") {
-        setActiveImageIndex((prev) => (prev !== null ? (prev + 1) % study.galleryImages.length : null));
-      } else if (e.key === "ArrowLeft") {
-        setActiveImageIndex((prev) =>
-          prev !== null ? (prev - 1 + study.galleryImages.length) % study.galleryImages.length : null
-        );
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        isContactOpen
+      ) {
+        return;
+      }
+
+      if (activeImageIndex !== null && study) {
+        if (e.key === "Escape") {
+          setActiveImageIndex(null);
+        } else if (e.key === "ArrowRight") {
+          setActiveImageIndex((prev) => (prev !== null ? (prev + 1) % study.galleryImages.length : null));
+        } else if (e.key === "ArrowLeft") {
+          setActiveImageIndex((prev) =>
+            prev !== null ? (prev - 1 + study.galleryImages.length) % study.galleryImages.length : null
+          );
+        }
+      } else {
+        if (e.key === "ArrowRight" || e.key === "]" || e.key === "j") {
+          setLocation(`/case-studies/${nextSlug}`);
+        } else if (e.key === "ArrowLeft" || e.key === "[" || e.key === "k") {
+          setLocation(`/case-studies/${prevSlug}`);
+        } else if (e.key === "Escape") {
+          setIsMenuOpen(false);
+        }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeImageIndex, study]);
+  }, [activeImageIndex, study, isContactOpen, prevSlug, nextSlug, setLocation]);
 
   if (!study) {
     return (
@@ -96,42 +125,91 @@ export default function CaseStudyPage() {
 
   return (
     <article className="min-h-screen bg-background text-foreground flex flex-col selection:bg-[#FE299E]/20">
-      {/* ── Sticky Sub-Navigation Bar ── */}
-      <div className="sticky top-16 sm:top-20 z-40 bg-[#F2EAE0]/95 backdrop-blur-md border-b border-[#D3C7B5] py-2.5 sm:py-3">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between gap-2 sm:gap-4">
+      {/* ── Sticky Sub-Navigation Bar: Sequential Walkthrough Ribbon ── */}
+      <div className="sticky top-16 sm:top-20 z-40 bg-[#F2EAE0]/95 backdrop-blur-md border-b border-[#D3C7B5] py-2 sm:py-2.5">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 flex items-center justify-between gap-2 sm:gap-4">
+          {/* Left: Back to Case Studies Directory */}
           <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans uppercase tracking-[0.12em] sm:tracking-[0.16em] font-semibold text-[#4A3A32] hover:text-[#281B16] transition-colors whitespace-nowrap"
+            href="/#case-studies"
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans uppercase tracking-[0.14em] font-bold text-[#4A3A32] hover:text-[#281B16] transition-colors whitespace-nowrap shrink-0"
           >
             <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FE299E] shrink-0" />
-            <span>Back<span className="hidden xs:inline sm:inline"> to Work</span></span>
+            <span>All Studies</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-3 text-xs font-sans">
-            <span className="text-[#4A3A32] font-semibold uppercase tracking-wider">Other Deep Dives:</span>
-            {Object.values(CASE_STUDIES)
-              .filter((s) => s.slug !== study.slug)
-              .slice(0, 4)
-              .map((s) => (
-                <Link
-                  key={s.slug}
-                  href={`/case-studies/${s.slug}`}
-                  className="font-semibold text-[#4A3A32] hover:text-[#FE299E] transition-colors uppercase tracking-wider"
-                >
-                  {s.client}
-                </Link>
-              ))}
+          {/* Center: Walkthrough Controller */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 text-xs font-sans">
+            <Link
+              href={`/case-studies/${prevSlug}`}
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full border border-[#D3C7B5] bg-[#EAE0D0]/80 hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-mono text-[10px] sm:text-[11px] font-bold uppercase transition-colors"
+              title={`Previous: ${prevStudy?.client}`}
+            >
+              <ChevronLeft className="w-3.5 h-3.5 text-[#FE299E]" />
+              <span className="hidden md:inline">{prevStudy?.client}</span>
+            </Link>
+
+            {/* Case Study Switcher Popover */}
+            <div className="relative">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#281B16] text-[#F2EAE0] hover:bg-[#FE299E] font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                <span>Study {safeIndex + 1} of {CASE_STUDY_ORDER.length}</span>
+                <ChevronDown className={`w-3 h-3 text-[#FE299E] transition-transform ${isMenuOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {isMenuOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 sm:w-80 max-h-96 overflow-y-auto bg-[#F2EAE0] border border-[#281B16] rounded-2xl shadow-2xl p-2 z-50 space-y-1">
+                  <div className="px-3 py-1.5 border-b border-[#D3C7B5] flex items-center justify-between text-[10px] font-mono uppercase text-[#4A3A32]">
+                    <span>All 12 Case Studies</span>
+                    <span>Click to Jump</span>
+                  </div>
+                  {CASE_STUDY_ORDER.map((itemSlug, idx) => {
+                    const item = CASE_STUDIES[itemSlug];
+                    if (!item) return null;
+                    const isCurrent = itemSlug === slug;
+                    return (
+                      <Link
+                        key={itemSlug}
+                        href={`/case-studies/${itemSlug}`}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-colors no-underline ${
+                          isCurrent
+                            ? "bg-[#281B16] text-[#F2EAE0] font-bold"
+                            : "hover:bg-[#EAE0D0] text-[#281B16]"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 truncate">
+                          <span className="font-mono text-[10px] text-[#FE299E]">{String(idx + 1).padStart(2, "0")}</span>
+                          <span className="truncate">{item.client}</span>
+                        </div>
+                        {isCurrent ? (
+                          <span className="text-[10px] text-[#FE299E] font-mono font-bold">Reading</span>
+                        ) : (
+                          <ArrowRight className="w-3 h-3 text-[#4A3A32]/60" />
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            <Link
+              href={`/case-studies/${nextSlug}`}
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full border border-[#D3C7B5] bg-[#EAE0D0]/80 hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-mono text-[10px] sm:text-[11px] font-bold uppercase transition-colors"
+              title={`Next: ${nextStudy?.client}`}
+            >
+              <span className="hidden md:inline">{nextStudy?.client}</span>
+              <ChevronRight className="w-3.5 h-3.5 text-[#FE299E]" />
+            </Link>
           </div>
 
+          {/* Right: Primary Action */}
           <div className="flex items-center gap-2 shrink-0">
-            <a
-              href="https://pipes.pink"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.12em] font-bold transition-colors no-underline"
-            >
-              | | | Claim Pipe ($9/yr)
-            </a>
+            <span className="hidden xl:inline font-mono text-[10px] text-[#6B554D] uppercase">
+              Use ← → to step
+            </span>
             <Button
               size="sm"
               className="bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.1em] sm:tracking-[0.15em] font-bold rounded-full px-3.5 sm:px-4 shrink-0 shadow-sm cursor-pointer"
@@ -545,54 +623,115 @@ export default function CaseStudyPage() {
         </div>
       )}
 
-      {/* ── Continue Exploring: Next Case Studies ── */}
-      <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-14 w-full space-y-6">
-        <div className="flex items-center justify-between border-t border-[#D3C7B5] pt-10">
-          <div className="space-y-1">
-            <span className="font-sans text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] block">
-              Continue Reading
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16]">
-              Explore more architectural records
-            </h2>
-          </div>
-          <Link
-            href="/"
-            className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-[0.14em] font-bold text-[#4A3A32] hover:text-[#FE299E] transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5 text-[#FE299E]" /> Full Portfolio Index
-          </Link>
-        </div>
+      {/* ── WALKTHROUGH: UP NEXT IN SEQUENCE & FULL 12-STUDY ARCHIVE ── */}
+      <section className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pt-8 pb-16 w-full space-y-10">
+        {/* Up Next Card */}
+        {nextStudy && (
+          <div className="rounded-3xl border-2 border-[#281B16] bg-[#281B16] text-[#F2EAE0] p-6 sm:p-10 shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="space-y-3 max-w-2xl">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-full bg-[#FE299E] text-white">
+                  UP NEXT · STUDY {((safeIndex + 1) % CASE_STUDY_ORDER.length) + 1} OF {CASE_STUDY_ORDER.length}
+                </span>
+                <span className="font-mono text-xs uppercase tracking-wider text-[#D3C7B5]">
+                  {nextStudy.timeline}
+                </span>
+                <span className="font-mono text-xs uppercase tracking-wider text-[#FE299E]">
+                  {nextStudy.scaleBadge}
+                </span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold tracking-tight text-[#F2EAE0] leading-snug">
+                {nextStudy.client}: {nextStudy.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#D3C7B5] font-sans line-clamp-2 leading-relaxed">
+                {nextStudy.subtitle}
+              </p>
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {["custodia", "unitedhealth", "walmart", "pipes"]
-            .filter((s) => s !== study.slug)
-            .slice(0, 3)
-            .map((nextSlug) => {
-              const nextStudy = CASE_STUDIES[nextSlug];
-              if (!nextStudy) return null;
+            <Link
+              href={`/case-studies/${nextSlug}`}
+              className="inline-flex items-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-6 py-4 shadow-md transition-all whitespace-nowrap shrink-0 no-underline"
+            >
+              <span>Continue to {nextStudy.client}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
+
+        {/* All 12 Case Studies Visual Catalog */}
+        <div className="space-y-5 pt-4 border-t border-[#D3C7B5]">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2">
+            <div>
+              <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] block">
+                PORTFOLIO DIRECTORY · ALL 12 PRODUCTION CASE STUDIES
+              </span>
+              <h3 className="text-xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight mt-0.5">
+                Explore the complete body of architectural work
+              </h3>
+            </div>
+            <Link
+              href="/#case-studies"
+              className="inline-flex items-center gap-1 font-sans text-xs uppercase tracking-[0.14em] font-bold text-[#4A3A32] hover:text-[#FE299E] transition-colors whitespace-nowrap"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 text-[#FE299E]" /> Portfolio Directory
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {CASE_STUDY_ORDER.map((itemSlug, idx) => {
+              const item = CASE_STUDIES[itemSlug];
+              if (!item) return null;
+              const isCurrent = itemSlug === slug;
               return (
-                <Link key={nextSlug} href={`/case-studies/${nextSlug}`} className="block h-full no-underline">
-                  <div className="group h-full rounded-2xl border border-[#D3C7B5] bg-[#F2EAE0] p-6 hover:border-[#FE299E] transition-all cursor-pointer flex flex-col justify-between space-y-5 shadow-xs">
-                    <div className="space-y-2">
-                      <span className="font-sans text-[11px] uppercase tracking-[0.18em] font-bold text-[#FE299E] block">
-                        {nextStudy.client}
+                <Link
+                  key={itemSlug}
+                  href={`/case-studies/${itemSlug}`}
+                  className={`group p-4 rounded-2xl border transition-all flex flex-col justify-between space-y-3 no-underline ${
+                    isCurrent
+                      ? "bg-[#281B16] text-[#F2EAE0] border-[#FE299E] shadow-md ring-2 ring-[#FE299E]/40"
+                      : "bg-[#F2EAE0] text-[#281B16] border-[#D3C7B5] hover:border-[#FE299E] hover:shadow-xs"
+                  }`}
+                >
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between gap-1">
+                      <span className="font-mono text-[10px] font-bold uppercase text-[#FE299E]">
+                        {String(idx + 1).padStart(2, "0")} / {CASE_STUDY_ORDER.length}
                       </span>
-                      <h3 className="font-serif font-bold text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors leading-snug">
-                        {nextStudy.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-[#4A3A32] font-sans line-clamp-2 leading-relaxed">
-                        {nextStudy.subtitle}
-                      </p>
+                      {isCurrent ? (
+                        <span className="font-mono text-[9px] uppercase px-1.5 py-0.5 rounded bg-[#FE299E] text-white font-bold">
+                          Reading Now
+                        </span>
+                      ) : (
+                        <span className="font-mono text-[10px] text-[#4A3A32] truncate max-w-[120px]">
+                          {item.timeline}
+                        </span>
+                      )}
                     </div>
-                    <div className="pt-3 border-t border-[#D3C7B5]/60 flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
-                      <span>Read Case Study</span>
-                      <ArrowRight className="w-4 h-4 text-[#FE299E] group-hover:translate-x-0.5 transition-transform" />
-                    </div>
+                    <h4
+                      className={`font-serif font-bold text-base leading-snug line-clamp-1 ${
+                        isCurrent ? "text-white" : "text-[#281B16] group-hover:text-[#FE299E]"
+                      }`}
+                    >
+                      {item.client}
+                    </h4>
+                    <p className={`text-xs line-clamp-2 ${isCurrent ? "text-[#D3C7B5]" : "text-[#4A3A32]"}`}>
+                      {item.title}
+                    </p>
+                  </div>
+                  <div
+                    className={`pt-2 border-t flex items-center justify-between text-xs font-bold ${
+                      isCurrent
+                        ? "border-white/10 text-[#FE299E]"
+                        : "border-[#D3C7B5] text-[#281B16] group-hover:text-[#FE299E]"
+                    }`}
+                  >
+                    <span>{isCurrent ? "Current Study" : "Read Study"}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </Link>
               );
             })}
+          </div>
         </div>
       </section>
 
