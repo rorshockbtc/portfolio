@@ -39,7 +39,7 @@ const pillars: StackPillar[] = [
     role: "Data Schemas & Edge State",
     icon: Database,
     tags: ["PostgreSQL", "LibSQL / SQLite", "DuckDB-WASM", "Apache Arrow", "Zod", "REST & GraphQL"],
-    description: "Modeling data from first principles. Structuring relational schemas, type-safe validation, and client-side zero-knowledge analytics on 500k+ records in-browser.",
+    description: "Modeling data from first principles. Structuring relational schemas, type-safe validation, and client-side zero-knowledge analytics on 2,000,000+ records in-browser.",
     deliverables: "Pragmatic schemas, edge databases, client-side analytical engines, and end-to-end type contracts.",
     proofLinks: [
       { label: "Marigold Audit (DuckDB-WASM)", href: "https://github.com/rorshockbtc/marigold", external: true },

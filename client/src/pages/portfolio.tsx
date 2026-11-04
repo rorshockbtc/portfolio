@@ -89,10 +89,10 @@ const ALL_CATALOG_STUDIES: CatalogItem[] = [
     order: "05",
     client: "Marigold Insights",
     title: "Zero-Cloud Civic Data & Election Audit Engine",
-    summary: "In-browser analytical engine running Fellegi-Sunter record linkage across 500k+ records via DuckDB-WASM and zero-PII cryptographic hydration.",
+    summary: "In-browser analytical engine running Fellegi-Sunter record linkage across 2,000,000+ records via DuckDB-WASM and zero-PII cryptographic hydration.",
     domain: "ai",
     domainLabel: "Sovereign AI & Protocols",
-    scaleBadge: "500k+ Records · DuckDB-WASM",
+    scaleBadge: "2,000,000+ Records · DuckDB-WASM",
     timeline: "2026",
   },
   {
@@ -137,7 +137,7 @@ const ALL_CATALOG_STUDIES: CatalogItem[] = [
     domain: "fintech",
     domainLabel: "Fintech & Banking",
     scaleBadge: "$500M+ Volume · Grubhub Exit",
-    timeline: "2012 – 2017",
+    timeline: "2010 – 2015",
   },
   {
     slug: "ultralinq",
@@ -148,7 +148,7 @@ const ALL_CATALOG_STUDIES: CatalogItem[] = [
     domain: "enterprise",
     domainLabel: "Enterprise Monoliths",
     scaleBadge: "Cloud PACS · FDA Regulated",
-    timeline: "2018 – 2020",
+    timeline: "2016 – 2017",
   },
   {
     slug: "highdraw",
@@ -854,7 +854,7 @@ export default function PortfolioPage() {
 
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { repo: "marigold", license: "AGPL-3.0 · Original", desc: "In-browser Fellegi-Sunter record linkage and civic-data auditing across 500k+ records via DuckDB-WASM and Apache Arrow with zero server PII.", stack: "TypeScript · DuckDB-WASM · Arrow" },
+              { repo: "marigold", license: "AGPL-3.0 · Original", desc: "In-browser Fellegi-Sunter record linkage and civic-data auditing across 2,000,000+ records via DuckDB-WASM and Apache Arrow with zero server PII.", stack: "TypeScript · DuckDB-WASM · Arrow" },
               { repo: "greater-than", license: "MIT · Original", desc: "Sovereign-by-default support bots and classroom tutors running local inference in the browser with WebGPU and Transformers.js at $0 cloud cost.", stack: "TypeScript · WebGPU · Local LLM" },
               { repo: "pipes-native", license: "Source Available · Original", desc: "The Pipes macOS (! BANG IDE) and iOS companion apps: local folder sync, SQLite/DuckDB vector indexing, and sovereign studio.", stack: "Tauri 2.0 · Rust · Swift" },
             ].map((r) => (
