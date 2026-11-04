@@ -20,12 +20,12 @@ interface Role {
 const roles: Role[] = [
   {
     id: "chb",
-    company: "Colon Hyphen Bracket",
-    title: "Founder, Product Architect & R&D Lead",
-    dates: "2018 – Present",
-    headline: "I architect, design, and ship my own products end to end.",
+    company: "Colon Hyphen Bracket R&D",
+    title: "Principal Product Architect & AI Systems Lead",
+    dates: "Sep 2024 – Present",
+    headline: "I architect, design, and ship multi-platform AI and analytics products end to end.",
     points: [
-      "Architected and shipped Pipes.Pink (sovereign knowledge protocol & marketplace with the integrated Hash Sanctuary and SEMI (;-]) Socratic agent), Marigold Insights (500k+-record in-browser DuckDB-WASM voter-roll audit engine), Greater-Than (WebGPU local support bots), and Cassandra—each solo from data schema to production.",
+      "Architected and shipped Pipes.Pink (sovereign knowledge protocol & marketplace across Web, Tauri v2 + Rust macOS IDE, and iOS/Android with the integrated Hash Sanctuary and SEMI (;-]) Socratic agent), Marigold Insights (2,000,000+-record in-browser DuckDB-WASM voter-roll audit engine), Greater-Than (WebGPU local support bots), and Cassandra—each solo from data schema to production.",
       "Mostly TypeScript with React/Next.js and Node, backed by Python, DuckDB-WASM, and Rust through AI-accelerated engineering.",
     ],
     caseStudy: "pipes",
@@ -33,8 +33,8 @@ const roles: Role[] = [
   {
     id: "custodia",
     company: "Custodia Bank",
-    title: "Lead Product Designer (First Design Hire)",
-    dates: "2022 – 2024",
+    title: "Founding Product Designer (First Design Hire)",
+    dates: "Nov 2021 – Aug 2024",
     headline: "First design hire at a chartered Wyoming SPDI bank. I built the design function from nothing.",
     points: [
       "Took the company from rough internal tools to a complete institutional banking suite covering Fedwire fiat rails, Money Market yield accrual, programmable interbank settlement, and multi-sig Bitcoin UTXO custody in 30 days ahead of Federal Reserve review.",
@@ -44,12 +44,12 @@ const roles: Role[] = [
   },
   {
     id: "predictiveux",
-    company: "PredictiveUX → Walmart",
-    title: "Senior UX/UI Architect",
-    dates: "2021 – 2022",
-    headline: "Led UX architecture for Walmart's internal enterprise search, used by 3M employees.",
+    company: "Walmart Global Tech (via PredictiveUX)",
+    title: "Senior Product Designer & UX Architect",
+    dates: "Aug 2020 – Oct 2021",
+    headline: "Led UX architecture for Walmart's internal enterprise search, used by 3M+ employees.",
     points: [
-      "Replaced legacy keyword lookups with GraphQL and graph-database discovery for the largest private workforce in the world (3M direct users).",
+      "Replaced legacy keyword lookups with GraphQL and graph-database discovery for the largest private workforce in the world (3M+ direct users across 10,500+ stores).",
       "Also architected diagnostic clinical decision-support tools (RecoverX) for physicians in high-acuity care settings.",
     ],
     caseStudy: "walmart",
@@ -57,8 +57,8 @@ const roles: Role[] = [
   {
     id: "uhg",
     company: "Optum & UnitedHealth Group",
-    title: "Senior Product Experience Designer (Principal Mobile Lead)",
-    dates: "2020 – 2021",
+    title: "Principal Product Designer (Mobile Lead)",
+    dates: "Jan 2020 – Oct 2021",
     headline: "Principal designer for UHG's flagship iOS and Android apps: 35M+ patients, 400K+ employees.",
     points: [
       "Championed UHG's enterprise adoption of Apple Health guidelines and native integrations, driving an estimated $100M+ in personal revenue impact while producing 80%+ of Android and 50%+ of iOS screens.",
@@ -70,7 +70,7 @@ const roles: Role[] = [
     id: "bldg25",
     company: "BLDG-25 (Fidelity Investments & IronNet)",
     title: "Design Director",
-    dates: "2018 – 2020",
+    dates: "Jan 2018 – Dec 2019",
     headline: "Embedded wealth-management & enterprise architecture across Fidelity Investments, IronNet, and Martin Marietta.",
     points: [
       "Spent 2 years embedded at Fidelity Investments in Raleigh as primary client liaison to architect their first cloud-native application launch.",
@@ -81,7 +81,7 @@ const roles: Role[] = [
     id: "ultralinq",
     company: "UltraLinq Healthcare",
     title: "Design Director",
-    dates: "2016 – 2018",
+    dates: "Jan 2016 – Dec 2017",
     headline: "Founded the internal design team and shipped HIPAA-certified medical telemetry.",
     points: [
       "Built design systems from scratch for cloud PACS web platforms, diagnostic medical devices, and wearable health monitors; led clinical user research and FDA/HIPAA usability compliance.",
@@ -92,7 +92,7 @@ const roles: Role[] = [
     id: "foodler",
     company: "Foodler (acquired by Grubhub)",
     title: "Director of Business Operations",
-    dates: "2010 – 2015",
+    dates: "Jan 2010 – Dec 2015",
     headline: "Rose from customer service rep to running two-thirds of the company in 18 months ($500M+ volume).",
     points: [
       "Engineered a proprietary fraud detection system that cut chargebacks 83% (from $6M to under $1M) working alongside local police and the FBI, helping drive 10x revenue growth through to the Grubhub acquisition.",
