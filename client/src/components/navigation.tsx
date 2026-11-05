@@ -105,6 +105,7 @@ export default function Navigation() {
 
           <a
             href="/resumes/kyle-cyree-resume.pdf"
+            download="Resume - Kyle Cyree.pdf"
             target="_blank"
             rel="noopener"
             className="hidden md:inline font-sans text-sm font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] whitespace-nowrap"

@@ -61,6 +61,7 @@ export default function NotFound() {
             </Button>
             <a
               href="/resumes/kyle-cyree-resume.pdf"
+              download="Resume - Kyle Cyree.pdf"
               target="_blank"
               rel="noopener"
               className="inline-flex items-center gap-2 px-4 h-12 font-sans text-xs sm:text-sm font-bold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"

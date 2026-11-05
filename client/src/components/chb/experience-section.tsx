@@ -128,6 +128,7 @@ export function ExperienceSection() {
 
           <a
             href="/resumes/kyle-cyree-resume.pdf"
+            download="Resume - Kyle Cyree.pdf"
             target="_blank"
             rel="noopener"
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white text-xs sm:text-sm font-sans font-bold transition-colors whitespace-nowrap no-underline"

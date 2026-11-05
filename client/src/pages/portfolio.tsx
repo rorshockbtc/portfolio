@@ -240,7 +240,7 @@ export default function PortfolioPage() {
               </div>
 
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm font-sans text-[#4A3A32] pt-0.5">
-                <a href="/resumes/kyle-cyree-resume.pdf" target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] whitespace-nowrap">
+                <a href="/resumes/kyle-cyree-resume.pdf" download="Resume - Kyle Cyree.pdf" target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] whitespace-nowrap">
                   <Download className="w-3.5 h-3.5 text-[#FE299E]" /> Resume (PDF)
                 </a>
                 <span className="inline-flex items-center gap-2 whitespace-nowrap">
