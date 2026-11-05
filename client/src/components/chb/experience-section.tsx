@@ -22,7 +22,7 @@ const roles: Role[] = [
     id: "chb",
     company: "Colon Hyphen Bracket R&D",
     title: "Principal Product Architect & AI Systems Lead",
-    dates: "Sep 2024 – Present",
+    dates: "Dec 2018 – Present",
     headline: "I architect, design, and ship multi-platform AI and analytics products end to end.",
     points: [
       "Architected and shipped Pipes.Pink (sovereign knowledge protocol & marketplace across Web, Tauri v2 + Rust macOS IDE, and iOS/Android with the integrated Hash Sanctuary and SEMI (;-]) Socratic agent), Marigold Insights (2,000,000+-record in-browser DuckDB-WASM voter-roll audit engine), Greater-Than (WebGPU local support bots), and Cassandra—each solo from data schema to production.",
@@ -34,7 +34,7 @@ const roles: Role[] = [
     id: "custodia",
     company: "Custodia Bank",
     title: "Founding Product Designer (First Design Hire)",
-    dates: "Nov 2021 – Aug 2024",
+    dates: "Jan 2022 – Sep 2024",
     headline: "First design hire at a chartered Wyoming SPDI bank. I built the design function from nothing.",
     points: [
       "Took the company from rough internal tools to a complete institutional banking suite covering Fedwire fiat rails, Money Market yield accrual, programmable interbank settlement, and multi-sig Bitcoin UTXO custody in 30 days ahead of Federal Reserve review.",
@@ -45,8 +45,8 @@ const roles: Role[] = [
   {
     id: "predictiveux",
     company: "Walmart Global Tech (via PredictiveUX)",
-    title: "Senior Product Designer & UX Architect",
-    dates: "Aug 2020 – Oct 2021",
+    title: "Senior Product Designer & UX Architect (Contract)",
+    dates: "Oct 2021 – Oct 2022",
     headline: "Led UX architecture for Walmart's internal enterprise search, used by 3M+ employees.",
     points: [
       "Replaced legacy keyword lookups with GraphQL and graph-database discovery for the largest private workforce in the world (3M+ direct users across 10,500+ stores).",
