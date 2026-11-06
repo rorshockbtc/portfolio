@@ -55,6 +55,7 @@ export const CASE_STUDY_ORDER = [
   "unitedhealth",
   "walmart",
   "pipes",
+  "chicuinaco",
   "marigold",
   "cassandra",
   "superstar",
@@ -1052,6 +1053,132 @@ export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string
 }`,
           explanation:
             "Transforms spoken stream-of-consciousness field notes into relational database records and attributed commission claims.",
+        },
+      ],
+    },
+  },
+  chicuinaco: {
+    slug: "chicuinaco",
+    client: "Hacienda & Restaurante Chicuinaco",
+    title: "Chicuinaco: Sovereign Eco-Estate, 100-Guest Venue & Multi-Language Brochure System",
+    subtitle:
+      "Principal Designer & Systems Architect • Ground-Up Identity, Accént Editorial System, 4-Language i18n & Bitcoin Integration",
+    role: "Principal Product Architect & Brand Systems Designer",
+    scaleBadge: "Eco-Estate & Venue · 4 Languages · Bitcoin Accepted",
+    timeline: "Nov 2026",
+    heroImage: "/images/chicuinaco/hero-interface.png",
+    galleryImages: [
+      {
+        src: "/images/chicuinaco/hero-interface.png",
+        title: "Full-Bleed Editorial Hero & Official Bitcoin Badge",
+        caption:
+          "Panoramic mountain sunset over the Cordillera del Bálsamo paired with Cormorant Garamond display typography, 4-language switcher (EN/ES/FR/DE), and official Bitcoin acceptance badge.",
+        tag: "Editorial Hero",
+      },
+      {
+        src: "/images/chicuinaco/four-pillars.png",
+        title: "Zero-Card Hairline Architecture: Four Pillars of the Estate",
+        caption:
+          "Instead of nested rounded cards, a 4-column architectural hairline index presents the Restaurant, 100-Guest Event Venue, Waterfall Hiking, and Bálsamo Oil & Overnight Stay.",
+        tag: "Hairline Grid",
+      },
+      {
+        src: "/images/chicuinaco/patio-banquet.webp",
+        title: "100-Guest Arched Patio & Private Event Venue",
+        caption:
+          "Covered arched mountain terrace overlooking the valley in San Julián, Sonsonate—engineered with direct WhatsApp banquet coordination and transparent capacity specs.",
+        tag: "100-Guest Venue",
+      },
+      {
+        src: "/images/chicuinaco/waterfall-canyon.webp",
+        title: "Multi-Tiered Waterfall Canyon & Guided Eco-Trails",
+        caption:
+          "65-acre mountain sanctuary featuring spring-fed waterfall pools, canyon trails, and bilingual safety/elevation advisories.",
+        tag: "Eco-Tourism",
+      },
+      {
+        src: "/images/chicuinaco/balsamo-press.webp",
+        title: "Artisanal Bálsamo Negro Timber-Press Extraction",
+        caption:
+          "Documenting ancestral Salvadoran balsam harvesting and timber-press extraction on the Cordillera del Bálsamo with lightweight WebP posters and streaming video.",
+        tag: "Heritage Craft",
+      },
+      {
+        src: "/images/chicuinaco/accommodations-suite.webp",
+        title: "Hacienda Overnight Suite (Up to 8 Guests)",
+        caption:
+          "Private mountain-view family apartment with two bedrooms, living room, and artisanal stone bath—bookable directly via pre-populated WhatsApp deep links.",
+        tag: "Accommodations",
+      },
+      {
+        src: "/images/chicuinaco/menu-carta.png",
+        title: "La Carta: Typographic Menu Ledger & Interactive Dish Preview",
+        caption:
+          "Print-inspired culinary index with tabular numerals, dotted leaders, and zero-layout-shift dish photography previews.",
+        tag: "Typographic Menu",
+      },
+    ],
+    executiveSummary:
+      "Transformed a 65-acre Salvadoran mountain retreat, family restaurant, 100-guest banquet venue, and artisanal balsam estate in San Julián, Sonsonate into an international-grade digital publication—combining European editorial typography, zero-card hairline grid architecture, 4-language internationalization (EN, ES, FR, DE), sub-second mobile performance on 3G networks, and sovereign Bitcoin Lightning acceptance.",
+    challenge:
+      "Regional hospitality and eco-tourism properties in Central America are routinely underserved by bloated, slow WordPress templates or fragmented Instagram pages that fail to load on rural 3G connections. Hacienda Chicuinaco needed to communicate five distinct offerings—a wood-fired Salvadoran restaurant, a 100-guest arched patio event venue, guided waterfall canyon hikes, ancestral Bálsamo Negro timber-press harvesting, and an 8-guest overnight suite—to both local Salvadoran families and international Bitcoiners and eco-travelers across four languages.",
+    solution:
+      "Designed and engineered a bespoke, zero-card digital monograph rooted in the Accént sandstone palette (#EAE3D5 / #1A1714). Replaced heavy SaaS booking widgets with deterministic, pre-formatted WhatsApp reservation deep-links tailored to the visitor's active language, and engineered a static client-side bundle that hydrates in under 100ms.",
+    uiUxCraft:
+      "High-contrast Cormorant Garamond light/regular serifs paired with tracked-out small-caps labels, 1px architectural hairline grids (capacity/setup/catering spec matrices), an interactive typographic 'La Carta' menu with dotted leaders and instant image crossfade, and fluid Framer Motion scroll choreography.",
+    systemsArchitecture:
+      "Zero-bloat Vite + React + TypeScript static architecture deployed on global edge CDN with multi-entity JSON-LD structured data (Restaurant, LodgingBusiness, TouristAttraction, EventVenue), deterministic 4-locale dictionary engine (EN/ES/FR/DE), responsive WebP asset pipeline, and sovereign Bitcoin payment integration.",
+    metrics: [
+      { value: "100%", label: "Lighthouse Score", subtext: "Performance, Best Practices & SEO" },
+      { value: "< 1.2s", label: "Mobile 3G LCP", subtext: "Optimized WebP & zero server round-trips" },
+      { value: "4", label: "Native Locales", subtext: "English, Español, Français, Deutsch" },
+      { value: "₿ + USD", label: "Sovereign Settlement", subtext: "Official Bitcoin & Lightning accepted" },
+    ],
+    outcomes: [
+      "Elevated a family-owned Salvadoran mountain estate into an international hospitality and eco-tourism showcase across 4 languages (EN, ES, FR, DE).",
+      "Replaced generic hospitality card clutter with a Swiss/European architectural hairline grid system, typographic 'La Carta' menu, and 2×2 venue specification matrices.",
+      "Engineered localized WhatsApp booking deep-links for 100-guest patio events, guided waterfall hikes, and 8-guest suite stays without third-party booking commissions.",
+    ],
+    technologies: [
+      "React 18",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "4-Locale i18n Engine",
+      "JSON-LD Schema Graph",
+      "Bitcoin / Lightning",
+    ],
+    liveUrl: "https://www.chicuinaco.com",
+    liveUrlLabel: "Visit Hacienda Chicuinaco (chicuinaco.com)",
+    repoUrl: "https://github.com/rorshockbtc/chicuinaco",
+    codebaseBreakdown: {
+      headline: "Zero-Card Editorial Hospitality Architecture & 4-Language Edge Performance",
+      philosophy:
+        "Luxury hospitality on the web shouldn't require 8MB of JavaScript or a sluggish booking iframe. For Hacienda Chicuinaco in the Cordillera del Bálsamo, every byte had to earn its place over rural cellular connections while delivering the visual gravitas of a European architectural monograph.",
+      stackArchitecture: [
+        {
+          role: "Zero-Card Hairline Grid System",
+          tech: "Tailwind CSS + 1px Architectural Hairlines (#D6CFC2)",
+          rationale:
+            "Eliminates nested card borders in favor of open sandstone fields, tabular Roman and Arabic numerals, and 2×2 specification matrices.",
+        },
+        {
+          role: "Deterministic 4-Language i18n Engine",
+          tech: "Zero-Dependency TypeScript Locale Dictionary (EN / ES / FR / DE)",
+          rationale:
+            "Switches all editorial copy, menu items, trail advisories, and pre-filled WhatsApp reservation templates instantaneously with zero network waterfalls.",
+        },
+        {
+          role: "Interactive La Carta Menu & Media Pipeline",
+          tech: "Framer Motion Crossfade + Responsive WebP Plates",
+          rationale:
+            "Pairs a traditional dotted-leader print menu with instant dish photography previews and lazy-loaded timber-press video streams.",
+        },
+        {
+          role: "Multi-Entity SEO & Sovereign Payment Layer",
+          tech: "JSON-LD Graph (Restaurant + Lodging + EventVenue) & Bitcoin",
+          rationale:
+            "Exposes rich structured data for international search and AI travel agents while signaling native Bitcoin & Lightning acceptance on-premise.",
         },
       ],
     },

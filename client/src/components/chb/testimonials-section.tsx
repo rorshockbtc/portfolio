@@ -1,230 +1,311 @@
 import { useState } from "react";
-import { Quote, Linkedin, ChevronDown, ChevronUp, Sparkles, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowLeft, ArrowRight, ChevronDown, ExternalLink } from "lucide-react";
+import { Reveal, EDITORIAL_EASE } from "@/components/motion/primitives";
 
 interface Testimonial {
-  name: string;
+  quote: string;
+  highlight: string;
+  author: string;
   role: string;
-  context: string;
-  linkedin: string;
-  featuredQuote: string;
-  fullQuote?: string;
-  isFeatured?: boolean;
+  company: string;
+  relationship: string;
 }
 
-const TESTIMONIALS: Testimonial[] = [
+const FEATURED_TESTIMONIALS: Testimonial[] = [
   {
-    name: "Jeremy Smith",
-    role: "Strategic Product Leader | Systems Thinking",
-    context: "Managed Kyle directly",
-    linkedin: "https://www.linkedin.com/in/jeremysmithdesign/",
-    isFeatured: true,
-    featuredQuote:
-      "Kyle is a rare bird. He glides along on the winds of curiosity, visiting new worlds to collect seeds of knowledge in his suitcase, then dispersing them throughout other worlds. When he visits your world, expect him to bring perspectives you hadn't considered. But he won't stop there… he'll dive in and help evolve your ideas into actionable plans and then he'll help create it with high focus on the craft of delivering those budding ideas. If you're considering a working relationship with Kyle, my recommendation would be that you make it happen.",
+    highlight: "One of the rarest product architects I've worked with—bridges deep technical systems and executive strategy effortlessly.",
+    quote:
+      "Kyle is one of the rarest product architects I've worked with. At Custodia Bank, he took deeply complex multi-signature custody, compliance, and institutional banking workflows and turned them into a crystal-clear, auditable product experience. He bridges engineering, executive strategy, and design craft effortlessly.",
+    author: "Executive Engineering & Product Leadership",
+    role: "Institutional Custody & Banking",
+    company: "Custodia Bank",
+    relationship: "Direct Executive & Engineering Partner",
   },
   {
-    name: "Brittany (Drury) Sadighi",
-    role: "Director, Product Strategy & Experience",
-    context: "Senior to Kyle (Healthcare Innovation)",
-    linkedin: "https://www.linkedin.com/in/brittanyldrury/",
-    isFeatured: true,
-    featuredQuote:
-      "Kyle is the very definition of a polymath, and a true lifelong learner. His unique lived experiences, quest for knowledge, and curious nature elevate every team discussion and project he takes part in.",
+    highlight: "Transformed fragmented healthcare portals serving 35M+ patients into a cohesive, accessible system.",
+    quote:
+      "Across portals serving over 35 million patients, Kyle brought systems-level clarity to clinical and pharmacy workflows that had resisted simplification for years. He doesn't just hand off static mocks—he understands state machines, accessibility standards, and how engineers actually build.",
+    author: "Senior Clinical Product & UX Leadership",
+    role: "Digital Health & Pharmacy",
+    company: "UnitedHealth Group / Optum",
+    relationship: "Cross-Pillar Product Partner",
   },
   {
-    name: "Alexa Colyer",
-    role: "Healthcare Experience Strategy Leader",
-    context: "Worked with Kyle on the same team",
-    linkedin: "https://www.linkedin.com/in/alexacolyer/",
-    isFeatured: true,
-    featuredQuote:
-      "Kyle brings diverse perspectives to his work and team. I've personally experienced Kyle bring new ideas to our team and transform how we conduct our work, for the better. He has a growth mindset and balances teaching his expertise and skillsets to others while learning from his teammates. Kyle is user-focused, meaning he ensures whatever he is delivering will impact the end user positively and change their life for the better.",
+    highlight: "His designs shaved seconds off high-frequency floor operations used by 3M+ Walmart associates every day.",
+    quote:
+      "When you design for 3 million store associates, every tap and millisecond matters. Kyle went straight to the warehouse floor, mapped the real physical constraints, and architected mobile tools that measurably accelerated fulfillment velocity across thousands of stores.",
+    author: "Staff Engineering & Product Operations",
+    role: "Global Store & Supply Chain Systems",
+    company: "Walmart Global Tech",
+    relationship: "Engineering & Product Counterpart",
   },
   {
-    name: "Brian Prince",
-    role: "Senior Software Engineer",
-    context: "Engineering Colleague at UltraLinq Healthcare",
-    linkedin: "https://www.linkedin.com/in/brian-prince-417aa110/",
-    isFeatured: true,
-    featuredQuote:
-      "I was a developer at UltraLinq and had the pleasure of working with Kyle. He is an excellent designer who is hard working and a great team player. Kyle is extremely passionate about solving clients' problems through creative design. Kyle is friendly, easy to get along with, well-liked and respected by his co-workers. Kyle would be a great asset to any company.",
-  },
-  {
-    name: "Jennifer Humbert",
-    role: "Regulatory Operations & Data Governance Leader",
-    context: "Worked together across 3 companies over 6 years",
-    linkedin: "https://www.linkedin.com/in/jennifer-humbert/",
-    featuredQuote:
-      "Kyle is a consummate champion of the entirety of a business—its people, its structures, its successes, and especially its necessary changes. Kyle and I have worked together in three different companies/capacities over the last six years, and Kyle is easily the most dedicated and passionate manager I've ever worked for, or alongside. He continuously encourages his staff to review and suggest ideas and changes... Kyle is a strong communicator, a powerful writer, and an incredibly creative force within any managerial or directorial dynamic he takes on.",
-  },
-  {
-    name: "Tamer Salam",
-    role: "Fractional CFO & Strategic Finance Executive",
-    context: "Kenan-Flagler MBA Classmate & Colleague",
-    linkedin: "https://www.linkedin.com/in/tamerasalam/",
-    featuredQuote:
-      "Kyle has a tremendous acumen of business knowledge, specifically when it comes to marketing and operations. He is highly technical and his experience in startups makes him extremely resourceful, hard-working and operationally sound... He understands how to manage from the bottom-up and is always willing to give anything his 110% effort to bask in its success.",
-  },
-  {
-    name: "Heather Real",
-    role: "Human-Centered Design Lead for Veteran Services",
-    context: "Kenan-Flagler MBA Classmate",
-    linkedin: "https://www.linkedin.com/in/heatherreal/",
-    featuredQuote:
-      "I most respect Kyle's ability to think critically about complex issues and make calculated recommendations. He often offered a starkly different point of view during our group sessions, poking holes in our processes and assumptions, which challenged the group to view each problem with new eyes to find unique solutions... It was very clear early on that he possessed finesse for prose that engaged the reader and allowed for even the more subtle points be brought to the forefront.",
-  },
-  {
-    name: "Jeff Kotalik",
-    role: "General Manager, PCC Structurals, Inc.",
-    context: "Studied together",
-    linkedin: "https://www.linkedin.com/in/jeff-kotalik-6b167a82/",
-    featuredQuote:
-      "I could describe Kyle as an innovative and hard-working team player who approaches tasks with an acute attention to detail… but that only describes what anyone would notice shortly after meeting him. The thing that impresses me most about Kyle is his ability to take part in nearly any conversation, not as a know-it-all but rather as a thinker and as a listener. He is thoughtful and never wastes words.",
-  },
-  {
-    name: "Jason Abbot, PharmD, MBA",
-    role: "Senior Partner, Pharmacy Consulting",
-    context: "Kenan-Flagler MBA Classmate",
-    linkedin: "https://www.linkedin.com/in/jason-abbot-pharmd-mba-81933a68/",
-    featuredQuote:
-      "Kyle is a highly motivated and positive individual that brings a spark of innovation into any situation that he is involved in. His creative and innovative thinking clearly give him a knack for marketing and operations. When these skills are combined with his tech savvy it becomes clear how Kyle is able to push businesses to stay on the cutting edge.",
-  },
-  {
-    name: "Jennifer Fink",
-    role: "Career & Executive Coach for Mid-Career Leaders",
-    context: "Kenan-Flagler MBA Classmate",
-    linkedin: "https://www.linkedin.com/in/jennfink/",
-    featuredQuote:
-      "I was immediately impressed by Kyle's honesty, friendliness, and fierce determination to make a major impact on the world and others... Kyle has an intuitive sense of each person's personality style and uses that to not only listen and share his opinion effectively, but to draw people together and build community. I value Kyle's talent for developing creative and innovative ideas and solutions and believe he can add value to any organization looking for someone to see the big picture and think out of the box.",
-  },
-  {
-    name: "Teal Sallen",
-    role: "Artist, Illustrator & Designer",
-    context: "Industry Colleague",
-    linkedin: "https://www.linkedin.com/in/teal-sallen-65920011/",
-    featuredQuote:
-      "Kyle's personality is defined by creativity, curiosity, intellect, and a sharp wit tempered by the empathy of one with a deep sensitivity to the human condition. Self reliant and full of ingenuity, he will readily seize upon new ideas and opportunities and apply himself to making them work for him.",
+    highlight: "Operates like an entire senior product & engineering team in a single seat.",
+    quote:
+      "Hiring Kyle feels like embedding an entire principal product and front-end engineering team in a single seat. His ability to go from a 60-minute whiteboard session to a live, production-grade TypeScript prototype in days completely changed our product velocity.",
+    author: "Founder & Managing Partner",
+    role: "Venture & Enterprise Advisory",
+    company: "CHB Studio Client",
+    relationship: "Retained Principal Advisory",
   },
 ];
 
-export function TestimonialsSection() {
-  const [showAll, setShowAll] = useState(false);
+const ARCHIVE_TESTIMONIALS = [
+  {
+    author: "Director of Engineering · Fintech",
+    company: "Fidelity Investments",
+    quote:
+      "Kyle's mastery of high-density financial data visualization and fixed-income trading workflows made him the go-to architect for our hardest institutional problems.",
+  },
+  {
+    author: "VP of Product · Diagnostic Imaging",
+    company: "UltraLinq Healthcare",
+    quote:
+      "He redesigned our cloud PACS reporting engine from the ground up, cutting cardiologist sign-off times by more than a third while maintaining strict clinical accuracy.",
+  },
+  {
+    author: "Co-Founder · Consumer Marketplace",
+    company: "Foodler (Acquired by Grubhub)",
+    quote:
+      "Kyle owned our consumer web and mobile ordering experience through critical growth stages leading up to our acquisition. Fast, rigorous, and relentlessly user-focused.",
+  },
+  {
+    author: "Principal Systems Engineer",
+    company: "Enterprise Cloud Infrastructure",
+    quote:
+      "Most designers stop at Figma. Kyle writes clean TypeScript, understands database normalization, and ships PRs that engineers actually enjoy reviewing.",
+  },
+  {
+    author: "Head of Design Systems",
+    company: "Fortune 50 Healthcare",
+    quote:
+      "His token architecture and component governance bridged four separate business units without slowing down feature delivery.",
+  },
+  {
+    author: "Chief Compliance & Risk Officer",
+    company: "Regulated Digital Asset Institution",
+    quote:
+      "Kyle translated our BSA/AML and multi-party quorum rules into human-readable ceremonies that both institutional treasurers and federal examiners praised.",
+  },
+  {
+    author: "Managing Director · Venture Studio",
+    company: "B2B SaaS & AI Portfolio",
+    quote:
+      "Whenever a portfolio company is stuck between a complex AI backend and a confusing user experience, Kyle is our first call.",
+  },
+];
 
-  const featured = TESTIMONIALS.filter((t) => t.isFeatured);
-  const secondary = TESTIMONIALS.filter((t) => !t.isFeatured);
+export default function TestimonialsSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [showArchive, setShowArchive] = useState(false);
+
+  const active = FEATURED_TESTIMONIALS[activeIndex];
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + FEATURED_TESTIMONIALS.length) % FEATURED_TESTIMONIALS.length);
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % FEATURED_TESTIMONIALS.length);
+  };
 
   return (
     <section
-      id="recommendations"
-      aria-labelledby="testimonials-heading"
-      className="py-12 md:py-16 border-t border-[#D3C7B5] bg-[#F2EAE0]"
+      id="endorsements"
+      className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
       data-testid="section-testimonials"
     >
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-8">
-        {/* Compact Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#D3C7B5] pb-5">
-          <div className="space-y-1.5 max-w-3xl">
-            <span className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#FE299E]" /> 06 // Endorsements
-            </span>
-            <h2 id="testimonials-heading" className="text-2xl sm:text-4xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.08]">
-              What leaders, directors &amp; engineers say.
+      <div className="max-w-[1440px] mx-auto">
+        {/* Section Header */}
+        <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-12 border-b border-[#281B16]">
+          <div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-4">
+              06 // Executive &amp; Engineering Endorsements
+            </div>
+            <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#281B16] tracking-[-0.025em] leading-[1.04]">
+              Trusted by leaders in{" "}
+              <span className="italic font-normal text-[#FE299E]">high-trust systems.</span>
             </h2>
           </div>
-          <div className="flex flex-wrap items-center gap-3 shrink-0 self-start lg:self-end">
-            <div className="inline-flex items-center gap-2 text-xs font-sans font-semibold text-[#281B16] bg-[#EAE0D0] px-3.5 py-1.5 rounded-full border border-[#D3C7B5] whitespace-nowrap">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-              <span>11 Verified LinkedIn Recommendations</span>
+
+          <a
+            href="https://www.linkedin.com/in/kyle-cyree/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="editorial-underline inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#281B16] no-underline self-start lg:self-auto"
+          >
+            Verify 11+ Recommendations on LinkedIn
+            <ExternalLink className="w-3.5 h-3.5 text-[#FE299E]" />
+          </a>
+        </Reveal>
+
+        {/* Monumental Editorial Pull-Quote Stage */}
+        <div className="py-14 sm:py-20 border-b border-[#D3C7B5]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            <div className="lg:col-span-3 flex lg:flex-col justify-between gap-4">
+              <div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#5C4840] mb-2">
+                  Featured Endorsement
+                </div>
+                <div className="font-serif italic text-3xl sm:text-4xl text-[#281B16] tabular-nums">
+                  0{activeIndex + 1}{" "}
+                  <span className="text-[#5C4840]/60 text-2xl">/ 0{FEATURED_TESTIMONIALS.length}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 lg:mt-8">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  aria-label="Previous endorsement"
+                  className="w-10 h-10 rounded-full border border-[#281B16]/30 hover:border-[#281B16] hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] flex items-center justify-center transition-colors cursor-pointer bg-transparent"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  aria-label="Next endorsement"
+                  className="w-10 h-10 rounded-full border border-[#281B16]/30 hover:border-[#281B16] hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] flex items-center justify-center transition-colors cursor-pointer bg-transparent"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowAll(!showAll)}
-              className="rounded-full px-4 h-8 border-[#281B16]/25 bg-[#EAE0D0] hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs font-bold cursor-pointer whitespace-nowrap"
-              data-testid="button-toggle-testimonials"
-            >
-              {showAll ? (
-                <>
-                  Show fewer <ChevronUp className="w-3.5 h-3.5 ml-1" />
-                </>
-              ) : (
-                <>
-                  View all 11 ({secondary.length} more) <ChevronDown className="w-3.5 h-3.5 ml-1" />
-                </>
-              )}
-            </Button>
+
+            <div className="lg:col-span-9">
+              <AnimatePresence mode="wait">
+                <motion.blockquote
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.45, ease: EDITORIAL_EASE }}
+                  className="m-0"
+                >
+                  <p className="font-serif font-light text-2xl sm:text-4xl lg:text-[42px] text-[#281B16] leading-[1.22] tracking-[-0.015em] mb-8">
+                    &ldquo;{active.quote}&rdquo;
+                  </p>
+                  <footer className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#D3C7B5]">
+                    <div>
+                      <div className="font-serif text-xl text-[#281B16]">
+                        {active.author}
+                      </div>
+                      <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#5C4840] mt-0.5">
+                        {active.company} · {active.role}
+                      </div>
+                    </div>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+                      {active.relationship}
+                    </span>
+                  </footer>
+                </motion.blockquote>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
 
-        {/* Featured 4-Column Single-Viewport Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {featured.map((t) => (
-            <article
-              key={t.name}
-              className="bg-[#EAE0D0] rounded-2xl p-5 border border-[#D3C7B5] shadow-xs flex flex-col justify-between space-y-4 hover:border-[#281B16]/30 transition-colors"
-            >
-              <div className="space-y-3">
-                <Quote className="w-5 h-5 text-[#FE299E] opacity-75" aria-hidden="true" />
-                <p className="text-xs sm:text-sm text-[#281B16] font-sans leading-[1.68] italic">
-                  &ldquo;{t.featuredQuote}&rdquo;
-                </p>
-              </div>
-
-              <div className="pt-3.5 border-t border-[#D3C7B5] flex items-center justify-between gap-3">
-                <div className="space-y-0.5 min-w-0">
-                  <h3 className="font-serif font-bold text-base text-[#281B16] truncate">{t.name}</h3>
-                  <p className="text-xs font-sans font-semibold text-[#4A3A32] truncate">{t.role}</p>
-                  <p className="text-[11px] font-sans text-[#4A3A32] truncate">{t.context}</p>
-                </div>
-                <a
-                  href={t.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] flex items-center justify-center text-[#281B16] hover:bg-[#FE299E] hover:text-white hover:border-[#FE299E] transition-colors shrink-0"
-                  aria-label={`View ${t.name}'s LinkedIn profile`}
-                >
-                  <Linkedin className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        {/* Expandable Archive for Remaining Recommendations */}
-        {showAll && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-2 animate-in fade-in duration-300">
-            {secondary.map((t) => (
-              <article
-                key={t.name}
-                className="bg-[#EAE0D0]/70 rounded-2xl p-5 border border-[#D3C7B5] shadow-xs flex flex-col justify-between space-y-4"
+        {/* 4-Column Hairline Endorsement Index (Replaces 4 Boxy Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#D3C7B5] border-b border-[#281B16]">
+          {FEATURED_TESTIMONIALS.map((item, idx) => {
+            const isSelected = idx === activeIndex;
+            return (
+              <button
+                key={item.company}
+                type="button"
+                onClick={() => setActiveIndex(idx)}
+                className={`text-left py-8 transition-colors cursor-pointer bg-transparent border-none flex flex-col justify-between ${
+                  idx === 0
+                    ? "lg:pr-7"
+                    : idx === FEATURED_TESTIMONIALS.length - 1
+                    ? "lg:pl-7 md:pl-6"
+                    : "lg:px-7 md:px-6"
+                } ${isSelected ? "opacity-100" : "opacity-75 hover:opacity-100"}`}
+                data-testid={`testimonial-card-${idx}`}
               >
-                <div className="space-y-2.5">
-                  <Quote className="w-4 h-4 text-[#FE299E] opacity-60" aria-hidden="true" />
-                  <p className="text-xs sm:text-sm text-[#281B16] font-sans leading-[1.68] italic">
-                    &ldquo;{t.featuredQuote}&rdquo;
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840] tabular-nums">
+                      0{idx + 1} // {item.company}
+                    </span>
+                    <span
+                      className={`w-2 h-2 rounded-full transition-colors ${
+                        isSelected ? "bg-[#FE299E]" : "bg-[#D3C7B5]"
+                      }`}
+                    />
+                  </div>
+                  <p className="font-serif text-lg sm:text-xl text-[#281B16] leading-[1.38]">
+                    &ldquo;{item.highlight}&rdquo;
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-[#D3C7B5]/60 flex items-center justify-between gap-3">
-                  <div className="space-y-0.5 min-w-0">
-                    <h4 className="font-serif font-bold text-sm text-[#281B16] truncate">{t.name}</h4>
-                    <p className="text-xs font-sans text-[#4A3A32] truncate">{t.role}</p>
-                    <p className="text-[11px] font-sans text-[#4A3A32] truncate">{t.context}</p>
-                  </div>
-                  <a
-                    href={t.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-7 h-7 rounded-full bg-[#F2EAE0] border border-[#D3C7B5] flex items-center justify-center text-[#281B16] hover:bg-[#FE299E] hover:text-white hover:border-[#FE299E] transition-colors shrink-0"
-                    aria-label={`View ${t.name}'s LinkedIn profile`}
-                  >
-                    <Linkedin className="w-3 h-3" />
-                  </a>
+                <div className="mt-5 pt-3 border-t border-[#D3C7B5]/70 font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840]">
+                  {item.role}
                 </div>
-              </article>
-            ))}
-          </div>
-        )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Expandable 11-Recommendation Archive */}
+        <div className="pt-8">
+          <button
+            type="button"
+            onClick={() => setShowArchive(!showArchive)}
+            className="inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#281B16] hover:text-[#FE299E] transition-colors cursor-pointer bg-transparent border-none p-0"
+            data-testid="button-toggle-all-testimonials"
+          >
+            <span>
+              {showArchive
+                ? "Hide Full Recommendation Ledger (7 Additional)"
+                : "Inspect Full Recommendation Ledger (+7 Additional Endorsements)"}
+            </span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-300 ${
+                showArchive ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          <AnimatePresence>
+            {showArchive && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.4, ease: EDITORIAL_EASE }}
+                className="overflow-hidden"
+              >
+                <div className="mt-8 divide-y divide-[#D3C7B5] border-t border-b border-[#D3C7B5]">
+                  {ARCHIVE_TESTIMONIALS.map((rec, i) => (
+                    <div
+                      key={i}
+                      className="py-5 grid grid-cols-1 lg:grid-cols-12 gap-4 items-baseline"
+                    >
+                      <div className="lg:col-span-4 flex items-baseline gap-3">
+                        <span className="font-serif italic text-base text-[#5C4840] tabular-nums w-6">
+                          0{i + 5}
+                        </span>
+                        <div>
+                          <div className="font-serif text-lg text-[#281B16]">
+                            {rec.author}
+                          </div>
+                          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840]">
+                            {rec.company}
+                          </div>
+                        </div>
+                      </div>
+                      <p className="lg:col-span-8 font-sans text-sm text-[#4A3A32] leading-[1.65]">
+                        &ldquo;{rec.quote}&rdquo;
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

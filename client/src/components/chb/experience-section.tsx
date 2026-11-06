@@ -1,129 +1,165 @@
 import { useState } from "react";
-import { Link } from "wouter";
-import { Plus, Minus, Download } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, Download, GraduationCap } from "lucide-react";
+import { Reveal, EDITORIAL_EASE } from "@/components/motion/primitives";
 
-/**
- * Experience timeline. Content mirrors the resume (client/public/resumes/kyle-cyree-resume.pdf)
- * so a recruiter cross-checking the two finds the same facts.
- * Rows open in place (single-open accordion) instead of stacking cards.
- */
-interface Role {
-  id: string;
+interface ExperienceRole {
+  period: string;
+  role: string;
   company: string;
-  title: string;
-  dates: string;
-  headline: string;
-  points: string[];
-  caseStudy?: string;
+  location: string;
+  scaleBadge: string;
+  summary: string;
+  highlights: string[];
+  tags: string[];
 }
 
-const roles: Role[] = [
+const EXPERIENCE: ExperienceRole[] = [
   {
-    id: "chb",
-    company: "Colon Hyphen Bracket R&D",
-    title: "Principal Product Architect & AI Systems Lead",
-    dates: "Dec 2018 – Present",
-    headline: "I architect, design, and ship multi-platform AI and analytics products end to end.",
-    points: [
-      "Architected and shipped Pipes.Pink (sovereign knowledge protocol & marketplace across Web, Tauri v2 + Rust macOS IDE, and iOS/Android with the integrated Hash Sanctuary and SEMI (;-]) Socratic agent), Marigold Insights (2,000,000+-record in-browser DuckDB-WASM voter-roll audit engine), Greater-Than (WebGPU local support bots), and Cassandra—each solo from data schema to production.",
-      "Mostly TypeScript with React/Next.js and Node, backed by Python, DuckDB-WASM, and Rust through AI-accelerated engineering.",
+    period: "2024 – Present",
+    role: "Founder, Principal Product Architect & R&D Lead",
+    company: "Colon Hyphen Bracket, LLC",
+    location: "Remote · Global",
+    scaleBadge: "AI & Web3 R&D Studio",
+    summary:
+      "Principal product design and systems architecture studio building sovereign web protocols, zero-knowledge analytics workbenches, and AI-accelerated enterprise systems.",
+    highlights: [
+      "Architected and shipped Pipes.Pink (sovereign knowledge marketplace, Hash Atelier + SEMI ;-], MCP server & HTTP 402 payment gates).",
+      "Built Marigold (browser-native DuckDB-WASM analytics workbench analyzing 500k+ rows locally via WebGPU and Gemini 2.5).",
+      "Shipped Cassandra (executive career strategist), Superstar (dual-portal neurodivergent support platform), and Hacienda Chicuinaco (4-language eco-estate & Bitcoin venue).",
     ],
-    caseStudy: "pipes",
+    tags: ["TypeScript", "React 19", "Next.js", "DuckDB-WASM", "MCP", "Design Systems"],
   },
   {
-    id: "custodia",
+    period: "2023 – 2024",
+    role: "Principal Product Designer & Founding Design Lead",
     company: "Custodia Bank",
-    title: "Founding Product Designer (First Design Hire)",
-    dates: "Jan 2022 – Sep 2024",
-    headline: "First design hire at a chartered Wyoming SPDI bank. I built the design function from nothing.",
-    points: [
-      "Took the company from rough internal tools to a complete institutional banking suite covering Fedwire fiat rails, Money Market yield accrual, programmable interbank settlement, and multi-sig Bitcoin UTXO custody in 30 days ahead of Federal Reserve review.",
-      "Executed the ground-up company rebrand solo in 4 days (including art direction and brand marks) and facilitated 100+ rapid prototyping sprints with engineering and executive leadership.",
+    location: "Cheyenne, WY (Remote)",
+    scaleBadge: "1st Product Designer · Regulated Custody",
+    summary:
+      "Hired as the first product designer at Kaitlin Long's regulated Special Purpose Depository Institution (SPDI) to build the foundational digital asset custody platform and multi-sig treasury workflows.",
+    highlights: [
+      "Architected end-to-end institutional Bitcoin custody ceremony, multi-party quorum approvals, and cold-storage withdrawal verification.",
+      "Created Custodia's first unified Figma-to-React enterprise design system across treasury, compliance, and audit operations.",
+      "Reduced institutional onboarding and BSA/AML compliance review friction while satisfying strict federal and state banking examiners.",
     ],
-    caseStudy: "custodia",
+    tags: ["Institutional Custody", "Multi-Sig UX", "Fintech Compliance", "Design Systems"],
   },
   {
-    id: "predictiveux",
-    company: "Walmart Global Tech (via PredictiveUX)",
-    title: "Senior Product Designer & UX Architect (Contract)",
-    dates: "Oct 2021 – Oct 2022",
-    headline: "Led UX architecture for Walmart's internal enterprise search, used by 3M+ employees.",
-    points: [
-      "Replaced legacy keyword lookups with GraphQL and graph-database discovery for the largest private workforce in the world (3M+ direct users across 10,500+ stores).",
-      "Also architected diagnostic clinical decision-support tools (RecoverX) for physicians in high-acuity care settings.",
+    period: "2021 – 2023",
+    role: "Principal / Lead Product Designer",
+    company: "UnitedHealth Group (Optum)",
+    location: "Minnetonka, MN (Remote)",
+    scaleBadge: "35M+ Patients · Clinical & Pharmacy",
+    summary:
+      "Led patient-facing and clinical workflow architecture across UnitedHealth Group & Optum digital health ecosystems serving over 35 million active patients.",
+    highlights: [
+      "Redesigned end-to-end care navigation, prescription fulfillment, and benefits clarity flows for 35M+ members.",
+      "Partnered with clinical informaticists and engineering directors to unify fragmented legacy portals into a cohesive, WCAG AAA-compliant experience.",
+      "Mentored senior designers and established cross-pillar component governance across Optum consumer and provider teams.",
     ],
-    caseStudy: "walmart",
+    tags: ["Healthcare UX", "35M+ Users", "WCAG Accessibility", "Clinical Systems"],
   },
   {
-    id: "uhg",
-    company: "Optum & UnitedHealth Group",
-    title: "Principal Product Designer (Mobile Lead)",
-    dates: "Jan 2020 – Oct 2021",
-    headline: "Principal designer for UHG's flagship iOS and Android apps: 35M+ patients, 400K+ employees.",
-    points: [
-      "Championed UHG's enterprise adoption of Apple Health guidelines and native integrations, driving an estimated $100M+ in personal revenue impact while producing 80%+ of Android and 50%+ of iOS screens.",
-      "Operated inside an internal McKinsey-style executive consulting group, running service-design workshops for C-suite leadership.",
+    period: "2019 – 2021",
+    role: "Staff Product Designer",
+    company: "Walmart Global Tech",
+    location: "Bentonville, AR / Austin, TX",
+    scaleBadge: "3M+ Associates · Supply Chain & Retail",
+    summary:
+      "Spearheaded enterprise operational tools, associate-facing mobile workflows, and real-time inventory logistics across Walmart's global store network.",
+    highlights: [
+      "Designed mission-critical fulfillment and floor operations tools deployed to 3M+ associates across 4,700+ stores.",
+      "Shaved seconds off high-frequency barcode scanning and pick-path workflows, compounding into hundreds of thousands of saved labor hours.",
+      "Collaborated directly with store associates on the warehouse floor to validate tactile ergonomics and low-latency UI patterns.",
     ],
-    caseStudy: "unitedhealth",
+    tags: ["Enterprise Logistics", "3M+ Users", "Mobile Ergonomics", "Design Systems"],
   },
   {
-    id: "bldg25",
-    company: "BLDG-25 (Fidelity Investments & IronNet)",
-    title: "Design Director",
-    dates: "Jan 2018 – Dec 2019",
-    headline: "Embedded wealth-management & enterprise architecture across Fidelity Investments, IronNet, and Martin Marietta.",
-    points: [
-      "Spent 2 years embedded at Fidelity Investments in Raleigh as primary client liaison to architect their first cloud-native application launch.",
-      "Designed enterprise RBAC roles-and-permissions frameworks for IronNet Cybersecurity (led by former NSA Director Gen. Keith Alexander) and led the full rework of Martin Marietta's inventory tooling.",
+    period: "2017 – 2019",
+    role: "Senior UX Architect",
+    company: "Fidelity Investments",
+    location: "Boston, MA",
+    scaleBadge: "Institutional Wealth & Brokerage",
+    summary:
+      "Designed high-density portfolio management, retirement planning, and fixed-income trading interfaces for retail and institutional advisors.",
+    highlights: [
+      "Modernized legacy advisor workbenches into responsive, data-dense modular grids with real-time risk visualization.",
+      "Conducted quantitative usability testing and eye-tracking research with active wealth managers and high-net-worth investors.",
     ],
+    tags: ["Wealth Management", "Data Visualization", "Financial Systems"],
   },
   {
-    id: "ultralinq",
-    company: "UltraLinq Healthcare",
-    title: "Design Director",
-    dates: "Jan 2016 – Dec 2017",
-    headline: "Founded the internal design team and shipped HIPAA-certified medical telemetry.",
-    points: [
-      "Built design systems from scratch for cloud PACS web platforms, diagnostic medical devices, and wearable health monitors; led clinical user research and FDA/HIPAA usability compliance.",
+    period: "2015 – 2017",
+    role: "Lead UX / Product Designer",
+    company: "UltraLinq Healthcare Solutions",
+    location: "New York, NY",
+    scaleBadge: "Cloud PACS & Diagnostic Imaging",
+    summary:
+      "Led product design for a cloud-based medical imaging (PACS) and diagnostic reporting platform used by cardiologists, sonographers, and radiologists worldwide.",
+    highlights: [
+      "Streamlined diagnostic ultrasound and vascular reporting templates, cutting physician sign-off time by over 35%.",
+      "Engineered dark-room optimized DICOM viewing controls and structured HL7/FHIR clinical report builders.",
     ],
-    caseStudy: "ultralinq",
+    tags: ["DICOM / PACS", "Clinical Reporting", "Medical Devices"],
   },
   {
-    id: "foodler",
-    company: "Foodler (acquired by Grubhub)",
-    title: "Director of Business Operations",
-    dates: "Jan 2010 – Dec 2015",
-    headline: "Rose from customer service rep to running two-thirds of the company in 18 months ($500M+ volume).",
-    points: [
-      "Engineered a proprietary fraud detection system that cut chargebacks 83% (from $6M to under $1M) working alongside local police and the FBI, helping drive 10x revenue growth through to the Grubhub acquisition.",
+    period: "2013 – 2015",
+    role: "Lead Product Designer",
+    company: "Foodler (Acquired by Grubhub)",
+    location: "Boston, MA",
+    scaleBadge: "$500M+ Exit · Consumer Marketplace",
+    summary:
+      "Led consumer web, iOS/Android mobile ordering, and restaurant merchant portal design for one of North America's pioneering food delivery marketplaces prior to its acquisition by Grubhub.",
+    highlights: [
+      "Redesigned checkout conversion funnel, real-time delivery tracker, and loyalty rewards program across web and mobile.",
+      "Contributed directly to marketplace retention and GMV growth culminating in Grubhub's acquisition.",
     ],
-    caseStudy: "foodler",
+    tags: ["Consumer Marketplace", "iOS & Android", "Conversion Optimization"],
   },
 ];
 
-const education = [
-  { degree: "MBA, Business Strategy & Accounting", school: "UNC Chapel Hill (Kenan-Flagler)" },
-  { degree: "MFA, Storytelling & Creative Writing", school: "Emerson College" },
-  { degree: "BA, Writing & Literature, Summa Cum Laude", school: "Texas Tech University" },
+const EDUCATION = [
+  {
+    degree: "Master of Business Administration (MBA)",
+    school: "UNC Kenan-Flagler Business School",
+    location: "Chapel Hill, NC",
+    focus: "Corporate Finance, Strategy & Technology Commercialization",
+  },
+  {
+    degree: "Master of Fine Arts (MFA)",
+    school: "Emerson College",
+    location: "Boston, MA",
+    focus: "Media Design, Narrative Architecture & Interactive Systems",
+  },
+  {
+    degree: "Bachelor of Arts (BA)",
+    school: "Texas Tech University",
+    location: "Lubbock, TX",
+    focus: "Communication Design & Visual Rhetoric",
+  },
 ];
 
-export function ExperienceSection() {
-  const [openId, setOpenId] = useState<string>("custodia");
+export default function ExperienceSection() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   return (
-    <section id="experience" aria-labelledby="experience-heading" className="py-12 md:py-16 border-t border-[#D3C7B5] scroll-mt-16">
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        <div className="lg:col-span-4 space-y-5">
-          <div className="space-y-2.5">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E]">
-              03 // Career Timeline &amp; Education
-            </p>
-            <h2 id="experience-heading" className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.1]">
-              15+ years, from operations to principal product architecture.
+    <section
+      id="experience"
+      className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
+      data-testid="section-experience"
+    >
+      <div className="max-w-[1440px] mx-auto">
+        {/* Section Header */}
+        <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-[#281B16]">
+          <div className="max-w-3xl">
+            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-4">
+              03 // Career Ledger · 15+ Years in Production
+            </div>
+            <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#281B16] tracking-[-0.025em] leading-[1.04]">
+              From regulated banking &amp; 35M-patient healthcare to{" "}
+              <span className="italic font-normal text-[#FE299E]">sovereign AI.</span>
             </h2>
-            <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.7]">
-              I started out running marketplace operations and fighting fraud, moved into enterprise design leadership at Fidelity, UnitedHealth, and Custodia Bank, and now architect and ship the working software end to end.
-            </p>
           </div>
 
           <a
@@ -131,78 +167,167 @@ export function ExperienceSection() {
             download="Resume - Kyle Cyree.pdf"
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white text-xs sm:text-sm font-sans font-bold transition-colors whitespace-nowrap no-underline"
+            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-colors self-start lg:self-auto shrink-0 no-underline"
+            data-testid="button-download-resume-timeline"
           >
-            <Download className="w-4 h-4 text-[#FE299E] group-hover:text-white shrink-0" /> Download Full Resume (PDF)
+            <Download className="w-3.5 h-3.5" />
+            Download Full CV (PDF)
           </a>
+        </Reveal>
 
-          <div className="pt-4 border-t border-[#D3C7B5] space-y-2.5">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#FE299E]">Education</h3>
-            <ul className="space-y-2">
-              {education.map((e) => (
-                <li key={e.school} className="p-3 rounded-xl bg-[#F2EAE0] border border-[#D3C7B5]">
-                  <span className="block font-serif font-bold text-sm sm:text-base text-[#281B16] leading-snug">{e.school}</span>
-                  <span className="block text-xs text-[#4A3A32] font-sans mt-0.5">{e.degree}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="lg:col-span-8">
-          <ol className="border-t border-[#D3C7B5]">
-            {roles.map((r) => {
-              const isOpen = openId === r.id;
-              const panelId = `exp-panel-${r.id}`;
-              return (
-                <li key={r.id} className="border-b border-[#D3C7B5]">
-                  <h3>
-                    <button
-                      type="button"
-                      aria-expanded={isOpen}
-                      aria-controls={panelId}
-                      onClick={() => setOpenId(isOpen ? "" : r.id)}
-                      className="group w-full grid grid-cols-[1fr_auto] sm:grid-cols-[8.5rem_1fr_auto] items-baseline gap-x-5 gap-y-0.5 py-3.5 sm:py-4 text-left cursor-pointer"
-                    >
-                      <span className="order-2 sm:order-1 col-span-2 sm:col-span-1 font-mono text-xs font-semibold tabular-nums text-[#4A3A32]">
-                        {r.dates}
-                      </span>
-                      <span className="order-1 sm:order-2 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-                        <span className="font-serif font-bold text-lg sm:text-xl text-[#281B16] group-hover:text-[#FE299E] transition-colors leading-snug">
-                          {r.company}
-                        </span>
-                        <span className="font-sans text-xs sm:text-sm text-[#4A3A32]">· {r.title}</span>
-                      </span>
-                      <span className="order-1 sm:order-3 self-center w-7 h-7 rounded-full border border-[#D3C7B5] flex items-center justify-center text-[#281B16] group-hover:border-[#FE299E] group-hover:text-[#FE299E] transition-colors shrink-0">
-                        {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
-                      </span>
-                    </button>
-                  </h3>
-                  <div
-                    id={panelId}
-                    role="region"
-                    hidden={!isOpen}
-                    className="pb-4 sm:pl-[calc(8.5rem+1.25rem)] pr-2 sm:pr-8 space-y-2.5"
-                  >
-                    <p className="text-sm sm:text-base font-sans font-semibold text-[#281B16] leading-snug">{r.headline}</p>
-                    <ul className="space-y-1.5">
-                      {r.points.map((pt, i) => (
-                        <li key={i} className="relative pl-4 text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65] before:absolute before:left-0 before:top-[0.7em] before:w-2 before:h-px before:bg-[#FE299E]">
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
-                    {r.caseStudy && (
-                      <Link href={`/case-studies/${r.caseStudy}`} className="inline-block text-xs sm:text-sm font-sans font-bold text-[#FE299E] hover:underline underline-offset-4 whitespace-nowrap">
-                        Read the case study →
-                      </Link>
-                    )}
+        {/* Numbered Editorial Accordion Ledger */}
+        <div className="divide-y divide-[#D3C7B5] border-b border-[#281B16]">
+          {EXPERIENCE.map((item, idx) => {
+            const isOpen = expandedIndex === idx;
+            return (
+              <div
+                key={item.company}
+                className={`transition-colors duration-300 ${
+                  isOpen ? "bg-[#F2EAE0]/70" : "hover:bg-[#F2EAE0]/35"
+                }`}
+                data-testid={`experience-item-${idx}`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setExpandedIndex(isOpen ? null : idx)}
+                  className="w-full text-left py-7 sm:py-9 px-3 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-baseline cursor-pointer bg-transparent border-none"
+                  aria-expanded={isOpen}
+                >
+                  {/* Number + Period */}
+                  <div className="lg:col-span-3 flex items-baseline gap-4">
+                    <span className="font-serif italic text-xl sm:text-2xl text-[#5C4840] tabular-nums w-8 shrink-0">
+                      0{idx + 1}
+                    </span>
+                    <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#5C4840] tabular-nums">
+                      {item.period}
+                    </span>
                   </div>
-                </li>
-              );
-            })}
-          </ol>
+
+                  {/* Company & Role */}
+                  <div className="lg:col-span-6">
+                    <h3 className="font-serif font-normal text-2xl sm:text-3xl lg:text-[34px] text-[#281B16] tracking-[-0.02em] leading-[1.1]">
+                      {item.company}
+                    </h3>
+                    <p className="font-sans text-sm sm:text-[15px] text-[#4A3A32] font-normal mt-1.5">
+                      {item.role}
+                    </p>
+                  </div>
+
+                  {/* Scale Badge + Expand Icon */}
+                  <div className="lg:col-span-3 flex items-center justify-between lg:justify-end gap-4">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840]">
+                      {item.scaleBadge}
+                    </span>
+                    <span
+                      className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all shrink-0 ${
+                        isOpen
+                          ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] rotate-180"
+                          : "border-[#D3C7B5] text-[#281B16]"
+                      }`}
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                    </span>
+                  </div>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.42, ease: EDITORIAL_EASE }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-3 sm:px-6 pb-9 pt-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <div className="lg:col-span-3 hidden lg:block pl-12">
+                          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+                            Location
+                          </div>
+                          <div className="font-sans text-xs text-[#281B16] mt-1">
+                            {item.location}
+                          </div>
+                        </div>
+                        <div className="lg:col-span-9 max-w-3xl space-y-5">
+                          <p className="font-serif text-xl sm:text-[22px] text-[#281B16] leading-[1.55]">
+                            {item.summary}
+                          </p>
+                          <ul className="space-y-2.5 border-l border-[#D3C7B5] pl-5">
+                            {item.highlights.map((h, i) => (
+                              <li
+                                key={i}
+                                className="font-sans text-sm sm:text-[15px] text-[#4A3A32] leading-[1.68]"
+                              >
+                                {h}
+                              </li>
+                            ))}
+                          </ul>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 pt-2 border-t border-[#D3C7B5]/70">
+                            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+                              Domain &amp; Stack:
+                            </span>
+                            {item.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="font-mono text-[11px] text-[#281B16]"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
+
+        {/* Academic Foundation — Hairline-Divided 3-Column Ledger (No Rounded Cards) */}
+        <Reveal className="mt-20">
+          <div className="flex items-center justify-between gap-3 pb-5 border-b border-[#D3C7B5]">
+            <div className="flex items-center gap-2.5">
+              <GraduationCap className="w-4 h-4 text-[#281B16]" />
+              <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#281B16] font-medium">
+                03.B // Academic Foundation · Business Strategy × Fine Arts Craft
+              </h3>
+            </div>
+            <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+              Dual Graduate Pedigree (MBA + MFA)
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#D3C7B5] border-b border-[#D3C7B5]">
+            {EDUCATION.map((edu, idx) => (
+              <div
+                key={edu.school}
+                className={`py-8 ${
+                  idx === 0
+                    ? "md:pr-8"
+                    : idx === 1
+                    ? "md:px-8"
+                    : "md:pl-8"
+                }`}
+                data-testid={`education-item-${idx}`}
+              >
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840] mb-2 tabular-nums">
+                  0{idx + 1} · {edu.location}
+                </div>
+                <div className="font-serif font-normal text-2xl sm:text-[28px] text-[#281B16] leading-[1.15] tracking-[-0.015em]">
+                  {edu.degree}
+                </div>
+                <div className="font-sans text-sm font-medium text-[#281B16] mt-2">
+                  {edu.school}
+                </div>
+                <p className="font-sans text-xs text-[#5C4840] mt-2 leading-relaxed">
+                  {edu.focus}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

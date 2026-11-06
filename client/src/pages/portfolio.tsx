@@ -1,1132 +1,1760 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
   ArrowRight,
+  ArrowUpRight,
   Download,
   ExternalLink,
-  GitBranch,
-  GitCommit,
-  Maximize2,
-  Compass,
-  Calendar,
-  Copy,
-  Check,
-  ChevronRight,
+  Github,
+  Layers,
   Sparkles,
-  Filter,
+  ZoomIn,
 } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import ClientLogoBar from "@/components/chb/client-logo-bar";
+import ExperienceSection from "@/components/chb/experience-section";
+import TechStack from "@/components/chb/tech-stack";
+import TestimonialsSection from "@/components/chb/testimonials-section";
+import SprintCallout from "@/components/chb/sprint-callout";
 import { openContactModal } from "@/lib/contact-events";
-import {
-  BrandMark,
-  ClientLogoBar,
-  SprintCallout,
-  TechStack,
-} from "@/components/chb";
-import { ExperienceSection } from "@/components/chb/experience-section";
-import { TestimonialsSection } from "@/components/chb/testimonials-section";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/primitives";
 
-interface CatalogItem {
+type DomainFilter = "all" | "enterprise" | "ai" | "design";
+
+interface CatalogStudy {
   slug: string;
-  order: string;
+  num: string;
   client: string;
   title: string;
-  summary: string;
-  domain: "fintech" | "enterprise" | "ai" | "design";
+  domain: DomainFilter;
   domainLabel: string;
   scaleBadge: string;
   timeline: string;
+  summary: string;
+  thumb: string;
+  liveUrl?: string;
 }
 
-const ALL_CATALOG_STUDIES: CatalogItem[] = [
+const ALL_CATALOG_STUDIES: CatalogStudy[] = [
   {
     slug: "custodia",
-    order: "01",
+    num: "01",
     client: "Custodia Bank",
-    title: "Institutional Money Market, Fedwire & Bitcoin Custody",
-    summary: "Ground-up rebrand in 4 days & core banking app in 30 days for chartered Federal Reserve SPDI bank ahead of Fed master account review.",
-    domain: "fintech",
-    domainLabel: "Fintech & Banking",
-    scaleBadge: "Chartered SPDI Bank · $71M Raised",
-    timeline: "Jan 2022 – Sep 2024",
+    title: "Institutional Bitcoin Custody & Multi-Sig Treasury Platform",
+    domain: "enterprise",
+    domainLabel: "Regulated Banking",
+    scaleBadge: "1st Product Designer · SPDI Bank",
+    timeline: "2023 – 2024",
+    summary:
+      "Foundational digital asset custody ceremony, multi-party quorum approvals, and BSA/AML compliance workbench for Kaitlin Long's regulated Wyoming bank.",
+    thumb: "/images/custodia/mm-01.png",
   },
   {
     slug: "unitedhealth",
-    order: "02",
-    client: "UnitedHealth Group / Optum",
-    title: "Flagship Native Patient Mobile Apps & Fusion Consultancy",
-    summary: "Led mobile UX for 35M+ patients and 400K+ employees. Produced 80%+ Android and 50%+ iOS screens, championing Apple Health integration.",
+    num: "02",
+    client: "UnitedHealth Group (Optum)",
+    title: "Unified Patient Care Navigation & Clinical Pharmacy Ecosystem",
     domain: "enterprise",
-    domainLabel: "Enterprise Monoliths",
-    scaleBadge: "35M+ Patients · Fortune 10",
-    timeline: "2020 – 2021",
+    domainLabel: "Enterprise Healthcare",
+    scaleBadge: "35M+ Active Patients · WCAG AAA",
+    timeline: "2021 – 2023",
+    summary:
+      "End-to-end care navigation, prescription fulfillment, and benefits clarity architecture serving over 35 million patients across Optum digital health.",
+    thumb: "/images/uhg/uhg-hero.png",
   },
   {
     slug: "walmart",
-    order: "03",
+    num: "03",
     client: "Walmart Global Tech",
-    title: "Enterprise Learning Management & Graph Search",
-    summary: "Replaced legacy keyword search with GraphQL graph-database discovery and Content Distribution Platform for 3M associates.",
+    title: "Next-Gen Store Operations & Supply Chain Fulfillment Platform",
     domain: "enterprise",
-    domainLabel: "Enterprise Monoliths",
-    scaleBadge: "3M Associates · Fortune 1",
-    timeline: "Oct 2021 – Oct 2022",
+    domainLabel: "Global Logistics",
+    scaleBadge: "3M+ Associates · 4,700+ Stores",
+    timeline: "2019 – 2021",
+    summary:
+      "High-frequency mobile floor operations, pick-path ergonomics, and real-time inventory systems deployed to 3 million associates worldwide.",
+    thumb: "/images/walmart/walmart-hero.png",
   },
   {
     slug: "pipes",
-    order: "04",
-    client: "Pipes Protocol (CHB)",
-    title: "Sovereign Knowledge Protocol, Hash Atelier & SEMI",
-    summary: "Built sovereign knowledge engine (pipes.pink), integrated Hash Studio, SEMI Socratic AI agent, and MCP/HTTP 402 micro-settlement gate.",
+    num: "04",
+    client: "Colon Hyphen Bracket",
+    title: "Pipes Protocol: Sovereign Knowledge Marketplace, Hash Atelier & SEMI (;-])",
     domain: "ai",
-    domainLabel: "Sovereign AI & Protocols",
-    scaleBadge: "Web Protocol · MCP 402 Gate",
-    timeline: "2024 – Present",
+    domainLabel: "Sovereign AI Protocol",
+    scaleBadge: "Web Protocol · MCP · HTTP 402",
+    timeline: "2024 – 2026",
+    summary:
+      "Content-addressed publishing protocol where domain curators deed pipe\\ namespaces, refine essays with SEMI (;-]), and earn 70% royalties via MCP.",
+    thumb: "/images/pipes/pipes-hero.png",
+    liveUrl: "https://pipes.pink",
+  },
+  {
+    slug: "chicuinaco",
+    num: "05",
+    client: "Hacienda & Restaurante Chicuinaco",
+    title: "Chicuinaco: Sovereign Eco-Estate, 100-Guest Venue & 4-Language Brochure System",
+    domain: "design",
+    domainLabel: "Design Systems & Brand",
+    scaleBadge: "Live Production · 4 Languages · Bitcoin",
+    timeline: "2026",
+    summary:
+      "Ground-up digital transformation of a 65-acre Salvadoran mountain estate: Cormorant editorial typography, 4-language i18n, zero-card hairline grid, and Bitcoin payments.",
+    thumb: "/images/chicuinaco/hero-interface.png",
+    liveUrl: "https://www.chicuinaco.com",
   },
   {
     slug: "marigold",
-    order: "05",
-    client: "Marigold Insights",
-    title: "Zero-Cloud Civic Data & Election Audit Engine",
-    summary: "In-browser analytical engine running Fellegi-Sunter record linkage across 2,000,000+ records via DuckDB-WASM and zero-PII cryptographic hydration.",
+    num: "06",
+    client: "Colon Hyphen Bracket",
+    title: "Marigold: Zero-Knowledge DuckDB-WASM & WebGPU Analytics Workbench",
     domain: "ai",
-    domainLabel: "Sovereign AI & Protocols",
-    scaleBadge: "2,000,000+ Records · DuckDB-WASM",
-    timeline: "2026",
+    domainLabel: "Client-Side AI & Data",
+    scaleBadge: "500k+ Rows In-Browser · Zero-Knowledge",
+    timeline: "2025 – 2026",
+    summary:
+      "Browser-native civic and financial intelligence studio executing SQL over 500k+ rows locally via DuckDB-WASM, WebGPU, and AES-GCM-256 encryption.",
+    thumb: "/images/marigold/marigold-hero.png",
+    liveUrl: "https://marigold.colonhyphenbracket.pink",
   },
   {
     slug: "cassandra",
-    order: "06",
-    client: "Cassandra AI",
-    title: "AI Orchestration, Focus Mode & Socratic Triage",
-    summary: "Streamlined executive candidate triage with deterministic model steering, structured evaluation matrices, and distraction-free Focus Mode.",
+    num: "07",
+    client: "Colon Hyphen Bracket",
+    title: "Cassandra: Executive Career Strategist & Compensation Intelligence",
     domain: "ai",
-    domainLabel: "Sovereign AI & Protocols",
-    scaleBadge: "Socratic AI · Zero Hallucination",
-    timeline: "2025",
+    domainLabel: "Applied AI Product",
+    scaleBadge: "Multi-Agent Career Engine",
+    timeline: "2025 – 2026",
+    summary:
+      "AI-powered executive positioning, role-fit diagnostics, and compensation negotiation workbench built on Albers warm-sandstone typography.",
+    thumb: "/images/cassandra/cassandra_combined.png",
+    liveUrl: "https://cassandra.colonhyphenbracket.pink",
   },
   {
     slug: "superstar",
-    order: "07",
-    client: "Superstar Memory Loom",
-    title: "Context Continuity & Persistent Local Memory",
-    summary: "Local-first cognitive storage preserving career transition context across sessions, eliminating repetitive explanations and context drift.",
+    num: "08",
+    client: "Colon Hyphen Bracket",
+    title: "Superstar: Dual-Portal Neurodivergent Support & Coaching Platform",
     domain: "ai",
-    domainLabel: "Sovereign AI & Protocols",
-    scaleBadge: "Context Loom · Local-First Memory",
-    timeline: "2025",
+    domainLabel: "Healthcare & Accessibility",
+    scaleBadge: "Dual-Portal · Low-Sensory UX",
+    timeline: "2025 – 2026",
+    summary:
+      "Synchronized participant and job-coach portals with calm low-sensory typography, visual task decomposition, and accessible progress tracking.",
+    thumb: "/images/superstar/03_superstar_prompt_crafter_with_gemini_ideas.png",
+    liveUrl: "https://superstar.colonhyphenbracket.pink",
   },
   {
     slug: "clubhouse1099",
-    order: "08",
+    num: "09",
     client: "Clubhouse 1099",
-    title: "Whisper Voice-CRM & Real Estate Agent Operating System",
-    summary: "Turned unstructured voice memos into validated CRM lead records using Whisper AI transcription and automated triage for 1099 agents.",
+    title: "Voice-First National Venture Scout Network & Whisper Deal Ledger",
     domain: "ai",
-    domainLabel: "Sovereign AI & Protocols",
-    scaleBadge: "Whisper Voice AI · 1099 CRM",
+    domainLabel: "Venture & Voice AI",
+    scaleBadge: "535 Capped Seats · Whisper AI",
     timeline: "2025",
+    summary:
+      "Geographically capped 535-seat scout platform with in-browser voice memo capture, Whisper transcription, and automated 10% commission & IRS mileage logs.",
+    thumb: "/images/clubhouse1099/01_clubhouse1099_landing_hero.png",
+    liveUrl: "https://clubhouse1099.com",
   },
   {
     slug: "foodler",
-    order: "09",
+    num: "10",
     client: "Foodler (Acquired by Grubhub)",
-    title: "High-Velocity Logistics Engine & Bitcoin Checkout",
-    summary: "Engineered proprietary fraud detection that cut chargebacks 83% ($6M to <$1M), driving $500M+ order volume exit to Grubhub.",
-    domain: "fintech",
-    domainLabel: "Fintech & Banking",
-    scaleBadge: "$500M+ Volume · Grubhub Exit",
-    timeline: "2010 – 2015",
+    title: "Consumer Marketplace Checkout, Live Delivery Tracker & Merchant Suite",
+    domain: "enterprise",
+    domainLabel: "Consumer Marketplace",
+    scaleBadge: "$500M+ Grubhub Exit",
+    timeline: "2013 – 2015",
+    summary:
+      "Web and mobile ordering conversion architecture, loyalty rewards, and merchant fulfillment tools leading up to Grubhub's acquisition.",
+    thumb: "/images/studio/studio-regulated-monolith.png",
   },
   {
     slug: "ultralinq",
-    order: "10",
-    client: "UltraLinq Healthcare",
-    title: "Cloud PACS & DICOM Medical Imaging Platform",
-    summary: "Engineered web-native zero-footprint medical imaging viewer for FDA-regulated cardiology telehealth, replacing heavy desktop workstations.",
+    num: "11",
+    client: "UltraLinq Healthcare Solutions",
+    title: "Cloud PACS Medical Imaging & Structured Clinical Reporting",
     domain: "enterprise",
-    domainLabel: "Enterprise Monoliths",
-    scaleBadge: "Cloud PACS · FDA Regulated",
-    timeline: "2016 – 2017",
+    domainLabel: "Diagnostic Imaging",
+    scaleBadge: "35% Faster Sign-Off · DICOM",
+    timeline: "2015 – 2017",
+    summary:
+      "Dark-room optimized DICOM viewer and structured cardiology/vascular reporting engine used by hospitals and imaging centers worldwide.",
+    thumb: "/images/uhg/uhg-hero.png",
   },
   {
     slug: "highdraw",
-    order: "11",
-    client: "High Draw Luxury Apparel",
-    title: "Custom DTC E-Commerce Platform & Identity",
-    summary: "Ground-up headless e-commerce store, product detail experience, and brand mark launched at Pebble Beach Concours d'Elegance.",
+    num: "12",
+    client: "High Draw Golf",
+    title: "High Draw: Precision Golf Telemetry & Club Fitting Monograph",
     domain: "design",
-    domainLabel: "Design Systems & DTC",
-    scaleBadge: "Pebble Beach Launch · Custom DTC",
-    timeline: "2024 – 2025",
+    domainLabel: "Design Systems & Brand",
+    scaleBadge: "Editorial Commerce & Telemetry",
+    timeline: "2025",
+    summary:
+      "Bespoke club-fitting and launch-monitor telemetry platform blending heritage links typography with real-time ball-flight physics.",
+    thumb: "/images/highdraw/01_highdraw_hero_pebble_beach.png",
   },
   {
     slug: "colors-type-grids",
-    order: "12",
-    client: "Albers & Vignelli Systems",
-    title: "Design Tokens, Typographic Scales & 8pt Grid",
-    summary: "Mathematical CSS grids and Josef Albers color relativity preventing generic AI interface homogeneity across digital products.",
+    num: "13",
+    client: "Colon Hyphen Bracket",
+    title: "Colors, Type & Grids: The Accént & Vignelli Design System Monograph",
     domain: "design",
-    domainLabel: "Design Systems & DTC",
-    scaleBadge: "Mathematical 8pt Grid · Specimen",
-    timeline: "CHB System Standard",
+    domainLabel: "Design Systems & Brand",
+    scaleBadge: "Foundational Token Architecture",
+    timeline: "2024 – 2026",
+    summary:
+      "Codifying Josef Albers' Interaction of Color, Massimo Vignelli's Swiss grids, and hairline spatial governance into reusable React/Tailwind primitives.",
+    thumb: "/images/cassandra/colors-type-grids.jpg",
   },
 ];
 
-export default function PortfolioPage() {
-  const [lightboxImage, setLightboxImage] = useState<{ src: string; caption: string } | null>(null);
-  const [copiedEmail, setCopiedEmail] = useState(false);
-  const [selectedDomain, setSelectedDomain] = useState<string>("all");
+const PIPES_PLATES = [
+  {
+    id: "protocol",
+    num: "01",
+    label: "Pipes.Pink Protocol",
+    title: "Pipes.Pink Web Protocol: A Sovereign Library for Human Knowledge",
+    caption:
+      "Domain experts claim deeded pipe\\ namespaces ($9/yr), publish verified primary-source canons with SHA-256 provenance, and earn 70% royalties when readers subscribe or AI agents query via MCP.",
+    src: "/images/pipes/pipes-hero.png",
+  },
+  {
+    id: "hash",
+    num: "02",
+    label: "Hash Atelier + SEMI (;-])",
+    title: "Integrated Hash Sanctuary & SEMI (;-]) Socratic Sparring Partner",
+    caption:
+      "Private-by-default epistemic writing vault inside /write where authors spar with SEMI (;-]), ingest Substack archives in one click, and cryptographically seal finished canons.",
+    src: "/images/pipes/pipes-hash-studio-semi.png",
+  },
+  {
+    id: "namespace",
+    num: "03",
+    label: "Sovereign Pipe Room",
+    title: "pipe\\bitcoin Primary-Source Canon & Greater (>) WebGPU Chat",
+    caption:
+      "Every namespace room pairs a primary-source index with interactive citation inspection, 3D knowledge galaxy visualization, and local WebGPU synthesis.",
+    src: "/images/pipes/pipes-namespace-bitcoin.png",
+  },
+  {
+    id: "mcp",
+    num: "04",
+    label: "MCP & HTTP 402 Hub",
+    title: "Developer Hub (v1.0): Model Context Protocol & HTTP 402 Payment Gates",
+    caption:
+      "Exposes immutable context graphs to Claude Desktop, Cursor, and autonomous agents with cryptographic attribution and automated 70/30 royalty splits.",
+    src: "/images/pipes/pipes-dev-mcp-hub.png",
+  },
+];
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText("rorshock@protonmail.com");
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
-  };
+const APPLIED_AI_SHOWCASE = [
+  {
+    id: "chicuinaco",
+    num: "01",
+    tag: "Sovereign Hospitality & Brand System",
+    title: "Hacienda & Restaurante Chicuinaco",
+    subtitle: "65-Acre Mountain Estate · 100-Guest Venue · 4-Language i18n · Bitcoin Accepted",
+    summary:
+      "Transformed a family-owned Salvadoran mountain estate and balsam reserve in the Cordillera del Bálsamo into an international editorial publication with Cormorant typography, zero-card hairline grids, 4-locale i18n (EN/ES/FR/DE), and 100% Lighthouse performance.",
+    src: "/images/chicuinaco/hero-interface.png",
+    secondarySrc: "/images/chicuinaco/four-pillars.png",
+    caseStudySlug: "chicuinaco",
+    liveUrl: "https://www.chicuinaco.com",
+    specs: [
+      { k: "ARCHITECTURE", v: "Zero-Card Hairline Grid" },
+      { k: "LOCALIZATION", v: "4 Languages (EN/ES/FR/DE)" },
+      { k: "PERFORMANCE", v: "100% Lighthouse · <1.2s LCP" },
+      { k: "SETTLEMENT", v: "Bitcoin Lightning + WhatsApp" },
+    ],
+  },
+  {
+    id: "marigold",
+    num: "02",
+    tag: "Zero-Knowledge Browser Analytics",
+    title: "Marigold Analytics Workbench",
+    subtitle: "DuckDB-WASM · Apache Arrow · WebGPU · AES-GCM-256",
+    summary:
+      "Executes complex analytical SQL queries over 500,000+ rows of civic, financial, and healthcare telemetry directly inside the browser tab with zero server round-trips and client-side Web Crypto encryption.",
+    src: "/images/marigold/marigold-hero.png",
+    secondarySrc: "/images/marigold/02_marigold_workspace_dashboard_kanban.png",
+    caseStudySlug: "marigold",
+    liveUrl: "https://marigold.colonhyphenbracket.pink",
+    specs: [
+      { k: "ENGINE", v: "DuckDB-WASM + Web Workers" },
+      { k: "THROUGHPUT", v: "500k+ Rows In-Browser" },
+      { k: "PRIVACY", v: "AES-GCM-256 Zero-Knowledge" },
+      { k: "SYNTHESIS", v: "Gemini 2.5 + Local WebGPU" },
+    ],
+  },
+  {
+    id: "cassandra",
+    num: "03",
+    tag: "Executive Career & Role Intelligence",
+    title: "Cassandra Career Strategist",
+    subtitle: "Multi-Agent Positioning · Compensation Modeling · Albers Palette",
+    summary:
+      "Pairs executive jobseekers with an AI career strategist that audits role-fit, rewrites narrative positioning from verified career artifacts, and models total compensation packages.",
+    src: "/images/cassandra/cassandra_combined.png",
+    secondarySrc: "/images/superstar/03_superstar_prompt_crafter_with_gemini_ideas.png",
+    caseStudySlug: "cassandra",
+    liveUrl: "https://cassandra.colonhyphenbracket.pink",
+    specs: [
+      { k: "AGENTS", v: "Role-Fit & Narrative Engine" },
+      { k: "DESIGN SYSTEM", v: "Albers Sandstone & Serif" },
+      { k: "COMPENSATION", v: "Live Equity & Base Modeling" },
+      { k: "COMPANION", v: "Superstar Dual-Portal UX" },
+    ],
+  },
+];
+
+const PRODUCTION_REPOS = [
+  {
+    num: "01",
+    name: "rorshockbtc / pipes",
+    domain: "Sovereign Knowledge Protocol & MCP Gate",
+    stack: "TypeScript · React 19 · Drizzle · PostgreSQL · MCP · HTTP 402",
+    liveUrl: "https://pipes.pink",
+    repoUrl: "https://github.com/rorshockbtc",
+    caseStudy: "/case-studies/pipes",
+  },
+  {
+    num: "02",
+    name: "rorshockbtc / chicuinaco",
+    domain: "4-Language Eco-Estate & 100-Guest Venue Monograph",
+    stack: "TypeScript · React 18 · Cormorant Garamond · Framer Motion · JSON-LD",
+    liveUrl: "https://www.chicuinaco.com",
+    repoUrl: "https://github.com/rorshockbtc/chicuinaco",
+    caseStudy: "/case-studies/chicuinaco",
+  },
+  {
+    num: "03",
+    name: "rorshockbtc / marigold",
+    domain: "Zero-Knowledge DuckDB-WASM Analytics Studio",
+    stack: "TypeScript · DuckDB-WASM · Apache Arrow · Web Crypto · Nivo",
+    liveUrl: "https://marigold.colonhyphenbracket.pink",
+    repoUrl: "https://github.com/rorshockbtc",
+    caseStudy: "/case-studies/marigold",
+  },
+  {
+    num: "04",
+    name: "rorshockbtc / cassandra-jobseeker",
+    domain: "Executive Career & Compensation Intelligence",
+    stack: "TypeScript · Next.js · Claude / Gemini · Tailwind CSS · Zod",
+    liveUrl: "https://cassandra.colonhyphenbracket.pink",
+    repoUrl: "https://github.com/rorshockbtc",
+    caseStudy: "/case-studies/cassandra",
+  },
+  {
+    num: "05",
+    name: "rorshockbtc / portfolio",
+    domain: "Principal Monograph & CHB Studio Architecture",
+    stack: "TypeScript · Vite · React · Framer Motion · Tailwind CSS",
+    liveUrl: "https://hire.colonhyphenbracket.pink",
+    repoUrl: "https://github.com/rorshockbtc/portfolio",
+    caseStudy: "/case-studies/colors-type-grids",
+  },
+];
+
+const FIELD_STUDIES = [
+  {
+    fig: "FIG. I // HOME BASE",
+    title: "Kyle & Victoria",
+    location: "United States · Remote & Travel-Ready",
+    caption:
+      "Grounded in craft, long-form reading, and building software that respects human attention.",
+    src: "/images/personal/kyle-victoria-blue-teal-portrait.jpg",
+  },
+  {
+    fig: "FIG. II // HIGH ALTITUDE",
+    title: "High Andes Expedition",
+    location: "Cordillera Real · Ecuador (15,000+ ft)",
+    caption:
+      "High-altitude trekking in the Ecuadorian Andes—where systems thinking meets physical endurance.",
+    src: "/images/personal/kyle-victoria-andes-market.jpg",
+  },
+  {
+    fig: "FIG. III // LATIN AMERICA",
+    title: "Field Research & Architecture",
+    location: "Medellín, Colombia & El Salvador",
+    caption:
+      "Working directly with founders and family estates across the Americas to ship sovereign digital infrastructure.",
+    src: "/images/personal/kyle-victoria-colombia-mural.jpg",
+  },
+];
+
+export default function Portfolio() {
+  const [domainFilter, setDomainFilter] = useState<DomainFilter>("all");
+  const [activePipesPlate, setActivePipesPlate] = useState(0);
+  const [activeAppliedIndex, setActiveAppliedIndex] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<{
+    src: string;
+    title: string;
+    caption?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    document.title = "Kyle Cyree | Product Architect, Principal Designer & R&D Lead";
+  }, []);
+
+  const filteredStudies =
+    domainFilter === "all"
+      ? ALL_CATALOG_STUDIES
+      : ALL_CATALOG_STUDIES.filter((s) => s.domain === domainFilter);
+
+  const currentPipesPlate = PIPES_PLATES[activePipesPlate];
+  const currentApplied = APPLIED_AI_SHOWCASE[activeAppliedIndex];
 
   return (
-    <div className="min-h-screen bg-[#EAE0D0] text-[#281B16] flex flex-col selection:bg-[#FE299E]/20">
-      {/* ── VIEWPORT 01: HERO + FAST-TRACK STRIP + TRACK RECORD ── */}
-      <section className="relative pt-6 sm:pt-8 md:pt-10 pb-8 md:pb-10" data-testid="section-hero">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-16 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12 items-center">
-            <div className="lg:col-span-8 space-y-4 sm:space-y-5 order-2 lg:order-1">
-              <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] font-bold text-[#FE299E]">
-                <BrandMark size="md" />
-                <span>Product Architect &amp; R&amp;D Lead · Principal Product Designer</span>
-              </p>
+    <div className="min-h-screen bg-[#EAE0D0] text-[#281B16] selection:bg-[#FE299E] selection:text-white">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          01 // EDITORIAL HERO — MONUMENTAL SERIF + ARCHITECTURAL PORTRAIT
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <section
+        id="hero"
+        className="pt-10 sm:pt-16 pb-16 sm:pb-24 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
+        data-testid="section-hero"
+      >
+        <div className="max-w-[1440px] mx-auto">
+          {/* Top Issue / Edition Hairline Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-10 sm:mb-14 border-b border-[#281B16]">
+            <div className="flex items-center gap-3">
+              <span className="inline-block w-2 h-2 rounded-full bg-[#FE299E]" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#281B16] font-medium">
+                :-] Product Architect &amp; R&amp;D Lead · Principal Product Designer
+              </span>
+            </div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#5C4840]">
+              15+ Years · Regulated Banking, 35M+ Healthcare &amp; Sovereign AI
+            </div>
+          </div>
 
-              <h1 className="text-[2.2rem] leading-[1.08] sm:text-5xl lg:text-[4.15rem] font-serif font-black text-[#281B16] tracking-tight space-y-0.5">
-                <span className="block">Architect the system.</span>
-                <span className="block italic font-normal text-[#FE299E]">Design the interface.</span>
-                <span className="block">Ship the prototype.</span>
+          {/* Main 12-Col Hero Grid: 8 Cols Monumental Typography / 4 Cols Smaller Architectural Portrait */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-start">
+            {/* Left 8 Columns */}
+            <Reveal className="lg:col-span-8">
+              <h1 className="font-serif font-light text-5xl sm:text-6xl lg:text-[76px] text-[#281B16] tracking-[-0.028em] leading-[0.97] mb-8">
+                Architect the system.
+                <br />
+                <span className="italic font-normal text-[#FE299E]">
+                  Design the interface.
+                </span>
+                <br />
+                Ship the prototype.
               </h1>
 
-              <div className="space-y-3 max-w-[64ch]">
-                <p className="text-base sm:text-lg lg:text-xl text-[#281B16] font-serif leading-[1.58]">
-                  I&apos;m Kyle Cyree. For 15+ years I&apos;ve led product architecture in regulated environments where mistakes cost millions: <strong className="font-semibold">Custodia Bank</strong>&apos;s institutional Money Market &amp; custody platform (first design hire), 2 years embedded at <strong className="font-semibold">Fidelity Investments</strong>, <strong className="font-semibold">UnitedHealth Group</strong> <strong className="font-semibold">(35M+ patients)</strong>, and <strong className="font-semibold">Walmart</strong> <strong className="font-semibold">(3M users)</strong>.
-                </p>
-                <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.7]">
-                  I bridge executive strategy (MBA, UNC Kenan-Flagler), first-principles data modeling, mathematical Swiss grids, and AI-accelerated engineering to ship working TypeScript, Next.js, DuckDB-WASM, and Rust software without handoff loss.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                <a
-                  href="https://calendly.com/cubby-colonhyphenbracket/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm font-bold rounded-full px-6 h-11 shadow-md transition-all cursor-pointer whitespace-nowrap no-underline"
-                >
-                  <Calendar className="w-4 h-4 shrink-0" /> Book 30-min call
-                </a>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-[#281B16]/40 bg-[#F2EAE0] hover:bg-[#281B16] hover:text-[#F2EAE0] text-[#281B16] font-sans text-xs sm:text-sm font-bold rounded-full px-6 h-11 cursor-pointer whitespace-nowrap"
-                  onClick={() => openContactModal("Full-time role (Product Architect / Staff)")}
-                >
-                  Discuss Full-Time Role →
-                </Button>
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  className="text-[#281B16] hover:bg-[#D3C7B5]/40 font-sans text-xs sm:text-sm font-bold rounded-full px-4 h-11 cursor-pointer whitespace-nowrap"
-                  onClick={() => openContactModal("1-week sprint ($7,500)")}
-                >
-                  Or 1-week trial sprint · $7,500
-                </Button>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm font-sans text-[#4A3A32] pt-0.5">
-                <a href="/resumes/kyle-cyree-resume.pdf" download="Resume - Kyle Cyree.pdf" target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] whitespace-nowrap">
-                  <Download className="w-3.5 h-3.5 text-[#FE299E]" /> Resume (PDF)
-                </a>
-                <span className="inline-flex items-center gap-2 whitespace-nowrap">
-                  <a href="mailto:rorshock@protonmail.com" className="font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]">
-                    rorshock@protonmail.com
-                  </a>
-                  <button
-                    type="button"
-                    onClick={copyEmail}
-                    aria-label="Copy email address"
-                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider border border-[#D3C7B5] bg-[#F2EAE0] text-[#281B16] hover:border-[#FE299E] transition-colors cursor-pointer whitespace-nowrap"
-                  >
-                    {copiedEmail ? (
-                      <>
-                        <Check className="w-3 h-3 text-emerald-700" /> Copied
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3 h-3 text-[#FE299E]" /> Copy
-                      </>
-                    )}
-                  </button>
-                </span>
-                <a href="https://www.linkedin.com/in/kyle-cyree/" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] whitespace-nowrap">
-                  LinkedIn
-                </a>
-                <a href="https://github.com/rorshockbtc" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#281B16] underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E] whitespace-nowrap">
-                  GitHub
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-4 order-1 lg:order-2 flex justify-center lg:justify-end">
-              <figure className="w-full max-w-[180px] sm:max-w-[240px] lg:max-w-[300px] space-y-2.5">
-                <div className="relative aspect-[4/4.6] max-h-[340px] w-full rounded-3xl overflow-hidden bg-[#E4DACB] border border-[#D3C7B5] shadow-xl">
-                  <img
-                    src="/images/kyle-portrait.jpg"
-                    alt="Kyle Cyree"
-                    width={800}
-                    height={800}
-                    fetchPriority="high"
-                    className="w-full h-full object-cover object-[50%_35%]"
-                  />
-                </div>
-                <figcaption className="space-y-1 px-1 text-center lg:text-left">
-                  <p className="inline-flex lg:flex items-center justify-center lg:justify-start gap-2 font-sans text-xs font-bold text-[#281B16]">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
-                    Available for Executive W2 or Turnkey B2B
-                  </p>
-                  <p className="text-[11px] sm:text-xs text-[#4A3A32] font-sans leading-snug hidden sm:block">
-                    North Carolina (EST/CST Remote) · MBA, UNC · MFA, Emerson
-                  </p>
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-
-          {/* ── Recruiter & Founder 15-Second Fast-Track Strip ── */}
-          <div className="mt-7 pt-4 border-t border-[#D3C7B5] grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-xs sm:text-sm font-sans">
-            <div>
-              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block mb-0.5">Target Roles</span>
-              <span className="font-semibold text-[#281B16] block">Product Architect · R&amp;D Lead</span>
-              <span className="text-xs text-[#4A3A32]">Principal Designer · Staff IC</span>
-            </div>
-            <div>
-              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block mb-0.5">Fintech, Wealth &amp; Health</span>
-              <span className="font-semibold text-[#281B16] block">Custodia Bank · Fidelity · UHG</span>
-              <span className="text-xs text-[#4A3A32]">Money Market, Custody, 35M+ Mobile</span>
-            </div>
-            <div>
-              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block mb-0.5">Production Stack</span>
-              <a href="#code" className="font-semibold text-[#281B16] hover:text-[#FE299E] transition-colors block">
-                TypeScript · Next.js · DuckDB ↓
-              </a>
-              <span className="text-xs text-[#4A3A32]">AI Harnesses · Python · Rust / Tauri</span>
-            </div>
-            <div>
-              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block mb-0.5">Education &amp; Base</span>
-              <span className="font-semibold text-[#281B16] block">MBA (UNC) · MFA (Emerson)</span>
-              <span className="text-xs text-[#4A3A32]">US Citizen · NC Remote (EST/CST)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 01 // Enterprise Client Logo Strip (Fits at bottom of Viewport 01) ── */}
-      <ClientLogoBar />
-
-      {/* ── 02 // SELECTED WORK: EACH PILLAR GROUP FITS WITHIN ONE VIEWPORT ── */}
-      <section id="selected-work" className="py-12 md:py-16 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 w-full space-y-12 md:space-y-14 scroll-mt-16">
-        {/* Compact Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b-2 border-[#281B16] pb-5">
-          <div className="space-y-1">
-            <span className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] block">
-              02 // SELECTED ARCHITECTURAL WORK
-            </span>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.06]">
-              Four pillars of systems design &amp; code.
-            </h2>
-          </div>
-          <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.65] max-w-md">
-            Zero-to-one banking &amp; treasury architecture, national healthcare scale (35M+), enterprise graph search (3M), and the sovereign knowledge protocol I built solo.
-          </p>
-        </div>
-
-        {/* ── VIEWPORT 02.A: PILLAR 01 — CUSTODIA BANK (FITS IN 1 VIEWPORT) ── */}
-        <article className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-5 sm:p-7 shadow-[0_12px_32px_rgba(40,27,22,0.05)] scroll-mt-20">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 mb-5 border-b border-[#D3C7B5]">
-            <div className="space-y-1.5 max-w-3xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="font-mono text-[11px] uppercase tracking-[0.18em] font-bold px-2.5 py-0.5 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
-                  01 / Regulated Fintech &amp; Treasury
-                </span>
-                <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#4A3A32]">
-                  Chartered Wyoming SPDI Bank · First Design Hire · $71M+ Raised
-                </span>
-              </div>
-              <h3 className="text-xl sm:text-3xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.12]">
-                Custodia Bank: Institutional Money Market, Fedwire &amp; Bitcoin Custody
-              </h3>
-              <p className="text-xs sm:text-sm md:text-base text-[#4A3A32] font-sans leading-[1.65]">
-                First and only designer at a chartered Federal Reserve Special Purpose Depository Institution. Shipped the ground-up rebrand in 4 days and the core banking application in 30 days ahead of Federal Reserve master account review—unifying Fedwire fiat rails, Money Market yield accrual, and multi-sig Bitcoin UTXO custody.
-              </p>
-            </div>
-
-            <div className="shrink-0">
-              <Link
-                href="/case-studies/custodia"
-                className="inline-flex items-center justify-center gap-2 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-3 shadow-sm transition-all whitespace-nowrap no-underline"
-              >
-                Custodia Case Study →
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
-            <div className="lg:col-span-6 rounded-2xl bg-[#EAE0D0]/70 border border-[#D3C7B5] p-4 flex flex-col justify-between space-y-3">
-              <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2">
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#281B16]">
-                  FIG 01.A // INSTITUTIONAL MONEY MARKET
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
-                  FEDWIRE &amp; TREASURY YIELD
-                </span>
-              </div>
-
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/images/custodia/mm-01.png",
-                    caption: "Custodia Bank Institutional Money Market Dashboard",
-                  })
-                }
-                className="group relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
-              >
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="/images/custodia/mm-01.png"
-                  alt="Custodia Bank Institutional Money Market Dashboard"
-                  className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
-                />
-                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-serif font-bold text-base sm:text-lg text-[#281B16]">
-                  Institutional Money Market &amp; Treasury Yield Console
-                </h4>
-                <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.6]">
-                  Northern Institutional Trust onboarding, Fedwire settlement, and programmable treasury controls for corporate fiduciaries.
-                </p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-6 rounded-2xl bg-[#EAE0D0]/70 border border-[#D3C7B5] p-4 flex flex-col justify-between space-y-3">
-              <div className="flex items-center justify-between gap-2 border-b border-[#D3C7B5] pb-2">
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#281B16]">
-                  FIG 01.B // MULTI-SIG BITCOIN CUSTODY
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
-                  UTXO GOVERNANCE
-                </span>
-              </div>
-
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/images/custodia/utxo-1.png",
-                    caption: "Custodia Bank Bitcoin UTXO Manager Console",
-                  })
-                }
-                className="group relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
-              >
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="/images/custodia/utxo-1.png"
-                  alt="Custodia Bank Bitcoin UTXO Manager Console"
-                  className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
-                />
-                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-serif font-bold text-base sm:text-lg text-[#281B16]">
-                  Segregated Bitcoin Custody &amp; UTXO Audit Ledger
-                </h4>
-                <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.6]">
-                  Hardware-enforced multi-signature quorum approvals and real-time UTXO provenance for institutional digital assets.
-                </p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        {/* ── VIEWPORT 02.B: PILLARS 02 & 03 — UNITEDHEALTH GROUP (35M+) & WALMART (3M) SIDE-BY-SIDE (FITS IN 1 VIEWPORT) ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          {/* PILLAR 02: UNITEDHEALTH GROUP */}
-          <article className="lg:col-span-6 bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-5 sm:p-6 shadow-[0_12px_32px_rgba(40,27,22,0.05)] flex flex-col justify-between space-y-4">
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D3C7B5] pb-3">
-                <span className="font-mono text-[11px] uppercase tracking-[0.18em] font-bold px-2.5 py-0.5 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
-                  02 / National Healthcare
-                </span>
-                <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#4A3A32]">
-                  35M+ Patients · $100M+ Impact
-                </span>
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.14]">
-                UnitedHealth Group &amp; Optum: Flagship Mobile Suite
-              </h3>
-
-              <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                Principal designer in an internal executive consulting team for UHG&apos;s flagship iOS and Android patient apps (35M+ patients, 400K+ employees). Produced 80%+ of Android and 50%+ of iOS screens and championed Apple Health integration ($100M+ revenue impact), lifting ratings from sub-2 stars to the high-4 tier.
+              <p className="font-serif text-xl sm:text-2xl text-[#281B16] leading-[1.52] max-w-[58ch] mb-6">
+                I&apos;m <strong className="font-medium">Kyle Cyree</strong>—a Principal Product Designer and Systems Architect with 15+ years turning complex, high-trust workflows into calm, durable software.
               </p>
 
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/artwork/enterprise-health.png",
-                    caption: "UnitedHealth Group & Optum Mobile Patient Ecosystem (35M+ Patients)",
-                  })
-                }
-                className="group relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
-              >
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="/artwork/enterprise-health.png"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/images/uhg/uhg-hero.png";
-                  }}
-                  alt="UnitedHealth Group Mobile App Architecture"
-                  className="w-full h-full object-contain rounded-xl group-hover:scale-[1.015] transition-transform duration-500"
-                />
-                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-[#D3C7B5] flex items-center justify-between gap-4">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[#4A3A32] font-semibold">
-                HIPAA · iOS &amp; Android · Service Design
-              </span>
-              <Link
-                href="/case-studies/unitedhealth"
-                className="inline-flex items-center justify-center gap-1.5 bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-4 py-2.5 transition-all whitespace-nowrap no-underline"
-              >
-                UnitedHealth Study →
-              </Link>
-            </div>
-          </article>
-
-          {/* PILLAR 03: WALMART GLOBAL TECH */}
-          <article className="lg:col-span-6 bg-[#F2EAE0] border border-[#D3C7B5] rounded-3xl p-5 sm:p-6 shadow-[0_12px_32px_rgba(40,27,22,0.05)] flex flex-col justify-between space-y-4">
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D3C7B5] pb-3">
-                <span className="font-mono text-[11px] uppercase tracking-[0.18em] font-bold px-2.5 py-0.5 rounded-full bg-[#281B16] text-[#FE299E] whitespace-nowrap">
-                  03 / Enterprise Graph Search
-                </span>
-                <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#4A3A32]">
-                  3M Employees · Fortune 1
-                </span>
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.14]">
-                Walmart: GraphQL Workforce Search &amp; Discovery
-              </h3>
-
-              <p className="text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">
-                Led UX and information architecture (via PredictiveUX) for Walmart&apos;s internal enterprise search and Content Distribution Platform serving 3 million associates—replacing legacy keyword lookups with GraphQL and graph-database discovery for career pathways and compliance.
-              </p>
-
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/images/walmart/walmart-search-results.png",
-                    caption: "Walmart Enterprise Search & GraphQL Content Distribution Platform (3M Users)",
-                  })
-                }
-                className="group relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[#181210] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
-              >
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="/images/walmart/walmart-search-results.png"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/images/walmart/walmart-hero.png";
-                  }}
-                  alt="Walmart Enterprise Search Architecture"
-                  className="w-full h-full object-contain rounded-xl group-hover:scale-[1.015] transition-transform duration-500"
-                />
-                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-[#D3C7B5] flex items-center justify-between gap-4">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[#4A3A32] font-semibold">
-                GraphQL · Graph DB · 3M Associates
-              </span>
-              <Link
-                href="/case-studies/walmart"
-                className="inline-flex items-center justify-center gap-1.5 bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-4 py-2.5 transition-all whitespace-nowrap no-underline"
-              >
-                Walmart Study →
-              </Link>
-            </div>
-          </article>
-        </div>
-
-        {/* ── VIEWPORT 02.C: PILLAR 04 — PIPES.PINK + 4-CARD ARCHIVE STRIP (FITS IN 1 VIEWPORT) ── */}
-        <div className="space-y-6">
-          <article className="bg-[#231814] text-[#F2EAE0] border border-[#3D2C24] rounded-3xl p-5 sm:p-7 shadow-[0_18px_45px_rgba(35,24,20,0.16)]">
-            <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 pb-5 mb-5 border-b border-[#3D2C24]">
-              <div className="space-y-1.5 max-w-3xl">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] font-bold px-2.5 py-0.5 rounded-full bg-[#FE299E] text-white whitespace-nowrap">
-                    04 / Solo R&amp;D Protocol
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-wider font-semibold text-[#E4DACB]">
-                    Next.js · Tauri 2.0 / Rust · Swift · DuckDB-WASM · WebGPU
-                  </span>
-                </div>
-                <h3 className="text-xl sm:text-3xl font-serif font-bold text-[#F2EAE0] tracking-tight leading-[1.12]">
-                  Pipes.Pink: Sovereign Knowledge Protocol, # Hash &amp; ;-] Semi
-                </h3>
-                <p className="text-xs sm:text-sm md:text-base text-[#E4DACB] font-sans leading-[1.65]">
-                  Designed, architected, and engineered solo from zero to production: a multi-platform knowledge protocol uniting deeded namespaces (<code className="text-[#FE299E] font-mono">pipe\topic</code>), the integrated <strong className="text-white"># Hash</strong> writing studio and <strong className="text-white">;-] Semi</strong> Socratic agent, 90+ language classrooms (<strong className="text-white">&gt; Greater</strong>), and a native macOS Rust IDE (<strong className="text-white">! BANG</strong>).
-                </p>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+              <p className="font-sans text-sm sm:text-[15px] text-[#4A3A32] leading-[1.72] max-w-[62ch] mb-10">
+                First product designer at{" "}
                 <Link
-                  href="/case-studies/pipes"
-                  className="inline-flex items-center justify-center gap-1.5 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs uppercase tracking-[0.14em] font-bold rounded-full px-5 py-2.5 shadow-sm transition-all whitespace-nowrap no-underline"
+                  href="/case-studies/custodia"
+                  className="text-[#281B16] font-medium underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"
                 >
-                  Pipes Case Study →
+                  Custodia Bank
                 </Link>
+                , Principal Lead for{" "}
+                <Link
+                  href="/case-studies/unitedhealth"
+                  className="text-[#281B16] font-medium underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"
+                >
+                  35M+ patients at UnitedHealth Group
+                </Link>
+                , Staff Designer for{" "}
+                <Link
+                  href="/case-studies/walmart"
+                  className="text-[#281B16] font-medium underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"
+                >
+                  3M+ associates at Walmart
+                </Link>
+                , and founder of{" "}
+                <Link
+                  href="/studio"
+                  className="text-[#281B16] font-medium underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"
+                >
+                  Colon Hyphen Bracket
+                </Link>{" "}
+                (shipping{" "}
                 <a
                   href="https://pipes.pink"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 bg-[#32221C] hover:bg-[#3D2C24] text-[#F2EAE0] border border-[#4A372E] hover:border-[#FE299E] font-mono text-xs uppercase tracking-[0.13em] font-bold rounded-full px-4 py-2.5 transition-all whitespace-nowrap no-underline"
+                  className="text-[#281B16] font-medium underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"
                 >
-                  <span>| | | Launch pipes.pink</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#FE299E] shrink-0" />
+                  pipes.pink
                 </a>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
-              <div className="lg:col-span-6 rounded-2xl bg-[#1B120F] border border-[#3D2C24] p-4 flex flex-col justify-between space-y-3">
-                <div className="flex items-center justify-between gap-2 border-b border-[#3D2C24] pb-2">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#F2EAE0]">
-                    FIG 04.A // PIPES.PINK PROTOCOL &amp; MARKETPLACE
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
-                    MERKLE-DAG VAULTS
-                  </span>
-                </div>
-
-                <div
-                  onClick={() =>
-                    setLightboxImage({
-                      src: "/images/pipes/pipes-hero.png",
-                      caption: "Pipes.Pink Sovereign Knowledge Network & Deeded Namespace Marketplace",
-                    })
-                  }
-                  className="group relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#120C0A] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
+                ,{" "}
+                <Link
+                  href="/case-studies/marigold"
+                  className="text-[#281B16] font-medium underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"
                 >
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src="/images/pipes/pipes-hero.png"
-                    alt="Pipes.Pink Sovereign Knowledge Network"
-                    className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
-                  />
-                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6 rounded-2xl bg-[#1B120F] border border-[#3D2C24] p-4 flex flex-col justify-between space-y-3">
-                <div className="flex items-center justify-between gap-2 border-b border-[#3D2C24] pb-2">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#F2EAE0]">
-                    FIG 04.B // INTEGRATED # HASH &amp; ;-] SEMI STUDIO
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] font-bold text-[#FE299E]">
-                    SOCRATIC AI MEMORY
-                  </span>
-                </div>
-
-                <div
-                  onClick={() =>
-                    setLightboxImage({
-                      src: "/images/pipes/pipes-hash-studio-semi.png",
-                      caption: "Integrated # Hash Epistemic Sanctuary & ;-] Semi Socratic Editor inside Pipes.Pink",
-                    })
-                  }
-                  className="group relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#120C0A] border border-[#3D2C24] shadow-md flex items-center justify-center cursor-zoom-in p-1.5"
+                  Marigold
+                </Link>
+                , and{" "}
+                <Link
+                  href="/case-studies/chicuinaco"
+                  className="text-[#281B16] font-medium underline decoration-[#D3C7B5] underline-offset-4 hover:decoration-[#FE299E]"
                 >
+                  Chicuinaco
+                </Link>
+                ).
+              </p>
+
+              {/* Primary CTA Row */}
+              <div className="flex flex-wrap items-center gap-4">
+                <Link
+                  href="/case-studies/custodia"
+                  className="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-all no-underline"
+                  data-testid="button-start-walkthrough-hero"
+                >
+                  <span>Case Study Walkthrough (01 / 13)</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                <Link
+                  href="/studio"
+                  className="inline-flex items-center gap-2.5 px-6 py-4 rounded-full bg-[#F2EAE0] hover:bg-[#281B16] text-[#281B16] hover:text-[#F2EAE0] border border-[#281B16]/25 font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-colors no-underline"
+                  data-testid="button-explore-studio-hero"
+                >
+                  <span>Explore CHB R&amp;D Studio</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+
+                <a
+                  href="/resumes/kyle-cyree-resume.pdf"
+                  download="Resume - Kyle Cyree.pdf"
+                  target="_blank"
+                  rel="noopener"
+                  className="editorial-underline inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#281B16] font-medium no-underline"
+                  data-testid="button-download-resume-hero"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#FE299E]" />
+                  <span>Download CV</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={() => openContactModal("Full-time role (Product Architect / Staff)")}
+                  className="editorial-underline inline-flex items-center gap-1.5 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#5C4840] hover:text-[#281B16] bg-transparent border-none cursor-pointer"
+                  data-testid="button-contact-hero"
+                >
+                  <span>Schedule Intro →</span>
+                </button>
+              </div>
+            </Reveal>
+
+            {/* Right 4 Columns: Smaller Architectural Portrait Plate */}
+            <Reveal delay={0.12} className="lg:col-span-4 flex flex-col items-start lg:items-end">
+              <div className="w-full max-w-[300px] sm:max-w-[320px] lg:ml-auto border border-[#D3C7B5] bg-[#F2EAE0] p-3">
+                <div className="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#D3C7B5] font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+                  <span>FIG. 00 // PRINCIPAL ARCHITECT</span>
+                  <span className="text-[#281B16]">MBA · MFA</span>
+                </div>
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#DFD4C4]">
                   <img
-                    loading="lazy"
-                    decoding="async"
-                    src="/images/pipes/pipes-hash-studio-semi.png"
-                    alt="Integrated Hash Studio and Semi Socratic Agent"
-                    className="w-full h-full object-cover object-top rounded-lg group-hover:scale-[1.015] transition-transform duration-500"
+                    src="/images/kyle-portrait.jpg"
+                    alt="Kyle Cyree — Product Architect & Principal Product Designer"
+                    className="w-full h-full object-cover object-top"
+                    data-testid="img-hero-portrait"
                   />
-                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#231814]/90 border border-[#FE299E]/50 text-[#F2EAE0] text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Maximize2 className="w-3 h-3 text-[#FE299E]" /> Inspect
+                </div>
+                <div className="pt-3 mt-2.5 border-t border-[#D3C7B5] flex items-center justify-between gap-2">
+                  <div>
+                    <div className="font-serif text-lg text-[#281B16] leading-tight">
+                      Kyle Cyree
+                    </div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#5C4840] mt-0.5">
+                      UNC MBA · Emerson MFA
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          {/* ── SECTION 02.B: FULL CASE STUDY DIRECTORY & WALKTHROUGH FLOW (12 STUDIES) ── */}
-          <div id="case-studies" className="pt-10 border-t border-[#D3C7B5] space-y-6 scroll-mt-20">
-            {/* Walkthrough Announcement Banner */}
-            <div className="rounded-3xl border-2 border-[#281B16] bg-[#281B16] text-[#F2EAE0] p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-              <div className="space-y-2 max-w-3xl">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-full bg-[#FE299E] text-white">
-                    02.B // GUIDED WALKTHROUGH
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-wider text-[#D3C7B5]">
-                    12 Shipped Case Studies
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[#281B16]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#2A7B5C]" />
+                    Available
                   </span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold tracking-tight text-[#F2EAE0]">
-                  Every case study, systems proof &amp; production rollout.
-                </h3>
-                <p className="text-xs sm:text-sm text-[#D3C7B5] font-sans leading-relaxed">
-                  From chartered Federal Reserve SPDI banking to national healthcare and sovereign AI. Walk through all 12 deep dives in order with keyboard shortcuts (← →), or jump directly to any study below.
-                </p>
               </div>
+            </Reveal>
+          </div>
 
-              <Link
-                href="/case-studies/custodia"
-                className="inline-flex items-center gap-2.5 bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.14em] font-bold rounded-full px-7 py-4 shadow-md transition-all whitespace-nowrap shrink-0 no-underline"
-              >
-                <span>Start Walkthrough (01 of 12)</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+          {/* Bottom of Hero: 4-Column Architectural Hairline Spec Grid (No Rounded Cards) */}
+          <Stagger className="mt-16 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-b border-[#281B16] divide-y sm:divide-y-0 sm:divide-x divide-[#D3C7B5]">
+            <StaggerItem className="py-6 sm:pr-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840] mb-2">
+                01 // Target Leadership Scope
+              </div>
+              <div className="font-serif text-xl sm:text-2xl text-[#281B16] leading-snug">
+                Principal / Staff Designer &amp; Product Architect
+              </div>
+              <p className="font-sans text-xs text-[#5C4840] mt-1.5 leading-relaxed">
+                Player-coach architecture, 0-to-1 R&amp;D, and design systems governance.
+              </p>
+            </StaggerItem>
+
+            <StaggerItem className="py-6 sm:px-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840] mb-2">
+                02 // Regulated Enterprise Scale
+              </div>
+              <div className="font-serif text-xl sm:text-2xl text-[#281B16] leading-snug">
+                35M+ Patients · 3M+ Associates · SPDI Banking
+              </div>
+              <p className="font-sans text-xs text-[#5C4840] mt-1.5 leading-relaxed">
+                UnitedHealth Group, Walmart Global Tech, Custodia Bank, Fidelity &amp; Foodler.
+              </p>
+            </StaggerItem>
+
+            <StaggerItem className="py-6 sm:px-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840] mb-2">
+                03 // Shipped Code &amp; AI Stack
+              </div>
+              <div className="font-serif text-xl sm:text-2xl text-[#281B16] leading-snug">
+                Figma Systems → TypeScript, React &amp; MCP
+              </div>
+              <p className="font-sans text-xs text-[#5C4840] mt-1.5 leading-relaxed">
+                Next.js, DuckDB-WASM, WebGPU, Framer Motion, Tailwind &amp; Rust/Tauri.
+              </p>
+            </StaggerItem>
+
+            <StaggerItem className="py-6 sm:pl-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840] mb-2">
+                04 // Academic Pedigree
+              </div>
+              <div className="font-serif text-xl sm:text-2xl text-[#281B16] leading-snug">
+                UNC MBA · Emerson MFA · Texas Tech BA
+              </div>
+              <p className="font-sans text-xs text-[#5C4840] mt-1.5 leading-relaxed">
+                Dual graduate training uniting corporate finance with narrative &amp; visual craft.
+              </p>
+            </StaggerItem>
+          </Stagger>
+        </div>
+      </section>
+
+      {/* Pedigree Strip */}
+      <ClientLogoBar />
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          02 // SELECTED WORK — FOUR DEFINING ARCHITECTURAL PILLARS
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <section
+        id="selected-work"
+        className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
+        data-testid="section-selected-work"
+      >
+        <div className="max-w-[1440px] mx-auto">
+          {/* Section Header */}
+          <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-14 border-b border-[#281B16]">
+            <div className="max-w-3xl">
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-4">
+                02 // Selected Work · Four Architectural Pillars
+              </div>
+              <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#281B16] tracking-[-0.025em] leading-[1.03]">
+                High-consequence systems built for{" "}
+                <span className="italic font-normal text-[#FE299E]">clarity &amp; trust.</span>
+              </h2>
             </div>
+            <p className="font-sans text-sm sm:text-[15px] text-[#4A3A32] max-w-md leading-[1.68]">
+              Four deep-dive monographs spanning regulated institutional custody, 38M-user enterprise platforms, applied AI workbenches, and the flagship Pipes.Pink protocol.
+            </p>
+          </Reveal>
 
-            {/* Filter Chips Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full">
-                <span className="text-xs font-mono font-bold uppercase text-[#4A3A32] flex items-center gap-1 mr-1">
-                  <Filter className="w-3 h-3 text-[#FE299E]" /> Filter:
+          {/* ─────────────────────────────────────────────────────────────────
+              PILLAR 01 // CUSTODIA BANK
+             ───────────────────────────────────────────────────────────────── */}
+          <div className="py-20 sm:py-24 border-b border-[#281B16]" data-testid="pillar-custodia">
+            <Reveal>
+              <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
+                <div className="flex items-baseline gap-4">
+                  <span className="font-serif italic text-3xl sm:text-4xl text-[#5C4840] tabular-nums">
+                    01
+                  </span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840]">
+                    Pillar I · Regulated Digital Asset Banking &amp; Custody
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#281B16]">
+                  Custodia Bank · 2023 – 2024
                 </span>
-                {[
-                  { id: "all", label: "All 12 Studies" },
-                  { id: "fintech", label: "Fintech & Banking (2)" },
-                  { id: "enterprise", label: "Enterprise Monoliths (3)" },
-                  { id: "ai", label: "Sovereign AI & Protocols (5)" },
-                  { id: "design", label: "Design Systems & DTC (2)" },
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setSelectedDomain(tab.id)}
-                    className={`px-3 py-1.5 rounded-full font-mono text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer border ${
-                      selectedDomain === tab.id
-                        ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16]"
-                        : "bg-[#F2EAE0] text-[#4A3A32] border-[#D3C7B5] hover:border-[#FE299E] hover:text-[#281B16]"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
               </div>
 
-              <span className="font-mono text-xs text-[#4A3A32] font-semibold hidden md:inline">
-                Showing {selectedDomain === "all" ? ALL_CATALOG_STUDIES.length : ALL_CATALOG_STUDIES.filter((s) => s.domain === selectedDomain).length} of 12
-              </span>
-            </div>
+              <h3 className="font-serif font-light text-4xl sm:text-5xl lg:text-[56px] text-[#281B16] tracking-[-0.025em] leading-[1.03] max-w-4xl mb-10">
+                Founding Product Architecture for an{" "}
+                <span className="italic font-normal">Institutional Bitcoin Custody Bank.</span>
+              </h3>
 
-            {/* 12-Card Catalog Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {ALL_CATALOG_STUDIES.filter((item) => selectedDomain === "all" || item.domain === selectedDomain).map(
-                (item) => (
+              {/* 4-Col Hairline Spec Bar (Chicuinaco-style) */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 border-y border-[#D3C7B5] divide-y sm:divide-y-0 sm:divide-x divide-[#D3C7B5] mb-12">
+                <div className="py-4 pr-4">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840]">
+                    Role
+                  </div>
+                  <div className="font-serif text-lg sm:text-xl text-[#281B16] mt-0.5">
+                    1st Product Designer
+                  </div>
+                </div>
+                <div className="py-4 sm:px-6">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840]">
+                    Charter
+                  </div>
+                  <div className="font-serif text-lg sm:text-xl text-[#281B16] mt-0.5">
+                    Wyoming SPDI Depository
+                  </div>
+                </div>
+                <div className="py-4 sm:px-6">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840]">
+                    Core Workflow
+                  </div>
+                  <div className="font-serif text-lg sm:text-xl text-[#281B16] mt-0.5">
+                    Multi-Sig Quorum &amp; Cold Storage
+                  </div>
+                </div>
+                <div className="py-4 sm:pl-6">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840]">
+                    Deliverable
+                  </div>
+                  <div className="font-serif text-lg sm:text-xl text-[#281B16] mt-0.5">
+                    Custody Platform &amp; Design System
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+              {/* Left 5 Cols: Narrative & Numbered Hairline Ledger */}
+              <Reveal className="lg:col-span-5 space-y-6">
+                <p className="font-serif text-xl sm:text-[22px] text-[#281B16] leading-[1.52]">
+                  Hired as the first product designer at Kaitlin Long&apos;s Custodia Bank to translate federal and state banking regulations into an institutional-grade Bitcoin custody and US dollar treasury platform.
+                </p>
+
+                <div className="divide-y divide-[#D3C7B5] border-t border-b border-[#D3C7B5]">
+                  <div className="py-4">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840] mb-1">
+                      01.A // Multi-Party Quorum Ceremony
+                    </div>
+                    <p className="font-sans text-sm text-[#4A3A32] leading-[1.65]">
+                      Designed deterministic hardware-key signing ceremonies, time-locked cold storage withdrawals, and role-based corporate treasury approvals.
+                    </p>
+                  </div>
+                  <div className="py-4">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840] mb-1">
+                      01.B // BSA/AML &amp; Examiner Auditability
+                    </div>
+                    <p className="font-sans text-sm text-[#4A3A32] leading-[1.65]">
+                      Built immutable audit trails and real-time transaction risk views that satisfied both corporate CFOs and bank examiners.
+                    </p>
+                  </div>
+                  <div className="py-4">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840] mb-1">
+                      01.C // Unified Enterprise Design System
+                    </div>
+                    <p className="font-sans text-sm text-[#4A3A32] leading-[1.65]">
+                      Established Custodia&apos;s foundational token architecture and React component library across customer and internal ops portals.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-wrap items-center gap-4">
                   <Link
-                    key={item.slug}
-                    href={`/case-studies/${item.slug}`}
-                    className="group p-5 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all flex flex-col justify-between space-y-3.5 no-underline shadow-xs hover:shadow-md"
+                    href="/case-studies/custodia"
+                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-colors no-underline"
+                    data-testid="link-pillar-custodia"
                   >
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between gap-1 border-b border-[#D3C7B5]/60 pb-2">
-                        <span className="font-mono text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-[#281B16] text-[#FE299E]">
-                          STUDY {item.order}
-                        </span>
-                        <span className="font-mono text-[10px] font-bold text-[#4A3A32] truncate max-w-[130px]">
-                          {item.timeline}
-                        </span>
-                      </div>
-
-                      <div>
-                        <span className="font-mono text-[10px] uppercase font-bold text-[#FE299E] block mb-0.5">
-                          {item.domainLabel}
-                        </span>
-                        <h4 className="font-serif font-bold text-lg text-[#281B16] group-hover:text-[#FE299E] transition-colors leading-snug">
-                          {item.client}
-                        </h4>
-                      </div>
-
-                      <p className="text-xs text-[#4A3A32] font-sans leading-[1.6] line-clamp-3">
-                        {item.summary}
-                      </p>
-
-                      <div className="pt-1">
-                        <span className="inline-block font-mono text-[10px] font-bold text-[#281B16] px-2 py-0.5 rounded bg-[#EAE0D0] border border-[#D3C7B5]">
-                          {item.scaleBadge}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="pt-2.5 border-t border-[#D3C7B5] flex items-center justify-between text-xs font-sans font-bold text-[#281B16] group-hover:text-[#FE299E]">
-                      <span>Read Case Study</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                    <span>Read Custodia Monograph</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                )
-              )}
+                </div>
+              </Reveal>
+
+              {/* Right 7 Cols: Un-nested Architectural Plates */}
+              <Reveal delay={0.1} className="lg:col-span-7 space-y-4">
+                <div
+                  className="group relative border border-[#D3C7B5] bg-[#F2EAE0] p-3 cursor-pointer"
+                  onClick={() =>
+                    setLightboxImage({
+                      src: "/images/custodia/mm-01.png",
+                      title: "Custodia Bank — Institutional Custody & Treasury Dashboard",
+                      caption:
+                        "Unified multi-signature Bitcoin custody and US Dollar settlement workbench designed for corporate treasurers.",
+                    })
+                  }
+                >
+                  <div className="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#D3C7B5] font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840]">
+                    <span>PLATE 01.1 // INSTITUTIONAL TREASURY &amp; CUSTODY WORKBENCH</span>
+                    <span className="inline-flex items-center gap-1 text-[#281B16] group-hover:text-[#FE299E] transition-colors">
+                      <ZoomIn className="w-3 h-3" /> Inspect Plate
+                    </span>
+                  </div>
+                  <div className="overflow-hidden bg-[#1A1310] aspect-[16/10]">
+                    <img
+                      src="/images/custodia/mm-01.png"
+                      alt="Custodia Bank Institutional Custody Interface"
+                      className="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div
+                    className="group border border-[#D3C7B5] bg-[#F2EAE0] p-3 cursor-pointer"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: "/images/custodia/utxo-1.png",
+                        title: "Custodia Bank — Cold Storage UTXO & Quorum Ceremony",
+                        caption: "Multi-party hardware key verification and withdrawal governance.",
+                      })
+                    }
+                  >
+                    <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840] pb-2 mb-2 border-b border-[#D3C7B5]">
+                      PLATE 01.2 // MULTI-SIG UTXO QUORUM FLOW
+                    </div>
+                    <div className="overflow-hidden bg-[#1A1310] aspect-[16/10]">
+                      <img
+                        src="/images/custodia/utxo-1.png"
+                        alt="Custodia Multi-Sig Quorum Flow"
+                        className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className="group border border-[#D3C7B5] bg-[#F2EAE0] p-3 cursor-pointer"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: "/images/custodia/mm-02.png",
+                        title: "Custodia Bank — Money Market & Fedwire Settlement",
+                        caption: "Tokenized typography, status badges, and high-density table primitives.",
+                      })
+                    }
+                  >
+                    <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840] pb-2 mb-2 border-b border-[#D3C7B5]">
+                      PLATE 01.3 // FEDWIRE &amp; MONEY MARKET RAILS
+                    </div>
+                    <div className="overflow-hidden bg-[#1A1310] aspect-[16/10]">
+                      <img
+                        src="/images/custodia/mm-02.png"
+                        alt="Custodia Bank Money Market Rails"
+                        className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* ─────────────────────────────────────────────────────────────────
+              PILLAR 02 // NATIONAL HEALTHCARE & RETAIL SCALE (UHG 35M+ & WALMART 3M+)
+             ───────────────────────────────────────────────────────────────── */}
+          <div className="py-20 sm:py-24 border-b border-[#281B16]" data-testid="pillar-enterprise-scale">
+            <Reveal>
+              <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
+                <div className="flex items-baseline gap-4">
+                  <span className="font-serif italic text-3xl sm:text-4xl text-[#5C4840] tabular-nums">
+                    02
+                  </span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840]">
+                    Pillar II · National Healthcare &amp; Global Retail Operations
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#281B16]">
+                  38M+ Combined Active Users
+                </span>
+              </div>
+
+              <h3 className="font-serif font-light text-4xl sm:text-5xl lg:text-[56px] text-[#281B16] tracking-[-0.025em] leading-[1.03] max-w-4xl mb-12">
+                Designing where every second and pixel compounds across{" "}
+                <span className="italic font-normal">tens of millions of lives.</span>
+              </h3>
+            </Reveal>
+
+            {/* 2-Column Hairline Split: UnitedHealth Group (Left) | Walmart Global Tech (Right) */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 border-t border-b border-[#D3C7B5] divide-y lg:divide-y-0 lg:divide-x divide-[#D3C7B5]">
+              {/* 02.A: UnitedHealth Group */}
+              <Reveal className="py-10 lg:pr-10 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840]">
+                      02.A // UNITEDHEALTH GROUP (OPTUM)
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#281B16]">
+                      35M+ PATIENTS · 2021–2023
+                    </span>
+                  </div>
+
+                  <h4 className="font-serif font-normal text-3xl sm:text-4xl text-[#281B16] tracking-[-0.02em] leading-[1.1] mb-4">
+                    Unified Patient Care Navigation &amp; Clinical Pharmacy
+                  </h4>
+
+                  <p className="font-sans text-sm sm:text-[15px] text-[#4A3A32] leading-[1.7] mb-6">
+                    Led cross-pillar product architecture unifying fragmented care portals, prescription fulfillment, and benefits clarity for over 35 million patients under strict HIPAA and WCAG AAA accessibility mandates.
+                  </p>
+
+                  <div
+                    className="group border border-[#D3C7B5] bg-[#F2EAE0] p-3 mb-6 cursor-pointer"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: "/images/uhg/uhg-hero.png",
+                        title: "UnitedHealth Group (Optum) — 35M+ Patient Care Portal",
+                        caption:
+                          "Accessible care navigation, pharmacy fulfillment, and clinical benefits clarity.",
+                      })
+                    }
+                  >
+                    <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840] pb-2 mb-2 border-b border-[#D3C7B5]">
+                      <span>FIG. 02.A // OPTUM PATIENT &amp; PHARMACY ECOSYSTEM</span>
+                      <span className="group-hover:text-[#FE299E]">Inspect →</span>
+                    </div>
+                    <div className="overflow-hidden aspect-[16/10] bg-[#DFD4C4]">
+                      <img
+                        src="/images/uhg/uhg-hero.png"
+                        alt="UnitedHealth Group Patient Portal"
+                        className="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-4 border-t border-[#D3C7B5]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840]">
+                    Principal Product Designer
+                  </span>
+                  <Link
+                    href="/case-studies/unitedhealth"
+                    className="editorial-underline inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#281B16] font-medium no-underline"
+                    data-testid="link-pillar-uhg"
+                  >
+                    <span>Inspect UHG Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#FE299E]" />
+                  </Link>
+                </div>
+              </Reveal>
+
+              {/* 02.B: Walmart Global Tech */}
+              <Reveal delay={0.1} className="py-10 lg:pl-10 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5C4840]">
+                      02.B // WALMART GLOBAL TECH
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#281B16]">
+                      3M+ ASSOCIATES · 2019–2021
+                    </span>
+                  </div>
+
+                  <h4 className="font-serif font-normal text-3xl sm:text-4xl text-[#281B16] tracking-[-0.02em] leading-[1.1] mb-4">
+                    Global Store Operations &amp; Supply Chain Fulfillment
+                  </h4>
+
+                  <p className="font-sans text-sm sm:text-[15px] text-[#4A3A32] leading-[1.7] mb-6">
+                    Architected mission-critical floor operations, inventory replenishment, and high-speed pick-path mobile tools used daily by 3 million associates across 4,700+ retail and distribution centers.
+                  </p>
+
+                  <div
+                    className="group border border-[#D3C7B5] bg-[#F2EAE0] p-3 mb-6 cursor-pointer"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: "/images/walmart/walmart-hero.png",
+                        title: "Walmart Global Tech — Associate Fulfillment & Inventory System",
+                        caption:
+                          "High-frequency mobile scanning and store operations architecture deployed across 4,700+ stores.",
+                      })
+                    }
+                  >
+                    <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840] pb-2 mb-2 border-b border-[#D3C7B5]">
+                      <span>FIG. 02.B // ASSOCIATE MOBILE FULFILLMENT SUITE</span>
+                      <span className="group-hover:text-[#FE299E]">Inspect →</span>
+                    </div>
+                    <div className="overflow-hidden aspect-[16/10] bg-[#DFD4C4]">
+                      <img
+                        src="/images/walmart/walmart-hero.png"
+                        alt="Walmart Global Tech Associate Platform"
+                        className="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-4 border-t border-[#D3C7B5]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840]">
+                    Staff Product Designer
+                  </span>
+                  <Link
+                    href="/case-studies/walmart"
+                    className="editorial-underline inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#281B16] font-medium no-underline"
+                    data-testid="link-pillar-walmart"
+                  >
+                    <span>Inspect Walmart Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#FE299E]" />
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* ─────────────────────────────────────────────────────────────────
+              PILLAR 03 // APPLIED AI & SOVEREIGN ESTATES (CHICUINACO, MARIGOLD, CASSANDRA)
+             ───────────────────────────────────────────────────────────────── */}
+          <div className="py-20 sm:py-24" data-testid="pillar-applied-ai">
+            <Reveal>
+              <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
+                <div className="flex items-baseline gap-4">
+                  <span className="font-serif italic text-3xl sm:text-4xl text-[#5C4840] tabular-nums">
+                    03
+                  </span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840]">
+                    Pillar III · Zero-Card Brand Estates &amp; Zero-Knowledge AI Workbenches
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#281B16]">
+                  Chicuinaco · Marigold · Cassandra
+                </span>
+              </div>
+
+              <h3 className="font-serif font-light text-4xl sm:text-5xl lg:text-[56px] text-[#281B16] tracking-[-0.025em] leading-[1.03] max-w-4xl mb-10">
+                Editorial craft meets{" "}
+                <span className="italic font-normal text-[#FE299E]">client-side intelligence.</span>
+              </h3>
+            </Reveal>
+
+            {/* Hairline Selector Tabs for Pillar 03 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 border-t border-b border-[#281B16] divide-y md:divide-y-0 md:divide-x divide-[#D3C7B5] mb-12">
+              {APPLIED_AI_SHOWCASE.map((item, idx) => {
+                const isSelected = idx === activeAppliedIndex;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setActiveAppliedIndex(idx)}
+                    className={`text-left py-5 px-5 transition-colors cursor-pointer border-none ${
+                      isSelected
+                        ? "bg-[#281B16] text-[#F2EAE0]"
+                        : "bg-transparent hover:bg-[#F2EAE0]/60 text-[#281B16]"
+                    }`}
+                    data-testid={`button-pillar3-tab-${item.id}`}
+                  >
+                    <div className="flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.18em] mb-1">
+                      <span className={isSelected ? "text-[#FE299E]" : "text-[#5C4840]"}>
+                        03.{idx + 1} // {item.tag}
+                      </span>
+                      <span>{isSelected ? "● Active" : "Inspect"}</span>
+                    </div>
+                    <div className="font-serif text-2xl tracking-tight">
+                      {item.title}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Monograph Essay Callout */}
-            <div className="p-5 rounded-2xl bg-[#EAE0D0]/80 border border-[#D3C7B5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="space-y-1">
-                <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block">
-                  Security &amp; IP Monograph
-                </span>
-                <h4 className="font-serif font-bold text-lg text-[#281B16]">
-                  Design is Risk: Why traditional portfolio transparency invites IP distillation
+            {/* Active Pillar 03 Spread */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+              <div className="lg:col-span-5 space-y-6">
+                <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#5C4840]">
+                  {currentApplied.subtitle}
+                </div>
+                <h4 className="font-serif font-normal text-3xl sm:text-4xl text-[#281B16] tracking-[-0.02em] leading-[1.1]">
+                  {currentApplied.title}
                 </h4>
-                <p className="text-xs text-[#4A3A32] font-sans max-w-3xl">
-                  An architectural essay on how adversarial AI reasoning and chain-of-thought scraping turned public portfolio wireframes into competitive vulnerability.
+                <p className="font-sans text-sm sm:text-[15px] text-[#4A3A32] leading-[1.72]">
+                  {currentApplied.summary}
                 </p>
+
+                {/* 2×2 Hairline Spec Grid */}
+                <div className="grid grid-cols-2 border-t border-b border-[#D3C7B5] divide-x divide-y divide-[#D3C7B5]">
+                  {currentApplied.specs.map((spec) => (
+                    <div key={spec.k} className="p-4">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+                        {spec.k}
+                      </div>
+                      <div className="font-serif text-lg text-[#281B16] mt-1">
+                        {spec.v}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <Link
+                    href={`/case-studies/${currentApplied.caseStudySlug}`}
+                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-colors no-underline"
+                  >
+                    <span>Read Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <a
+                    href={currentApplied.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="editorial-underline inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-[#281B16] no-underline"
+                  >
+                    <span>Visit Live Production</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#FE299E]" />
+                  </a>
+                </div>
               </div>
-              <Link
-                href="/essays/design-is-risk"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-sans text-xs uppercase tracking-wider font-bold transition-colors whitespace-nowrap shrink-0 no-underline"
-              >
-                <span>Read Essay</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-12 gap-4">
+                <div
+                  className="sm:col-span-8 group border border-[#D3C7B5] bg-[#F2EAE0] p-3 cursor-pointer"
+                  onClick={() =>
+                    setLightboxImage({
+                      src: currentApplied.src,
+                      title: currentApplied.title,
+                      caption: currentApplied.summary,
+                    })
+                  }
+                >
+                  <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840] pb-2 mb-2 border-b border-[#D3C7B5]">
+                    <span>PRIMARY PRODUCTION INTERFACE</span>
+                    <span className="group-hover:text-[#FE299E]">Zoom →</span>
+                  </div>
+                  <div className="overflow-hidden aspect-[16/10] bg-[#1A1310]">
+                    <img
+                      src={currentApplied.src}
+                      alt={currentApplied.title}
+                      className="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+
+                <div
+                  className="sm:col-span-4 group border border-[#D3C7B5] bg-[#F2EAE0] p-3 cursor-pointer flex flex-col justify-between"
+                  onClick={() =>
+                    setLightboxImage({
+                      src: currentApplied.secondarySrc,
+                      title: `${currentApplied.title} — Secondary Architectural Plate`,
+                      caption: currentApplied.subtitle,
+                    })
+                  }
+                >
+                  <div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#5C4840] pb-2 mb-2 border-b border-[#D3C7B5]">
+                      ARCHITECTURAL DETAIL
+                    </div>
+                    <div className="overflow-hidden aspect-[4/3] sm:aspect-[4/5] bg-[#1A1310]">
+                      <img
+                        src={currentApplied.secondarySrc}
+                        alt={`${currentApplied.title} detail`}
+                        className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                  <div className="pt-3 mt-2 border-t border-[#D3C7B5] font-mono text-[10px] uppercase tracking-[0.14em] text-[#5C4840]">
+                    Click to inspect full plate
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── VIEWPORT 03: CAREER TIMELINE & EDUCATION (FITS IN 1 VIEWPORT) ── */}
-      <ExperienceSection />
-
-      {/* ── VIEWPORT 04: CODE & PRODUCTION STACK (FITS IN 1 VIEWPORT) ── */}
-      <section id="code" className="py-12 md:py-16 border-t border-[#D3C7B5] bg-[#E4DACB]/45 scroll-mt-16">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-8">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b-2 border-[#281B16] pb-5">
-            <div className="space-y-1.5 max-w-3xl">
-              <p className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] flex items-center gap-2">
-                <GitBranch className="w-3.5 h-3.5" /> 04 // AUTHORED CODE &amp; PRODUCTION STACK
-              </p>
-              <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.08]">
-                Systems architect. Prompt engineer. Builder.
-              </h2>
-              <p className="text-sm sm:text-base text-[#4A3A32] font-sans leading-[1.68]">
-                Because most enterprise work is under NDA, I architect and release my own systems in public—defining relational schemas, mathematical UI grids, and deterministic AI harnesses in TypeScript, Python, and Rust.
-              </p>
-            </div>
-            <div className="shrink-0">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          PILLAR 04 // FLAGSHIP R&D MONOGRAPH: PIPES.PINK (DARK ESPRESSO BAND)
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <section
+        id="pipes-flagship"
+        className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 bg-[#16110E] text-[#F2EAE0] border-b border-[#3D2C24]"
+        data-testid="pillar-pipes"
+      >
+        <div className="max-w-[1440px] mx-auto">
+          <Reveal>
+            <div className="flex flex-wrap items-baseline justify-between gap-4 pb-6 mb-10 border-b border-[#F2EAE0]/15">
+              <div className="flex items-baseline gap-4">
+                <span className="font-serif italic text-3xl sm:text-4xl text-[#FE299E] tabular-nums">
+                  04
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#D3C7B5]/80">
+                  Pillar IV · Flagship Sovereign Protocol &amp; Creator Economy R&amp;D
+                </span>
+              </div>
               <a
-                href="https://github.com/rorshockbtc"
+                href="https://pipes.pink"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 h-10 rounded-full bg-[#281B16] hover:bg-[#3D2C24] text-[#F2EAE0] font-sans text-xs sm:text-sm font-bold transition-colors shadow-sm whitespace-nowrap no-underline"
+                className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#FE299E] hover:underline inline-flex items-center gap-1.5"
               >
-                <GitCommit className="w-4 h-4 text-[#FE299E]" /> github.com/rorshockbtc ↗
+                <span>LIVE AT PIPES.PINK</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
-          </div>
 
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              { repo: "marigold", license: "AGPL-3.0 · Original", desc: "In-browser Fellegi-Sunter record linkage and civic-data auditing across 2,000,000+ records via DuckDB-WASM and Apache Arrow with zero server PII.", stack: "TypeScript · DuckDB-WASM · Arrow" },
-              { repo: "greater-than", license: "MIT · Original", desc: "Sovereign-by-default support bots and classroom tutors running local inference in the browser with WebGPU and Transformers.js at $0 cloud cost.", stack: "TypeScript · WebGPU · Local LLM" },
-              { repo: "pipes-native", license: "Source Available · Original", desc: "The Pipes macOS (! BANG IDE) and iOS companion apps: local folder sync, SQLite/DuckDB vector indexing, and sovereign studio.", stack: "Tauri 2.0 · Rust · Swift" },
-            ].map((r) => (
-              <li key={r.repo} className="h-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end mb-12">
+              <div className="lg:col-span-8">
+                <h3 className="font-serif font-light text-4xl sm:text-5xl lg:text-[62px] text-[#F2EAE0] tracking-[-0.025em] leading-[1.01]">
+                  Pipes.Pink: Sovereign Knowledge Protocol,{" "}
+                  <span className="italic font-normal text-[#FE299E]">Hash Sanctuary</span> &amp; SEMI (;-]).
+                </h3>
+              </div>
+              <div className="lg:col-span-4">
+                <p className="font-sans text-sm sm:text-[15px] text-[#D3C7B5]/85 leading-[1.68]">
+                  Just as Unix pipes (<code className="text-[#FE299E]">|</code>) route clean signal between programs,{" "}
+                  <strong className="text-[#F2EAE0]">pipes.pink</strong> routes verified human perspective across readers and AI agents with cryptographic provenance and 70% creator royalties.
+                </p>
+              </div>
+            </div>
+
+            {/* 4-Column Hairline Protocol Spec Bar */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 border-y border-[#F2EAE0]/15 divide-y sm:divide-y-0 sm:divide-x divide-[#F2EAE0]/15 mb-14">
+              <div className="py-5 pr-4">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D3C7B5]/70">
+                  Namespace Deed
+                </div>
+                <div className="font-serif text-2xl text-[#F2EAE0] mt-1">
+                  $9 / year · pipe\handle
+                </div>
+              </div>
+              <div className="py-5 sm:px-6">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D3C7B5]/70">
+                  Creator Royalty Split
+                </div>
+                <div className="font-serif text-2xl text-[#FE299E] mt-1">
+                  70% Direct to Curator
+                </div>
+              </div>
+              <div className="py-5 sm:px-6">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D3C7B5]/70">
+                  Writing Sanctuary
+                </div>
+                <div className="font-serif text-2xl text-[#F2EAE0] mt-1">
+                  # Hash + SEMI (;-])
+                </div>
+              </div>
+              <div className="py-5 sm:pl-6">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D3C7B5]/70">
+                  Agent Settlement
+                </div>
+                <div className="font-serif text-2xl text-[#F2EAE0] mt-1">
+                  MCP + HTTP 402 Gate
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Interactive 4-Plate Showcase */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left 4 Cols: Plate Switcher List */}
+            <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
+              <div className="divide-y divide-[#F2EAE0]/12 border-t border-b border-[#F2EAE0]/15">
+                {PIPES_PLATES.map((plate, idx) => {
+                  const isActive = idx === activePipesPlate;
+                  return (
+                    <button
+                      key={plate.id}
+                      type="button"
+                      onClick={() => setActivePipesPlate(idx)}
+                      className={`w-full text-left py-5 px-3 transition-colors cursor-pointer bg-transparent border-none flex items-baseline justify-between gap-4 ${
+                        isActive
+                          ? "text-[#F2EAE0]"
+                          : "text-[#D3C7B5]/60 hover:text-[#F2EAE0]"
+                      }`}
+                    >
+                      <div className="flex items-baseline gap-3.5">
+                        <span
+                          className={`font-serif italic text-xl tabular-nums ${
+                            isActive ? "text-[#FE299E]" : "text-[#D3C7B5]/50"
+                          }`}
+                        >
+                          {plate.num}
+                        </span>
+                        <div>
+                          <div className="font-serif text-xl sm:text-2xl tracking-tight">
+                            {plate.label}
+                          </div>
+                          {isActive && (
+                            <p className="font-sans text-xs text-[#D3C7B5]/80 mt-2 leading-relaxed">
+                              {plate.caption}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] shrink-0">
+                        {isActive ? "●" : "→"}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
-                  href={`https://github.com/rorshockbtc/${r.repo}`}
+                  href="https://pipes.pink"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group h-full flex flex-col justify-between space-y-3 p-5 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all shadow-xs no-underline"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-colors no-underline"
+                  data-testid="link-pipes-live"
                 >
-                  <div className="space-y-2">
-                    <span className="flex items-baseline justify-between gap-2 border-b border-[#D3C7B5] pb-2">
-                      <span className="font-serif text-lg sm:text-xl font-bold text-[#281B16] group-hover:text-[#FE299E] transition-colors">{r.repo}</span>
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EAE0D0] text-[#281B16] shrink-0 whitespace-nowrap">{r.license}</span>
-                    </span>
-                    <span className="block text-xs sm:text-sm text-[#4A3A32] font-sans leading-[1.65]">{r.desc}</span>
-                  </div>
-                  <span className="block text-xs font-mono font-bold text-[#281B16] group-hover:text-[#FE299E] pt-2 border-t border-[#D3C7B5] whitespace-nowrap">{r.stack} ↗</span>
+                  <span>Launch Pipes.Pink</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </a>
-              </li>
-            ))}
-          </ul>
+                <Link
+                  href="/case-studies/pipes"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#F2EAE0]/25 hover:border-[#F2EAE0] text-[#F2EAE0] font-mono text-[11px] uppercase tracking-[0.16em] no-underline transition-colors"
+                  data-testid="link-pillar-pipes"
+                >
+                  <span>Full Pipes Case Study</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
 
-          {/* ── 4-Layer Architectural Capabilities Matrix (Compact 4-Column Row) ── */}
+            {/* Right 8 Cols: Active Plate Display */}
+            <div className="lg:col-span-8">
+              <div
+                className="group border border-[#F2EAE0]/20 bg-[#1F1713] p-3 sm:p-4 cursor-pointer"
+                onClick={() =>
+                  setLightboxImage({
+                    src: currentPipesPlate.src,
+                    title: currentPipesPlate.title,
+                    caption: currentPipesPlate.caption,
+                  })
+                }
+              >
+                <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#F2EAE0]/15 font-mono text-[10px] uppercase tracking-[0.18em] text-[#D3C7B5]/80">
+                  <span>
+                    SPECIMEN {currentPipesPlate.num} // {currentPipesPlate.title}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[#FE299E]">
+                    <ZoomIn className="w-3.5 h-3.5" /> Full Resolution
+                  </span>
+                </div>
+                <div className="overflow-hidden aspect-[16/10] bg-[#0E0A08]">
+                  <img
+                    src={currentPipesPlate.src}
+                    alt={currentPipesPlate.title}
+                    className="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          02.B // COMPLETE 13-CASE-STUDY ARCHITECTURAL INDEX TABLE
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <section
+        id="case-studies"
+        className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
+        data-testid="section-case-studies-catalog"
+      >
+        <div className="max-w-[1440px] mx-auto">
+          <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-[#281B16]">
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-3">
+                02.B // Complete Architectural Archive (01 – 13)
+              </div>
+              <h2 className="font-serif font-light text-4xl sm:text-5xl text-[#281B16] tracking-[-0.025em] leading-[1.04]">
+                Every system, monograph &amp;{" "}
+                <span className="italic font-normal text-[#FE299E]">shipped codebase.</span>
+              </h2>
+            </div>
+
+            {/* Domain Filter Bar */}
+            <div className="flex flex-wrap items-center gap-2">
+              {[
+                { id: "all", label: `All Works (${ALL_CATALOG_STUDIES.length})` },
+                { id: "enterprise", label: "Regulated & Enterprise (5)" },
+                { id: "ai", label: "Sovereign AI & Data (5)" },
+                { id: "design", label: "Brand & Design Systems (3)" },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setDomainFilter(tab.id as DomainFilter)}
+                  className={`px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.14em] transition-colors cursor-pointer border ${
+                    domainFilter === tab.id
+                      ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16]"
+                      : "bg-[#F2EAE0]/80 text-[#4A3A32] border-[#D3C7B5] hover:border-[#281B16]"
+                  }`}
+                  data-testid={`filter-tab-${tab.id}`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Numbered Hairline Index Rows (Replaces 12 Boxy Cards) */}
+          <div className="divide-y divide-[#D3C7B5] border-b border-[#281B16]">
+            {filteredStudies.map((study) => (
+              <Link
+                key={study.slug}
+                href={`/case-studies/${study.slug}`}
+                className="group py-7 sm:py-8 px-2 sm:px-4 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-center hover:bg-[#F2EAE0]/75 transition-colors no-underline"
+                data-testid={`card-case-study-${study.slug}`}
+              >
+                {/* Col 1-2: Numeral + Thumbnail Plate */}
+                <div className="lg:col-span-2 flex items-center gap-4">
+                  <span className="font-serif italic text-2xl sm:text-3xl text-[#5C4840] group-hover:text-[#FE299E] transition-colors tabular-nums w-8 shrink-0">
+                    {study.num}
+                  </span>
+                  <div className="w-20 h-13 overflow-hidden border border-[#D3C7B5] bg-[#1A1310] shrink-0 hidden sm:block">
+                    <img
+                      src={study.thumb}
+                      alt={study.client}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+
+                {/* Col 3-7: Client & Monumental Serif Title */}
+                <div className="lg:col-span-5">
+                  <div className="flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840] mb-1">
+                    <span>{study.client}</span>
+                    <span>·</span>
+                    <span>{study.domainLabel}</span>
+                  </div>
+                  <h3 className="font-serif font-normal text-2xl sm:text-[28px] text-[#281B16] group-hover:text-[#FE299E] transition-colors tracking-[-0.015em] leading-[1.15]">
+                    {study.title}
+                  </h3>
+                </div>
+
+                {/* Col 8-10: Editorial Summary */}
+                <div className="lg:col-span-3">
+                  <p className="font-sans text-xs sm:text-[13px] text-[#4A3A32] leading-[1.6] line-clamp-2">
+                    {study.summary}
+                  </p>
+                </div>
+
+                {/* Col 11-12: Scale Badge & Arrow */}
+                <div className="lg:col-span-2 flex items-center justify-between lg:justify-end gap-3 text-right">
+                  <div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#281B16]">
+                      {study.scaleBadge}
+                    </div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#5C4840] mt-0.5 tabular-nums">
+                      {study.timeline}
+                    </div>
+                  </div>
+                  <span className="w-8 h-8 rounded-full border border-[#D3C7B5] group-hover:border-[#281B16] group-hover:bg-[#281B16] group-hover:text-[#F2EAE0] text-[#281B16] flex items-center justify-center transition-all shrink-0">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          03 // CAREER TIMELINE & ACADEMIC FOUNDATION
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <ExperienceSection />
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          04 // PRODUCTION CODE & ARCHITECTURAL CAPABILITY MATRIX
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <section
+        id="code"
+        className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
+        data-testid="section-code"
+      >
+        <div className="max-w-[1440px] mx-auto">
+          <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-[#281B16]">
+            <div className="max-w-3xl">
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-4">
+                04 // Shipped Code &amp; Technical Architecture
+              </div>
+              <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#281B16] tracking-[-0.025em] leading-[1.03]">
+                I don&apos;t throw static mocks over the wall.{" "}
+                <span className="italic font-normal text-[#FE299E]">I ship the code.</span>
+              </h2>
+            </div>
+
+            <a
+              href="https://github.com/rorshockbtc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] hover:text-white font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-colors self-start lg:self-auto no-underline"
+              data-testid="link-github-profile"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub (@rorshockbtc)</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+          </Reveal>
+
+          {/* Hairline Repository Ledger */}
+          <div className="divide-y divide-[#D3C7B5] border-b border-[#281B16]">
+            {PRODUCTION_REPOS.map((repo) => (
+              <div
+                key={repo.name}
+                className="py-6 px-2 sm:px-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-baseline hover:bg-[#F2EAE0]/60 transition-colors"
+              >
+                <div className="lg:col-span-4 flex items-baseline gap-4">
+                  <span className="font-serif italic text-xl text-[#5C4840] tabular-nums w-7">
+                    {repo.num}
+                  </span>
+                  <div>
+                    <div className="font-mono text-sm font-medium text-[#281B16]">
+                      {repo.name}
+                    </div>
+                    <div className="font-sans text-xs text-[#5C4840] mt-0.5">
+                      {repo.domain}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5 font-mono text-xs text-[#4A3A32]">
+                  {repo.stack}
+                </div>
+
+                <div className="lg:col-span-3 flex items-center lg:justify-end gap-5">
+                  <Link
+                    href={repo.caseStudy}
+                    className="editorial-underline font-mono text-[11px] uppercase tracking-[0.15em] text-[#281B16] no-underline"
+                  >
+                    Architecture Study
+                  </Link>
+                  <a
+                    href={repo.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="editorial-underline inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.15em] text-[#FE299E] no-underline"
+                  >
+                    <span>Live</span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 4-Column Capability Matrix */}
           <TechStack />
         </div>
       </section>
 
-      {/* ── VIEWPORT 05: HOW I WORK & FIELD STUDIES (FITS IN 1 VIEWPORT) ── */}
-      <section id="about-kyle" className="py-12 md:py-16 border-t border-[#D3C7B5] bg-[#EAE0D0] scroll-mt-16">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 space-y-10">
-          {/* Part A: The Unit of One Loop + Why Teams Hire Me */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-5">
-              <div className="rounded-3xl bg-[#281B16] text-[#F2EAE0] p-6 sm:p-7 shadow-xl border border-[#3D2C24] space-y-4">
-                <div className="flex items-center justify-between border-b border-[#F2EAE0]/15 pb-3">
-                  <div>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-[#FE299E] block">
-                      Operating Architecture
+      {/* ═══════════════════════════════════════════════════════════════════════
+          05 // HOW I WORK ("UNIT OF ONE LOOP") & FIELD STUDIES
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <section
+        id="about-kyle"
+        className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
+        data-testid="section-about"
+      >
+        <div className="max-w-[1440px] mx-auto">
+          <Reveal className="pb-12 border-b border-[#281B16]">
+            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-4">
+              05 // Operating Philosophy · The Unit of One
+            </div>
+            <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#281B16] tracking-[-0.025em] leading-[1.03] max-w-4xl">
+              Collapsing the wall between{" "}
+              <span className="italic font-normal text-[#FE299E]">boardroom strategy</span>, design craft, and production code.
+            </h2>
+          </Reveal>
+
+          {/* 2-Column Asymmetric Architectural Spread */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-[#281B16] divide-y lg:divide-y-0 lg:divide-x divide-[#D3C7B5]">
+            {/* Left 6 Cols: The Unit of One Loop */}
+            <Reveal className="lg:col-span-6 py-12 lg:pr-12">
+              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#5C4840] mb-6">
+                05.A // The Four-Stage Operating Loop
+              </div>
+
+              <div className="divide-y divide-[#D3C7B5] border-t border-b border-[#D3C7B5]">
+                {[
+                  {
+                    num: "01",
+                    title: "First-Principles Domain & Schema Modeling",
+                    desc: "Before drawing a rectangle, I map the regulatory constraints, database entities, and state transitions so the UI reflects how the system actually works.",
+                  },
+                  {
+                    num: "02",
+                    title: "Vignelli Grids & Albers Color Governance",
+                    desc: "Interfaces are built on structural 1px hairlines, warm paper contrast, and calm typographic hierarchy that eliminate cognitive fatigue.",
+                  },
+                  {
+                    num: "03",
+                    title: "AI-Accelerated Production Prototyping",
+                    desc: "Instead of static slide decks, I build live TypeScript/React/Tailwind prototypes wired to real schemas and agent harnesses in days.",
+                  },
+                  {
+                    num: "04",
+                    title: "Executive & Engineering Alignment",
+                    desc: "With an MBA from UNC and an MFA from Emerson, I translate seamlessly between C-suite P&L goals, compliance officers, and staff engineers.",
+                  },
+                ].map((step) => (
+                  <div key={step.num} className="py-5 flex items-baseline gap-5">
+                    <span className="font-serif italic text-2xl text-[#5C4840] tabular-nums w-8 shrink-0">
+                      {step.num}
                     </span>
-                    <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#F2EAE0] mt-0.5">
-                      The &ldquo;Unit of One&rdquo; Loop
-                    </h3>
+                    <div>
+                      <h3 className="font-serif font-normal text-2xl text-[#281B16] tracking-tight">
+                        {step.title}
+                      </h3>
+                      <p className="font-sans text-sm text-[#4A3A32] leading-[1.65] mt-1">
+                        {step.desc}
+                      </p>
+                    </div>
                   </div>
-                  <span className="font-sans font-bold text-xl text-[#FE299E] select-none" aria-hidden="true">
-                    :-]
-                  </span>
-                </div>
-
-                <ol className="space-y-3 font-sans">
-                  {[
-                    {
-                      step: "01",
-                      title: "Executive & Regulatory Strategy",
-                      desc: "UNC Kenan-Flagler MBA rigor applied to OCC/FDIC banking, wealth management, and HIPAA workflows.",
-                    },
-                    {
-                      step: "02",
-                      title: "First-Principles Data Modeling",
-                      desc: "Relational PostgreSQL schemas, local-first DuckDB-WASM tables, and zero-PII security boundaries before pixels.",
-                    },
-                    {
-                      step: "03",
-                      title: "Swiss Grid & Interaction Craft",
-                      desc: "Mathematical Vignelli grids, Albers color systems, and high-density institutional interfaces.",
-                    },
-                    {
-                      step: "04",
-                      title: "AI-Accelerated Shipping",
-                      desc: "Prompt & harness engineering that turns specs into working Next.js, TypeScript, and Rust software.",
-                    },
-                  ].map((item) => (
-                    <li key={item.step} className="flex items-start gap-3">
-                      <span className="font-mono text-[11px] font-bold text-[#FE299E] bg-[#FE299E]/15 border border-[#FE299E]/30 rounded-lg px-2 py-0.5 shrink-0 mt-0.5">
-                        {item.step}
-                      </span>
-                      <div className="space-y-0.5">
-                        <h4 className="font-serif font-bold text-sm sm:text-base text-[#F2EAE0] leading-snug">
-                          {item.title}
-                        </h4>
-                        <p className="text-xs text-[#E4DACB] leading-[1.6]">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
+                ))}
               </div>
-            </div>
+            </Reveal>
 
-            <div className="lg:col-span-7 space-y-4">
-              <span className="font-mono text-xs uppercase tracking-[0.22em] font-bold text-[#FE299E] block">
-                05 // HOW I WORK
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.08]">
-                Why founders &amp; executive teams hire me.
-              </h2>
-              <div className="space-y-3 text-sm sm:text-base lg:text-lg text-[#4A3A32] font-sans leading-[1.7] max-w-[62ch]">
-                <p>
-                  Most product teams lose months in the translation loop between strategy, design, and engineering. Designers mock up screens detached from the data model, engineers rebuild them under deadline pressure, and leadership wonders why shipping takes two quarters.
+            {/* Right 6 Cols: Why Founders & Executive Teams Hire Me */}
+            <Reveal delay={0.1} className="lg:col-span-6 py-12 lg:pl-12 flex flex-col justify-between">
+              <div>
+                <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#5C4840] mb-6">
+                  05.B // Why Executive Teams &amp; Founders Bring Me In
+                </div>
+                <p className="font-serif text-2xl sm:text-[26px] text-[#281B16] leading-[1.45] mb-8">
+                  Traditional product teams lose months translating between PM specs, Figma files, compliance reviews, and frontend tickets. Operating as a single principal architect removes that translation loss entirely.
                 </p>
-                <p>
-                  I close that gap. I align with executives on business outcomes, model the relational or graph schema from first principles, design the interface on a mathematical grid, and use AI-accelerated engineering to ship working software—so the system that ships is the system we agreed on.
-                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-b border-[#D3C7B5] divide-y sm:divide-y-0 sm:divide-x divide-[#D3C7B5]">
+                  <div className="py-5 sm:pr-6">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+                      VELOCITY
+                    </div>
+                    <div className="font-serif text-2xl text-[#281B16] mt-1">
+                      Days, Not Quarters
+                    </div>
+                    <p className="font-sans text-xs text-[#4A3A32] mt-1.5 leading-relaxed">
+                      Working coded prototypes in week one rather than 12-week discovery decks.
+                    </p>
+                  </div>
+                  <div className="py-5 sm:pl-6">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+                      GOVERNANCE
+                    </div>
+                    <div className="font-serif text-2xl text-[#281B16] mt-1">
+                      Regulated Ready
+                    </div>
+                    <p className="font-sans text-xs text-[#4A3A32] mt-1.5 leading-relaxed">
+                      Battle-tested across federal banking, HIPAA clinical care, and national retail.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 pt-3 border-t border-[#D3C7B5]">
-                <div>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#FE299E] font-bold block">
-                    System Architecture
-                  </span>
-                  <span className="font-serif font-bold text-sm sm:text-base text-[#281B16] block mt-0.5">Zero-to-one, fast</span>
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#FE299E] font-bold block">
-                    Design Systems
-                  </span>
-                  <span className="font-serif font-bold text-sm sm:text-base text-[#281B16] block mt-0.5">Systems, not screens</span>
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#FE299E] font-bold block">
-                    AI-Native Execution
-                  </span>
-                  <span className="font-serif font-bold text-sm sm:text-base text-[#281B16] block mt-0.5">No lost handoffs</span>
-                </div>
+              <div className="pt-8 flex flex-wrap items-center justify-between gap-4">
+                <Link
+                  href="/essays/design-is-risk"
+                  className="editorial-underline inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#281B16] no-underline"
+                >
+                  <span>Read Essay: &ldquo;Design Is Risk&rdquo;</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#FE299E]" />
+                </Link>
+                <Link
+                  href="/studio"
+                  className="editorial-underline inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#281B16] no-underline"
+                >
+                  <span>Inspect CHB Studio Manifesto</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#FE299E]" />
+                </Link>
               </div>
-            </div>
+            </Reveal>
           </div>
 
-          {/* Part B: Compact 3-Column Field Studies Strip (Fits in same viewport) */}
-          <div id="in-the-field" className="pt-6 border-t border-[#D3C7B5] space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] flex items-center gap-1.5">
-                  <Compass className="w-3.5 h-3.5 text-[#FE299E]" /> FIELD STUDIES
-                </span>
-                <span className="text-[#4A3A32]">·</span>
-                <h3 className="text-lg sm:text-xl font-serif font-bold text-[#281B16]">
-                  Outside work: studying trust, color &amp; human exchange in the field
+          {/* 05.C // Field Studies — 3-Column Editorial Monograph Plates */}
+          <div id="in-the-field" className="pt-20" data-testid="section-field-studies">
+            <Reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 border-b border-[#D3C7B5]">
+              <div>
+                <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-2">
+                  05.C // In the Field · Life Beyond the Terminal
+                </div>
+                <h3 className="font-serif font-normal text-3xl sm:text-4xl text-[#281B16] tracking-[-0.02em]">
+                  High altitude, field architecture &amp;{" "}
+                  <span className="italic">perspective.</span>
                 </h3>
               </div>
-            </div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
+                United States · Andes · Latin America
+              </span>
+            </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/images/personal/kyle-victoria-coastal-ring.jpg",
-                    caption: "Kyle & Victoria. Grounded in quiet discipline, mutual purpose, and deep focus.",
-                  })
-                }
-                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-3.5 flex items-center gap-4 shadow-xs"
-              >
-                <div className="relative w-24 sm:w-28 aspect-[4/3] shrink-0 rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src="/images/personal/kyle-victoria-coastal-ring.jpg"
-                    alt="Kyle and Victoria Cyree"
-                    className="w-full h-full object-cover object-[50%_35%] group-hover:scale-[1.03] transition-transform duration-500"
-                  />
-                </div>
-                <div className="space-y-0.5 min-w-0">
-                  <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block">
-                    Partnership &amp; Focus
-                  </span>
-                  <h4 className="font-serif font-bold text-base text-[#281B16] truncate">
-                    Kyle &amp; Victoria
-                  </h4>
-                  <p className="text-xs text-[#4A3A32] font-sans leading-[1.5] line-clamp-2">
-                    Exploring architecture, craft, and resilient human systems across continents.
+            <Stagger className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#D3C7B5] border-b border-[#281B16]">
+              {FIELD_STUDIES.map((plate, idx) => (
+                <StaggerItem
+                  key={plate.title}
+                  className={`py-8 ${
+                    idx === 0
+                      ? "md:pr-8"
+                      : idx === 1
+                      ? "md:px-8"
+                      : "md:pl-8"
+                  }`}
+                >
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840] mb-3">
+                    {plate.fig}
+                  </div>
+                  <div
+                    className="overflow-hidden aspect-[4/3] bg-[#DFD4C4] border border-[#D3C7B5] mb-4 cursor-pointer group"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: plate.src,
+                        title: `${plate.title} — ${plate.location}`,
+                        caption: plate.caption,
+                      })
+                    }
+                  >
+                    <img
+                      src={plate.src}
+                      alt={plate.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h4 className="font-serif text-2xl text-[#281B16]">
+                      {plate.title}
+                    </h4>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#5C4840]">
+                      {plate.location}
+                    </span>
+                  </div>
+                  <p className="font-serif italic text-base text-[#4A3A32] mt-1.5 leading-relaxed">
+                    {plate.caption}
                   </p>
-                </div>
-              </div>
-
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/images/personal/kyle-victoria-andes-market.jpg",
-                    caption: "High Andes indigenous market, Ecuador. Studying real human exchange and tactile craft.",
-                  })
-                }
-                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-3.5 flex items-center gap-4 shadow-xs"
-              >
-                <div className="relative w-24 sm:w-28 aspect-[4/3] shrink-0 rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src="/images/personal/kyle-victoria-andes-market.jpg"
-                    alt="Field study in high Andes indigenous market in Ecuador"
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                  />
-                </div>
-                <div className="space-y-0.5 min-w-0">
-                  <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block">
-                    High Andes, Ecuador
-                  </span>
-                  <h4 className="font-serif font-bold text-base text-[#281B16] truncate">
-                    Tactile Trade &amp; Trust
-                  </h4>
-                  <p className="text-xs text-[#4A3A32] font-sans leading-[1.5] line-clamp-2">
-                    How high-trust commerce works with no apps, no algorithms, and no middlemen.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                onClick={() =>
-                  setLightboxImage({
-                    src: "/images/personal/kyle-victoria-colombia-mural.jpg",
-                    caption: "Comuna 13, Medellín, Colombia. Monumental urban typography and chromatic contrast.",
-                  })
-                }
-                className="group cursor-zoom-in rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] p-3.5 flex items-center gap-4 shadow-xs"
-              >
-                <div className="relative w-24 sm:w-28 aspect-[4/3] shrink-0 rounded-xl overflow-hidden border border-[#D3C7B5] bg-[#E4DACB]">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src="/images/personal/kyle-victoria-colombia-mural.jpg"
-                    alt="Street mural and urban typography in Comuna 13, Medellín, Colombia"
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                  />
-                </div>
-                <div className="space-y-0.5 min-w-0">
-                  <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-[#FE299E] block">
-                    Medellín, Colombia
-                  </span>
-                  <h4 className="font-serif font-bold text-base text-[#281B16] truncate">
-                    Monumental Color &amp; Type
-                  </h4>
-                  <p className="text-xs text-[#4A3A32] font-sans leading-[1.5] line-clamp-2">
-                    Comuna 13&apos;s murals are a masterclass in scale, chromatic contrast, and type.
-                  </p>
-                </div>
-              </div>
-            </div>
+                </StaggerItem>
+              ))}
+            </Stagger>
           </div>
         </div>
       </section>
 
-      {/* ── VIEWPORT 06: EXECUTIVE ENDORSEMENTS (FITS IN 1 VIEWPORT) ── */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          06 // EXECUTIVE & ENGINEERING ENDORSEMENTS
+         ═══════════════════════════════════════════════════════════════════════ */}
       <TestimonialsSection />
 
-      {/* ── VIEWPORT 07: WORK TOGETHER — FULL-TIME OR SURGICAL SPRINTS (FITS IN 1 VIEWPORT) ── */}
-      <SprintCallout onContactClick={(subject) => openContactModal(subject || "Full-time role (Product Architect / Staff)")} />
+      {/* ═══════════════════════════════════════════════════════════════════════
+          07 // WORK TOGETHER — SPRINT & PRINCIPAL ENGAGEMENT LEDGER
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <SprintCallout />
 
-      {/* Fullscreen Lightbox Dialog */}
-      <Dialog open={!!lightboxImage} onOpenChange={(open) => !open && setLightboxImage(null)}>
-        <DialogContent className="max-w-[94vw] max-h-[92vh] p-4 bg-[#110f0e] border-white/20 text-white overflow-hidden flex flex-col">
-          <DialogHeader className="flex flex-row items-center justify-between pb-3 border-b border-white/10 px-2">
-            <div>
-              <DialogTitle className="text-lg font-serif font-bold text-white">
-                {lightboxImage?.caption}
-              </DialogTitle>
-              <DialogDescription className="text-xs sm:text-sm text-white/60 font-sans">
-                Full-resolution product plate inspection
-              </DialogDescription>
-            </div>
-          </DialogHeader>
-
-          <div className="flex-1 overflow-auto p-4 bg-[#0c0b0a] rounded-2xl flex items-center justify-center">
-            {lightboxImage && (
+      {/* Lightbox Dialog */}
+      <Dialog
+        open={!!lightboxImage}
+        onOpenChange={(open) => !open && setLightboxImage(null)}
+      >
+        <DialogContent className="max-w-[92vw] md:max-w-5xl bg-[#1C1411] border-[#3D2C24] text-[#F2EAE0] p-4 md:p-6">
+          <DialogTitle className="font-serif text-xl md:text-2xl text-[#F2EAE0]">
+            {lightboxImage?.title}
+          </DialogTitle>
+          {lightboxImage?.caption && (
+            <p className="font-sans text-xs md:text-sm text-[#D3C7B5] mt-1">
+              {lightboxImage.caption}
+            </p>
+          )}
+          {lightboxImage && (
+            <div className="mt-3 overflow-hidden border border-[#4A372E] bg-[#110C0A] max-h-[75vh] flex items-center justify-center">
               <img
-                loading="lazy"
-                decoding="async"
                 src={lightboxImage.src}
-                alt={lightboxImage.caption}
-                className="max-w-full max-h-[78vh] object-contain rounded-xl shadow-2xl"
+                alt={lightboxImage.title}
+                className="max-h-[73vh] w-auto object-contain"
               />
-            )}
-          </div>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </div>
