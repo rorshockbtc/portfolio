@@ -17,7 +17,18 @@ import TechStack from "@/components/chb/tech-stack";
 import TestimonialsSection from "@/components/chb/testimonials-section";
 import SprintCallout from "@/components/chb/sprint-callout";
 import { openContactModal } from "@/lib/contact-events";
-import { Reveal, Stagger, StaggerItem } from "@/components/motion/primitives";
+import {
+  Reveal,
+  Stagger,
+  StaggerItem,
+  AccentRevealText,
+  AccentRevealImage,
+  AccentKineticBadge,
+  Hairline,
+  TAP,
+  SPRING_LAYOUT,
+} from "@/components/motion/primitives";
+import { motion } from "framer-motion";
 
 type DomainFilter = "all" | "enterprise" | "ai" | "design";
 
@@ -438,13 +449,13 @@ export default function Portfolio() {
             {/* Left 8 Columns */}
             <Reveal className="lg:col-span-8">
               <h1 className="font-serif font-light text-5xl sm:text-6xl lg:text-[76px] text-[#281B16] tracking-[-0.028em] leading-[0.97] mb-8">
-                Architect the system.
+                <AccentRevealText text="Architect the system." as="span" immediate delay={0.04} />
                 <br />
                 <span className="italic font-normal text-[#FE299E]">
-                  Design the interface.
+                  <AccentRevealText text="Design the interface." as="span" immediate delay={0.18} />
                 </span>
                 <br />
-                Ship the prototype.
+                <AccentRevealText text="Ship the prototype." as="span" immediate delay={0.32} />
               </h1>
 
               <p className="font-serif text-xl sm:text-2xl text-[#281B16] leading-[1.52] max-w-[58ch] mb-6">
@@ -506,62 +517,70 @@ export default function Portfolio() {
                 ).
               </p>
 
-              {/* Primary CTA Row */}
+              {/* Primary CTA Row with Tactile Motion Feedback */}
               <div className="flex flex-wrap items-center gap-4">
-                <Link
-                  href="/case-studies/custodia"
-                  className="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-all no-underline"
-                  data-testid="button-start-walkthrough-hero"
-                >
-                  <span>Case Study Walkthrough (01 / 13)</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                <motion.div whileHover={{ y: -2 }} whileTap={TAP}>
+                  <Link
+                    href="/case-studies/custodia"
+                    className="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-all no-underline shadow-sm hover:shadow-md"
+                    data-testid="button-start-walkthrough-hero"
+                  >
+                    <span>Case Study Walkthrough (01 / 13)</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </motion.div>
 
-                <Link
-                  href="/studio"
-                  className="inline-flex items-center gap-2.5 px-6 py-4 rounded-full bg-[#F2EAE0] hover:bg-[#281B16] text-[#281B16] hover:text-[#F2EAE0] border border-[#281B16]/25 font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-colors no-underline"
-                  data-testid="button-explore-studio-hero"
-                >
-                  <span>Explore CHB R&amp;D Studio</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </Link>
+                <motion.div whileHover={{ y: -2 }} whileTap={TAP}>
+                  <Link
+                    href="/studio"
+                    className="inline-flex items-center gap-2.5 px-6 py-4 rounded-full bg-[#F2EAE0] hover:bg-[#281B16] text-[#281B16] hover:text-[#F2EAE0] border border-[#281B16]/25 font-mono text-[11px] uppercase tracking-[0.16em] font-medium transition-colors no-underline"
+                    data-testid="button-explore-studio-hero"
+                  >
+                    <span>Explore CHB R&amp;D Studio</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </motion.div>
 
-                <a
-                  href="/resumes/kyle-cyree-resume.pdf"
-                  download="Resume - Kyle Cyree.pdf"
-                  target="_blank"
-                  rel="noopener"
-                  className="editorial-underline inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#281B16] font-medium no-underline"
-                  data-testid="button-download-resume-hero"
-                >
-                  <Download className="w-3.5 h-3.5 text-[#FE299E]" />
-                  <span>Download CV</span>
-                </a>
+                <motion.div whileHover={{ y: -1 }} whileTap={TAP}>
+                  <a
+                    href="/resumes/kyle-cyree-resume.pdf"
+                    download="Resume - Kyle Cyree.pdf"
+                    target="_blank"
+                    rel="noopener"
+                    className="editorial-underline inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#281B16] font-medium no-underline"
+                    data-testid="button-download-resume-hero"
+                  >
+                    <Download className="w-3.5 h-3.5 text-[#FE299E]" />
+                    <span>Download CV</span>
+                  </a>
+                </motion.div>
 
-                <button
+                <motion.button
+                  whileHover={{ y: -1 }}
+                  whileTap={TAP}
                   type="button"
                   onClick={() => openContactModal("Full-time role (Product Architect / Staff)")}
                   className="editorial-underline inline-flex items-center gap-1.5 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#5C4840] hover:text-[#281B16] bg-transparent border-none cursor-pointer"
                   data-testid="button-contact-hero"
                 >
                   <span>Schedule Intro →</span>
-                </button>
+                </motion.button>
               </div>
             </Reveal>
 
-            {/* Right 4 Columns: Smaller Architectural Portrait Plate */}
+            {/* Right 4 Columns: Smaller Architectural Portrait Plate with Curtain Reveal */}
             <Reveal delay={0.12} className="lg:col-span-4 flex flex-col items-start lg:items-end">
-              <div className="w-full max-w-[300px] sm:max-w-[320px] lg:ml-auto border border-[#D3C7B5] bg-[#F2EAE0] p-3">
+              <div className="w-full max-w-[280px] sm:max-w-[300px] lg:ml-auto border border-[#D3C7B5] bg-[#F2EAE0] p-3 shadow-sm">
                 <div className="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#D3C7B5] font-mono text-[10px] uppercase tracking-[0.18em] text-[#5C4840]">
                   <span>FIG. 00 // PRINCIPAL ARCHITECT</span>
                   <span className="text-[#281B16]">MBA · MFA</span>
                 </div>
                 <div className="relative aspect-[4/5] overflow-hidden bg-[#DFD4C4]">
-                  <img
+                  <AccentRevealImage
                     src="/images/kyle-portrait.jpg"
                     alt="Kyle Cyree — Product Architect & Principal Product Designer"
-                    className="w-full h-full object-cover object-top"
-                    data-testid="img-hero-portrait"
+                    imgClassName="object-top"
+                    delay={0.18}
                   />
                 </div>
                 <div className="pt-3 mt-2.5 border-t border-[#D3C7B5] flex items-center justify-between gap-2">
@@ -650,9 +669,10 @@ export default function Portfolio() {
           {/* Section Header */}
           <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-14 border-b border-[#281B16]">
             <div className="max-w-3xl">
-              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-4">
-                02 // Selected Work · Four Architectural Pillars
-              </div>
+              <AccentKineticBadge
+                label="02 // Selected Work · Four Architectural Pillars"
+                className="mb-4 text-[#5C4840]"
+              />
               <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#281B16] tracking-[-0.025em] leading-[1.03]">
                 High-consequence systems built for{" "}
                 <span className="italic font-normal text-[#FE299E]">clarity &amp; trust.</span>
@@ -1347,37 +1367,46 @@ export default function Portfolio() {
         <div className="max-w-[1440px] mx-auto">
           <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-[#281B16]">
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-3">
-                02.B // Complete Architectural Archive (01 – 13)
-              </div>
+              <AccentKineticBadge
+                label="02.B // Complete Architectural Archive (01 – 13)"
+                className="mb-3 text-[#5C4840]"
+              />
               <h2 className="font-serif font-light text-4xl sm:text-5xl text-[#281B16] tracking-[-0.025em] leading-[1.04]">
                 Every system, monograph &amp;{" "}
                 <span className="italic font-normal text-[#FE299E]">shipped codebase.</span>
               </h2>
             </div>
 
-            {/* Domain Filter Bar */}
-            <div className="flex flex-wrap items-center gap-2">
+            {/* Domain Filter Bar with Tactile Shared Spring Indicator */}
+            <div className="flex flex-wrap items-center gap-2 p-1 rounded-full bg-[#E4DACB]/60 border border-[#D3C7B5]">
               {[
                 { id: "all", label: `All Works (${ALL_CATALOG_STUDIES.length})` },
                 { id: "enterprise", label: "Regulated & Enterprise (5)" },
                 { id: "ai", label: "Sovereign AI & Data (5)" },
                 { id: "design", label: "Brand & Design Systems (3)" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setDomainFilter(tab.id as DomainFilter)}
-                  className={`px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.14em] transition-colors cursor-pointer border ${
-                    domainFilter === tab.id
-                      ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16]"
-                      : "bg-[#F2EAE0]/80 text-[#4A3A32] border-[#D3C7B5] hover:border-[#281B16]"
-                  }`}
-                  data-testid={`filter-tab-${tab.id}`}
-                >
-                  {tab.label}
-                </button>
-              ))}
+              ].map((tab) => {
+                const isActive = domainFilter === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setDomainFilter(tab.id as DomainFilter)}
+                    className={`relative px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.14em] cursor-pointer transition-colors ${
+                      isActive ? "text-[#F2EAE0] font-bold" : "text-[#4A3A32] hover:text-[#281B16]"
+                    }`}
+                    data-testid={`filter-tab-${tab.id}`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="domain-filter-pill"
+                        transition={SPRING_LAYOUT}
+                        className="absolute inset-0 bg-[#281B16] rounded-full -z-10 shadow-sm"
+                      />
+                    )}
+                    <span className="relative z-10">{tab.label}</span>
+                  </button>
+                );
+              })}
             </div>
           </Reveal>
 

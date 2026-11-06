@@ -23,6 +23,15 @@ import { useStudioSections } from "@/hooks/use-studio-sections";
 import ContactFormModal from "@/components/contact-form-modal";
 import { BrandMark, ClientLogoBar, SprintCallout } from "@/components/chb";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import {
+  SPRING_LAYOUT,
+  TAP,
+  CARD_HOVER,
+  CARD_TAP,
+  AccentRevealText,
+  AccentRevealImage,
+  AccentKineticBadge,
+} from "@/components/motion/primitives";
 
 const SECTIONS = [
   { id: "thesis", number: "01", shortLabel: "The Thesis" },
@@ -591,15 +600,24 @@ export default function StudioPage() {
                   <button
                     key={s.id}
                     onClick={() => scrollToSection(s.id)}
-                    className={`px-3 py-1.5 rounded-sm font-mono text-[11px] uppercase tracking-[0.13em] transition-all cursor-pointer border whitespace-nowrap ${
+                    className={`relative px-3 py-1.5 rounded-sm font-mono text-[11px] uppercase tracking-[0.13em] cursor-pointer whitespace-nowrap transition-colors ${
                       isActive
-                        ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-bold"
-                        : "bg-transparent text-[#4A3A32] border-transparent hover:border-[#D3C7B5] hover:bg-[#F2EAE0]/60 hover:text-[#281B16]"
+                        ? "text-[#F2EAE0] font-bold"
+                        : "text-[#4A3A32] hover:text-[#281B16] hover:bg-[#F2EAE0]/50"
                     }`}
                     data-testid={`nav-studio-pill-${s.id}`}
                   >
-                    <span className="text-[#FE299E] mr-1.5 font-bold">{s.number}</span>
-                    {s.shortLabel}
+                    {isActive && (
+                      <motion.div
+                        layoutId="studio-active-pill"
+                        transition={SPRING_LAYOUT}
+                        className="absolute inset-0 bg-[#281B16] rounded-sm -z-10 shadow-sm"
+                      />
+                    )}
+                    <span className="relative z-10">
+                      <span className="text-[#FE299E] mr-1.5 font-bold">{s.number}</span>
+                      {s.shortLabel}
+                    </span>
                   </button>
                 );
               })}
@@ -654,9 +672,10 @@ export default function StudioPage() {
                 </div>
 
                 <h1 className="font-serif font-light text-5xl sm:text-6xl lg:text-[72px] text-[#281B16] tracking-[-0.028em] leading-[0.98] mb-7">
-                  Architecture partner for the{" "}
+                  <AccentRevealText text="Architecture partner for the" as="span" immediate delay={0.04} />
+                  {" "}
                   <span className="italic font-normal text-[#FE299E]">
-                    stuck &amp; underserved.
+                    <AccentRevealText text="stuck & underserved." as="span" immediate delay={0.22} />
                   </span>
                 </h1>
 
@@ -813,17 +832,14 @@ export default function StudioPage() {
                       })
                     }
                   >
-                    <img
+                    <AccentRevealImage
                       src="/images/studio/studio-hero-architecture.png"
-                      onError={(e) => {
-                        if (!e.currentTarget.src.endsWith(".svg")) {
-                          e.currentTarget.src = "/images/studio/studio-hero-architecture.svg";
-                        }
-                      }}
                       alt="Architectural blueprint and Swiss grid system study on warm sandstone paper"
-                      className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      className="w-full aspect-[16/10]"
+                      imgClassName="group-hover:scale-[1.02] transition-transform duration-500"
+                      delay={0.15}
                     />
-                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-[#281B16]/90 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5 opacity-90 group-hover:opacity-100">
+                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-[#281B16]/90 text-[#F2EAE0] font-mono text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5 opacity-90 group-hover:opacity-100 z-10">
                       <ZoomIn className="w-3 h-3 text-[#FE299E]" />
                       Inspect Plate
                     </div>

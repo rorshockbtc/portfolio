@@ -3,6 +3,13 @@ import { useRoute, useLocation, Link } from "wouter";
 import { CASE_STUDIES, CASE_STUDY_ORDER, type CaseStudyData, type CaseStudyImage } from "@/data/case-studies";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
+import {
+  TAP,
+  SPRING_LAYOUT,
+  AccentRevealText,
+  AccentRevealImage,
+} from "@/components/motion/primitives";
 import {
   ArrowLeft,
   ExternalLink,
@@ -161,7 +168,7 @@ export default function CaseStudyPage() {
               {isMenuOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 sm:w-80 max-h-96 overflow-y-auto bg-[#F2EAE0] border border-[#281B16] rounded-2xl shadow-2xl p-2 z-50 space-y-1">
                   <div className="px-3 py-1.5 border-b border-[#D3C7B5] flex items-center justify-between text-[10px] font-mono uppercase text-[#4A3A32]">
-                    <span>All 12 Case Studies</span>
+                    <span>All {CASE_STUDY_ORDER.length} Case Studies</span>
                     <span>Click to Jump</span>
                   </div>
                   {CASE_STUDY_ORDER.map((itemSlug, idx) => {
@@ -237,7 +244,7 @@ export default function CaseStudyPage() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#281B16] tracking-tight leading-[1.12]">
-            {study.title}
+            <AccentRevealText text={study.title} as="span" immediate delay={0.05} />
           </h1>
 
           <p className="text-lg md:text-xl text-[#4A3A32] font-sans leading-relaxed max-w-3xl">
