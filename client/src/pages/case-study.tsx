@@ -97,33 +97,35 @@ function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
   return (
     <section className="px-5 sm:px-10 lg:px-16 py-20 sm:py-28 bg-[#DFD3C0] border-y border-[#C5B7A2]">
       <div className="max-w-[1280px] mx-auto">
-        <FadeUp className="flex flex-col xl:flex-row xl:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#C5B7A2]">
-          <div>
-            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] mb-3">
-              <Sparkles className="w-4 h-4" /> 01 // Interactive Transformation
+        <FadeUp className="mb-10 pb-8 border-b border-[#C5B7A2]">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div>
+              <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] mb-3">
+                <Sparkles className="w-4 h-4" /> 01 // Interactive Transformation
+              </div>
+              <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl tracking-[-0.025em] text-[#281B16]">
+                Before &amp; After Redesign
+              </h2>
+              <p className="mt-3 text-base text-[#5C4840] max-w-[54ch]">
+                Select a screen below to inspect the direct architectural evolution from the legacy WordPress site to the high-performance Swiss monograph.
+              </p>
             </div>
-            <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl tracking-[-0.025em] text-[#281B16]">
-              Before &amp; After Redesign
-            </h2>
-            <p className="mt-3 text-base text-[#5C4840] max-w-[48ch]">
-              Select a screen below to inspect the direct architectural evolution from the legacy WordPress site to the high-performance Swiss monograph.
-            </p>
           </div>
 
-          {/* High-Contrast Interactive Navigation Tabs */}
-          <div className="flex flex-wrap gap-2 bg-[#EAE0D0] p-1.5 rounded-2xl sm:rounded-full border border-[#C5B7A2] shadow-sm max-w-full">
+          {/* Clean Segmented Tab Rail (No enclosing pill container) */}
+          <div className="mt-8 flex flex-wrap gap-2.5 sm:gap-3">
             {pairs.map((p, idx) => (
               <button
                 key={p.label}
                 onClick={() => setActiveIdx(idx)}
-                className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs font-sans font-bold tracking-wide cursor-pointer transition-all duration-200 border whitespace-nowrap ${
+                className={`px-4 py-2.5 sm:px-5 sm:py-3 rounded-full text-xs sm:text-sm font-sans font-bold tracking-wide cursor-pointer transition-all duration-200 border shadow-sm ${
                   activeIdx === idx
-                    ? "bg-[#FE299E] text-white border-[#FE299E] shadow-md scale-[1.02]"
-                    : "bg-[#F7F2EC] text-[#5C4840] border-[#D3C7B5] hover:text-[#281B16] hover:bg-white"
+                    ? "bg-[#FE299E] text-white border-[#FE299E] shadow-md ring-2 ring-[#FE299E]/30"
+                    : "bg-[#F7F2EC] text-[#5C4840] border-[#C5B7A2] hover:text-[#281B16] hover:border-[#281B16] hover:bg-white"
                 }`}
                 aria-pressed={activeIdx === idx}
               >
-                <span className="opacity-70 mr-1.5 font-mono text-[10px]">{idx + 1}.</span>
+                <span className="opacity-75 mr-2 font-mono text-xs">{idx + 1}.</span>
                 {p.label}
               </button>
             ))}
