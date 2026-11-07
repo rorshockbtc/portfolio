@@ -66,6 +66,8 @@ export const CASE_STUDY_ORDER = [
   "unitedhealth",
   "walmart",
   "pipes",
+  "colors-type-grids",
+  "chb-corporate",
   "chicuinaco",
   "marigold",
   "cassandra",
@@ -74,7 +76,6 @@ export const CASE_STUDY_ORDER = [
   "foodler",
   "ultralinq",
   "highdraw",
-  "colors-type-grids",
 ] as const;
 
 export type CaseStudySlug = (typeof CASE_STUDY_ORDER)[number];
@@ -637,50 +638,250 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
   "colors-type-grids": {
     slug: "colors-type-grids",
     client: "Colon Hyphen Bracket · Accént 3.0",
-    title: "Accént 3.0 & Albers/Vignelli in CSS — The Pipes Sovereign Design System",
-    subtitle: "Interactive Design System (design.pipes.pink), W3C Token Architecture & 3846×4800 Grid Manifesto",
-    role: "Author, Designer & Systems Architect",
-    scaleBadge: "Live at design.pipes.pink · 49 AAA Pairings",
+    title: "Accént 3.0: An Open-Source Design System Built for Humans & Local AI Models",
+    subtitle:
+      "Live at design.pipes.pink • 43 Interactive Pages, 197 Machine-Enforced Rules (rules.json), Stepwise 7B Prompt Compiler & Multi-Brand W3C Tokens",
+    role: "Creator, Author & Principal Systems Architect",
+    scaleBadge: "MIT Open Source · 43 Pages · 197 AI Rules",
     timeline: "2024 – 2026",
-    heroImage: "/images/cassandra/colors-type-grids.jpg",
+    heroImage: "/images/accent/01_accent_home_overview.png",
     galleryImages: [
       {
-        src: "/images/cassandra/colors-type-grids.jpg",
-        title: "Albers & Vignelli in CSS: The 4-Column Masterwork Poster",
-        caption: "High-resolution 3846x4800 masterwork poster exploring Josef Albers' color interaction, typographic scale, and Massimo Vignelli's 8pt CSS grid discipline.",
-        tag: "Design Manifesto",
+        src: "/images/accent/01_accent_home_overview.png",
+        title: "Accént 3.0 Live Documentation & Choreography Stage (design.pipes.pink)",
+        caption:
+          "The live interactive documentation workbench at design.pipes.pink: 43 pages across Start Here, Why Accént, Foundations, Components, Patterns, and Building with AI, with live multi-brand theme switching and the Ask Semi (;-]) assistant.",
+        tag: "Live Portal",
       },
       {
-        src: "/images/pipes/pipes-hero.png",
-        title: "Accént 3.0 in Production across Pipes.Pink",
-        caption: "Dual-Accent palette (Sovereign Pink + Crystalline Sky Blue), Editorial vs. Commercial surface modes, and hairline grid governance.",
-        tag: "Live Design System",
+        src: "/images/accent/02_accent_foundations_color.png",
+        title: "Color & Contrast: Interactive AAA Luminance Matrix & Warm Sandstone Ergonomics",
+        caption:
+          "Interactive Contrast Explorer validating 7:1 WCAG AAA compliance across all 49 Albers pastel-on-tonal-dark pairings and Warm Sandstone (#E8E2D5) surfaces that reduce 450nm blue-light sub-pixel emission by 16.5%.",
+        tag: "Foundations · Color",
+      },
+      {
+        src: "/images/accent/03_accent_foundations_motion.png",
+        title: "Two-Tier Motion Architecture: Product Utility vs. Editorial Showcase",
+        caption:
+          "Live choreography sandbox demonstrating Tier 1 Product Motion (120–320ms snappy utility) alongside Tier 2 Editorial & Corporate Motion (RiseLines, ScaryHeadline 3-phase strike, Smile wink, and Hairline draw).",
+        tag: "Foundations · Motion",
+      },
+      {
+        src: "/images/accent/04_accent_component_card_nonesting.png",
+        title: "Component Governance: The 4-Part 400×408 Card & No-Nesting Doctrine",
+        caption:
+          "Numbered anatomical specification enforcing the exact 4-part card order (Surface, Art, Interaction, Anchor), asymmetric 0/12/0/12 radius, and the strict card.no-nesting rule that bans boxes inside boxes.",
+        tag: "Components · Card",
+      },
+      {
+        src: "/images/accent/05_accent_pattern_bang_stepwise.png",
+        title: "Patterns: BANG! Fixed Small-Business Skeletons & 12 Architectural Rooms",
+        caption:
+          "Interactive Storefront, Service, and Portfolio skeleton explorer showing how BANG! empowers Main Street owners to ship accessible, tabular-numeral sites in one hour without breaking the 8pt grid.",
+        tag: "Patterns · BANG!",
+      },
+      {
+        src: "/images/accent/06_accent_building_with_ai_rules.png",
+        title: "Building with AI: rules.json & Hardware-Aware Stepwise Prompt Compiler",
+        caption:
+          "How Accént keeps local 7B models (Qwen 2.5 Coder 7B on 8–16GB Macs) on the grid by chunking UI generation into 4 ~200-token steps and validating output against 197 regular-expression violationPatterns.",
+        tag: "Building with AI",
+      },
+      {
+        src: "/images/cassandra/colors-type-grids.jpg",
+        title: "Albers & Vignelli in CSS: The 3846×4800 Masterwork Poster",
+        caption:
+          "The original visual manifesto exploring Josef Albers' chromatic relativity, typographic scale, and Massimo Vignelli's 8pt CSS grid discipline.",
+        tag: "Visual Manifesto",
       },
     ],
     executiveSummary:
-      "Accént 3.0 (live at design.pipes.pink) is the codified design system and token architecture governing Pipes and Colon Hyphen Bracket—translating Josef Albers' 'The Interaction of Color' and Massimo Vignelli's 8pt Swiss grid directly into W3C DTCG tokens, React/Tailwind primitives, and Framer Motion choreography.",
+      "Accént 3.0 (live at design.pipes.pink and open-sourced under MIT at github.com/rorshockbtc/accent-ui) is the comprehensive, dual-audience design system governing Pipes, BANG!, Marigold, and Colon Hyphen Bracket. Spanning 43 interactive documentation pages and 197 machine-enforceable rules, Accént is written simultaneously for humans (product designers, engineers, and non-technical small-business owners) and for the small 7B–14B local AI models running on their laptops. It translates Josef Albers' 'The Interaction of Color' (relief vs. focus, 49 WCAG AAA pairings) and Massimo Vignelli's 8pt grid into a single W3C DTCG token source, three forkable multi-brand presets, a Two-Tier Motion architecture, and a live /rules.json endpoint paired with a hardware-aware stepwise prompt compiler.",
     challenge:
-      "Modern web software is drowning in generic, AI-generated design soup: low-contrast grey-on-grey text, uncalibrated rounded boxes, missing typographic hierarchies, and arbitrary spacing. Digital interfaces needed a rigorous, machine-enforceable system written for designers, engineers, and local AI models alike.",
+      "AI writes backend code like a lightsaber through butter, but ask an LLM—especially a local 7B model on an 8GB or 16GB laptop—to generate a frontend interface and it burns 5× the tokens while producing uncalibrated slop: nested cards inside cards, low-contrast grey text, arbitrary pixel heights like h-[37px], and sub-13px labels. Meanwhile, traditional enterprise design systems are written exclusively for human designers in Figma or bloated with hundreds of unopinionated utility variants, offering zero machine-readable guardrails for agentic code generation and zero plain-language guidance for non-designers.",
     solution:
-      "Synthesized Bauhaus modernism, Josef Albers' chromatic relativity (7 tactile pastels × 7 tonal darks = 49 WCAG AAA pairings), and Vignelli's mathematical hairlines into a single W3C DTCG JSON source (design-tokens.json) and live interactive documentation portal at design.pipes.pink.",
+      "Architected Accént 3.0 as a 43-page interactive specification and component workbench where humans read the prose tabs (Overview, Guidelines, Specs, Accessibility) and AI models ingest the machine-readable rules (/rules.json). Key innovations include: (1) 197 Machine-Enforced Rules with Regex Violation Patterns: Every page exports deterministic rules (e.g., grid.multiple-of-8, type.floor-13px, card.no-nesting, color.one-focus, button.hit-area-44) equipped with JavaScript regular expressions that automatically flag non-conforming AI code in CI or local IDE loops; (2) Hardware-Aware Stepwise Prompt Compiler: Prevents 7B local models (Qwen 2.5 Coder 7B / Llama 3.2) from choking on 2,500-word prompts by compiling UI tasks into four ~200-token sequential phases (Skeleton → Primitives → Editorial Data → Walkthrough), validating regex gates after every step; (3) Visual Ergonomics & 49 AAA Pairings: Replaces clinical #FFFFFF backgrounds with Warm Sandstone (#E8E2D5, ~77% luminance) to cut 450nm blue-light scatter by 16.5% and eliminate astigmatism stripe vibration while maintaining 12.6:1 AAA ink contrast; and (4) Multi-Brand Preset Engine: Ships three turnkey brand profiles (editorial-sandstone for Pipes, playful-principal for CHB Corporate, and albers-perspectives) from one token contract.",
     uiUxCraft:
-      "Features Dual-Accent governance (Sovereign Pink #FE299E / #B8326D + Crystalline Sky Blue #01A9F4 / #D4EBF5), two surface modes (Editorial quiet hairlines for reading rooms vs. Commercial 3px tactile ink shadows for primary CTAs), and GPU-safe Framer Motion spring tokens.",
+      "Every page on design.pipes.pink dogfoods the exact rules it teaches. Built around Josef Albers' principle of Relief and Focus—most of the screen rests quietly in Warm Sandstone relief (#E8E2D5 / #F3EFE9) while Sovereign Pink (#FE299E / #D44983) is reserved for the single primary focal point (<10% of any viewport). Enforces a strict 13px minimum type floor, 44×44px minimum touch targets, tabular numerals for all data tables, and a Two-Tier Motion doctrine: Tier 1 Product Motion (120ms/200ms/320ms on cubic-bezier(0.16, 1, 0.3, 1) with zero text movement during daily work) vs. Tier 2 Editorial Showcase Motion (650–900ms masked line rises, 3-phase ScaryHeadline strikes, and left-origin hairline draws).",
     systemsArchitecture:
-      "Powered by a single W3C DTCG token source compiled across Next.js web and Tauri/Rust desktop, with runtime semantic contrast computation and automated CI spec enforcement.",
+      "Next.js 15 + TypeScript + Tailwind CSS documentation and compiler runtime backed by a single W3C Design Tokens Community Group (DTCG) source (src/styles/design-tokens.json). Exposes a static edge-cached /rules.json API route aggregating all 197 AgentRule objects across 43 page modules, a live Stepwise Prompt Compiler (src/lib/bang/stepwise-prompt-compiler.ts) that adapts token chunking across 3 hardware tiers (local-7b, local-14b-32b, cloud-frontier), and an integrated Ask Semi (;-]) Socratic design assistant.",
     metrics: [
-      { value: "v3.0", label: "Live System", subtext: "design.pipes.pink" },
-      { value: "49 AAA", label: "Chromatic Pairings", subtext: "Albers Pastel × Tonal Dark" },
-      { value: "8pt", label: "Mathematical Grid", subtext: "Vignelli spatial discipline" },
-      { value: "100%", label: "W3C DTCG Tokens", subtext: "CI-verified contrast" },
+      { value: "43 Pages", label: "Interactive Docs", subtext: "Foundations, Components, Patterns & AI" },
+      { value: "197 Rules", label: "Machine-Enforced", subtext: "Live /rules.json + regex validators" },
+      { value: "49 AAA", label: "Chromatic Pairings", subtext: "≥ 7:1 contrast across 12 rooms" },
+      { value: "3 Tiers", label: "Stepwise AI Compiler", subtext: "7B laptop · 14–32B · Cloud frontier" },
     ],
     outcomes: [
-      "Shipped live interactive documentation and component workbench at https://design.pipes.pink.",
-      "Codified the Colon Hyphen Bracket & Pipes design philosophy across web, mobile, and native macOS apps.",
-      "Released the 3846×4800 Albers & Vignelli in CSS masterwork poster as the visual manifesto.",
+      "Designed, authored, and open-sourced the 43-page Accént 3.0 design system portal at https://design.pipes.pink (MIT License).",
+      "Engineered the /rules.json endpoint and 197 regex-backed AgentRule specifications so local 7B–14B models and CI pipelines catch layout, contrast, and typography violations automatically.",
+      "Built the Hardware-Aware Stepwise Prompt Compiler for BANG! and Pipes, splitting UI generation into 4 ~200-token verified steps for 8GB–16GB Macs.",
+      "Codified three multi-brand theme presets (Editorial Sandstone, Playful-Principal, Albers Perspectives) powering pipes.pink, colonhyphenbracket.pink, and bolt.pipes.pink from a single W3C token source.",
+      "Created interactive live sandboxes across every page: Contrast Explorer, Eye-Fatigue Luminance Simulator, Tier 1/Tier 2 Motion Stage, 4-Part Card Anatomy, and BANG! Site Skeletons.",
     ],
-    technologies: ["Accént 3.0", "W3C DTCG Tokens", "Josef Albers Color Theory", "Massimo Vignelli 8pt Grid", "Framer Motion", "Tailwind CSS"],
+    technologies: [
+      "Next.js & TypeScript",
+      "W3C DTCG Design Tokens",
+      "Machine-Readable rules.json",
+      "Stepwise 7B Prompt Compiler",
+      "Framer Motion (Two-Tier)",
+      "Tailwind CSS",
+      "WCAG AAA (7:1) Governance",
+    ],
     liveUrl: "https://design.pipes.pink",
-    liveUrlLabel: "Launch Accént 3.0 Design System (design.pipes.pink)",
+    liveUrlLabel: "Explore Accént 3.0 Live (design.pipes.pink)",
+    repoUrl: "https://github.com/rorshockbtc/accent-ui",
+    codebaseBreakdown: {
+      headline: "How Accént Governs Both Human Interfaces and 7B Local AI Code Generation",
+      philosophy:
+        "A design system in the agentic era cannot just be a Figma sticker sheet or a collection of copy-paste React primitives. It must be an executable contract. Humans need clear essays explaining why Warm Sandstone prevents eye fatigue or why nested cards destroy scannability; local 7B models need 1-sentence deterministic statements and regex violation patterns small enough to fit inside a 300-token context window.",
+      stackArchitecture: [
+        {
+          role: "Single-Source W3C DTCG Token & Multi-Brand Engine",
+          tech: "design-tokens.json + src/styles/themes.ts",
+          rationale:
+            "Compiles color, typography, 8pt spacing, elevation, and motion curves into CSS custom properties across three brand presets (editorial-sandstone, playful-principal, albers-perspectives) without forking components.",
+        },
+        {
+          role: "Machine-Readable Agent Rule Registry",
+          tech: "/rules.json API + 197 Regex Violation Patterns",
+          rationale:
+            "Every documentation page exports structured AgentRule objects (id, statement, why, violationPattern). Tools, linters, and local LLMs fetch only the rule groups relevant to the active component.",
+        },
+        {
+          role: "Hardware-Aware Stepwise Prompt Compiler",
+          tech: "src/lib/bang/stepwise-prompt-compiler.ts",
+          rationale:
+            "Divides UI generation into 4 sequential ~200-token steps for 7B laptop models, 2 phases for 14B–32B models, or 1 unified pass for frontier cloud models—halting and retrying if any regex gate fails.",
+        },
+        {
+          role: "Two-Tier Motion & Interactive Demo Workbench",
+          tech: "Framer Motion + 35+ Live Embedded Sandboxes",
+          rationale:
+            "Separates snappy 120–320ms product utility motion (Tier 1) from 650–900ms editorial showcase choreography (Tier 2), with full prefers-reduced-motion compliance.",
+        },
+      ],
+      codeSnippets: [
+        {
+          title: "Hardware-Aware Stepwise Prompt Compiler (src/lib/bang/stepwise-prompt-compiler.ts)",
+          language: "typescript",
+          code: `export type HardwareTierId = 'local-7b' | 'local-14b-32b' | 'cloud-frontier';
+
+export const HARDWARE_TIERS: Record<HardwareTierId, HardwareTierSpec> = {
+  'local-7b': {
+    id: 'local-7b',
+    label: '8GB–16GB Mac · Qwen 2.5 Coder 7B / Llama 3.2 3B',
+    modelExamples: 'qwen2.5-coder:7b · llama3.2:3b · WebGPU 4B',
+    ramRecommendation: '8GB–16GB Unified Memory (Zero Cloud Cost)',
+    maxPromptCharsPerStep: 1400,
+    stepCount: 4,
+    whyThisChunking:
+      '7B models excel at focused single-concern generation but degrade rapidly when asked to handle CSS grid geometry, ARIA focus state, long-form copy, and contrast QA in one pass. Splitting into 4 verified steps keeps each pass under ~300 tokens.',
+  },
+  'local-14b-32b': {
+    id: 'local-14b-32b',
+    label: '16GB–64GB Mac · Qwen 2.5 Coder 14B / 32B',
+    modelExamples: 'qwen2.5-coder:14b · qwen2.5-coder:32b',
+    ramRecommendation: '16GB–64GB MacBook Pro / Mac Studio',
+    maxPromptCharsPerStep: 2800,
+    stepCount: 2,
+    whyThisChunking:
+      '14B–32B models hold structural layout and accessible CVA primitives together cleanly in Phase 1, then bind primary-source content and run self-audit checks in Phase 2.',
+  },
+  'cloud-frontier': {
+    id: 'cloud-frontier',
+    label: 'Cloud / Frontier · Gemini 2.5 Pro / Claude',
+    modelExamples: 'Gemini 2.5 Pro · Claude Sonnet / Opus',
+    ramRecommendation: 'Cloud API or BYOK (200K+ Context Window)',
+    maxPromptCharsPerStep: 8000,
+    stepCount: 1,
+    whyThisChunking:
+      'Frontier models can ingest the complete W3C token contract, CVA variants, and verification checklist in a single unified specification pass.',
+  },
+};`,
+          explanation:
+            "Instead of dumping a 2,500-word design system prompt into a small local model on an 8GB Mac, the Stepwise Compiler chunks generation into 4 focused passes (~200 tokens each) and validates regex gates before advancing.",
+        },
+        {
+          title: "Multi-Brand Theme Registry (src/styles/themes.ts)",
+          language: "typescript",
+          code: `export type BrandProfileId =
+  | 'editorial-sandstone'
+  | 'playful-principal'
+  | 'albers-perspectives';
+
+export const BRAND_PROFILES: Record<BrandProfileId, BrandProfile> = {
+  'editorial-sandstone': {
+    id: 'editorial-sandstone',
+    name: 'Editorial Sandstone (Pipes)',
+    tagline: 'MoMA/Met archival sandstone canvas, Fraunces display serif, and Dual-Accent Pink + Sky.',
+    usedBy: 'pipes.pink · design.pipes.pink',
+    mark: '´',
+    typography: { display: 'Fraunces', serif: 'Fraunces', sans: 'Inter', mono: 'JetBrains Mono' },
+    tokens: {
+      light: { ...getAccentThemeVars('light'), '--a-radius-cta': '6px' },
+      dark: { ...getAccentThemeVars('dark'), '--a-radius-cta': '6px' },
+    },
+  },
+  'playful-principal': {
+    id: 'playful-principal',
+    name: 'Playful-Principal (CHB Corporate)',
+    tagline: 'Crisp Alabaster paper (#FAF8F5), Bricolage Grotesque display, Hot Pink (#FE299E), and pill CTAs.',
+    usedBy: 'colonhyphenbracket.pink (feat/playful-principal)',
+    mark: ': - ]',
+    typography: { display: 'Bricolage Grotesque', serif: 'Newsreader', sans: 'Inter', mono: 'JetBrains Mono' },
+    tokens: {
+      light: {
+        '--a-bg': '#FAF8F5',
+        '--a-surface': '#F3EEE6',
+        '--a-ink': '#111827',
+        '--a-accent': '#FE299E',
+        '--a-radius-cta': '9999px',
+      },
+      dark: {
+        '--a-bg': '#0F141C',
+        '--a-surface': '#18202C',
+        '--a-ink': '#FAF8F5',
+        '--a-accent': '#FF5CB8',
+        '--a-radius-cta': '9999px',
+      },
+    },
+  },
+};`,
+          explanation:
+            "Defines first-class brand profiles so different properties across the ecosystem (Pipes, CHB Corporate, and open-source forks) switch typography, surface warmth, and CTA geometry cleanly without breaking 7:1 AAA contrast guarantees.",
+        },
+        {
+          title: "Machine-Readable Agent Rules Endpoint (src/app/rules.json/route.ts)",
+          language: "typescript",
+          code: `import { NextResponse } from 'next/server';
+import { getAllAccentRules } from '@/content/accent/registry';
+import { DESIGN_TOKENS, ACCENT_PRIMARY, ACCENT_SKY, SEMANTIC_CONTRAST_PAIRS } from '@/styles/design-tokens';
+
+export const dynamic = 'force-static';
+
+export function GET() {
+  return NextResponse.json(
+    {
+      system: 'Accént (Pipes Design System)',
+      version: DESIGN_TOKENS.version,
+      docs: 'https://design.pipes.pink',
+      note: 'Each rule is a single instruction for a generating model. violationPattern, when present, is a JavaScript regex source; a match in generated code indicates a violation.',
+      tokens: {
+        primaryPink: ACCENT_PRIMARY,
+        sovereignSkyBlue: ACCENT_SKY,
+        verifiedContrastPairs: SEMANTIC_CONTRAST_PAIRS,
+      },
+      rules: getAllAccentRules(),
+    },
+    { headers: { 'Cache-Control': 'public, max-age=3600' } }
+  );
+}`,
+          explanation:
+            "Serves all 197 deterministic rules and regex violation patterns at https://design.pipes.pink/rules.json so local IDE agents, linters, and CI scripts can verify generated UI code automatically.",
+        },
+      ],
+    },
   },
 
   unitedhealth: {
@@ -1344,6 +1545,227 @@ export function BitcoinAcceptedBadge({ className = "" }: { className?: string })
 }`,
           explanation:
             "Replaced misplaced navbar icons with the official Bitcoin brand standard: pure white glyph tilted 14° clockwise on #F7931A orange disc. Placed beneath the Four Pillars matrix to prevent mobile navbar crowding while giving prominent signal to international travelers.",
+        },
+      ],
+    },
+  },
+  "chb-corporate": {
+    slug: "chb-corporate",
+    client: "Colon Hyphen Bracket, LLC",
+    title: "Colon Hyphen Bracket: From Audience-Switching Clipart to a Principal-Led Architecture & R&D Studio",
+    subtitle:
+      "colonhyphenbracket.pink • Ground-Up Studio Repositioning, Playful-Principal Theme (Accént 3.0), 7-Product Ecosystem & Code-First 5-Day Sprints",
+    role: "Founder & Principal Systems Architect",
+    scaleBadge: "Playful-Principal Rebuild · 7 Live Products · Zero Handoffs",
+    timeline: "Nov 2026",
+    heroImage: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+    galleryImages: [
+      {
+        src: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+        title: "Playful-Principal Hero: Turning Scary Software Into a Smile : - ]",
+        caption:
+          "The rebuilt colonhyphenbracket.pink homepage on Alabaster paper (#FAF8F5), pairing Bricolage Grotesque display typography and the 3-phase ScaryHeadline strike animation with Guy Billout–inspired architectural staircase art.",
+        tag: "Redesigned Hero",
+      },
+      {
+        src: "/images/chb-corporate/after/06_chb_products_7nav_after.png",
+        title: "Software Named After Punctuation: The 7-Product Ecosystem Navigator",
+        caption:
+          "Sticky horizontal chapter bar uniting all 7 live products—||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, and ❀ Marigold—removing the need for audience-switching dropdowns on the homepage.",
+        tag: "7-Product Suite",
+      },
+      {
+        src: "/images/chb-corporate/after/03_chb_studio_sprint_after.png",
+        title: "Studio Positioning: One Principal Architect. No Handoffs.",
+        caption:
+          "Direct, unambiguous positioning eliminating the agency telephone game between strategy decks, Figma files, and engineering tickets.",
+        tag: "Studio Practice",
+      },
+      {
+        src: "/images/chb-corporate/after/07_chb_studio_sprint_method_after.png",
+        title: "Code-First Methodology: Listen → Map → Build → Refine → Smile",
+        caption:
+          "Inverted 5-day $7,500 fixed-scope sprint schedule where working code and live data ship on Wednesday ('Build') before UI polish and ergonomic refinement happen on Thursday ('Refine').",
+        tag: "5-Day Sprint",
+      },
+      {
+        src: "/images/chb-corporate/after/02_chb_home_ecosystem_after.png",
+        title: "Scroll-Tracked Principles & Punctuation Philosophy",
+        caption:
+          "Interactive scroll-tracked manifesto pillar pairing each punctuation mark (#, ;-], |||, é) with a sticky side card explaining why one principal beats four handoffs.",
+        tag: "Scroll Choreography",
+      },
+      {
+        src: "/images/chb-corporate/after/05_chb_manifesto_after.png",
+        title: "The Manifesto: Replacing Coastal Gatekeeping With Real Craft",
+        caption:
+          "Dedicated /manifesto page articulating why a principal designer-architect from Southern Appalachia builds sovereign software for the founders, creators, families, and Main Street businesses Big Tech overlooked.",
+        tag: "Studio Manifesto",
+      },
+    ],
+    beforeAfter: [
+      {
+        label: "Brand Hero & Visual Language",
+        beforeSrc: "/images/chb-corporate/before/03_legacy_switcher_open_or_switched.png",
+        beforeTitle: "Original Site: Persona Dropdown & Soft Clipart (Before)",
+        beforeCaption:
+          "Early iteration used approachable clipart illustrations (gears, lightbulbs, targets) and an eye-icon dropdown switching the entire site between Startup Founders, Content Creators, and Memory Capturers.",
+        afterSrc: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+        afterTitle: "Playful-Principal Hero & Architectural Art (After)",
+        afterCaption:
+          "Confident Bricolage Grotesque typography, animated ScaryHeadline strike-throughs ('SOC 2 audits → a checklist'), and surrealist Guy Billout–inspired architectural illustration on Alabaster paper (#FAF8F5).",
+      },
+      {
+        label: "Family & Audience Positioning",
+        beforeSrc: "/images/chb-corporate/before/05_legacy_memory_capturers_hero.png",
+        beforeTitle: "Original 'Memory Capturers' Family Mode (Before)",
+        beforeCaption:
+          "Originally used warm lakeside family clipart to feel non-intimidating to everyday families and smaller clients while explaining the concept of private AI memory before Pipes existed as a live product.",
+        afterSrc: "/images/chb-corporate/after/05_chb_manifesto_after.png",
+        afterTitle: "Unified Principal Studio Manifesto (After)",
+        afterCaption:
+          "Speaks directly and respectfully to founders, creators, families, and Main Street in one unified voice—replacing coastal gatekeeping with real architectural craft.",
+      },
+      {
+        label: "Product Ecosystem Architecture",
+        beforeSrc: "/images/chb-corporate/before/04_legacy_products.png",
+        beforeTitle: "Original 3-Step Conceptual Funnel (Before)",
+        beforeCaption:
+          "Presented Semi, Hash, and Pipes ('coming soon') as a 3-step conceptual journey card before the full cross-platform ecosystem was shipped.",
+        afterSrc: "/images/chb-corporate/after/06_chb_products_7nav_after.png",
+        afterTitle: "7 Live Products Named After Punctuation (After)",
+        afterCaption:
+          "Now that Pipes, BANG!, Hash, Semi, Greater, Accént, and Marigold are live production software across Web, Desktop, and Mobile, a sticky 7-chapter bar lets visitors inspect every shipped tool.",
+      },
+      {
+        label: "Studio Methodology & Engagement",
+        beforeSrc: "/images/chb-corporate/before/07_legacy_roadmap.png",
+        beforeTitle: "Original Conceptual Roadmap (Before)",
+        beforeCaption:
+          "Gamified winding-road illustration explaining future phases ('Business perspective switching') rather than how clients can hire the studio today.",
+        afterSrc: "/images/chb-corporate/after/07_chb_studio_sprint_method_after.png",
+        afterTitle: "Five Days From Scary to Shipped (After)",
+        afterCaption:
+          "Transparent $7,500 fixed-scope 5-day sprints (Listen → Map → Build → Refine → Smile) and $15k/mo fractional principal partnerships with 100% Day-One IP ownership.",
+      },
+    ],
+    executiveSummary:
+      "Re-architecting our own corporate flagship (colonhyphenbracket.pink) to reflect a fundamental milestone: transitioning from an early-stage practice explaining concepts to a battle-tested product and systems studio with seven live platforms in production. Originally, our site relied on a 3-way 'Perspective Switcher' (toggling the entire website between Startup Founders, Content Creators, and Memory Capturers) and soft clipart illustrations designed to feel non-intimidating to families and small clients as we worked our way up. Today—with Pipes, BANG!, Accént 3.0, and Marigold live in production, backed by 15+ years of principal engineering and design systems maturity—we retired the persona-switching gimmick and clipart. We rebuilt colonhyphenbracket.pink from the ground up on the 'Playful-Principal' preset of Accént 3.0: uniting all seven punctuation-named products, codifying our code-first 5-day sprint methodology (Listen → Map → Build → Refine → Smile), and proving how one principal architect eliminates the four-person agency handoff tax.",
+    challenge:
+      "When we launched the first version of colonhyphenbracket.pink, Pipes was still in development ('coming soon') and we were actively trying to demystify AI for regular families, independent creatives, and small local businesses. To avoid looking like another intimidating, jargon-heavy Silicon Valley agency, we deliberately used friendly clipart illustrations (lakeside family fishing scenes, colorful gears, winding board-game roadmaps) and built a runtime 'Perspective Engine' that rewrote every headline and swapped every illustration between 'Startup Founders', 'Content Creators', and 'Memory Capturers'. While well-intentioned, that approach created three problems as our studio matured: (1) Conceptual Overhead: Since Pipes (pipes.pink) is now a working cross-platform product that natively handles personal, creative, and business knowledge namespaces, the corporate site no longer needed to simulate 'perspective switching' in the navbar; (2) Visual Underselling: Soft vector clipart aimed at lowering intimidation accidentally masked 15 years of senior systems architecture across Custodia Bank, UnitedHealth Group, and Walmart; and (3) Hidden Studio Mechanics: Prospective clients couldn't clearly see our code-first build methodology, our 7 shipped products, or how BANG! IDE hands them 100% sovereign control of their codebase.",
+    solution:
+      "Executed a complete ground-up architectural and editorial rebuild on the 'playful-principal' brand profile of Accént 3.0: (1) Retired the 3-Way Perspective Switcher for a Unified Voice: Replaced fragmented audience modes with a single, confident narrative ('We turn [SOC 2 audits / HIPAA / vendor lock-in / legacy code] into [a checklist / trust / freedom / calm] : - ]') that honors founders, creators, families, and Main Street alike without talking down to any of them; (2) Upgraded From Clipart to Surrealist Architectural Art: Commissioned and art-directed Guy Billout–inspired editorial plates (monolithic brutalist staircases met by a warm hot-pink umbrella ramp) with responsive WebP mobile crops and GPU-accelerated scroll parallax; (3) Built the 7-Product Punctuation Showcase (/products): Organized our shipped software suite around the punctuation marks they behave like—||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, and ❀ Marigold; and (4) Codified the Inverted Code-First Sprint (/studio): Inverted the traditional agency waterfall into 'Listen (Mon) → Map (Tue) → Build (Wed) → Refine (Thu) → Smile (Fri)', proving that we build working code on Wednesday and apply design refinement directly to live software on Thursday.",
+    uiUxCraft:
+      "Governed by the Playful-Principal preset in Accént 3.0 (src/styles/themes.ts): warm Alabaster paper (#FAF8F5 / #F7F6F1), deep Slate Ink (#111827, 16.7:1 WCAG AAA contrast), Bricolage Grotesque display headlines paired with Newsreader editorial serifs, and Sovereign Hot Pink (#FE299E) reserved strictly for focal strikes, winks, and primary pill CTAs. Engineered custom Tier 2 Editorial Motion primitives in Framer Motion: ScaryHeadline (a 3-phase state machine that displays an intimidating industry term, strikes it through with a hot-pink bar, and spring-swaps in the human outcome), RiseLines (IntersectionObserver masked line-by-line display reveals), and a persistent semi-translucent paper nav that adapts cleanly over dark sections.",
+    systemsArchitecture:
+      "Vite + React 18 + TypeScript + Tailwind CSS frontend paired with a Node/Express build pipeline and static social metadata prerendering (prerender-social.cjs). Generates dedicated 1200×630 OpenGraph cards and pre-rendered HTML entry points for /studio, /products, /manifesto, and /contact so every link shared on X/Twitter or Slack unfurls route-specific headlines. Wired zero-backend-lock-in contact routing via Web3Forms direct client dispatch and deployed to Vercel Edge.",
+    metrics: [
+      { value: "7 Live", label: "Punctuation Products", subtext: "Pipes, BANG!, Hash, Semi, Greater, Accént, Marigold" },
+      { value: "1 Principal", label: "Zero Handoffs", subtext: "Strategy, design & production code in one head" },
+      { value: "5 Days", label: "Scary to Shipped", subtext: "Listen → Map → Build → Refine → Smile ($7.5k)" },
+      { value: "16.7:1", label: "WCAG AAA Contrast", subtext: "Playful-Principal preset on Alabaster #FAF8F5" },
+    ],
+    outcomes: [
+      "Transitioned colonhyphenbracket.pink from an early-stage persona-switching concept site into a principal-led product & architecture studio showcase.",
+      "Retired the 3-persona dropdown ('Memory Capturers / Startup Founders / Content Creators') and soft clipart in favor of one unified voice backed by 7 live products.",
+      "Showcased all 7 shipped punctuation-named platforms (||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, and ❀ Marigold) in an interactive sticky chapter navigator.",
+      "Inverted the studio sprint schedule to Listen → Map → Build → Refine → Smile, reflecting our code-first methodology where working software precedes visual polish.",
+      "Engineered route-specific static social prerendering (prerender-social.cjs) and custom 1200×630 OG cards across all 4 studio routes.",
+    ],
+    technologies: [
+      "React 18 & TypeScript",
+      "Accént 3.0 (Playful-Principal)",
+      "Framer Motion (Tier 2 Choreography)",
+      "Tailwind CSS",
+      "Static OG Prerender Pipeline",
+      "Responsive WebP Art Direction",
+      "Vercel Edge",
+    ],
+    liveUrl: "https://colonhyphenbracket.pink",
+    liveUrlLabel: "Visit Colon Hyphen Bracket (colonhyphenbracket.pink)",
+    repoUrl: "https://github.com/rorshockbtc/chb-corporate-site",
+    codebaseBreakdown: {
+      headline: "From 3-Way Persona Switching to Unified Tier-2 Editorial Choreography",
+      philosophy:
+        "In our first iteration, we tried to prove empathy by dynamically rewriting the DOM for three different audiences ('Startup Founders', 'Content Creators', 'Memory Capturers'). As our engineering and product suite matured, we realized true empathy isn't a persona dropdown—it's taking the genuinely scary parts of technology (SOC 2 audits, HIPAA, vendor lock-in, legacy code) and turning them into calm, sovereign software that clients own 100% on day one.",
+      stackArchitecture: [
+        {
+          role: "Tier 2 Editorial Motion Engine",
+          tech: "Framer Motion + ScaryHeadline + RiseLines",
+          rationale:
+            "Implements the 3-phase ScaryHeadline state machine (scary → strike → friendly) and masked line-by-line RiseLines on cubic-bezier(0.22, 1, 0.36, 1) with full prefers-reduced-motion support.",
+        },
+        {
+          role: "Accént Playful-Principal Token Contract",
+          tech: "Alabaster #FAF8F5 + Bricolage Grotesque + Hot Pink #FE299E",
+          rationale:
+            "Consumes the playful-principal brand profile from Accént 3.0, guaranteeing 16.7:1 AAA body contrast, 44×44px touch targets, and zero nested cards.",
+        },
+        {
+          role: "Responsive Art Direction & Parallax",
+          tech: "<picture> WebP + Mobile Crops + useScroll",
+          rationale:
+            "Serves dedicated 639px mobile crops and 2560px desktop WebP plates for the staircase and Marigold botanical artwork with zero layout shift.",
+        },
+        {
+          role: "Static Route Social Prerenderer",
+          tech: "prerender-social.cjs + generate-og.cjs",
+          rationale:
+            "Injects route-specific OpenGraph, Twitter Card, and canonical tags into static HTML shells at build time so social crawlers never see a generic SPA title.",
+        },
+      ],
+      codeSnippets: [
+        {
+          title: "3-Phase 'Scary to Friendly' Headline State Machine (client/src/components/brand/scary-words.tsx)",
+          language: "tsx",
+          code: `export const HOME_SCARY_PAIRS: ScaryPair[] = [
+  { scary: "SOC 2 audits", friendly: "a checklist" },
+  { scary: "HIPAA", friendly: "trust" },
+  { scary: "vendor lock-in", friendly: "freedom" },
+  { scary: "legacy code", friendly: "calm" },
+  { scary: "regulators", friendly: "easy audits" },
+  { scary: "cryptography", friendly: "privacy" },
+  { scary: "dark patterns", friendly: "honest UX" },
+];
+
+type Phase = "scary" | "strike" | "friendly";
+
+export function ScaryHeadline({ accent = "#FE299E", pairs = HOME_SCARY_PAIRS }: ScaryHeadlineProps) {
+  const reduce = useReducedMotion();
+  const [i, setI] = useState(0);
+  const [phase, setPhase] = useState<Phase>("scary");
+
+  useEffect(() => {
+    const ms: Record<Phase, number> = reduce
+      ? { scary: 2400, strike: 10, friendly: 2600 }
+      : { scary: 1700, strike: 600, friendly: 2400 };
+    const t = window.setTimeout(() => {
+      if (phase === "scary") setPhase("strike");
+      else if (phase === "strike") setPhase("friendly");
+      else {
+        setPhase("scary");
+        setI((n) => (n + 1) % pairs.length);
+      }
+    }, ms[phase]);
+    return () => window.clearTimeout(t);
+  }, [phase, reduce, pairs.length]);
+  // Renders the intimidating term, draws an animated #FE299E strike bar, and springs in the calm outcome : - ]
+}`,
+          explanation:
+            "Replaces the old 3-persona dropdown with a single visceral demonstration of what Colon Hyphen Bracket does: striking through intimidating technical barriers and replacing them with calm, human outcomes.",
+        },
+        {
+          title: "Code-First 5-Day Sprint Architecture (client/src/pages/studio.tsx)",
+          language: "tsx",
+          code: `const WEEK = [
+  { d: "Mon", t: "Listen", color: "#0A9BE0", b: "You explain the challenge. We define the problem and ask the hard questions." },
+  { d: "Tue", t: "Map",    color: "#3FA535", b: "Architecture, data models, and constraints pinned down. Building begins." },
+  { d: "Wed", t: "Build",  color: "#0A9BE0", b: "Working code and live data. A reviewable milestone so you know we're on the right track." },
+  { d: "Thu", t: "Refine", color: "#3FA535", b: "Design and craft applied to working software: ergonomics, UI polish, and edge cases." },
+  { d: "Fri", t: "Smile",  color: "#FE299E", b: "Live walkthrough, decision memo, and the repository handed over outright. : - ]" },
+];`,
+          explanation:
+            "Rather than spending weeks pushing static pixels in Figma before writing a line of code, our studio builds working software with real data by Wednesday and refines the design ergonomics directly in code on Thursday.",
         },
       ],
     },

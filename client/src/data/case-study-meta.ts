@@ -37,9 +37,15 @@ export const CASE_STUDY_META: Record<string, CaseStudyMeta> = {
   },
   "colors-type-grids": {
     name: "Accént",
-    headline: "An open-source design system, built for the agentic era.",
-    myRole: "Creator & maintainer",
-    domain: "Design systems · MIT licensed",
+    headline: "An open-source design system built for humans and 7B local AI models.",
+    myRole: "Creator & principal architect",
+    domain: "Design systems · MIT licensed · rules.json",
+  },
+  "chb-corporate": {
+    name: "Colon Hyphen Bracket",
+    headline: "From persona-switching clipart to a principal-led product & architecture studio.",
+    myRole: "Founder, principal architect & designer",
+    domain: "Brand architecture · 7-product studio",
   },
   marigold: {
     name: "Marigold",

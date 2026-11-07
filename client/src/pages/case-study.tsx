@@ -23,9 +23,14 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-/** Split long prose into sentences so we can lead with a short summary. */
+/** Split long prose into sentences so we can lead with a short summary, ignoring dots inside version numbers (3.0) or domains (pipes.pink). */
 function sentences(text: string): string[] {
-  return (text || "").match(/[^.!?]+(?:[.!?]+["”']?|$)/g)?.map((s) => s.trim()).filter(Boolean) ?? [];
+  return (
+    (text || "")
+      .split(/(?<=[.!?]["”']?)\s+(?=[A-Z0-9“"'])/)
+      .map((s) => s.trim())
+      .filter(Boolean) ?? []
+  );
 }
 
 /** If prose is written as "(1) … (2) …", turn it into an intro + list. */
@@ -107,7 +112,7 @@ function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
                 Before &amp; After Redesign
               </h2>
               <p className="mt-3 text-base text-[#5C4840] max-w-[54ch]">
-                Select a screen below to inspect the direct architectural evolution from the legacy WordPress site to the high-performance Swiss monograph.
+                Select a screen below to inspect the direct architectural evolution from the legacy site to the redesigned production system.
               </p>
             </div>
           </div>

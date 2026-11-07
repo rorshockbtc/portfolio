@@ -62,9 +62,16 @@ const FEATURED = [
   {
     slug: "colors-type-grids",
     client: "Accént",
-    title: "An open-source design system, built for the agentic era.",
-    tag: "Creator · Design systems · MIT",
-    image: "/images/cassandra/colors-type-grids.jpg",
+    title: "An open-source design system built for humans and 7B local AI models.",
+    tag: "Creator · 43 pages · 197 AI rules · MIT",
+    image: "/images/accent/01_accent_home_overview.png",
+  },
+  {
+    slug: "chb-corporate",
+    client: "Colon Hyphen Bracket",
+    title: "From persona-switching clipart to a principal-led product & architecture studio.",
+    tag: "Founder · Studio rebuild · 7 live products",
+    image: "/images/chb-corporate/after/01_chb_home_hero_after.png",
   },
   {
     slug: "marigold",
@@ -73,10 +80,18 @@ const FEATURED = [
     tag: "Architect · Zero-knowledge data",
     image: "/images/marigold/02_marigold_workspace_dashboard_kanban.png",
   },
+  {
+    slug: "chicuinaco",
+    client: "Chicuinaco",
+    title: "A four-language site for a mountain estate on a 3G budget.",
+    tag: "Principal architect · Sovereign hospitality · BANG!",
+    image: "/images/chicuinaco/site_redesign_hero.png",
+  },
 ];
 
 const MORE = [
-  { slug: "chicuinaco", client: "Chicuinaco", title: "Four-language estate & venue site", year: "2026" },
+  { slug: "chicuinaco", client: "Chicuinaco", title: "Four-language estate & venue site with BANG! sovereignty", year: "2026" },
+  { slug: "chb-corporate", client: "Colon Hyphen Bracket", title: "Studio flagship redesign & 7-product punctuation suite", year: "2026" },
   { slug: "cassandra", client: "Cassandra", title: "AI career agent with a single-task focus mode", year: "2025" },
   { slug: "superstar", client: "Superstar", title: "Private mobile AI reflection companion", year: "2025" },
   { slug: "clubhouse1099", client: "Clubhouse 1099", title: "Voice-first venture scout network", year: "2025" },
