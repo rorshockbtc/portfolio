@@ -35,6 +35,22 @@ export interface BeforeAfterPair {
   afterCaption: string;
 }
 
+export interface LivestreamSpec {
+  badge: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  chapters: string[];
+  embedUrl?: string;
+  streamUrl?: string;
+  streamLabel?: string;
+  legacyCommit?: string;
+  newCommit?: string;
+  beforePreviewSrc?: string;
+  afterPreviewSrc?: string;
+  deltas?: { label: string; value: string; delta: string }[];
+}
+
 export interface CaseStudyData {
   slug: string;
   client: string;
@@ -46,6 +62,7 @@ export interface CaseStudyData {
   heroImage: string;
   galleryImages: CaseStudyImage[];
   beforeAfter?: BeforeAfterPair[];
+  livestream?: LivestreamSpec;
   executiveSummary: string;
   challenge: string;
   solution: string;
@@ -1552,125 +1569,210 @@ export function BitcoinAcceptedBadge({ className = "" }: { className?: string })
   "chb-corporate": {
     slug: "chb-corporate",
     client: "Colon Hyphen Bracket, LLC",
-    title: "Colon Hyphen Bracket: From Audience-Switching Clipart to a Principal-Led Architecture & R&D Studio",
+    title: "Colon Hyphen Bracket: From Audience-Switching Clipart to an Enterprise-Ready Principal Architecture & R&D Studio",
     subtitle:
-      "colonhyphenbracket.pink • Ground-Up Studio Repositioning, Playful-Principal Theme (Accént 3.0), 7-Product Ecosystem & Code-First 5-Day Sprints",
+      "colonhyphenbracket.pink • 24-Hour Ground-Up Rebuild, Legacy Code Bloat Elimination (18 Routes → 4 Pillars), Tier 2 Editorial Motion (Accént 3.0) & Enterprise Trust Positioning",
     role: "Founder & Principal Systems Architect",
-    scaleBadge: "Playful-Principal Rebuild · 7 Live Products · Zero Handoffs",
-    timeline: "Nov 2026",
+    scaleBadge: "Playful-Principal Rebuild · 18→4 Routes · 7 Live Products",
+    timeline: "Nov 2026 (24-Hour Rebuild)",
     heroImage: "/images/chb-corporate/after/01_chb_home_hero_after.png",
     galleryImages: [
       {
         src: "/images/chb-corporate/after/01_chb_home_hero_after.png",
-        title: "Playful-Principal Hero: Turning Scary Software Into a Smile : - ]",
+        title: "Playful-Principal Hero: Turning Scary Enterprise Barriers Into a Smile : - ]",
         caption:
-          "The rebuilt colonhyphenbracket.pink homepage on Alabaster paper (#FAF8F5), pairing Bricolage Grotesque display typography and the 3-phase ScaryHeadline strike animation with Guy Billout–inspired architectural staircase art.",
+          "The rebuilt colonhyphenbracket.pink homepage on Alabaster paper (#FAF8F5), pairing Bricolage Grotesque display typography, the 3-phase ScaryHeadline strike state machine ('SOC 2 audits → a checklist', 'HIPAA → trust'), and upscaled 2560px Guy Billout–inspired staircase artwork.",
         tag: "Redesigned Hero",
       },
       {
-        src: "/images/chb-corporate/after/06_chb_products_7nav_after.png",
-        title: "Software Named After Punctuation: The 7-Product Ecosystem Navigator",
-        caption:
-          "Sticky horizontal chapter bar uniting all 7 live products—||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, and ❀ Marigold—removing the need for audience-switching dropdowns on the homepage.",
-        tag: "7-Product Suite",
-      },
-      {
-        src: "/images/chb-corporate/after/03_chb_studio_sprint_after.png",
-        title: "Studio Positioning: One Principal Architect. No Handoffs.",
-        caption:
-          "Direct, unambiguous positioning eliminating the agency telephone game between strategy decks, Figma files, and engineering tickets.",
-        tag: "Studio Practice",
-      },
-      {
-        src: "/images/chb-corporate/after/07_chb_studio_sprint_method_after.png",
-        title: "Code-First Methodology: Listen → Map → Build → Refine → Smile",
-        caption:
-          "Inverted 5-day $7,500 fixed-scope sprint schedule where working code and live data ship on Wednesday ('Build') before UI polish and ergonomic refinement happen on Thursday ('Refine').",
-        tag: "5-Day Sprint",
-      },
-      {
         src: "/images/chb-corporate/after/02_chb_home_ecosystem_after.png",
-        title: "Scroll-Tracked Principles & Punctuation Philosophy",
+        title: "Scroll-Tracked Manifesto Pillar & Sticky 'One Principal Beats Four Handoffs' Card",
         caption:
-          "Interactive scroll-tracked manifesto pillar pairing each punctuation mark (#, ;-], |||, é) with a sticky side card explaining why one principal beats four handoffs.",
+          "IntersectionObserver scroll-tracked belief rows (#, ;-], |||, é) paired with a sticky dark slate side card (#111827) on desktop and a layoutId spring-animated border on mobile.",
         tag: "Scroll Choreography",
       },
       {
-        src: "/images/chb-corporate/after/05_chb_manifesto_after.png",
-        title: "The Manifesto: Replacing Coastal Gatekeeping With Real Craft",
+        src: "/images/chb-corporate/after/08_chb_who_we_help_blueprint_after.png",
+        title: "Scroll-Tracked 'We Build For: Founders · Creators · Families' & Blueprint Art",
         caption:
-          "Dedicated /manifesto page articulating why a principal designer-architect from Southern Appalachia builds sovereign software for the founders, creators, families, and Main Street businesses Big Tech overlooked.",
-        tag: "Studio Manifesto",
+          "Replaces the old 3-persona navbar switcher with a scroll-tracked chapter bar (layoutId='aud-active-bar') and three surrealist architectural illustrations: Founders Blueprint Wave, Creators Terrace, and Families Lighthouse.",
+        tag: "Unified Audience",
+      },
+      {
+        src: "/images/chb-corporate/after/09_chb_things_we_make_dark_after.png",
+        title: "Things We Make: Dark Slate (#111827) 7-Product Punctuation Index",
+        caption:
+          "High-contrast dark architectural showcase on the homepage introducing all 7 live punctuation-named platforms (||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, and ❀ Marigold) with zero nested card clutter.",
+        tag: "Dark Section",
+      },
+      {
+        src: "/images/chb-corporate/after/03_chb_studio_sprint_after.png",
+        title: "Enterprise Studio Practice (/studio): One Principal Architect. No Handoffs.",
+        caption:
+          "Positions Colon Hyphen Bracket as an enterprise-ready partner for Startups, Regulated Teams (banking, healthcare, SOC 2 / HIPAA auditors), Schools & Families, and Main Street.",
+        tag: "Enterprise Studio",
+      },
+      {
+        src: "/images/chb-corporate/after/10_chb_studio_handoff_strike_after.png",
+        title: "Striking Out the Agency Telephone Game: 1 Principal, 5 Days, 100% IP",
+        caption:
+          "Dark comparison stage on /studio striking through 'Strategy deck → Figma handoff → Jira backlog → 4 months lost' in hot pink and replacing it with 'Problem → Working Build → Refined Code in one head'.",
+        tag: "Zero Handoffs",
+      },
+      {
+        src: "/images/chb-corporate/after/07_chb_studio_sprint_method_after.png",
+        title: "Inverted Code-First Sprint: Listen → Map → Build → Refine → Smile",
+        caption:
+          "The 5-day $7,500 fixed-scope sprint schedule where working code and live data ship on Wednesday ('Build') before UI polish and ergonomic refinement happen directly in code on Thursday ('Refine').",
+        tag: "5-Day Sprint",
+      },
+      {
+        src: "/images/chb-corporate/after/11_chb_studio_pricing_tiers_after.png",
+        title: "Transparent Studio Engagement Tiers ($7,500 Sprint · $15k Partner · Custom Build)",
+        caption:
+          "Published, unambiguous pricing cards on /studio eliminating opaque agency discovery calls: The Sprint ($7,500 / 1 week), The Partner (Starts at $15k / monthly), and The Build (Custom end-to-end delivery).",
+        tag: "Transparent Pricing",
+      },
+      {
+        src: "/images/chb-corporate/after/06_chb_products_7nav_after.png",
+        title: "Software Named After Punctuation (/products): Sticky 7-Platform Navigator",
+        caption:
+          "Interactive sticky chapter bar allowing visitors to inspect every shipped platform across Web, Model Context Protocol (MCP), native macOS Desktop (Tauri/Rust), and iOS.",
+        tag: "7-Product Suite",
+      },
+      {
+        src: "/images/chb-corporate/after/12_chb_manifesto_contrasts_dark_after.png",
+        title: "Studio Manifesto (/manifesto): What We Refuse to Do—and What We Do Instead",
+        caption:
+          "Side-by-side doctrinal contrast table rejecting four-layer agency handoffs, rent-seeking retainers, dark patterns, and black-box AI wrappers in favor of Day-One repo ownership and sovereign software.",
+        tag: "Studio Doctrine",
+      },
+      {
+        src: "/images/chb-corporate/after/13_chb_contact_kyle_cubby_after.png",
+        title: "Direct Principal Access (/contact): 'Kyle or Cubby?' & Zero-Backend Web3Forms",
+        caption:
+          "Warm, human conversion page featuring the 'Kyle or Cubby?' personal note, 6 interactive engagement pills ($7.5k Sprint, $15k/mo Partner, Product question, Press), and direct client-side Web3Forms dispatch.",
+        tag: "Direct Conversion",
       },
     ],
     beforeAfter: [
       {
-        label: "Brand Hero & Visual Language",
+        label: "Hero & Enterprise Positioning",
         beforeSrc: "/images/chb-corporate/before/03_legacy_switcher_open_or_switched.png",
-        beforeTitle: "Original Site: Persona Dropdown & Soft Clipart (Before)",
+        beforeTitle: "Legacy Site: 3-Persona Eye Dropdown & Soft Clipart (Before)",
         beforeCaption:
-          "Early iteration used approachable clipart illustrations (gears, lightbulbs, targets) and an eye-icon dropdown switching the entire site between Startup Founders, Content Creators, and Memory Capturers.",
+          "Commit 58af53c relied on a top-left Eye dropdown ('Startup Founders / Content Creators / Memory Capturers') that mutated root CSS variables at runtime and used approachable gear/lightbulb clipart to feel non-intimidating to small clients.",
         afterSrc: "/images/chb-corporate/after/01_chb_home_hero_after.png",
-        afterTitle: "Playful-Principal Hero & Architectural Art (After)",
+        afterTitle: "Playful-Principal Hero & ScaryHeadline Strike (After)",
         afterCaption:
-          "Confident Bricolage Grotesque typography, animated ScaryHeadline strike-throughs ('SOC 2 audits → a checklist'), and surrealist Guy Billout–inspired architectural illustration on Alabaster paper (#FAF8F5).",
+          "Commit cec1833 leads with enterprise-grade authority on Alabaster paper (#FAF8F5): Bricolage Grotesque typography, a 3-phase ScaryHeadline state machine ('SOC 2 audits → a checklist'), and upscaled 2560px brutalist staircase art.",
       },
       {
-        label: "Family & Audience Positioning",
+        label: "Audience Architecture (Founders, Creators & Families)",
         beforeSrc: "/images/chb-corporate/before/05_legacy_memory_capturers_hero.png",
-        beforeTitle: "Original 'Memory Capturers' Family Mode (Before)",
+        beforeTitle: "Legacy 'Memory Capturers' Family Clipart Mode (Before)",
         beforeCaption:
-          "Originally used warm lakeside family clipart to feel non-intimidating to everyday families and smaller clients while explaining the concept of private AI memory before Pipes existed as a live product.",
-        afterSrc: "/images/chb-corporate/after/05_chb_manifesto_after.png",
-        afterTitle: "Unified Principal Studio Manifesto (After)",
+          "Previously isolated families into a separate green 'Memory Capturers' mode with lakeside fishing clipart and 3× duplicated copy trees in usePerspectiveContent() to explain private AI memory before Pipes existed.",
+        afterSrc: "/images/chb-corporate/after/08_chb_who_we_help_blueprint_after.png",
+        afterTitle: "Unified Scroll-Tracked Audience Chapters & Surrealist Art (After)",
         afterCaption:
-          "Speaks directly and respectfully to founders, creators, families, and Main Street in one unified voice—replacing coastal gatekeeping with real architectural craft.",
+          "Honors Founders, Creators, and Families together on one scroll-tracked stage with layoutId spring indicators and bespoke Guy Billout–style architectural plates (Blueprint Wave, Terrace, Lighthouse).",
       },
       {
-        label: "Product Ecosystem Architecture",
-        beforeSrc: "/images/chb-corporate/before/04_legacy_products.png",
-        beforeTitle: "Original 3-Step Conceptual Funnel (Before)",
+        label: "Creative & Editorial Voice",
+        beforeSrc: "/images/chb-corporate/before/08_legacy_content_creators_hero.png",
+        beforeTitle: "Legacy 'Content Creators' 3D Bubble Clipart (Before)",
         beforeCaption:
-          "Presented Semi, Hash, and Pipes ('coming soon') as a 3-step conceptual journey card before the full cross-platform ecosystem was shipped.",
+          "Switching to 'Content Creators' turned the entire site pink/purple with floating 3D chat bubbles and generic creator slogans, masking 15 years of principal systems architecture.",
+        afterSrc: "/images/chb-corporate/after/02_chb_home_ecosystem_after.png",
+        afterTitle: "Scroll-Tracked Punctuation Beliefs & Sticky Principal Card (After)",
+        afterCaption:
+          "Scroll-tracked editorial rows (#, ;-], |||, é) paired with a sticky dark slate card ('One principal beats four handoffs') that updates dynamically as the reader scrolls.",
+      },
+      {
+        label: "Product Suite Evolution (Conceptual → 7 Live Platforms)",
+        beforeSrc: "/images/chb-corporate/before/04_legacy_products.png",
+        beforeTitle: "Legacy 3-Step Conceptual Card with Pipes 'Coming Soon' (Before)",
+        beforeCaption:
+          "Presented Semi, Hash, and Pipes ('coming soon') as a single conceptual funnel card when the ecosystem was still in early R&D.",
         afterSrc: "/images/chb-corporate/after/06_chb_products_7nav_after.png",
         afterTitle: "7 Live Products Named After Punctuation (After)",
         afterCaption:
-          "Now that Pipes, BANG!, Hash, Semi, Greater, Accént, and Marigold are live production software across Web, Desktop, and Mobile, a sticky 7-chapter bar lets visitors inspect every shipped tool.",
+          "Now that Pipes, BANG!, Hash, Semi, Greater, Accént 3.0, and Marigold are live production software across Web, MCP, macOS Desktop, and iOS, a sticky 7-chapter navigator lets visitors inspect every shipped platform.",
       },
       {
-        label: "Studio Methodology & Engagement",
+        label: "Studio Methodology & Enterprise Delivery",
         beforeSrc: "/images/chb-corporate/before/07_legacy_roadmap.png",
-        beforeTitle: "Original Conceptual Roadmap (Before)",
+        beforeTitle: "Legacy Winding Board-Game Roadmap Clipart (Before)",
         beforeCaption:
-          "Gamified winding-road illustration explaining future phases ('Business perspective switching') rather than how clients can hire the studio today.",
-        afterSrc: "/images/chb-corporate/after/07_chb_studio_sprint_method_after.png",
-        afterTitle: "Five Days From Scary to Shipped (After)",
+          "Used a gamified winding-road illustration ('The Path Forward') describing future internal features like 'Business perspective switching' rather than how enterprise or startup clients engage the studio.",
+        afterSrc: "/images/chb-corporate/after/10_chb_studio_handoff_strike_after.png",
+        afterTitle: "Agency Handoff Strike & 5-Day Code-First Sprint (After)",
         afterCaption:
-          "Transparent $7,500 fixed-scope 5-day sprints (Listen → Map → Build → Refine → Smile) and $15k/mo fractional principal partnerships with 100% Day-One IP ownership.",
+          "Viscerally strikes through 'Strategy deck → Figma handoff → Jira backlog → 4 months lost' and pairs it with our inverted 5-day sprint (Listen → Map → Build → Refine → Smile) and transparent $7,500 / $15k pricing.",
+      },
+      {
+        label: "Conversion & Direct Principal Access",
+        beforeSrc: "/images/chb-corporate/before/09_legacy_contact_page.png",
+        beforeTitle: "Legacy 'Choose Your Connection' 3-Persona Contact Page (Before)",
+        beforeCaption:
+          "Required visitors to pick a persona badge and routed submissions through a bespoke Express server proxy coupled to a floating <SemiChat /> widget on every page.",
+        afterSrc: "/images/chb-corporate/after/13_chb_contact_kyle_cubby_after.png",
+        afterTitle: "Warm Principal Intake, 'Kyle or Cubby?' & Web3Forms (After)",
+        afterCaption:
+          "Features the personal 'Kyle or Cubby?' callout box, 6 one-tap engagement pills ($7.5k Sprint, $15k/mo Partner, Product question), and zero-backend Web3Forms dispatch.",
       },
     ],
+    livestream: {
+      badge: "Live Stream & DNS Switchover",
+      title: "Saying Goodbye to the Legacy Site & Flipping Production Live on Stream",
+      subtitle:
+        "A complete live walkthrough of the before-and-after transformation—inspecting the original audience-switching clipart codebase, walking through the new Playful-Principal architecture, and cutting over colonhyphenbracket.pink in real time.",
+      description:
+        "When we built the original Colon Hyphen Bracket site, we used consumer-friendly clipart and a 3-way persona dropdown so everyday families and small clients wouldn't feel intimidated while Pipes was still a concept. In this live stream, I walk screen-by-screen through why we outgrew that training-wheels framing, how we stripped out 14 legacy routes and 3× duplicated state trees, how we engineered the new Tier 2 Editorial Motion primitives in under 24 hours, and flip the live production deployment to say goodbye to the old site for good.",
+      streamUrl: "https://x.com/chb_coop",
+      streamLabel: "Watch Live Stream / Replay on X (@chb_coop)",
+      legacyCommit: "58af53c",
+      newCommit: "cec1833",
+      beforePreviewSrc: "/images/chb-corporate/before/03_legacy_switcher_open_or_switched.png",
+      afterPreviewSrc: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+      chapters: [
+        "Why the original site used lakeside family clipart and a 3-way 'Memory Capturers / Startup Founders / Content Creators' switcher when we were starting out.",
+        "Codebase autopsy (commit 58af53c): Inspecting the 18 legacy Replit routes, client-side password gates, floating SemiChat widget, and 3× duplicated copy objects.",
+        "Repositioning as a trustworthy enterprise & regulated-industry partner (SOC 2, HIPAA, banking, healthcare) without losing our warmth for creators, families, and Main Street.",
+        "Live tour of the 24-hour Playful-Principal rebuild (commit cec1833): ScaryHeadline 3-phase strike, RiseLines, winking Smile : - ], 7-product punctuation bar, and the inverted 5-day sprint.",
+        "Flipping the switch: Saying goodbye to the legacy site and deploying the new colonhyphenbracket.pink live.",
+      ],
+      deltas: [
+        { label: "Route Footprint", value: "18 → 4 Pillars", delta: "-78% route bloat" },
+        { label: "Copy State Trees", value: "3× → 1 Voice", delta: "Retired PerspectiveProvider" },
+        { label: "Motion Engine", value: "Tier 2 Editorial", delta: "ScaryHeadline + RiseLines" },
+        { label: "Product Suite", value: "7 Shipped", delta: "Web · MCP · macOS · iOS" },
+      ],
+    },
     executiveSummary:
-      "Re-architecting our own corporate flagship (colonhyphenbracket.pink) to reflect a fundamental milestone: transitioning from an early-stage practice explaining concepts to a battle-tested product and systems studio with seven live platforms in production. Originally, our site relied on a 3-way 'Perspective Switcher' (toggling the entire website between Startup Founders, Content Creators, and Memory Capturers) and soft clipart illustrations designed to feel non-intimidating to families and small clients as we worked our way up. Today—with Pipes, BANG!, Accént 3.0, and Marigold live in production, backed by 15+ years of principal engineering and design systems maturity—we retired the persona-switching gimmick and clipart. We rebuilt colonhyphenbracket.pink from the ground up on the 'Playful-Principal' preset of Accént 3.0: uniting all seven punctuation-named products, codifying our code-first 5-day sprint methodology (Listen → Map → Build → Refine → Smile), and proving how one principal architect eliminates the four-person agency handoff tax.",
+      "Re-architecting our own corporate flagship (colonhyphenbracket.pink) in an intensive 24-hour sprint to mark a defining evolution: graduating from an early-stage, consumer-facing concept site into an enterprise-ready, principal-led product and systems architecture studio with seven live platforms in production. When we built the first version of Colon Hyphen Bracket, Pipes was still marked 'coming soon' and we were working our way up with smaller clients and families. To feel approachable and differentiate ourselves from intimidating coastal agencies, we used soft vector clipart and a 3-way 'Perspective Switcher' that toggled the entire DOM between 'Startup Founders', 'Content Creators', and 'Memory Capturers'. Today—with Pipes, BANG!, Hash, Semi, Greater, Accént 3.0, and Marigold live across Web, MCP, macOS Desktop, and iOS, backed by 15+ years of principal systems architecture at Custodia Bank, UnitedHealth Group, and Walmart—that framing had become both technical debt and strategic underselling. We stripped out 14 bloated legacy routes, retired the 3× duplicated persona state machine, and rebuilt colonhyphenbracket.pink from the ground up on the 'Playful-Principal' preset of Accént 3.0—pairing institutional credibility with expressive Tier 2 Editorial Motion and a live production cutover.",
     challenge:
-      "When we launched the first version of colonhyphenbracket.pink, Pipes was still in development ('coming soon') and we were actively trying to demystify AI for regular families, independent creatives, and small local businesses. To avoid looking like another intimidating, jargon-heavy Silicon Valley agency, we deliberately used friendly clipart illustrations (lakeside family fishing scenes, colorful gears, winding board-game roadmaps) and built a runtime 'Perspective Engine' that rewrote every headline and swapped every illustration between 'Startup Founders', 'Content Creators', and 'Memory Capturers'. While well-intentioned, that approach created three problems as our studio matured: (1) Conceptual Overhead: Since Pipes (pipes.pink) is now a working cross-platform product that natively handles personal, creative, and business knowledge namespaces, the corporate site no longer needed to simulate 'perspective switching' in the navbar; (2) Visual Underselling: Soft vector clipart aimed at lowering intimidation accidentally masked 15 years of senior systems architecture across Custodia Bank, UnitedHealth Group, and Walmart; and (3) Hidden Studio Mechanics: Prospective clients couldn't clearly see our code-first build methodology, our 7 shipped products, or how BANG! IDE hands them 100% sovereign control of their codebase.",
+      "Auditing our legacy repository (commit 58af53c) against where Colon Hyphen Bracket stands today exposed four compounding problems across positioning, codebase hygiene, visual craft, and studio conversion: (1) Outgrown Consumer Clipart vs. Enterprise Trust: Our original lakeside family fishing clipart, 3D creator bubbles, and winding board-game roadmaps were intentionally chosen early on so families and small local businesses wouldn't feel intimidated by AI. In practice, however, that clipart actively obscured 15 years of mission-critical engineering across Federal Reserve SPDI banking (Custodia Bank), Fortune 10 healthcare for 35M+ patients (UnitedHealth Group), and Fortune 1 graph search for 3M employees (Walmart)—making the studio look too consumer-oriented for enterprise CTOs and regulated teams; (2) Obsolete 'Perspective Switching' Now That Pipes Is Live: The legacy site relied on a global PerspectiveProvider (Startup Founders / Content Creators / Memory Capturers) to explain how one underlying memory engine could serve different people. Now that Pipes (pipes.pink) is a live production protocol with dedicated sovereign namespaces (pipe\\bitcoin, pipe\\my-first-bitcoin) and an integrated Hash + SEMI atelier, the corporate site no longer needed to simulate audience switching in the navbar; (3) Severe Legacy Code Bloat & Replit Artifacts: The original App.tsx shipped 18 separate routes—including hardcoded client-side password gates (ProtectedImageAdmin, ProtectedImageDetail), three redundant deep-dive pages (MemoryCapturersDeepDive, StartupFoundersDeepDive, ContentCreatorsDeepDive), legacy Scout/Roadmap/CreativeProcess pages, a floating <SemiChat /> widget on every screen, runtime CSS variable mutation hooks (usePerspectiveTheme), and usePerspectiveContent() hooks that forced every component to maintain 3× duplicated copy objects; and (4) Missing Code-First Studio Mechanics & Motion Craft: The old site lacked our transparent $7,500 5-day sprint model, hid our inverted code-first workflow (where working code ships on Wednesday before design polish on Thursday), and had zero editorial motion choreography.",
     solution:
-      "Executed a complete ground-up architectural and editorial rebuild on the 'playful-principal' brand profile of Accént 3.0: (1) Retired the 3-Way Perspective Switcher for a Unified Voice: Replaced fragmented audience modes with a single, confident narrative ('We turn [SOC 2 audits / HIPAA / vendor lock-in / legacy code] into [a checklist / trust / freedom / calm] : - ]') that honors founders, creators, families, and Main Street alike without talking down to any of them; (2) Upgraded From Clipart to Surrealist Architectural Art: Commissioned and art-directed Guy Billout–inspired editorial plates (monolithic brutalist staircases met by a warm hot-pink umbrella ramp) with responsive WebP mobile crops and GPU-accelerated scroll parallax; (3) Built the 7-Product Punctuation Showcase (/products): Organized our shipped software suite around the punctuation marks they behave like—||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, and ❀ Marigold; and (4) Codified the Inverted Code-First Sprint (/studio): Inverted the traditional agency waterfall into 'Listen (Mon) → Map (Tue) → Build (Wed) → Refine (Thu) → Smile (Fri)', proving that we build working code on Wednesday and apply design refinement directly to live software on Thursday.",
+      "Executed a total architectural and brand overhaul (commit cec1833) governed by the Playful-Principal preset of Accént 3.0: (1) Positioned for Enterprise & Regulated Credibility Without Losing Human Warmth: Replaced the 3-way persona dropdown with a single, authoritative voice ('We turn [SOC 2 audits / HIPAA / vendor lock-in / legacy code / regulators / cryptography / dark patterns] into [a checklist / trust / freedom / calm / easy audits / privacy / honest UX] : - ]') and dedicated studio tracks for Startups, Regulated Teams (banking, healthcare, compliance), Schools & Families, and Main Street; (2) Slashed Legacy Code Bloat (18 Routes → 4 Focused Pillars): Deleted all 14 legacy admin, password-gate, and persona-deep-dive routes, removed the runtime PerspectiveProvider and floating chat widget, and consolidated the entire application into four crystal-clear architectural pillars—Home (/), Studio (/studio), Products (/products), and Manifesto (/manifesto)—plus a zero-backend Contact intake (/contact) wired directly to Web3Forms; (3) Engineered Accént Tier 2 Editorial Motion & Scroll Choreography: Built custom Framer Motion primitives from scratch—ScaryHeadline (a 3-phase 1700ms/600ms/2400ms strike-through state machine), RiseLines and AccentRevealText (masked line-by-line and word-by-word reveals on cubic-bezier(0.22, 1, 0.36, 1)), a pure typographic Smile (: - ]) mark that winks into (; - ]) every 4.2s and on hover, and IntersectionObserver scroll-tracked chapters with layoutId spring indicators; (4) Commissioned Surrealist Architectural Art & Upscaled WebP Pipeline: Replaced every piece of vector clipart with Guy Billout–inspired architectural plates—upscaling the hero brutalist staircase and pink umbrella ramp to 2560px desktop WebP with dedicated 639px mobile crops and GPU-accelerated scroll parallax, alongside custom Founders Blueprint Wave, Creators Terrace, Families Lighthouse, and zoomed-out Marigold botanical plates; and (5) Codified the Inverted 5-Day Sprint & 7-Product Punctuation Suite: Built an interactive sticky navigator for all 7 live punctuation-named products (||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, ❀ Marigold) and inverted our studio sprint timeline to Listen (Mon) → Map (Tue) → Build (Wed) → Refine (Thu) → Smile (Fri).",
     uiUxCraft:
-      "Governed by the Playful-Principal preset in Accént 3.0 (src/styles/themes.ts): warm Alabaster paper (#FAF8F5 / #F7F6F1), deep Slate Ink (#111827, 16.7:1 WCAG AAA contrast), Bricolage Grotesque display headlines paired with Newsreader editorial serifs, and Sovereign Hot Pink (#FE299E) reserved strictly for focal strikes, winks, and primary pill CTAs. Engineered custom Tier 2 Editorial Motion primitives in Framer Motion: ScaryHeadline (a 3-phase state machine that displays an intimidating industry term, strikes it through with a hot-pink bar, and spring-swaps in the human outcome), RiseLines (IntersectionObserver masked line-by-line display reveals), and a persistent semi-translucent paper nav that adapts cleanly over dark sections.",
+      "Every screen is governed by the Playful-Principal brand profile in Accént 3.0 (src/styles/themes.ts): warm Alabaster paper (#FAF8F5 / #F7F6F1) paired with deep Slate Ink (#111827 for 16.7:1 WCAG AAA contrast), high-contrast dark slate architectural bands (#111827 and #0F141C) that break up vertical rhythm without a global dark-mode toggle, Bricolage Grotesque display headlines (-0.035em tracking), Newsreader editorial serifs for manifesto pull-quotes, and Sovereign Hot Pink (#FE299E) reserved strictly for focal strikes, winks, and pill CTAs. Motion is treated as structural punctuation rather than decoration: the hero ScaryHeadline physically draws a hot-pink strike bar across intimidating enterprise terms before springing in the human outcome; the 'What we believe' manifesto section tracks viewport scroll to update a sticky desktop side card ('One principal beats four handoffs') and a shared layoutId mobile border; the 'We build for' section smoothly glides a layoutId='aud-active-bar' underline across Founders, Creators, and Families as their corresponding blueprint-wave, terrace, and lighthouse plates cross the viewport center; the persistent top navbar uses semi-translucent Alabaster paper (bg-[#FAF8F5]/95 backdrop-blur-md) so navigation remains crisp over dark slate sections; and every animation honors <MotionConfig reducedMotion='user'>.",
     systemsArchitecture:
-      "Vite + React 18 + TypeScript + Tailwind CSS frontend paired with a Node/Express build pipeline and static social metadata prerendering (prerender-social.cjs). Generates dedicated 1200×630 OpenGraph cards and pre-rendered HTML entry points for /studio, /products, /manifesto, and /contact so every link shared on X/Twitter or Slack unfurls route-specific headlines. Wired zero-backend-lock-in contact routing via Web3Forms direct client dispatch and deployed to Vercel Edge.",
+      "Lean Vite + React 18 + TypeScript + Tailwind CSS architecture compiled into static assets with build-time social metadata prerendering. Eliminating the legacy PerspectiveProvider, ImageProtectionProvider, and Express contact proxy allowed the entire frontend to run as a zero-lock-in static bundle on Vercel Edge. At build time, generate-og.cjs renders custom 1200×630 OpenGraph plates and prerender-social.cjs injects route-specific <title>, description, canonical, og:*, and twitter:* tags into static HTML shells for /, /studio, /products, /manifesto, and /contact so every URL shared on X/Twitter, LinkedIn, or Slack unfurls rich, route-accurate metadata without a server runtime.",
     metrics: [
+      { value: "18 → 4", label: "Routes Consolidated", subtext: "Eliminated 14 legacy & admin routes" },
       { value: "7 Live", label: "Punctuation Products", subtext: "Pipes, BANG!, Hash, Semi, Greater, Accént, Marigold" },
-      { value: "1 Principal", label: "Zero Handoffs", subtext: "Strategy, design & production code in one head" },
       { value: "5 Days", label: "Scary to Shipped", subtext: "Listen → Map → Build → Refine → Smile ($7.5k)" },
       { value: "16.7:1", label: "WCAG AAA Contrast", subtext: "Playful-Principal preset on Alabaster #FAF8F5" },
     ],
     outcomes: [
-      "Transitioned colonhyphenbracket.pink from an early-stage persona-switching concept site into a principal-led product & architecture studio showcase.",
-      "Retired the 3-persona dropdown ('Memory Capturers / Startup Founders / Content Creators') and soft clipart in favor of one unified voice backed by 7 live products.",
-      "Showcased all 7 shipped punctuation-named platforms (||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, and ❀ Marigold) in an interactive sticky chapter navigator.",
-      "Inverted the studio sprint schedule to Listen → Map → Build → Refine → Smile, reflecting our code-first methodology where working software precedes visual polish.",
-      "Engineered route-specific static social prerendering (prerender-social.cjs) and custom 1200×630 OG cards across all 4 studio routes.",
+      "Repositioned colonhyphenbracket.pink from a consumer-facing clipart concept site into an enterprise-ready principal architecture & R&D studio.",
+      "Eliminated legacy code bloat by deleting 14 obsolete Replit routes, client-side password gates, floating chat widgets, and 3× duplicated usePerspectiveContent() state trees.",
+      "Engineered the Accént Tier 2 Editorial Motion suite in Framer Motion: ScaryHeadline 3-phase strike-throughs, RiseLines masked reveals, winking : - ] marks, and scroll-tracked layoutId chapters.",
+      "Replaced all vector clipart with 2560px Guy Billout–inspired architectural illustrations (staircase ramp, blueprint wave, terrace, lighthouse) with responsive <picture> mobile crops and scroll parallax.",
+      "Showcased all 7 shipped punctuation-named platforms (||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, ❀ Marigold) and transparent $7,500 Sprint / $15k Partner studio tiers.",
+      "Shipped build-time static social prerendering (prerender-social.cjs + generate-og.cjs), a high-contrast hot-pink smiley favicon, unified PageClose CTAs, and the personal 'Kyle or Cubby?' contact experience.",
     ],
     technologies: [
       "React 18 & TypeScript",
@@ -1679,44 +1781,90 @@ export function BitcoinAcceptedBadge({ className = "" }: { className?: string })
       "Tailwind CSS",
       "Static OG Prerender Pipeline",
       "Responsive WebP Art Direction",
+      "Web3Forms Direct Dispatch",
       "Vercel Edge",
     ],
     liveUrl: "https://colonhyphenbracket.pink",
     liveUrlLabel: "Visit Colon Hyphen Bracket (colonhyphenbracket.pink)",
     repoUrl: "https://github.com/rorshockbtc/chb-corporate-site",
     codebaseBreakdown: {
-      headline: "From 3-Way Persona Switching to Unified Tier-2 Editorial Choreography",
+      headline: "De-Bloating Legacy Persona State Machines Into Lean Tier-2 Editorial Architecture",
       philosophy:
-        "In our first iteration, we tried to prove empathy by dynamically rewriting the DOM for three different audiences ('Startup Founders', 'Content Creators', 'Memory Capturers'). As our engineering and product suite matured, we realized true empathy isn't a persona dropdown—it's taking the genuinely scary parts of technology (SOC 2 audits, HIPAA, vendor lock-in, legacy code) and turning them into calm, sovereign software that clients own 100% on day one.",
+        "In our original Replit build (commit 58af53c), we tried to prove versatility by shipping a runtime PerspectiveProvider that mutated root CSS variables and forced every component to hold three separate copy trees ('startup_founders', 'content_creators', 'memory_capturers') alongside 18 routes of admin gates and experimental pages. In the rebuilt codebase (commit cec1833), we proved maturity through subtraction: one unified editorial voice, 4 focused routes, zero runtime theme-mutation hooks, and high-craft Framer Motion primitives that turn scary enterprise problems into a smile : - ].",
       stackArchitecture: [
         {
-          role: "Tier 2 Editorial Motion Engine",
-          tech: "Framer Motion + ScaryHeadline + RiseLines",
+          role: "Route & State De-Bloating (18 Routes → 4 Pillars)",
+          tech: "Wouter + Static Pillar Architecture (/, /studio, /products, /manifesto, /contact)",
           rationale:
-            "Implements the 3-phase ScaryHeadline state machine (scary → strike → friendly) and masked line-by-line RiseLines on cubic-bezier(0.22, 1, 0.36, 1) with full prefers-reduced-motion support.",
+            "Removed ProtectedImageAdmin, ProtectedImageDetail, 3 persona deep-dive routes, PerspectiveProvider, and floating SemiChat—cutting cognitive and bundle overhead while unifying the studio narrative.",
+        },
+        {
+          role: "Tier 2 Editorial Motion Primitives",
+          tech: "Framer Motion + ScaryHeadline + RiseLines + Smile + MotionConfig",
+          rationale:
+            "Implements the 3-phase ScaryHeadline strike state machine, masked line-by-line RiseLines on cubic-bezier(0.22, 1, 0.36, 1), periodic : - ] → ; - ] winks, and layoutId scroll trackers with full reduced-motion governance.",
         },
         {
           role: "Accént Playful-Principal Token Contract",
-          tech: "Alabaster #FAF8F5 + Bricolage Grotesque + Hot Pink #FE299E",
+          tech: "Alabaster #FAF8F5 + Dark Slate #111827 + Hot Pink #FE299E",
           rationale:
-            "Consumes the playful-principal brand profile from Accént 3.0, guaranteeing 16.7:1 AAA body contrast, 44×44px touch targets, and zero nested cards.",
+            "Consumes the playful-principal brand profile from Accént 3.0, guaranteeing 16.7:1 AAA body contrast, 44×44px touch targets, and high-contrast dark slate cadence bands without nested card clutter.",
         },
         {
-          role: "Responsive Art Direction & Parallax",
-          tech: "<picture> WebP + Mobile Crops + useScroll",
+          role: "Responsive Art Direction & Static Social Prerenderer",
+          tech: "<picture> 2560px/639px WebP + prerender-social.cjs + Web3Forms",
           rationale:
-            "Serves dedicated 639px mobile crops and 2560px desktop WebP plates for the staircase and Marigold botanical artwork with zero layout shift.",
-        },
-        {
-          role: "Static Route Social Prerenderer",
-          tech: "prerender-social.cjs + generate-og.cjs",
-          rationale:
-            "Injects route-specific OpenGraph, Twitter Card, and canonical tags into static HTML shells at build time so social crawlers never see a generic SPA title.",
+            "Serves art-directed mobile and desktop WebP plates with GPU scroll parallax, pre-renders route-specific OpenGraph HTML shells at build time, and dispatches contact inquiries directly from the client.",
         },
       ],
       codeSnippets: [
         {
-          title: "3-Phase 'Scary to Friendly' Headline State Machine (client/src/components/brand/scary-words.tsx)",
+          title: "BEFORE vs. AFTER: Eliminating Legacy Route & Persona Bloat (commit 58af53c → cec1833)",
+          language: "tsx",
+          code: `// ❌ BEFORE (Legacy commit 58af53c — client/src/App.tsx & home.tsx):
+// 18 routes, hardcoded client-side password gates, runtime CSS variable mutation,
+// and 3× duplicated copy objects inside every single section component:
+<PerspectiveProvider>
+  <ImageProtectionProvider>
+    <ThemeManager /> {/* Mutated document.documentElement CSS vars on dropdown click */}
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route path="/memory-capturers" component={MemoryCapturersDeepDive} />
+      <Route path="/startup-founders" component={StartupFoundersDeepDive} />
+      <Route path="/content-creators" component={ContentCreatorsDeepDive} />
+      <Route path="/scout" component={Scout} />
+      <Route path="/roadmap" component={Roadmap} />
+      <Route path="/admin/images" component={ProtectedImageAdmin} />
+      {/* ...11 more legacy routes + global floating <SemiChat /> bubble */}
+    </Switch>
+  </ImageProtectionProvider>
+</PerspectiveProvider>
+
+// ✅ AFTER (Rebuilt commit cec1833 — client/src/App.tsx):
+// 4 focused editorial pillars, one unified voice, and global reduced-motion governance:
+export default function App() {
+  return (
+    <MotionConfig reducedMotion="user">
+      <TooltipProvider>
+        <ScrollToTop />
+        <Toaster />
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/studio" component={Studio} />
+          <Route path="/products" component={Products} />
+          <Route path="/manifesto" component={Manifesto} />
+          <Route path="/contact" component={Contact} />
+          <Route component={NotFound} />
+        </Switch>
+      </TooltipProvider>
+    </MotionConfig>
+  );
+}`,
+          explanation:
+            "In the legacy codebase, every page had to maintain 3× duplicated strings inside usePerspectiveContent({ startup_founders, content_creators, memory_capturers }) and ship 18 routes including client-side password gates. The rebuild strips away the gimmickry so one principal voice speaks clearly to enterprise CTOs, founders, creators, and families alike.",
+        },
+        {
+          title: "3-Phase 'Scary to Friendly' Enterprise Headline State Machine (client/src/components/brand/scary-words.tsx)",
           language: "tsx",
           code: `export const HOME_SCARY_PAIRS: ScaryPair[] = [
   { scary: "SOC 2 audits", friendly: "a checklist" },
@@ -1749,13 +1897,63 @@ export function ScaryHeadline({ accent = "#FE299E", pairs = HOME_SCARY_PAIRS }: 
     }, ms[phase]);
     return () => window.clearTimeout(t);
   }, [phase, reduce, pairs.length]);
-  // Renders the intimidating term, draws an animated #FE299E strike bar, and springs in the calm outcome : - ]
+  // Phase 1: Renders scary enterprise term ('SOC 2 audits')
+  // Phase 2: Draws a 6px #FE299E strike-through bar from left to right (scaleX: 0 -> 1)
+  // Phase 3: Spring-swaps in the calm human outcome ('a checklist') + winking : - ]
 }`,
           explanation:
-            "Replaces the old 3-persona dropdown with a single visceral demonstration of what Colon Hyphen Bracket does: striking through intimidating technical barriers and replacing them with calm, human outcomes.",
+            "Instead of hiding behind soft consumer clipart, the hero immediately names the high-stakes enterprise realities our clients face—SOC 2 audits, HIPAA, vendor lock-in, legacy code, regulators—and viscerally demonstrates our studio's value by striking them out and replacing them with calm, shipping outcomes.",
         },
         {
-          title: "Code-First 5-Day Sprint Architecture (client/src/pages/studio.tsx)",
+          title: "Tier 2 Masked Line-by-Line Editorial Reveals & Winking Punctuation (motion.tsx & smile.tsx)",
+          language: "tsx",
+          code: `// Masked line-by-line display reveal on Accént editorial curve cubic-bezier(0.22, 1, 0.36, 1)
+export function RiseLines({ lines, stagger = 0.09, duration = 0.72, immediate = false }: RiseLinesProps) {
+  const reduce = useReducedMotion();
+  return (
+    <>
+      {lines.map((line, i) => (
+        <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+          <motion.span
+            className="block will-change-transform"
+            initial={reduce ? false : { y: "105%", rotate: 1.5, opacity: 0 }}
+            {...(immediate
+              ? { animate: { y: "0%", rotate: 0, opacity: 1 } }
+              : { whileInView: { y: "0%", rotate: 0, opacity: 1 }, viewport: { once: true, margin: "-8% 0px" } })}
+            transition={{ duration, delay: i * stagger, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {line}
+          </motion.span>
+        </span>
+      ))}
+    </>
+  );
+}
+
+// Pure typographic : - ] brand mark that winks into ; - ] every 4.2s and on hover
+export function Smile({ size = "md", color = "#FE299E", wink = true }: SmileProps) {
+  const [winking, setWinking] = useState(false);
+  // Periodically swaps ':' for ';' with a subtle 8-degree spring tilt
+  return (
+    <motion.span
+      onMouseEnter={() => setWinking(true)}
+      onMouseLeave={() => setWinking(false)}
+      animate={{ rotate: winking ? 8 : 0, scale: winking ? 1.08 : 1 }}
+      transition={{ type: "spring", stiffness: 420, damping: 16 }}
+      className="font-mono font-bold inline-flex items-center select-none whitespace-nowrap"
+      style={{ color }}
+    >
+      <span>{winking ? ";" : ":"}</span>
+      <span className="mx-[0.08em]">-</span>
+      <span>]</span>
+    </motion.span>
+  );
+}`,
+          explanation:
+            "Every display headline on the rebuilt site uses RiseLines so lines emerge from a clean horizontal baseline mask without layout shift, punctuated by the typographic : - ] mark that winks on hover and at 4.2-second intervals.",
+        },
+        {
+          title: "Inverted Code-First 5-Day Sprint Architecture (client/src/pages/studio.tsx)",
           language: "tsx",
           code: `const WEEK = [
   { d: "Mon", t: "Listen", color: "#0A9BE0", b: "You explain the challenge. We define the problem and ask the hard questions." },
@@ -1765,7 +1963,7 @@ export function ScaryHeadline({ accent = "#FE299E", pairs = HOME_SCARY_PAIRS }: 
   { d: "Fri", t: "Smile",  color: "#FE299E", b: "Live walkthrough, decision memo, and the repository handed over outright. : - ]" },
 ];`,
           explanation:
-            "Rather than spending weeks pushing static pixels in Figma before writing a line of code, our studio builds working software with real data by Wednesday and refines the design ergonomics directly in code on Thursday.",
+            "Traditional agencies spend months in Figma before writing a line of code. Because one principal architect holds strategy, design systems, and full-stack engineering in a single head, we ship working code with live data on Wednesday ('Build') and apply high-craft UI refinement directly to the running software on Thursday ('Refine').",
         },
       ],
     },

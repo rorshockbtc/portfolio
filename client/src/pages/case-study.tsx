@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRoute, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown, ChevronLeft, X, Sparkles } from "lucide-react";
-import { CASE_STUDIES, CASE_STUDY_ORDER, type CaseStudyData, type BeforeAfterPair } from "@/data/case-studies";
+import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown, ChevronLeft, X, Sparkles, Radio, Play, GitCommit, Layers } from "lucide-react";
+import { CASE_STUDIES, CASE_STUDY_ORDER, type CaseStudyData, type BeforeAfterPair, type LivestreamSpec } from "@/data/case-studies";
 import { CASE_STUDY_META } from "@/data/case-study-meta";
 import { openContactModal } from "@/lib/contact-events";
 import NotFound from "@/pages/not-found";
@@ -43,9 +43,9 @@ function enumerated(text: string): { intro: string; items: string[] } | null {
   };
 }
 
-/** Section with a short visible lead and the rest behind "Read more". */
-function Story({ label, text }: { label: string; text: string }) {
-  const [open, setOpen] = useState(false);
+/** Section with a strong serif lead and full body + numbered pillars visible by default. */
+function Story({ label, text, defaultOpen = true }: { label: string; text: string; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
   if (!text) return null;
   const list = enumerated(text);
   const all = sentences(list ? list.intro : text);
@@ -56,7 +56,7 @@ function Story({ label, text }: { label: string; text: string }) {
   return (
     <FadeUp className="grid md:grid-cols-12 gap-4 md:gap-10 py-12 sm:py-14 border-t border-[#D3C7B5]">
       <h2 className="md:col-span-3 text-sm font-medium text-[#FE299E] pt-1.5">{label}</h2>
-      <div className="md:col-span-9 max-w-[62ch]">
+      <div className="md:col-span-9 max-w-[66ch]">
         <p className="font-serif text-xl sm:text-[25px] leading-[1.45] text-[#281B16]">{lead}</p>
         <AnimatePresence initial={false}>
           {open && (
@@ -69,9 +69,9 @@ function Story({ label, text }: { label: string; text: string }) {
             >
               {rest && <p className="mt-5 text-[17px] leading-[1.75] text-[#4A3A32]">{rest}</p>}
               {list && (
-                <ol className="mt-5 space-y-3 list-decimal pl-5 text-[17px] leading-[1.7] text-[#4A3A32] marker:text-[#FE299E]">
+                <ol className="mt-6 space-y-4 list-decimal pl-5 text-[17px] leading-[1.75] text-[#4A3A32] marker:text-[#FE299E] marker:font-mono marker:font-semibold">
                   {list.items.map((it, i) => (
-                    <li key={i}>{it}</li>
+                    <li key={i} className="pl-1">{it}</li>
                   ))}
                 </ol>
               )}
@@ -83,7 +83,7 @@ function Story({ label, text }: { label: string; text: string }) {
             onClick={() => setOpen((o) => !o)}
             className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[#5C4840] hover:text-[#FE299E] bg-transparent border-none p-0 cursor-pointer"
           >
-            {open ? "Show less" : "Read more"}
+            {open ? "Collapse section" : "Read more"}
             <ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} />
           </button>
         )}
@@ -224,9 +224,9 @@ function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
   );
 }
 
-/** Collapsible deep-dive panel for engineering detail. */
-function DeepDive({ title, children }: { title: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
+/** Collapsible deep-dive panel for engineering detail (open by default so architectural depth is immediately scannable). */
+function DeepDive({ title, children, defaultOpen = true }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="border-t border-[#D3C7B5]">
       <button
@@ -246,11 +246,190 @@ function DeepDive({ title, children }: { title: string; children: React.ReactNod
             transition={{ duration: 0.4, ease: EASE }}
             className="overflow-hidden"
           >
-            <div className="pb-8 text-[16px] leading-[1.75] text-[#4A3A32] max-w-[70ch]">{children}</div>
+            <div className="pb-8 text-[16px] leading-[1.75] text-[#4A3A32] max-w-[74ch]">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+/** Dedicated Live Stream & Architecture Switchover section rendered near the bottom of flagship rebuilds */
+function LivestreamSection({ spec, liveUrl }: { spec: LivestreamSpec; liveUrl?: string }) {
+  return (
+    <section className="px-5 sm:px-10 lg:px-16 py-20 sm:py-28 mt-12 bg-[#140E0C] text-[#F2EAE0] border-y border-[#3A2E28]">
+      <div className="max-w-[1280px] mx-auto">
+        <FadeUp className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Left Narrative & Agenda */}
+          <div className="lg:col-span-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FE299E]/15 text-[#FE299E] border border-[#FE299E]/30 font-mono text-xs uppercase tracking-[0.18em] font-bold mb-5">
+              <span className="w-2 h-2 rounded-full bg-[#FE299E] animate-ping" />
+              <Radio className="w-3.5 h-3.5" />
+              {spec.badge}
+            </div>
+            <h2 className="font-serif font-light text-4xl sm:text-5xl leading-[1.06] tracking-[-0.02em] text-[#FAF8F5]">
+              {spec.title}
+            </h2>
+            <p className="mt-4 text-base sm:text-[17px] leading-[1.7] text-[#C8B9AE]">
+              {spec.subtitle}
+            </p>
+            <p className="mt-4 text-sm sm:text-[15px] leading-[1.7] text-[#9E8E84]">
+              {spec.description}
+            </p>
+
+            {/* Timestamped Walkthrough Chapters */}
+            <div className="mt-8 pt-6 border-t border-[#2E221D]">
+              <div className="font-mono text-xs uppercase tracking-[0.16em] text-[#FE299E] font-bold mb-4">
+                Stream Walkthrough Agenda
+              </div>
+              <ol className="space-y-3">
+                {spec.chapters.map((ch, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-sm text-[#E0D5CA] leading-relaxed">
+                    <span className="font-mono text-xs px-2 py-0.5 rounded bg-[#261C18] text-[#FE299E] border border-[#3A2E28] shrink-0 mt-0.5">
+                      0{idx + 1}
+                    </span>
+                    <span>{ch}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              {spec.streamUrl && (
+                <a
+                  href={spec.streamUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#FE299E] hover:bg-[#ff47ad] text-white text-sm font-semibold no-underline transition-all shadow-lg"
+                >
+                  <Play className="w-4 h-4 fill-current" />
+                  {spec.streamLabel || "Watch Live Stream & Recording"}
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              )}
+              {liveUrl && (
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-[#4A3A32] hover:border-[#FAF8F5] text-[#FAF8F5] text-sm font-medium no-underline transition-all"
+                >
+                  Inspect Live Site
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              )}
+            </div>
+          </div>
+
+          {/* Right Broadcast Stage / Interactive Video Container */}
+          <div className="lg:col-span-7">
+            <div className="rounded-[22px] bg-[#1E1613] border border-[#3A2E28] p-4 sm:p-6 shadow-2xl">
+              {/* Top Broadcast Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-[#2E221D] text-xs font-mono">
+                <div className="flex items-center gap-2.5 text-[#E0D5CA]">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#FE299E] text-white font-bold uppercase tracking-wider">
+                    LIVE CUTOVER
+                  </span>
+                  <span>colonhyphenbracket.pink</span>
+                </div>
+                <div className="flex items-center gap-4 text-[#9E8E84]">
+                  {spec.legacyCommit && (
+                    <span className="inline-flex items-center gap-1">
+                      <GitCommit className="w-3.5 h-3.5 text-[#E07A5F]" />
+                      Legacy: <code className="text-[#E0D5CA]">{spec.legacyCommit}</code>
+                    </span>
+                  )}
+                  {spec.newCommit && (
+                    <span className="inline-flex items-center gap-1">
+                      <Layers className="w-3.5 h-3.5 text-[#3FA535]" />
+                      Rebuild: <code className="text-[#E0D5CA]">{spec.newCommit}</code>
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Video Embed or Split Before/After Broadcast Stage */}
+              {spec.embedUrl ? (
+                <div className="aspect-video w-full overflow-hidden rounded-[14px] bg-black border border-white/10">
+                  <iframe
+                    src={spec.embedUrl}
+                    title={spec.title}
+                    className="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <div className="relative overflow-hidden rounded-[16px] bg-[#0F0B0A] border border-white/10">
+                  <div className="grid sm:grid-cols-2 gap-3 p-3 sm:p-4 bg-[#140E0C]">
+                    <div className="rounded-xl overflow-hidden border border-[#3A2E28] bg-black/60">
+                      <div className="px-3 py-1.5 bg-[#241A16] border-b border-[#3A2E28] flex items-center justify-between text-[11px] font-mono text-[#E07A5F]">
+                        <span>GOODBYE: LEGACY (58af53c)</span>
+                        <span>18 Routes · Clipart</span>
+                      </div>
+                      <img
+                        src={spec.beforePreviewSrc || "/images/chb-corporate/before/03_legacy_switcher_open_or_switched.png"}
+                        alt="Legacy site before switchover"
+                        className="w-full aspect-[16/10] object-cover object-top opacity-85"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="rounded-xl overflow-hidden border border-[#FE299E]/50 bg-black/60">
+                      <div className="px-3 py-1.5 bg-[#2A1421] border-b border-[#FE299E]/40 flex items-center justify-between text-[11px] font-mono text-[#FF7AC6]">
+                        <span>HELLO: PLAYFUL-PRINCIPAL (cec1833)</span>
+                        <span>4 Pillars · Accént 3.0</span>
+                      </div>
+                      <img
+                        src={spec.afterPreviewSrc || "/images/chb-corporate/after/01_chb_home_hero_after.png"}
+                        alt="New site after switchover"
+                        className="w-full aspect-[16/10] object-cover object-top"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Stream Callout Banner */}
+                  <div className="p-5 sm:p-6 bg-gradient-to-r from-[#1E1512] via-[#26181E] to-[#1E1512] border-t border-[#3A2E28] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <div className="font-mono text-xs uppercase tracking-wider text-[#FE299E] font-bold">
+                        Live Walkthrough &amp; Production Switchover
+                      </div>
+                      <div className="mt-1 font-serif text-xl text-[#FAF8F5]">
+                        Saying goodbye to the legacy perspective-switcher site &amp; flipping DNS live on stream.
+                      </div>
+                    </div>
+                    {spec.streamUrl && (
+                      <a
+                        href={spec.streamUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#FAF8F5] hover:bg-[#FE299E] text-[#140E0C] hover:text-white text-xs font-mono font-bold uppercase tracking-wider no-underline transition-colors"
+                      >
+                        <Play className="w-3.5 h-3.5 fill-current" />
+                        Tune In / Replay
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Architectural Delta Summary Strip */}
+              {spec.deltas && spec.deltas.length > 0 && (
+                <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-[#2E221D]">
+                  {spec.deltas.map((d) => (
+                    <div key={d.label} className="p-3 rounded-xl bg-[#16100E] border border-[#2E221D]">
+                      <div className="font-mono text-xs text-[#9E8E84]">{d.label}</div>
+                      <div className="mt-1 font-serif text-lg text-[#FAF8F5] font-medium">{d.value}</div>
+                      <div className="mt-0.5 text-[11px] text-[#FE299E] font-mono">{d.delta}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </FadeUp>
+      </div>
+    </section>
   );
 }
 
@@ -290,7 +469,7 @@ export default function CaseStudyPage() {
 
   const name = meta?.name ?? study.client;
   const headline = meta?.headline ?? study.title;
-  const gallery = study.galleryImages.filter((g) => g.src !== study.heroImage).slice(0, 6);
+  const gallery = study.galleryImages.filter((g) => g.src !== study.heroImage);
   const cb = study.codebaseBreakdown;
 
   return (
@@ -406,7 +585,7 @@ export default function CaseStudyPage() {
                       />
                     </div>
                     <div className="mt-4 font-medium text-[#281B16]">{g.title}</div>
-                    <div className="mt-1 text-sm leading-[1.6] text-[#5C4840] max-w-[56ch]">{sentences(g.caption)[0]}</div>
+                    <div className="mt-1 text-sm leading-[1.6] text-[#5C4840] max-w-[60ch]">{g.caption}</div>
                   </button>
                 </FadeUp>
               ))}
@@ -494,6 +673,11 @@ export default function CaseStudyPage() {
           {study.ndaNotice && <p className="mt-10 text-xs text-[#5C4840] max-w-[70ch]">{study.ndaNotice}</p>}
         </div>
       </div>
+
+      {/* Live Stream Walkthrough & Architecture Switchover (if present) */}
+      {study.livestream && (
+        <LivestreamSection spec={study.livestream} liveUrl={study.liveUrl} />
+      )}
 
       {/* Next project */}
       {next && (

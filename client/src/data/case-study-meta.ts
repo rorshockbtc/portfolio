@@ -43,9 +43,9 @@ export const CASE_STUDY_META: Record<string, CaseStudyMeta> = {
   },
   "chb-corporate": {
     name: "Colon Hyphen Bracket",
-    headline: "From persona-switching clipart to a principal-led product & architecture studio.",
+    headline: "From consumer clipart & persona switching to an enterprise-ready principal architecture studio.",
     myRole: "Founder, principal architect & designer",
-    domain: "Brand architecture · 7-product studio",
+    domain: "Enterprise brand · 18→4 routes · 7 live products",
   },
   marigold: {
     name: "Marigold",
