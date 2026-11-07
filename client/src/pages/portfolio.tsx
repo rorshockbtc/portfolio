@@ -112,7 +112,15 @@ const EXPERIENCE = [
   { years: "2001 — 2010", org: "Foundations & Craft", role: "Emerson Graduate Tutor, TECHniques Lab Founder" },
 ];
 
-const LOGOS = ["Custodia Bank", "UnitedHealth Group", "Walmart", "Grubhub"];
+const LOGOS = [
+  "Custodia Bank",
+  "UnitedHealth Group",
+  "Walmart",
+  "Martin Marietta",
+  "IronNet Cybersecurity",
+  "Fidelity",
+  "Foodler → Grubhub",
+];
 
 export default function Portfolio() {
   return (

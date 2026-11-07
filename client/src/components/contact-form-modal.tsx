@@ -124,42 +124,45 @@ export default function ContactFormModal({
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent
-        className="max-w-lg bg-[#F2EAE0] border-[#D3C7B5] text-[#281B16]"
+        className="max-w-xl bg-[#FAF6F0] border-2 border-[#D3C7B5] text-[#281B16] p-6 sm:p-8 rounded-[24px] shadow-2xl max-h-[92vh] overflow-y-auto"
         data-testid="modal-contact"
         aria-describedby="contact-form-description"
       >
-        <DialogHeader>
-          <DialogTitle className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16]" data-testid="text-contact-title">
+        <DialogHeader className="pb-2">
+          <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] font-bold text-[#FE299E] mb-1">
+            <span className="w-2 h-2 rounded-full bg-[#2F9E5B]" /> Direct Channel
+          </div>
+          <DialogTitle className="text-2xl sm:text-[32px] font-serif font-light text-[#281B16] leading-tight tracking-[-0.02em]" data-testid="text-contact-title">
             Connect with Kyle &ldquo;Cubby&rdquo; Cyree
           </DialogTitle>
-          <DialogDescription id="contact-form-description" className="text-sm text-[#6B554D] font-sans">
-            Direct access to Kyle (Cubby) Cyree · North Carolina · US Remote · Replies within 1 business day.
+          <DialogDescription id="contact-form-description" className="text-sm text-[#5C4840] font-sans leading-relaxed pt-1">
+            Founder &amp; Principal Systems Architect · North Carolina · US Remote · Direct replies within 1 business day.
           </DialogDescription>
         </DialogHeader>
 
         {/* Tab Selector */}
-        <div className="flex rounded-full bg-[#EAE0D0] p-1 border border-[#D3C7B5] my-0.5">
+        <div className="flex rounded-full bg-[#EAE0D0] p-1.5 border border-[#D3C7B5] my-2">
           <button
             type="button"
             onClick={() => setActiveTab("message")}
-            className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 text-[11px] sm:text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "message"
-                ? "bg-[#281B16] text-[#F2EAE0] shadow-sm"
-                : "text-[#6B554D] hover:text-[#281B16]"
+                ? "bg-[#281B16] text-[#FAF8F5] shadow-md"
+                : "text-[#5C4840] hover:text-[#281B16]"
             }`}
           >
-            <MessageSquare className="w-3.5 h-3.5 shrink-0" /> Send a Message
+            <MessageSquare className="w-4 h-4 shrink-0" /> Send a Message
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("calendar")}
-            className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 text-[11px] sm:text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-sans font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "calendar"
-                ? "bg-[#281B16] text-[#F2EAE0] shadow-sm"
-                : "text-[#6B554D] hover:text-[#281B16]"
+                ? "bg-[#281B16] text-[#FAF8F5] shadow-md"
+                : "text-[#5C4840] hover:text-[#281B16]"
             }`}
           >
-            <Calendar className="w-3.5 h-3.5 text-[#FE299E] shrink-0" /> Pick a Time<span className="hidden sm:inline"> (Calendly)</span>
+            <Calendar className="w-4 h-4 text-[#FE299E] shrink-0" /> Pick a Time<span className="hidden sm:inline"> (Calendly)</span>
           </button>
         </div>
 
@@ -257,8 +260,8 @@ export default function ContactFormModal({
               <input id="contact-botcheck" type="text" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
 
               <div>
-                <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#6B554D] block mb-2">
-                  What's this about?
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#5C4840] block mb-2.5">
+                  Select Scope or Engagement
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {intentOptions.map((opt) => {
@@ -269,10 +272,10 @@ export default function ContactFormModal({
                         type="button"
                         aria-pressed={isSelected}
                         onClick={() => form.setValue("subject", opt)}
-                        className={`text-xs sm:text-sm px-3 py-1.5 rounded-full border transition-all font-sans cursor-pointer ${
+                        className={`text-xs px-3.5 py-2 rounded-full border transition-all font-sans cursor-pointer font-medium ${
                           isSelected
-                            ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] font-semibold"
-                            : "bg-transparent text-[#6B554D] border-[#D3C7B5] hover:text-[#281B16] hover:border-[#281B16]"
+                            ? "bg-[#FE299E] text-white border-[#FE299E] shadow-sm font-bold ring-2 ring-[#FE299E]/20"
+                            : "bg-[#FFFFFF]/60 text-[#4A3A32] border-[#D3C7B5] hover:text-[#281B16] hover:border-[#281B16] hover:bg-[#FFFFFF]"
                         }`}
                       >
                         {opt}
@@ -282,59 +285,61 @@ export default function ContactFormModal({
                 </div>
               </div>
 
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs uppercase font-bold tracking-wider text-[#5C4840]">Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Your name"
-                        className="bg-[#EAE0D0] border-[#D3C7B5] text-[#281B16] focus-visible:ring-[#FE299E]"
-                        {...field}
-                        data-testid="input-name"
-                        autoComplete="name"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="grid sm:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xs font-mono uppercase font-bold tracking-wider text-[#5C4840]">Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Your name"
+                          className="bg-[#FFFFFF] border-[#D3C7B5] text-[#281B16] placeholder:text-[#9E8E84] focus-visible:ring-[#FE299E] h-11 rounded-xl shadow-xs"
+                          {...field}
+                          data-testid="input-name"
+                          autoComplete="name"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs uppercase font-bold tracking-wider text-[#5C4840]">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="you@example.com"
-                        className="bg-[#EAE0D0] border-[#D3C7B5] text-[#281B16] focus-visible:ring-[#FE299E]"
-                        {...field}
-                        data-testid="input-email"
-                        autoComplete="email"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xs font-mono uppercase font-bold tracking-wider text-[#5C4840]">Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="you@example.com"
+                          className="bg-[#FFFFFF] border-[#D3C7B5] text-[#281B16] placeholder:text-[#9E8E84] focus-visible:ring-[#FE299E] h-11 rounded-xl shadow-xs"
+                          {...field}
+                          data-testid="input-email"
+                          autoComplete="email"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={form.control}
                 name="subject"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-xs uppercase font-bold tracking-wider text-[#5C4840]">
-                      Subject <span className="text-muted-foreground font-normal lowercase">(optional)</span>
+                    <FormLabel className="text-xs font-mono uppercase font-bold tracking-wider text-[#5C4840]">
+                      Subject <span className="text-[#8C7469] font-normal lowercase">(optional)</span>
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="What's this about?"
-                        className="bg-[#EAE0D0] border-[#D3C7B5] text-[#281B16] focus-visible:ring-[#FE299E]"
+                        className="bg-[#FFFFFF] border-[#D3C7B5] text-[#281B16] placeholder:text-[#9E8E84] focus-visible:ring-[#FE299E] h-11 rounded-xl shadow-xs"
                         {...field}
                         data-testid="input-subject"
                       />
@@ -349,12 +354,12 @@ export default function ContactFormModal({
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-xs uppercase font-bold tracking-wider text-[#5C4840]">Message</FormLabel>
+                    <FormLabel className="text-xs font-mono uppercase font-bold tracking-wider text-[#5C4840]">Message</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Tell me the problem, timeline, or role scope."
-                        rows={3}
-                        className="bg-[#EAE0D0] border-[#D3C7B5] text-[#281B16] focus-visible:ring-[#FE299E]"
+                        rows={4}
+                        className="bg-[#FFFFFF] border-[#D3C7B5] text-[#281B16] placeholder:text-[#9E8E84] focus-visible:ring-[#FE299E] rounded-xl shadow-xs leading-relaxed"
                         {...field}
                         data-testid="input-message"
                       />
@@ -366,7 +371,7 @@ export default function ContactFormModal({
 
               <Button
                 type="submit"
-                className="w-full bg-[#FE299E] hover:bg-[#D1007E] text-white font-sans text-sm font-bold rounded-full py-3.5 cursor-pointer shadow-md"
+                className="w-full bg-[#281B16] hover:bg-[#FE299E] text-white font-sans text-sm font-bold rounded-full py-4 h-12 cursor-pointer shadow-md transition-all duration-200 mt-2"
                 disabled={status === "submitting"}
                 data-testid="button-submit-contact"
               >

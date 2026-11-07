@@ -1,0 +1,43 @@
+const sharp = require("sharp");
+const fs = require("fs");
+
+// Clean, distinctive monogram SVG:
+// Dark ink background (#140E0C), crisp Alabaster KC monogram (#FAF8F5),
+// with an authentic Sovereign Pink node (#FE299E) at top right.
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <rect width="128" height="128" rx="28" fill="#140E0C" />
+  <rect x="2" y="2" width="124" height="124" rx="26" fill="none" stroke="#FE299E" stroke-opacity="0.35" stroke-width="2.5" />
+  <!-- Monogram KC rendered as clean vector paths for 100% deterministic pixel-fitting -->
+  <g fill="#FAF8F5">
+    <!-- Letter K -->
+    <path d="M 28 32 L 40 32 L 40 56 L 60 32 L 75 32 L 51 60 L 76 96 L 61 96 L 40 66 L 40 96 L 28 96 Z" />
+    <!-- Letter C -->
+    <path d="M 103 48 C 98 37 88 32 75 32 C 60 32 49 43 49 64 C 49 85 60 96 75 96 C 88 96 98 91 103 80 L 92 74 C 89 81 83 85 75 85 C 66 85 60 76 60 64 C 60 52 66 43 75 43 C 83 43 89 47 92 54 Z" />
+  </g>
+  <!-- Distinctive Sovereign Pink Accent Node -->
+  <circle cx="106" cy="24" r="8" fill="#FE299E" />
+</svg>`;
+
+fs.writeFileSync("client/public/favicon.svg", svg);
+
+sharp(Buffer.from(svg))
+  .resize(32, 32)
+  .png()
+  .toFile("client/public/favicon-32x32.png");
+
+sharp(Buffer.from(svg))
+  .resize(180, 180)
+  .png()
+  .toFile("client/public/apple-touch-icon.png");
+
+sharp(Buffer.from(svg))
+  .resize(32, 32)
+  .png()
+  .toFile("client/public/images/favicon.png");
+
+sharp(Buffer.from(svg))
+  .resize(48, 48)
+  .png()
+  .toFile("client/public/favicon.ico");
+
+console.log("Successfully generated KC monogram favicons!");
