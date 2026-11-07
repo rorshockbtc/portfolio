@@ -97,7 +97,7 @@ function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
   return (
     <section className="px-5 sm:px-10 lg:px-16 py-20 sm:py-28 bg-[#DFD3C0] border-y border-[#C5B7A2]">
       <div className="max-w-[1280px] mx-auto">
-        <FadeUp className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#C5B7A2]">
+        <FadeUp className="flex flex-col xl:flex-row xl:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#C5B7A2]">
           <div>
             <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] mb-3">
               <Sparkles className="w-4 h-4" /> 01 // Interactive Transformation
@@ -110,16 +110,16 @@ function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
             </p>
           </div>
 
-          {/* High-Contrast Interactive Navigation Pills */}
-          <div className="flex flex-wrap gap-2.5 bg-[#EAE0D0] p-1.5 rounded-full border border-[#C5B7A2] shadow-inner">
+          {/* High-Contrast Interactive Navigation Tabs */}
+          <div className="flex flex-wrap gap-2 bg-[#EAE0D0] p-1.5 rounded-2xl sm:rounded-full border border-[#C5B7A2] shadow-sm max-w-full">
             {pairs.map((p, idx) => (
               <button
                 key={p.label}
                 onClick={() => setActiveIdx(idx)}
-                className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold tracking-wide cursor-pointer transition-all duration-300 ${
+                className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs font-sans font-bold tracking-wide cursor-pointer transition-all duration-200 border whitespace-nowrap ${
                   activeIdx === idx
-                    ? "bg-[#FE299E] text-white shadow-md scale-[1.02]"
-                    : "bg-transparent text-[#5C4840] hover:text-[#281B16] hover:bg-[#DFD3C0]/60"
+                    ? "bg-[#FE299E] text-white border-[#FE299E] shadow-md scale-[1.02]"
+                    : "bg-[#F7F2EC] text-[#5C4840] border-[#D3C7B5] hover:text-[#281B16] hover:bg-white"
                 }`}
                 aria-pressed={activeIdx === idx}
               >
@@ -502,8 +502,15 @@ export default function CaseStudyPage() {
                 Read case study <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
-            <Link href={`/case-studies/${nextSlug}`} className="md:col-span-5 block overflow-hidden rounded-[16px] bg-[#E3D8C7]">
-              <img src={next.heroImage} alt="" loading="lazy" className="w-full aspect-[16/10] object-cover object-top hover:scale-[1.03] transition-transform duration-700" />
+            <Link href={`/case-studies/${nextSlug}`} className="md:col-span-5 block overflow-hidden rounded-[20px] bg-[#1E1714] p-3 sm:p-4 shadow-xl border border-[#3A2E28] hover:border-[#FE299E] transition-all group">
+              <div className="overflow-hidden rounded-[14px] bg-[#2A201B] aspect-[16/10] border border-white/5">
+                <img
+                  src={next.heroImage}
+                  alt={next.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 opacity-95 group-hover:opacity-100"
+                />
+              </div>
             </Link>
           </div>
           <div className="max-w-[1280px] mx-auto mt-16 pt-8 border-t border-[#D3C7B5] flex flex-wrap items-center justify-between gap-4">
