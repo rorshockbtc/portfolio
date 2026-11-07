@@ -1080,17 +1080,17 @@ export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string
     client: "Hacienda & Restaurante Chicuinaco",
     title: "Chicuinaco: Sovereign Eco-Estate, 100-Guest Venue & Multi-Language Brochure System",
     subtitle:
-      "Principal Designer & Systems Architect • Ground-Up Identity, Accént Editorial System, 4-Language i18n & Bitcoin Integration",
+      "Principal Designer & Systems Architect • Ground-Up Identity, Accént Editorial System, 4-Language i18n & Client Sovereignty",
     role: "Principal Product Architect & Brand Systems Designer",
-    scaleBadge: "Eco-Estate & Venue · 4 Languages · Bitcoin Accepted",
+    scaleBadge: "Eco-Estate & Venue · 4 Languages · Zero Hostage",
     timeline: "Nov 2026",
     heroImage: "/images/chicuinaco/site_redesign_hero.png",
     galleryImages: [
       {
         src: "/images/chicuinaco/site_redesign_hero.png",
-        title: "Full-Bleed Swiss Editorial Hero & Satoshi Bitcoin Badge",
+        title: "Full-Bleed Swiss Editorial Hero & 'Bitcoin Accepted' Signal",
         caption:
-          "Live production interface featuring Cormorant Garamond display typography, 4-language switcher (EN/ES/FR/DE), and official Satoshi-spec Bitcoin acceptance badge on warm sandstone paper (#EAE3D5).",
+          "Live production interface featuring Cormorant Garamond display typography, 4-language switcher (EN/ES/FR/DE), and official Satoshi-spec on-premise Bitcoin accepted badge on warm sandstone paper (#EAE3D5).",
         tag: "Editorial Hero",
       },
       {
@@ -1161,20 +1161,20 @@ export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string
       },
     ],
     executiveSummary:
-      "Zero-Hostage Software: Empowering Central American Small Business Sovereignty. What began a year ago as a 30-minute emergency Replit build was re-engineered into an international-grade Swiss monograph and decoupled static architecture. Instead of paying monthly hosting retainers and relying on developers for minor tweaks, proprietor Joe Coffey now owns his codebase on GitHub, deploys autonomously to Vercel, and maintains his site independently using BANG! IDE paired with local on-device AI (Qwen/Llama). Bridging rural Central American realities—3G cellular networks, sub-$100 Android devices, and volatile pricing—with publication-grade editorial craft, 4-language i18n, zero-card hairline grids, and Satoshi-spec Bitcoin Lightning settlement.",
+      "Zero-Hostage Software: Empowering Central American Small Business Sovereignty. What began a year ago as a 30-minute emergency Replit build was re-engineered into an international-grade Swiss monograph and decoupled static architecture. Instead of paying monthly hosting retainers and relying on developers for minor tweaks, proprietor Joe Coffey now owns his codebase on GitHub, deploys autonomously to Vercel, and maintains his site independently using BANG! IDE paired with local on-device AI (Qwen/Llama). Bridging rural Central American realities—3G cellular networks, sub-$100 Android devices, and volatile pricing—with publication-grade editorial craft, 4-language i18n, zero-card hairline grids, and on-premise Bitcoin acceptance signaling.",
     challenge:
       "Small businesses and eco-tourism estates in Central America are routinely trapped by software extractivism: predatory developers who charge monthly hosting retainers, clunky WordPress themes loaded with 8MB of scripts, or fragile SaaS builders that hold code hostage. Originally, I built Chicuinaco a year ago in under 30 minutes on Replit to solve an immediate emergency. But that created developer dependency: every text change or menu update required reaching out to me. Furthermore, regional hospitality faced acute real-world constraints: (1) Severe Hardware & Bandwidth Realities: Central American travelers and local staff rely on low-tier 3G cellular connections and entry-level Android devices (such as 360px ZTE phones), where standard viewport clamp calculations cause browser crashes; (2) Multi-Offering Synthesis: Articulating five distinct operations—a wood-fired dining room, a 100-guest arched terrace for weddings, rugged waterfall canyon hikes, ancestral Bálsamo Negro harvesting, and an 8-guest overnight suite; (3) The Browser Auto-Translate Trap: Safari and Google Chrome auto-translate engines routinely mistranslated the proper estate name \"Hacienda Chicuinaco\" into \"Department of Treasury Chicuinaco\" (Ministerio de Hacienda); and (4) The Cultural Pricing Dilemma: As proprietor Joe Coffey explained, \"Over here if you publish a price, they think it is that price forever.\" Static e-commerce was culturally unviable given seasonal market dynamics.",
     solution:
-      "Engineered an ultra-lean, zero-card digital monograph and fully decoupled, sovereign stack rooted in Accént Sandstone (#EAE3D5 sandstone paper, #1B5E3A Hacienda emerald, #14120F charcoal). Resolved every constraint through deliberate architectural trade-offs: (1) Code Sovereignty & BANG! IDE: Transferred 100% repository ownership to the proprietors on GitHub with automated Vercel edge CI/CD, and trained Joe Coffey to make menu and content edits independently using BANG! IDE with on-device local AI (Qwen/Llama)—permanently eliminating $75–$200/hr WordPress developer fees; (2) Zero-Hardcoded-Pricing WhatsApp Protocol: Replaced brittle booking databases with dynamic, language-aware WhatsApp prefilled reservation links—generating instantaneous, localized booking payloads directly into management messaging with zero SaaS commissions; (3) Defensive Auto-Translate System: Injected translate=\"no\" and class=\"notranslate\" attributes across proper nouns, botanical names (Myroxylon balsamum), and brand anchors; (4) Resilient 360px Fluid Typographic Scale: Overhauled fragile headline clamps down to clamp(2.75rem, 13vw, 12.5rem) paired with dark frosted backdrop shields (bg-[#14120F]/90 backdrop-blur-md); and (5) Sub-100ms Edge Hydration: Built on a lightweight Vite + React static SPA engine with WebP video poster streams, delivering a sub-1.2s Largest Contentful Paint over 3G cellular towers.",
+      "Engineered an ultra-lean, zero-card digital monograph and fully decoupled, sovereign stack rooted in Accént Sandstone (#EAE3D5 sandstone paper, #1B5E3A Hacienda emerald, #14120F charcoal). Resolved every constraint through deliberate architectural trade-offs: (1) Code Sovereignty & BANG! IDE: Transferred 100% repository ownership to the proprietors on GitHub with automated Vercel edge CI/CD, and trained Joe Coffey to make menu and content edits independently using BANG! IDE with on-device local AI (Qwen/Llama)—permanently eliminating $75–$200/hr WordPress developer fees; (2) Zero-Hardcoded-Pricing WhatsApp Protocol: Replaced brittle booking databases with dynamic, language-aware WhatsApp prefilled reservation links—generating instantaneous, localized booking payloads directly into management messaging with zero SaaS commissions; (3) Defensive Auto-Translate System: Injected translate=\"no\" and class=\"notranslate\" attributes across proper nouns, botanical names (Myroxylon balsamum), and brand anchors; (4) Resilient 360px Fluid Typographic Scale: Overhauled fragile headline clamps down to clamp(2.75rem, 13vw, 12.5rem) paired with dark frosted backdrop shields (bg-[#14120F]/90 backdrop-blur-md); and (5) Sub-100ms Edge Hydration: Built on a lightweight Vite + React static SPA engine with WebP video poster streams, delivering a sub-1.2s Largest Contentful Paint over 3G cellular towers while displaying an authentic on-premise 'Bitcoin Accepted Here' badge beneath the 4 pillars.",
     uiUxCraft:
       "Crafted an elevated, publication-grade sensory experience inspired by European architectural monographs and Latin stone inscriptions. High-contrast Cormorant Garamond light/regular serifs are paired with tracked-out small-caps labels and the Lavishly Yours handwritten script signature. The Four Pillars section abandons generic nested cards for 1px hairline-divided sandstone matrices with Roman and Arabic numerals. \"La Carta\" menu functions as a typographic ledger with dotted leaders, tabular price alignments, and zero-layout-shift dish photography previews. Fluid Framer Motion scroll choreography and accessible dark/light sandstone themes deliver quiet luxury on every screen.",
     systemsArchitecture:
-      "Zero-bloat Vite + React + TypeScript static architecture deployed on global edge CDN. Features a zero-dependency 4-locale internationalization dictionary (EN, ES, FR, DE) with instantaneous locale switching, multi-entity JSON-LD structured data (Restaurant, LodgingBusiness, TouristAttraction, EventVenue) for Google Knowledge Graph and AI search agent indexing, high-efficiency WebP responsive asset pipeline, and sovereign on-premise Bitcoin Lightning settlement.",
+      "Zero-bloat Vite + React + TypeScript static architecture deployed on global edge CDN. Features a zero-dependency 4-locale internationalization dictionary (EN, ES, FR, DE) with instantaneous locale switching, multi-entity JSON-LD structured data (Restaurant, LodgingBusiness, TouristAttraction, EventVenue) for Google Knowledge Graph and AI search agent indexing, high-efficiency WebP responsive asset pipeline, and sovereign client code autonomy via BANG! IDE.",
     metrics: [
       { value: "100%", label: "Lighthouse Score", subtext: "Performance, Best Practices & SEO" },
       { value: "< 1.2s", label: "Mobile 3G LCP", subtext: "Optimized WebP & zero server round-trips" },
       { value: "100% Offline AI", label: "BANG! + Qwen/Llama", subtext: "Autonomous updates without dev fees" },
-      { value: "₿ + USD", label: "Sovereign Settlement", subtext: "Official Bitcoin & Lightning accepted" },
+      { value: "4", label: "Native Locales", subtext: "English, Español, Français, Deutsch" },
     ],
     outcomes: [
       "Zero-Hostage Software: Liberated the small business from developer dependency, giving the owners 100% ownership of their GitHub repo and Vercel pipeline.",
@@ -1191,7 +1191,7 @@ export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string
       "Framer Motion",
       "4-Locale i18n Engine",
       "JSON-LD Schema Graph",
-      "Bitcoin / Lightning",
+      "BANG! IDE (Local AI)",
     ],
     liveUrl: "https://www.chicuinaco.com",
     liveUrlLabel: "Visit Hacienda Chicuinaco (chicuinaco.com)",
@@ -1220,10 +1220,10 @@ export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string
             "Pairs a traditional dotted-leader print menu with instant dish photography previews and lazy-loaded timber-press video streams.",
         },
         {
-          role: "Multi-Entity SEO & Sovereign Payment Layer",
-          tech: "JSON-LD Graph (Restaurant + Lodging + EventVenue) & Bitcoin",
+          role: "Multi-Entity SEO & On-Premise Bitcoin Badge",
+          tech: "JSON-LD Graph (Restaurant + Lodging + EventVenue) & On-Premise Bitcoin Badge",
           rationale:
-            "Exposes rich structured data for international search and AI travel agents while signaling native Bitcoin & Lightning acceptance on-premise.",
+            "Exposes rich structured data for international search and AI travel agents while displaying an authentic on-premise 'Bitcoin Accepted Here' badge beneath the Four Pillars.",
         },
       ],
       codeSnippets: [
