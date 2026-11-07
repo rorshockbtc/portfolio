@@ -87,111 +87,127 @@ function Story({ label, text }: { label: string; text: string }) {
   );
 }
 
-/** Interactive Before & After comparison carousel */
+/** Interactive Before & After comparison carousel with high-contrast tab controls */
 function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
-  const [viewMode, setViewMode] = useState<"side-by-side" | "diff">("side-by-side");
   const current = pairs[activeIdx];
 
   if (!pairs || pairs.length === 0) return null;
 
   return (
-    <section className="px-5 sm:px-10 lg:px-16 py-20 sm:py-28 bg-[#E3D8C7] border-y border-[#D3C7B5]">
+    <section className="px-5 sm:px-10 lg:px-16 py-20 sm:py-28 bg-[#DFD3C0] border-y border-[#C5B7A2]">
       <div className="max-w-[1280px] mx-auto">
-        <FadeUp className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <FadeUp className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#C5B7A2]">
           <div>
-            <div className="inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-wider font-bold text-[#FE299E] mb-3">
-              <Sparkles className="w-3.5 h-3.5" /> Direct Transformation
+            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] font-bold text-[#FE299E] mb-3">
+              <Sparkles className="w-4 h-4" /> 01 // Interactive Transformation
             </div>
-            <h2 className="font-serif font-light text-4xl sm:text-5xl tracking-[-0.02em] text-[#281B16]">
-              Before &amp; After
+            <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl tracking-[-0.025em] text-[#281B16]">
+              Before &amp; After Redesign
             </h2>
+            <p className="mt-3 text-base text-[#5C4840] max-w-[48ch]">
+              Select a screen below to inspect the direct architectural evolution from the legacy WordPress site to the high-performance Swiss monograph.
+            </p>
           </div>
-          {/* Slide Navigation Tabs */}
-          <div className="flex flex-wrap gap-2">
+
+          {/* High-Contrast Interactive Navigation Pills */}
+          <div className="flex flex-wrap gap-2.5 bg-[#EAE0D0] p-1.5 rounded-full border border-[#C5B7A2] shadow-inner">
             {pairs.map((p, idx) => (
               <button
                 key={p.label}
                 onClick={() => setActiveIdx(idx)}
-                className={`px-4 py-2 rounded-full text-xs font-medium font-sans cursor-pointer transition-all border ${
+                className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold tracking-wide cursor-pointer transition-all duration-300 ${
                   activeIdx === idx
-                    ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] shadow-sm"
-                    : "bg-[#EAE0D0] text-[#5C4840] border-[#D3C7B5] hover:text-[#281B16]"
+                    ? "bg-[#FE299E] text-white shadow-md scale-[1.02]"
+                    : "bg-transparent text-[#5C4840] hover:text-[#281B16] hover:bg-[#DFD3C0]/60"
                 }`}
+                aria-pressed={activeIdx === idx}
               >
+                <span className="opacity-70 mr-1.5 font-mono text-[10px]">{idx + 1}.</span>
                 {p.label}
               </button>
             ))}
           </div>
         </FadeUp>
 
-        {/* Carousel Card */}
+        {/* Comparison Showcase Stage */}
         <FadeUp>
-          <div className="grid md:grid-cols-2 gap-8 items-start">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
             {/* BEFORE PANEL */}
-            <div className="rounded-[18px] bg-[#1C1715] p-5 sm:p-6 text-[#E0D8D0] shadow-md border border-[#3A2E28]">
-              <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#3A2E28] mb-4">
-                <span className="font-mono text-xs uppercase tracking-widest text-[#E07A5F] font-bold">
-                  Legacy / Before
-                </span>
-                <span className="text-xs text-[#9E8E84]">{current.beforeTitle}</span>
+            <div className="rounded-[22px] bg-[#1A1513] p-5 sm:p-7 text-[#E0D8D0] shadow-xl border border-[#3A2E28] flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#3A2E28] mb-5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E07A5F]/20 text-[#E07A5F] border border-[#E07A5F]/30 font-mono text-xs uppercase tracking-wider font-bold">
+                    Legacy Site (Before)
+                  </div>
+                  <span className="text-xs text-[#9E8E84] font-medium">{current.beforeTitle}</span>
+                </div>
+                <div className="overflow-hidden rounded-[14px] bg-black/60 aspect-[16/10] border border-white/10 shadow-inner group">
+                  <img
+                    src={current.beforeSrc}
+                    alt={current.beforeTitle}
+                    className="w-full h-full object-cover object-top opacity-95 transition-transform duration-700 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-              <div className="overflow-hidden rounded-[12px] bg-black/40 aspect-[16/10] border border-white/5">
-                <img
-                  src={current.beforeSrc}
-                  alt={current.beforeTitle}
-                  className="w-full h-full object-cover object-top opacity-90"
-                  loading="lazy"
-                />
+              <div className="mt-5 pt-4 border-t border-[#3A2E28]/60">
+                <p className="text-xs sm:text-sm text-[#B3A499] leading-relaxed">
+                  {current.beforeCaption}
+                </p>
               </div>
-              <p className="mt-4 text-xs sm:text-sm text-[#B3A499] leading-relaxed">
-                {current.beforeCaption}
-              </p>
             </div>
 
             {/* AFTER PANEL */}
-            <div className="rounded-[18px] bg-[#F7F2EC] p-5 sm:p-6 text-[#281B16] shadow-md border border-[#D3C7B5]">
-              <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#D3C7B5] mb-4">
-                <span className="font-mono text-xs uppercase tracking-widest text-[#1B5E3A] font-bold">
-                  Redesigned Monograph / After
-                </span>
-                <span className="text-xs text-[#5C4840]">{current.afterTitle}</span>
+            <div className="rounded-[22px] bg-[#F7F2EC] p-5 sm:p-7 text-[#281B16] shadow-xl border-2 border-[#1B5E3A]/30 flex flex-col justify-between relative overflow-hidden">
+              <div>
+                <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#D3C7B5] mb-5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1B5E3A]/15 text-[#1B5E3A] border border-[#1B5E3A]/30 font-mono text-xs uppercase tracking-wider font-bold">
+                    Live Monograph (After)
+                  </div>
+                  <span className="text-xs text-[#5C4840] font-medium">{current.afterTitle}</span>
+                </div>
+                <div className="overflow-hidden rounded-[14px] bg-[#E3D8C7] aspect-[16/10] border border-[#D3C7B5] shadow-sm group">
+                  <img
+                    src={current.afterSrc}
+                    alt={current.afterTitle}
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-              <div className="overflow-hidden rounded-[12px] bg-[#E3D8C7] aspect-[16/10] border border-[#D3C7B5]">
-                <img
-                  src={current.afterSrc}
-                  alt={current.afterTitle}
-                  className="w-full h-full object-cover object-top"
-                  loading="lazy"
-                />
+              <div className="mt-5 pt-4 border-t border-[#D3C7B5]/60">
+                <p className="text-xs sm:text-sm text-[#3A2A22] leading-relaxed font-medium">
+                  {current.afterCaption}
+                </p>
               </div>
-              <p className="mt-4 text-xs sm:text-sm text-[#4A3A32] leading-relaxed font-medium">
-                {current.afterCaption}
-              </p>
             </div>
           </div>
 
-          {/* Bottom Step Indicator */}
-          <div className="mt-8 flex items-center justify-between text-xs text-[#5C4840]">
-            <div>
-              Transformation {activeIdx + 1} of {pairs.length}: <strong className="text-[#281B16] font-semibold">{current.label}</strong>
-            </div>
+          {/* Interactive Stepper Footer */}
+          <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#C5B7A2] text-sm text-[#5C4840]">
             <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#FE299E] animate-pulse" />
+              Viewing transformation <strong className="text-[#281B16]">{activeIdx + 1} of {pairs.length}</strong>:{" "}
+              <span className="italic font-serif text-[#281B16] text-base">{current.label}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-xs uppercase font-bold tracking-wider text-[#8C7469]">Switch View:</span>
               <button
                 disabled={activeIdx === 0}
                 onClick={() => setActiveIdx((i) => Math.max(0, i - 1))}
-                className="w-8 h-8 rounded-full border border-[#D3C7B5] flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#281B16] hover:text-white transition-colors cursor-pointer"
-                aria-label="Previous comparison"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#281B16] text-[#281B16] text-xs font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#281B16] hover:text-white transition-all cursor-pointer"
+                aria-label="Previous screen"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-4 h-4" /> Prev
               </button>
               <button
                 disabled={activeIdx === pairs.length - 1}
                 onClick={() => setActiveIdx((i) => Math.min(pairs.length - 1, i + 1))}
-                className="w-8 h-8 rounded-full border border-[#D3C7B5] flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#281B16] hover:text-white transition-colors cursor-pointer"
-                aria-label="Next comparison"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#281B16] text-white text-xs font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#FE299E] hover:border-[#FE299E] transition-all cursor-pointer shadow-sm"
+                aria-label="Next screen"
               >
-                <ArrowRight className="w-4 h-4" />
+                Next <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
