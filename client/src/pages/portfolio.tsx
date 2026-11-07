@@ -105,7 +105,7 @@ const EXPERIENCE = [
   { years: "2022 — 2024", org: "Custodia Bank", role: "Lead Product Designer (First design hire)" },
   { years: "2021 — 2022", org: "Walmart (via PredictiveUX)", role: "Fractional / Consulting Lead Architect" },
   { years: "2020 — 2021", org: "UnitedHealth Group / Optum", role: "Senior Product Experience Designer" },
-  { years: "2018 — 2020", org: "Building 25", role: "Design Director (Fidelity Investments, IronNet)" },
+  { years: "2018 — 2020", org: "BLDG-25", role: "Design Director (Fidelity Investments, IronNet, Martin Marietta)" },
   { years: "2015 — 2017", org: "UltraLinq Healthcare", role: "Lead Product Designer / Design Director" },
   { years: "2014 — 2015", org: "ESO Fund", role: "Marketing Director (Pre-IPO Equity Liquidity)" },
   { years: "2010 — 2014", org: "Foodler (Acquired by Grubhub)", role: "Director of Business Operations" },

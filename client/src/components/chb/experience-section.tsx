@@ -78,7 +78,7 @@ const EXPERIENCE: ExperienceRole[] = [
   {
     period: "2018 – 2020",
     role: "Design Director",
-    company: "Building 25",
+    company: "BLDG-25",
     location: "Raleigh, NC",
     scaleBadge: "Fidelity Investments · IronNet · Martin Marietta",
     summary:
