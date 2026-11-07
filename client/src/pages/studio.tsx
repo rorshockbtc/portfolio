@@ -663,12 +663,23 @@ export default function StudioPage() {
                 transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                 className="lg:col-span-7"
               >
-                <div className="flex flex-wrap items-center gap-3 pb-5 mb-8 border-b border-[#281B16]">
-                  <BrandMark size="sm" />
-                  <span className="text-[#5C4840]">·</span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#5C4840] font-medium">
-                    Colon Hyphen Bracket, LLC · Principal Architecture &amp; R&amp;D Lab
-                  </span>
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-5 mb-8 border-b border-[#281B16]">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <BrandMark size="sm" />
+                    <span className="text-[#5C4840]">·</span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#5C4840] font-medium">
+                      Colon Hyphen Bracket, LLC · Principal Architecture &amp; R&amp;D Lab
+                    </span>
+                  </div>
+                  <a
+                    href="https://colonhyphenbracket.pink/studio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#281B16] text-[#F2EAE0] hover:bg-[#FE299E] font-mono text-[10px] uppercase tracking-[0.14em] no-underline transition-colors"
+                  >
+                    <span>Canonical Home: colonhyphenbracket.pink/studio</span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
                 </div>
 
                 <h1 className="font-serif font-light text-5xl sm:text-6xl lg:text-[72px] text-[#281B16] tracking-[-0.028em] leading-[0.98] mb-7">

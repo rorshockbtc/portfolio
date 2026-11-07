@@ -10,7 +10,6 @@ import { lazy, Suspense } from "react";
 import NotFound from "@/pages/not-found";
 
 // Secondary routes load on demand so the homepage ships less JavaScript.
-const Studio = lazy(() => import("@/pages/studio"));
 const CaseStudyPage = lazy(() => import("@/pages/case-study"));
 const EssayDesignIsRisk = lazy(() => import("@/pages/essay-design-is-risk"));
 
@@ -26,7 +25,7 @@ function Router() {
           <Switch>
             <Route path="/" component={Portfolio} />
             <Route path="/case-studies/:slug" component={CaseStudyPage} />
-            <Route path="/studio" component={Studio} />
+            <Route path="/studio">{() => { window.location.replace("https://colonhyphenbracket.pink/studio"); return null; }}</Route>
             <Route component={NotFound} />
           </Switch>
         </Layout>

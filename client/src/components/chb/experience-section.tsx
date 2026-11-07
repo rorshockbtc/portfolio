@@ -146,7 +146,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
+      className="py-16 sm:py-24 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
       data-testid="section-experience"
     >
       <div className="max-w-[1440px] mx-auto">
@@ -154,7 +154,7 @@ export default function ExperienceSection() {
         <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-[#281B16]">
           <div className="max-w-3xl">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-4">
-              03 // Career Ledger · 15+ Years in Production
+              04 // Career Ledger · 15+ Years in Production
             </div>
             <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#281B16] tracking-[-0.025em] leading-[1.04]">
               From regulated banking &amp; 35M-patient healthcare to{" "}
@@ -190,7 +190,7 @@ export default function ExperienceSection() {
                 <button
                   type="button"
                   onClick={() => setExpandedIndex(isOpen ? null : idx)}
-                  className="w-full text-left py-7 sm:py-9 px-3 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-baseline cursor-pointer bg-transparent border-none"
+                  className="w-full text-left py-5 sm:py-6 px-3 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-baseline cursor-pointer bg-transparent border-none"
                   aria-expanded={isOpen}
                 >
                   {/* Number + Period */}

@@ -113,15 +113,15 @@ export default function TestimonialsSection() {
   return (
     <section
       id="endorsements"
-      className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
+      className="py-16 sm:py-24 px-5 sm:px-10 lg:px-16 border-b border-[#D3C7B5] bg-[#EAE0D0]"
       data-testid="section-testimonials"
     >
       <div className="max-w-[1440px] mx-auto">
         {/* Section Header */}
-        <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-12 border-b border-[#281B16]">
+        <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 border-b border-[#281B16]">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5C4840] mb-4">
-              06 // Executive &amp; Engineering Endorsements
+              05 // Executive &amp; Engineering Endorsements
             </div>
             <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#281B16] tracking-[-0.025em] leading-[1.04]">
               Trusted by leaders in{" "}

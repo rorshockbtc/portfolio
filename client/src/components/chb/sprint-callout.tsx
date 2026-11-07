@@ -75,15 +75,15 @@ export function SprintCallout({ onContactClick }: SprintCalloutProps) {
   return (
     <section
       id="work-together"
-      className="py-24 sm:py-32 px-5 sm:px-10 lg:px-16 bg-[#1A1310] text-[#F2EAE0] border-t border-[#3D2C24]"
+      className="py-16 sm:py-24 px-5 sm:px-10 lg:px-16 bg-[#1A1310] text-[#F2EAE0] border-t border-[#3D2C24]"
       data-testid="section-sprint-callout"
     >
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}
-        <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-14 border-b border-[#F2EAE0]/15">
+        <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-[#F2EAE0]/15">
           <div className="max-w-3xl">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#D3C7B5]/80 mb-4">
-              07 // Work Together · Direct Principal Engagement
+              06 // Work Together · Direct Principal Engagement
             </div>
             <h2 className="font-serif font-light text-4xl sm:text-5xl lg:text-6xl text-[#F2EAE0] tracking-[-0.025em] leading-[1.04]">
               One architect. Zero agency bloat.{" "}
@@ -91,9 +91,20 @@ export function SprintCallout({ onContactClick }: SprintCalloutProps) {
             </h2>
           </div>
 
-          <p className="font-sans text-sm sm:text-base text-[#D3C7B5]/85 max-w-md leading-[1.65]">
-            Available for Principal / Staff Product Architect roles and fixed-scope CHB Studio sprints. Every engagement works directly with Kyle.
-          </p>
+          <div className="max-w-md space-y-3">
+            <p className="font-sans text-sm sm:text-base text-[#D3C7B5]/85 leading-[1.65]">
+              Available for Principal / Staff Product Architect roles and fixed-scope CHB Studio sprints. Every engagement works directly with Kyle.
+            </p>
+            <a
+              href="https://colonhyphenbracket.pink/studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#FE299E] hover:underline no-underline"
+            >
+              <span>Explore CHB R&amp;D Studio at colonhyphenbracket.pink/studio</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </Reveal>
 
         {/* 3-Column Hairline Architectural Ledger */}

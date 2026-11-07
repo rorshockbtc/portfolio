@@ -625,45 +625,51 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
 
   "colors-type-grids": {
     slug: "colors-type-grids",
-    client: "Colon Hyphen Bracket",
-    title: "Albers & Vignelli in CSS — The Interaction of Color & Typographic Breathing",
-    subtitle: "A Rebel's Manifesto on Grid-Based Design & Typography by Colon Hyphen Bracket",
+    client: "Colon Hyphen Bracket · Accént 3.0",
+    title: "Accént 3.0 & Albers/Vignelli in CSS — The Pipes Sovereign Design System",
+    subtitle: "Interactive Design System (design.pipes.pink), W3C Token Architecture & 3846×4800 Grid Manifesto",
     role: "Author, Designer & Systems Architect",
-    scaleBadge: "3846 × 4800 Masterwork Poster",
-    timeline: "2025 – 2026",
+    scaleBadge: "Live at design.pipes.pink · 49 AAA Pairings",
+    timeline: "2024 – 2026",
     heroImage: "/images/cassandra/colors-type-grids.jpg",
     galleryImages: [
       {
         src: "/images/cassandra/colors-type-grids.jpg",
-        title: "Albers & Vignelli in CSS: The 4-Column Poster",
-        caption: "High-resolution 3846x4800 masterwork poster exploring color interaction, typographic scale, and CSS grid discipline.",
+        title: "Albers & Vignelli in CSS: The 4-Column Masterwork Poster",
+        caption: "High-resolution 3846x4800 masterwork poster exploring Josef Albers' color interaction, typographic scale, and Massimo Vignelli's 8pt CSS grid discipline.",
         tag: "Design Manifesto",
+      },
+      {
+        src: "/images/pipes/pipes-hero.png",
+        title: "Accént 3.0 in Production across Pipes.Pink",
+        caption: "Dual-Accent palette (Sovereign Pink + Crystalline Sky Blue), Editorial vs. Commercial surface modes, and hairline grid governance.",
+        tag: "Live Design System",
       },
     ],
     executiveSummary:
-      "A comprehensive design manifesto and technical blueprint examining Josef Albers' 'The Interaction of Color' and Massimo Vignelli's 8pt grid system translated directly into modern CSS architecture. Rejects AI-generated aesthetic homogeny and corporate template bloat.",
+      "Accént 3.0 (live at design.pipes.pink) is the codified design system and token architecture governing Pipes and Colon Hyphen Bracket—translating Josef Albers' 'The Interaction of Color' and Massimo Vignelli's 8pt Swiss grid directly into W3C DTCG tokens, React/Tailwind primitives, and Framer Motion choreography.",
     challenge:
-      "Modern web software is drowning in generic, AI-generated design soup: low-contrast grey-on-grey text, uncalibrated rounded boxes, missing typographic hierarchies, and arbitrary spacing. Digital interfaces have lost their visual soul and rhythm.",
+      "Modern web software is drowning in generic, AI-generated design soup: low-contrast grey-on-grey text, uncalibrated rounded boxes, missing typographic hierarchies, and arbitrary spacing. Digital interfaces needed a rigorous, machine-enforceable system written for designers, engineers, and local AI models alike.",
     solution:
-      "Synthesized the enduring principles of Bauhaus modernism, Josef Albers' relativity of color, and Vignelli's mathematical grid into a concrete, executable CSS system. Proves that mathematical rigor in spacing and bold, purposeful color contrast unlocks interfaces that breathe naturally.",
+      "Synthesized Bauhaus modernism, Josef Albers' chromatic relativity (7 tactile pastels × 7 tonal darks = 49 WCAG AAA pairings), and Vignelli's mathematical hairlines into a single W3C DTCG JSON source (design-tokens.json) and live interactive documentation portal at design.pipes.pink.",
     uiUxCraft:
-      "4-column progressive breakdown: Column 1 outlines the core manifesto and typographic rules; Column 2 establishes the base-8 grid rhythm and initial card anatomy; Column 3 demonstrates complex two-tiered component compositions; Column 4 explores chromatic relativity and optical vibration under varying backgrounds.",
+      "Features Dual-Accent governance (Sovereign Pink #FE299E / #B8326D + Crystalline Sky Blue #01A9F4 / #D4EBF5), two surface modes (Editorial quiet hairlines for reading rooms vs. Commercial 3px tactile ink shadows for primary CTAs), and GPU-safe Framer Motion spring tokens.",
     systemsArchitecture:
-      "Built with strict CSS custom property tokenization. Establishes proportional rem-based scaling, optical margin alignment, and high-DPI rasterization standards for web and physical print.",
+      "Powered by a single W3C DTCG token source compiled across Next.js web and Tauri/Rust desktop, with runtime semantic contrast computation and automated CI spec enforcement.",
     metrics: [
-      { value: "3846x4800", label: "Masterwork Canvas", subtext: "Print-ready high DPI" },
+      { value: "v3.0", label: "Live System", subtext: "design.pipes.pink" },
+      { value: "49 AAA", label: "Chromatic Pairings", subtext: "Albers Pastel × Tonal Dark" },
       { value: "8pt", label: "Mathematical Grid", subtext: "Vignelli spatial discipline" },
-      { value: "100%", label: "CSS Native", subtext: "Zero external framework bloat" },
-      { value: "4 Columns", label: "Manifesto System", subtext: "From theory to production" },
+      { value: "100%", label: "W3C DTCG Tokens", subtext: "CI-verified contrast" },
     ],
     outcomes: [
-      "Codified the Colon Hyphen Bracket design philosophy governing all client and sovereign software.",
-      "Released interactive digital viewer enabling pan-and-zoom inspection across all 4 columns.",
-      "Provided an uncompromising antidote to generic SaaS card design and AI template homogeny.",
+      "Shipped live interactive documentation and component workbench at https://design.pipes.pink.",
+      "Codified the Colon Hyphen Bracket & Pipes design philosophy across web, mobile, and native macOS apps.",
+      "Released the 3846×4800 Albers & Vignelli in CSS masterwork poster as the visual manifesto.",
     ],
-    technologies: ["Massimo Vignelli 8pt Grid", "Josef Albers Color Theory", "Vanilla CSS", "Modern Typography", "Print & Vector Layout"],
-    liveUrl: "https://cassandra.colonhyphenbracket.pink/ColorsTypeGrids",
-    liveUrlLabel: "Open Interactive Poster Viewer",
+    technologies: ["Accént 3.0", "W3C DTCG Tokens", "Josef Albers Color Theory", "Massimo Vignelli 8pt Grid", "Framer Motion", "Tailwind CSS"],
+    liveUrl: "https://design.pipes.pink",
+    liveUrlLabel: "Launch Accént 3.0 Design System (design.pipes.pink)",
   },
 
   unitedhealth: {

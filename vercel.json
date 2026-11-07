@@ -2,11 +2,11 @@
   "framework": "vite",
   "outputDirectory": "dist",
   "buildCommand": "npm run build",
+  "redirects": [
+    { "source": "/studio", "destination": "https://colonhyphenbracket.pink/studio", "permanent": true },
+    { "source": "/studio/:path*", "destination": "https://colonhyphenbracket.pink/studio", "permanent": true }
+  ],
   "rewrites": [
-    {
-      "source": "/studio",
-      "destination": "/studio/index.html"
-    },
     {
       "source": "/case-studies/:slug",
       "destination": "/case-studies/:slug/index.html"
