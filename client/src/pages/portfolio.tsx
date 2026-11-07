@@ -115,6 +115,7 @@ const EXPERIENCE = [
 const LOGOS = [
   "Custodia Bank",
   "UnitedHealth Group",
+  "Optum",
   "Walmart",
   "Martin Marietta",
   "IronNet Cybersecurity",

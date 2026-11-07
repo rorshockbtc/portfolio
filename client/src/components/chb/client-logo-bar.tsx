@@ -2,10 +2,11 @@ import { Stagger, StaggerItem } from "@/components/motion/primitives";
 
 const LOGOS = [
   { name: "Custodia Bank", context: "1st Product Designer · Digital Asset Custody" },
+  { name: "UnitedHealth Group", context: "Principal Lead · 35M+ Patient Portal" },
+  { name: "Optum", context: "Fusion Senior Designer · Clinical Mobile Experience" },
+  { name: "Walmart Global Tech", context: "Staff Systems · 3M+ Associate Platform" },
   { name: "Martin Marietta", context: "Fortune 500 · Enterprise Logistics & Materials" },
   { name: "IronNet", context: "Gen. Keith Alexander · Network Defense Telemetry" },
-  { name: "UnitedHealth Group", context: "Principal Lead · 35M+ Patient Portal" },
-  { name: "Walmart Global Tech", context: "Staff Systems · 3M+ Associate Platform" },
   { name: "Fidelity Investments", context: "Enterprise UX · Wealth & Brokerage" },
   { name: "Foodler → Grubhub", context: "Lead Ops · $500M+ Volume Acquisition Exit" },
 ];
@@ -27,7 +28,7 @@ export function ClientLogoBar() {
           </span>
         </div>
 
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 divide-y sm:divide-y-0 sm:divide-x divide-[#D3C7B5]">
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 divide-y sm:divide-y-0 sm:divide-x divide-[#D3C7B5]">
           {LOGOS.map((logo, idx) => (
             <StaggerItem
               key={logo.name}
