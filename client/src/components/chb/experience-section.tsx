@@ -16,8 +16,8 @@ interface ExperienceRole {
 
 const EXPERIENCE: ExperienceRole[] = [
   {
-    period: "2024 – Present",
-    role: "Founder, Principal Product Architect & R&D Lead",
+    period: "2017 – Present",
+    role: "Founder, Principal Product Architect & Systems Lead",
     company: "Colon Hyphen Bracket, LLC",
     location: "Remote · Global",
     scaleBadge: "AI & Web3 R&D Studio",
@@ -31,13 +31,13 @@ const EXPERIENCE: ExperienceRole[] = [
     tags: ["TypeScript", "React 19", "Next.js", "DuckDB-WASM", "MCP", "Design Systems"],
   },
   {
-    period: "2023 – 2024",
-    role: "Principal Product Designer & Founding Design Lead",
+    period: "Jan 2022 – Sep 2024",
+    role: "Lead Product Designer & Founding Design Hire",
     company: "Custodia Bank",
     location: "Cheyenne, WY (Remote)",
     scaleBadge: "1st Product Designer · Regulated Custody",
     summary:
-      "Hired as the first product designer at Kaitlin Long's regulated Special Purpose Depository Institution (SPDI) to build the foundational digital asset custody platform and multi-sig treasury workflows.",
+      "Hired as the first product designer at Caitlin Long's regulated Special Purpose Depository Institution (SPDI) to build the foundational digital asset custody platform and multi-sig treasury workflows.",
     highlights: [
       "Architected end-to-end institutional Bitcoin custody ceremony, multi-party quorum approvals, and cold-storage withdrawal verification.",
       "Created Custodia's first unified Figma-to-React enterprise design system across treasury, compliance, and audit operations.",
@@ -46,52 +46,53 @@ const EXPERIENCE: ExperienceRole[] = [
     tags: ["Institutional Custody", "Multi-Sig UX", "Fintech Compliance", "Design Systems"],
   },
   {
-    period: "2021 – 2023",
-    role: "Principal / Lead Product Designer",
-    company: "UnitedHealth Group (Optum)",
-    location: "Minnetonka, MN (Remote)",
-    scaleBadge: "35M+ Patients · Clinical & Pharmacy",
-    summary:
-      "Led patient-facing and clinical workflow architecture across UnitedHealth Group & Optum digital health ecosystems serving over 35 million active patients.",
-    highlights: [
-      "Redesigned end-to-end care navigation, prescription fulfillment, and benefits clarity flows for 35M+ members.",
-      "Partnered with clinical informaticists and engineering directors to unify fragmented legacy portals into a cohesive, WCAG AAA-compliant experience.",
-      "Mentored senior designers and established cross-pillar component governance across Optum consumer and provider teams.",
-    ],
-    tags: ["Healthcare UX", "35M+ Users", "WCAG Accessibility", "Clinical Systems"],
-  },
-  {
-    period: "2019 – 2021",
-    role: "Staff Product Designer",
-    company: "Walmart Global Tech",
-    location: "Bentonville, AR / Austin, TX",
+    period: "Oct 2021 – Oct 2022",
+    role: "Fractional / Consulting Lead Architect",
+    company: "Walmart Global Tech (via PredictiveUX)",
+    location: "Remote / Bentonville, AR",
     scaleBadge: "3M+ Associates · Supply Chain & Retail",
     summary:
-      "Spearheaded enterprise operational tools, associate-facing mobile workflows, and real-time inventory logistics across Walmart's global store network.",
+      "Spearheaded enterprise operational tools, associate-facing learning portals, and graph-driven search paradigms across Walmart's global workforce.",
     highlights: [
-      "Designed mission-critical fulfillment and floor operations tools deployed to 3M+ associates across 4,700+ stores.",
-      "Shaved seconds off high-frequency barcode scanning and pick-path workflows, compounding into hundreds of thousands of saved labor hours.",
-      "Collaborated directly with store associates on the warehouse floor to validate tactile ergonomics and low-latency UI patterns.",
+      "Architected graph-driven search and curriculum navigation connecting 3M associates with localized certifications.",
+      "Engineered the Content Distribution Platform (CDP) manual authoring suite with state-driven deletion safeguards.",
+      "Replaced brittle relational catalog queries with flexible GraphQL schemas and real-time taxonomy indexing.",
     ],
-    tags: ["Enterprise Logistics", "3M+ Users", "Mobile Ergonomics", "Design Systems"],
+    tags: ["Enterprise Search", "3M+ Users", "GraphQL", "Graph Databases"],
   },
   {
-    period: "2017 – 2019",
-    role: "Senior UX Architect",
-    company: "Fidelity Investments",
-    location: "Boston, MA",
-    scaleBadge: "Institutional Wealth & Brokerage",
+    period: "2020 – 2021",
+    role: "Senior Product Experience Designer (Fusion)",
+    company: "UnitedHealth Group (Optum)",
+    location: "Minnetonka, MN (Remote)",
+    scaleBadge: "35M+ Patients · Clinical & Mobile",
     summary:
-      "Designed high-density portfolio management, retirement planning, and fixed-income trading interfaces for retail and institutional advisors.",
+      "Embedded within Fusion (elite internal strategy consultancy) leading patient mobile applications and cross-enterprise cybersecurity triage workflows.",
     highlights: [
-      "Modernized legacy advisor workbenches into responsive, data-dense modular grids with real-time risk visualization.",
-      "Conducted quantitative usability testing and eye-tracking research with active wealth managers and high-net-worth investors.",
+      "Personally designed 80%+ of Android and 50%+ of iOS flagship patient mobile experiences for 35M+ members.",
+      "Governed the unified mobile design system across Optum and UnitedHealth Group divisions.",
+      "Partnered with enterprise cybersecurity leadership to define operational triage workflows and protocol structures across hospital group acquisitions under strict NDA.",
     ],
-    tags: ["Wealth Management", "Data Visualization", "Financial Systems"],
+    tags: ["Healthcare UX", "35M+ Users", "Android & iOS", "Cybersecurity Triage"],
+  },
+  {
+    period: "2018 – 2020",
+    role: "Design Director",
+    company: "Building 25",
+    location: "Raleigh, NC",
+    scaleBadge: "Fidelity Investments · IronNet · Martin Marietta",
+    summary:
+      "Directed multidisciplinary product designers across high-stakes financial, cybersecurity, and industrial enterprise engagements.",
+    highlights: [
+      "Embedded 2 years at Fidelity Investments in Raleigh as key client liaison, architecting their first cloud-native app launch.",
+      "Designed roles, permissions, and network-defense telemetry for IronNet Cybersecurity (founded by former NSA Director Gen. Keith Alexander).",
+      "Overhauled enterprise logistics and real-time inventory tools for Martin Marietta Materials.",
+    ],
+    tags: ["Wealth Management", "Cybersecurity", "Design Leadership", "Enterprise UX"],
   },
   {
     period: "2015 – 2017",
-    role: "Lead UX / Product Designer",
+    role: "Lead Product Designer & Design Director",
     company: "UltraLinq Healthcare Solutions",
     location: "New York, NY",
     scaleBadge: "Cloud PACS & Diagnostic Imaging",
@@ -104,18 +105,48 @@ const EXPERIENCE: ExperienceRole[] = [
     tags: ["DICOM / PACS", "Clinical Reporting", "Medical Devices"],
   },
   {
-    period: "2013 – 2015",
-    role: "Lead Product Designer",
+    period: "Oct 2014 – Apr 2015",
+    role: "Marketing Director",
+    company: "ESO Fund",
+    location: "San Francisco, CA (Remote)",
+    scaleBadge: "Pre-IPO Equity Liquidity",
+    summary:
+      "Directed marketing and client strategy for employee stock option liquidity fund while completing MBA at UNC Kenan-Flagler.",
+    highlights: [
+      "Positioned financial products to startup founders and early employees seeking option exercise financing.",
+      "Completed MBA in Corporate Finance & Strategy at UNC Kenan-Flagler Business School (2015).",
+    ],
+    tags: ["Pre-IPO Liquidity", "Venture Equity", "Financial Strategy"],
+  },
+  {
+    period: "Feb 2010 – Oct 2014",
+    role: "Director of Business Operations",
     company: "Foodler (Acquired by Grubhub)",
     location: "Boston, MA",
-    scaleBadge: "$500M+ Exit · Consumer Marketplace",
+    scaleBadge: "$500M+ Volume · 10x Exit",
     summary:
-      "Led consumer web, iOS/Android mobile ordering, and restaurant merchant portal design for one of North America's pioneering food delivery marketplaces prior to its acquisition by Grubhub.",
+      "Rose from customer operations to directing two-thirds of operations across a pioneering food ordering marketplace processing $500M+ volume.",
     highlights: [
-      "Redesigned checkout conversion funnel, real-time delivery tracker, and loyalty rewards program across web and mobile.",
-      "Contributed directly to marketplace retention and GMV growth culminating in Grubhub's acquisition.",
+      "Solo-engineered proprietary algorithmic fraud detection system slashing chargebacks by 83% ($6M to <$1M).",
+      "Partnered with local police and FBI on commercial fraud stings, contributing directly to Foodler's 10x revenue acquisition exit to Grubhub.",
     ],
-    tags: ["Consumer Marketplace", "iOS & Android", "Conversion Optimization"],
+    tags: ["Algorithmic Fraud", "Fintech Security", "Operations", "$500M+ Volume"],
+  },
+  {
+    period: "2001 – 2010",
+    role: "Academic Leadership, Frontman & Craft Foundations",
+    company: "Emerson College · Texas Tech · American Kitchens",
+    location: "Boston, MA · Lubbock, TX",
+    scaleBadge: "Writing Lab Founder · Rock Frontman · 25-Yr Musician",
+    summary:
+      "Early foundational background combining academic writing instruction, physical manufacturing, published creative writing, and rock musicianship.",
+    highlights: [
+      "Founded the first-ever dedicated writing lab for students with learning disabilities at the Texas Tech TECHniques Center (2006–2007).",
+      "Graduate Tutor at Emerson College (2007–2009) while completing MFA in Creative Writing; writing tutor at Kaplan SCORE (2007–2008).",
+      "Frontman and principal songwriter for rock band American Kitchens (2003–2009); 25-year independent recording and self-producing musician, published poet, and author.",
+      "Operated industrial embroidery machines and screen printing presses at U-Dawg Graphics (2001–2002); library desk assistant at Texas Tech & medical library (2004–2006).",
+    ],
+    tags: ["Music & Performance", "Writing Lab Founder", "Published Author", "Emerson MFA"],
   },
 ];
 

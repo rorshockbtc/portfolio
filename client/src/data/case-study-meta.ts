@@ -19,15 +19,15 @@ export const CASE_STUDY_META: Record<string, CaseStudyMeta> = {
   },
   unitedhealth: {
     name: "UnitedHealth Group",
-    headline: "Care navigation for 35 million patients.",
-    myRole: "Principal Design Lead",
-    domain: "Healthcare at scale",
+    headline: "Transformed fragmented patient mobile experiences and enterprise cybersecurity operations into unified, scalable systems.",
+    myRole: "Senior Product Experience Designer (Fusion)",
+    domain: "Healthcare at scale & cybersecurity",
   },
   walmart: {
     name: "Walmart",
     headline: "Search and content tools for 3 million associates.",
-    myRole: "Staff Product Designer",
-    domain: "Enterprise retail",
+    myRole: "Fractional / Consulting Lead Architect",
+    domain: "Enterprise retail & LMS",
   },
   pipes: {
     name: "Pipes",
@@ -80,13 +80,13 @@ export const CASE_STUDY_META: Record<string, CaseStudyMeta> = {
   ultralinq: {
     name: "UltraLinq",
     headline: "Faster sign-off for cloud medical imaging.",
-    myRole: "Product designer",
-    domain: "Clinical software",
+    myRole: "Lead Product Designer & Design Director",
+    domain: "Clinical software & DICOM",
   },
   foodler: {
     name: "Foodler → Grubhub",
     headline: "Checkout and live delivery tracking for a marketplace Grubhub acquired.",
-    myRole: "Product designer & front-end",
-    domain: "Consumer marketplace",
+    myRole: "Director of Business Operations",
+    domain: "Consumer marketplace & fraud defense",
   },
 };

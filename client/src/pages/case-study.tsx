@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRoute, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown, X } from "lucide-react";
-import { CASE_STUDIES, CASE_STUDY_ORDER, type CaseStudyData } from "@/data/case-studies";
+import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown, ChevronLeft, X, Sparkles } from "lucide-react";
+import { CASE_STUDIES, CASE_STUDY_ORDER, type CaseStudyData, type BeforeAfterPair } from "@/data/case-studies";
 import { CASE_STUDY_META } from "@/data/case-study-meta";
 import { openContactModal } from "@/lib/contact-events";
 import NotFound from "@/pages/not-found";
@@ -84,6 +84,120 @@ function Story({ label, text }: { label: string; text: string }) {
         )}
       </div>
     </FadeUp>
+  );
+}
+
+/** Interactive Before & After comparison carousel */
+function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [viewMode, setViewMode] = useState<"side-by-side" | "diff">("side-by-side");
+  const current = pairs[activeIdx];
+
+  if (!pairs || pairs.length === 0) return null;
+
+  return (
+    <section className="px-5 sm:px-10 lg:px-16 py-20 sm:py-28 bg-[#E3D8C7] border-y border-[#D3C7B5]">
+      <div className="max-w-[1280px] mx-auto">
+        <FadeUp className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <div className="inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-wider font-bold text-[#FE299E] mb-3">
+              <Sparkles className="w-3.5 h-3.5" /> Direct Transformation
+            </div>
+            <h2 className="font-serif font-light text-4xl sm:text-5xl tracking-[-0.02em] text-[#281B16]">
+              Before &amp; After
+            </h2>
+          </div>
+          {/* Slide Navigation Tabs */}
+          <div className="flex flex-wrap gap-2">
+            {pairs.map((p, idx) => (
+              <button
+                key={p.label}
+                onClick={() => setActiveIdx(idx)}
+                className={`px-4 py-2 rounded-full text-xs font-medium font-sans cursor-pointer transition-all border ${
+                  activeIdx === idx
+                    ? "bg-[#281B16] text-[#F2EAE0] border-[#281B16] shadow-sm"
+                    : "bg-[#EAE0D0] text-[#5C4840] border-[#D3C7B5] hover:text-[#281B16]"
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </FadeUp>
+
+        {/* Carousel Card */}
+        <FadeUp>
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            {/* BEFORE PANEL */}
+            <div className="rounded-[18px] bg-[#1C1715] p-5 sm:p-6 text-[#E0D8D0] shadow-md border border-[#3A2E28]">
+              <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#3A2E28] mb-4">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#E07A5F] font-bold">
+                  Legacy / Before
+                </span>
+                <span className="text-xs text-[#9E8E84]">{current.beforeTitle}</span>
+              </div>
+              <div className="overflow-hidden rounded-[12px] bg-black/40 aspect-[16/10] border border-white/5">
+                <img
+                  src={current.beforeSrc}
+                  alt={current.beforeTitle}
+                  className="w-full h-full object-cover object-top opacity-90"
+                  loading="lazy"
+                />
+              </div>
+              <p className="mt-4 text-xs sm:text-sm text-[#B3A499] leading-relaxed">
+                {current.beforeCaption}
+              </p>
+            </div>
+
+            {/* AFTER PANEL */}
+            <div className="rounded-[18px] bg-[#F7F2EC] p-5 sm:p-6 text-[#281B16] shadow-md border border-[#D3C7B5]">
+              <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#D3C7B5] mb-4">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#1B5E3A] font-bold">
+                  Redesigned Monograph / After
+                </span>
+                <span className="text-xs text-[#5C4840]">{current.afterTitle}</span>
+              </div>
+              <div className="overflow-hidden rounded-[12px] bg-[#E3D8C7] aspect-[16/10] border border-[#D3C7B5]">
+                <img
+                  src={current.afterSrc}
+                  alt={current.afterTitle}
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+              <p className="mt-4 text-xs sm:text-sm text-[#4A3A32] leading-relaxed font-medium">
+                {current.afterCaption}
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Step Indicator */}
+          <div className="mt-8 flex items-center justify-between text-xs text-[#5C4840]">
+            <div>
+              Transformation {activeIdx + 1} of {pairs.length}: <strong className="text-[#281B16] font-semibold">{current.label}</strong>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                disabled={activeIdx === 0}
+                onClick={() => setActiveIdx((i) => Math.max(0, i - 1))}
+                className="w-8 h-8 rounded-full border border-[#D3C7B5] flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#281B16] hover:text-white transition-colors cursor-pointer"
+                aria-label="Previous comparison"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                disabled={activeIdx === pairs.length - 1}
+                onClick={() => setActiveIdx((i) => Math.min(pairs.length - 1, i + 1))}
+                className="w-8 h-8 rounded-full border border-[#D3C7B5] flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#281B16] hover:text-white transition-colors cursor-pointer"
+                aria-label="Next comparison"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </FadeUp>
+      </div>
+    </section>
   );
 }
 
@@ -240,6 +354,11 @@ export default function CaseStudyPage() {
           <Story label="What I did" text={study.solution} />
         </div>
       </div>
+
+      {/* Before & After Transformation Carousel (if present) */}
+      {study.beforeAfter && study.beforeAfter.length > 0 && (
+        <BeforeAfterSection pairs={study.beforeAfter} />
+      )}
 
       {/* Gallery */}
       {gallery.length > 0 && (

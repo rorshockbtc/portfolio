@@ -25,6 +25,16 @@ export interface CodebaseBreakdown {
   codeSnippets?: CodeSnippet[];
 }
 
+export interface BeforeAfterPair {
+  label: string;
+  beforeSrc: string;
+  beforeTitle: string;
+  beforeCaption: string;
+  afterSrc: string;
+  afterTitle: string;
+  afterCaption: string;
+}
+
 export interface CaseStudyData {
   slug: string;
   client: string;
@@ -35,6 +45,7 @@ export interface CaseStudyData {
   timeline: string;
   heroImage: string;
   galleryImages: CaseStudyImage[];
+  beforeAfter?: BeforeAfterPair[];
   executiveSummary: string;
   challenge: string;
   solution: string;
@@ -676,21 +687,21 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     slug: "unitedhealth",
     client: "UnitedHealth Group / Optum",
     title: "Flagship Native Patient Mobile Apps & Fusion Strategic Consultancy",
-    subtitle: "Senior Product Experience Designer • Flagship apps for 35M+ patients",
-    role: "Senior Product Experience Designer",
+    subtitle: "Senior Product Experience Designer • Flagship apps for 35M+ patients & Cybersecurity Triage",
+    role: "Senior Product Experience Designer (Fusion)",
     scaleBadge: "35M+ patients • Flagship iOS & Android",
     timeline: "2020 – 2021",
     heroImage: "/artwork/enterprise-health.png",
     galleryImages: [
       {
         src: "/artwork/enterprise-health.png",
-        title: "Flagship Mobile Experience: Unified Patient Portal",
-        caption: "Native iOS and Android patient ecosystem serving 35M+ patients, integrating telemedicine, claims, pharmacy, and real-time coverage.",
-        tag: "Mobile Architecture",
+        title: "Enterprise Systems Architecture: Mobile Design Systems & Security Triage",
+        caption: "Confidentiality Notice: Proprietary patient telemetry, internal hospital portal URLs, and clinical screens are redacted under healthcare compliance and mutual confidentiality agreements. Visuals depict high-level systems topology.",
+        tag: "Systems Topology",
       },
     ],
     executiveSummary:
-      "Led product design for UnitedHealth Group's flagship patient mobile applications, serving 35M+ patients and 400K+ employees. Personally produced 80%+ of the Android experience and 50%+ of the iOS experience. Embedded within Fusion (an elite internal McKinsey-style product & business consultancy), facilitating C-suite stakeholders, leading hospital acquisition rollouts, and unifying cross-org design systems across UnitedHealth and Optum.",
+      "Transformed fragmented patient mobile experiences and enterprise cybersecurity operations into unified, scalable systems. Embedded within Fusion (an elite internal McKinsey-style product & business consultancy), I served as lead designer for UnitedHealth Group's flagship patient mobile applications serving 35M+ patients and 400K+ employees. Personally produced 80%+ of the Android experience and 50%+ of the iOS experience, managed cross-pillar design system governance, and partnered with the enterprise cybersecurity team to architect incident triage workflows and protocol structures across major hospital group acquisitions.",
     challenge:
       "When the initial external mobile agency disbanded in month one, millions of patients faced a fragmented, buggy app experience. Healthcare data is extraordinarily complex: insurance deductibles, co-pays, real-time prescription pricing, HIPAA compliance, and varying state regulations made patient workflows overwhelming and error-prone.",
     solution:
@@ -706,12 +717,13 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
       { value: "Fortune 10", label: "Enterprise Scale", subtext: "Optum & UHG" },
     ],
     outcomes: [
+      "Transformed fragmented patient mobile experiences and enterprise cybersecurity operations into unified, scalable systems.",
       "Unified the cross-organizational mobile design system across UnitedHealth Group and Optum.",
       "Designed and shipped 80%+ of Android and 50%+ of iOS flagship screens.",
       "Championed UHG's adoption of Apple Health guidelines and integrations, impacting tens of millions of patients.",
-      "Facilitated C-suite executive alignment across major regional hospital acquisitions.",
+      "Facilitated C-suite executive alignment across major regional hospital acquisitions and cybersecurity triage missions.",
     ],
-    technologies: ["Native iOS (SwiftUI)", "Native Android", "Multi-Tenant Design Systems", "Executive Stakeholder Facilitation", "HIPAA Compliance"],
+    technologies: ["Native iOS (SwiftUI)", "Native Android (Jetpack Compose)", "Multi-Tenant Design Systems", "Executive Stakeholder Facilitation", "HIPAA Compliance"],
     ndaNotice: "Proprietary patient telemetry, internal hospital portal URLs, and sensitive corporate identifiers are redacted under healthcare compliance and mutual confidentiality agreements.",
   },
 
@@ -719,8 +731,8 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     slug: "walmart",
     client: "Walmart (via PredictiveUX)",
     title: "Enterprise Learning Management System (LMS) & Graph Search Paradigm",
-    subtitle: "Senior UX/UI Architect at PredictiveUX • Internal tools for 3M employees",
-    role: "Senior UX/UI Architect (via PredictiveUX)",
+    subtitle: "Fractional / Consulting Lead Architect • Internal tools for 3M employees",
+    role: "Fractional / Consulting Lead Architect",
     scaleBadge: "3M employees • Enterprise search & LMS",
     timeline: "Oct 2021 – Oct 2022",
     heroImage: "/images/walmart/walmart-search-results.png",
@@ -776,7 +788,7 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     subtitle: "Director of Business Operations • Slashing Chargebacks by 83% ($6M to <$1M)",
     role: "Director of Business Operations",
     scaleBadge: "$500M+ Volume • 10x Acquisition Exit",
-    timeline: "2010 – 2015",
+    timeline: "Feb 2010 – Oct 2014",
     heroImage: "/artwork/enterprise-fraud.png",
     galleryImages: [
       {
@@ -814,10 +826,10 @@ export function blindVoterRecord(record: VoterRecord): { blindedContext: string;
     slug: "ultralinq",
     client: "UltraLinq Healthcare Solutions",
     title: "UltraLinq: Cloud Cardiovascular PACS & Medical Imaging Diagnostic Workflows",
-    subtitle: "Design Director • Zero-Latency Cloud DICOM Viewer & Structured Clinical Reporting",
-    role: "Design Director & Clinical Workflow Architect",
+    subtitle: "Lead Product Designer & Design Director • Zero-Latency Cloud DICOM Viewer & Structured Clinical Reporting",
+    role: "Lead Product Designer & Design Director",
     scaleBadge: "Cloud DICOM PACS • Cardiovascular Imaging",
-    timeline: "2016 – 2018",
+    timeline: "2015 – 2017",
     heroImage: "/artwork/enterprise-health.png",
     galleryImages: [
       {
@@ -1122,6 +1134,44 @@ export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string
         caption:
           "Print-inspired culinary index with tabular numerals, dotted leaders, and zero-layout-shift dish photography previews.",
         tag: "Typographic Menu",
+      },
+    ],
+    beforeAfter: [
+      {
+        label: "Brand Hero & Value Proposition",
+        beforeSrc: "/images/chicuinaco/before/hero-before.png",
+        beforeTitle: "Original Legacy Hero (Before)",
+        beforeCaption: "Standard saturated purple overlay, centered generic text, and heavy unoptimized assets that crashed 3G mobile browsers.",
+        afterSrc: "/images/chicuinaco/hero-interface.png",
+        afterTitle: "Swiss Editorial System & Bitcoin Standard (After)",
+        afterCaption: "Refined Cormorant Garamond display typography, 4-language i18n switcher, and sub-1.2s LCP progressive loading.",
+      },
+      {
+        label: "Estate Story & Architecture",
+        beforeSrc: "/images/chicuinaco/before/story-before.png",
+        beforeTitle: "Original History Section (Before)",
+        beforeCaption: "Generic black background with dense narrative blocks and uncalibrated imagery.",
+        afterSrc: "/images/chicuinaco/four-pillars.png",
+        afterTitle: "Four Pillars Hairline Monograph (After)",
+        afterCaption: "Sandstone paper surface (#EAE3D5), hairline-divided 4-pillar index with Roman and Arabic numerals.",
+      },
+      {
+        label: "Culinary Presentation (La Carta)",
+        beforeSrc: "/images/chicuinaco/before/menu-before.png",
+        beforeTitle: "Original Food Grid (Before)",
+        beforeCaption: "Heavy photographic card grid with fixed prices and high layout shifts.",
+        afterSrc: "/images/chicuinaco/menu-carta.png",
+        afterTitle: "La Carta Typographic Ledger (After)",
+        afterCaption: "Publication-grade culinary index with dotted leaders, tabular alignments, and dynamic WhatsApp inquiries.",
+      },
+      {
+        label: "Visitor Logistics & Venue Booking",
+        beforeSrc: "/images/chicuinaco/before/visit-before.png",
+        beforeTitle: "Original Contact & Location (Before)",
+        beforeCaption: "Basic text listings with disconnected phone numbers and static maps.",
+        afterSrc: "/images/chicuinaco/patio-banquet.webp",
+        afterTitle: "Direct WhatsApp Event Protocol (After)",
+        afterCaption: "Language-aware pre-filled WhatsApp deep links for dining, 100-guest patio banquets, and overnight suite stays.",
       },
     ],
     executiveSummary:

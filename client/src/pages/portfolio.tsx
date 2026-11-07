@@ -81,16 +81,20 @@ const MORE = [
   { slug: "superstar", client: "Superstar", title: "Private mobile AI reflection companion", year: "2025" },
   { slug: "clubhouse1099", client: "Clubhouse 1099", title: "Voice-first venture scout network", year: "2025" },
   { slug: "highdraw", client: "High Draw Golf", title: "Editorial commerce for golf apparel", year: "2025" },
-  { slug: "ultralinq", client: "UltraLinq", title: "Cloud medical imaging & clinical reporting", year: "2016" },
-  { slug: "foodler", client: "Foodler → Grubhub", title: "Marketplace checkout & live delivery tracking", year: "2013" },
+  { slug: "ultralinq", client: "UltraLinq", title: "Cloud medical imaging & clinical reporting", year: "2015 – 2017" },
+  { slug: "foodler", client: "Foodler → Grubhub", title: "Marketplace checkout & live delivery tracking", year: "2010 – 2014" },
 ];
 
 const EXPERIENCE = [
-  { years: "2024 —", org: "Colon Hyphen Bracket", role: "Founder & Principal Architect" },
-  { years: "2022 — 2024", org: "Custodia Bank", role: "Lead Product Designer (first design hire)" },
-  { years: "2021 — 2022", org: "Walmart (via PredictiveUX)", role: "Staff Product Designer" },
-  { years: "2020 — 2021", org: "UnitedHealth Group / Optum", role: "Principal Design Lead" },
-  { years: "2010 — 2020", org: "Foodler, UltraLinq & others", role: "Product design & front-end" },
+  { years: "2017 — Present", org: "Colon Hyphen Bracket", role: "Founder & Principal Systems Architect" },
+  { years: "2022 — 2024", org: "Custodia Bank", role: "Lead Product Designer (First design hire)" },
+  { years: "2021 — 2022", org: "Walmart (via PredictiveUX)", role: "Fractional / Consulting Lead Architect" },
+  { years: "2020 — 2021", org: "UnitedHealth Group / Optum", role: "Senior Product Experience Designer" },
+  { years: "2018 — 2020", org: "Building 25", role: "Design Director (Fidelity Investments, IronNet)" },
+  { years: "2015 — 2017", org: "UltraLinq Healthcare", role: "Lead Product Designer / Design Director" },
+  { years: "2014 — 2015", org: "ESO Fund", role: "Marketing Director (Pre-IPO Equity Liquidity)" },
+  { years: "2010 — 2014", org: "Foodler (Acquired by Grubhub)", role: "Director of Business Operations" },
+  { years: "2001 — 2010", org: "Foundations & Craft", role: "Emerson Graduate Tutor, TECHniques Lab Founder" },
 ];
 
 const LOGOS = ["Custodia Bank", "UnitedHealth Group", "Walmart", "Grubhub"];
@@ -263,11 +267,13 @@ export default function Portfolio() {
             <div className="mt-8 space-y-5 font-serif text-xl leading-[1.55] text-[#3A2A22] max-w-[42ch]">
               <p>
                 I&apos;m a designer who architects. I sit between product, engineering, and leadership, and I
-                turn ambiguous, regulated problems into systems teams can actually build.
+                turn ambiguous, regulated problems into systems teams can actually build and ship.
               </p>
               <p>
-                Most people know me as <em>Cubby</em>. I hold an MBA from UNC and an MFA from Emerson, and I
-                ship production TypeScript myself.
+                Most people know me as <em>Cubby</em>. I hold an MBA in Strategy &amp; Finance from UNC Kenan-Flagler and an MFA from Emerson College, and I ship production TypeScript myself.
+              </p>
+              <p className="text-lg text-[#5C4840]">
+                Beyond software, I&apos;m a published poet, author, and independent musician. I spent six years (2003–2009) fronting the rock band <em>American Kitchens</em> and have written, recorded, and produced my own records across 25 years. That lifelong discipline of rhythm, lyricism, and live performance directly informs how I architect systems, write code, and direct products under pressure.
               </p>
             </div>
             <a

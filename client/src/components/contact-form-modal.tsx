@@ -37,7 +37,7 @@ interface ContactFormModalProps {
   defaultSubject?: string;
 }
 
-const CONTACT_EMAIL = "rorshock@protonmail.com";
+const CONTACT_EMAIL = "cubby@colonhyphenbracket.pink";
 const CALENDLY_URL = "https://calendly.com/cubby-colonhyphenbracket/30min";
 
 export default function ContactFormModal({
@@ -130,10 +130,10 @@ export default function ContactFormModal({
       >
         <DialogHeader>
           <DialogTitle className="text-2xl sm:text-3xl font-serif font-bold text-[#281B16]" data-testid="text-contact-title">
-            Connect with Kyle
+            Connect with Kyle &ldquo;Cubby&rdquo; Cyree
           </DialogTitle>
           <DialogDescription id="contact-form-description" className="text-sm text-[#6B554D] font-sans">
-            Direct access to Kyle Cyree. North Carolina · US Remote · Replies within 1 business day.
+            Direct access to Kyle (Cubby) Cyree · North Carolina · US Remote · Replies within 1 business day.
           </DialogDescription>
         </DialogHeader>
 
@@ -387,10 +387,10 @@ export default function ContactFormModal({
                 <p>
                   Direct email:{" "}
                   <a
-                    href="mailto:rorshock@protonmail.com"
+                    href="mailto:cubby@colonhyphenbracket.pink"
                     className="font-sans text-[#FE299E] hover:underline font-semibold"
                   >
-                    rorshock@protonmail.com
+                    cubby@colonhyphenbracket.pink
                   </a>
                 </p>
                 <p className="text-[11px] font-sans text-[#8C7469]">

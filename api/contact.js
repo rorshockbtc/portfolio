@@ -2,7 +2,7 @@
 // Delivery requires WEB3FORMS_ACCESS_KEY (free at https://web3forms.com, keyed to the inbox
 // that should receive leads). If it is missing or delivery fails, we return 503 so the
 // client shows a pre-filled mailto fallback instead of a fake "success".
-const CONTACT_EMAIL = "rorshock@protonmail.com";
+const CONTACT_EMAIL = "cubby@colonhyphenbracket.pink";
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
