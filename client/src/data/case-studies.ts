@@ -1302,38 +1302,38 @@ export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string
     role: "Principal Product Architect & Brand Systems Designer",
     scaleBadge: "Eco-Estate & Venue · 4 Languages · Zero Hostage",
     timeline: "Nov 2026",
-    heroImage: "/images/chicuinaco/site_redesign_hero.png",
+    heroImage: "/images/chicuinaco/site_redesign_hero.webp",
     galleryImages: [
       {
-        src: "/images/chicuinaco/site_redesign_hero.png",
+        src: "/images/chicuinaco/site_redesign_hero.webp",
         title: "Full-Bleed Swiss Editorial Hero & 'Bitcoin Accepted' Signal",
         caption:
           "Live production interface featuring Cormorant Garamond display typography, 4-language switcher (EN/ES/FR/DE), and official Satoshi-spec on-premise Bitcoin accepted badge on warm sandstone paper (#EAE3D5).",
         tag: "Editorial Hero",
       },
       {
-        src: "/images/chicuinaco/site_redesign_pillars.png",
+        src: "/images/chicuinaco/site_redesign_pillars.webp",
         title: "Four Pillars of the Estate: Architectural Hairline Grid",
         caption:
           "Hairline-divided sandstone index structuring the 4 core offerings: Restaurant, 100-Guest Event Venue, Waterfall Trails, and Bálsamo Oil with Roman numerals and zero card bloat.",
         tag: "Hairline Monograph",
       },
       {
-        src: "/images/chicuinaco/site_redesign_venue.png",
+        src: "/images/chicuinaco/site_redesign_venue.webp",
         title: "100-Guest Arched Patio & Event Capacity Specifications",
         caption:
           "High-contrast venue architecture section displaying direct WhatsApp banquet booking, transparent capacity meters, and mountain valley photography.",
         tag: "Venue Architecture",
       },
       {
-        src: "/images/chicuinaco/site_redesign_menu.png",
+        src: "/images/chicuinaco/site_redesign_menu.webp",
         title: "La Carta: Typographic Menu Ledger & Dish Photography",
         caption:
           "Print-inspired culinary index with tabular numerals, dotted leaders, zero-layout-shift dish photography, and live WhatsApp kitchen inquiries.",
         tag: "Culinary Ledger",
       },
       {
-        src: "/images/chicuinaco/site_redesign_visit.png",
+        src: "/images/chicuinaco/site_redesign_visit.webp",
         title: "Practical Visitor Logistics & FAQ Accordion",
         caption:
           "Interactive visitor preparedness guide: 4x4 road conditions, waterfall hiking essentials, Bitcoin settlement details, and bilingual Google Maps routing.",
@@ -1343,37 +1343,37 @@ export async function processScoutVoiceMemo(audioBuffer: Buffer, scoutId: string
     beforeAfter: [
       {
         label: "Brand Hero & Value Proposition",
-        beforeSrc: "/images/chicuinaco/before/hero-before.png",
+        beforeSrc: "/images/chicuinaco/before/hero-before.webp",
         beforeTitle: "Original Legacy Site (Before)",
         beforeCaption: "Standard saturated purple overlay, generic centered text, and heavy unoptimized assets that crashed 3G mobile browsers.",
-        afterSrc: "/images/chicuinaco/site_redesign_hero.png",
+        afterSrc: "/images/chicuinaco/site_redesign_hero.webp",
         afterTitle: "Swiss Editorial System & Bitcoin Standard (After)",
         afterCaption: "Refined Cormorant Garamond display typography, 4-language i18n switcher, and sub-1.2s LCP progressive loading on live web.",
       },
       {
         label: "Estate Story & Architecture",
-        beforeSrc: "/images/chicuinaco/before/story-before.png",
+        beforeSrc: "/images/chicuinaco/before/story-before.webp",
         beforeTitle: "Original History Section (Before)",
         beforeCaption: "Generic black background with dense narrative blocks and uncalibrated photography.",
-        afterSrc: "/images/chicuinaco/site_redesign_pillars.png",
+        afterSrc: "/images/chicuinaco/site_redesign_pillars.webp",
         afterTitle: "Four Pillars Hairline Monograph (After)",
         afterCaption: "Sandstone paper surface (#EAE3D5), hairline-divided 4-pillar index with Roman and Arabic numerals, and zero-card clutter.",
       },
       {
         label: "Culinary Presentation (La Carta)",
-        beforeSrc: "/images/chicuinaco/before/menu-before.png",
+        beforeSrc: "/images/chicuinaco/before/menu-before.webp",
         beforeTitle: "Original Food Grid (Before)",
         beforeCaption: "Heavy card grid with hardcoded prices and cumulative layout shift.",
-        afterSrc: "/images/chicuinaco/site_redesign_menu.png",
+        afterSrc: "/images/chicuinaco/site_redesign_menu.webp",
         afterTitle: "La Carta Typographic Ledger (After)",
         afterCaption: "Publication-grade culinary index with dotted leaders, tabular alignments, and dynamic WhatsApp inquiries.",
       },
       {
         label: "Visitor Logistics & Venue Booking",
-        beforeSrc: "/images/chicuinaco/before/visit-before.png",
+        beforeSrc: "/images/chicuinaco/before/visit-before.webp",
         beforeTitle: "Original Contact & Location (Before)",
         beforeCaption: "Basic text listings with disconnected phone numbers and static maps.",
-        afterSrc: "/images/chicuinaco/site_redesign_visit.png",
+        afterSrc: "/images/chicuinaco/site_redesign_visit.webp",
         afterTitle: "Direct WhatsApp Event Protocol (After)",
         afterCaption: "Language-aware pre-filled WhatsApp deep links for dining, 100-guest patio banquets, and overnight suite stays.",
       },
@@ -1575,80 +1575,80 @@ export function BitcoinAcceptedBadge({ className = "" }: { className?: string })
     role: "Founder & Principal Systems Architect",
     scaleBadge: "Playful-Principal Rebuild · 18→4 Routes · 7 Live Products",
     timeline: "Nov 2026 (24-Hour Rebuild)",
-    heroImage: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+    heroImage: "/images/chb-corporate/after/01_chb_home_hero_after.webp",
     galleryImages: [
       {
-        src: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+        src: "/images/chb-corporate/after/01_chb_home_hero_after.webp",
         title: "Playful-Principal Hero: Turning Scary Enterprise Barriers Into a Smile : - ]",
         caption:
           "The rebuilt colonhyphenbracket.pink homepage on Alabaster paper (#FAF8F5), pairing Bricolage Grotesque display typography, the 3-phase ScaryHeadline strike state machine ('SOC 2 audits → a checklist', 'HIPAA → trust'), and upscaled 2560px Guy Billout–inspired staircase artwork.",
         tag: "Redesigned Hero",
       },
       {
-        src: "/images/chb-corporate/after/02_chb_home_ecosystem_after.png",
+        src: "/images/chb-corporate/after/02_chb_home_ecosystem_after.webp",
         title: "Scroll-Tracked Manifesto Pillar & Sticky 'One Principal Beats Four Handoffs' Card",
         caption:
           "IntersectionObserver scroll-tracked belief rows (#, ;-], |||, é) paired with a sticky dark slate side card (#111827) on desktop and a layoutId spring-animated border on mobile.",
         tag: "Scroll Choreography",
       },
       {
-        src: "/images/chb-corporate/after/08_chb_who_we_help_blueprint_after.png",
+        src: "/images/chb-corporate/after/08_chb_who_we_help_blueprint_after.webp",
         title: "Scroll-Tracked 'We Build For: Founders · Creators · Families' & Blueprint Art",
         caption:
           "Replaces the old 3-persona navbar switcher with a scroll-tracked chapter bar (layoutId='aud-active-bar') and three surrealist architectural illustrations: Founders Blueprint Wave, Creators Terrace, and Families Lighthouse.",
         tag: "Unified Audience",
       },
       {
-        src: "/images/chb-corporate/after/09_chb_things_we_make_dark_after.png",
+        src: "/images/chb-corporate/after/09_chb_things_we_make_dark_after.webp",
         title: "Things We Make: Dark Slate (#111827) 7-Product Punctuation Index",
         caption:
           "High-contrast dark architectural showcase on the homepage introducing all 7 live punctuation-named platforms (||| Pipes, ! BANG!, # Hash, ;- ] Semi, > Greater, é Accént, and ❀ Marigold) with zero nested card clutter.",
         tag: "Dark Section",
       },
       {
-        src: "/images/chb-corporate/after/03_chb_studio_sprint_after.png",
+        src: "/images/chb-corporate/after/03_chb_studio_sprint_after.webp",
         title: "Enterprise Studio Practice (/studio): One Principal Architect. No Handoffs.",
         caption:
           "Positions Colon Hyphen Bracket as an enterprise-ready partner for Startups, Regulated Teams (banking, healthcare, SOC 2 / HIPAA auditors), Schools & Families, and Main Street.",
         tag: "Enterprise Studio",
       },
       {
-        src: "/images/chb-corporate/after/10_chb_studio_handoff_strike_after.png",
+        src: "/images/chb-corporate/after/10_chb_studio_handoff_strike_after.webp",
         title: "Striking Out the Agency Telephone Game: 1 Principal, 5 Days, 100% IP",
         caption:
           "Dark comparison stage on /studio striking through 'Strategy deck → Figma handoff → Jira backlog → 4 months lost' in hot pink and replacing it with 'Problem → Working Build → Refined Code in one head'.",
         tag: "Zero Handoffs",
       },
       {
-        src: "/images/chb-corporate/after/07_chb_studio_sprint_method_after.png",
+        src: "/images/chb-corporate/after/07_chb_studio_sprint_method_after.webp",
         title: "Inverted Code-First Sprint: Listen → Map → Build → Refine → Smile",
         caption:
           "The 5-day $7,500 fixed-scope sprint schedule where working code and live data ship on Wednesday ('Build') before UI polish and ergonomic refinement happen directly in code on Thursday ('Refine').",
         tag: "5-Day Sprint",
       },
       {
-        src: "/images/chb-corporate/after/11_chb_studio_pricing_tiers_after.png",
+        src: "/images/chb-corporate/after/11_chb_studio_pricing_tiers_after.webp",
         title: "Transparent Studio Engagement Tiers ($7,500 Sprint · $15k Partner · Custom Build)",
         caption:
           "Published, unambiguous pricing cards on /studio eliminating opaque agency discovery calls: The Sprint ($7,500 / 1 week), The Partner (Starts at $15k / monthly), and The Build (Custom end-to-end delivery).",
         tag: "Transparent Pricing",
       },
       {
-        src: "/images/chb-corporate/after/06_chb_products_7nav_after.png",
+        src: "/images/chb-corporate/after/06_chb_products_7nav_after.webp",
         title: "Software Named After Punctuation (/products): Sticky 7-Platform Navigator",
         caption:
           "Interactive sticky chapter bar allowing visitors to inspect every shipped platform across Web, Model Context Protocol (MCP), native macOS Desktop (Tauri/Rust), and iOS.",
         tag: "7-Product Suite",
       },
       {
-        src: "/images/chb-corporate/after/12_chb_manifesto_contrasts_dark_after.png",
+        src: "/images/chb-corporate/after/12_chb_manifesto_contrasts_dark_after.webp",
         title: "Studio Manifesto (/manifesto): What We Refuse to Do—and What We Do Instead",
         caption:
           "Side-by-side doctrinal contrast table rejecting four-layer agency handoffs, rent-seeking retainers, dark patterns, and black-box AI wrappers in favor of Day-One repo ownership and sovereign software.",
         tag: "Studio Doctrine",
       },
       {
-        src: "/images/chb-corporate/after/13_chb_contact_kyle_cubby_after.png",
+        src: "/images/chb-corporate/after/13_chb_contact_kyle_cubby_after.webp",
         title: "Direct Principal Access (/contact): 'Kyle or Cubby?' & Zero-Backend Web3Forms",
         caption:
           "Warm, human conversion page featuring the 'Kyle or Cubby?' personal note, 6 interactive engagement pills ($7.5k Sprint, $15k/mo Partner, Product question, Press), and direct client-side Web3Forms dispatch.",
@@ -1658,66 +1658,66 @@ export function BitcoinAcceptedBadge({ className = "" }: { className?: string })
     beforeAfter: [
       {
         label: "Hero & Enterprise Positioning",
-        beforeSrc: "/images/chb-corporate/before/03_legacy_switcher_open_or_switched.png",
+        beforeSrc: "/images/chb-corporate/before/03_legacy_switcher_open_or_switched.webp",
         beforeTitle: "Legacy Site: 3-Persona Eye Dropdown & Soft Clipart (Before)",
         beforeCaption:
           "Commit 58af53c relied on a top-left Eye dropdown ('Startup Founders / Content Creators / Memory Capturers') that mutated root CSS variables at runtime and used approachable gear/lightbulb clipart to feel non-intimidating to small clients.",
-        afterSrc: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+        afterSrc: "/images/chb-corporate/after/01_chb_home_hero_after.webp",
         afterTitle: "Playful-Principal Hero & ScaryHeadline Strike (After)",
         afterCaption:
           "Commit cec1833 leads with enterprise-grade authority on Alabaster paper (#FAF8F5): Bricolage Grotesque typography, a 3-phase ScaryHeadline state machine ('SOC 2 audits → a checklist'), and upscaled 2560px brutalist staircase art.",
       },
       {
         label: "Audience Architecture (Founders, Creators & Families)",
-        beforeSrc: "/images/chb-corporate/before/05_legacy_memory_capturers_hero.png",
+        beforeSrc: "/images/chb-corporate/before/05_legacy_memory_capturers_hero.webp",
         beforeTitle: "Legacy 'Memory Capturers' Family Clipart Mode (Before)",
         beforeCaption:
           "Previously isolated families into a separate green 'Memory Capturers' mode with lakeside fishing clipart and 3× duplicated copy trees in usePerspectiveContent() to explain private AI memory before Pipes existed.",
-        afterSrc: "/images/chb-corporate/after/08_chb_who_we_help_blueprint_after.png",
+        afterSrc: "/images/chb-corporate/after/08_chb_who_we_help_blueprint_after.webp",
         afterTitle: "Unified Scroll-Tracked Audience Chapters & Surrealist Art (After)",
         afterCaption:
           "Honors Founders, Creators, and Families together on one scroll-tracked stage with layoutId spring indicators and bespoke Guy Billout–style architectural plates (Blueprint Wave, Terrace, Lighthouse).",
       },
       {
         label: "Creative & Editorial Voice",
-        beforeSrc: "/images/chb-corporate/before/08_legacy_content_creators_hero.png",
+        beforeSrc: "/images/chb-corporate/before/08_legacy_content_creators_hero.webp",
         beforeTitle: "Legacy 'Content Creators' 3D Bubble Clipart (Before)",
         beforeCaption:
           "Switching to 'Content Creators' turned the entire site pink/purple with floating 3D chat bubbles and generic creator slogans, masking 15 years of principal systems architecture.",
-        afterSrc: "/images/chb-corporate/after/02_chb_home_ecosystem_after.png",
+        afterSrc: "/images/chb-corporate/after/02_chb_home_ecosystem_after.webp",
         afterTitle: "Scroll-Tracked Punctuation Beliefs & Sticky Principal Card (After)",
         afterCaption:
           "Scroll-tracked editorial rows (#, ;-], |||, é) paired with a sticky dark slate card ('One principal beats four handoffs') that updates dynamically as the reader scrolls.",
       },
       {
         label: "Product Suite Evolution (Conceptual → 7 Live Platforms)",
-        beforeSrc: "/images/chb-corporate/before/04_legacy_products.png",
+        beforeSrc: "/images/chb-corporate/before/04_legacy_products.webp",
         beforeTitle: "Legacy 3-Step Conceptual Card with Pipes 'Coming Soon' (Before)",
         beforeCaption:
           "Presented Semi, Hash, and Pipes ('coming soon') as a single conceptual funnel card when the ecosystem was still in early R&D.",
-        afterSrc: "/images/chb-corporate/after/06_chb_products_7nav_after.png",
+        afterSrc: "/images/chb-corporate/after/06_chb_products_7nav_after.webp",
         afterTitle: "7 Live Products Named After Punctuation (After)",
         afterCaption:
           "Now that Pipes, BANG!, Hash, Semi, Greater, Accént 3.0, and Marigold are live production software across Web, MCP, macOS Desktop, and iOS, a sticky 7-chapter navigator lets visitors inspect every shipped platform.",
       },
       {
         label: "Studio Methodology & Enterprise Delivery",
-        beforeSrc: "/images/chb-corporate/before/07_legacy_roadmap.png",
+        beforeSrc: "/images/chb-corporate/before/07_legacy_roadmap.webp",
         beforeTitle: "Legacy Winding Board-Game Roadmap Clipart (Before)",
         beforeCaption:
           "Used a gamified winding-road illustration ('The Path Forward') describing future internal features like 'Business perspective switching' rather than how enterprise or startup clients engage the studio.",
-        afterSrc: "/images/chb-corporate/after/10_chb_studio_handoff_strike_after.png",
+        afterSrc: "/images/chb-corporate/after/10_chb_studio_handoff_strike_after.webp",
         afterTitle: "Agency Handoff Strike & 5-Day Code-First Sprint (After)",
         afterCaption:
           "Viscerally strikes through 'Strategy deck → Figma handoff → Jira backlog → 4 months lost' and pairs it with our inverted 5-day sprint (Listen → Map → Build → Refine → Smile) and transparent $7,500 / $15k pricing.",
       },
       {
         label: "Conversion & Direct Principal Access",
-        beforeSrc: "/images/chb-corporate/before/09_legacy_contact_page.png",
+        beforeSrc: "/images/chb-corporate/before/09_legacy_contact_page.webp",
         beforeTitle: "Legacy 'Choose Your Connection' 3-Persona Contact Page (Before)",
         beforeCaption:
           "Required visitors to pick a persona badge and routed submissions through a bespoke Express server proxy coupled to a floating <SemiChat /> widget on every page.",
-        afterSrc: "/images/chb-corporate/after/13_chb_contact_kyle_cubby_after.png",
+        afterSrc: "/images/chb-corporate/after/13_chb_contact_kyle_cubby_after.webp",
         afterTitle: "Warm Principal Intake, 'Kyle or Cubby?' & Web3Forms (After)",
         afterCaption:
           "Features the personal 'Kyle or Cubby?' callout box, 6 one-tap engagement pills ($7.5k Sprint, $15k/mo Partner, Product question), and zero-backend Web3Forms dispatch.",
@@ -1735,8 +1735,8 @@ export function BitcoinAcceptedBadge({ className = "" }: { className?: string })
       streamLabel: "Watch on YouTube",
       legacyCommit: "58af53c",
       newCommit: "cec1833",
-      beforePreviewSrc: "/images/chb-corporate/before/03_legacy_switcher_open_or_switched.png",
-      afterPreviewSrc: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+      beforePreviewSrc: "/images/chb-corporate/before/03_legacy_switcher_open_or_switched.webp",
+      afterPreviewSrc: "/images/chb-corporate/after/01_chb_home_hero_after.webp",
       chapters: [
         "Why the original site used lakeside family clipart and a 3-way 'Memory Capturers / Startup Founders / Content Creators' switcher when starting out.",
         "Codebase autopsy (commit 58af53c): Inspecting the 18 legacy Replit routes, client-side password gates, floating SemiChat widget, and 3× duplicated copy objects.",

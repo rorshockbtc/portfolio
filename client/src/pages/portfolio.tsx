@@ -71,7 +71,7 @@ const FEATURED = [
     client: "Colon Hyphen Bracket",
     title: "From persona-switching clipart to a principal-led product & architecture studio.",
     tag: "Founder · Studio rebuild · 7 live products",
-    image: "/images/chb-corporate/after/01_chb_home_hero_after.png",
+    image: "/images/chb-corporate/after/01_chb_home_hero_after.webp",
   },
   {
     slug: "marigold",
@@ -85,7 +85,7 @@ const FEATURED = [
     client: "Chicuinaco",
     title: "A four-language site for a mountain estate on a 3G budget.",
     tag: "Principal architect · Sovereign hospitality · BANG!",
-    image: "/images/chicuinaco/site_redesign_hero.png",
+    image: "/images/chicuinaco/site_redesign_hero.webp",
   },
 ];
 

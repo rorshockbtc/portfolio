@@ -97,6 +97,17 @@ function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const current = pairs[activeIdx];
 
+  // Pre-warm all carousel slide images into browser cache so tab switching is instant
+  useEffect(() => {
+    if (!pairs || pairs.length === 0) return;
+    pairs.forEach((p) => {
+      const b = new Image();
+      b.src = p.beforeSrc;
+      const a = new Image();
+      a.src = p.afterSrc;
+    });
+  }, [pairs]);
+
   if (!pairs || pairs.length === 0) return null;
 
   return (
@@ -154,7 +165,7 @@ function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
                     src={current.beforeSrc}
                     alt={current.beforeTitle}
                     className="w-full h-full object-cover object-top opacity-95 transition-transform duration-700 group-hover:scale-[1.02]"
-                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -179,7 +190,7 @@ function BeforeAfterSection({ pairs }: { pairs: BeforeAfterPair[] }) {
                     src={current.afterSrc}
                     alt={current.afterTitle}
                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
-                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
