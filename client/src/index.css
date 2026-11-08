@@ -10,6 +10,23 @@
 ───────────────────────────────────────────────────────────────────────────── */
 
 :root {
+  /* Accént 3.0 Upstream Semantic Variables (cassandra-noir light mode) */
+  --a-bg: #EAE0D0;
+  --a-surface: #F4EFE6;
+  --a-card: #F4EFE6;
+  --a-well: #FAF8F5;
+  --a-ink: #281B16;
+  --a-muted: #5C4940;
+  --a-rule: rgba(40, 27, 22, 0.14);
+  --a-accent: #FE299E;
+  --a-accent-fill: #B81468;
+  --a-accent-fill-hover: #281B16;
+  --a-accent-fg: #FFFFFF;
+  --a-accent-text: #A3285C;
+  --a-sky: #02A7F1;
+  --a-emerald: #2D8A4E;
+  --a-radius-cta: 6px;
+
   /* Brand Accent Tokens */
   --brand-pink: 326 99% 58%;        /* #FE299E (Pipes Canonical Hot Pink) */
   --brand-dusty-rose: 356 54% 66%;   /* #D9777F (Cassandra Dusty Rose) */
@@ -81,6 +98,23 @@
 
 /* Dark Mode: Warm Obsidian Espresso & Albers Cream Paper */
 .dark {
+  /* Accént 3.0 Upstream Semantic Variables (cassandra-noir dark mode) */
+  --a-bg: #161413;
+  --a-surface: #211E1C;
+  --a-card: #211E1C;
+  --a-well: #2C2825;
+  --a-ink: #F1EBD8;
+  --a-muted: #B5ABA0;
+  --a-rule: rgba(241, 235, 216, 0.14);
+  --a-accent: #D9777F;
+  --a-accent-fill: #D9777F;
+  --a-accent-fill-hover: #F1EBD8;
+  --a-accent-fg: #161413;
+  --a-accent-text: #E8959C;
+  --a-sky: #38BDF8;
+  --a-emerald: #4ADE80;
+  --a-radius-cta: 6px;
+
   --button-outline: rgba(255, 255, 255, 0.10);
   --badge-outline: rgba(255, 255, 255, 0.06);
   --opaque-button-border-intensity: 9;
