@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Download } from "lucide-react";
 import { openContactModal } from "@/lib/contact-events";
 import { CASE_STUDY_META } from "@/data/case-study-meta";
+import { RecommendationsSection } from "@/components/recommendations-section";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const RESUME = "/resumes/kyle-cyree-resume.pdf";
@@ -332,6 +333,9 @@ export default function Portfolio() {
           </FadeUp>
         </div>
       </section>
+
+      {/* ── Recommendations & Letters ───────────────────────── */}
+      <RecommendationsSection />
 
       {/* ── Close ──────────────────────────────────────────── */}
       <section className="px-5 sm:px-10 lg:px-16 py-24 sm:py-32 border-t border-[#D3C7B5] text-center" data-testid="section-close">
