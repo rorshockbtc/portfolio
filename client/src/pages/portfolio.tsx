@@ -198,7 +198,7 @@ export default function Portfolio() {
             <div className="mt-4 flex items-center justify-between text-sm text-[#5C4840]">
               <span>Kyle Cyree · MBA, MFA</span>
               <span className="inline-flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#2F9E5B]" /> Open to roles
+                <span className="w-2 h-2 rounded-full bg-[#2F9E5B]" /> Open to roles &amp; studio sprints
               </span>
             </div>
           </motion.div>
@@ -346,9 +346,8 @@ export default function Portfolio() {
           <h2 className="mt-6 font-serif font-light text-5xl sm:text-6xl tracking-[-0.02em]">
             Let&apos;s build something serious.
           </h2>
-          <p className="mt-5 text-lg sm:text-xl text-[#5C4840] max-w-[46ch] mx-auto">
-            Open to staff and principal roles in product, design systems, and AI. I reply to every note
-            personally.
+          <p className="mt-5 text-lg sm:text-xl text-[#5C4840] max-w-[48ch] mx-auto">
+            Open to Staff and Principal roles in product, design systems, and AI—as well as fixed $7,500 sprints and fractional partnerships (starting at $15k/mo). I reply to every note personally.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <button
@@ -370,7 +369,7 @@ export default function Portfolio() {
             className="mt-10 pt-8 border-t border-[#D3C7B5] text-sm sm:text-base text-[#5C4840]"
             data-testid="portfolio-studio-handoff"
           >
-            Need a principal architect next week without a full-time hire? Book a fixed $7,500 one-week sprint or fractional partnership via{" "}
+            Need a principal architect next week without a full-time hire? Book a $7,500 one-week sprint or fractional partnership ($15k+/mo) via{" "}
             <a
               href="https://colonhyphenbracket.pink/studio"
               target="_blank"

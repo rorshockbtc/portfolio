@@ -374,7 +374,7 @@ function LivestreamSection({ spec, liveUrl }: { spec: LivestreamSpec; liveUrl?: 
                 <div className="relative overflow-hidden rounded-[16px] bg-[#0F0B0A] border border-white/10">
                   <div className="grid sm:grid-cols-2 gap-3 p-3 sm:p-4 bg-[#140E0C]">
                     <div className="rounded-xl overflow-hidden border border-[#3A2E28] bg-black/60">
-                      <div className="px-3 py-1.5 bg-[#241A16] border-b border-[#3A2E28] flex items-center justify-between text-[11px] font-mono text-[#E07A5F]">
+                      <div className="px-3 py-1.5 bg-[#241A16] border-b border-[#3A2E28] flex items-center justify-between text-[13px] font-mono text-[#E07A5F]">
                         <span>GOODBYE: LEGACY (58af53c)</span>
                         <span>18 Routes · Clipart</span>
                       </div>
@@ -386,9 +386,9 @@ function LivestreamSection({ spec, liveUrl }: { spec: LivestreamSpec; liveUrl?: 
                       />
                     </div>
                     <div className="rounded-xl overflow-hidden border border-[#FE299E]/50 bg-black/60">
-                      <div className="px-3 py-1.5 bg-[#2A1421] border-b border-[#FE299E]/40 flex items-center justify-between text-[11px] font-mono text-[#FF7AC6]">
+                      <div className="px-3 py-1.5 bg-[#2A1421] border-b border-[#FE299E]/40 flex items-center justify-between text-[13px] font-mono text-[#FF7AC6]">
                         <span>HELLO: PLAYFUL-PRINCIPAL (cec1833)</span>
-                        <span>4 Pillars · Accént 3.0</span>
+                        <span>6 Focused Pages · Accént 3.0</span>
                       </div>
                       <img
                         src={spec.afterPreviewSrc || "/images/chb-corporate/after/01_chb_home_hero_after.png"}
@@ -431,7 +431,7 @@ function LivestreamSection({ spec, liveUrl }: { spec: LivestreamSpec; liveUrl?: 
                     <div key={d.label} className="p-3 rounded-xl bg-[#16100E] border border-[#2E221D]">
                       <div className="font-mono text-xs text-[#9E8E84]">{d.label}</div>
                       <div className="mt-1 font-serif text-lg text-[#FAF8F5] font-medium">{d.value}</div>
-                      <div className="mt-0.5 text-[11px] text-[#FE299E] font-mono">{d.delta}</div>
+                      <div className="mt-0.5 text-[13px] text-[#FE299E] font-mono">{d.delta}</div>
                     </div>
                   ))}
                 </div>

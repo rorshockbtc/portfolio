@@ -3,6 +3,9 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontSize: {
+        xs: ["0.8125rem", { lineHeight: "1.2rem" }],
+      },
       borderRadius: {
         lg: ".5625rem", /* 9px */
         md: ".375rem", /* 6px */

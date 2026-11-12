@@ -24,11 +24,19 @@ export default function FooterSection() {
               href="https://design.pipes.pink"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#F2EAE0]/80 hover:text-[#FE299E] no-underline underline underline-offset-4 transition-colors"
+              className="text-[#F2EAE0]/80 hover:text-[#FE299E] underline underline-offset-4 transition-colors"
             >
               Accént 3.0
             </a>{" "}
-            · MIT Open Source
+            ·{" "}
+            <a
+              href="https://github.com/rorshockbtc/portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#F2EAE0]/80 hover:text-[#FE299E] underline underline-offset-4 transition-colors"
+            >
+              Source on GitHub (MIT) ↗
+            </a>
           </span>
           <a
             href="https://colonhyphenbracket.pink/studio"

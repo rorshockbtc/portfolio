@@ -51,10 +51,10 @@ export default function ContactFormModal({
   const [lastDraft, setLastDraft] = useState<ContactFormValues | null>(null);
 
   const intentOptions = [
+    "Full-time role (Staff / Principal)",
     "1-week sprint ($7,500)",
-    "2-4 week systems engagement ($15k-$25k)",
-    "Full-time role (Product Architect / Staff)",
-    "Introductory chat / consultation",
+    "Fractional principal partner (starts at $15k/mo)",
+    "Single-day build or custom scope",
   ];
 
   const form = useForm<ContactFormValues>({
@@ -129,7 +129,7 @@ export default function ContactFormModal({
         aria-describedby="contact-form-description"
       >
         <DialogHeader className="pb-2">
-          <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] font-bold text-[#FE299E] mb-1">
+          <div className="inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.18em] font-bold text-[#FE299E] mb-1">
             <span className="w-2 h-2 rounded-full bg-[#2F9E5B]" /> Direct Channel
           </div>
           <DialogTitle className="text-2xl sm:text-[32px] font-serif font-light text-[#281B16] leading-tight tracking-[-0.02em]" data-testid="text-contact-title">
@@ -398,7 +398,7 @@ export default function ContactFormModal({
                     cubby@colonhyphenbracket.pink
                   </a>
                 </p>
-                <p className="text-[11px] font-sans text-[#8C7469]">
+                <p className="text-[13px] font-sans text-[#8C7469]">
                   North Carolina · US remote · Replies within 1 business day
                 </p>
               </div>

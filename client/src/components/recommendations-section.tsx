@@ -118,7 +118,7 @@ function TestimonialCard({ testimonial: t }: { testimonial: Testimonial }) {
             )}
           </div>
           <p className="text-xs text-[#5C4840] font-sans mt-0.5">{t.role}</p>
-          <p className="text-[11px] font-mono text-[#5C4840]/75 uppercase tracking-wider mt-1">
+          <p className="text-[13px] font-mono text-[#5C4840]/75 uppercase tracking-wider mt-1">
             {t.context}
           </p>
         </div>

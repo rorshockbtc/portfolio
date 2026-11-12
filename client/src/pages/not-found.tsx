@@ -80,7 +80,7 @@ export default function NotFound() {
               <Link key={item.slug} href={`/case-studies/${item.slug}`}>
                 <div className="group p-6 rounded-2xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#FE299E] transition-all cursor-pointer h-full flex flex-col justify-between space-y-4">
                   <div className="space-y-1.5">
-                    <span className="font-sans text-[11px] uppercase tracking-[0.18em] font-bold text-[#FE299E] block">
+                    <span className="font-sans text-[13px] uppercase tracking-[0.18em] font-bold text-[#FE299E] block">
                       {item.label}
                     </span>
                     <h3 className="font-serif font-bold text-2xl text-[#281B16] group-hover:text-[#FE299E] transition-colors">

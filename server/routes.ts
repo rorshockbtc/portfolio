@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { textToSpeech } from "./replit_integrations/audio/client";
+import { textToSpeech } from "./audio/client";
 import { buildSiteUrl } from "./seo";
 import * as fs from "fs";
 import * as path from "path";
