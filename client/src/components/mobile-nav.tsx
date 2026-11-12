@@ -12,13 +12,15 @@ export default function MobileNav() {
     }
   };
 
-  const item = "flex-1 py-3 text-[13px] font-medium text-[#3A2A22] bg-transparent border-none cursor-pointer no-underline text-center";
+  const item =
+    "flex-1 min-h-[48px] flex items-center justify-center text-[13px] font-medium text-[#3A2A22] hover:text-[#FE299E] bg-transparent border-none cursor-pointer no-underline text-center";
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 sm:hidden" role="navigation" aria-label="Page navigation" data-testid="nav-mobile-bottom">
       <div className="bg-[#EAE0D0]/95 backdrop-blur-xl border-t border-[#D3C7B5] flex safe-area-bottom">
         <button onClick={() => go("work")} className={item}>Work</button>
         <button onClick={() => go("about")} className={item}>About</button>
+        <button onClick={() => go("recommendations")} className={item}>Reviews</button>
         <a href="/resumes/kyle-cyree-resume.pdf" download="Resume - Kyle Cyree.pdf" className={item}>Résumé</a>
       </div>
     </div>

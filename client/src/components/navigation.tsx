@@ -6,6 +6,7 @@ import { openContactModal } from "@/lib/contact-events";
 const links = [
   { label: "Work", targetId: "work" },
   { label: "About", targetId: "about" },
+  { label: "Reviews", targetId: "recommendations" },
 ];
 
 export default function Navigation() {
@@ -48,12 +49,12 @@ export default function Navigation() {
           <span className="font-serif text-2xl leading-none">Kyle Cyree</span>
         </Link>
 
-        <div className="flex items-center gap-6 sm:gap-9">
+        <div className="flex items-center gap-6 sm:gap-8">
           {links.map((l) => (
             <button
               key={l.targetId}
               onClick={() => go(l.targetId)}
-              className="hidden sm:inline bg-transparent border-none p-0 cursor-pointer text-[15px] text-[#3A2A22] hover:text-[#FE299E] transition-colors"
+              className="hidden sm:inline-flex items-center min-h-[44px] bg-transparent border-none p-0 cursor-pointer text-[15px] text-[#3A2A22] hover:text-[#FE299E] transition-colors"
               data-testid={`nav-link-${l.targetId}`}
             >
               {l.label}
@@ -62,14 +63,23 @@ export default function Navigation() {
           <a
             href="/resumes/kyle-cyree-resume.pdf"
             download="Resume - Kyle Cyree.pdf"
-            className="hidden sm:inline text-[15px] text-[#3A2A22] hover:text-[#FE299E] transition-colors no-underline"
+            className="hidden sm:inline-flex items-center min-h-[44px] text-[15px] text-[#3A2A22] hover:text-[#FE299E] transition-colors no-underline"
             data-testid="nav-link-resume"
           >
             Résumé
           </a>
+          <a
+            href="https://colonhyphenbracket.pink/studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex items-center min-h-[44px] text-[15px] text-[#3A2A22] hover:text-[#FE299E] transition-colors no-underline"
+            data-testid="nav-link-studio"
+          >
+            Studio ↗
+          </a>
           <button
             onClick={() => openContactModal("Full-time role (Staff / Principal)")}
-            className="px-5 h-10 rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] text-sm font-medium transition-colors cursor-pointer"
+            className="min-h-[44px] px-5 inline-flex items-center rounded-full bg-[#281B16] hover:bg-[#FE299E] text-[#F2EAE0] text-sm font-medium transition-colors cursor-pointer"
             data-testid="nav-cta-contact"
           >
             Get in touch

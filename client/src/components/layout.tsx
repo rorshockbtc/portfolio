@@ -5,7 +5,6 @@ import Navigation from "./navigation";
 import FooterSection from "./footer-section";
 import MobileNav from "./mobile-nav";
 import ContactFormModal from "./contact-form-modal";
-import { StudioSectionsProvider } from "@/hooks/use-studio-sections";
 
 const pageTransition = {
   initial: { opacity: 0, y: 10 },
@@ -30,40 +29,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <MotionConfig reducedMotion="user">
-      <StudioSectionsProvider>
-        <div className="min-h-screen flex flex-col bg-[#EAE0D0]">
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:text-sm"
-            data-testid="skip-to-content"
-          >
-            Skip to main content
-          </a>
+      <div className="min-h-screen flex flex-col bg-[#EAE0D0]">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:text-sm"
+          data-testid="skip-to-content"
+        >
+          Skip to main content
+        </a>
 
-          <Navigation />
+        <Navigation />
 
-          <main id="main-content" className="flex-1 pt-16 sm:pt-20 pb-16 md:pb-0">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location}
-                {...pageTransition}
-              >
-                {children}
-              </motion.div>
-            </AnimatePresence>
-          </main>
+        <main id="main-content" className="flex-1 pt-16 sm:pt-20 pb-16 md:pb-0">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location}
+              {...pageTransition}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
+        </main>
 
-          <FooterSection />
-          <MobileNav />
+        <FooterSection />
+        <MobileNav />
 
-          {/* Global Contact / Sprint Booking Modal */}
-          <ContactFormModal
-            open={isContactOpen}
-            onOpenChange={setIsContactOpen}
-            defaultSubject={contactSubject}
-          />
-        </div>
-      </StudioSectionsProvider>
+        {/* Global Contact / Sprint Booking Modal */}
+        <ContactFormModal
+          open={isContactOpen}
+          onOpenChange={setIsContactOpen}
+          defaultSubject={contactSubject}
+        />
+      </div>
     </MotionConfig>
   );
 }

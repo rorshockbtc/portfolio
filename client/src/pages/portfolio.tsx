@@ -353,17 +353,33 @@ export default function Portfolio() {
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <button
               onClick={() => openContactModal("Full-time role (Staff / Principal)")}
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white text-base font-medium cursor-pointer"
+              className="inline-flex items-center gap-2.5 min-h-[44px] px-8 py-4 rounded-full bg-[#FE299E] hover:bg-[#D1007E] text-white text-base font-medium cursor-pointer"
               data-testid="button-contact-close"
             >
               Get in touch <ArrowRight className="w-4 h-4" />
             </button>
             <a
               href="mailto:cubby@colonhyphenbracket.pink"
-              className="inline-flex items-center px-8 py-4 rounded-full border border-[#281B16] text-[#281B16] hover:bg-[#281B16] hover:text-[#F2EAE0] transition-colors text-base font-medium no-underline"
+              className="inline-flex items-center min-h-[44px] px-8 py-4 rounded-full border border-[#281B16] text-[#281B16] hover:bg-[#281B16] hover:text-[#F2EAE0] transition-colors text-base font-medium no-underline"
             >
               cubby@colonhyphenbracket.pink
             </a>
+          </div>
+
+          <div
+            className="mt-10 pt-8 border-t border-[#D3C7B5] text-sm sm:text-base text-[#5C4840]"
+            data-testid="portfolio-studio-handoff"
+          >
+            Need a principal architect next week without a full-time hire? Book a fixed $7,500 one-week sprint or fractional partnership via{" "}
+            <a
+              href="https://colonhyphenbracket.pink/studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center min-h-[44px] font-medium text-[#281B16] hover:text-[#FE299E] underline decoration-[#D3C7B5] hover:decoration-[#FE299E] underline-offset-4 transition-colors"
+            >
+              Colon Hyphen Bracket Studio ↗
+            </a>
+            .
           </div>
         </FadeUp>
       </section>
