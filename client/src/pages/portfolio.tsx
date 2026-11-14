@@ -102,7 +102,7 @@ const MORE = [
 ];
 
 const EXPERIENCE = [
-  { years: "2017 — Present", org: "Colon Hyphen Bracket", role: "Founder & Principal Systems Architect" },
+  { years: "2018 — Present", org: "Colon Hyphen Bracket, LLC", role: "Principal Product Designer & Client Studio (Short-Term Engagements & R&D)" },
   { years: "2022 — 2024", org: "Custodia Bank", role: "Lead Product Designer (First design hire)" },
   { years: "2021 — 2022", org: "Walmart (via PredictiveUX)", role: "Fractional / Consulting Lead Architect" },
   { years: "2020 — 2021", org: "UnitedHealth Group / Optum", role: "Senior Product Experience Designer" },

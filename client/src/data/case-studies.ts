@@ -190,7 +190,7 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     liveUrlLabel: "Explore Live Pipes.Pink Protocol",
     repoUrl: "https://github.com/rorshockbtc/pipes-native",
     codebaseBreakdown: {
-      headline: "How I Architect & Ship Sovereign Platforms as a Unit of One",
+      headline: "How I Architect & Ship Sovereign Platforms Zero-to-One",
       philosophy:
         "The translation gap between design and engineering is where early-stage tech dies. As a systems architect and prompt engineer who reads code, I model the relational schemas from first principles, lock the mathematical Vignelli grid in CSS, and orchestrate AI agents—especially on the backend—to ship full-stack TypeScript, Next.js, Python, and Rust systems with zero handoff loss.",
       stackArchitecture: [
