@@ -59,6 +59,12 @@ export const CASE_STUDY_META: Record<string, CaseStudyMeta> = {
     myRole: "Design, brand & engineering",
     domain: "Hospitality · performance",
   },
+  asterisk: {
+    name: "asterisk *",
+    headline: "Write one post and adapt it for six social rooms, with WebGL watercolor shaders and zero OAuth lock-in.",
+    myRole: "Creator, product designer & systems architect",
+    domain: "WebGL motion · Social tooling · Apache-2.0",
+  },
   cassandra: {
     name: "Cassandra",
     headline: "An AI career agent that shows you one decision at a time.",

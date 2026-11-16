@@ -71,7 +71,7 @@ const FEATURED = [
     slug: "chb-corporate",
     client: "Colon Hyphen Bracket",
     title: "From persona-switching clipart to a principal-led product & architecture studio.",
-    tag: "Founder · Studio rebuild · 7 live products",
+    tag: "Founder · Studio rebuild · 8 live products",
     image: "/images/chb-corporate/after/01_chb_home_hero_after.webp",
   },
   {
@@ -88,9 +88,17 @@ const FEATURED = [
     tag: "Principal architect · Sovereign hospitality · BANG!",
     image: "/images/chicuinaco/site_redesign_hero.webp",
   },
+  {
+    slug: "asterisk",
+    client: "asterisk *",
+    title: "Write one post and adapt it for six social rooms, with WebGL watercolor shaders and zero OAuth lock-in.",
+    tag: "Creator & architect · Interactive watercolor · Open source",
+    image: "/images/asterisk/01_asterisk_hero.webp",
+  },
 ];
 
 const MORE = [
+  { slug: "asterisk", client: "asterisk *", title: "One-thought social tuner for six rooms + two-way Pipes bridge", year: "2026" },
   { slug: "chicuinaco", client: "Chicuinaco", title: "Four-language estate & venue site with BANG! sovereignty", year: "2026" },
   { slug: "chb-corporate", client: "Colon Hyphen Bracket", title: "Studio flagship redesign & 7-product punctuation suite", year: "2026" },
   { slug: "cassandra", client: "Cassandra", title: "AI career agent with a single-task focus mode", year: "2025" },

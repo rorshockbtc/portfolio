@@ -87,6 +87,7 @@ export const CASE_STUDY_ORDER = [
   "chb-corporate",
   "chicuinaco",
   "marigold",
+  "asterisk",
   "cassandra",
   "superstar",
   "clubhouse1099",
@@ -98,6 +99,120 @@ export const CASE_STUDY_ORDER = [
 export type CaseStudySlug = (typeof CASE_STUDY_ORDER)[number];
 
 export const CASE_STUDIES: Record<string, CaseStudyData> = {
+  asterisk: {
+    slug: "asterisk",
+    client: "Colon Hyphen Bracket",
+    title: "asterisk (*): One Post, Six Social Rooms, Zero Scheduling Bloat",
+    subtitle: "asterisk.pipes.pink • Jean-Michel Folon Art Direction, WebGL & Wet-Brush Shaders, Deterministic Channel Physics & Open-Source Codebase",
+    role: "Creator, Product Designer & Systems Architect",
+    scaleBadge: "6 social rooms • WebGL + Canvas shaders • Open source (Apache-2.0)",
+    timeline: "2026",
+    heroImage: "/images/asterisk/01_asterisk_hero.webp",
+    galleryImages: [
+      {
+        src: "/images/asterisk/01_asterisk_hero.webp",
+        title: "Dawn Watercolor Hero: 'Say It Once. Let It Travel.'",
+        caption: "A WebGL pigment wash responds to pointer movement and scroll behind a sunlit Folon-inspired traveler and continuous bird flight, leading straight into a working browser demo with no sign-up wall.",
+        tag: "WebGL Hero",
+      },
+      {
+        src: "/images/asterisk/02_asterisk_demo.webp",
+        title: "Zero-Account Composer & Sky Weather Readiness",
+        caption: "Test the full rule engine right on the homepage: one draft adapts across six rooms, splits external links into self-replies, and shows room readiness as changing sky weather instead of red error boxes.",
+        tag: "Try It Live",
+      },
+      {
+        src: "/images/asterisk/03_asterisk_story.webp",
+        title: "From One Thought to Every Room: Editorial Scroll & Watercolor Plates",
+        caption: "Scroll-linked storytelling pairs custom horizon watercolors with plain-English notes on how each social feed handles links, length, and image crops.",
+        tag: "Scroll Story",
+      },
+      {
+        src: "/images/asterisk/04_asterisk_composer.webp",
+        title: "Single-Sheet Composing Desk (/app) with Multi-Image & Pipe Sync",
+        caption: "Attach up to four images (checked automatically against Instagram's 4:5 crop), tuck posting cadence into a collapsible Rhythm popover, and sync drafts two ways with Hash (#) or a Personal Pipe.",
+        tag: "Composing Desk",
+      },
+      {
+        src: "/images/asterisk/05_asterisk_rooms.webp",
+        title: "Six Rooms, Six Paper-Masked Animations (/app/rooms)",
+        caption: "Each channel gets its own watercolor plate and paper-textured motion: a thread pulse, a banking paper airplane, porch-lantern rings, falling manuscript pages, optical bokeh, and water ripples.",
+        tag: "Six Rooms",
+      },
+      {
+        src: "/images/asterisk/06_asterisk_colophon.webp",
+        title: "Colophon & Playable Wet-on-Wet Brushstroke Canvas (/colophon)",
+        caption: "Dragging a cursor or thumb across the Colophon masthead paints live watercolor washes on an HTML5 Canvas with SVG fractal turbulence, blooming outward before fading back into cotton paper.",
+        tag: "Wet-Brush Canvas",
+      },
+      {
+        src: "/images/asterisk/07_asterisk_closing.webp",
+        title: "Open Window & Twilight Closing Shader",
+        caption: "An open-window plate marks the inspectable Apache-2.0 codebase before transitioning into a twilight WebGL shader where winged envelopes cross the horizon.",
+        tag: "Twilight Close",
+      },
+    ],
+    executiveSummary:
+      "Most builders and writers know they should share what they ship, but rewriting one idea for six different social platforms gets tedious fast. asterisk (*) (asterisk.pipes.pink) is an open-source composing desk where you write a post once in your own words, let deterministic channel rules format it for Threads, X, Facebook, Substack, Instagram, and TikTok, and send it out without scheduling-calendar clutter or AI ghostwriting. Visually, it acts as the watercolor counterpart to our corporate site (colonhyphenbracket.pink): where the studio flagship feels like crisp architectural printmaking, asterisk takes after Belgian illustrator Jean-Michel Folon's winged envelopes and open horizons.",
+    challenge:
+      "Building a cross-posting tool people actually want to open meant fixing four things conventional social SaaS gets wrong: (1) Blind Copy-Pasting Hurts Reach: Dropping an external URL into the main body of a Threads or Facebook post throttles distribution, a 400-word note clips awkwardly on X unless split at sentence boundaries, and wide desktop screenshots crop poorly inside Instagram's 4:5 portrait frame; (2) OAuth Gatekeeping Blocks Day-One Use: Traditional schedulers force users through brittle OAuth flows, Meta app reviews, or paid X API tiers before they can format a single post; (3) 'AI Rewrite' Buttons Flatten Voice: Writers don't want an LLM turning a candid note into engagement bait—they just want each room's rules handled cleanly while keeping 100% of their own words; and (4) Streak Dashboards Manufacture Guilt: Nagging '0 posts this week' bars and red validation alerts turn sharing work into a chore.",
+    solution:
+      "I designed and built asterisk end to end around deterministic channel rules, tactile watercolor motion, and zero-friction publishing: (1) Printmaking Paired with Watercolor ('Print Is the Sans-Serif, Watercolor Is the Serif'): Evaluated 11 illustrators before landing on Jean-Michel Folon's warm horizon palette, pairing custom dawn plates with a WebGL pigment sky and a playable wet-brush HTML5 Canvas on /colophon; (2) Refined Motion Through Visual Iteration: Early passes showed where motion got in the way—a dark-coated traveler hurt headline contrast, stepped bird keyframes paused awkwardly mid-flight, and repeating one bird loop across six cards felt stale. I repainted the traveler in a sunlit coat, smoothed flight into continuous curves, and gave each of the Six Rooms its own paper-masked animation; (3) Copy-First Publishing & Sky Weather Instead of OAuth Lock-In: Built a pure TypeScript rule engine that works immediately via one-click Copy & Open (automatically moving URLs into Threads/Facebook self-replies, splitting X threads, and checking 1–4 image aspect ratios), while showing room readiness as sky weather and tucking cadence into an optional Rhythm popover; and (4) Connected Private Writing to Public Distribution: Wired directly into Pipes (pipes.pink) and Hash (#) so members can pull Pipe images into posts, save drafts back to their private journal, or clone the Apache-2.0 repo and run `npm run dev` locally on port 3400 with zero config.",
+    uiUxCraft:
+      "Instead of repeating one generic transition everywhere, asterisk uses three purpose-built watercolor engines. On the homepage Hero and Twilight Closing, a custom WebGL fragment shader blends dawn violet, rose, and apricot washes with scroll depth and pointer drift while winged envelopes lift off on send. On the Six Rooms gallery, each platform has its own CSS paper-masked motion—Threads pulses along a filament, X banks a folded paper airplane, Facebook radiates porch-lantern rings, Substack drifts loose pages, Instagram blooms optical light leaks, and TikTok sends vertical water ripples. On /colophon, moving a pointer paints wet-on-wet brushstrokes on an HTML5 Canvas filtered through SVG fractal turbulence that bleed into paper grain and evaporate after a few seconds without hijacking vertical scroll.",
+    systemsArchitecture:
+      "Built on Next.js 16 (`cacheComponents`), TypeScript, Tailwind CSS, and Accént 3.0 (`playful-principal`). Authentication shares Clerk single sign-on with Pipes (`OptionalClerkProvider` and `src/proxy.ts`), falling back to a local dev stub (`/api/auth/stub`) when Clerk keys are absent. Persistence uses a dual backend: multi-tenant Neon PostgreSQL (`profiles`, `hash_entries`, `nodes`) in production paired with automatic local SQLite (`./data/asterisk.db`) so anyone cloning the repo can run everything locally with zero cloud credentials.",
+    metrics: [
+      { value: "6 Rooms", label: "Tailored Channels", subtext: "Threads, X, FB, Substack, IG & TikTok" },
+      { value: "0 Keys", label: "Needed on Day One", subtext: "Copy & Open works before any API setup" },
+      { value: "3 Engines", label: "Watercolor Motion", subtext: "WebGL sky, wet-brush canvas & paper masks" },
+      { value: "11 → 1", label: "Art Direction Study", subtext: "Evaluated 11 masters; chosen in Folon's spirit" },
+    ],
+    outcomes: [
+      "Turned cross-posting from a multi-tab chore into a single-sheet composer that keeps 100% of the author's words while respecting six platform formats.",
+      "Built a cohesive watercolor motion language combining a live WebGL sky shader, six distinct room animations, winged-envelope micro-interactions, and a playable wet-brush canvas.",
+      "Removed OAuth onboarding friction with one-click Copy & Open publishing on second zero (including automatic self-reply link isolation for Threads and Facebook), alongside optional direct API dispatch.",
+      "Replaced streak counters and red error banners with sky-weather readiness indicators and a collapsible Rhythm popover.",
+      "Published the full application under Apache-2.0 at github.com/rorshockbtc/asterisk while reserving original watercolor plates and studio marks.",
+    ],
+    technologies: [
+      "Next.js 16 & TypeScript",
+      "WebGL & HTML5 Canvas Shaders",
+      "Framer Motion Choreography",
+      "Accént 3.0 Design System",
+      "Clerk Single Sign-On",
+      "Neon PostgreSQL & SQLite",
+      "Apache-2.0 Open Source",
+    ],
+    liveUrl: "https://asterisk.pipes.pink",
+    liveUrlLabel: "Explore asterisk.pipes.pink",
+    repoUrl: "https://github.com/rorshockbtc/asterisk",
+    codebaseBreakdown: {
+      headline: "Three Watercolor Motion Engines, Deterministic Channel Physics & Dual Storage",
+      philosophy:
+        "Tools earn trust when their rules are inspectable. Instead of wrapping an LLM prompt in SaaS chrome, asterisk pairs a deterministic, unit-tested channel engine with custom WebGL/Canvas shaders and a dual Neon/SQLite persistence layer so hosted users and local open-source contributors get the exact same behavior.",
+      stackArchitecture: [
+        {
+          role: "Interactive Watercolor & Motion Suite",
+          tech: "WebGL fragment washes + HTML5 Canvas wet-brush bleed + SVG turbulence masks",
+          rationale:
+            "Gives each surface distinct behavior—ambient sky washes on the homepage, six bespoke room motifs in the gallery, and playable capillary brushstrokes on /colophon—while honoring prefers-reduced-motion.",
+        },
+        {
+          role: "Deterministic Channel Physics",
+          tech: "Pure TypeScript rule engine (unit-tested across all 6 rooms)",
+          rationale:
+            "Isolates outbound URLs into Threads/Facebook self-replies to avoid feed throttling, splits X threads cleanly at sentence boundaries, and checks 1–4 image aspect ratios without rewriting the author's voice.",
+        },
+        {
+          role: "Pipes Bridge & Dual Storage",
+          tech: "Clerk SSO + Neon PostgreSQL / local SQLite fallback",
+          rationale:
+            "Recognizes signed-in Pipes members automatically, pulls Pipe visuals and syncs drafts with Hash (#), and lets open-source clones boot locally on port 3400 with zero environment variables.",
+        },
+      ],
+    },
+  },
   pipes: {
     slug: "pipes",
     client: "Colon Hyphen Bracket",
