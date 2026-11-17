@@ -677,6 +677,32 @@ export default function CaseStudyPage() {
                   </div>
                 </DeepDive>
               )}
+              {study.credits && study.credits.length > 0 && (
+                <DeepDive title="Open-source acknowledgments">
+                  <div className="space-y-6">
+                    {study.credits.map((credit) => (
+                      <div key={credit.name} className="space-y-3">
+                        <div className="font-medium text-[#281B16]">{credit.name}</div>
+                        <p className="text-[#3A2A22]">{credit.note}</p>
+                        <div className="flex flex-wrap gap-5">
+                          {credit.links.map((link) => (
+                            <a
+                              key={link.url}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 min-h-[44px] text-sm font-medium text-[#281B16] hover:text-[#FE299E] underline underline-offset-4 decoration-[#D3C7B5] hover:decoration-[#FE299E] transition-colors"
+                            >
+                              {link.label}
+                              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </DeepDive>
+              )}
               <div className="border-t border-[#D3C7B5]" />
             </div>
           </FadeUp>

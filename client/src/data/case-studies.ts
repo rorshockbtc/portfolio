@@ -51,6 +51,12 @@ export interface LivestreamSpec {
   deltas?: { label: string; value: string; delta: string }[];
 }
 
+export interface OpenSourceCredit {
+  name: string;
+  note: string;
+  links: { label: string; url: string }[];
+}
+
 export interface CaseStudyData {
   slug: string;
   client: string;
@@ -75,6 +81,7 @@ export interface CaseStudyData {
   liveUrl?: string;
   liveUrlLabel?: string;
   repoUrl?: string;
+  credits?: OpenSourceCredit[];
   ndaNotice?: string;
 }
 
@@ -159,7 +166,7 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     solution:
       "I designed and built asterisk end to end around deterministic channel rules, tactile watercolor motion, and zero-friction publishing: (1) Printmaking Paired with Watercolor ('Print Is the Sans-Serif, Watercolor Is the Serif'): Evaluated 11 illustrators before landing on Jean-Michel Folon's warm horizon palette, pairing custom dawn plates with a WebGL pigment sky and a playable wet-brush HTML5 Canvas on /colophon; (2) Refined Motion Through Visual Iteration: Early passes showed where motion got in the way—a dark-coated traveler hurt headline contrast, stepped bird keyframes paused awkwardly mid-flight, and repeating one bird loop across six cards felt stale. I repainted the traveler in a sunlit coat, smoothed flight into continuous curves, and gave each of the Six Rooms its own paper-masked animation; (3) Copy-First Publishing & Sky Weather Instead of OAuth Lock-In: Built a pure TypeScript rule engine that works immediately via one-click Copy & Open (automatically moving URLs into Threads/Facebook self-replies, splitting X threads, and checking 1–4 image aspect ratios), while showing room readiness as sky weather and tucking cadence into an optional Rhythm popover; and (4) Connected Private Writing to Public Distribution: Wired directly into Pipes (pipes.pink) and Hash (#) so members can pull Pipe images into posts, save drafts back to their private journal, or clone the Apache-2.0 repo and run `npm run dev` locally on port 3400 with zero config.",
     uiUxCraft:
-      "Instead of repeating one generic transition everywhere, asterisk uses three purpose-built watercolor engines. On the homepage Hero and Twilight Closing, a custom WebGL fragment shader blends dawn violet, rose, and apricot washes with scroll depth and pointer drift while winged envelopes lift off on send. On the Six Rooms gallery, each platform has its own CSS paper-masked motion—Threads pulses along a filament, X banks a folded paper airplane, Facebook radiates porch-lantern rings, Substack drifts loose pages, Instagram blooms optical light leaks, and TikTok sends vertical water ripples. On /colophon, moving a pointer paints wet-on-wet brushstrokes on an HTML5 Canvas filtered through SVG fractal turbulence that bleed into paper grain and evaporate after a few seconds without hijacking vertical scroll.",
+      "Getting real watercolor painting effects to feel alive in a browser is notoriously hard: flat gradients look plastic, and naive blur filters muddy the pigments. In asterisk, we solved it with Three.js (github.com/mrdoob/three.js) and two companion motion layers. On the homepage Hero and Twilight Closing, a dynamically imported Three.js `WebGLRenderer` (`powerPreference: 'low-power'`, orthographic `-1..1` full-bleed `PlaneGeometry(2, 2)`) runs a custom GLSL `ShaderMaterial` with 3-octave domain-warped fractional Brownian motion (fBm). An exponential pointer falloff pushes pigment softly across the sheet, a boundary detector darkens the 'wet edge' where real watercolor pools as it dries, and high-frequency granulation plus cold-press paper tooth multiply into every pixel—while pausing automatically offscreen and freezing to a single painted frame under `prefers-reduced-motion`. On the Six Rooms gallery, each channel pairs a custom plate with CSS paper-masked ambient motion (filament pulse, banking paper airplane, porch-lantern rings, drifting manuscript leaves, optical bokeh, and water ripples). On /colophon, sweeping a pointer paints wet-on-wet brushstrokes onto an HTML5 Canvas filtered through SVG fractal turbulence that bleed outward and evaporate back into paper grain without hijacking vertical scroll.",
     systemsArchitecture:
       "Built on Next.js 16 (`cacheComponents`), TypeScript, Tailwind CSS, and Accént 3.0 (`playful-principal`). Authentication shares Clerk single sign-on with Pipes (`OptionalClerkProvider` and `src/proxy.ts`), falling back to a local dev stub (`/api/auth/stub`) when Clerk keys are absent. Persistence uses a dual backend: multi-tenant Neon PostgreSQL (`profiles`, `hash_entries`, `nodes`) in production paired with automatic local SQLite (`./data/asterisk.db`) so anyone cloning the repo can run everything locally with zero cloud credentials.",
     metrics: [
@@ -176,8 +183,10 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       "Published the full application under Apache-2.0 at github.com/rorshockbtc/asterisk while reserving original watercolor plates and studio marks.",
     ],
     technologies: [
+      "Three.js (WebGL Shaders)",
       "Next.js 16 & TypeScript",
-      "WebGL & HTML5 Canvas Shaders",
+      "GLSL Domain-Warped fBm",
+      "HTML5 Canvas & SVG Turbulence",
       "Framer Motion Choreography",
       "Accént 3.0 Design System",
       "Clerk Single Sign-On",
@@ -187,16 +196,26 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     liveUrl: "https://asterisk.pipes.pink",
     liveUrlLabel: "Explore asterisk.pipes.pink",
     repoUrl: "https://github.com/rorshockbtc/asterisk",
+    credits: [
+      {
+        name: "Three.js",
+        note: "Huge thanks to Ricardo Cabello (mrdoob) and the Three.js contributors. Achieving authentic painting effects on the web—wet-edge pigment pooling, granulation, and responsive washes at 60fps—without drowning in boilerplate is extraordinarily hard, and Three.js makes that craft accessible in open source.",
+        links: [
+          { label: "Three.js on GitHub", url: "https://github.com/mrdoob/three.js" },
+          { label: "threejs.org", url: "https://threejs.org" },
+        ],
+      },
+    ],
     codebaseBreakdown: {
       headline: "Three Watercolor Motion Engines, Deterministic Channel Physics & Dual Storage",
       philosophy:
         "Tools earn trust when their rules are inspectable. Instead of wrapping an LLM prompt in SaaS chrome, asterisk pairs a deterministic, unit-tested channel engine with custom WebGL/Canvas shaders and a dual Neon/SQLite persistence layer so hosted users and local open-source contributors get the exact same behavior.",
       stackArchitecture: [
         {
-          role: "Interactive Watercolor & Motion Suite",
-          tech: "WebGL fragment washes + HTML5 Canvas wet-brush bleed + SVG turbulence masks",
+          role: "Three.js & Watercolor Motion Suite",
+          tech: "Three.js WebGLRenderer + GLSL domain-warped fBm ShaderMaterial + HTML5 Canvas wet-brush bleed + SVG turbulence",
           rationale:
-            "Gives each surface distinct behavior—ambient sky washes on the homepage, six bespoke room motifs in the gallery, and playable capillary brushstrokes on /colophon—while honoring prefers-reduced-motion.",
+            "Simulates wet-edge pigment pooling, paper-tooth granulation, and responsive pointer washes in Three.js while pairing six bespoke CSS paper-masked room animations and a playable /colophon wet-brush canvas—pausing offscreen and honoring prefers-reduced-motion.",
         },
         {
           role: "Deterministic Channel Physics",
