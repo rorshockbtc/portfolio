@@ -2175,7 +2175,7 @@ export function Smile({ size = "md", color = "#FE299E", wink = true }: SmileProp
       "Playwright E2E",
     ],
     liveUrl: "https://semi.colonhyphenbracket.pink",
-    liveUrlLabel: "Visit semi.colonhyphenbracket.pink",
+    liveUrlLabel: "Visit Semi",
     repoUrl: "https://github.com/rorshockbtc/semi",
     ndaNotice:
       "Note on IP: The website codebase (github.com/rorshockbtc/semi) is open source under Apache-2.0. Semi's visual likeness, vocal identity, music/video assets, and underlying companion models & memory runtime are copyrighted and proprietary.",
