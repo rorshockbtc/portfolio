@@ -95,6 +95,13 @@ const FEATURED = [
     tag: "Creator & architect · Interactive watercolor · Open source",
     image: "/images/asterisk/01_asterisk_hero.webp",
   },
+  {
+    slug: "semi",
+    client: "Semi (; - ])",
+    title: "Character consistency, uncapped opt-in memory, and indie-folk songs about open-source software.",
+    tag: "Creator & architect · AI character · Accént 3.0",
+    image: "/images/semi/01_semi_hero.webp",
+  },
 ];
 
 const MORE = [
