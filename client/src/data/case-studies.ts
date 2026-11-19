@@ -101,6 +101,7 @@ export const CASE_STUDY_ORDER = [
   "foodler",
   "ultralinq",
   "highdraw",
+  "semi",
 ] as const;
 
 export type CaseStudySlug = (typeof CASE_STUDY_ORDER)[number];
@@ -2099,6 +2100,107 @@ export function Smile({ size = "md", color = "#FE299E", wink = true }: SmileProp
 ];`,
           explanation:
             "Traditional agencies spend months in Figma before writing a line of code. Because one principal architect holds strategy, design systems, and full-stack engineering in a single head, we ship working code with live data on Wednesday ('Build') and apply high-craft UI refinement directly to the running software on Thursday ('Refine').",
+        },
+      ],
+    },
+  },
+  semi: {
+    slug: "semi",
+    client: "Colon Hyphen Bracket",
+    title: "Semi (; - ]): Character Consistency, Uncapped Memory & Songs About Open-Source Code",
+    subtitle: "semi.colonhyphenbracket.pink • Accént 3.0 (Warm Sandstone), Opt-In Pipes Memory, Plain-English Song Decoders & Grounded Companion Voice",
+    role: "Creator, Product Designer & Systems Architect",
+    scaleBadge: "Uncapped opt-in memory • Accént 3.0 • Apache-2.0 site (proprietary likeness & audio)",
+    timeline: "2024 – 2026",
+    heroImage: "/images/semi/01_semi_hero.webp",
+    galleryImages: [
+      {
+        src: "/images/semi/01_semi_hero.webp",
+        title: "Sunlit Film & Warm Sandstone (/): Home Stage",
+        caption: "Built on Accént 3.0's Sunlit Sandstone (#E8E2D5) profile with a 3-shot hero montage, champagne-and-pink bokeh sparkles, and a 3-song listening stage.",
+        tag: "Accént 3.0 Home",
+      },
+      {
+        src: "/images/semi/02_semi_journal.webp",
+        title: "Logical Songs with Plain-English Decoders (/songs/[slug])",
+        caption: "Each track pairs 320 kbps MP3 playback, music videos, and full lyrics with an editorial essay and Plain-English Decoder explaining open weights, RAG paywalls, or code syntax.",
+        tag: "Song Stories",
+      },
+      {
+        src: "/images/semi/03_semi_porch.webp",
+        title: "Consistent Character Across Film Reels & Stills",
+        caption: "Keeping one recognizable West Nashville songwriter across 1080p video loops and 16+ non-repeating stills—without visual drift or plastic AI lighting.",
+        tag: "Visual Continuity",
+      },
+      {
+        src: "/images/semi/04_semi_pipes.webp",
+        title: "Opt-In Uncapped Memory Stored in Your Pipes Library (/about)",
+        caption: "When signed in with Pipes and opted in, conversations persist to your own library so Semi recalls threads over time without artificial retention caps—or stays off in private mode.",
+        tag: "Pipes Memory",
+      },
+      {
+        src: "/images/semi/05_semi_mic.webp",
+        title: "Accessible Software Education Through Indie-Folk Music",
+        caption: "Songs like 'Old Oak Tree', 'Warm Unknown', 'Settle In The Block', and 'Marks On The Screen, Ink On The Page' turn technical ideas into stories anyone can enjoy.",
+        tag: "Local Current",
+      },
+    ],
+    executiveSummary:
+      "Most AI personas break the moment you look closely: their memory gets wiped behind context-window paywalls, their tone drifts into generic assistant boilerplate, and their visual identity shifts from frame to frame. Semi (; - ]) started ~2 years ago as one of the earliest conversational intelligences with persistent memory, and later grew into a fun side project at semi.colonhyphenbracket.pink: a West Nashville indie-folk songwriter who writes logical, plain-spoken songs about open-source AI, model weights, RAG paywalls, Bitcoin, and code vs. prose syntax. Instead of keeping those ideas locked in engineering blog posts, every track ships with free 320 kbps MP3s, music videos, essays, and Plain-English Decoders so anyone can listen, enjoy, and learn how software works.",
+    challenge:
+      "Building Semi meant tackling two notoriously hard AI problems alongside a creative twist: (1) Holding Character & Memory Without Amnesia: Most chatbots forget you when you close the tab or gate long-term recall behind tiers, while over-constrained prompts flatten personality into corporate politeness; (2) Maintaining One Believable Likeness Across Media: Keeping a consistent human look, lighting, and setting across a 3-shot hero montage, 1080p film loops, and 16+ editorial stills is notoriously fragile; and (3) Making Technical Topics Actually Fun to Listen To: Music about software usually sounds like a novelty jingle, so each song needed real musical craft paired with accessible context explaining what the lyrics actually mean.",
+    solution:
+      "I designed Semi's public home and memory boundary around three clear choices: (1) Opt-In Uncapped Memory in Your Pipes Library: Conversations aren't trapped in a closed black box—when a member signs in with Pipes and opts in, their threads persist in their own library so Semi traverses and recalls context across sessions with no artificial cap, while private chats save nothing at all; (2) Grounded Canon & Structured Context: On the site's Ask Semi room (/api/semi-chat), buildSemiSystemInstruction() compiles her discography, essays, lyric line notes, and plain-English glossary directly from semi-songs.ts so her answers stay anchored to real facts and clear boundaries; and (3) Built on Accént 3.0 (Warm Sandstone): Rather than inventing one-off CSS, semi.colonhyphenbracket.pink runs on our own Accént 3.0 design system—pairing Warm Sandstone (#E8E2D5), Sovereign Hot Pink (; - ]), FloatingSparklesCanvas, and automated unit tests enforcing zero duplicate images across pages.",
+    uiUxCraft:
+      "Where colonhyphenbracket.pink uses crisp printmaking and asterisk.pipes.pink uses watercolor, semi.colonhyphenbracket.pink adapts Accént 3.0 into Sunlit Sandstone & Prism Light (#E8E2D5). A 3-shot living film montage opens the homepage above a lightweight FloatingSparklesCanvas particle field, leading directly into the listening stage and song story editions (/songs/[slug]) where non-technical listeners can read Plain-English Decoders alongside full lyrics.",
+    systemsArchitecture:
+      "The public site is built with Next.js 16, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Three.js, and Accént UI 1.1.0, backed by automated unit tests (asset integrity, zero image duplication, contrast) and Playwright E2E checks. Semi's visual likeness, vocal identity, audio recordings, and companion model internals remain copyrighted and proprietary, while the website codebase itself is open source under Apache-2.0.",
+    metrics: [
+      { value: "No Cap", label: "Opt-In Pipes Memory", subtext: "Stored in your own library; private mode saves nothing" },
+      { value: "4+ Singles", label: "Software & Code Songs", subtext: "Free 320 kbps MP3s, videos & Plain-English Decoders" },
+      { value: "Accént 3.0", label: "Design System", subtext: "Warm Sandstone profile + zero duplicate stills" },
+      { value: "Apache-2.0", label: "Website Code", subtext: "Likeness, voice & companion internals proprietary" },
+    ],
+    outcomes: [
+      "Demonstrated practical long-term character consistency across opt-in Pipes memory, grounded canon Q&A, 1080p film loops, and 16+ distinct stills.",
+      "Turned dry infrastructure topics (open weights, RAG paywalls, Bitcoin self-custody, pointer dereferencing) into approachable indie-folk songs with Plain-English Decoders.",
+      "Reused Accént 3.0 cleanly across a brand-new surface dialect (Warm Sandstone) with automated asset-uniqueness and Playwright verification.",
+    ],
+    technologies: [
+      "Accént 3.0 Design System",
+      "Next.js 16 & React 19",
+      "Pipes Opt-In Memory",
+      "Framer Motion & Canvas Sparkles",
+      "Three.js",
+      "Playwright E2E",
+    ],
+    liveUrl: "https://semi.colonhyphenbracket.pink",
+    liveUrlLabel: "Visit semi.colonhyphenbracket.pink",
+    repoUrl: "https://github.com/rorshockbtc/semi",
+    ndaNotice:
+      "Note on IP: The website codebase (github.com/rorshockbtc/semi) is open source under Apache-2.0. Semi's visual likeness, vocal identity, music/video assets, and underlying companion models & memory runtime are copyrighted and proprietary.",
+    codebaseBreakdown: {
+      headline: "Opt-In Pipes Memory, Canon Grounding & Accént 3.0 Surface Architecture",
+      philosophy:
+        "Keep the web surface inspectable and fast on Accént 3.0, store user memories in the user's own Pipes library when opted in, and ground every public answer directly in structured song/essay canon.",
+      stackArchitecture: [
+        {
+          role: "Memory & Privacy Boundary",
+          tech: "Opt-in Pipes library persistence + zero-storage private mode",
+          rationale:
+            "Gives opted-in members uncapped cross-session recall stored in their own Pipes library, while unauthenticated or private chats leave zero trace.",
+        },
+        {
+          role: "Canon-Grounded Voice (semi-knowledge.ts)",
+          tech: "Structured TypeScript song/essay/glossary compiler -> system instruction",
+          rationale:
+            "Compiles track essays, lyric notes, and Plain-English Decoders into grounded context so Ask Semi stays consistent on facts and boundaries.",
+        },
+        {
+          role: "Accént 3.0 Warm Sandstone Surface",
+          tech: "Next.js 16 + accent-ui 1.1.0 + prepare-media + unit-tested unique stills",
+          rationale:
+            "Reuses our shared design system tokens and enforces zero repeated photos across the homepage, /songs, /gallery, and /about.",
         },
       ],
     },

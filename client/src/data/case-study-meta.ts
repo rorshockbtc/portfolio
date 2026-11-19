@@ -101,4 +101,10 @@ export const CASE_STUDY_META: Record<string, CaseStudyMeta> = {
     myRole: "Director of Business Operations",
     domain: "Consumer marketplace & fraud defense",
   },
+  semi: {
+    name: "Semi (; - ])",
+    headline: "Character consistency, uncapped opt-in memory, and indie-folk songs about open-source software.",
+    myRole: "Creator, designer & architect",
+    domain: "AI character · Accént 3.0 · music",
+  },
 };

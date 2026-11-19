@@ -107,6 +107,7 @@ const MORE = [
   { slug: "highdraw", client: "High Draw Golf", title: "Editorial commerce for golf apparel", year: "2025" },
   { slug: "ultralinq", client: "UltraLinq", title: "Cloud medical imaging & clinical reporting", year: "2015 – 2017" },
   { slug: "foodler", client: "Foodler → Grubhub", title: "Marketplace checkout & live delivery tracking", year: "2010 – 2014" },
+  { slug: "semi", client: "Semi (; - ])", title: "Character consistency, uncapped memory & songs about open-source code", year: "2024 – 2026" },
 ];
 
 const EXPERIENCE = [
